@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import {
   PieChart,
   Pie,
@@ -7,23 +7,37 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts'
-import { SCHEDULE_DAYS, type ScheduleDay } from '../config/schedule.config'
+import {
+  SCHEDULE_DAYS,
+  CHART_DISPLAY_OPTIONS,
+  type ScheduleDay,
+  type ChartDisplayMode,
+} from '../config/schedule.config'
 import { useActivitiesStore } from '../store/activities.store'
 import { useScheduleStore } from '../store/schedule.store'
 import {
   getDayActivityStats,
   getWeekActivityStats,
   formatMinutesToHours,
+  toPercentageData,
+  getDayTotalMinutes,
+  getWeekTotalMinutes,
   type ActivityMinutes,
 } from '../utils/schedule-stats.utils'
 
 type DayPieChartProps = {
   day: ScheduleDay
   data: ActivityMinutes[]
+  displayMode: ChartDisplayMode
 }
 
-function DayPieChart({ day, data }: DayPieChartProps) {
+function DayPieChart({ day, data, displayMode }: DayPieChartProps) {
   if (data.length === 0) return null
+
+  const displayData =
+    displayMode === 'percentage'
+      ? toPercentageData(data, getDayTotalMinutes())
+      : data
 
   return (
     <div className="flex flex-col items-center">
@@ -34,7 +48,7 @@ function DayPieChart({ day, data }: DayPieChartProps) {
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
-              data={data}
+              data={displayData}
               cx="50%"
               cy="50%"
               innerRadius={50}
@@ -43,7 +57,7 @@ function DayPieChart({ day, data }: DayPieChartProps) {
               dataKey="value"
               nameKey="name"
             >
-              {data.map((entry, i) => (
+              {displayData.map((entry, i) => (
                 <Cell key={`cell-${i}`} fill={entry.color} />
               ))}
             </Pie>
@@ -51,20 +65,33 @@ function DayPieChart({ day, data }: DayPieChartProps) {
               content={({ active, payload }) => {
                 if (!active || !payload?.length) return null
                 const item = payload[0].payload as ActivityMinutes
+                const minutes = item.minutes ?? data.find((d) => d.name === item.name)?.value ?? item.value
                 return (
                   <div className="bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 shadow-xl">
                     <p className="text-white font-medium capitalize">{item.name}</p>
                     <p className="text-slate-300 text-sm">
-                      {formatMinutesToHours(item.value)}
+                      {displayMode === 'hours'
+                        ? formatMinutesToHours(minutes)
+                        : `${item.value}% (${formatMinutesToHours(minutes)})`}
                     </p>
                   </div>
                 )
               }}
             />
             <Legend
-              formatter={(value) => (
-                <span className="text-slate-400 capitalize text-xs">{value}</span>
-              )}
+              formatter={(value, entry) => {
+                const payload = entry.payload as ActivityMinutes
+                const minutes = payload.minutes ?? data.find((d) => d.name === payload.name)?.value ?? payload.value
+                const display =
+                  displayMode === 'hours'
+                    ? formatMinutesToHours(minutes)
+                    : `${payload.value}%`
+                return (
+                  <span className="text-slate-400 capitalize text-xs">
+                    {value}: {display}
+                  </span>
+                )
+              }}
               wrapperStyle={{ fontSize: 11 }}
             />
           </PieChart>
@@ -75,6 +102,7 @@ function DayPieChart({ day, data }: DayPieChartProps) {
 }
 
 export function SchedulePieCharts() {
+  const [displayMode, setDisplayMode] = useState<ChartDisplayMode>('hours')
   const activities = useActivitiesStore((s) => s.activities)
   const schedule = useScheduleStore((s) => s.schedule)
   const colorMap = useMemo(() => {
@@ -85,17 +113,34 @@ export function SchedulePieCharts() {
     return map
   }, [activities])
   const weekData = getWeekActivityStats(colorMap, schedule)
+  const weekDisplayData =
+    displayMode === 'percentage'
+      ? toPercentageData(weekData, getWeekTotalMinutes())
+      : weekData
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 md:p-10">
       <div className="max-w-6xl mx-auto">
-        <header className="mb-10">
-          <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-            Activity Breakdown
-          </h1>
-          <p className="text-slate-400 mt-1 text-sm">
-            Time spent by activity
-          </p>
+        <header className="mb-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+              Activity Breakdown
+            </h1>
+            <p className="text-slate-400 mt-1 text-sm">
+              Time spent by activity
+            </p>
+          </div>
+          <select
+            value={displayMode}
+            onChange={(e) => setDisplayMode(e.target.value as ChartDisplayMode)}
+            className="px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 w-fit"
+          >
+            {CHART_DISPLAY_OPTIONS.map((opt) => (
+              <option key={opt.id} value={opt.id}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
         </header>
 
         <section className="mb-16">
@@ -108,6 +153,7 @@ export function SchedulePieCharts() {
                 key={day}
                 day={day}
                 data={getDayActivityStats(day, colorMap, schedule)}
+                displayMode={displayMode}
               />
             ))}
           </div>
@@ -122,7 +168,7 @@ export function SchedulePieCharts() {
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
-                    data={weekData}
+                    data={weekDisplayData}
                     cx="50%"
                     cy="50%"
                     innerRadius={70}
@@ -131,7 +177,7 @@ export function SchedulePieCharts() {
                     dataKey="value"
                     nameKey="name"
                   >
-                    {weekData.map((entry, i) => (
+                    {weekDisplayData.map((entry, i) => (
                       <Cell key={`cell-${i}`} fill={entry.color} />
                     ))}
                   </Pie>
@@ -139,24 +185,35 @@ export function SchedulePieCharts() {
                     content={({ active, payload }) => {
                       if (!active || !payload?.length) return null
                       const item = payload[0].payload as ActivityMinutes
+                      const minutes = item.minutes ?? weekData.find((d) => d.name === item.name)?.value ?? item.value
                       return (
                         <div className="bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 shadow-xl">
                           <p className="text-white font-medium capitalize">
                             {item.name}
                           </p>
                           <p className="text-slate-300 text-sm">
-                            {formatMinutesToHours(item.value)}
+                            {displayMode === 'hours'
+                              ? formatMinutesToHours(minutes)
+                              : `${item.value}% (${formatMinutesToHours(minutes)})`}
                           </p>
                         </div>
                       )
                     }}
                   />
                   <Legend
-                    formatter={(value) => (
-                      <span className="text-slate-400 capitalize text-xs">
-                        {value}
-                      </span>
-                    )}
+                    formatter={(value, entry) => {
+                      const payload = entry.payload as ActivityMinutes
+                      const minutes = payload.minutes ?? weekData.find((d) => d.name === payload.name)?.value ?? payload.value
+                      const display =
+                        displayMode === 'hours'
+                          ? formatMinutesToHours(minutes)
+                          : `${payload.value}%`
+                      return (
+                        <span className="text-slate-400 capitalize text-xs">
+                          {value}: {display}
+                        </span>
+                      )
+                    }}
                     wrapperStyle={{ fontSize: 12 }}
                   />
                 </PieChart>

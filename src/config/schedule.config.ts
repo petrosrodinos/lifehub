@@ -64,3 +64,10 @@ export const TAB_OPTIONS = [
 ] as const
 
 export type TabId = (typeof TAB_OPTIONS)[number]['id']
+
+export const CHART_DISPLAY_OPTIONS = [
+  { id: 'hours', label: 'Hours' },
+  { id: 'percentage', label: 'Percentage' },
+] as const
+
+export type ChartDisplayMode = (typeof CHART_DISPLAY_OPTIONS)[number]['id']

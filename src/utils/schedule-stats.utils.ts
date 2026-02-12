@@ -5,6 +5,7 @@ export type ActivityMinutes = {
   name: string
   value: number
   color: string
+  minutes?: number
 }
 
 export type ColorMap = Record<string, string>
@@ -79,4 +80,40 @@ export function formatMinutesToHours(minutes: number): string {
   if (h === 0) return `${m}m`
   if (m === 0) return `${h}h`
   return `${h}h ${m}m`
+}
+
+const MINUTES_PER_DAY = 24 * 60
+
+export function toPercentageData(
+  data: ActivityMinutes[],
+  totalMinutes: number
+): ActivityMinutes[] {
+  const total = totalMinutes || 1
+  const scheduled = data.reduce((sum, d) => sum + d.value, 0)
+  const unscheduled = Math.max(0, total - scheduled)
+
+  const result: ActivityMinutes[] = data.map((d) => ({
+    ...d,
+    value: Math.round((d.value / total) * 1000) / 10,
+    minutes: d.value,
+  }))
+
+  if (unscheduled > 0) {
+    result.push({
+      name: 'unscheduled',
+      value: Math.round((unscheduled / total) * 1000) / 10,
+      color: '#334155',
+      minutes: unscheduled,
+    })
+  }
+
+  return result.sort((a, b) => b.value - a.value)
+}
+
+export function getDayTotalMinutes(): number {
+  return MINUTES_PER_DAY
+}
+
+export function getWeekTotalMinutes(): number {
+  return SCHEDULE_DAYS.length * MINUTES_PER_DAY
 }
