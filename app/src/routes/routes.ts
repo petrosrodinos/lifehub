@@ -7,4 +7,13 @@ export const Routes = {
     user: {
         prefix: '/dashboard/user',
     },
+    routine: {
+        prefix: '/dashboard/routine',
+    },
+    expenses: {
+        prefix: '/dashboard/expenses',
+    },
+    habits: {
+        prefix: '/dashboard/habits',
+    },
 };

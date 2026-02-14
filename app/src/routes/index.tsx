@@ -3,7 +3,7 @@ import ProtectedRoute from "./protected-route";
 import { SignIn } from "../pages/auth/sign-in";
 import { SignUp } from "../pages/auth/sign-up";
 import { MainLayout } from "../components/layout/main-layout";
-import { RoutinePage } from "../pages/routine/routine-page";
+import { RoutinePage } from "../pages/routine/index";
 import { ExpensesPage } from "../pages/expenses/expenses-page";
 import { HabitsPage } from "../pages/habits/habits-page";
 
