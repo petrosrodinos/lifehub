@@ -37,10 +37,10 @@ export const useActivitiesStore = create<ActivitiesState>((set, get) => ({
     const next = get().activities.map((a) =>
       a.id === id
         ? {
-            ...a,
-            ...(updates.name !== undefined && { name: updates.name.trim().toLowerCase() }),
-            ...(updates.color !== undefined && { color: updates.color }),
-          }
+          ...a,
+          ...(updates.name !== undefined && { name: updates.name.trim().toLowerCase() }),
+          ...(updates.color !== undefined && { color: updates.color }),
+        }
         : a
     )
     set({ activities: next })

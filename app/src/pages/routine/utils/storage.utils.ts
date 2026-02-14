@@ -1,12 +1,6 @@
-import { ACTIVITIES_STORAGE_KEY, type Activity } from '../config/activities.config'
-import { DEFAULT_ACTIVITIES } from '../config/activities.config'
-import {
-  SCHEDULE_STORAGE_KEY,
-  SCHEDULE_DAYS,
-  DEFAULT_SCHEDULE,
-  type ScheduleDay,
-  type ScheduleSlot,
-} from '../config/schedule.config'
+import { ACTIVITIES_STORAGE_KEY, DEFAULT_ACTIVITIES, type Activity } from "../config/activities.config"
+import { DEFAULT_SCHEDULE, SCHEDULE_DAYS, SCHEDULE_STORAGE_KEY, type ScheduleDay, type ScheduleSlot } from "../config/schedule.config"
+
 
 export function loadActivities(): Activity[] {
   try {

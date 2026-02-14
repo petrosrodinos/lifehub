@@ -1,8 +1,11 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "./protected-route";
-import { SignIn } from "../features/auth/pages/sign-in";
-import { SignUp } from "../features/auth/pages/sign-up";
-import { Dashboard } from "../pages/dashboard";
+import { SignIn } from "../pages/auth/sign-in";
+import { SignUp } from "../pages/auth/sign-up";
+import { MainLayout } from "../components/layout/main-layout";
+import { RoutinePage } from "../pages/routine/routine-page";
+import { ExpensesPage } from "../pages/expenses/expenses-page";
+import { HabitsPage } from "../pages/habits/habits-page";
 
 export default function AppRoutes() {
   return (
@@ -28,10 +31,15 @@ export default function AppRoutes() {
         path="/dashboard"
         element={
           <ProtectedRoute loggedIn={true}>
-            <Dashboard />
+            <MainLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route index element={<Navigate to="/dashboard/routine" replace />} />
+        <Route path="routine" element={<RoutinePage />} />
+        <Route path="expenses" element={<ExpensesPage />} />
+        <Route path="habits" element={<HabitsPage />} />
+      </Route>
 
       <Route path="/" element={<Navigate to="/auth/sign-in" replace />} />
 
