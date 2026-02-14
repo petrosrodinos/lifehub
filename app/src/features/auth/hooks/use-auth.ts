@@ -34,20 +34,13 @@ export function useSignin() {
 
 
 export function useSignup() {
-    const { login } = useAuthStore((state) => state);
-    const navigate = useNavigate();
 
     return useMutation({
         mutationFn: (data: SignUpUser) => signUp(data),
-        onSuccess: (data) => {
-            login({
-                ...data,
-                isLoggedIn: true,
-            });
-            toast.success("You have successfully registered", {
+        onSuccess: () => {
+            toast.success('Account created successfully!', {
                 duration: 2000,
             });
-            navigate("/dashboard");
         },
         onError: (error) => {
             toast.error(error.message, {

@@ -3,12 +3,17 @@ import { devtools, persist } from "zustand/middleware";
 import type { LoggedInUser } from "../features/auth/interfaces/auth.interface";
 
 interface UserStore extends LoggedInUser {
+    pinHash: string | null;
+    isAppLocked: boolean;
     login(user: any): void;
     logout(): void;
     updateUser(user: any): void;
+    setPinHash(hash: string): void;
+    lockApp(): void;
+    unlockApp(): void;
 }
 
-const initialValues: UserStore = {
+const initialValues: Omit<UserStore, 'login' | 'logout' | 'updateUser' | 'setPinHash' | 'lockApp' | 'unlockApp'> = {
     isLoggedIn: false,
     user_uuid: null,
     role: null,
@@ -17,9 +22,8 @@ const initialValues: UserStore = {
     access_token: null,
     expires_in: null,
     avatar: null,
-    login: () => { },
-    logout: () => { },
-    updateUser: () => { },
+    pinHash: null,
+    isAppLocked: false,
 };
 
 const STORE_KEY = `lifehub-auth`;
@@ -33,6 +37,7 @@ export const useAuthStore = create<UserStore>()(
                     set((state) => ({
                         ...state,
                         ...user,
+                        isAppLocked: state.pinHash ? true : false,
                     }));
                 },
                 logout: () => {
@@ -42,6 +47,15 @@ export const useAuthStore = create<UserStore>()(
                 },
                 updateUser: async (user: Partial<LoggedInUser>) => {
                     set((state) => ({ ...state, ...user }));
+                },
+                setPinHash: (hash: string) => {
+                    set((state) => ({ ...state, pinHash: hash }));
+                },
+                lockApp: () => {
+                    set((state) => ({ ...state, isAppLocked: true }));
+                },
+                unlockApp: () => {
+                    set((state) => ({ ...state, isAppLocked: false }));
                 },
             }),
             {

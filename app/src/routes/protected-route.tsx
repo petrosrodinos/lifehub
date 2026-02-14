@@ -12,12 +12,12 @@ interface ProtectedRouteProps {
 export default function ProtectedRoute({ children, requiredRoles, loggedIn, fallbackPath = "/auth/sign-in" }: ProtectedRouteProps) {
   const { isLoggedIn, role } = useAuthStore((state) => state);
 
-  if (!isLoggedIn && loggedIn) {
+  if (loggedIn === true && !isLoggedIn) {
     return <Navigate to={fallbackPath} replace />;
   }
 
-  if (isLoggedIn && !loggedIn) {
-    return <Navigate to={"/dashboard"} replace />;
+  if (loggedIn === false && isLoggedIn) {
+    return <Navigate to="/dashboard" replace />;
   }
 
   if (requiredRoles && !requiredRoles.includes(role || "USER")) {

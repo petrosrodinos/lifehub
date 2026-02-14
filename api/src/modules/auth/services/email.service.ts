@@ -5,27 +5,31 @@ import { PrismaService } from '@/core/databases/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { CreateJwtService } from '@/shared/utils/jwt/jwt.service';
 import { AuthRoles } from '../interfaces/auth.interface';
-import { SendgridMailService } from '@/integrations/notifications/sendgrid/services/mail.service';
 
 @Injectable()
 export class EmailAuthService {
     constructor(
         private readonly prisma: PrismaService,
         private readonly jwtService: CreateJwtService,
-        private readonly mailService: SendgridMailService,
     ) { }
 
     async registerWithEmail(dto: RegisterEmailDto) {
 
         try {
-            const existingUser = await this.prisma.user.findUnique({
-                where: {
-                    email: dto.email,
-                },
+
+            const whereClause = {
+                OR: [
+                    { email: dto.email },
+                    ...(dto.phone ? [{ phone: dto.phone }] : []),
+                ],
+            };
+
+            const existingUser = await this.prisma.user.findFirst({
+                where: whereClause,
             });
 
             if (existingUser) {
-                throw new ConflictException('User with this email already exists');
+                throw new ConflictException('User with this email or phone already exists');
             }
 
             const hashedPassword = await bcrypt.hash(dto.password, 10);

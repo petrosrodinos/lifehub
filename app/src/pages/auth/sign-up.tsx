@@ -1,12 +1,19 @@
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Mail, Lock, User, Phone, Loader2, Calendar, Sparkles } from 'lucide-react'
 import { signUpSchema, type SignUpFormData } from '../../features/auth/schemas/auth.schema'
 import { useSignup } from '../../features/auth/hooks/use-auth'
+import { PinSetup } from '../../components/pin/PinSetup'
+import { Routes } from '../../routes/routes'
+import { useAuthStore } from '../../store/auth-store'
 
 export function SignUp() {
-  const { mutate: signUp, isPending } = useSignup()
+  const [showPinSetup, setShowPinSetup] = useState(false)
+  const { mutate: signUp, isPending, isSuccess, data } = useSignup()
+  const { login } = useAuthStore((state) => state)
+  const navigate = useNavigate()
 
   const {
     register,
@@ -16,8 +23,40 @@ export function SignUp() {
     resolver: zodResolver(signUpSchema),
   })
 
-  const onSubmit = (data: SignUpFormData) => {
-    signUp(data)
+  useEffect(() => {
+    if (isSuccess && data) {
+      setShowPinSetup(true)
+    }
+  }, [isSuccess, data])
+
+  const onSubmit = (formData: SignUpFormData) => {
+    signUp(formData)
+  }
+
+  const handlePinSetupComplete = () => {
+    if (data) {
+      login({
+        ...data,
+        isLoggedIn: true,
+      })
+    }
+    setShowPinSetup(false)
+    navigate(Routes.dashboard)
+  }
+
+  const handleSkipPin = () => {
+    if (data) {
+      login({
+        ...data,
+        isLoggedIn: true,
+      })
+    }
+    setShowPinSetup(false)
+    navigate(Routes.dashboard)
+  }
+
+  if (showPinSetup) {
+    return <PinSetup onComplete={handlePinSetupComplete} onSkip={handleSkipPin} />
   }
 
   return (

@@ -16,4 +16,7 @@ export const Routes = {
     habits: {
         prefix: '/dashboard/habits',
     },
+    settings: {
+        security: '/dashboard/settings/security',
+    },
 };

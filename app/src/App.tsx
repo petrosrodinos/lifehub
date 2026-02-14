@@ -2,6 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import AppRoutes from "./routes";
+import { PinLockWrapper } from "./components/pin/PinLockWrapper";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,7 +17,9 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <AppRoutes />
+        <PinLockWrapper>
+          <AppRoutes />
+        </PinLockWrapper>
         <Toaster
           position="top-right"
           toastOptions={{

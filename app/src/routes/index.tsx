@@ -6,6 +6,7 @@ import { MainLayout } from "../components/layout/main-layout";
 import { RoutinePage } from "../pages/routine/index";
 import { ExpensesPage } from "../pages/expenses/expenses-page";
 import { HabitsPage } from "../pages/habits/habits-page";
+import { SecuritySettingsPage } from "../pages/settings/security-settings";
 
 export default function AppRoutes() {
   return (
@@ -39,6 +40,7 @@ export default function AppRoutes() {
         <Route path="routine" element={<RoutinePage />} />
         <Route path="expenses" element={<ExpensesPage />} />
         <Route path="habits" element={<HabitsPage />} />
+        <Route path="settings/security" element={<SecuritySettingsPage />} />
       </Route>
 
       <Route path="/" element={<Navigate to="/auth/sign-in" replace />} />
