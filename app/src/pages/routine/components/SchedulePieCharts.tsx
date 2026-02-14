@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BarChart3 } from 'lucide-react'
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recharts'
 import type { ChartDisplayMode, ScheduleDay } from '../../../features/routine/interfaces/routine.interface'
 import { SCHEDULE_DAYS } from '../../../features/routine/interfaces/routine.interface'
@@ -12,6 +13,7 @@ import {
   type ActivityMinutes,
 } from '../../../features/routine/utils/schedule-stats.utils'
 import { useScheduleSlots } from '../../../features/routine/hooks/use-routine'
+import { ChartsSkeleton } from './ScheduleSkeleton'
 
 const CHART_DISPLAY_OPTIONS = [
   { id: 'hours', label: 'Hours' },
@@ -111,30 +113,14 @@ export function SchedulePieCharts() {
       : weekData
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 md:p-10 flex items-center justify-center">
-        <div className="text-slate-400">Loading statistics...</div>
-      </div>
-    )
+    return <ChartsSkeleton />
   }
 
   if (allSlots.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 md:p-10 flex items-center justify-center">
         <div className="text-center max-w-md">
-          <svg
-            className="w-20 h-20 mx-auto text-slate-600 mb-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-            />
-          </svg>
+          <BarChart3 className="w-20 h-20 mx-auto text-slate-600 mb-6" />
           <h2 className="text-2xl font-bold text-white mb-3">No Data Available</h2>
           <p className="text-slate-400 mb-6">
             Add time slots to your schedule to see activity breakdown charts

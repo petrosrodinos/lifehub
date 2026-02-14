@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Settings } from 'lucide-react'
 import { WeeklySlotBoard } from './WeeklySlotBoard'
 import { SchedulePieCharts } from './SchedulePieCharts'
 import { ActivitiesMenu } from './ActivitiesMenu'
@@ -40,9 +41,7 @@ export function AppTabs() {
             className="p-2 text-slate-400 hover:text-amber-400 rounded-lg hover:bg-slate-800/40 transition-colors"
             title="Manage activities"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-            </svg>
+            <Settings className="w-5 h-5" />
           </button>
         </div>
       </div>

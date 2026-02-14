@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { X, Plus, Calendar, Loader2 } from 'lucide-react'
 import type { ScheduleDay, ScheduleSlot } from '../../../features/routine/interfaces/routine.interface'
 import { useActivities } from '../../../features/activities/hooks/use-activities'
 import { useScheduleSlots, useCreateScheduleSlot, useUpdateScheduleSlot, useDeleteScheduleSlot } from '../../../features/routine/hooks/use-routine'
 import { timeToMinutes, slotDurationMinutes, formatTimeDisplay } from '../utils/time.utils'
 import { SCHEDULE_DAYS } from '../../../features/routine/interfaces/routine.interface'
 import { ActivitiesMenu } from './ActivitiesMenu'
+import { ScheduleSkeleton } from './ScheduleSkeleton'
 
 const BOARD_START_MINUTES = 5 * 60
 const BOARD_END_MINUTES = 22 * 60
@@ -62,9 +64,10 @@ function DayColumn({ day, slots, onEditSlot, onAddSlot }: DayColumnProps) {
         <button
           type="button"
           onClick={onAddSlot}
-          className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-slate-600/80 hover:bg-slate-500/80 text-slate-300 hover:text-white text-xs font-medium transition-colors border border-slate-500/50"
+          className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-slate-600/80 hover:bg-slate-500/80 text-slate-300 hover:text-white text-xs font-medium transition-colors border border-slate-500/50 flex items-center gap-1"
         >
-          + Add slot
+          <Plus className="w-3 h-3" />
+          Add slot
         </button>
       </div>
     </div>
@@ -178,14 +181,7 @@ function SlotEditModal({ day, slot, onClose, mode }: SlotEditModalProps) {
             onClick={onClose}
             className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-700 transition-colors"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <X className="w-5 h-5" />
           </button>
         </div>
 
@@ -233,8 +229,11 @@ function SlotEditModal({ day, slot, onClose, mode }: SlotEditModalProps) {
             <button
               type="submit"
               disabled={createSlot.isPending || updateSlot.isPending || activities.length === 0}
-              className="flex-1 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
+              {(createSlot.isPending || updateSlot.isPending) && (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              )}
               {mode === 'add' ? 'Add' : 'Save'}
             </button>
             {mode === 'edit' && (
@@ -242,8 +241,11 @@ function SlotEditModal({ day, slot, onClose, mode }: SlotEditModalProps) {
                 type="button"
                 onClick={handleDelete}
                 disabled={deleteSlot.isPending}
-                className="px-4 py-2 bg-red-600/80 hover:bg-red-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50"
+                className="px-4 py-2 bg-red-600/80 hover:bg-red-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
+                {deleteSlot.isPending && (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                )}
                 Delete
               </button>
             )}
@@ -255,8 +257,8 @@ function SlotEditModal({ day, slot, onClose, mode }: SlotEditModalProps) {
 }
 
 export function WeeklySlotBoard() {
-  const { data: activities = [] } = useActivities()
-  const { data: allSlots = [], isLoading } = useScheduleSlots()
+  const { data: activities = [], isLoading: isLoadingActivities } = useActivities()
+  const { data: allSlots = [], isLoading: isLoadingSlots } = useScheduleSlots()
   const [showActivitiesMenu, setShowActivitiesMenu] = useState(false)
 
   const [editing, setEditing] = useState<{
@@ -271,12 +273,8 @@ export function WeeklySlotBoard() {
     return acc
   }, {} as Record<ScheduleDay, ScheduleSlot[]>)
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 md:p-10 flex items-center justify-center">
-        <div className="text-slate-400">Loading schedule...</div>
-      </div>
-    )
+  if (isLoadingSlots || isLoadingActivities) {
+    return <ScheduleSkeleton />
   }
 
   if (activities.length === 0) {
@@ -327,19 +325,7 @@ export function WeeklySlotBoard() {
             <p className="text-slate-400 mt-1 text-sm">05:00 – 22:00</p>
           </header>
           <div className="text-center max-w-md mx-auto py-12 mb-8">
-            <svg
-              className="w-20 h-20 mx-auto text-slate-600 mb-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <Calendar className="w-20 h-20 mx-auto text-slate-600 mb-6" />
             <h2 className="text-2xl font-bold text-white mb-3">Empty Schedule</h2>
             <p className="text-slate-400 mb-6">
               Add time slots to your schedule to start planning your week
