@@ -118,7 +118,7 @@ export function SchedulePieCharts() {
 
   if (allSlots.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 md:p-10 flex items-center justify-center">
+      <div className="text-slate-100 p-6 md:p-10 flex items-center justify-center min-h-[60vh]">
         <div className="text-center max-w-md">
           <BarChart3 className="w-20 h-20 mx-auto text-slate-600 mb-6" />
           <h2 className="text-2xl font-bold text-white mb-3">No Data Available</h2>
@@ -131,7 +131,7 @@ export function SchedulePieCharts() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 md:p-10">
+    <div className="text-slate-100 pb-10">
       <div className="max-w-6xl mx-auto">
         <header className="mb-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>

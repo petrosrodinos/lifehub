@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { X, ClipboardList, Edit2, Trash2, Loader2 } from 'lucide-react'
 import { useActivities, useCreateActivity, useUpdateActivity, useDeleteActivity } from '../../../features/activities/hooks/use-activities'
+import { ConfirmationModal } from '../../../components/ui/ConfirmationModal'
 
 type ActivitiesMenuProps = {
   isOpen: boolean
@@ -110,6 +111,7 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
 
   const [editingUuid, setEditingUuid] = useState<string | null>(null)
   const [isAdding, setIsAdding] = useState(false)
+  const [deletingUuid, setDeletingUuid] = useState<string | null>(null)
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -143,11 +145,21 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
     )
   }
 
-  const handleDelete = (uuid: string) => {
-    if (confirm('Are you sure you want to delete this activity?')) {
-      deleteActivity.mutate(uuid)
+  const handleDeleteClick = (uuid: string) => {
+    setDeletingUuid(uuid)
+  }
+
+  const handleDeleteConfirm = () => {
+    if (deletingUuid) {
+      deleteActivity.mutate(deletingUuid, {
+        onSuccess: () => {
+          setDeletingUuid(null)
+        },
+      })
     }
   }
+
+  const deletingActivity = activities.find((a) => a.uuid === deletingUuid)
 
   if (!isOpen) return null
 
@@ -254,7 +266,7 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
                           </button>
                           <button
                             type="button"
-                            onClick={() => handleDelete(activity.uuid)}
+                            onClick={() => handleDeleteClick(activity.uuid)}
                             className="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-700 transition-colors"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -269,6 +281,18 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
           </div>
         </div>
       </aside>
+
+      <ConfirmationModal
+        isOpen={!!deletingUuid}
+        onClose={() => setDeletingUuid(null)}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Activity"
+        description={`Are you sure you want to delete "${deletingActivity?.name}"? This action cannot be undone and will remove all associated schedule slots.`}
+        confirmText="Delete"
+        cancelText="Cancel"
+        variant="danger"
+        isPending={deleteActivity.isPending}
+      />
     </>
   )
 }

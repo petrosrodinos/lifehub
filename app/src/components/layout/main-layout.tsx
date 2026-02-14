@@ -1,10 +1,22 @@
-import { Outlet } from "react-router-dom";
-import { LogOut, User } from "lucide-react";
-import { BottomNavigation } from "./bottom-navigation";
-import { useAuthStore } from "../../store/auth-store";
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import { LogOut, User } from 'lucide-react'
+import { BottomNavigation } from './bottom-navigation'
+import { useAuthStore } from '../../store/auth-store'
+import { ConfirmationModal } from '../ui/ConfirmationModal'
 
 export function MainLayout() {
-  const { full_name, logout } = useAuthStore();
+  const { full_name, logout } = useAuthStore()
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
+
+  const handleLogoutClick = () => {
+    setShowLogoutConfirm(true)
+  }
+
+  const handleLogoutConfirm = () => {
+    logout()
+    setShowLogoutConfirm(false)
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pb-16">
@@ -23,7 +35,7 @@ export function MainLayout() {
             </div>
           </div>
           <button
-            onClick={logout}
+            onClick={handleLogoutClick}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-slate-800/60 rounded-lg transition-all duration-200 border border-slate-700/50 hover:border-amber-400/30"
           >
             <LogOut className="w-4 h-4" />
@@ -35,6 +47,17 @@ export function MainLayout() {
         <Outlet />
       </main>
       <BottomNavigation />
+
+      <ConfirmationModal
+        isOpen={showLogoutConfirm}
+        onClose={() => setShowLogoutConfirm(false)}
+        onConfirm={handleLogoutConfirm}
+        title="Logout"
+        description="Are you sure you want to logout? You will need to sign in again to access your account."
+        confirmText="Logout"
+        cancelText="Cancel"
+        variant="warning"
+      />
     </div>
-  );
+  )
 }

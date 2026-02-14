@@ -7,6 +7,7 @@ import { timeToMinutes, slotDurationMinutes, formatTimeDisplay } from '../utils/
 import { SCHEDULE_DAYS } from '../../../features/routine/interfaces/routine.interface'
 import { ActivitiesMenu } from './ActivitiesMenu'
 import { ScheduleSkeleton } from './ScheduleSkeleton'
+import { ConfirmationModal } from '../../../components/ui/ConfirmationModal'
 
 const BOARD_START_MINUTES = 5 * 60
 const BOARD_END_MINUTES = 22 * 60
@@ -98,6 +99,7 @@ function SlotEditModal({ day, slot, onClose, mode }: SlotEditModalProps) {
   const [endTime, setEndTime] = useState(slot?.end_time ?? '10:00')
   const [activityUuid, setActivityUuid] = useState(slot?.activity_uuid ?? activities[0]?.uuid ?? '')
   const [error, setError] = useState<string | null>(null)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -156,13 +158,22 @@ function SlotEditModal({ day, slot, onClose, mode }: SlotEditModalProps) {
     }
   }
 
-  const handleDelete = () => {
-    if (slot && confirm('Are you sure you want to delete this slot?')) {
+  const handleDeleteClick = () => {
+    setShowDeleteConfirm(true)
+  }
+
+  const handleDeleteConfirm = () => {
+    if (slot) {
       deleteSlot.mutate(slot.uuid, {
-        onSuccess: () => onClose(),
+        onSuccess: () => {
+          setShowDeleteConfirm(false)
+          onClose()
+        },
       })
     }
   }
+
+  const selectedActivity = activities.find((a) => a.uuid === slot?.activity_uuid)
 
   return (
     <>
@@ -239,19 +250,27 @@ function SlotEditModal({ day, slot, onClose, mode }: SlotEditModalProps) {
             {mode === 'edit' && (
               <button
                 type="button"
-                onClick={handleDelete}
-                disabled={deleteSlot.isPending}
+                onClick={handleDeleteClick}
                 className="px-4 py-2 bg-red-600/80 hover:bg-red-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                {deleteSlot.isPending && (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                )}
                 Delete
               </button>
             )}
           </div>
         </form>
       </div>
+
+      <ConfirmationModal
+        isOpen={showDeleteConfirm}
+        onClose={() => setShowDeleteConfirm(false)}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Time Slot"
+        description={`Are you sure you want to delete the ${selectedActivity?.name || 'activity'} slot on ${day} from ${slot?.start_time} to ${slot?.end_time}?`}
+        confirmText="Delete"
+        cancelText="Cancel"
+        variant="danger"
+        isPending={deleteSlot.isPending}
+      />
     </>
   )
 }
@@ -279,7 +298,7 @@ export function WeeklySlotBoard() {
 
   if (activities.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 md:p-10 flex items-center justify-center">
+      <div className="text-slate-100 p-6 md:p-10 flex items-center justify-center min-h-[60vh]">
         <div className="text-center max-w-md">
           <svg
             className="w-20 h-20 mx-auto text-slate-600 mb-6"
@@ -316,7 +335,7 @@ export function WeeklySlotBoard() {
 
   if (allSlots.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 md:p-10">
+      <div className="text-slate-100 pb-10">
         <div className="max-w-6xl mx-auto">
           <header className="mb-10">
             <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
@@ -370,7 +389,7 @@ export function WeeklySlotBoard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 md:p-10">
+    <div className="text-slate-100 pb-10">
       <div className="max-w-6xl mx-auto">
         <header className="mb-10">
           <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">

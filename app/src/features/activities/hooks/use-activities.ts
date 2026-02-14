@@ -15,6 +15,7 @@ import {
 const QUERY_KEYS = {
   activities: ['activities'],
   activity: (uuid: string) => ['activities', uuid],
+  scheduleSlots: ['schedule-slots'],
 }
 
 export function useActivities() {
@@ -56,6 +57,7 @@ export function useUpdateActivity() {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.activities })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.activity(variables.uuid) })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.scheduleSlots })
       toast.success('Activity updated successfully', { duration: 2000 })
     },
     onError: (error: Error) => {
