@@ -18,6 +18,16 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model Activity
+ * 
+ */
+export type Activity = $Result.DefaultSelection<Prisma.$ActivityPayload>
+/**
+ * Model ScheduleSlot
+ * 
+ */
+export type ScheduleSlot = $Result.DefaultSelection<Prisma.$ScheduleSlotPayload>
 
 /**
  * Enums
@@ -32,11 +42,28 @@ export namespace $Enums {
 
 export type AuthRole = (typeof AuthRole)[keyof typeof AuthRole]
 
+
+export const ScheduleDay: {
+  MONDAY: 'MONDAY',
+  TUESDAY: 'TUESDAY',
+  WEDNESDAY: 'WEDNESDAY',
+  THURSDAY: 'THURSDAY',
+  FRIDAY: 'FRIDAY',
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY'
+};
+
+export type ScheduleDay = (typeof ScheduleDay)[keyof typeof ScheduleDay]
+
 }
 
 export type AuthRole = $Enums.AuthRole
 
 export const AuthRole: typeof $Enums.AuthRole
+
+export type ScheduleDay = $Enums.ScheduleDay
+
+export const ScheduleDay: typeof $Enums.ScheduleDay
 
 /**
  * ##  Prisma Client ʲˢ
@@ -164,6 +191,26 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.activity`: Exposes CRUD operations for the **Activity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Activities
+    * const activities = await prisma.activity.findMany()
+    * ```
+    */
+  get activity(): Prisma.ActivityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.scheduleSlot`: Exposes CRUD operations for the **ScheduleSlot** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ScheduleSlots
+    * const scheduleSlots = await prisma.scheduleSlot.findMany()
+    * ```
+    */
+  get scheduleSlot(): Prisma.ScheduleSlotDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -598,7 +645,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User'
+    User: 'User',
+    Activity: 'Activity',
+    ScheduleSlot: 'ScheduleSlot'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -614,7 +663,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user"
+      modelProps: "user" | "activity" | "scheduleSlot"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -689,6 +738,154 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Activity: {
+        payload: Prisma.$ActivityPayload<ExtArgs>
+        fields: Prisma.ActivityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ActivityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ActivityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          findFirst: {
+            args: Prisma.ActivityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ActivityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          findMany: {
+            args: Prisma.ActivityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>[]
+          }
+          create: {
+            args: Prisma.ActivityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          createMany: {
+            args: Prisma.ActivityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ActivityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>[]
+          }
+          delete: {
+            args: Prisma.ActivityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          update: {
+            args: Prisma.ActivityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          deleteMany: {
+            args: Prisma.ActivityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ActivityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ActivityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>[]
+          }
+          upsert: {
+            args: Prisma.ActivityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityPayload>
+          }
+          aggregate: {
+            args: Prisma.ActivityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActivity>
+          }
+          groupBy: {
+            args: Prisma.ActivityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActivityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ActivityCountArgs<ExtArgs>
+            result: $Utils.Optional<ActivityCountAggregateOutputType> | number
+          }
+        }
+      }
+      ScheduleSlot: {
+        payload: Prisma.$ScheduleSlotPayload<ExtArgs>
+        fields: Prisma.ScheduleSlotFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ScheduleSlotFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ScheduleSlotFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload>
+          }
+          findFirst: {
+            args: Prisma.ScheduleSlotFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ScheduleSlotFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload>
+          }
+          findMany: {
+            args: Prisma.ScheduleSlotFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload>[]
+          }
+          create: {
+            args: Prisma.ScheduleSlotCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload>
+          }
+          createMany: {
+            args: Prisma.ScheduleSlotCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ScheduleSlotCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload>[]
+          }
+          delete: {
+            args: Prisma.ScheduleSlotDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload>
+          }
+          update: {
+            args: Prisma.ScheduleSlotUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload>
+          }
+          deleteMany: {
+            args: Prisma.ScheduleSlotDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ScheduleSlotUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ScheduleSlotUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload>[]
+          }
+          upsert: {
+            args: Prisma.ScheduleSlotUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleSlotPayload>
+          }
+          aggregate: {
+            args: Prisma.ScheduleSlotAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateScheduleSlot>
+          }
+          groupBy: {
+            args: Prisma.ScheduleSlotGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ScheduleSlotGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ScheduleSlotCountArgs<ExtArgs>
+            result: $Utils.Optional<ScheduleSlotCountAggregateOutputType> | number
           }
         }
       }
@@ -801,6 +998,8 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    activity?: ActivityOmit
+    scheduleSlot?: ScheduleSlotOmit
   }
 
   /* Types for Logging */
@@ -875,6 +1074,76 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    activities: number
+    schedule_slots: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activities?: boolean | UserCountOutputTypeCountActivitiesArgs
+    schedule_slots?: boolean | UserCountOutputTypeCountSchedule_slotsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSchedule_slotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduleSlotWhereInput
+  }
+
+
+  /**
+   * Count Type ActivityCountOutputType
+   */
+
+  export type ActivityCountOutputType = {
+    schedule_slots: number
+  }
+
+  export type ActivityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule_slots?: boolean | ActivityCountOutputTypeCountSchedule_slotsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ActivityCountOutputType without action
+   */
+  export type ActivityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityCountOutputType
+     */
+    select?: ActivityCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ActivityCountOutputType without action
+   */
+  export type ActivityCountOutputTypeCountSchedule_slotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduleSlotWhereInput
+  }
 
 
   /**
@@ -1119,6 +1388,9 @@ export namespace Prisma {
     role?: boolean
     created_at?: boolean
     updated_at?: boolean
+    activities?: boolean | User$activitiesArgs<ExtArgs>
+    schedule_slots?: boolean | User$schedule_slotsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1161,10 +1433,20 @@ export namespace Prisma {
   }
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "email" | "phone" | "password" | "first_name" | "last_name" | "role" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activities?: boolean | User$activitiesArgs<ExtArgs>
+    schedule_slots?: boolean | User$schedule_slotsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
-    objects: {}
+    objects: {
+      activities: Prisma.$ActivityPayload<ExtArgs>[]
+      schedule_slots: Prisma.$ScheduleSlotPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       uuid: string
@@ -1570,6 +1852,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    activities<T extends User$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    schedule_slots<T extends User$schedule_slotsArgs<ExtArgs> = {}>(args?: Subset<T, User$schedule_slotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1626,6 +1910,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1644,6 +1932,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1661,6 +1953,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -1710,6 +2006,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -1758,6 +2058,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput
@@ -1800,6 +2104,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to create a User.
      */
@@ -1848,6 +2156,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to update a User.
      */
@@ -1915,6 +2227,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -1941,6 +2257,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput
@@ -1961,6 +2281,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.activities
+   */
+  export type User$activitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    where?: ActivityWhereInput
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    cursor?: ActivityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityScalarFieldEnum | ActivityScalarFieldEnum[]
+  }
+
+  /**
+   * User.schedule_slots
+   */
+  export type User$schedule_slotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    where?: ScheduleSlotWhereInput
+    orderBy?: ScheduleSlotOrderByWithRelationInput | ScheduleSlotOrderByWithRelationInput[]
+    cursor?: ScheduleSlotWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ScheduleSlotScalarFieldEnum | ScheduleSlotScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1972,6 +2340,2336 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Activity
+   */
+
+  export type AggregateActivity = {
+    _count: ActivityCountAggregateOutputType | null
+    _avg: ActivityAvgAggregateOutputType | null
+    _sum: ActivitySumAggregateOutputType | null
+    _min: ActivityMinAggregateOutputType | null
+    _max: ActivityMaxAggregateOutputType | null
+  }
+
+  export type ActivityAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ActivitySumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ActivityMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    name: string | null
+    color: string | null
+    is_default: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ActivityMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    name: string | null
+    color: string | null
+    is_default: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ActivityCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    name: number
+    color: number
+    is_default: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type ActivityAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ActivitySumAggregateInputType = {
+    id?: true
+  }
+
+  export type ActivityMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    name?: true
+    color?: true
+    is_default?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ActivityMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    name?: true
+    color?: true
+    is_default?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ActivityCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    name?: true
+    color?: true
+    is_default?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type ActivityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Activity to aggregate.
+     */
+    where?: ActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activities to fetch.
+     */
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Activities
+    **/
+    _count?: true | ActivityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ActivityAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ActivitySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActivityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActivityMaxAggregateInputType
+  }
+
+  export type GetActivityAggregateType<T extends ActivityAggregateArgs> = {
+        [P in keyof T & keyof AggregateActivity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActivity[P]>
+      : GetScalarType<T[P], AggregateActivity[P]>
+  }
+
+
+
+
+  export type ActivityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityWhereInput
+    orderBy?: ActivityOrderByWithAggregationInput | ActivityOrderByWithAggregationInput[]
+    by: ActivityScalarFieldEnum[] | ActivityScalarFieldEnum
+    having?: ActivityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActivityCountAggregateInputType | true
+    _avg?: ActivityAvgAggregateInputType
+    _sum?: ActivitySumAggregateInputType
+    _min?: ActivityMinAggregateInputType
+    _max?: ActivityMaxAggregateInputType
+  }
+
+  export type ActivityGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    name: string
+    color: string
+    is_default: boolean
+    created_at: Date
+    updated_at: Date
+    _count: ActivityCountAggregateOutputType | null
+    _avg: ActivityAvgAggregateOutputType | null
+    _sum: ActivitySumAggregateOutputType | null
+    _min: ActivityMinAggregateOutputType | null
+    _max: ActivityMaxAggregateOutputType | null
+  }
+
+  type GetActivityGroupByPayload<T extends ActivityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActivityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActivityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActivityGroupByOutputType[P]>
+            : GetScalarType<T[P], ActivityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ActivitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    name?: boolean
+    color?: boolean
+    is_default?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    schedule_slots?: boolean | Activity$schedule_slotsArgs<ExtArgs>
+    _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activity"]>
+
+  export type ActivitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    name?: boolean
+    color?: boolean
+    is_default?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activity"]>
+
+  export type ActivitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    name?: boolean
+    color?: boolean
+    is_default?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activity"]>
+
+  export type ActivitySelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    name?: boolean
+    color?: boolean
+    is_default?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type ActivityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "color" | "is_default" | "created_at" | "updated_at", ExtArgs["result"]["activity"]>
+  export type ActivityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    schedule_slots?: boolean | Activity$schedule_slotsArgs<ExtArgs>
+    _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ActivityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ActivityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ActivityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Activity"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      schedule_slots: Prisma.$ScheduleSlotPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      name: string
+      color: string
+      is_default: boolean
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["activity"]>
+    composites: {}
+  }
+
+  type ActivityGetPayload<S extends boolean | null | undefined | ActivityDefaultArgs> = $Result.GetResult<Prisma.$ActivityPayload, S>
+
+  type ActivityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ActivityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ActivityCountAggregateInputType | true
+    }
+
+  export interface ActivityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Activity'], meta: { name: 'Activity' } }
+    /**
+     * Find zero or one Activity that matches the filter.
+     * @param {ActivityFindUniqueArgs} args - Arguments to find a Activity
+     * @example
+     * // Get one Activity
+     * const activity = await prisma.activity.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ActivityFindUniqueArgs>(args: SelectSubset<T, ActivityFindUniqueArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Activity that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ActivityFindUniqueOrThrowArgs} args - Arguments to find a Activity
+     * @example
+     * // Get one Activity
+     * const activity = await prisma.activity.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ActivityFindUniqueOrThrowArgs>(args: SelectSubset<T, ActivityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Activity that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityFindFirstArgs} args - Arguments to find a Activity
+     * @example
+     * // Get one Activity
+     * const activity = await prisma.activity.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ActivityFindFirstArgs>(args?: SelectSubset<T, ActivityFindFirstArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Activity that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityFindFirstOrThrowArgs} args - Arguments to find a Activity
+     * @example
+     * // Get one Activity
+     * const activity = await prisma.activity.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ActivityFindFirstOrThrowArgs>(args?: SelectSubset<T, ActivityFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Activities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Activities
+     * const activities = await prisma.activity.findMany()
+     * 
+     * // Get first 10 Activities
+     * const activities = await prisma.activity.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const activityWithIdOnly = await prisma.activity.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ActivityFindManyArgs>(args?: SelectSubset<T, ActivityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Activity.
+     * @param {ActivityCreateArgs} args - Arguments to create a Activity.
+     * @example
+     * // Create one Activity
+     * const Activity = await prisma.activity.create({
+     *   data: {
+     *     // ... data to create a Activity
+     *   }
+     * })
+     * 
+     */
+    create<T extends ActivityCreateArgs>(args: SelectSubset<T, ActivityCreateArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Activities.
+     * @param {ActivityCreateManyArgs} args - Arguments to create many Activities.
+     * @example
+     * // Create many Activities
+     * const activity = await prisma.activity.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ActivityCreateManyArgs>(args?: SelectSubset<T, ActivityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Activities and returns the data saved in the database.
+     * @param {ActivityCreateManyAndReturnArgs} args - Arguments to create many Activities.
+     * @example
+     * // Create many Activities
+     * const activity = await prisma.activity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Activities and only return the `id`
+     * const activityWithIdOnly = await prisma.activity.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ActivityCreateManyAndReturnArgs>(args?: SelectSubset<T, ActivityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Activity.
+     * @param {ActivityDeleteArgs} args - Arguments to delete one Activity.
+     * @example
+     * // Delete one Activity
+     * const Activity = await prisma.activity.delete({
+     *   where: {
+     *     // ... filter to delete one Activity
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ActivityDeleteArgs>(args: SelectSubset<T, ActivityDeleteArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Activity.
+     * @param {ActivityUpdateArgs} args - Arguments to update one Activity.
+     * @example
+     * // Update one Activity
+     * const activity = await prisma.activity.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ActivityUpdateArgs>(args: SelectSubset<T, ActivityUpdateArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Activities.
+     * @param {ActivityDeleteManyArgs} args - Arguments to filter Activities to delete.
+     * @example
+     * // Delete a few Activities
+     * const { count } = await prisma.activity.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ActivityDeleteManyArgs>(args?: SelectSubset<T, ActivityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Activities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Activities
+     * const activity = await prisma.activity.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ActivityUpdateManyArgs>(args: SelectSubset<T, ActivityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Activities and returns the data updated in the database.
+     * @param {ActivityUpdateManyAndReturnArgs} args - Arguments to update many Activities.
+     * @example
+     * // Update many Activities
+     * const activity = await prisma.activity.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Activities and only return the `id`
+     * const activityWithIdOnly = await prisma.activity.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ActivityUpdateManyAndReturnArgs>(args: SelectSubset<T, ActivityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Activity.
+     * @param {ActivityUpsertArgs} args - Arguments to update or create a Activity.
+     * @example
+     * // Update or create a Activity
+     * const activity = await prisma.activity.upsert({
+     *   create: {
+     *     // ... data to create a Activity
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Activity we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ActivityUpsertArgs>(args: SelectSubset<T, ActivityUpsertArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Activities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityCountArgs} args - Arguments to filter Activities to count.
+     * @example
+     * // Count the number of Activities
+     * const count = await prisma.activity.count({
+     *   where: {
+     *     // ... the filter for the Activities we want to count
+     *   }
+     * })
+    **/
+    count<T extends ActivityCountArgs>(
+      args?: Subset<T, ActivityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActivityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Activity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActivityAggregateArgs>(args: Subset<T, ActivityAggregateArgs>): Prisma.PrismaPromise<GetActivityAggregateType<T>>
+
+    /**
+     * Group by Activity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ActivityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ActivityGroupByArgs['orderBy'] }
+        : { orderBy?: ActivityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ActivityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActivityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Activity model
+   */
+  readonly fields: ActivityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Activity.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ActivityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    schedule_slots<T extends Activity$schedule_slotsArgs<ExtArgs> = {}>(args?: Subset<T, Activity$schedule_slotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Activity model
+   */
+  interface ActivityFieldRefs {
+    readonly id: FieldRef<"Activity", 'Int'>
+    readonly uuid: FieldRef<"Activity", 'String'>
+    readonly user_uuid: FieldRef<"Activity", 'String'>
+    readonly name: FieldRef<"Activity", 'String'>
+    readonly color: FieldRef<"Activity", 'String'>
+    readonly is_default: FieldRef<"Activity", 'Boolean'>
+    readonly created_at: FieldRef<"Activity", 'DateTime'>
+    readonly updated_at: FieldRef<"Activity", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Activity findUnique
+   */
+  export type ActivityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity to fetch.
+     */
+    where: ActivityWhereUniqueInput
+  }
+
+  /**
+   * Activity findUniqueOrThrow
+   */
+  export type ActivityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity to fetch.
+     */
+    where: ActivityWhereUniqueInput
+  }
+
+  /**
+   * Activity findFirst
+   */
+  export type ActivityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity to fetch.
+     */
+    where?: ActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activities to fetch.
+     */
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Activities.
+     */
+    cursor?: ActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Activities.
+     */
+    distinct?: ActivityScalarFieldEnum | ActivityScalarFieldEnum[]
+  }
+
+  /**
+   * Activity findFirstOrThrow
+   */
+  export type ActivityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity to fetch.
+     */
+    where?: ActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activities to fetch.
+     */
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Activities.
+     */
+    cursor?: ActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Activities.
+     */
+    distinct?: ActivityScalarFieldEnum | ActivityScalarFieldEnum[]
+  }
+
+  /**
+   * Activity findMany
+   */
+  export type ActivityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which Activities to fetch.
+     */
+    where?: ActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activities to fetch.
+     */
+    orderBy?: ActivityOrderByWithRelationInput | ActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Activities.
+     */
+    cursor?: ActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activities.
+     */
+    skip?: number
+    distinct?: ActivityScalarFieldEnum | ActivityScalarFieldEnum[]
+  }
+
+  /**
+   * Activity create
+   */
+  export type ActivityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Activity.
+     */
+    data: XOR<ActivityCreateInput, ActivityUncheckedCreateInput>
+  }
+
+  /**
+   * Activity createMany
+   */
+  export type ActivityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Activities.
+     */
+    data: ActivityCreateManyInput | ActivityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Activity createManyAndReturn
+   */
+  export type ActivityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * The data used to create many Activities.
+     */
+    data: ActivityCreateManyInput | ActivityCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Activity update
+   */
+  export type ActivityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Activity.
+     */
+    data: XOR<ActivityUpdateInput, ActivityUncheckedUpdateInput>
+    /**
+     * Choose, which Activity to update.
+     */
+    where: ActivityWhereUniqueInput
+  }
+
+  /**
+   * Activity updateMany
+   */
+  export type ActivityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Activities.
+     */
+    data: XOR<ActivityUpdateManyMutationInput, ActivityUncheckedUpdateManyInput>
+    /**
+     * Filter which Activities to update
+     */
+    where?: ActivityWhereInput
+    /**
+     * Limit how many Activities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Activity updateManyAndReturn
+   */
+  export type ActivityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * The data used to update Activities.
+     */
+    data: XOR<ActivityUpdateManyMutationInput, ActivityUncheckedUpdateManyInput>
+    /**
+     * Filter which Activities to update
+     */
+    where?: ActivityWhereInput
+    /**
+     * Limit how many Activities to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Activity upsert
+   */
+  export type ActivityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Activity to update in case it exists.
+     */
+    where: ActivityWhereUniqueInput
+    /**
+     * In case the Activity found by the `where` argument doesn't exist, create a new Activity with this data.
+     */
+    create: XOR<ActivityCreateInput, ActivityUncheckedCreateInput>
+    /**
+     * In case the Activity was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ActivityUpdateInput, ActivityUncheckedUpdateInput>
+  }
+
+  /**
+   * Activity delete
+   */
+  export type ActivityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    /**
+     * Filter which Activity to delete.
+     */
+    where: ActivityWhereUniqueInput
+  }
+
+  /**
+   * Activity deleteMany
+   */
+  export type ActivityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Activities to delete
+     */
+    where?: ActivityWhereInput
+    /**
+     * Limit how many Activities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Activity.schedule_slots
+   */
+  export type Activity$schedule_slotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    where?: ScheduleSlotWhereInput
+    orderBy?: ScheduleSlotOrderByWithRelationInput | ScheduleSlotOrderByWithRelationInput[]
+    cursor?: ScheduleSlotWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ScheduleSlotScalarFieldEnum | ScheduleSlotScalarFieldEnum[]
+  }
+
+  /**
+   * Activity without action
+   */
+  export type ActivityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ScheduleSlot
+   */
+
+  export type AggregateScheduleSlot = {
+    _count: ScheduleSlotCountAggregateOutputType | null
+    _avg: ScheduleSlotAvgAggregateOutputType | null
+    _sum: ScheduleSlotSumAggregateOutputType | null
+    _min: ScheduleSlotMinAggregateOutputType | null
+    _max: ScheduleSlotMaxAggregateOutputType | null
+  }
+
+  export type ScheduleSlotAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ScheduleSlotSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ScheduleSlotMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    activity_uuid: string | null
+    day: $Enums.ScheduleDay | null
+    start_time: string | null
+    end_time: string | null
+    is_default: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ScheduleSlotMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    activity_uuid: string | null
+    day: $Enums.ScheduleDay | null
+    start_time: string | null
+    end_time: string | null
+    is_default: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ScheduleSlotCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    activity_uuid: number
+    day: number
+    start_time: number
+    end_time: number
+    is_default: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type ScheduleSlotAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ScheduleSlotSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ScheduleSlotMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    day?: true
+    start_time?: true
+    end_time?: true
+    is_default?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ScheduleSlotMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    day?: true
+    start_time?: true
+    end_time?: true
+    is_default?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ScheduleSlotCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    day?: true
+    start_time?: true
+    end_time?: true
+    is_default?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type ScheduleSlotAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ScheduleSlot to aggregate.
+     */
+    where?: ScheduleSlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduleSlots to fetch.
+     */
+    orderBy?: ScheduleSlotOrderByWithRelationInput | ScheduleSlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ScheduleSlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduleSlots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduleSlots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ScheduleSlots
+    **/
+    _count?: true | ScheduleSlotCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ScheduleSlotAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ScheduleSlotSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ScheduleSlotMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ScheduleSlotMaxAggregateInputType
+  }
+
+  export type GetScheduleSlotAggregateType<T extends ScheduleSlotAggregateArgs> = {
+        [P in keyof T & keyof AggregateScheduleSlot]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateScheduleSlot[P]>
+      : GetScalarType<T[P], AggregateScheduleSlot[P]>
+  }
+
+
+
+
+  export type ScheduleSlotGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduleSlotWhereInput
+    orderBy?: ScheduleSlotOrderByWithAggregationInput | ScheduleSlotOrderByWithAggregationInput[]
+    by: ScheduleSlotScalarFieldEnum[] | ScheduleSlotScalarFieldEnum
+    having?: ScheduleSlotScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ScheduleSlotCountAggregateInputType | true
+    _avg?: ScheduleSlotAvgAggregateInputType
+    _sum?: ScheduleSlotSumAggregateInputType
+    _min?: ScheduleSlotMinAggregateInputType
+    _max?: ScheduleSlotMaxAggregateInputType
+  }
+
+  export type ScheduleSlotGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    activity_uuid: string
+    day: $Enums.ScheduleDay
+    start_time: string
+    end_time: string
+    is_default: boolean
+    created_at: Date
+    updated_at: Date
+    _count: ScheduleSlotCountAggregateOutputType | null
+    _avg: ScheduleSlotAvgAggregateOutputType | null
+    _sum: ScheduleSlotSumAggregateOutputType | null
+    _min: ScheduleSlotMinAggregateOutputType | null
+    _max: ScheduleSlotMaxAggregateOutputType | null
+  }
+
+  type GetScheduleSlotGroupByPayload<T extends ScheduleSlotGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ScheduleSlotGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ScheduleSlotGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ScheduleSlotGroupByOutputType[P]>
+            : GetScalarType<T[P], ScheduleSlotGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ScheduleSlotSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    day?: boolean
+    start_time?: boolean
+    end_time?: boolean
+    is_default?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scheduleSlot"]>
+
+  export type ScheduleSlotSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    day?: boolean
+    start_time?: boolean
+    end_time?: boolean
+    is_default?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scheduleSlot"]>
+
+  export type ScheduleSlotSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    day?: boolean
+    start_time?: boolean
+    end_time?: boolean
+    is_default?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scheduleSlot"]>
+
+  export type ScheduleSlotSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    day?: boolean
+    start_time?: boolean
+    end_time?: boolean
+    is_default?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type ScheduleSlotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "activity_uuid" | "day" | "start_time" | "end_time" | "is_default" | "created_at" | "updated_at", ExtArgs["result"]["scheduleSlot"]>
+  export type ScheduleSlotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }
+  export type ScheduleSlotIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }
+  export type ScheduleSlotIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }
+
+  export type $ScheduleSlotPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ScheduleSlot"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      activity: Prisma.$ActivityPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      activity_uuid: string
+      day: $Enums.ScheduleDay
+      start_time: string
+      end_time: string
+      is_default: boolean
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["scheduleSlot"]>
+    composites: {}
+  }
+
+  type ScheduleSlotGetPayload<S extends boolean | null | undefined | ScheduleSlotDefaultArgs> = $Result.GetResult<Prisma.$ScheduleSlotPayload, S>
+
+  type ScheduleSlotCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ScheduleSlotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ScheduleSlotCountAggregateInputType | true
+    }
+
+  export interface ScheduleSlotDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ScheduleSlot'], meta: { name: 'ScheduleSlot' } }
+    /**
+     * Find zero or one ScheduleSlot that matches the filter.
+     * @param {ScheduleSlotFindUniqueArgs} args - Arguments to find a ScheduleSlot
+     * @example
+     * // Get one ScheduleSlot
+     * const scheduleSlot = await prisma.scheduleSlot.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ScheduleSlotFindUniqueArgs>(args: SelectSubset<T, ScheduleSlotFindUniqueArgs<ExtArgs>>): Prisma__ScheduleSlotClient<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ScheduleSlot that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ScheduleSlotFindUniqueOrThrowArgs} args - Arguments to find a ScheduleSlot
+     * @example
+     * // Get one ScheduleSlot
+     * const scheduleSlot = await prisma.scheduleSlot.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ScheduleSlotFindUniqueOrThrowArgs>(args: SelectSubset<T, ScheduleSlotFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ScheduleSlotClient<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ScheduleSlot that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleSlotFindFirstArgs} args - Arguments to find a ScheduleSlot
+     * @example
+     * // Get one ScheduleSlot
+     * const scheduleSlot = await prisma.scheduleSlot.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ScheduleSlotFindFirstArgs>(args?: SelectSubset<T, ScheduleSlotFindFirstArgs<ExtArgs>>): Prisma__ScheduleSlotClient<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ScheduleSlot that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleSlotFindFirstOrThrowArgs} args - Arguments to find a ScheduleSlot
+     * @example
+     * // Get one ScheduleSlot
+     * const scheduleSlot = await prisma.scheduleSlot.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ScheduleSlotFindFirstOrThrowArgs>(args?: SelectSubset<T, ScheduleSlotFindFirstOrThrowArgs<ExtArgs>>): Prisma__ScheduleSlotClient<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ScheduleSlots that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleSlotFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ScheduleSlots
+     * const scheduleSlots = await prisma.scheduleSlot.findMany()
+     * 
+     * // Get first 10 ScheduleSlots
+     * const scheduleSlots = await prisma.scheduleSlot.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const scheduleSlotWithIdOnly = await prisma.scheduleSlot.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ScheduleSlotFindManyArgs>(args?: SelectSubset<T, ScheduleSlotFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ScheduleSlot.
+     * @param {ScheduleSlotCreateArgs} args - Arguments to create a ScheduleSlot.
+     * @example
+     * // Create one ScheduleSlot
+     * const ScheduleSlot = await prisma.scheduleSlot.create({
+     *   data: {
+     *     // ... data to create a ScheduleSlot
+     *   }
+     * })
+     * 
+     */
+    create<T extends ScheduleSlotCreateArgs>(args: SelectSubset<T, ScheduleSlotCreateArgs<ExtArgs>>): Prisma__ScheduleSlotClient<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ScheduleSlots.
+     * @param {ScheduleSlotCreateManyArgs} args - Arguments to create many ScheduleSlots.
+     * @example
+     * // Create many ScheduleSlots
+     * const scheduleSlot = await prisma.scheduleSlot.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ScheduleSlotCreateManyArgs>(args?: SelectSubset<T, ScheduleSlotCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ScheduleSlots and returns the data saved in the database.
+     * @param {ScheduleSlotCreateManyAndReturnArgs} args - Arguments to create many ScheduleSlots.
+     * @example
+     * // Create many ScheduleSlots
+     * const scheduleSlot = await prisma.scheduleSlot.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ScheduleSlots and only return the `id`
+     * const scheduleSlotWithIdOnly = await prisma.scheduleSlot.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ScheduleSlotCreateManyAndReturnArgs>(args?: SelectSubset<T, ScheduleSlotCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ScheduleSlot.
+     * @param {ScheduleSlotDeleteArgs} args - Arguments to delete one ScheduleSlot.
+     * @example
+     * // Delete one ScheduleSlot
+     * const ScheduleSlot = await prisma.scheduleSlot.delete({
+     *   where: {
+     *     // ... filter to delete one ScheduleSlot
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ScheduleSlotDeleteArgs>(args: SelectSubset<T, ScheduleSlotDeleteArgs<ExtArgs>>): Prisma__ScheduleSlotClient<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ScheduleSlot.
+     * @param {ScheduleSlotUpdateArgs} args - Arguments to update one ScheduleSlot.
+     * @example
+     * // Update one ScheduleSlot
+     * const scheduleSlot = await prisma.scheduleSlot.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ScheduleSlotUpdateArgs>(args: SelectSubset<T, ScheduleSlotUpdateArgs<ExtArgs>>): Prisma__ScheduleSlotClient<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ScheduleSlots.
+     * @param {ScheduleSlotDeleteManyArgs} args - Arguments to filter ScheduleSlots to delete.
+     * @example
+     * // Delete a few ScheduleSlots
+     * const { count } = await prisma.scheduleSlot.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ScheduleSlotDeleteManyArgs>(args?: SelectSubset<T, ScheduleSlotDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ScheduleSlots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleSlotUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ScheduleSlots
+     * const scheduleSlot = await prisma.scheduleSlot.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ScheduleSlotUpdateManyArgs>(args: SelectSubset<T, ScheduleSlotUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ScheduleSlots and returns the data updated in the database.
+     * @param {ScheduleSlotUpdateManyAndReturnArgs} args - Arguments to update many ScheduleSlots.
+     * @example
+     * // Update many ScheduleSlots
+     * const scheduleSlot = await prisma.scheduleSlot.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ScheduleSlots and only return the `id`
+     * const scheduleSlotWithIdOnly = await prisma.scheduleSlot.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ScheduleSlotUpdateManyAndReturnArgs>(args: SelectSubset<T, ScheduleSlotUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ScheduleSlot.
+     * @param {ScheduleSlotUpsertArgs} args - Arguments to update or create a ScheduleSlot.
+     * @example
+     * // Update or create a ScheduleSlot
+     * const scheduleSlot = await prisma.scheduleSlot.upsert({
+     *   create: {
+     *     // ... data to create a ScheduleSlot
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ScheduleSlot we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ScheduleSlotUpsertArgs>(args: SelectSubset<T, ScheduleSlotUpsertArgs<ExtArgs>>): Prisma__ScheduleSlotClient<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ScheduleSlots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleSlotCountArgs} args - Arguments to filter ScheduleSlots to count.
+     * @example
+     * // Count the number of ScheduleSlots
+     * const count = await prisma.scheduleSlot.count({
+     *   where: {
+     *     // ... the filter for the ScheduleSlots we want to count
+     *   }
+     * })
+    **/
+    count<T extends ScheduleSlotCountArgs>(
+      args?: Subset<T, ScheduleSlotCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ScheduleSlotCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ScheduleSlot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleSlotAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ScheduleSlotAggregateArgs>(args: Subset<T, ScheduleSlotAggregateArgs>): Prisma.PrismaPromise<GetScheduleSlotAggregateType<T>>
+
+    /**
+     * Group by ScheduleSlot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleSlotGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ScheduleSlotGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ScheduleSlotGroupByArgs['orderBy'] }
+        : { orderBy?: ScheduleSlotGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ScheduleSlotGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetScheduleSlotGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ScheduleSlot model
+   */
+  readonly fields: ScheduleSlotFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ScheduleSlot.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ScheduleSlotClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    activity<T extends ActivityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActivityDefaultArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ScheduleSlot model
+   */
+  interface ScheduleSlotFieldRefs {
+    readonly id: FieldRef<"ScheduleSlot", 'Int'>
+    readonly uuid: FieldRef<"ScheduleSlot", 'String'>
+    readonly user_uuid: FieldRef<"ScheduleSlot", 'String'>
+    readonly activity_uuid: FieldRef<"ScheduleSlot", 'String'>
+    readonly day: FieldRef<"ScheduleSlot", 'ScheduleDay'>
+    readonly start_time: FieldRef<"ScheduleSlot", 'String'>
+    readonly end_time: FieldRef<"ScheduleSlot", 'String'>
+    readonly is_default: FieldRef<"ScheduleSlot", 'Boolean'>
+    readonly created_at: FieldRef<"ScheduleSlot", 'DateTime'>
+    readonly updated_at: FieldRef<"ScheduleSlot", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ScheduleSlot findUnique
+   */
+  export type ScheduleSlotFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduleSlot to fetch.
+     */
+    where: ScheduleSlotWhereUniqueInput
+  }
+
+  /**
+   * ScheduleSlot findUniqueOrThrow
+   */
+  export type ScheduleSlotFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduleSlot to fetch.
+     */
+    where: ScheduleSlotWhereUniqueInput
+  }
+
+  /**
+   * ScheduleSlot findFirst
+   */
+  export type ScheduleSlotFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduleSlot to fetch.
+     */
+    where?: ScheduleSlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduleSlots to fetch.
+     */
+    orderBy?: ScheduleSlotOrderByWithRelationInput | ScheduleSlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ScheduleSlots.
+     */
+    cursor?: ScheduleSlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduleSlots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduleSlots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ScheduleSlots.
+     */
+    distinct?: ScheduleSlotScalarFieldEnum | ScheduleSlotScalarFieldEnum[]
+  }
+
+  /**
+   * ScheduleSlot findFirstOrThrow
+   */
+  export type ScheduleSlotFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduleSlot to fetch.
+     */
+    where?: ScheduleSlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduleSlots to fetch.
+     */
+    orderBy?: ScheduleSlotOrderByWithRelationInput | ScheduleSlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ScheduleSlots.
+     */
+    cursor?: ScheduleSlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduleSlots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduleSlots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ScheduleSlots.
+     */
+    distinct?: ScheduleSlotScalarFieldEnum | ScheduleSlotScalarFieldEnum[]
+  }
+
+  /**
+   * ScheduleSlot findMany
+   */
+  export type ScheduleSlotFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduleSlots to fetch.
+     */
+    where?: ScheduleSlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduleSlots to fetch.
+     */
+    orderBy?: ScheduleSlotOrderByWithRelationInput | ScheduleSlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ScheduleSlots.
+     */
+    cursor?: ScheduleSlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduleSlots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduleSlots.
+     */
+    skip?: number
+    distinct?: ScheduleSlotScalarFieldEnum | ScheduleSlotScalarFieldEnum[]
+  }
+
+  /**
+   * ScheduleSlot create
+   */
+  export type ScheduleSlotCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ScheduleSlot.
+     */
+    data: XOR<ScheduleSlotCreateInput, ScheduleSlotUncheckedCreateInput>
+  }
+
+  /**
+   * ScheduleSlot createMany
+   */
+  export type ScheduleSlotCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ScheduleSlots.
+     */
+    data: ScheduleSlotCreateManyInput | ScheduleSlotCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ScheduleSlot createManyAndReturn
+   */
+  export type ScheduleSlotCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * The data used to create many ScheduleSlots.
+     */
+    data: ScheduleSlotCreateManyInput | ScheduleSlotCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ScheduleSlot update
+   */
+  export type ScheduleSlotUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ScheduleSlot.
+     */
+    data: XOR<ScheduleSlotUpdateInput, ScheduleSlotUncheckedUpdateInput>
+    /**
+     * Choose, which ScheduleSlot to update.
+     */
+    where: ScheduleSlotWhereUniqueInput
+  }
+
+  /**
+   * ScheduleSlot updateMany
+   */
+  export type ScheduleSlotUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ScheduleSlots.
+     */
+    data: XOR<ScheduleSlotUpdateManyMutationInput, ScheduleSlotUncheckedUpdateManyInput>
+    /**
+     * Filter which ScheduleSlots to update
+     */
+    where?: ScheduleSlotWhereInput
+    /**
+     * Limit how many ScheduleSlots to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ScheduleSlot updateManyAndReturn
+   */
+  export type ScheduleSlotUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * The data used to update ScheduleSlots.
+     */
+    data: XOR<ScheduleSlotUpdateManyMutationInput, ScheduleSlotUncheckedUpdateManyInput>
+    /**
+     * Filter which ScheduleSlots to update
+     */
+    where?: ScheduleSlotWhereInput
+    /**
+     * Limit how many ScheduleSlots to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ScheduleSlot upsert
+   */
+  export type ScheduleSlotUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ScheduleSlot to update in case it exists.
+     */
+    where: ScheduleSlotWhereUniqueInput
+    /**
+     * In case the ScheduleSlot found by the `where` argument doesn't exist, create a new ScheduleSlot with this data.
+     */
+    create: XOR<ScheduleSlotCreateInput, ScheduleSlotUncheckedCreateInput>
+    /**
+     * In case the ScheduleSlot was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ScheduleSlotUpdateInput, ScheduleSlotUncheckedUpdateInput>
+  }
+
+  /**
+   * ScheduleSlot delete
+   */
+  export type ScheduleSlotDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
+    /**
+     * Filter which ScheduleSlot to delete.
+     */
+    where: ScheduleSlotWhereUniqueInput
+  }
+
+  /**
+   * ScheduleSlot deleteMany
+   */
+  export type ScheduleSlotDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ScheduleSlots to delete
+     */
+    where?: ScheduleSlotWhereInput
+    /**
+     * Limit how many ScheduleSlots to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ScheduleSlot without action
+   */
+  export type ScheduleSlotDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleSlot
+     */
+    select?: ScheduleSlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleSlot
+     */
+    omit?: ScheduleSlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleSlotInclude<ExtArgs> | null
   }
 
 
@@ -2003,6 +4701,36 @@ export namespace Prisma {
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const ActivityScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    name: 'name',
+    color: 'color',
+    is_default: 'is_default',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type ActivityScalarFieldEnum = (typeof ActivityScalarFieldEnum)[keyof typeof ActivityScalarFieldEnum]
+
+
+  export const ScheduleSlotScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    activity_uuid: 'activity_uuid',
+    day: 'day',
+    start_time: 'start_time',
+    end_time: 'end_time',
+    is_default: 'is_default',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type ScheduleSlotScalarFieldEnum = (typeof ScheduleSlotScalarFieldEnum)[keyof typeof ScheduleSlotScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2091,6 +4819,27 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'ScheduleDay'
+   */
+  export type EnumScheduleDayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduleDay'>
+    
+
+
+  /**
+   * Reference to a field of type 'ScheduleDay[]'
+   */
+  export type ListEnumScheduleDayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduleDay[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2121,6 +4870,8 @@ export namespace Prisma {
     role?: EnumAuthRoleFilter<"User"> | $Enums.AuthRole
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
+    activities?: ActivityListRelationFilter
+    schedule_slots?: ScheduleSlotListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -2134,6 +4885,8 @@ export namespace Prisma {
     role?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    activities?: ActivityOrderByRelationAggregateInput
+    schedule_slots?: ScheduleSlotOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -2150,6 +4903,8 @@ export namespace Prisma {
     role?: EnumAuthRoleFilter<"User"> | $Enums.AuthRole
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
+    activities?: ActivityListRelationFilter
+    schedule_slots?: ScheduleSlotListRelationFilter
   }, "id" | "uuid" | "email" | "phone">
 
   export type UserOrderByWithAggregationInput = {
@@ -2186,6 +4941,166 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+  export type ActivityWhereInput = {
+    AND?: ActivityWhereInput | ActivityWhereInput[]
+    OR?: ActivityWhereInput[]
+    NOT?: ActivityWhereInput | ActivityWhereInput[]
+    id?: IntFilter<"Activity"> | number
+    uuid?: StringFilter<"Activity"> | string
+    user_uuid?: StringFilter<"Activity"> | string
+    name?: StringFilter<"Activity"> | string
+    color?: StringFilter<"Activity"> | string
+    is_default?: BoolFilter<"Activity"> | boolean
+    created_at?: DateTimeFilter<"Activity"> | Date | string
+    updated_at?: DateTimeFilter<"Activity"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    schedule_slots?: ScheduleSlotListRelationFilter
+  }
+
+  export type ActivityOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    is_default?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    schedule_slots?: ScheduleSlotOrderByRelationAggregateInput
+  }
+
+  export type ActivityWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: ActivityWhereInput | ActivityWhereInput[]
+    OR?: ActivityWhereInput[]
+    NOT?: ActivityWhereInput | ActivityWhereInput[]
+    user_uuid?: StringFilter<"Activity"> | string
+    name?: StringFilter<"Activity"> | string
+    color?: StringFilter<"Activity"> | string
+    is_default?: BoolFilter<"Activity"> | boolean
+    created_at?: DateTimeFilter<"Activity"> | Date | string
+    updated_at?: DateTimeFilter<"Activity"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    schedule_slots?: ScheduleSlotListRelationFilter
+  }, "id" | "uuid">
+
+  export type ActivityOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    is_default?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: ActivityCountOrderByAggregateInput
+    _avg?: ActivityAvgOrderByAggregateInput
+    _max?: ActivityMaxOrderByAggregateInput
+    _min?: ActivityMinOrderByAggregateInput
+    _sum?: ActivitySumOrderByAggregateInput
+  }
+
+  export type ActivityScalarWhereWithAggregatesInput = {
+    AND?: ActivityScalarWhereWithAggregatesInput | ActivityScalarWhereWithAggregatesInput[]
+    OR?: ActivityScalarWhereWithAggregatesInput[]
+    NOT?: ActivityScalarWhereWithAggregatesInput | ActivityScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Activity"> | number
+    uuid?: StringWithAggregatesFilter<"Activity"> | string
+    user_uuid?: StringWithAggregatesFilter<"Activity"> | string
+    name?: StringWithAggregatesFilter<"Activity"> | string
+    color?: StringWithAggregatesFilter<"Activity"> | string
+    is_default?: BoolWithAggregatesFilter<"Activity"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
+  }
+
+  export type ScheduleSlotWhereInput = {
+    AND?: ScheduleSlotWhereInput | ScheduleSlotWhereInput[]
+    OR?: ScheduleSlotWhereInput[]
+    NOT?: ScheduleSlotWhereInput | ScheduleSlotWhereInput[]
+    id?: IntFilter<"ScheduleSlot"> | number
+    uuid?: StringFilter<"ScheduleSlot"> | string
+    user_uuid?: StringFilter<"ScheduleSlot"> | string
+    activity_uuid?: StringFilter<"ScheduleSlot"> | string
+    day?: EnumScheduleDayFilter<"ScheduleSlot"> | $Enums.ScheduleDay
+    start_time?: StringFilter<"ScheduleSlot"> | string
+    end_time?: StringFilter<"ScheduleSlot"> | string
+    is_default?: BoolFilter<"ScheduleSlot"> | boolean
+    created_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
+    updated_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    activity?: XOR<ActivityScalarRelationFilter, ActivityWhereInput>
+  }
+
+  export type ScheduleSlotOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    day?: SortOrder
+    start_time?: SortOrder
+    end_time?: SortOrder
+    is_default?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    activity?: ActivityOrderByWithRelationInput
+  }
+
+  export type ScheduleSlotWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: ScheduleSlotWhereInput | ScheduleSlotWhereInput[]
+    OR?: ScheduleSlotWhereInput[]
+    NOT?: ScheduleSlotWhereInput | ScheduleSlotWhereInput[]
+    user_uuid?: StringFilter<"ScheduleSlot"> | string
+    activity_uuid?: StringFilter<"ScheduleSlot"> | string
+    day?: EnumScheduleDayFilter<"ScheduleSlot"> | $Enums.ScheduleDay
+    start_time?: StringFilter<"ScheduleSlot"> | string
+    end_time?: StringFilter<"ScheduleSlot"> | string
+    is_default?: BoolFilter<"ScheduleSlot"> | boolean
+    created_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
+    updated_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    activity?: XOR<ActivityScalarRelationFilter, ActivityWhereInput>
+  }, "id" | "uuid">
+
+  export type ScheduleSlotOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    day?: SortOrder
+    start_time?: SortOrder
+    end_time?: SortOrder
+    is_default?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: ScheduleSlotCountOrderByAggregateInput
+    _avg?: ScheduleSlotAvgOrderByAggregateInput
+    _max?: ScheduleSlotMaxOrderByAggregateInput
+    _min?: ScheduleSlotMinOrderByAggregateInput
+    _sum?: ScheduleSlotSumOrderByAggregateInput
+  }
+
+  export type ScheduleSlotScalarWhereWithAggregatesInput = {
+    AND?: ScheduleSlotScalarWhereWithAggregatesInput | ScheduleSlotScalarWhereWithAggregatesInput[]
+    OR?: ScheduleSlotScalarWhereWithAggregatesInput[]
+    NOT?: ScheduleSlotScalarWhereWithAggregatesInput | ScheduleSlotScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ScheduleSlot"> | number
+    uuid?: StringWithAggregatesFilter<"ScheduleSlot"> | string
+    user_uuid?: StringWithAggregatesFilter<"ScheduleSlot"> | string
+    activity_uuid?: StringWithAggregatesFilter<"ScheduleSlot"> | string
+    day?: EnumScheduleDayWithAggregatesFilter<"ScheduleSlot"> | $Enums.ScheduleDay
+    start_time?: StringWithAggregatesFilter<"ScheduleSlot"> | string
+    end_time?: StringWithAggregatesFilter<"ScheduleSlot"> | string
+    is_default?: BoolWithAggregatesFilter<"ScheduleSlot"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"ScheduleSlot"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ScheduleSlot"> | Date | string
+  }
+
   export type UserCreateInput = {
     uuid?: string
     email: string
@@ -2196,6 +5111,8 @@ export namespace Prisma {
     role: $Enums.AuthRole
     created_at?: Date | string
     updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -2209,6 +5126,8 @@ export namespace Prisma {
     role: $Enums.AuthRole
     created_at?: Date | string
     updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -2221,6 +5140,8 @@ export namespace Prisma {
     role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -2234,6 +5155,8 @@ export namespace Prisma {
     role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -2270,6 +5193,169 @@ export namespace Prisma {
     first_name?: StringFieldUpdateOperationsInput | string
     last_name?: StringFieldUpdateOperationsInput | string
     role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityCreateInput = {
+    uuid?: string
+    name: string
+    color: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutActivitiesInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    name: string
+    color: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutActivitiesNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    name: string
+    color: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleSlotCreateInput = {
+    uuid?: string
+    day: $Enums.ScheduleDay
+    start_time: string
+    end_time: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutSchedule_slotsInput
+    activity: ActivityCreateNestedOneWithoutSchedule_slotsInput
+  }
+
+  export type ScheduleSlotUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    day: $Enums.ScheduleDay
+    start_time: string
+    end_time: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ScheduleSlotUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSchedule_slotsNestedInput
+    activity?: ActivityUpdateOneRequiredWithoutSchedule_slotsNestedInput
+  }
+
+  export type ScheduleSlotUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleSlotCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    day: $Enums.ScheduleDay
+    start_time: string
+    end_time: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ScheduleSlotUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleSlotUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -2333,9 +5419,29 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type ActivityListRelationFilter = {
+    every?: ActivityWhereInput
+    some?: ActivityWhereInput
+    none?: ActivityWhereInput
+  }
+
+  export type ScheduleSlotListRelationFilter = {
+    every?: ScheduleSlotWhereInput
+    some?: ScheduleSlotWhereInput
+    none?: ScheduleSlotWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type ActivityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ScheduleSlotOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -2461,6 +5567,162 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type ActivityCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    is_default?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ActivityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    is_default?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    is_default?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivitySumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumScheduleDayFilter<$PrismaModel = never> = {
+    equals?: $Enums.ScheduleDay | EnumScheduleDayFieldRefInput<$PrismaModel>
+    in?: $Enums.ScheduleDay[] | ListEnumScheduleDayFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ScheduleDay[] | ListEnumScheduleDayFieldRefInput<$PrismaModel>
+    not?: NestedEnumScheduleDayFilter<$PrismaModel> | $Enums.ScheduleDay
+  }
+
+  export type ActivityScalarRelationFilter = {
+    is?: ActivityWhereInput
+    isNot?: ActivityWhereInput
+  }
+
+  export type ScheduleSlotCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    day?: SortOrder
+    start_time?: SortOrder
+    end_time?: SortOrder
+    is_default?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ScheduleSlotAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ScheduleSlotMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    day?: SortOrder
+    start_time?: SortOrder
+    end_time?: SortOrder
+    is_default?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ScheduleSlotMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    day?: SortOrder
+    start_time?: SortOrder
+    end_time?: SortOrder
+    is_default?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ScheduleSlotSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumScheduleDayWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ScheduleDay | EnumScheduleDayFieldRefInput<$PrismaModel>
+    in?: $Enums.ScheduleDay[] | ListEnumScheduleDayFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ScheduleDay[] | ListEnumScheduleDayFieldRefInput<$PrismaModel>
+    not?: NestedEnumScheduleDayWithAggregatesFilter<$PrismaModel> | $Enums.ScheduleDay
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumScheduleDayFilter<$PrismaModel>
+    _max?: NestedEnumScheduleDayFilter<$PrismaModel>
+  }
+
+  export type ActivityCreateNestedManyWithoutUserInput = {
+    create?: XOR<ActivityCreateWithoutUserInput, ActivityUncheckedCreateWithoutUserInput> | ActivityCreateWithoutUserInput[] | ActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutUserInput | ActivityCreateOrConnectWithoutUserInput[]
+    createMany?: ActivityCreateManyUserInputEnvelope
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+  }
+
+  export type ScheduleSlotCreateNestedManyWithoutUserInput = {
+    create?: XOR<ScheduleSlotCreateWithoutUserInput, ScheduleSlotUncheckedCreateWithoutUserInput> | ScheduleSlotCreateWithoutUserInput[] | ScheduleSlotUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ScheduleSlotCreateOrConnectWithoutUserInput | ScheduleSlotCreateOrConnectWithoutUserInput[]
+    createMany?: ScheduleSlotCreateManyUserInputEnvelope
+    connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+  }
+
+  export type ActivityUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ActivityCreateWithoutUserInput, ActivityUncheckedCreateWithoutUserInput> | ActivityCreateWithoutUserInput[] | ActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutUserInput | ActivityCreateOrConnectWithoutUserInput[]
+    createMany?: ActivityCreateManyUserInputEnvelope
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+  }
+
+  export type ScheduleSlotUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ScheduleSlotCreateWithoutUserInput, ScheduleSlotUncheckedCreateWithoutUserInput> | ScheduleSlotCreateWithoutUserInput[] | ScheduleSlotUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ScheduleSlotCreateOrConnectWithoutUserInput | ScheduleSlotCreateOrConnectWithoutUserInput[]
+    createMany?: ScheduleSlotCreateManyUserInputEnvelope
+    connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2477,12 +5739,160 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type ActivityUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ActivityCreateWithoutUserInput, ActivityUncheckedCreateWithoutUserInput> | ActivityCreateWithoutUserInput[] | ActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutUserInput | ActivityCreateOrConnectWithoutUserInput[]
+    upsert?: ActivityUpsertWithWhereUniqueWithoutUserInput | ActivityUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ActivityCreateManyUserInputEnvelope
+    set?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    disconnect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    delete?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    update?: ActivityUpdateWithWhereUniqueWithoutUserInput | ActivityUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ActivityUpdateManyWithWhereWithoutUserInput | ActivityUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+  }
+
+  export type ScheduleSlotUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ScheduleSlotCreateWithoutUserInput, ScheduleSlotUncheckedCreateWithoutUserInput> | ScheduleSlotCreateWithoutUserInput[] | ScheduleSlotUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ScheduleSlotCreateOrConnectWithoutUserInput | ScheduleSlotCreateOrConnectWithoutUserInput[]
+    upsert?: ScheduleSlotUpsertWithWhereUniqueWithoutUserInput | ScheduleSlotUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ScheduleSlotCreateManyUserInputEnvelope
+    set?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    disconnect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    delete?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    update?: ScheduleSlotUpdateWithWhereUniqueWithoutUserInput | ScheduleSlotUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ScheduleSlotUpdateManyWithWhereWithoutUserInput | ScheduleSlotUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ScheduleSlotScalarWhereInput | ScheduleSlotScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type ActivityUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ActivityCreateWithoutUserInput, ActivityUncheckedCreateWithoutUserInput> | ActivityCreateWithoutUserInput[] | ActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityCreateOrConnectWithoutUserInput | ActivityCreateOrConnectWithoutUserInput[]
+    upsert?: ActivityUpsertWithWhereUniqueWithoutUserInput | ActivityUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ActivityCreateManyUserInputEnvelope
+    set?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    disconnect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    delete?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    connect?: ActivityWhereUniqueInput | ActivityWhereUniqueInput[]
+    update?: ActivityUpdateWithWhereUniqueWithoutUserInput | ActivityUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ActivityUpdateManyWithWhereWithoutUserInput | ActivityUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+  }
+
+  export type ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ScheduleSlotCreateWithoutUserInput, ScheduleSlotUncheckedCreateWithoutUserInput> | ScheduleSlotCreateWithoutUserInput[] | ScheduleSlotUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ScheduleSlotCreateOrConnectWithoutUserInput | ScheduleSlotCreateOrConnectWithoutUserInput[]
+    upsert?: ScheduleSlotUpsertWithWhereUniqueWithoutUserInput | ScheduleSlotUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ScheduleSlotCreateManyUserInputEnvelope
+    set?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    disconnect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    delete?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    update?: ScheduleSlotUpdateWithWhereUniqueWithoutUserInput | ScheduleSlotUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ScheduleSlotUpdateManyWithWhereWithoutUserInput | ScheduleSlotUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ScheduleSlotScalarWhereInput | ScheduleSlotScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutActivitiesInput = {
+    create?: XOR<UserCreateWithoutActivitiesInput, UserUncheckedCreateWithoutActivitiesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutActivitiesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ScheduleSlotCreateNestedManyWithoutActivityInput = {
+    create?: XOR<ScheduleSlotCreateWithoutActivityInput, ScheduleSlotUncheckedCreateWithoutActivityInput> | ScheduleSlotCreateWithoutActivityInput[] | ScheduleSlotUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ScheduleSlotCreateOrConnectWithoutActivityInput | ScheduleSlotCreateOrConnectWithoutActivityInput[]
+    createMany?: ScheduleSlotCreateManyActivityInputEnvelope
+    connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+  }
+
+  export type ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput = {
+    create?: XOR<ScheduleSlotCreateWithoutActivityInput, ScheduleSlotUncheckedCreateWithoutActivityInput> | ScheduleSlotCreateWithoutActivityInput[] | ScheduleSlotUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ScheduleSlotCreateOrConnectWithoutActivityInput | ScheduleSlotCreateOrConnectWithoutActivityInput[]
+    createMany?: ScheduleSlotCreateManyActivityInputEnvelope
+    connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type UserUpdateOneRequiredWithoutActivitiesNestedInput = {
+    create?: XOR<UserCreateWithoutActivitiesInput, UserUncheckedCreateWithoutActivitiesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutActivitiesInput
+    upsert?: UserUpsertWithoutActivitiesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutActivitiesInput, UserUpdateWithoutActivitiesInput>, UserUncheckedUpdateWithoutActivitiesInput>
+  }
+
+  export type ScheduleSlotUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<ScheduleSlotCreateWithoutActivityInput, ScheduleSlotUncheckedCreateWithoutActivityInput> | ScheduleSlotCreateWithoutActivityInput[] | ScheduleSlotUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ScheduleSlotCreateOrConnectWithoutActivityInput | ScheduleSlotCreateOrConnectWithoutActivityInput[]
+    upsert?: ScheduleSlotUpsertWithWhereUniqueWithoutActivityInput | ScheduleSlotUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: ScheduleSlotCreateManyActivityInputEnvelope
+    set?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    disconnect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    delete?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    update?: ScheduleSlotUpdateWithWhereUniqueWithoutActivityInput | ScheduleSlotUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: ScheduleSlotUpdateManyWithWhereWithoutActivityInput | ScheduleSlotUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: ScheduleSlotScalarWhereInput | ScheduleSlotScalarWhereInput[]
+  }
+
+  export type ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<ScheduleSlotCreateWithoutActivityInput, ScheduleSlotUncheckedCreateWithoutActivityInput> | ScheduleSlotCreateWithoutActivityInput[] | ScheduleSlotUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ScheduleSlotCreateOrConnectWithoutActivityInput | ScheduleSlotCreateOrConnectWithoutActivityInput[]
+    upsert?: ScheduleSlotUpsertWithWhereUniqueWithoutActivityInput | ScheduleSlotUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: ScheduleSlotCreateManyActivityInputEnvelope
+    set?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    disconnect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    delete?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+    update?: ScheduleSlotUpdateWithWhereUniqueWithoutActivityInput | ScheduleSlotUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: ScheduleSlotUpdateManyWithWhereWithoutActivityInput | ScheduleSlotUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: ScheduleSlotScalarWhereInput | ScheduleSlotScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutSchedule_slotsInput = {
+    create?: XOR<UserCreateWithoutSchedule_slotsInput, UserUncheckedCreateWithoutSchedule_slotsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSchedule_slotsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ActivityCreateNestedOneWithoutSchedule_slotsInput = {
+    create?: XOR<ActivityCreateWithoutSchedule_slotsInput, ActivityUncheckedCreateWithoutSchedule_slotsInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutSchedule_slotsInput
+    connect?: ActivityWhereUniqueInput
+  }
+
+  export type EnumScheduleDayFieldUpdateOperationsInput = {
+    set?: $Enums.ScheduleDay
+  }
+
+  export type UserUpdateOneRequiredWithoutSchedule_slotsNestedInput = {
+    create?: XOR<UserCreateWithoutSchedule_slotsInput, UserUncheckedCreateWithoutSchedule_slotsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSchedule_slotsInput
+    upsert?: UserUpsertWithoutSchedule_slotsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSchedule_slotsInput, UserUpdateWithoutSchedule_slotsInput>, UserUncheckedUpdateWithoutSchedule_slotsInput>
+  }
+
+  export type ActivityUpdateOneRequiredWithoutSchedule_slotsNestedInput = {
+    create?: XOR<ActivityCreateWithoutSchedule_slotsInput, ActivityUncheckedCreateWithoutSchedule_slotsInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutSchedule_slotsInput
+    upsert?: ActivityUpsertWithoutSchedule_slotsInput
+    connect?: ActivityWhereUniqueInput
+    update?: XOR<XOR<ActivityUpdateToOneWithWhereWithoutSchedule_slotsInput, ActivityUpdateWithoutSchedule_slotsInput>, ActivityUncheckedUpdateWithoutSchedule_slotsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -2636,6 +6046,544 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumScheduleDayFilter<$PrismaModel = never> = {
+    equals?: $Enums.ScheduleDay | EnumScheduleDayFieldRefInput<$PrismaModel>
+    in?: $Enums.ScheduleDay[] | ListEnumScheduleDayFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ScheduleDay[] | ListEnumScheduleDayFieldRefInput<$PrismaModel>
+    not?: NestedEnumScheduleDayFilter<$PrismaModel> | $Enums.ScheduleDay
+  }
+
+  export type NestedEnumScheduleDayWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ScheduleDay | EnumScheduleDayFieldRefInput<$PrismaModel>
+    in?: $Enums.ScheduleDay[] | ListEnumScheduleDayFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ScheduleDay[] | ListEnumScheduleDayFieldRefInput<$PrismaModel>
+    not?: NestedEnumScheduleDayWithAggregatesFilter<$PrismaModel> | $Enums.ScheduleDay
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumScheduleDayFilter<$PrismaModel>
+    _max?: NestedEnumScheduleDayFilter<$PrismaModel>
+  }
+
+  export type ActivityCreateWithoutUserInput = {
+    uuid?: string
+    name: string
+    color: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    name: string
+    color: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityCreateOrConnectWithoutUserInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutUserInput, ActivityUncheckedCreateWithoutUserInput>
+  }
+
+  export type ActivityCreateManyUserInputEnvelope = {
+    data: ActivityCreateManyUserInput | ActivityCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ScheduleSlotCreateWithoutUserInput = {
+    uuid?: string
+    day: $Enums.ScheduleDay
+    start_time: string
+    end_time: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutSchedule_slotsInput
+  }
+
+  export type ScheduleSlotUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    activity_uuid: string
+    day: $Enums.ScheduleDay
+    start_time: string
+    end_time: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ScheduleSlotCreateOrConnectWithoutUserInput = {
+    where: ScheduleSlotWhereUniqueInput
+    create: XOR<ScheduleSlotCreateWithoutUserInput, ScheduleSlotUncheckedCreateWithoutUserInput>
+  }
+
+  export type ScheduleSlotCreateManyUserInputEnvelope = {
+    data: ScheduleSlotCreateManyUserInput | ScheduleSlotCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityUpsertWithWhereUniqueWithoutUserInput = {
+    where: ActivityWhereUniqueInput
+    update: XOR<ActivityUpdateWithoutUserInput, ActivityUncheckedUpdateWithoutUserInput>
+    create: XOR<ActivityCreateWithoutUserInput, ActivityUncheckedCreateWithoutUserInput>
+  }
+
+  export type ActivityUpdateWithWhereUniqueWithoutUserInput = {
+    where: ActivityWhereUniqueInput
+    data: XOR<ActivityUpdateWithoutUserInput, ActivityUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ActivityUpdateManyWithWhereWithoutUserInput = {
+    where: ActivityScalarWhereInput
+    data: XOR<ActivityUpdateManyMutationInput, ActivityUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ActivityScalarWhereInput = {
+    AND?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+    OR?: ActivityScalarWhereInput[]
+    NOT?: ActivityScalarWhereInput | ActivityScalarWhereInput[]
+    id?: IntFilter<"Activity"> | number
+    uuid?: StringFilter<"Activity"> | string
+    user_uuid?: StringFilter<"Activity"> | string
+    name?: StringFilter<"Activity"> | string
+    color?: StringFilter<"Activity"> | string
+    is_default?: BoolFilter<"Activity"> | boolean
+    created_at?: DateTimeFilter<"Activity"> | Date | string
+    updated_at?: DateTimeFilter<"Activity"> | Date | string
+  }
+
+  export type ScheduleSlotUpsertWithWhereUniqueWithoutUserInput = {
+    where: ScheduleSlotWhereUniqueInput
+    update: XOR<ScheduleSlotUpdateWithoutUserInput, ScheduleSlotUncheckedUpdateWithoutUserInput>
+    create: XOR<ScheduleSlotCreateWithoutUserInput, ScheduleSlotUncheckedCreateWithoutUserInput>
+  }
+
+  export type ScheduleSlotUpdateWithWhereUniqueWithoutUserInput = {
+    where: ScheduleSlotWhereUniqueInput
+    data: XOR<ScheduleSlotUpdateWithoutUserInput, ScheduleSlotUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ScheduleSlotUpdateManyWithWhereWithoutUserInput = {
+    where: ScheduleSlotScalarWhereInput
+    data: XOR<ScheduleSlotUpdateManyMutationInput, ScheduleSlotUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ScheduleSlotScalarWhereInput = {
+    AND?: ScheduleSlotScalarWhereInput | ScheduleSlotScalarWhereInput[]
+    OR?: ScheduleSlotScalarWhereInput[]
+    NOT?: ScheduleSlotScalarWhereInput | ScheduleSlotScalarWhereInput[]
+    id?: IntFilter<"ScheduleSlot"> | number
+    uuid?: StringFilter<"ScheduleSlot"> | string
+    user_uuid?: StringFilter<"ScheduleSlot"> | string
+    activity_uuid?: StringFilter<"ScheduleSlot"> | string
+    day?: EnumScheduleDayFilter<"ScheduleSlot"> | $Enums.ScheduleDay
+    start_time?: StringFilter<"ScheduleSlot"> | string
+    end_time?: StringFilter<"ScheduleSlot"> | string
+    is_default?: BoolFilter<"ScheduleSlot"> | boolean
+    created_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
+    updated_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
+  }
+
+  export type UserCreateWithoutActivitiesInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutActivitiesInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutActivitiesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutActivitiesInput, UserUncheckedCreateWithoutActivitiesInput>
+  }
+
+  export type ScheduleSlotCreateWithoutActivityInput = {
+    uuid?: string
+    day: $Enums.ScheduleDay
+    start_time: string
+    end_time: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutSchedule_slotsInput
+  }
+
+  export type ScheduleSlotUncheckedCreateWithoutActivityInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    day: $Enums.ScheduleDay
+    start_time: string
+    end_time: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ScheduleSlotCreateOrConnectWithoutActivityInput = {
+    where: ScheduleSlotWhereUniqueInput
+    create: XOR<ScheduleSlotCreateWithoutActivityInput, ScheduleSlotUncheckedCreateWithoutActivityInput>
+  }
+
+  export type ScheduleSlotCreateManyActivityInputEnvelope = {
+    data: ScheduleSlotCreateManyActivityInput | ScheduleSlotCreateManyActivityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutActivitiesInput = {
+    update: XOR<UserUpdateWithoutActivitiesInput, UserUncheckedUpdateWithoutActivitiesInput>
+    create: XOR<UserCreateWithoutActivitiesInput, UserUncheckedCreateWithoutActivitiesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutActivitiesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutActivitiesInput, UserUncheckedUpdateWithoutActivitiesInput>
+  }
+
+  export type UserUpdateWithoutActivitiesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutActivitiesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ScheduleSlotUpsertWithWhereUniqueWithoutActivityInput = {
+    where: ScheduleSlotWhereUniqueInput
+    update: XOR<ScheduleSlotUpdateWithoutActivityInput, ScheduleSlotUncheckedUpdateWithoutActivityInput>
+    create: XOR<ScheduleSlotCreateWithoutActivityInput, ScheduleSlotUncheckedCreateWithoutActivityInput>
+  }
+
+  export type ScheduleSlotUpdateWithWhereUniqueWithoutActivityInput = {
+    where: ScheduleSlotWhereUniqueInput
+    data: XOR<ScheduleSlotUpdateWithoutActivityInput, ScheduleSlotUncheckedUpdateWithoutActivityInput>
+  }
+
+  export type ScheduleSlotUpdateManyWithWhereWithoutActivityInput = {
+    where: ScheduleSlotScalarWhereInput
+    data: XOR<ScheduleSlotUpdateManyMutationInput, ScheduleSlotUncheckedUpdateManyWithoutActivityInput>
+  }
+
+  export type UserCreateWithoutSchedule_slotsInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSchedule_slotsInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSchedule_slotsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSchedule_slotsInput, UserUncheckedCreateWithoutSchedule_slotsInput>
+  }
+
+  export type ActivityCreateWithoutSchedule_slotsInput = {
+    uuid?: string
+    name: string
+    color: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutActivitiesInput
+  }
+
+  export type ActivityUncheckedCreateWithoutSchedule_slotsInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    name: string
+    color: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityCreateOrConnectWithoutSchedule_slotsInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutSchedule_slotsInput, ActivityUncheckedCreateWithoutSchedule_slotsInput>
+  }
+
+  export type UserUpsertWithoutSchedule_slotsInput = {
+    update: XOR<UserUpdateWithoutSchedule_slotsInput, UserUncheckedUpdateWithoutSchedule_slotsInput>
+    create: XOR<UserCreateWithoutSchedule_slotsInput, UserUncheckedCreateWithoutSchedule_slotsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSchedule_slotsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSchedule_slotsInput, UserUncheckedUpdateWithoutSchedule_slotsInput>
+  }
+
+  export type UserUpdateWithoutSchedule_slotsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSchedule_slotsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ActivityUpsertWithoutSchedule_slotsInput = {
+    update: XOR<ActivityUpdateWithoutSchedule_slotsInput, ActivityUncheckedUpdateWithoutSchedule_slotsInput>
+    create: XOR<ActivityCreateWithoutSchedule_slotsInput, ActivityUncheckedCreateWithoutSchedule_slotsInput>
+    where?: ActivityWhereInput
+  }
+
+  export type ActivityUpdateToOneWithWhereWithoutSchedule_slotsInput = {
+    where?: ActivityWhereInput
+    data: XOR<ActivityUpdateWithoutSchedule_slotsInput, ActivityUncheckedUpdateWithoutSchedule_slotsInput>
+  }
+
+  export type ActivityUpdateWithoutSchedule_slotsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutActivitiesNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutSchedule_slotsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    name: string
+    color: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ScheduleSlotCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    activity_uuid: string
+    day: $Enums.ScheduleDay
+    start_time: string
+    end_time: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleSlotUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutSchedule_slotsNestedInput
+  }
+
+  export type ScheduleSlotUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleSlotUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleSlotCreateManyActivityInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    day: $Enums.ScheduleDay
+    start_time: string
+    end_time: string
+    is_default?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ScheduleSlotUpdateWithoutActivityInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSchedule_slotsNestedInput
+  }
+
+  export type ScheduleSlotUncheckedUpdateWithoutActivityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleSlotUncheckedUpdateManyWithoutActivityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    is_default?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

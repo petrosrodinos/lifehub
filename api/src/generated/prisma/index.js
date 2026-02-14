@@ -106,6 +106,30 @@ exports.Prisma.UserScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.ActivityScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  name: 'name',
+  color: 'color',
+  is_default: 'is_default',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.ScheduleSlotScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  activity_uuid: 'activity_uuid',
+  day: 'day',
+  start_time: 'start_time',
+  end_time: 'end_time',
+  is_default: 'is_default',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -127,8 +151,20 @@ exports.AuthRole = exports.$Enums.AuthRole = {
   SUPPORT: 'SUPPORT'
 };
 
+exports.ScheduleDay = exports.$Enums.ScheduleDay = {
+  MONDAY: 'MONDAY',
+  TUESDAY: 'TUESDAY',
+  WEDNESDAY: 'WEDNESDAY',
+  THURSDAY: 'THURSDAY',
+  FRIDAY: 'FRIDAY',
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY'
+};
+
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Activity: 'Activity',
+  ScheduleSlot: 'ScheduleSlot'
 };
 /**
  * Create the Client
@@ -138,10 +174,10 @@ const config = {
   "clientVersion": "7.2.0",
   "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id         Int     @id @default(autoincrement())\n  uuid       String  @unique @default(uuid())\n  email      String  @unique\n  phone      String? @unique\n  password   String\n  first_name String\n  last_name  String\n\n  role       AuthRole\n  created_at DateTime @default(now())\n  updated_at DateTime @updatedAt\n\n  @@index([email])\n  @@index([phone])\n  @@index([uuid])\n  @@map(\"users\")\n}\n\nenum AuthRole {\n  USER\n  ADMIN\n  SUPER_ADMIN\n  SUPPORT\n}\n"
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id         Int      @id @default(autoincrement())\n  uuid       String   @unique @default(uuid())\n  email      String   @unique\n  phone      String?  @unique\n  password   String\n  first_name String\n  last_name  String\n  role       AuthRole\n  created_at DateTime @default(now())\n  updated_at DateTime @updatedAt\n\n  activities     Activity[]\n  schedule_slots ScheduleSlot[]\n\n  @@index([email])\n  @@index([phone])\n  @@index([uuid])\n  @@map(\"users\")\n}\n\nenum AuthRole {\n  USER\n  ADMIN\n  SUPER_ADMIN\n  SUPPORT\n}\n\nmodel Activity {\n  id         Int      @id @default(autoincrement())\n  uuid       String   @unique @default(uuid())\n  user_uuid  String\n  name       String\n  color      String\n  is_default Boolean  @default(false)\n  created_at DateTime @default(now())\n  updated_at DateTime @updatedAt\n\n  user           User           @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)\n  schedule_slots ScheduleSlot[]\n\n  @@index([uuid])\n  @@index([user_uuid])\n  @@map(\"activities\")\n}\n\nmodel ScheduleSlot {\n  id            Int         @id @default(autoincrement())\n  uuid          String      @unique @default(uuid())\n  user_uuid     String\n  activity_uuid String\n  day           ScheduleDay\n  start_time    String\n  end_time      String\n  is_default    Boolean     @default(false)\n  created_at    DateTime    @default(now())\n  updated_at    DateTime    @updatedAt\n\n  user     User     @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)\n  activity Activity @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)\n\n  @@index([uuid])\n  @@index([user_uuid])\n  @@index([day])\n  @@map(\"schedule_slots\")\n}\n\nenum ScheduleDay {\n  MONDAY\n  TUESDAY\n  WEDNESDAY\n  THURSDAY\n  FRIDAY\n  SATURDAY\n  SUNDAY\n}\n"
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"uuid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"AuthRole\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"users\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"uuid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"AuthRole\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"activities\",\"kind\":\"object\",\"type\":\"Activity\",\"relationName\":\"ActivityToUser\"},{\"name\":\"schedule_slots\",\"kind\":\"object\",\"type\":\"ScheduleSlot\",\"relationName\":\"ScheduleSlotToUser\"}],\"dbName\":\"users\"},\"Activity\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"uuid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_uuid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"color\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"is_default\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ActivityToUser\"},{\"name\":\"schedule_slots\",\"kind\":\"object\",\"type\":\"ScheduleSlot\",\"relationName\":\"ActivityToScheduleSlot\"}],\"dbName\":\"activities\"},\"ScheduleSlot\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"uuid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_uuid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"activity_uuid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"day\",\"kind\":\"enum\",\"type\":\"ScheduleDay\"},{\"name\":\"start_time\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"end_time\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"is_default\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ScheduleSlotToUser\"},{\"name\":\"activity\",\"kind\":\"object\",\"type\":\"Activity\",\"relationName\":\"ActivityToScheduleSlot\"}],\"dbName\":\"schedule_slots\"}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.compilerWasm = {
       getRuntime: async () => require('./query_compiler_bg.js'),
