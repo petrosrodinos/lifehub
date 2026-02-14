@@ -21,4 +21,28 @@ export class RegisterEmailDto {
     @MinLength(6)
     password: string;
 
+    @ApiProperty({
+        description: 'User first name',
+        example: 'John',
+    })
+    @IsString()
+    @MinLength(2)
+    first_name: string;
+
+    @ApiProperty({
+        description: 'User last name',
+        example: 'Doe',
+    })
+    @IsString()
+    @MinLength(2)
+    last_name: string;
+
+    @ApiProperty({
+        description: 'User phone number',
+        example: '1234567890',
+    })
+    @IsString()
+    @MinLength(10)
+    phone: string;
+
 }

@@ -20,6 +20,7 @@ export interface LoggedInUser {
     user_uuid: string | null;
     access_token: string | null;
     expires_in: number | null;
+    email?: string | null;
     avatar?: string | null;
     full_name?: string | null;
     role?: string | null;

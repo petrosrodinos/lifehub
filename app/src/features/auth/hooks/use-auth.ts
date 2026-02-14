@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { useAuthStore } from "@/stores/auth";
+import toast from "react-hot-toast";
+import { useAuthStore } from "../../../store/auth-store";
 import { useNavigate } from "react-router-dom";
 import type { SignInUser, SignUpUser } from "../interfaces/auth.interface";
-import { Routes } from "@/routes/routes";
-import { toast } from "@/hooks/use-toast";
+import { Routes } from "../../../routes/routes";
 import type { LoggedInUser } from "../interfaces/auth.interface";
 import { adminLoginToAccount, refreshAccountToken, signUp, signIn, updatePassword } from "../services/auth";
 
@@ -19,19 +19,14 @@ export function useSignin() {
                 ...data,
                 isLoggedIn: true,
             });
-            toast({
-                title: "Login successful",
-                description: "You have successfully logged in",
+            toast.success("You have successfully logged in", {
                 duration: 2000,
             });
             navigate(Routes.dashboard);
         },
         onError: (error: any) => {
-            toast({
-                title: "Could not sign in",
-                description: error?.message || "An unexpected error occurred",
+            toast.error(error?.message || "An unexpected error occurred", {
                 duration: 3000,
-                variant: "error",
             });
         },
     });
@@ -49,19 +44,14 @@ export function useSignup() {
                 ...data,
                 isLoggedIn: true,
             });
-            toast({
-                title: "Register successful",
-                description: "You have successfully registered in",
+            toast.success("You have successfully registered", {
                 duration: 2000,
             });
             navigate("/dashboard");
         },
         onError: (error) => {
-            toast({
-                title: "Could not sign up",
-                description: error.message,
+            toast.error(error.message, {
                 duration: 3000,
-                variant: "error",
             });
         },
     });
@@ -84,9 +74,7 @@ export function useAdminLoginToAccount() {
     return useMutation({
         mutationFn: (account_uuid: string) => adminLoginToAccount(account_uuid),
         onSuccess: (data: LoggedInUser) => {
-            toast({
-                title: "Admin login successful",
-                description: "You have successfully logged in as admin",
+            toast.success("You have successfully logged in as admin", {
                 duration: 2000,
             });
             login({
@@ -95,11 +83,8 @@ export function useAdminLoginToAccount() {
             });
         },
         onError: (error: any) => {
-            toast({
-                title: "Could not admin login to account",
-                description: error.message,
+            toast.error(error.message, {
                 duration: 3000,
-                variant: "error",
             });
         },
     });
@@ -109,18 +94,13 @@ export function useUpdatePassword() {
     return useMutation({
         mutationFn: updatePassword,
         onSuccess: () => {
-            toast({
-                title: "Password updated successfully",
-                description: "You have successfully updated your password",
+            toast.success("You have successfully updated your password", {
                 duration: 2000,
             });
         },
         onError: (error: any) => {
-            toast({
-                title: "Could not update password",
-                description: error.message,
+            toast.error(error.message, {
                 duration: 3000,
-                variant: "error",
             });
         },
     });

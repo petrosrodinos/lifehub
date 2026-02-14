@@ -1,27 +1,40 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "./protected-route";
+import { SignIn } from "../features/auth/pages/sign-in";
+import { SignUp } from "../features/auth/pages/sign-up";
+import { Dashboard } from "../pages/dashboard";
 
 export default function AppRoutes() {
   return (
     <Routes>
-      {/* Auth routes */}
       <Route
-        path="/auth"
+        path="/auth/sign-in"
         element={
           <ProtectedRoute loggedIn={false}>
-            <div>Auth routes</div>
+            <SignIn />
           </ProtectedRoute>
         }
-      >
-        {/* <Route path="sign-up" element={<SignUp />} /> */}
-        {/* <Route path="sign-in" element={<SignIn />} /> */}
-        <Route index element={<Navigate to="/auth/sign-in" replace />} />
-      </Route>
+      />
+      <Route
+        path="/auth/sign-up"
+        element={
+          <ProtectedRoute loggedIn={false}>
+            <SignUp />
+          </ProtectedRoute>
+        }
+      />
 
-      {/* Default redirect */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute loggedIn={true}>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path="/" element={<Navigate to="/auth/sign-in" replace />} />
 
-      {/* Catch all route */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

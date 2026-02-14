@@ -5,9 +5,7 @@ import { PrismaService } from '@/core/databases/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { CreateJwtService } from '@/shared/utils/jwt/jwt.service';
 import { AuthRoles } from '../interfaces/auth.interface';
-import { WaitlistDto } from '../dto/waitlist.dto';
 import { SendgridMailService } from '@/integrations/notifications/sendgrid/services/mail.service';
-import { EmailConfig } from '@/shared/constants/email';
 
 @Injectable()
 export class EmailAuthService {
@@ -37,6 +35,9 @@ export class EmailAuthService {
                     email: dto.email,
                     password: hashedPassword,
                     role: AuthRoles.USER,
+                    first_name: dto.first_name,
+                    last_name: dto.last_name,
+                    phone: dto.phone,
                 },
             });
 
@@ -89,42 +90,6 @@ export class EmailAuthService {
             throw new BadRequestException(error.message);
         }
 
-    }
-
-    async waitlist(dto: WaitlistDto) {
-
-        try {
-            const existingUser = await this.prisma.user.findUnique({
-                where: {
-                    email: dto.email,
-                },
-            });
-
-            if (existingUser) {
-                return { message: 'You are already in the waitlist', code: 'WAITLIST_ALREADY_EXISTS' };
-            }
-
-            const user = await this.prisma.user.create({
-                data: {
-                    email: dto.email,
-                    password: '',
-                    role: AuthRoles.USER,
-                },
-            });
-
-            await this.mailService.sendEmail({
-                to: dto.email,
-                from: EmailConfig.email_addresses.alert,
-                subject: EmailConfig.templates.waitlist.subject,
-                template_id: EmailConfig.templates.waitlist.template_id,
-            });
-
-
-            return { message: 'You have been successfully added to the waitlist', code: 'WAITLIST_SUCCESS' };
-
-        } catch (error) {
-            throw new BadRequestException('Failed to waitlist user', error.message);
-        }
     }
 
 }

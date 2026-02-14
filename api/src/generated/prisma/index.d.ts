@@ -907,6 +907,8 @@ export namespace Prisma {
     email: string | null
     phone: string | null
     password: string | null
+    first_name: string | null
+    last_name: string | null
     role: $Enums.AuthRole | null
     created_at: Date | null
     updated_at: Date | null
@@ -918,6 +920,8 @@ export namespace Prisma {
     email: string | null
     phone: string | null
     password: string | null
+    first_name: string | null
+    last_name: string | null
     role: $Enums.AuthRole | null
     created_at: Date | null
     updated_at: Date | null
@@ -929,6 +933,8 @@ export namespace Prisma {
     email: number
     phone: number
     password: number
+    first_name: number
+    last_name: number
     role: number
     created_at: number
     updated_at: number
@@ -950,6 +956,8 @@ export namespace Prisma {
     email?: true
     phone?: true
     password?: true
+    first_name?: true
+    last_name?: true
     role?: true
     created_at?: true
     updated_at?: true
@@ -961,6 +969,8 @@ export namespace Prisma {
     email?: true
     phone?: true
     password?: true
+    first_name?: true
+    last_name?: true
     role?: true
     created_at?: true
     updated_at?: true
@@ -972,6 +982,8 @@ export namespace Prisma {
     email?: true
     phone?: true
     password?: true
+    first_name?: true
+    last_name?: true
     role?: true
     created_at?: true
     updated_at?: true
@@ -1070,6 +1082,8 @@ export namespace Prisma {
     email: string
     phone: string | null
     password: string
+    first_name: string
+    last_name: string
     role: $Enums.AuthRole
     created_at: Date
     updated_at: Date
@@ -1100,6 +1114,8 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     password?: boolean
+    first_name?: boolean
+    last_name?: boolean
     role?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -1111,6 +1127,8 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     password?: boolean
+    first_name?: boolean
+    last_name?: boolean
     role?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -1122,6 +1140,8 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     password?: boolean
+    first_name?: boolean
+    last_name?: boolean
     role?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -1133,12 +1153,14 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     password?: boolean
+    first_name?: boolean
+    last_name?: boolean
     role?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "email" | "phone" | "password" | "role" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "email" | "phone" | "password" | "first_name" | "last_name" | "role" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -1149,6 +1171,8 @@ export namespace Prisma {
       email: string
       phone: string | null
       password: string
+      first_name: string
+      last_name: string
       role: $Enums.AuthRole
       created_at: Date
       updated_at: Date
@@ -1580,6 +1604,8 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly phone: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly first_name: FieldRef<"User", 'String'>
+    readonly last_name: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'AuthRole'>
     readonly created_at: FieldRef<"User", 'DateTime'>
     readonly updated_at: FieldRef<"User", 'DateTime'>
@@ -1969,6 +1995,8 @@ export namespace Prisma {
     email: 'email',
     phone: 'phone',
     password: 'password',
+    first_name: 'first_name',
+    last_name: 'last_name',
     role: 'role',
     created_at: 'created_at',
     updated_at: 'updated_at'
@@ -2088,6 +2116,8 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     phone?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
+    first_name?: StringFilter<"User"> | string
+    last_name?: StringFilter<"User"> | string
     role?: EnumAuthRoleFilter<"User"> | $Enums.AuthRole
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
@@ -2099,6 +2129,8 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrderInput | SortOrder
     password?: SortOrder
+    first_name?: SortOrder
+    last_name?: SortOrder
     role?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -2113,6 +2145,8 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
+    first_name?: StringFilter<"User"> | string
+    last_name?: StringFilter<"User"> | string
     role?: EnumAuthRoleFilter<"User"> | $Enums.AuthRole
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
@@ -2124,6 +2158,8 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrderInput | SortOrder
     password?: SortOrder
+    first_name?: SortOrder
+    last_name?: SortOrder
     role?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -2143,6 +2179,8 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     phone?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringWithAggregatesFilter<"User"> | string
+    first_name?: StringWithAggregatesFilter<"User"> | string
+    last_name?: StringWithAggregatesFilter<"User"> | string
     role?: EnumAuthRoleWithAggregatesFilter<"User"> | $Enums.AuthRole
     created_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -2153,6 +2191,8 @@ export namespace Prisma {
     email: string
     phone?: string | null
     password: string
+    first_name: string
+    last_name: string
     role: $Enums.AuthRole
     created_at?: Date | string
     updated_at?: Date | string
@@ -2164,6 +2204,8 @@ export namespace Prisma {
     email: string
     phone?: string | null
     password: string
+    first_name: string
+    last_name: string
     role: $Enums.AuthRole
     created_at?: Date | string
     updated_at?: Date | string
@@ -2174,6 +2216,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
     role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2185,6 +2229,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
     role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2196,6 +2242,8 @@ export namespace Prisma {
     email: string
     phone?: string | null
     password: string
+    first_name: string
+    last_name: string
     role: $Enums.AuthRole
     created_at?: Date | string
     updated_at?: Date | string
@@ -2206,6 +2254,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
     role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2217,6 +2267,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
     role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2292,6 +2344,8 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     password?: SortOrder
+    first_name?: SortOrder
+    last_name?: SortOrder
     role?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -2307,6 +2361,8 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     password?: SortOrder
+    first_name?: SortOrder
+    last_name?: SortOrder
     role?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -2318,6 +2374,8 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     password?: SortOrder
+    first_name?: SortOrder
+    last_name?: SortOrder
     role?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import type { LoggedInUser } from "../auth/interfaces/auth.interface";
+import type { LoggedInUser } from "../features/auth/interfaces/auth.interface";
 
 interface UserStore extends LoggedInUser {
     login(user: any): void;
@@ -12,6 +12,7 @@ const initialValues: UserStore = {
     isLoggedIn: false,
     user_uuid: null,
     role: null,
+    email: null,
     full_name: "",
     access_token: null,
     expires_in: null,

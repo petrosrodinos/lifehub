@@ -1,7 +1,7 @@
 import { formatAuthUser } from "../utils/auth.utils";
 import type { LoggedInUser, SignInUser, SignUpUser, UpdatePasswordDto } from "../interfaces/auth.interface";
-import { ApiRoutes } from "../../config/api/routes";
-import axiosInstance from "../../config/api/axios";
+import { ApiRoutes } from "../../../config/api/routes";
+import axiosInstance from "../../../config/api/axios";
 
 export const signIn = async (
     { email, password }: SignInUser,

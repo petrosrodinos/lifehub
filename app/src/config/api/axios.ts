@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { getAuthStoreState } from '@/stores/auth'
-import { isTokenExpired } from '@/lib/token';
-import { environments } from '@/config/environments';
+import { getAuthStoreState } from '../../store/auth-store'
+import { environments } from '../environments/index';
+import { isTokenExpired } from '../../lib/token';
 
 const axiosInstance = axios.create({
     baseURL: environments.API_URL,
