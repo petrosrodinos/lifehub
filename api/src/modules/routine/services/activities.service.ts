@@ -7,11 +7,11 @@ import { UpdateActivityDto } from '../dto/update-activity.dto'
 export class ActivitiesService {
   constructor(private readonly prisma: PrismaService) { }
 
-  async create(dto: CreateActivityDto, userUuid: string) {
+  async create(dto: CreateActivityDto, user_uuid: string) {
     const existingActivity = await this.prisma.activity.findFirst({
       where: {
         name: dto.name,
-        user_uuid: userUuid || null,
+        user_uuid: user_uuid,
       },
     })
 
@@ -24,16 +24,16 @@ export class ActivitiesService {
         name: dto.name,
         color: dto.color,
         is_default: dto.is_default || false,
-        user_uuid: userUuid,
+        user_uuid: user_uuid,
       },
     })
   }
 
-  async findAll(userUuid: string) {
+  async findAll(user_uuid: string) {
     return this.prisma.activity.findMany({
       where: {
         OR: [
-          { user_uuid: userUuid },
+          { user_uuid: user_uuid },
           { is_default: true },
         ],
       },
@@ -43,12 +43,12 @@ export class ActivitiesService {
     })
   }
 
-  async findOne(uuid: string, userUuid: string) {
+  async findOne(uuid: string, user_uuid: string) {
     const activity = await this.prisma.activity.findFirst({
       where: {
         uuid,
         OR: [
-          { user_uuid: userUuid },
+          { user_uuid: user_uuid },
           { is_default: true },
         ],
       },
@@ -61,11 +61,11 @@ export class ActivitiesService {
     return activity
   }
 
-  async update(uuid: string, dto: UpdateActivityDto, userUuid: string) {
+  async update(uuid: string, dto: UpdateActivityDto, user_uuid: string) {
     const activity = await this.prisma.activity.findFirst({
       where: {
         uuid,
-        user_uuid: userUuid,
+        user_uuid: user_uuid,
       },
     })
 
@@ -77,7 +77,7 @@ export class ActivitiesService {
       const existingActivity = await this.prisma.activity.findFirst({
         where: {
           name: dto.name,
-          user_uuid: userUuid || null,
+          user_uuid: user_uuid,
           uuid: { not: uuid },
         },
       })
@@ -93,11 +93,11 @@ export class ActivitiesService {
     })
   }
 
-  async remove(uuid: string, userUuid: string) {
+  async remove(uuid: string, user_uuid: string) {
     const activity = await this.prisma.activity.findFirst({
       where: {
         uuid,
-        user_uuid: userUuid,
+        user_uuid: user_uuid,
       },
     })
 

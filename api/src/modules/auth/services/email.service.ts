@@ -42,7 +42,7 @@ export class EmailAuthService {
             });
 
             const token = await this.jwtService.signToken({
-                uuid: user.uuid,
+                user_uuid: user.uuid,
                 role: user.role,
             });
 
@@ -77,7 +77,7 @@ export class EmailAuthService {
             }
 
             const token = await this.jwtService.signToken({
-                uuid: user.uuid,
+                user_uuid: user.uuid,
                 role: user.role,
             });
 

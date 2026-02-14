@@ -1,4 +1,4 @@
-import { IsString, IsEnum, Matches, IsInt, IsOptional, IsBoolean } from 'class-validator'
+import { IsString, IsEnum, Matches, IsOptional, IsBoolean, IsUUID } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 import { SCHEDULE_DAYS, ScheduleDay } from '@/shared/config/schedule/schedule-days.config'
 
@@ -21,8 +21,8 @@ export class CreateScheduleSlotDto {
   })
   end_time: string
 
-  @ApiProperty({ example: 1, description: 'Activity ID' })
-  @IsInt()
+  @ApiProperty({ example: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890', description: 'Activity UUID' })
+  @IsUUID()
   activity_uuid: string
 
   @ApiProperty({ example: false, description: 'Whether this is a default schedule slot', required: false })

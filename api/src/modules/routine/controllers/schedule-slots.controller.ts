@@ -9,18 +9,18 @@ import { CurrentUser } from '@/shared/decorators/current-user.decorator'
 
 @ApiTags('Schedule Slots')
 @Controller('schedule-slots')
+@UseGuards(JwtGuard)
 export class ScheduleSlotsController {
   constructor(private readonly scheduleSlotsService: ScheduleSlotsService) { }
 
   @Post()
-  @UseGuards(JwtGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Create a new schedule slot' })
   @ApiResponse({ status: 201, description: 'Schedule slot created successfully' })
   @ApiResponse({ status: 400, description: 'Bad request - Invalid time or activity' })
   create(
     @Body() createScheduleSlotDto: CreateScheduleSlotDto,
-    @CurrentUser('uuid') userUuid: string,
+    @CurrentUser('user_uuid') userUuid: string,
   ) {
     return this.scheduleSlotsService.create(createScheduleSlotDto, userUuid)
   }
@@ -31,7 +31,7 @@ export class ScheduleSlotsController {
   @ApiResponse({ status: 200, description: 'Schedule slots retrieved successfully' })
   findAll(
     @Query('day') day?: ScheduleDay,
-    @CurrentUser('uuid') userUuid?: string,
+    @CurrentUser('user_uuid') userUuid?: string,
   ) {
     return this.scheduleSlotsService.findAll(userUuid, day)
   }
@@ -41,7 +41,7 @@ export class ScheduleSlotsController {
   @ApiResponse({ status: 200, description: 'Schedule slots retrieved successfully' })
   findByDay(
     @Param('day') day: ScheduleDay,
-    @CurrentUser('uuid') userUuid?: string,
+    @CurrentUser('user_uuid') userUuid?: string,
   ) {
     return this.scheduleSlotsService.findByDay(day, userUuid)
   }
@@ -52,7 +52,7 @@ export class ScheduleSlotsController {
   @ApiResponse({ status: 404, description: 'Schedule slot not found' })
   findOne(
     @Param('uuid') uuid: string,
-    @CurrentUser('uuid') userUuid?: string,
+    @CurrentUser('user_uuid') userUuid?: string,
   ) {
     return this.scheduleSlotsService.findOne(uuid, userUuid)
   }
@@ -67,7 +67,7 @@ export class ScheduleSlotsController {
   update(
     @Param('uuid') uuid: string,
     @Body() updateScheduleSlotDto: UpdateScheduleSlotDto,
-    @CurrentUser('uuid') userUuid: string,
+    @CurrentUser('user_uuid') userUuid: string,
   ) {
     return this.scheduleSlotsService.update(uuid, updateScheduleSlotDto, userUuid)
   }
@@ -80,7 +80,7 @@ export class ScheduleSlotsController {
   @ApiResponse({ status: 404, description: 'Schedule slot not found' })
   remove(
     @Param('uuid') uuid: string,
-    @CurrentUser('uuid') userUuid: string,
+    @CurrentUser('user_uuid') userUuid: string,
   ) {
     return this.scheduleSlotsService.remove(uuid, userUuid)
   }

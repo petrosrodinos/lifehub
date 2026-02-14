@@ -19,7 +19,7 @@ export class ActivitiesController {
   @ApiResponse({ status: 409, description: 'Activity with this name already exists' })
   create(
     @Body() createActivityDto: CreateActivityDto,
-    @CurrentUser('uuid') userUuid: string,
+    @CurrentUser('user_uuid') userUuid: string,
   ) {
     return this.activitiesService.create(createActivityDto, userUuid)
   }
@@ -27,7 +27,7 @@ export class ActivitiesController {
   @Get()
   @ApiOperation({ summary: 'Get all activities (default and user-specific)' })
   @ApiResponse({ status: 200, description: 'Activities retrieved successfully' })
-  findAll(@CurrentUser('uuid') userUuid: string) {
+  findAll(@CurrentUser('user_uuid') userUuid: string) {
     return this.activitiesService.findAll(userUuid)
   }
 
@@ -37,7 +37,7 @@ export class ActivitiesController {
   @ApiResponse({ status: 404, description: 'Activity not found' })
   findOne(
     @Param('uuid') uuid: string,
-    @CurrentUser('uuid') userUuid: string,
+    @CurrentUser('user_uuid') userUuid: string,
   ) {
     return this.activitiesService.findOne(uuid, userUuid)
   }
@@ -52,7 +52,7 @@ export class ActivitiesController {
   update(
     @Param('uuid') uuid: string,
     @Body() updateActivityDto: UpdateActivityDto,
-    @CurrentUser('uuid') userUuid: string,
+    @CurrentUser('user_uuid') userUuid: string,
   ) {
     return this.activitiesService.update(uuid, updateActivityDto, userUuid)
   }
@@ -65,7 +65,7 @@ export class ActivitiesController {
   @ApiResponse({ status: 404, description: 'Activity not found' })
   remove(
     @Param('uuid') uuid: string,
-    @CurrentUser('uuid') userUuid: string,
+    @CurrentUser('user_uuid') userUuid: string,
   ) {
     return this.activitiesService.remove(uuid, userUuid)
   }

@@ -17,4 +17,21 @@ export const ApiRoutes = {
         me: "/users/me",
         user: (user_uuid: string) => `/users/${user_uuid}`,
     },
+    routine: {
+        activities: {
+            list: "/activities",
+            create: "/activities",
+            get: (uuid: string) => `/activities/${uuid}`,
+            update: (uuid: string) => `/activities/${uuid}`,
+            delete: (uuid: string) => `/activities/${uuid}`,
+        },
+        scheduleSlots: {
+            list: "/schedule-slots",
+            create: "/schedule-slots",
+            byDay: (day: string) => `/schedule-slots/by-day/${day}`,
+            get: (uuid: string) => `/schedule-slots/${uuid}`,
+            update: (uuid: string) => `/schedule-slots/${uuid}`,
+            delete: (uuid: string) => `/schedule-slots/${uuid}`,
+        },
+    },
 }

@@ -8,7 +8,7 @@ import { ScheduleDay } from '@/shared/config/schedule/schedule-days.config'
 export class ScheduleSlotsService {
   constructor(private readonly prisma: PrismaService) { }
 
-  async create(dto: CreateScheduleSlotDto, userUuid: string) {
+  async create(dto: CreateScheduleSlotDto, user_uuid: string) {
     const activity = await this.prisma.activity.findUnique({
       where: { uuid: dto.activity_uuid },
     })
@@ -31,7 +31,7 @@ export class ScheduleSlotsService {
         end_time: dto.end_time,
         activity_uuid: dto.activity_uuid,
         is_default: dto.is_default || false,
-        user_uuid: userUuid,
+        user_uuid: user_uuid,
       },
       include: {
         activity: true,
@@ -39,11 +39,11 @@ export class ScheduleSlotsService {
     })
   }
 
-  async findAll(userUuid: string, day: ScheduleDay) {
+  async findAll(user_uuid: string, day: ScheduleDay) {
     return this.prisma.scheduleSlot.findMany({
       where: {
         OR: [
-          { user_uuid: userUuid },
+          { user_uuid: user_uuid },
           { is_default: true },
         ],
         ...(day && { day }),
@@ -58,12 +58,12 @@ export class ScheduleSlotsService {
     })
   }
 
-  async findByDay(day: ScheduleDay, userUuid: string) {
+  async findByDay(day: ScheduleDay, user_uuid: string) {
     return this.prisma.scheduleSlot.findMany({
       where: {
         day,
         OR: [
-          { user_uuid: userUuid },
+          { user_uuid: user_uuid },
           { is_default: true },
         ],
       },
@@ -76,12 +76,12 @@ export class ScheduleSlotsService {
     })
   }
 
-  async findOne(uuid: string, userUuid: string) {
+  async findOne(uuid: string, user_uuid: string) {
     const slot = await this.prisma.scheduleSlot.findFirst({
       where: {
         uuid,
         OR: [
-          { user_uuid: userUuid },
+          { user_uuid: user_uuid },
           { is_default: true },
         ],
       },
@@ -97,11 +97,11 @@ export class ScheduleSlotsService {
     return slot
   }
 
-  async update(uuid: string, dto: UpdateScheduleSlotDto, userUuid: string) {
+  async update(uuid: string, dto: UpdateScheduleSlotDto, user_uuid: string) {
     const slot = await this.prisma.scheduleSlot.findFirst({
       where: {
         uuid,
-        user_uuid: userUuid,
+        user_uuid: user_uuid,
       },
     })
 
@@ -139,11 +139,11 @@ export class ScheduleSlotsService {
     })
   }
 
-  async remove(uuid: string, userUuid: string) {
+  async remove(uuid: string, user_uuid: string) {
     const slot = await this.prisma.scheduleSlot.findFirst({
       where: {
         uuid,
-        user_uuid: userUuid,
+        user_uuid: user_uuid,
       },
     })
 

@@ -1,8 +1,14 @@
 import { useState } from 'react'
-import { TAB_OPTIONS, type TabId } from '../config/schedule.config'
 import { WeeklySlotBoard } from './WeeklySlotBoard'
 import { SchedulePieCharts } from './SchedulePieCharts'
 import { ActivitiesMenu } from './ActivitiesMenu'
+
+const TAB_OPTIONS = [
+  { id: 'schedule', label: 'Schedule' },
+  { id: 'charts', label: 'Pie Charts' },
+] as const
+
+type TabId = (typeof TAB_OPTIONS)[number]['id']
 
 export function AppTabs() {
   const [activeTab, setActiveTab] = useState<TabId>('schedule')
