@@ -5,6 +5,8 @@ import type {
   UpdateExpenseEntryDto,
   ExpenseEntriesQueryParams,
   AnalyticsQueryParams,
+  CategoryAnalyticsQueryParams,
+  TransactionTrendQueryParams,
 } from '../interfaces/expense-entries.interfaces'
 import {
   getExpenseEntries,
@@ -16,6 +18,7 @@ import {
   getIncomeExpense,
   getStats,
   getExpensesBySubcategory,
+  getTransactionTrend,
 } from '../services/expense-entries'
 
 const QUERY_KEYS = {
@@ -26,7 +29,8 @@ const QUERY_KEYS = {
     balanceTrend: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'balance-trend', params],
     incomeExpense: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'income-expense', params],
     stats: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'stats', params],
-    expensesBySubcategory: ['expense-entries', 'analytics', 'expenses-by-subcategory'],
+    expensesBySubcategory: (params: CategoryAnalyticsQueryParams) => ['expense-entries', 'analytics', 'expenses-by-subcategory', params],
+    transactionTrend: (params: TransactionTrendQueryParams) => ['expense-entries', 'analytics', 'transaction-trend', params],
   },
 }
 
@@ -119,9 +123,17 @@ export function useStats(params: AnalyticsQueryParams) {
   })
 }
 
-export function useExpensesBySubcategory() {
+export function useExpensesBySubcategory(params: CategoryAnalyticsQueryParams) {
   return useQuery({
-    queryKey: QUERY_KEYS.analytics.expensesBySubcategory,
-    queryFn: getExpensesBySubcategory,
+    queryKey: QUERY_KEYS.analytics.expensesBySubcategory(params),
+    queryFn: () => getExpensesBySubcategory(params),
+  })
+}
+
+export function useTransactionTrend(params: TransactionTrendQueryParams) {
+  return useQuery({
+    queryKey: QUERY_KEYS.analytics.transactionTrend(params),
+    queryFn: () => getTransactionTrend(params),
+    enabled: !!params.category_uuid,
   })
 }

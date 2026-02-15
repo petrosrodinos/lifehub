@@ -7,6 +7,7 @@ import { CurrentUser } from '@/shared/decorators/current-user.decorator';
 import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe';
 import { ExpenseEntriesQuerySchema, ExpenseEntriesQueryType } from './schemas/expense-entries-query.schema';
 import { AnalyticsQuerySchema, AnalyticsQueryType } from './schemas/analytics-query.schema';
+import { CategoryAnalyticsQuerySchema, CategoryAnalyticsQueryType, TransactionTrendQuerySchema, TransactionTrendQueryType } from './schemas/category-analytics-query.schema';
 
 @Controller('expense-entries')
 @UseGuards(JwtGuard)
@@ -89,8 +90,18 @@ export class ExpenseEntriesController {
   @Get('analytics/expenses-by-subcategory')
   @HttpCode(HttpStatus.OK)
   getExpensesBySubcategory(
-    @CurrentUser('user_uuid') user_uuid: string
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(CategoryAnalyticsQuerySchema)) query: CategoryAnalyticsQueryType
   ) {
-    return this.expenseEntriesService.getExpensesBySubcategory(user_uuid);
+    return this.expenseEntriesService.getExpensesBySubcategory(user_uuid, query);
+  }
+
+  @Get('analytics/transaction-trend')
+  @HttpCode(HttpStatus.OK)
+  getTransactionTrend(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(TransactionTrendQuerySchema)) query: TransactionTrendQueryType
+  ) {
+    return this.expenseEntriesService.getTransactionTrend(user_uuid, query);
   }
 }

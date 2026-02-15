@@ -1,5 +1,5 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import type { ExpenseBySubcategoryData } from "../../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import type { ExpenseBySubcategoryData } from "../../../../../features/expense-entries/interfaces/expense-entries.interfaces";
 
 type ExpensesBySubcategoryChartProps = {
   data: ExpenseBySubcategoryData[];
@@ -10,9 +10,7 @@ export function ExpensesBySubcategoryChart({ data }: ExpensesBySubcategoryChartP
     return (
       <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/50 p-6">
         <h3 className="text-lg font-semibold text-white mb-4">Expenses by Subcategory</h3>
-        <div className="flex items-center justify-center h-64 text-slate-400">
-          No expense data available
-        </div>
+        <div className="flex items-center justify-center h-64 text-slate-400">No expense data available</div>
       </div>
     );
   }
@@ -55,17 +53,10 @@ export function ExpensesBySubcategoryChart({ data }: ExpensesBySubcategoryChartP
               borderRadius: "8px",
               color: "#f1f5f9",
             }}
-            formatter={(value: number | undefined, _name: string | undefined, props: any) => [
-              value !== undefined ? `$${value.toLocaleString()} (${props.payload.count} transactions)` : "N/A",
-              props.payload.name,
-            ]}
+            formatter={(value: number | undefined, _name: string | undefined, props: any) => [value !== undefined ? `$${value.toLocaleString()} (${props.payload.count} transactions)` : "N/A", props.payload.name]}
             labelStyle={{ color: "#cbd5e1" }}
           />
-          <Legend
-            wrapperStyle={{ color: "#cbd5e1" }}
-            iconType="circle"
-            formatter={(value, entry: any) => `${value} - ${entry.payload.category}`}
-          />
+          <Legend wrapperStyle={{ color: "#cbd5e1" }} iconType="circle" formatter={(value, entry: any) => `${value} - ${entry.payload.category}`} />
         </PieChart>
       </ResponsiveContainer>
     </div>

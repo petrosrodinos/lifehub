@@ -94,6 +94,25 @@ export interface StatsData {
   netBalance: number;
 }
 
+export interface CategoryAnalyticsQueryParams {
+  type?: ExpenseEntryType;
+  from_date?: string;
+  to_date?: string;
+}
+
+export interface TransactionTrendQueryParams {
+  type: ExpenseEntryType;
+  category_uuid: string;
+  subcategory_uuid?: string;
+  from_date?: string;
+  to_date?: string;
+}
+
+export interface TransactionTrendData {
+  date: string;
+  total: number;
+}
+
 export interface ExpenseBySubcategoryData {
   subcategoryUuid: string;
   subcategoryName: string;

@@ -3,8 +3,8 @@ import { Loader2 } from "lucide-react";
 import type { CreateExpenseAccountDto, UpdateExpenseAccountDto } from "../../../../features/expense-accounts/interfaces/expense-accounts.interfaces";
 import { PRESET_COLORS } from "../../constants/expenses-colors";
 import { ACCOUNT_PRESET_ICONS } from "../../constants/account-icons";
-import { EmojiPicker } from "../../components/EmojiPicker";
-import { ColorPicker } from "../../components/ColorPicker";
+import { EmojiPicker } from "../../../../components/ui/EmojiPicker";
+import { ColorPicker } from "../../../../components/ui/ColorPicker";
 
 type AccountFormProps<T extends CreateExpenseAccountDto | UpdateExpenseAccountDto> = {
   onSubmit: (data: T) => void;
@@ -49,22 +49,12 @@ export function AccountForm<T extends CreateExpenseAccountDto | UpdateExpenseAcc
 
       <div className="space-y-2">
         <label className="block text-sm font-semibold text-slate-300">Icon</label>
-        <EmojiPicker
-          value={icon}
-          onChange={setIcon}
-          presetEmojis={ACCOUNT_PRESET_ICONS}
-          disabled={isPending}
-        />
+        <EmojiPicker value={icon} onChange={setIcon} presetEmojis={ACCOUNT_PRESET_ICONS} disabled={isPending} />
       </div>
 
       <div className="space-y-2">
         <label className="block text-sm font-semibold text-slate-300">Color</label>
-        <ColorPicker
-          value={color}
-          onChange={setColor}
-          presetColors={PRESET_COLORS}
-          disabled={isPending}
-        />
+        <ColorPicker value={color} onChange={setColor} presetColors={PRESET_COLORS} disabled={isPending} />
       </div>
 
       <div className="space-y-2">

@@ -10,7 +10,10 @@ import type {
   BalanceTrendData,
   IncomeExpenseData,
   StatsData,
+  CategoryAnalyticsQueryParams,
+  TransactionTrendQueryParams,
   ExpenseBySubcategoryData,
+  TransactionTrendData,
 } from '../interfaces/expense-entries.interfaces'
 
 export const getExpenseEntries = async (
@@ -92,11 +95,20 @@ export const getStats = async (params: AnalyticsQueryParams): Promise<StatsData>
   }
 }
 
-export const getExpensesBySubcategory = async (): Promise<ExpenseBySubcategoryData[]> => {
+export const getExpensesBySubcategory = async (params: CategoryAnalyticsQueryParams): Promise<ExpenseBySubcategoryData[]> => {
   try {
-    const response = await axiosInstance.get(ApiRoutes.expenses.entries.analytics.expensesBySubcategory)
+    const response = await axiosInstance.get(ApiRoutes.expenses.entries.analytics.expensesBySubcategory, { params })
     return response.data
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to fetch expenses by subcategory')
+  }
+}
+
+export const getTransactionTrend = async (params: TransactionTrendQueryParams): Promise<TransactionTrendData[]> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.expenses.entries.analytics.transactionTrend, { params })
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to fetch transaction trend')
   }
 }

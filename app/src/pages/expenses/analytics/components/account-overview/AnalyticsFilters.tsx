@@ -1,4 +1,4 @@
-import { useExpenseAccounts } from "../../../../features/expense-accounts/hooks/use-expense-accounts";
+import { useExpenseAccounts } from "../../../../../features/expense-accounts/hooks/use-expense-accounts";
 
 type AnalyticsFiltersProps = {
   selectedAccounts: string[];
@@ -9,14 +9,7 @@ type AnalyticsFiltersProps = {
   onToDateChange: (date: string) => void;
 };
 
-export function AnalyticsFilters({
-  selectedAccounts,
-  onAccountsChange,
-  fromDate,
-  onFromDateChange,
-  toDate,
-  onToDateChange,
-}: AnalyticsFiltersProps) {
+export function AnalyticsFilters({ selectedAccounts, onAccountsChange, fromDate, onFromDateChange, toDate, onToDateChange }: AnalyticsFiltersProps) {
   const { data: accountsData } = useExpenseAccounts();
   const accounts = accountsData || [];
 
@@ -41,11 +34,7 @@ export function AnalyticsFilters({
       <div>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-white">Filters</h3>
-          <button
-            type="button"
-            onClick={handleSelectAll}
-            className="text-sm text-violet-400 hover:text-violet-300 transition-colors"
-          >
+          <button type="button" onClick={handleSelectAll} className="text-sm text-violet-400 hover:text-violet-300 transition-colors">
             {selectedAccounts.length === accounts.length ? "Deselect All" : "Select All"}
           </button>
         </div>
@@ -60,11 +49,7 @@ export function AnalyticsFilters({
                   key={account.uuid}
                   type="button"
                   onClick={() => handleAccountToggle(account.uuid)}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all text-left ${
-                    isSelected
-                      ? "text-white shadow-lg"
-                      : "bg-slate-800 text-slate-400 hover:bg-slate-700 border border-slate-700"
-                  }`}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all text-left ${isSelected ? "text-white shadow-lg" : "bg-slate-800 text-slate-400 hover:bg-slate-700 border border-slate-700"}`}
                   style={
                     isSelected
                       ? {
@@ -86,23 +71,11 @@ export function AnalyticsFilters({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-slate-300 mb-2">From Date (Optional)</label>
-          <input
-            type="date"
-            value={fromDate}
-            onChange={(e) => onFromDateChange(e.target.value)}
-            placeholder="All time"
-            className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors"
-          />
+          <input type="date" value={fromDate} onChange={(e) => onFromDateChange(e.target.value)} placeholder="All time" className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-300 mb-2">To Date (Optional)</label>
-          <input
-            type="date"
-            value={toDate}
-            onChange={(e) => onToDateChange(e.target.value)}
-            placeholder="All time"
-            className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors"
-          />
+          <input type="date" value={toDate} onChange={(e) => onToDateChange(e.target.value)} placeholder="All time" className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors" />
         </div>
       </div>
     </div>

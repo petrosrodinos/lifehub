@@ -5,6 +5,7 @@ import { PrismaService } from '../../core/databases/prisma/prisma.service';
 import { ExpenseEntryType } from '@/generated/prisma';
 import { ExpenseEntriesQueryType } from './schemas/expense-entries-query.schema';
 import { AnalyticsQueryType } from './schemas/analytics-query.schema';
+import { CategoryAnalyticsQueryType, TransactionTrendQueryType } from './schemas/category-analytics-query.schema';
 
 
 @Injectable()
@@ -482,13 +483,27 @@ export class ExpenseEntriesService {
     }
   }
 
-  async getExpensesBySubcategory(user_uuid: string) {
+  async getExpensesBySubcategory(user_uuid: string, query: CategoryAnalyticsQueryType) {
     try {
+      const where: any = {
+        user_uuid,
+        type: query.type || ExpenseEntryType.EXPENSE,
+      };
+
+      if (query.from_date || query.to_date) {
+        where.entry_date = {};
+
+        if (query.from_date) {
+          where.entry_date.gte = query.from_date;
+        }
+
+        if (query.to_date) {
+          where.entry_date.lte = query.to_date;
+        }
+      }
+
       const entries = await this.prisma.expenseEntry.findMany({
-        where: {
-          user_uuid,
-          type: ExpenseEntryType.EXPENSE,
-        },
+        where,
         include: {
           subcategory: {
             include: {
@@ -532,14 +547,71 @@ export class ExpenseEntriesService {
         }))
         .sort((a, b) => b.total - a.total);
 
-      const totalExpenses = data.reduce((sum, item) => sum + item.total, 0);
+      const total = data.reduce((sum, item) => sum + item.total, 0);
 
       return data.map((item) => ({
         ...item,
-        percentage: totalExpenses > 0 ? (item.total / totalExpenses) * 100 : 0,
+        percentage: total > 0 ? (item.total / total) * 100 : 0,
       }));
     } catch (error) {
-      throw new InternalServerErrorException('Failed to fetch expenses by subcategory');
+      throw new InternalServerErrorException('Failed to fetch by subcategory');
+    }
+  }
+
+  async getTransactionTrend(user_uuid: string, query: TransactionTrendQueryType) {
+    try {
+      const where: any = {
+        user_uuid,
+        type: query.type,
+        category_uuid: query.category_uuid,
+      };
+
+      if (query.subcategory_uuid) {
+        where.subcategory_uuid = query.subcategory_uuid;
+      }
+
+      if (query.from_date || query.to_date) {
+        where.entry_date = {};
+
+        if (query.from_date) {
+          where.entry_date.gte = query.from_date;
+        }
+
+        if (query.to_date) {
+          where.entry_date.lte = query.to_date;
+        }
+      }
+
+      const entries = await this.prisma.expenseEntry.findMany({
+        where,
+        orderBy: { entry_date: 'asc' },
+        select: {
+          entry_date: true,
+          amount: true,
+        },
+      });
+
+      const dateMap = new Map<string, number>();
+
+      entries.forEach((entry) => {
+        const date = entry.entry_date.toISOString().split('T')[0];
+        const amount = Number(entry.amount);
+
+        if (!dateMap.has(date)) {
+          dateMap.set(date, 0);
+        }
+
+        dateMap.set(date, dateMap.get(date)! + amount);
+      });
+
+      return Array.from(dateMap.entries())
+        .sort(([dateA], [dateB]) => dateA.localeCompare(dateB))
+        .map(([date, total]) => ({
+          date,
+          total,
+        }));
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to fetch transaction trend');
     }
   }
 }
