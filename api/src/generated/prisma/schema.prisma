@@ -13,6 +13,29 @@ datasource db {
   provider = "postgresql"
 }
 
+enum AuthRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+  SUPPORT
+}
+
+enum ScheduleDay {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+enum ExpenseEntryType {
+  INCOME
+  EXPENSE
+  TRANSFER
+}
+
 model User {
   id         Int      @id @default(autoincrement())
   uuid       String   @unique @default(uuid())
@@ -25,20 +48,17 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  activities     Activity[]
-  schedule_slots ScheduleSlot[]
+  activities       Activity[]
+  schedule_slots   ScheduleSlot[]
+  expense_accounts ExpenseAccount[]
+  expense_entries  ExpenseEntry[]
+  categories       ExpenseCategory[]
+  subcategories    ExpenseSubcategory[]
 
   @@index([email])
   @@index([phone])
   @@index([uuid])
   @@map("users")
-}
-
-enum AuthRole {
-  USER
-  ADMIN
-  SUPER_ADMIN
-  SUPPORT
 }
 
 model Activity {
@@ -80,12 +100,84 @@ model ScheduleSlot {
   @@map("schedule_slots")
 }
 
-enum ScheduleDay {
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  THURSDAY
-  FRIDAY
-  SATURDAY
-  SUNDAY
+model ExpenseAccount {
+  id         Int      @id @default(autoincrement())
+  uuid       String   @unique @default(uuid())
+  user_uuid  String
+  name       String
+  icon       String?
+  color      String?
+  balance    Decimal  @default(0)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user         User           @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  entries_from ExpenseEntry[] @relation("EntryFromAccount")
+  entries_to   ExpenseEntry[] @relation("EntryToAccount")
+
+  @@index([user_uuid])
+  @@map("expense_accounts")
+}
+
+model ExpenseCategory {
+  id         Int      @id @default(autoincrement())
+  uuid       String   @unique @default(uuid())
+  user_uuid  String?
+  name       String
+  icon       String?
+  color      String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user          User?                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  subcategories ExpenseSubcategory[]
+  entries       ExpenseEntry[]
+
+  @@index([user_uuid])
+  @@map("categories")
+}
+
+model ExpenseSubcategory {
+  id            Int      @id @default(autoincrement())
+  uuid          String   @unique @default(uuid())
+  user_uuid     String?
+  category_uuid String
+  name          String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  user     User?           @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  category ExpenseCategory @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
+  entries  ExpenseEntry[]
+
+  @@index([category_uuid])
+  @@map("subcategories")
+}
+
+model ExpenseEntry {
+  id                Int              @id @default(autoincrement())
+  uuid              String           @unique @default(uuid())
+  user_uuid         String
+  type              ExpenseEntryType
+  amount            Decimal
+  description       String?
+  from_account_uuid String
+  to_account_uuid   String?
+  category_uuid     String
+  subcategory_uuid  String
+  entry_date        DateTime         @default(now())
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+
+  user         User               @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  from_account ExpenseAccount     @relation("EntryFromAccount", fields: [from_account_uuid], references: [uuid], onDelete: Cascade)
+  to_account   ExpenseAccount?    @relation("EntryToAccount", fields: [to_account_uuid], references: [uuid], onDelete: Cascade)
+  category     ExpenseCategory    @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
+  subcategory  ExpenseSubcategory @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
+
+  @@index([user_uuid])
+  @@index([category_uuid])
+  @@index([subcategory_uuid])
+  @@index([entry_date])
+  @@map("expense_entries")
 }

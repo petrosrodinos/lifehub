@@ -157,6 +157,55 @@ exports.Prisma.ScheduleSlotScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.ExpenseAccountScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  name: 'name',
+  icon: 'icon',
+  color: 'color',
+  balance: 'balance',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.ExpenseCategoryScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  name: 'name',
+  icon: 'icon',
+  color: 'color',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.ExpenseSubcategoryScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  category_uuid: 'category_uuid',
+  name: 'name',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.ExpenseEntryScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  type: 'type',
+  amount: 'amount',
+  description: 'description',
+  from_account_uuid: 'from_account_uuid',
+  to_account_uuid: 'to_account_uuid',
+  category_uuid: 'category_uuid',
+  subcategory_uuid: 'subcategory_uuid',
+  entry_date: 'entry_date',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -188,10 +237,20 @@ exports.ScheduleDay = exports.$Enums.ScheduleDay = {
   SUNDAY: 'SUNDAY'
 };
 
+exports.ExpenseEntryType = exports.$Enums.ExpenseEntryType = {
+  INCOME: 'INCOME',
+  EXPENSE: 'EXPENSE',
+  TRANSFER: 'TRANSFER'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Activity: 'Activity',
-  ScheduleSlot: 'ScheduleSlot'
+  ScheduleSlot: 'ScheduleSlot',
+  ExpenseAccount: 'ExpenseAccount',
+  ExpenseCategory: 'ExpenseCategory',
+  ExpenseSubcategory: 'ExpenseSubcategory',
+  ExpenseEntry: 'ExpenseEntry'
 };
 
 /**
