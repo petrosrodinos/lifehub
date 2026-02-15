@@ -36,7 +36,6 @@ export class CreateExpenseAccountDto {
   })
   @IsOptional()
   @IsNumber()
-  @Min(0)
   @Type(() => Number)
   balance?: number;
 }

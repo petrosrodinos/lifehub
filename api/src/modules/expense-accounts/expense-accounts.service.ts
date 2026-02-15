@@ -20,6 +20,7 @@ export class ExpenseAccountsService {
         },
       });
     } catch (error) {
+      console.error('Error creating expense account:', error);
       throw new InternalServerErrorException('Failed to create expense account');
     }
   }

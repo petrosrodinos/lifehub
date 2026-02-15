@@ -1,0 +1,151 @@
+import { useState } from 'react'
+import { Loader2 } from 'lucide-react'
+import type { CreateExpenseAccountDto, UpdateExpenseAccountDto } from '../../../../features/expense-accounts/interfaces/expense-accounts.interfaces'
+import { ACCOUNT_PRESET_COLORS } from '../constants/account-colors'
+import { ACCOUNT_PRESET_ICONS } from '../constants/account-icons'
+
+type AccountFormProps<T extends CreateExpenseAccountDto | UpdateExpenseAccountDto> = {
+  onSubmit: (data: T) => void
+  onCancel: () => void
+  submitLabel: string
+  isPending?: boolean
+  initialData?: {
+    name?: string
+    icon?: string
+    color?: string
+    balance?: number
+  }
+}
+
+export function AccountForm<T extends CreateExpenseAccountDto | UpdateExpenseAccountDto>({
+  onSubmit,
+  onCancel,
+  submitLabel,
+  isPending = false,
+  initialData,
+}: AccountFormProps<T>) {
+  const [name, setName] = useState(initialData?.name || '')
+  const [icon, setIcon] = useState(initialData?.icon || ACCOUNT_PRESET_ICONS[0])
+  const [color, setColor] = useState(initialData?.color || ACCOUNT_PRESET_COLORS[0])
+  const [balance, setBalance] = useState(initialData?.balance?.toString() || '0')
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const trimmedName = name.trim()
+    if (!trimmedName) return
+
+    onSubmit({
+      name: trimmedName,
+      icon,
+      color,
+      balance: parseFloat(balance) || 0,
+    } as T)
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="space-y-2">
+        <label htmlFor="name" className="block text-sm font-semibold text-slate-300">
+          Account Name
+        </label>
+        <input
+          id="name"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="e.g., Main Bank Account"
+          className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-transparent transition-all"
+          autoFocus
+          disabled={isPending}
+          required
+        />
+      </div>
+
+      <div className="space-y-2">
+        <label className="block text-sm font-semibold text-slate-300">Icon</label>
+        <div className="flex flex-wrap gap-2">
+          {ACCOUNT_PRESET_ICONS.map((presetIcon) => (
+            <button
+              key={presetIcon}
+              type="button"
+              onClick={() => setIcon(presetIcon)}
+              disabled={isPending}
+              className={`w-12 h-12 text-2xl rounded-xl border-2 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed ${
+                icon === presetIcon
+                  ? 'border-violet-500 bg-violet-500/10 scale-110'
+                  : 'border-slate-700 bg-slate-800 hover:border-slate-600'
+              }`}
+            >
+              {presetIcon}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <label className="block text-sm font-semibold text-slate-300">Color</label>
+        <div className="flex flex-wrap gap-2">
+          {ACCOUNT_PRESET_COLORS.map((presetColor) => (
+            <button
+              key={presetColor}
+              type="button"
+              onClick={() => setColor(presetColor)}
+              disabled={isPending}
+              className={`w-10 h-10 rounded-full border-2 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed ${
+                color === presetColor ? 'border-white scale-110 ring-2 ring-white/20' : 'border-slate-700'
+              }`}
+              style={{ backgroundColor: presetColor }}
+            />
+          ))}
+        </div>
+        <input
+          type="color"
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+          disabled={isPending}
+          className="w-full h-12 cursor-pointer bg-slate-800 rounded-xl disabled:opacity-50 border border-slate-700"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <label htmlFor="balance" className="block text-sm font-semibold text-slate-300">
+          Initial Balance
+        </label>
+        <div className="relative">
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-medium">
+            $
+          </span>
+          <input
+            id="balance"
+            type="number"
+            step="0.01"
+            value={balance}
+            onChange={(e) => setBalance(e.target.value)}
+            placeholder="0.00"
+            className="w-full pl-8 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-transparent transition-all"
+            disabled={isPending}
+          />
+        </div>
+      </div>
+
+      <div className="flex gap-3 pt-2">
+        <button
+          type="submit"
+          disabled={isPending || !name.trim()}
+          className="flex-1 px-4 py-3 bg-gradient-to-r from-violet-500 to-blue-500 hover:from-violet-600 hover:to-blue-600 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        >
+          {isPending && <Loader2 className="w-5 h-5 animate-spin" />}
+          {submitLabel}
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          disabled={isPending}
+          className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  )
+}
