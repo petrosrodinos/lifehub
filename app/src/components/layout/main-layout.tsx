@@ -1,23 +1,11 @@
-import { useState } from 'react'
 import { Outlet, Link, useLocation } from 'react-router-dom'
-import { LogOut, User, Settings } from 'lucide-react'
+import { User, Settings } from 'lucide-react'
 import { BottomNavigation } from './bottom-navigation'
 import { useAuthStore } from '../../store/auth-store'
-import { ConfirmationModal } from '../ui/ConfirmationModal'
 
 export function MainLayout() {
-  const { full_name, logout } = useAuthStore()
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
+  const { full_name } = useAuthStore()
   const location = useLocation()
-
-  const handleLogoutClick = () => {
-    setShowLogoutConfirm(true)
-  }
-
-  const handleLogoutConfirm = () => {
-    logout()
-    setShowLogoutConfirm(false)
-  }
 
   const isSettingsPage = location.pathname.startsWith('/dashboard/settings')
 
@@ -37,43 +25,22 @@ export function MainLayout() {
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Link
-              to="/dashboard/settings/security"
-              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 border ${
-                isSettingsPage
-                  ? 'text-amber-400 bg-amber-500/10 border-amber-400/30'
-                  : 'text-slate-300 hover:text-amber-400 hover:bg-slate-800/60 border-slate-700/50 hover:border-amber-400/30'
-              }`}
-            >
-              <Settings className="w-4 h-4" />
-              <span className="hidden sm:inline">Settings</span>
-            </Link>
-            <button
-              onClick={handleLogoutClick}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-slate-800/60 rounded-lg transition-all duration-200 border border-slate-700/50 hover:border-amber-400/30"
-            >
-              <LogOut className="w-4 h-4" />
-              <span className="hidden sm:inline">Logout</span>
-            </button>
-          </div>
+          <Link
+            to="/dashboard/settings/security"
+            className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 border ${
+              isSettingsPage
+                ? 'text-amber-400 bg-amber-500/10 border-amber-400/30'
+                : 'text-slate-300 hover:text-amber-400 hover:bg-slate-800/60 border-slate-700/50 hover:border-amber-400/30'
+            }`}
+          >
+            <Settings className="w-5 h-5" />
+          </Link>
         </div>
       </header>
       <main className="max-w-7xl mx-auto">
         <Outlet />
       </main>
       <BottomNavigation />
-
-      <ConfirmationModal
-        isOpen={showLogoutConfirm}
-        onClose={() => setShowLogoutConfirm(false)}
-        onConfirm={handleLogoutConfirm}
-        title="Logout"
-        description="Are you sure you want to logout? You will need to sign in again to access your account."
-        confirmText="Logout"
-        cancelText="Cancel"
-        variant="warning"
-      />
     </div>
   )
 }

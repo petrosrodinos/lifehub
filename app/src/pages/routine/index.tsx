@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Settings } from "lucide-react";
+import { Sliders } from "lucide-react";
 import { WeeklySlotBoard } from "./components/WeeklySlotBoard";
 import { SchedulePieCharts } from "./components/SchedulePieCharts";
 import { ActivitiesMenu } from "./components/ActivitiesMenu";
@@ -23,7 +23,7 @@ export function RoutinePage() {
             </button>
           </div>
           <button type="button" onClick={() => setMenuOpen(true)} className="p-2.5 text-slate-400 hover:text-amber-400 rounded-lg transition-colors" title="Manage activities">
-            <Settings className="w-5 h-5" />
+            <Sliders className="w-5 h-5" />
           </button>
         </div>
 
