@@ -96,6 +96,7 @@ export interface StatsData {
 
 export interface CategoryAnalyticsQueryParams {
   type?: ExpenseEntryType;
+  group_by?: 'category' | 'subcategory';
   from_date?: string;
   to_date?: string;
 }
@@ -111,6 +112,17 @@ export interface TransactionTrendQueryParams {
 export interface TransactionTrendData {
   date: string;
   total: number;
+}
+
+export interface BreakdownData {
+  uuid: string;
+  name: string;
+  categoryName?: string;
+  icon?: string;
+  color: string;
+  total: number;
+  count: number;
+  percentage: number;
 }
 
 export interface ExpenseBySubcategoryData {

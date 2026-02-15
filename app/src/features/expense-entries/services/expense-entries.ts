@@ -12,7 +12,7 @@ import type {
   StatsData,
   CategoryAnalyticsQueryParams,
   TransactionTrendQueryParams,
-  ExpenseBySubcategoryData,
+  BreakdownData,
   TransactionTrendData,
 } from '../interfaces/expense-entries.interfaces'
 
@@ -95,7 +95,7 @@ export const getStats = async (params: AnalyticsQueryParams): Promise<StatsData>
   }
 }
 
-export const getExpensesBySubcategory = async (params: CategoryAnalyticsQueryParams): Promise<ExpenseBySubcategoryData[]> => {
+export const getExpensesBySubcategory = async (params: CategoryAnalyticsQueryParams): Promise<BreakdownData[]> => {
   try {
     const response = await axiosInstance.get(ApiRoutes.expenses.entries.analytics.expensesBySubcategory, { params })
     return response.data

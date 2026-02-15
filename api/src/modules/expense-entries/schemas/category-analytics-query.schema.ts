@@ -3,6 +3,7 @@ import { ExpenseEntryType } from '@/generated/prisma';
 
 export const CategoryAnalyticsQuerySchema = z.object({
   type: z.nativeEnum(ExpenseEntryType).optional(),
+  group_by: z.enum(['category', 'subcategory']).default('subcategory'),
   from_date: z.string().optional().transform((val) => val && val.length > 0 ? new Date(val) : undefined),
   to_date: z.string().optional().transform((val) => val && val.length > 0 ? new Date(val) : undefined),
 });

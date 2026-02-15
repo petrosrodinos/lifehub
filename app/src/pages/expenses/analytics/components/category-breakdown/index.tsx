@@ -3,13 +3,14 @@ import { useExpensesBySubcategory, useTransactionTrend } from "../../../../../fe
 import { useExpenseCategories } from "../../../../../features/expense-categories/hooks/use-expense-categories";
 import { useExpenseSubcategories } from "../../../../../features/expense-subcategories/hooks/use-expense-subcategories";
 import { ExpenseEntryTypes, type ExpenseEntryType } from "../../../../../features/expense-entries/interfaces/expense-entries.interfaces";
-import { ExpensesBySubcategoryChart } from "./ExpensesBySubcategoryChart";
-import { ExpensesBySubcategoryTable } from "./ExpensesBySubcategoryTable";
+import { BreakdownChart } from "./BreakdownChart";
+import { BreakdownTable } from "./BreakdownTable";
 import { TransactionTrendChart } from "./TransactionTrendChart";
 import { ChartSkeleton } from "../ChartSkeleton";
 
 export function CategoryBreakdown() {
   const [selectedType, setSelectedType] = useState<ExpenseEntryType>(ExpenseEntryTypes.EXPENSE);
+  const [groupBy, setGroupBy] = useState<"category" | "subcategory">("subcategory");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   
@@ -23,11 +24,12 @@ export function CategoryBreakdown() {
 
   const categoryParams = {
     type: selectedType,
+    group_by: groupBy,
     from_date: fromDate,
     to_date: toDate,
   };
 
-  const { data: expensesBySubcategory = [], isLoading: isLoadingExpensesBySubcategory } = useExpensesBySubcategory(categoryParams);
+  const { data: breakdownData = [], isLoading: isLoadingBreakdown } = useExpensesBySubcategory(categoryParams);
 
   const trendParams = {
     type: selectedType,
@@ -61,9 +63,21 @@ export function CategoryBreakdown() {
 
       <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/50 p-6 space-y-6">
         <div>
-          <h3 className="text-lg font-semibold text-white mb-4">Breakdown by Subcategory</h3>
+          <h3 className="text-lg font-semibold text-white mb-4">Breakdown by {groupBy === "category" ? "Category" : "Subcategory"}</h3>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">Group By</label>
+              <select
+                value={groupBy}
+                onChange={(e) => setGroupBy(e.target.value as "category" | "subcategory")}
+                className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors"
+              >
+                <option value="category">Category</option>
+                <option value="subcategory">Subcategory</option>
+              </select>
+            </div>
+
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">From Date (Optional)</label>
               <input
@@ -86,16 +100,16 @@ export function CategoryBreakdown() {
           </div>
         </div>
 
-        {isLoadingExpensesBySubcategory ? (
+        {isLoadingBreakdown ? (
           <ChartSkeleton />
         ) : (
-          <ExpensesBySubcategoryChart data={expensesBySubcategory} />
+          <BreakdownChart data={breakdownData} groupBy={groupBy} />
         )}
 
-        {isLoadingExpensesBySubcategory ? (
+        {isLoadingBreakdown ? (
           <ChartSkeleton />
         ) : (
-          <ExpensesBySubcategoryTable data={expensesBySubcategory} />
+          <BreakdownTable data={breakdownData} groupBy={groupBy} />
         )}
       </div>
 

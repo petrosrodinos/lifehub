@@ -513,46 +513,89 @@ export class ExpenseEntriesService {
         },
       });
 
-      const subcategoryMap = new Map<string, { name: string; categoryName: string; categoryColor: string; total: number; count: number }>();
+      if (query.group_by === 'category') {
+        const categoryMap = new Map<string, { name: string; icon: string; color: string; total: number; count: number }>();
 
-      entries.forEach((entry) => {
-        if (entry.subcategory) {
-          const key = entry.subcategory.uuid;
-          const amount = Number(entry.amount);
+        entries.forEach((entry) => {
+          if (entry.subcategory?.category) {
+            const key = entry.subcategory.category.uuid;
+            const amount = Number(entry.amount);
 
-          if (!subcategoryMap.has(key)) {
-            subcategoryMap.set(key, {
-              name: entry.subcategory.name,
-              categoryName: entry.subcategory.category?.name || '',
-              categoryColor: entry.subcategory.category?.color || '#8b5cf6',
-              total: 0,
-              count: 0,
-            });
+            if (!categoryMap.has(key)) {
+              categoryMap.set(key, {
+                name: entry.subcategory.category.name,
+                icon: entry.subcategory.category.icon || '',
+                color: entry.subcategory.category.color || '#8b5cf6',
+                total: 0,
+                count: 0,
+              });
+            }
+
+            const current = categoryMap.get(key)!;
+            current.total += amount;
+            current.count += 1;
           }
+        });
 
-          const current = subcategoryMap.get(key)!;
-          current.total += amount;
-          current.count += 1;
-        }
-      });
+        const data = Array.from(categoryMap.entries())
+          .map(([uuid, values]) => ({
+            uuid,
+            name: values.name,
+            icon: values.icon,
+            color: values.color,
+            total: values.total,
+            count: values.count,
+          }))
+          .sort((a, b) => b.total - a.total);
 
-      const data = Array.from(subcategoryMap.entries())
-        .map(([uuid, values]) => ({
-          subcategoryUuid: uuid,
-          subcategoryName: values.name,
-          categoryName: values.categoryName,
-          categoryColor: values.categoryColor,
-          total: values.total,
-          count: values.count,
-        }))
-        .sort((a, b) => b.total - a.total);
+        const total = data.reduce((sum, item) => sum + item.total, 0);
 
-      const total = data.reduce((sum, item) => sum + item.total, 0);
+        return data.map((item) => ({
+          ...item,
+          percentage: total > 0 ? (item.total / total) * 100 : 0,
+        }));
+      } else {
+        const subcategoryMap = new Map<string, { name: string; categoryName: string; categoryColor: string; total: number; count: number }>();
 
-      return data.map((item) => ({
-        ...item,
-        percentage: total > 0 ? (item.total / total) * 100 : 0,
-      }));
+        entries.forEach((entry) => {
+          if (entry.subcategory) {
+            const key = entry.subcategory.uuid;
+            const amount = Number(entry.amount);
+
+            if (!subcategoryMap.has(key)) {
+              subcategoryMap.set(key, {
+                name: entry.subcategory.name,
+                categoryName: entry.subcategory.category?.name || '',
+                categoryColor: entry.subcategory.category?.color || '#8b5cf6',
+                total: 0,
+                count: 0,
+              });
+            }
+
+            const current = subcategoryMap.get(key)!;
+            current.total += amount;
+            current.count += 1;
+          }
+        });
+
+        const data = Array.from(subcategoryMap.entries())
+          .map(([uuid, values]) => ({
+            uuid,
+            name: values.name,
+            categoryName: values.categoryName,
+            color: values.categoryColor,
+            total: values.total,
+            count: values.count,
+          }))
+          .sort((a, b) => b.total - a.total);
+
+        const total = data.reduce((sum, item) => sum + item.total, 0);
+
+        return data.map((item) => ({
+          ...item,
+          percentage: total > 0 ? (item.total / total) * 100 : 0,
+        }));
+      }
     } catch (error) {
       throw new InternalServerErrorException('Failed to fetch by subcategory');
     }
