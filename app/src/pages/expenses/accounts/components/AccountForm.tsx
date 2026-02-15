@@ -3,6 +3,8 @@ import { Loader2 } from "lucide-react";
 import type { CreateExpenseAccountDto, UpdateExpenseAccountDto } from "../../../../features/expense-accounts/interfaces/expense-accounts.interfaces";
 import { PRESET_COLORS } from "../../constants/expenses-colors";
 import { ACCOUNT_PRESET_ICONS } from "../../constants/account-icons";
+import { EmojiPicker } from "../../components/EmojiPicker";
+import { ColorPicker } from "../../components/ColorPicker";
 
 type AccountFormProps<T extends CreateExpenseAccountDto | UpdateExpenseAccountDto> = {
   onSubmit: (data: T) => void;
@@ -47,22 +49,22 @@ export function AccountForm<T extends CreateExpenseAccountDto | UpdateExpenseAcc
 
       <div className="space-y-2">
         <label className="block text-sm font-semibold text-slate-300">Icon</label>
-        <div className="flex flex-wrap gap-2">
-          {ACCOUNT_PRESET_ICONS.map((presetIcon) => (
-            <button key={presetIcon} type="button" onClick={() => setIcon(presetIcon)} disabled={isPending} className={`w-12 h-12 text-2xl rounded-xl border-2 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed ${icon === presetIcon ? "border-violet-500 bg-violet-500/10 scale-110" : "border-slate-700 bg-slate-800 hover:border-slate-600"}`}>
-              {presetIcon}
-            </button>
-          ))}
-        </div>
+        <EmojiPicker
+          value={icon}
+          onChange={setIcon}
+          presetEmojis={ACCOUNT_PRESET_ICONS}
+          disabled={isPending}
+        />
       </div>
 
       <div className="space-y-2">
         <label className="block text-sm font-semibold text-slate-300">Color</label>
-        <div className="flex flex-wrap gap-2">
-          {PRESET_COLORS.map((presetColor) => (
-            <button key={presetColor} type="button" onClick={() => setColor(presetColor)} disabled={isPending} className={`w-10 h-10 rounded-full border-2 transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed ${color === presetColor ? "border-white scale-110 ring-2 ring-white/20" : "border-slate-700"}`} style={{ backgroundColor: presetColor }} />
-          ))}
-        </div>
+        <ColorPicker
+          value={color}
+          onChange={setColor}
+          presetColors={PRESET_COLORS}
+          disabled={isPending}
+        />
       </div>
 
       <div className="space-y-2">
