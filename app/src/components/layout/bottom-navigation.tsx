@@ -26,7 +26,7 @@ export function BottomNavigation() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-sm border-t border-slate-700/50 shadow-2xl z-1">
+    <nav className="fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-sm border-t border-slate-700/50 shadow-2xl z-40">
       <div className="max-w-md mx-auto">
         <div className="flex justify-around items-center h-16">
           {tabs.map((tab) => {
