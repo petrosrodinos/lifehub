@@ -6,6 +6,10 @@ import type {
   UpdateExpenseEntryDto,
   ExpenseEntriesQueryParams,
   ExpenseEntriesResponse,
+  AnalyticsQueryParams,
+  BalanceTrendData,
+  IncomeExpenseData,
+  StatsData,
 } from '../interfaces/expense-entries.interfaces'
 
 export const getExpenseEntries = async (
@@ -57,5 +61,32 @@ export const deleteExpenseEntry = async (uuid: string): Promise<void> => {
     await axiosInstance.delete(ApiRoutes.expenses.entries.delete(uuid))
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to delete expense entry')
+  }
+}
+
+export const getBalanceTrend = async (params: AnalyticsQueryParams): Promise<BalanceTrendData[]> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.expenses.entries.analytics.balanceTrend, { params })
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to fetch balance trend')
+  }
+}
+
+export const getIncomeExpense = async (params: AnalyticsQueryParams): Promise<IncomeExpenseData[]> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.expenses.entries.analytics.incomeExpense, { params })
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to fetch income and expense data')
+  }
+}
+
+export const getStats = async (params: AnalyticsQueryParams): Promise<StatsData> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.expenses.entries.analytics.stats, { params })
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to fetch stats')
   }
 }

@@ -70,3 +70,26 @@ export const ExpenseEntryTypes = {
 } as const;
 
 export type ExpenseEntryType = (typeof ExpenseEntryTypes)[keyof typeof ExpenseEntryTypes];
+
+export interface AnalyticsQueryParams {
+  account_uuids?: string;
+  from_date?: string;
+  to_date?: string;
+}
+
+export interface BalanceTrendData {
+  date: string;
+  balance: number;
+}
+
+export interface IncomeExpenseData {
+  date: string;
+  income: number;
+  expense: number;
+}
+
+export interface StatsData {
+  totalIncome: number;
+  totalExpense: number;
+  netBalance: number;
+}

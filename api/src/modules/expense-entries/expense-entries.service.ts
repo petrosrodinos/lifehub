@@ -4,6 +4,7 @@ import { UpdateExpenseEntryDto } from './dto/update-expense-entry.dto';
 import { PrismaService } from '../../core/databases/prisma/prisma.service';
 import { ExpenseEntryType } from '@/generated/prisma';
 import { ExpenseEntriesQueryType } from './schemas/expense-entries-query.schema';
+import { AnalyticsQueryType } from './schemas/analytics-query.schema';
 
 
 @Injectable()
@@ -289,6 +290,195 @@ export class ExpenseEntriesService {
         where: { uuid: entry.to_account_uuid },
         data: { balance: { decrement: amount } },
       });
+    }
+  }
+
+  async getBalanceTrend(user_uuid: string, query: AnalyticsQueryType) {
+    try {
+      const accountUuids = query.account_uuids ? query.account_uuids.split(',') : [];
+
+      const where: any = { user_uuid };
+
+      if (accountUuids.length > 0) {
+        where.from_account_uuid = { in: accountUuids };
+      }
+
+      if (query.from_date || query.to_date) {
+        where.entry_date = {};
+
+        if (query.from_date) {
+          where.entry_date.gte = query.from_date;
+        }
+
+        if (query.to_date) {
+          where.entry_date.lte = query.to_date;
+        }
+      }
+
+      where.type = { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] };
+
+      const entries = await this.prisma.expenseEntry.findMany({
+        where,
+        orderBy: { entry_date: 'asc' },
+        select: {
+          entry_date: true,
+          amount: true,
+          type: true,
+        },
+      });
+
+      const dateMap = new Map<string, number>();
+
+      entries.forEach((entry) => {
+        const date = entry.entry_date.toISOString().split('T')[0];
+        const amount = Number(entry.amount);
+
+        if (!dateMap.has(date)) {
+          dateMap.set(date, 0);
+        }
+
+        if (entry.type === ExpenseEntryType.INCOME) {
+          dateMap.set(date, dateMap.get(date)! + amount);
+        } else if (entry.type === ExpenseEntryType.EXPENSE) {
+          dateMap.set(date, dateMap.get(date)! - amount);
+        }
+      });
+
+      const sortedDates = Array.from(dateMap.keys()).sort();
+      let runningBalance = 0;
+
+      const data = sortedDates.map((date) => {
+        runningBalance += dateMap.get(date)!;
+        return {
+          date,
+          balance: runningBalance,
+        };
+      });
+
+      return data;
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to fetch balance trend');
+    }
+  }
+
+  async getIncomeExpense(user_uuid: string, query: AnalyticsQueryType) {
+    try {
+      const accountUuids = query.account_uuids ? query.account_uuids.split(',') : [];
+
+      const where: any = { user_uuid };
+
+      if (accountUuids.length > 0) {
+        where.from_account_uuid = { in: accountUuids };
+      }
+
+      if (query.from_date || query.to_date) {
+        where.entry_date = {};
+
+        if (query.from_date) {
+          where.entry_date.gte = query.from_date;
+        }
+
+        if (query.to_date) {
+          where.entry_date.lte = query.to_date;
+        }
+      }
+
+      where.type = { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] };
+
+      const entries = await this.prisma.expenseEntry.findMany({
+        where,
+        orderBy: { entry_date: 'asc' },
+        select: {
+          entry_date: true,
+          amount: true,
+          type: true,
+        },
+      });
+
+      const dateMap = new Map<string, { income: number; expense: number }>();
+
+      entries.forEach((entry) => {
+        const date = entry.entry_date.toISOString().split('T')[0];
+        const amount = Number(entry.amount);
+
+        if (!dateMap.has(date)) {
+          dateMap.set(date, { income: 0, expense: 0 });
+        }
+
+        const current = dateMap.get(date)!;
+        if (entry.type === ExpenseEntryType.INCOME) {
+          current.income += amount;
+        } else if (entry.type === ExpenseEntryType.EXPENSE) {
+          current.expense += amount;
+        }
+      });
+
+      const data = Array.from(dateMap.entries())
+        .sort(([dateA], [dateB]) => dateA.localeCompare(dateB))
+        .map(([date, values]) => ({
+          date,
+          income: values.income,
+          expense: values.expense,
+        }));
+
+      return data;
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to fetch income and expense data');
+    }
+  }
+
+  async getStats(user_uuid: string, query: AnalyticsQueryType) {
+    try {
+      const accountUuids = query.account_uuids ? query.account_uuids.split(',') : [];
+
+      const where: any = { user_uuid };
+
+      if (accountUuids.length > 0) {
+        where.from_account_uuid = { in: accountUuids };
+      }
+
+      if (query.from_date || query.to_date) {
+        where.entry_date = {};
+
+        if (query.from_date) {
+          where.entry_date.gte = query.from_date;
+        }
+
+        if (query.to_date) {
+          where.entry_date.lte = query.to_date;
+        }
+      }
+
+      where.type = { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] };
+
+      const entries = await this.prisma.expenseEntry.findMany({
+        where,
+        select: {
+          amount: true,
+          type: true,
+        },
+      });
+
+      let totalIncome = 0;
+      let totalExpense = 0;
+
+      entries.forEach((entry) => {
+        const amount = Number(entry.amount);
+
+        if (entry.type === ExpenseEntryType.INCOME) {
+          totalIncome += amount;
+        } else if (entry.type === ExpenseEntryType.EXPENSE) {
+          totalExpense += amount;
+        }
+      });
+
+      return {
+        totalIncome,
+        totalExpense,
+        netBalance: totalIncome - totalExpense,
+      };
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to fetch stats');
     }
   }
 }

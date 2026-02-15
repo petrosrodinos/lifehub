@@ -3,12 +3,21 @@ import { AccountsHeader } from "./accounts/components/AccountsHeader";
 import { AccountsList } from "./accounts/components/AccountsList";
 import { CreateAccountModal } from "./accounts/components/CreateAccountModal";
 import { TransactionsSection } from "./transactions/components/TransactionsSection";
+import { AnalyticsSection } from "./analytics/components/AnalyticsSection";
 import { useAccountsPage } from "./accounts/hooks/use-accounts-page";
 import { CategoriesMenu } from "./categories/components/CategoriesMenu";
+
+const TAB_OPTIONS = {
+  TRANSACTIONS: "transactions",
+  ANALYTICS: "analytics",
+} as const;
+
+type TabOption = (typeof TAB_OPTIONS)[keyof typeof TAB_OPTIONS];
 
 export function ExpenseAccountsPage() {
   const { isCreateModalOpen, openCreateModal, closeCreateModal } = useAccountsPage();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabOption>(TAB_OPTIONS.TRANSACTIONS);
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
@@ -22,7 +31,35 @@ export function ExpenseAccountsPage() {
 
         <AccountsList />
 
-        <TransactionsSection />
+        <div className="space-y-6">
+          <div className="flex gap-2 bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/50 p-1">
+            <button
+              type="button"
+              onClick={() => setActiveTab(TAB_OPTIONS.TRANSACTIONS)}
+              className={`flex-1 px-6 py-3 rounded-lg text-sm font-medium transition-all ${
+                activeTab === TAB_OPTIONS.TRANSACTIONS
+                  ? "bg-violet-600 text-white shadow-lg shadow-violet-600/30"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+              }`}
+            >
+              Transactions
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab(TAB_OPTIONS.ANALYTICS)}
+              className={`flex-1 px-6 py-3 rounded-lg text-sm font-medium transition-all ${
+                activeTab === TAB_OPTIONS.ANALYTICS
+                  ? "bg-violet-600 text-white shadow-lg shadow-violet-600/30"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+              }`}
+            >
+              Analytics
+            </button>
+          </div>
+
+          {activeTab === TAB_OPTIONS.TRANSACTIONS && <TransactionsSection />}
+          {activeTab === TAB_OPTIONS.ANALYTICS && <AnalyticsSection />}
+        </div>
       </div>
 
       <CreateAccountModal isOpen={isCreateModalOpen} onClose={closeCreateModal} />

@@ -62,6 +62,11 @@ export const ApiRoutes = {
             get: (uuid: string) => `/expense-entries/${uuid}`,
             update: (uuid: string) => `/expense-entries/${uuid}`,
             delete: (uuid: string) => `/expense-entries/${uuid}`,
+            analytics: {
+                balanceTrend: "/expense-entries/analytics/balance-trend",
+                incomeExpense: "/expense-entries/analytics/income-expense",
+                stats: "/expense-entries/analytics/stats",
+            },
         },
     },
 }

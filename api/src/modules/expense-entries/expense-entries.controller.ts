@@ -6,6 +6,7 @@ import { JwtGuard } from '@/shared/guards/jwt.guard';
 import { CurrentUser } from '@/shared/decorators/current-user.decorator';
 import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe';
 import { ExpenseEntriesQuerySchema, ExpenseEntriesQueryType } from './schemas/expense-entries-query.schema';
+import { AnalyticsQuerySchema, AnalyticsQueryType } from './schemas/analytics-query.schema';
 
 @Controller('expense-entries')
 @UseGuards(JwtGuard)
@@ -56,5 +57,32 @@ export class ExpenseEntriesController {
     @Param('uuid') uuid: string
   ) {
     return this.expenseEntriesService.remove(user_uuid, uuid);
+  }
+
+  @Get('analytics/balance-trend')
+  @HttpCode(HttpStatus.OK)
+  getBalanceTrend(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(AnalyticsQuerySchema)) query: AnalyticsQueryType
+  ) {
+    return this.expenseEntriesService.getBalanceTrend(user_uuid, query);
+  }
+
+  @Get('analytics/income-expense')
+  @HttpCode(HttpStatus.OK)
+  getIncomeExpense(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(AnalyticsQuerySchema)) query: AnalyticsQueryType
+  ) {
+    return this.expenseEntriesService.getIncomeExpense(user_uuid, query);
+  }
+
+  @Get('analytics/stats')
+  @HttpCode(HttpStatus.OK)
+  getStats(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(AnalyticsQuerySchema)) query: AnalyticsQueryType
+  ) {
+    return this.expenseEntriesService.getStats(user_uuid, query);
   }
 }

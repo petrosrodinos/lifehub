@@ -4,6 +4,7 @@ import type {
   CreateExpenseEntryDto,
   UpdateExpenseEntryDto,
   ExpenseEntriesQueryParams,
+  AnalyticsQueryParams,
 } from '../interfaces/expense-entries.interfaces'
 import {
   getExpenseEntries,
@@ -11,12 +12,20 @@ import {
   createExpenseEntry,
   updateExpenseEntry,
   deleteExpenseEntry,
+  getBalanceTrend,
+  getIncomeExpense,
+  getStats,
 } from '../services/expense-entries'
 
 const QUERY_KEYS = {
   expenseEntries: (params?: ExpenseEntriesQueryParams) => ['expense-entries', params],
   expenseEntry: (uuid: string) => ['expense-entries', uuid],
   expenseAccounts: ['expense-accounts'],
+  analytics: {
+    balanceTrend: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'balance-trend', params],
+    incomeExpense: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'income-expense', params],
+    stats: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'stats', params],
+  },
 }
 
 export function useExpenseEntries(params?: ExpenseEntriesQueryParams) {
@@ -81,5 +90,29 @@ export function useDeleteExpenseEntry() {
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to delete expense entry', { duration: 3000 })
     },
+  })
+}
+
+export function useBalanceTrend(params: AnalyticsQueryParams) {
+  return useQuery({
+    queryKey: QUERY_KEYS.analytics.balanceTrend(params),
+    queryFn: () => getBalanceTrend(params),
+    enabled: !!params.account_uuids && params.account_uuids.length > 0,
+  })
+}
+
+export function useIncomeExpense(params: AnalyticsQueryParams) {
+  return useQuery({
+    queryKey: QUERY_KEYS.analytics.incomeExpense(params),
+    queryFn: () => getIncomeExpense(params),
+    enabled: !!params.account_uuids && params.account_uuids.length > 0,
+  })
+}
+
+export function useStats(params: AnalyticsQueryParams) {
+  return useQuery({
+    queryKey: QUERY_KEYS.analytics.stats(params),
+    queryFn: () => getStats(params),
+    enabled: !!params.account_uuids && params.account_uuids.length > 0,
   })
 }
