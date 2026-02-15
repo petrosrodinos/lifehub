@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus, Query } from '@nestjs/common';
 import { ExpenseEntriesService } from './expense-entries.service';
 import { CreateExpenseEntryDto } from './dto/create-expense-entry.dto';
 import { UpdateExpenseEntryDto } from './dto/update-expense-entry.dto';
 import { JwtGuard } from '@/shared/guards/jwt.guard';
 import { CurrentUser } from '@/shared/decorators/current-user.decorator';
+import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe';
+import { ExpenseEntriesQuerySchema, ExpenseEntriesQueryType } from './schemas/expense-entries-query.schema';
 
 @Controller('expense-entries')
 @UseGuards(JwtGuard)
@@ -21,8 +23,11 @@ export class ExpenseEntriesController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  findAll(@CurrentUser('user_uuid') user_uuid: string) {
-    return this.expenseEntriesService.findAll(user_uuid);
+  findAll(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(ExpenseEntriesQuerySchema)) query: ExpenseEntriesQueryType
+  ) {
+    return this.expenseEntriesService.findAll(user_uuid, query);
   }
 
   @Get(':uuid')

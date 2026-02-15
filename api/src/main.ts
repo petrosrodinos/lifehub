@@ -6,8 +6,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Appointly API')
-    .setDescription('The Appointly API documentation')
+    .setTitle('LifeHub API')
+    .setDescription('The LifeHub API documentation')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

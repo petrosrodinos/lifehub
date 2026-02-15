@@ -34,4 +34,34 @@ export const ApiRoutes = {
             delete: (uuid: string) => `/schedule-slots/${uuid}`,
         },
     },
+    expenses: {
+        accounts: {
+            list: "/expense-accounts",
+            create: "/expense-accounts",
+            get: (uuid: string) => `/expense-accounts/${uuid}`,
+            update: (uuid: string) => `/expense-accounts/${uuid}`,
+            delete: (uuid: string) => `/expense-accounts/${uuid}`,
+        },
+        categories: {
+            list: "/expense-categories",
+            create: "/expense-categories",
+            get: (uuid: string) => `/expense-categories/${uuid}`,
+            update: (uuid: string) => `/expense-categories/${uuid}`,
+            delete: (uuid: string) => `/expense-categories/${uuid}`,
+        },
+        subcategories: {
+            list: "/expense-subcategories",
+            create: "/expense-subcategories",
+            get: (uuid: string) => `/expense-subcategories/${uuid}`,
+            update: (uuid: string) => `/expense-subcategories/${uuid}`,
+            delete: (uuid: string) => `/expense-subcategories/${uuid}`,
+        },
+        entries: {
+            list: "/expense-entries",
+            create: "/expense-entries",
+            get: (uuid: string) => `/expense-entries/${uuid}`,
+            update: (uuid: string) => `/expense-entries/${uuid}`,
+            delete: (uuid: string) => `/expense-entries/${uuid}`,
+        },
+    },
 }
