@@ -1,9 +1,11 @@
 import { ChevronDown, ChevronRight, Edit2, Trash2, Plus } from "lucide-react";
 import type { ExpenseCategory } from "../../../../features/expense-categories/interfaces/expense-categories.interfaces";
 import type { ExpenseSubcategory } from "../../../../features/expense-subcategories/interfaces/expense-subcategories.interfaces";
-import { CategoryForm, PRESET_COLORS, PRESET_ICONS } from "./CategoryForm";
+import { CategoryForm } from "./CategoryForm";
 import { SubcategoryForm } from "./SubcategoryForm";
 import { SubcategoryItem } from "./SubcategoryItem";
+import { PRESET_COLORS } from "../../constants/expenses-colors";
+import { CATEGORY_PRESET_ICONS } from "../../constants/account-icons";
 
 type CategoryItemProps = {
   category: ExpenseCategory;
@@ -34,7 +36,7 @@ export function CategoryItem({ category, subcategories, isExpanded, onToggle, on
     <div className="bg-slate-800/50 rounded-xl border border-slate-700">
       {isEditing ? (
         <div className="p-3">
-          <CategoryForm initialName={category.name} initialColor={category.color || PRESET_COLORS[0]} initialIcon={category.icon || PRESET_ICONS[0]} onSubmit={onEdit} onCancel={onCancelEdit} submitLabel="Save" isPending={isUpdatePending} />
+          <CategoryForm initialName={category.name} initialColor={category.color || PRESET_COLORS[0]} initialIcon={category.icon || CATEGORY_PRESET_ICONS[0]} onSubmit={onEdit} onCancel={onCancelEdit} submitLabel="Save" isPending={isUpdatePending} />
         </div>
       ) : (
         <div className="flex items-center gap-3 p-3">

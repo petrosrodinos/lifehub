@@ -5,9 +5,11 @@ import { useExpenseSubcategories, useCreateExpenseSubcategory, useUpdateExpenseS
 import type { ExpenseCategory } from "../../../../features/expense-categories/interfaces/expense-categories.interfaces";
 import type { ExpenseSubcategory } from "../../../../features/expense-subcategories/interfaces/expense-subcategories.interfaces";
 import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
-import { CategoryForm, PRESET_COLORS, PRESET_ICONS } from "./CategoryForm";
+import { CategoryForm } from "./CategoryForm";
 import { CategoryItem } from "./CategoryItem";
 import { EmptyState } from "./EmptyState";
+import { PRESET_COLORS } from "../../constants/expenses-colors";
+import { CATEGORY_PRESET_ICONS } from "../../constants/account-icons";
 
 type CategoriesMenuProps = {
   isOpen: boolean;
@@ -139,7 +141,7 @@ export function CategoriesMenu({ isOpen, onClose }: CategoriesMenuProps) {
           {isAddingCategory ? (
             <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
               <h3 className="text-sm font-medium text-slate-300 mb-3">Add category</h3>
-              <CategoryForm initialName="" initialColor={PRESET_COLORS[0]} initialIcon={PRESET_ICONS[0]} onSubmit={handleAddCategory} onCancel={() => setIsAddingCategory(false)} submitLabel="Add" isPending={createCategory.isPending} />
+              <CategoryForm initialName="" initialColor={PRESET_COLORS[0]} initialIcon={CATEGORY_PRESET_ICONS[0]} onSubmit={handleAddCategory} onCancel={() => setIsAddingCategory(false)} submitLabel="Add" isPending={createCategory.isPending} />
             </div>
           ) : (
             <button type="button" onClick={() => setIsAddingCategory(true)} className="w-full py-3 border-2 border-dashed border-slate-600 rounded-xl text-slate-400 hover:text-violet-400 hover:border-violet-500/50 transition-colors font-medium">

@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-
-const PRESET_COLORS = ["#f59e0b", "#0284c7", "#10b981", "#8b5cf6", "#f43f5e", "#f97316", "#dc2626", "#6366f1", "#14b8a6", "#eab308"];
-
-const PRESET_ICONS = ["🍔", "🏠", "🚗", "🎮", "💊", "✈️", "🎓", "👕", "🎬", "🏋️"];
+import { CATEGORY_PRESET_ICONS } from "../../constants/account-icons";
+import { PRESET_COLORS } from "../../constants/expenses-colors";
 
 type CategoryFormProps = {
   initialName: string;
@@ -32,7 +30,7 @@ export function CategoryForm({ initialName, initialColor, initialIcon, onSubmit,
     <form onSubmit={handleSubmit} className="space-y-3">
       <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Category name" className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50" autoFocus disabled={isPending} />
       <div className="flex flex-wrap gap-2">
-        {PRESET_ICONS.map((i) => (
+        {CATEGORY_PRESET_ICONS.map((i) => (
           <button key={i} type="button" onClick={() => setIcon(i)} disabled={isPending} className={`w-10 h-10 text-xl rounded-lg border-2 transition-transform hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed ${icon === i ? "border-violet-500 bg-violet-500/10 scale-110" : "border-slate-600"}`}>
             {i}
           </button>
@@ -55,5 +53,3 @@ export function CategoryForm({ initialName, initialColor, initialIcon, onSubmit,
     </form>
   );
 }
-
-export { PRESET_COLORS, PRESET_ICONS };

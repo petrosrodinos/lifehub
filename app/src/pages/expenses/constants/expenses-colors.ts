@@ -1,4 +1,4 @@
-export const ACCOUNT_PRESET_COLORS = [
+export const PRESET_COLORS = [
   '#8b5cf6',
   '#3b82f6',
   '#06b6d4',
@@ -11,4 +11,5 @@ export const ACCOUNT_PRESET_COLORS = [
   '#a855f7',
 ] as const
 
-export type AccountPresetColor = typeof ACCOUNT_PRESET_COLORS[number]
+export type ExpensePresetColor = typeof PRESET_COLORS[number]
+
