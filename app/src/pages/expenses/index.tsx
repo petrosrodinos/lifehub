@@ -1,75 +1,31 @@
-import { useNavigate } from "react-router-dom";
-import { Wallet, TrendingDown } from "lucide-react";
+import { useState } from "react";
+import { AccountsHeader } from "./accounts/components/AccountsHeader";
+import { AccountsList } from "./accounts/components/AccountsList";
+import { CreateAccountModal } from "./accounts/components/CreateAccountModal";
+import { TransactionsSection } from "./transactions/components/TransactionsSection";
+import { useAccountsPage } from "./accounts/hooks/use-accounts-page";
+import { CategoriesMenu } from "./categories/components/CategoriesMenu";
 
-export function ExpensesPage() {
-  const navigate = useNavigate();
-
-  const features = [
-    {
-      title: "Accounts",
-      description: "Manage your financial accounts and track balances",
-      icon: Wallet,
-      color: "from-violet-500 to-blue-500",
-      route: "/dashboard/expenses/accounts",
-    },
-    {
-      title: "Transactions",
-      description: "Record and categorize your expense entries",
-      icon: TrendingDown,
-      color: "from-emerald-500 to-teal-500",
-      route: null,
-    },
-  ];
+export function ExpenseAccountsPage() {
+  const { isCreateModalOpen, openCreateModal, closeCreateModal } = useAccountsPage();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 p-6 md:p-10">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-2">
-            Expenses
-          </h1>
-          <p className="text-slate-400 text-base">
-            Track your spending and manage your finances
-          </p>
-        </header>
+    <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
+      <CategoriesMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {features.map((feature) => {
-            const Icon = feature.icon;
-            const isAvailable = feature.route !== null;
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.08),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.08),transparent_40%)]" />
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMwIDYuNjI3LTUuMzczIDEyLTEyIDEycy0xMi01LjM3My0xMi0xMiA1LjM3My0xMiAxMi0xMiAxMiA1LjM3MyAxMiAxMnoiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvZz48L3N2Zz4=')] opacity-20" />
 
-            return (
-              <button
-                key={feature.title}
-                onClick={() => isAvailable && navigate(feature.route)}
-                disabled={!isAvailable}
-                className={`group relative bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50 text-left transition-all duration-300 ${
-                  isAvailable
-                    ? "hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10 hover:-translate-y-1 cursor-pointer"
-                    : "opacity-60 cursor-not-allowed"
-                }`}
-              >
-                <div
-                  className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${feature.color} mb-4 shadow-lg`}
-                >
-                  <Icon className="w-8 h-8 text-white" strokeWidth={1.5} />
-                </div>
-                <h2 className="text-2xl font-semibold text-white mb-2 group-hover:text-violet-300 transition-colors">
-                  {feature.title}
-                </h2>
-                <p className="text-slate-400 leading-relaxed">
-                  {feature.description}
-                </p>
-                {!isAvailable && (
-                  <span className="absolute top-4 right-4 text-xs text-slate-500 bg-slate-700/50 px-3 py-1 rounded-full">
-                    Coming Soon
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 space-y-8">
+        <AccountsHeader onCreateClick={openCreateModal} onCategoriesClick={() => setMenuOpen(true)} />
+
+        <AccountsList />
+
+        <TransactionsSection />
       </div>
+
+      <CreateAccountModal isOpen={isCreateModalOpen} onClose={closeCreateModal} />
     </div>
   );
 }
