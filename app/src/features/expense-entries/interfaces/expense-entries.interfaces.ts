@@ -93,3 +93,13 @@ export interface StatsData {
   totalExpense: number;
   netBalance: number;
 }
+
+export interface ExpenseBySubcategoryData {
+  subcategoryUuid: string;
+  subcategoryName: string;
+  categoryName: string;
+  categoryColor: string;
+  total: number;
+  count: number;
+  percentage: number;
+}

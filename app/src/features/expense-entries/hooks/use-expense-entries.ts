@@ -15,6 +15,7 @@ import {
   getBalanceTrend,
   getIncomeExpense,
   getStats,
+  getExpensesBySubcategory,
 } from '../services/expense-entries'
 
 const QUERY_KEYS = {
@@ -25,6 +26,7 @@ const QUERY_KEYS = {
     balanceTrend: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'balance-trend', params],
     incomeExpense: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'income-expense', params],
     stats: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'stats', params],
+    expensesBySubcategory: ['expense-entries', 'analytics', 'expenses-by-subcategory'],
   },
 }
 
@@ -114,5 +116,12 @@ export function useStats(params: AnalyticsQueryParams) {
     queryKey: QUERY_KEYS.analytics.stats(params),
     queryFn: () => getStats(params),
     enabled: !!params.account_uuids && params.account_uuids.length > 0,
+  })
+}
+
+export function useExpensesBySubcategory() {
+  return useQuery({
+    queryKey: QUERY_KEYS.analytics.expensesBySubcategory,
+    queryFn: getExpensesBySubcategory,
   })
 }

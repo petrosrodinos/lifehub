@@ -66,6 +66,7 @@ export const ApiRoutes = {
                 balanceTrend: "/expense-entries/analytics/balance-trend",
                 incomeExpense: "/expense-entries/analytics/income-expense",
                 stats: "/expense-entries/analytics/stats",
+                expensesBySubcategory: "/expense-entries/analytics/expenses-by-subcategory",
             },
         },
     },

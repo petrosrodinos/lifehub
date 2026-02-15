@@ -481,4 +481,65 @@ export class ExpenseEntriesService {
       throw new InternalServerErrorException('Failed to fetch stats');
     }
   }
+
+  async getExpensesBySubcategory(user_uuid: string) {
+    try {
+      const entries = await this.prisma.expenseEntry.findMany({
+        where: {
+          user_uuid,
+          type: ExpenseEntryType.EXPENSE,
+        },
+        include: {
+          subcategory: {
+            include: {
+              category: true,
+            },
+          },
+        },
+      });
+
+      const subcategoryMap = new Map<string, { name: string; categoryName: string; categoryColor: string; total: number; count: number }>();
+
+      entries.forEach((entry) => {
+        if (entry.subcategory) {
+          const key = entry.subcategory.uuid;
+          const amount = Number(entry.amount);
+
+          if (!subcategoryMap.has(key)) {
+            subcategoryMap.set(key, {
+              name: entry.subcategory.name,
+              categoryName: entry.subcategory.category?.name || '',
+              categoryColor: entry.subcategory.category?.color || '#8b5cf6',
+              total: 0,
+              count: 0,
+            });
+          }
+
+          const current = subcategoryMap.get(key)!;
+          current.total += amount;
+          current.count += 1;
+        }
+      });
+
+      const data = Array.from(subcategoryMap.entries())
+        .map(([uuid, values]) => ({
+          subcategoryUuid: uuid,
+          subcategoryName: values.name,
+          categoryName: values.categoryName,
+          categoryColor: values.categoryColor,
+          total: values.total,
+          count: values.count,
+        }))
+        .sort((a, b) => b.total - a.total);
+
+      const totalExpenses = data.reduce((sum, item) => sum + item.total, 0);
+
+      return data.map((item) => ({
+        ...item,
+        percentage: totalExpenses > 0 ? (item.total / totalExpenses) * 100 : 0,
+      }));
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to fetch expenses by subcategory');
+    }
+  }
 }

@@ -85,4 +85,12 @@ export class ExpenseEntriesController {
   ) {
     return this.expenseEntriesService.getStats(user_uuid, query);
   }
+
+  @Get('analytics/expenses-by-subcategory')
+  @HttpCode(HttpStatus.OK)
+  getExpensesBySubcategory(
+    @CurrentUser('user_uuid') user_uuid: string
+  ) {
+    return this.expenseEntriesService.getExpensesBySubcategory(user_uuid);
+  }
 }

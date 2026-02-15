@@ -10,6 +10,7 @@ import type {
   BalanceTrendData,
   IncomeExpenseData,
   StatsData,
+  ExpenseBySubcategoryData,
 } from '../interfaces/expense-entries.interfaces'
 
 export const getExpenseEntries = async (
@@ -88,5 +89,14 @@ export const getStats = async (params: AnalyticsQueryParams): Promise<StatsData>
     return response.data
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to fetch stats')
+  }
+}
+
+export const getExpensesBySubcategory = async (): Promise<ExpenseBySubcategoryData[]> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.expenses.entries.analytics.expensesBySubcategory)
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to fetch expenses by subcategory')
   }
 }
