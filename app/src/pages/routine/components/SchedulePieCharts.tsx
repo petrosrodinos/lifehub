@@ -20,6 +20,14 @@ const CHART_DISPLAY_OPTIONS = [
   { id: 'percentage', label: 'Percentage' },
 ] as const
 
+const TIME_PERIOD_OPTIONS = [
+  { id: 'weekly', label: 'Weekly', multiplier: 1 },
+  { id: 'monthly', label: 'Monthly', multiplier: 4 },
+  { id: 'yearly', label: 'Yearly', multiplier: 24 },
+] as const
+
+type TimePeriod = typeof TIME_PERIOD_OPTIONS[number]['id']
+
 type DayPieChartProps = {
   day: ScheduleDay
   data: ActivityMinutes[]
@@ -104,13 +112,20 @@ function DayPieChart({ day, data, displayMode }: DayPieChartProps) {
 
 export function SchedulePieCharts() {
   const [displayMode, setDisplayMode] = useState<ChartDisplayMode>('hours')
+  const [timePeriod, setTimePeriod] = useState<TimePeriod>('weekly')
   const { data: allSlots = [], isLoading } = useScheduleSlots()
 
+  const multiplier = TIME_PERIOD_OPTIONS.find((opt) => opt.id === timePeriod)?.multiplier ?? 1
   const weekData = getWeekActivityStats(allSlots)
+  const adjustedWeekData = weekData.map((activity) => ({
+    ...activity,
+    value: activity.value * multiplier,
+    minutes: activity.minutes ? activity.minutes * multiplier : activity.value * multiplier,
+  }))
   const weekDisplayData =
     displayMode === 'percentage'
       ? toPercentageData(weekData, getWeekTotalMinutes())
-      : weekData
+      : adjustedWeekData
 
   if (isLoading) {
     return <ChartsSkeleton />
@@ -168,7 +183,20 @@ export function SchedulePieCharts() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold text-slate-200 mb-6">Week Total</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-semibold text-slate-200">Week Total</h2>
+            <select
+              value={timePeriod}
+              onChange={(e) => setTimePeriod(e.target.value as TimePeriod)}
+              className="px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm"
+            >
+              {TIME_PERIOD_OPTIONS.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="max-w-md mx-auto">
             <div className="w-full h-[320px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -193,7 +221,7 @@ export function SchedulePieCharts() {
                       const item = payload[0].payload as ActivityMinutes
                       const minutes =
                         item.minutes ??
-                        weekData.find((d) => d.name === item.name)?.value ??
+                        adjustedWeekData.find((d) => d.name === item.name)?.value ??
                         item.value
                       return (
                         <div className="bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 shadow-xl">
@@ -212,7 +240,7 @@ export function SchedulePieCharts() {
                       const payload = entry.payload as ActivityMinutes
                       const minutes =
                         payload.minutes ??
-                        weekData.find((d) => d.name === payload.name)?.value ??
+                        adjustedWeekData.find((d) => d.name === payload.name)?.value ??
                         payload.value
                       const display =
                         displayMode === 'hours'

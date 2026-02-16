@@ -3009,7 +3009,6 @@ export namespace Prisma {
     user_uuid: string | null
     name: string | null
     color: string | null
-    is_default: boolean | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -3020,7 +3019,6 @@ export namespace Prisma {
     user_uuid: string | null
     name: string | null
     color: string | null
-    is_default: boolean | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -3031,7 +3029,6 @@ export namespace Prisma {
     user_uuid: number
     name: number
     color: number
-    is_default: number
     created_at: number
     updated_at: number
     _all: number
@@ -3052,7 +3049,6 @@ export namespace Prisma {
     user_uuid?: true
     name?: true
     color?: true
-    is_default?: true
     created_at?: true
     updated_at?: true
   }
@@ -3063,7 +3059,6 @@ export namespace Prisma {
     user_uuid?: true
     name?: true
     color?: true
-    is_default?: true
     created_at?: true
     updated_at?: true
   }
@@ -3074,7 +3069,6 @@ export namespace Prisma {
     user_uuid?: true
     name?: true
     color?: true
-    is_default?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -3172,7 +3166,6 @@ export namespace Prisma {
     user_uuid: string
     name: string
     color: string
-    is_default: boolean
     created_at: Date
     updated_at: Date
     _count: ActivityCountAggregateOutputType | null
@@ -3202,7 +3195,6 @@ export namespace Prisma {
     user_uuid?: boolean
     name?: boolean
     color?: boolean
-    is_default?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3216,7 +3208,6 @@ export namespace Prisma {
     user_uuid?: boolean
     name?: boolean
     color?: boolean
-    is_default?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3228,7 +3219,6 @@ export namespace Prisma {
     user_uuid?: boolean
     name?: boolean
     color?: boolean
-    is_default?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3240,12 +3230,11 @@ export namespace Prisma {
     user_uuid?: boolean
     name?: boolean
     color?: boolean
-    is_default?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type ActivityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "color" | "is_default" | "created_at" | "updated_at", ExtArgs["result"]["activity"]>
+  export type ActivityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "color" | "created_at" | "updated_at", ExtArgs["result"]["activity"]>
   export type ActivityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     schedule_slots?: boolean | Activity$schedule_slotsArgs<ExtArgs>
@@ -3270,7 +3259,6 @@ export namespace Prisma {
       user_uuid: string
       name: string
       color: string
-      is_default: boolean
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["activity"]>
@@ -3703,7 +3691,6 @@ export namespace Prisma {
     readonly user_uuid: FieldRef<"Activity", 'String'>
     readonly name: FieldRef<"Activity", 'String'>
     readonly color: FieldRef<"Activity", 'String'>
-    readonly is_default: FieldRef<"Activity", 'Boolean'>
     readonly created_at: FieldRef<"Activity", 'DateTime'>
     readonly updated_at: FieldRef<"Activity", 'DateTime'>
   }
@@ -4172,7 +4159,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay | null
     start_time: string | null
     end_time: string | null
-    is_default: boolean | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -4185,7 +4171,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay | null
     start_time: string | null
     end_time: string | null
-    is_default: boolean | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -4198,7 +4183,6 @@ export namespace Prisma {
     day: number
     start_time: number
     end_time: number
-    is_default: number
     created_at: number
     updated_at: number
     _all: number
@@ -4221,7 +4205,6 @@ export namespace Prisma {
     day?: true
     start_time?: true
     end_time?: true
-    is_default?: true
     created_at?: true
     updated_at?: true
   }
@@ -4234,7 +4217,6 @@ export namespace Prisma {
     day?: true
     start_time?: true
     end_time?: true
-    is_default?: true
     created_at?: true
     updated_at?: true
   }
@@ -4247,7 +4229,6 @@ export namespace Prisma {
     day?: true
     start_time?: true
     end_time?: true
-    is_default?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -4347,7 +4328,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
-    is_default: boolean
     created_at: Date
     updated_at: Date
     _count: ScheduleSlotCountAggregateOutputType | null
@@ -4379,7 +4359,6 @@ export namespace Prisma {
     day?: boolean
     start_time?: boolean
     end_time?: boolean
-    is_default?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4394,7 +4373,6 @@ export namespace Prisma {
     day?: boolean
     start_time?: boolean
     end_time?: boolean
-    is_default?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4409,7 +4387,6 @@ export namespace Prisma {
     day?: boolean
     start_time?: boolean
     end_time?: boolean
-    is_default?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4424,12 +4401,11 @@ export namespace Prisma {
     day?: boolean
     start_time?: boolean
     end_time?: boolean
-    is_default?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type ScheduleSlotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "activity_uuid" | "day" | "start_time" | "end_time" | "is_default" | "created_at" | "updated_at", ExtArgs["result"]["scheduleSlot"]>
+  export type ScheduleSlotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "activity_uuid" | "day" | "start_time" | "end_time" | "created_at" | "updated_at", ExtArgs["result"]["scheduleSlot"]>
   export type ScheduleSlotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     activity?: boolean | ActivityDefaultArgs<ExtArgs>
@@ -4457,7 +4433,6 @@ export namespace Prisma {
       day: $Enums.ScheduleDay
       start_time: string
       end_time: string
-      is_default: boolean
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["scheduleSlot"]>
@@ -4892,7 +4867,6 @@ export namespace Prisma {
     readonly day: FieldRef<"ScheduleSlot", 'ScheduleDay'>
     readonly start_time: FieldRef<"ScheduleSlot", 'String'>
     readonly end_time: FieldRef<"ScheduleSlot", 'String'>
-    readonly is_default: FieldRef<"ScheduleSlot", 'Boolean'>
     readonly created_at: FieldRef<"ScheduleSlot", 'DateTime'>
     readonly updated_at: FieldRef<"ScheduleSlot", 'DateTime'>
   }
@@ -10185,7 +10159,6 @@ export namespace Prisma {
     user_uuid: 'user_uuid',
     name: 'name',
     color: 'color',
-    is_default: 'is_default',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -10201,7 +10174,6 @@ export namespace Prisma {
     day: 'day',
     start_time: 'start_time',
     end_time: 'end_time',
-    is_default: 'is_default',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -10352,13 +10324,6 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -10527,7 +10492,6 @@ export namespace Prisma {
     user_uuid?: StringFilter<"Activity"> | string
     name?: StringFilter<"Activity"> | string
     color?: StringFilter<"Activity"> | string
-    is_default?: BoolFilter<"Activity"> | boolean
     created_at?: DateTimeFilter<"Activity"> | Date | string
     updated_at?: DateTimeFilter<"Activity"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -10540,7 +10504,6 @@ export namespace Prisma {
     user_uuid?: SortOrder
     name?: SortOrder
     color?: SortOrder
-    is_default?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -10556,7 +10519,6 @@ export namespace Prisma {
     user_uuid?: StringFilter<"Activity"> | string
     name?: StringFilter<"Activity"> | string
     color?: StringFilter<"Activity"> | string
-    is_default?: BoolFilter<"Activity"> | boolean
     created_at?: DateTimeFilter<"Activity"> | Date | string
     updated_at?: DateTimeFilter<"Activity"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -10569,7 +10531,6 @@ export namespace Prisma {
     user_uuid?: SortOrder
     name?: SortOrder
     color?: SortOrder
-    is_default?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: ActivityCountOrderByAggregateInput
@@ -10588,7 +10549,6 @@ export namespace Prisma {
     user_uuid?: StringWithAggregatesFilter<"Activity"> | string
     name?: StringWithAggregatesFilter<"Activity"> | string
     color?: StringWithAggregatesFilter<"Activity"> | string
-    is_default?: BoolWithAggregatesFilter<"Activity"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
   }
@@ -10604,7 +10564,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFilter<"ScheduleSlot"> | $Enums.ScheduleDay
     start_time?: StringFilter<"ScheduleSlot"> | string
     end_time?: StringFilter<"ScheduleSlot"> | string
-    is_default?: BoolFilter<"ScheduleSlot"> | boolean
     created_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
     updated_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -10619,7 +10578,6 @@ export namespace Prisma {
     day?: SortOrder
     start_time?: SortOrder
     end_time?: SortOrder
-    is_default?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -10637,7 +10595,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFilter<"ScheduleSlot"> | $Enums.ScheduleDay
     start_time?: StringFilter<"ScheduleSlot"> | string
     end_time?: StringFilter<"ScheduleSlot"> | string
-    is_default?: BoolFilter<"ScheduleSlot"> | boolean
     created_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
     updated_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -10652,7 +10609,6 @@ export namespace Prisma {
     day?: SortOrder
     start_time?: SortOrder
     end_time?: SortOrder
-    is_default?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: ScheduleSlotCountOrderByAggregateInput
@@ -10673,7 +10629,6 @@ export namespace Prisma {
     day?: EnumScheduleDayWithAggregatesFilter<"ScheduleSlot"> | $Enums.ScheduleDay
     start_time?: StringWithAggregatesFilter<"ScheduleSlot"> | string
     end_time?: StringWithAggregatesFilter<"ScheduleSlot"> | string
-    is_default?: BoolWithAggregatesFilter<"ScheduleSlot"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"ScheduleSlot"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ScheduleSlot"> | Date | string
   }
@@ -11137,7 +11092,6 @@ export namespace Prisma {
     uuid?: string
     name: string
     color: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutActivitiesInput
@@ -11150,7 +11104,6 @@ export namespace Prisma {
     user_uuid: string
     name: string
     color: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
@@ -11160,7 +11113,6 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutActivitiesNestedInput
@@ -11173,7 +11125,6 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
@@ -11185,7 +11136,6 @@ export namespace Prisma {
     user_uuid: string
     name: string
     color: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -11194,7 +11144,6 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11205,7 +11154,6 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11215,7 +11163,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutSchedule_slotsInput
@@ -11230,7 +11177,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -11240,7 +11186,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutSchedule_slotsNestedInput
@@ -11255,7 +11200,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11268,7 +11212,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -11278,7 +11221,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11291,7 +11233,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11885,11 +11826,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -11901,7 +11837,6 @@ export namespace Prisma {
     user_uuid?: SortOrder
     name?: SortOrder
     color?: SortOrder
-    is_default?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11916,7 +11851,6 @@ export namespace Prisma {
     user_uuid?: SortOrder
     name?: SortOrder
     color?: SortOrder
-    is_default?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11927,21 +11861,12 @@ export namespace Prisma {
     user_uuid?: SortOrder
     name?: SortOrder
     color?: SortOrder
-    is_default?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type ActivitySumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumScheduleDayFilter<$PrismaModel = never> = {
@@ -11964,7 +11889,6 @@ export namespace Prisma {
     day?: SortOrder
     start_time?: SortOrder
     end_time?: SortOrder
-    is_default?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11981,7 +11905,6 @@ export namespace Prisma {
     day?: SortOrder
     start_time?: SortOrder
     end_time?: SortOrder
-    is_default?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11994,7 +11917,6 @@ export namespace Prisma {
     day?: SortOrder
     start_time?: SortOrder
     end_time?: SortOrder
-    is_default?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -12559,10 +12481,6 @@ export namespace Prisma {
     connectOrCreate?: ScheduleSlotCreateOrConnectWithoutActivityInput | ScheduleSlotCreateOrConnectWithoutActivityInput[]
     createMany?: ScheduleSlotCreateManyActivityInputEnvelope
     connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutActivitiesNestedInput = {
@@ -13140,19 +13058,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type NestedEnumScheduleDayFilter<$PrismaModel = never> = {
     equals?: $Enums.ScheduleDay | EnumScheduleDayFieldRefInput<$PrismaModel>
     in?: $Enums.ScheduleDay[] | ListEnumScheduleDayFieldRefInput<$PrismaModel>
@@ -13218,7 +13123,6 @@ export namespace Prisma {
     uuid?: string
     name: string
     color: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
@@ -13229,7 +13133,6 @@ export namespace Prisma {
     uuid?: string
     name: string
     color: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
@@ -13250,7 +13153,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     activity: ActivityCreateNestedOneWithoutSchedule_slotsInput
@@ -13263,7 +13165,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13439,7 +13340,6 @@ export namespace Prisma {
     user_uuid?: StringFilter<"Activity"> | string
     name?: StringFilter<"Activity"> | string
     color?: StringFilter<"Activity"> | string
-    is_default?: BoolFilter<"Activity"> | boolean
     created_at?: DateTimeFilter<"Activity"> | Date | string
     updated_at?: DateTimeFilter<"Activity"> | Date | string
   }
@@ -13471,7 +13371,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFilter<"ScheduleSlot"> | $Enums.ScheduleDay
     start_time?: StringFilter<"ScheduleSlot"> | string
     end_time?: StringFilter<"ScheduleSlot"> | string
-    is_default?: BoolFilter<"ScheduleSlot"> | boolean
     created_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
     updated_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
   }
@@ -13646,7 +13545,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutSchedule_slotsInput
@@ -13659,7 +13557,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13780,7 +13677,6 @@ export namespace Prisma {
     uuid?: string
     name: string
     color: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutActivitiesInput
@@ -13792,7 +13688,6 @@ export namespace Prisma {
     user_uuid: string
     name: string
     color: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13863,7 +13758,6 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutActivitiesNestedInput
@@ -13875,7 +13769,6 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14804,7 +14697,6 @@ export namespace Prisma {
     uuid?: string
     name: string
     color: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -14816,7 +14708,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -14870,7 +14761,6 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
@@ -14881,7 +14771,6 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
@@ -14892,7 +14781,6 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14902,7 +14790,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activity?: ActivityUpdateOneRequiredWithoutSchedule_slotsNestedInput
@@ -14915,7 +14802,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14927,7 +14813,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15080,7 +14965,6 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
-    is_default?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -15090,7 +14974,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutSchedule_slotsNestedInput
@@ -15103,7 +14986,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15115,7 +14997,6 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
-    is_default?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

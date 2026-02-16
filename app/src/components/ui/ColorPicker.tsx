@@ -55,44 +55,46 @@ export function ColorPicker({ value, onChange, presetColors, disabled = false }:
       </div>
 
       {showCustomColorInput && (
-        <div className="flex gap-2 mt-2">
-          <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg">
+        <div className="flex flex-col sm:flex-row gap-2 mt-2">
+          <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg min-w-0">
             <input
               type="color"
               value={customColor}
               onChange={(e) => setCustomColor(e.target.value)}
               disabled={disabled}
-              className="w-12 h-8 rounded cursor-pointer bg-transparent"
+              className="w-10 sm:w-12 h-8 rounded cursor-pointer bg-transparent shrink-0"
             />
             <input
               type="text"
               value={customColor}
               onChange={(e) => setCustomColor(e.target.value)}
               placeholder="#000000"
-              className="flex-1 bg-transparent text-white placeholder-slate-500 focus:outline-none"
+              className="flex-1 min-w-0 bg-transparent text-white placeholder-slate-500 focus:outline-none text-sm sm:text-base"
               disabled={disabled}
               maxLength={7}
             />
           </div>
-          <button
-            type="button"
-            onClick={handleCustomColorSubmit}
-            disabled={disabled}
-            className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
-          >
-            Use
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setShowCustomColorInput(false)
-              setCustomColor('#8B5CF6')
-            }}
-            disabled={disabled}
-            className="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-          >
-            Cancel
-          </button>
+          <div className="flex gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={handleCustomColorSubmit}
+              disabled={disabled}
+              className="flex-1 sm:flex-none px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+            >
+              Use
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowCustomColorInput(false)
+                setCustomColor('#8B5CF6')
+              }}
+              disabled={disabled}
+              className="flex-1 sm:flex-none px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       )}
     </div>

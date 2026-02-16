@@ -12,21 +12,33 @@ export const signIn = async (
             password,
         });
 
-        const auth_response = response.data;
-        return formatAuthUser(auth_response);
+        console.log('response', response.data);
+
+        if (response?.data) {
+            const auth_response = response.data;
+            return formatAuthUser(auth_response);
+        }
+
+        throw new Error("Failed to sign in. Please try again.");
 
     } catch (error: any) {
-        throw new Error(error.response.data.message || "Failed to sign in. Please try again.");
+        throw new Error(error?.response?.data?.message || "Failed to sign in. Please try again.");
     }
 };
 
 export const signUp = async (data: SignUpUser): Promise<LoggedInUser> => {
     try {
         const response = await axiosInstance.post(ApiRoutes.auth.email.register, data);
-        const auth_response = response.data;
-        return formatAuthUser(auth_response);
+
+        if (response.data) {
+            const auth_response = response.data;
+            return formatAuthUser(auth_response);
+        }
+
+        throw new Error("Failed to sign up. Please try again.");
+
     } catch (error: any) {
-        throw new Error(error.response.data.message || "Failed to sign up. Please try again.");
+        throw new Error(error?.response?.data?.message || "Failed to sign up. Please try again.");
     }
 };
 
@@ -36,7 +48,7 @@ export const adminLoginToAccount = async (account_uuid: string): Promise<LoggedI
         const response = await axiosInstance.post(ApiRoutes.auth.email.admin_login_to_account(account_uuid));
         return formatAuthUser(response.data);
     } catch (error: any) {
-        throw new Error(error.response.data.message || "Failed to admin login to account. Please try again.");
+        throw new Error(error?.response?.data?.message || "Failed to admin login to account. Please try again.");
     }
 };
 
@@ -46,7 +58,7 @@ export const refreshAccountToken = async (): Promise<LoggedInUser> => {
         const response = await axiosInstance.post(ApiRoutes.auth.email.refresh_token);
         return formatAuthUser(response.data);
     } catch (error: any) {
-        throw new Error(error.response.data.message || "Failed to refresh account token. Please try again.");
+        throw new Error(error?.response?.data?.message || "Failed to refresh account token. Please try again.");
     }
 };
 
@@ -73,7 +85,7 @@ export const updatePassword = async (payload: UpdatePasswordDto): Promise<void> 
         const response = await axiosInstance.post(ApiRoutes.auth.email.change_password, payload);
         return response.data;
     } catch (error: any) {
-        throw new Error(error.response.data.message || "Failed to update password. Please try again.");
+        throw new Error(error?.response?.data?.message || "Failed to update password. Please try again.");
     }
 };
 

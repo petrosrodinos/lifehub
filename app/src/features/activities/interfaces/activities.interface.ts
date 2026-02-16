@@ -4,7 +4,6 @@ export interface Activity {
   user_uuid: string
   name: string
   color: string
-  is_default?: boolean
   created_at?: string
   updated_at?: string
 }

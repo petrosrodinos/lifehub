@@ -68,7 +68,6 @@ model Activity {
   user_uuid    String
   name       String
   color      String
-  is_default Boolean  @default(false)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
@@ -88,7 +87,6 @@ model ScheduleSlot {
   day          ScheduleDay
   start_time   String
   end_time     String
-  is_default   Boolean      @default(false)
   created_at   DateTime     @default(now())
   updated_at   DateTime     @updatedAt
 

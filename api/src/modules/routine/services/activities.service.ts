@@ -23,7 +23,6 @@ export class ActivitiesService {
       data: {
         name: dto.name,
         color: dto.color,
-        is_default: dto.is_default || false,
         user_uuid: user_uuid,
       },
     })
@@ -32,10 +31,7 @@ export class ActivitiesService {
   async findAll(user_uuid: string) {
     return this.prisma.activity.findMany({
       where: {
-        OR: [
-          { user_uuid: user_uuid },
-          { is_default: true },
-        ],
+        user_uuid: user_uuid,
       },
       orderBy: {
         created_at: 'asc',
@@ -47,10 +43,7 @@ export class ActivitiesService {
     const activity = await this.prisma.activity.findFirst({
       where: {
         uuid,
-        OR: [
-          { user_uuid: user_uuid },
-          { is_default: true },
-        ],
+        user_uuid: user_uuid,
       },
     })
 

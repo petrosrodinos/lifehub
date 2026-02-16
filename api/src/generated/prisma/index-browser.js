@@ -139,7 +139,6 @@ exports.Prisma.ActivityScalarFieldEnum = {
   user_uuid: 'user_uuid',
   name: 'name',
   color: 'color',
-  is_default: 'is_default',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -152,7 +151,6 @@ exports.Prisma.ScheduleSlotScalarFieldEnum = {
   day: 'day',
   start_time: 'start_time',
   end_time: 'end_time',
-  is_default: 'is_default',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };

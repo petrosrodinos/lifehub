@@ -9,7 +9,6 @@ export interface ScheduleSlot {
   start_time: string
   end_time: string
   activity?: Activity
-  is_default?: boolean
   created_at: string
   updated_at: string
 }

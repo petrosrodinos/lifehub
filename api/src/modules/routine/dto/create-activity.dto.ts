@@ -10,8 +10,4 @@ export class CreateActivityDto {
   @IsHexColor()
   color: string
 
-  @ApiProperty({ example: false, description: 'Whether this is a default activity', required: false })
-  @IsOptional()
-  @IsBoolean()
-  is_default?: boolean
 }

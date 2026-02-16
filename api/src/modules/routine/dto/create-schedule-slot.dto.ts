@@ -25,8 +25,4 @@ export class CreateScheduleSlotDto {
   @IsUUID()
   activity_uuid: string
 
-  @ApiProperty({ example: false, description: 'Whether this is a default schedule slot', required: false })
-  @IsOptional()
-  @IsBoolean()
-  is_default?: boolean
 }

@@ -30,7 +30,6 @@ export class ScheduleSlotsService {
         start_time: dto.start_time,
         end_time: dto.end_time,
         activity_uuid: dto.activity_uuid,
-        is_default: dto.is_default || false,
         user_uuid: user_uuid,
       },
       include: {
@@ -42,10 +41,7 @@ export class ScheduleSlotsService {
   async findAll(user_uuid: string, day: ScheduleDay) {
     return this.prisma.scheduleSlot.findMany({
       where: {
-        OR: [
-          { user_uuid: user_uuid },
-          { is_default: true },
-        ],
+        user_uuid: user_uuid,
         ...(day && { day }),
       },
       include: {
@@ -62,10 +58,7 @@ export class ScheduleSlotsService {
     return this.prisma.scheduleSlot.findMany({
       where: {
         day,
-        OR: [
-          { user_uuid: user_uuid },
-          { is_default: true },
-        ],
+        user_uuid: user_uuid,
       },
       include: {
         activity: true,
@@ -80,10 +73,7 @@ export class ScheduleSlotsService {
     const slot = await this.prisma.scheduleSlot.findFirst({
       where: {
         uuid,
-        OR: [
-          { user_uuid: user_uuid },
-          { is_default: true },
-        ],
+        user_uuid: user_uuid,
       },
       include: {
         activity: true,
