@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Settings } from 'lucide-react'
-import { WeeklySlotBoard } from './WeeklySlotBoard'
+import { WeeklySlotBoard } from './slot-board'
 import { SchedulePieCharts } from './SchedulePieCharts'
 import { ActivitiesMenu } from './ActivitiesMenu'
 

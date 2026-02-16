@@ -13,3 +13,8 @@ export function formatTimeDisplay(time: string): string {
   const displayHours = hours % 12 || 12
   return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`
 }
+
+export function formatTimeForInput(value: string): string {
+  const [h, m] = value.split(":").map(Number);
+  return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
+}
