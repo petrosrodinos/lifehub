@@ -32,6 +32,8 @@ export const ApiRoutes = {
             get: (uuid: string) => `/schedule-slots/${uuid}`,
             update: (uuid: string) => `/schedule-slots/${uuid}`,
             delete: (uuid: string) => `/schedule-slots/${uuid}`,
+            duplicateDay: "/schedule-slots/duplicate-day",
+            duplicateSlot: "/schedule-slots/duplicate-slot",
         },
     },
     expenses: {

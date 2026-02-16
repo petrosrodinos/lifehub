@@ -3,6 +3,8 @@ import toast from 'react-hot-toast'
 import type {
   CreateScheduleSlotDto,
   UpdateScheduleSlotDto,
+  DuplicateDayDto,
+  DuplicateSlotDto,
   ScheduleDay,
 } from '../interfaces/routine.interface'
 import {
@@ -12,6 +14,8 @@ import {
   createScheduleSlot,
   updateScheduleSlot,
   deleteScheduleSlot,
+  duplicateDay,
+  duplicateSlot,
 } from '../services/routine'
 
 const QUERY_KEYS = {
@@ -85,6 +89,36 @@ export function useDeleteScheduleSlot() {
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to delete schedule slot', { duration: 3000 })
+    },
+  })
+}
+
+export function useDuplicateDay() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (data: DuplicateDayDto) => duplicateDay(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['schedule-slots'] })
+      toast.success('Day duplicated successfully', { duration: 2000 })
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Failed to duplicate day', { duration: 3000 })
+    },
+  })
+}
+
+export function useDuplicateSlot() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (data: DuplicateSlotDto) => duplicateSlot(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['schedule-slots'] })
+      toast.success('Slot duplicated successfully', { duration: 2000 })
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Failed to duplicate slot', { duration: 3000 })
     },
   })
 }

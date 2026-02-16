@@ -27,6 +27,16 @@ export interface UpdateScheduleSlotDto {
   activity_uuid?: string
 }
 
+export interface DuplicateDayDto {
+  source_day: ScheduleDay
+  target_days: ScheduleDay[]
+}
+
+export interface DuplicateSlotDto {
+  slot_uuid: string
+  target_days: ScheduleDay[]
+}
+
 export type ScheduleDay =
   | 'MONDAY'
   | 'TUESDAY'

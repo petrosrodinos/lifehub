@@ -3,6 +3,8 @@ import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiBearerAuth } from '@ne
 import { ScheduleSlotsService } from '../services/schedule-slots.service'
 import { CreateScheduleSlotDto } from '../dto/create-schedule-slot.dto'
 import { UpdateScheduleSlotDto } from '../dto/update-schedule-slot.dto'
+import { DuplicateDayDto } from '../dto/duplicate-day.dto'
+import { DuplicateSlotDto } from '../dto/duplicate-slot.dto'
 import { ScheduleDay, SCHEDULE_DAYS } from '@/shared/config/schedule/schedule-days.config'
 import { JwtGuard } from '@/shared/guards/jwt.guard'
 import { CurrentUser } from '@/shared/decorators/current-user.decorator'
@@ -83,5 +85,32 @@ export class ScheduleSlotsController {
     @CurrentUser('user_uuid') userUuid: string,
   ) {
     return this.scheduleSlotsService.remove(uuid, userUuid)
+  }
+
+  @Post('duplicate-day')
+  @UseGuards(JwtGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Duplicate all slots from one day to another' })
+  @ApiResponse({ status: 201, description: 'Day duplicated successfully' })
+  @ApiResponse({ status: 400, description: 'Bad request - Source and target days cannot be the same' })
+  @ApiResponse({ status: 404, description: 'No slots found for the source day' })
+  duplicateDay(
+    @Body() duplicateDayDto: DuplicateDayDto,
+    @CurrentUser('user_uuid') userUuid: string,
+  ) {
+    return this.scheduleSlotsService.duplicateDay(duplicateDayDto, userUuid)
+  }
+
+  @Post('duplicate-slot')
+  @UseGuards(JwtGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Duplicate a slot to multiple days' })
+  @ApiResponse({ status: 201, description: 'Slot duplicated successfully' })
+  @ApiResponse({ status: 404, description: 'Schedule slot not found' })
+  duplicateSlot(
+    @Body() duplicateSlotDto: DuplicateSlotDto,
+    @CurrentUser('user_uuid') userUuid: string,
+  ) {
+    return this.scheduleSlotsService.duplicateSlot(duplicateSlotDto, userUuid)
   }
 }

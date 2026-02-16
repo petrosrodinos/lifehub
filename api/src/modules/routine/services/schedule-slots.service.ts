@@ -2,6 +2,8 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { PrismaService } from '@/core/databases/prisma/prisma.service'
 import { CreateScheduleSlotDto } from '../dto/create-schedule-slot.dto'
 import { UpdateScheduleSlotDto } from '../dto/update-schedule-slot.dto'
+import { DuplicateDayDto } from '../dto/duplicate-day.dto'
+import { DuplicateSlotDto } from '../dto/duplicate-slot.dto'
 import { ScheduleDay } from '@/shared/config/schedule/schedule-days.config'
 
 @Injectable()
@@ -146,6 +148,88 @@ export class ScheduleSlotsService {
     })
   }
 
+  async duplicateDay(dto: DuplicateDayDto, user_uuid: string) {
+    if (dto.target_days.includes(dto.source_day)) {
+      throw new BadRequestException('Source day cannot be in target days')
+    }
+
+    const sourceSlots = await this.prisma.scheduleSlot.findMany({
+      where: {
+        day: dto.source_day,
+        user_uuid: user_uuid,
+      },
+      include: {
+        activity: true,
+      },
+    })
+
+    if (sourceSlots.length === 0) {
+      throw new NotFoundException('No slots found for the source day')
+    }
+
+    await this.prisma.scheduleSlot.deleteMany({
+      where: {
+        day: { in: dto.target_days },
+        user_uuid: user_uuid,
+      },
+    })
+
+    const duplicatedSlots = await this.prisma.$transaction(
+      dto.target_days.flatMap((targetDay) =>
+        sourceSlots.map((slot) =>
+          this.prisma.scheduleSlot.create({
+            data: {
+              day: targetDay,
+              start_time: slot.start_time,
+              end_time: slot.end_time,
+              activity_uuid: slot.activity_uuid,
+              user_uuid: user_uuid,
+            },
+            include: {
+              activity: true,
+            },
+          }),
+        ),
+      ),
+    )
+
+    return duplicatedSlots
+  }
+
+  async duplicateSlot(dto: DuplicateSlotDto, user_uuid: string) {
+    const sourceSlot = await this.prisma.scheduleSlot.findFirst({
+      where: {
+        uuid: dto.slot_uuid,
+        user_uuid: user_uuid,
+      },
+      include: {
+        activity: true,
+      },
+    })
+
+    if (!sourceSlot) {
+      throw new NotFoundException('Schedule slot not found or you do not have permission to access it')
+    }
+
+    const duplicatedSlots = await this.prisma.$transaction(
+      dto.target_days.map((targetDay) =>
+        this.prisma.scheduleSlot.create({
+          data: {
+            day: targetDay,
+            start_time: sourceSlot.start_time,
+            end_time: sourceSlot.end_time,
+            activity_uuid: sourceSlot.activity_uuid,
+            user_uuid: user_uuid,
+          },
+          include: {
+            activity: true,
+          },
+        }),
+      ),
+    )
+
+    return duplicatedSlots
+  }
 
   private timeToMinutes(time: string): number {
     const [hours, minutes] = time.split(':').map(Number)

@@ -4,6 +4,8 @@ import type {
   ScheduleSlot,
   CreateScheduleSlotDto,
   UpdateScheduleSlotDto,
+  DuplicateDayDto,
+  DuplicateSlotDto,
   ScheduleDay,
 } from '../interfaces/routine.interface'
 
@@ -66,5 +68,23 @@ export const deleteScheduleSlot = async (uuid: string): Promise<void> => {
     await axiosInstance.delete(ApiRoutes.routine.scheduleSlots.delete(uuid))
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to delete schedule slot')
+  }
+}
+
+export const duplicateDay = async (data: DuplicateDayDto): Promise<ScheduleSlot[]> => {
+  try {
+    const response = await axiosInstance.post(ApiRoutes.routine.scheduleSlots.duplicateDay, data)
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to duplicate day')
+  }
+}
+
+export const duplicateSlot = async (data: DuplicateSlotDto): Promise<ScheduleSlot[]> => {
+  try {
+    const response = await axiosInstance.post(ApiRoutes.routine.scheduleSlots.duplicateSlot, data)
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to duplicate slot')
   }
 }
