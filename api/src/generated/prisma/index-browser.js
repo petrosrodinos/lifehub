@@ -204,6 +204,63 @@ exports.Prisma.ExpenseEntryScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.MuscleGroupScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  name: 'name',
+  color: 'color',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.ExerciseScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  muscle_group_uuid: 'muscle_group_uuid',
+  name: 'name',
+  description: 'description',
+  type: 'type',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.WorkoutScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  name: 'name',
+  notes: 'notes',
+  started_at: 'started_at',
+  finished_at: 'finished_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.WorkoutSetScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  workout_uuid: 'workout_uuid',
+  exercise_uuid: 'exercise_uuid',
+  type: 'type',
+  reps: 'reps',
+  weight: 'weight',
+  duration_seconds: 'duration_seconds',
+  distance_meters: 'distance_meters',
+  reset_seconds: 'reset_seconds',
+  notes: 'notes',
+  is_dropset: 'is_dropset',
+  is_amrap: 'is_amrap',
+  is_rest: 'is_rest',
+  is_warmup: 'is_warmup',
+  is_cooldown: 'is_cooldown',
+  is_super_set: 'is_super_set',
+  order: 'order',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -241,6 +298,11 @@ exports.ExpenseEntryType = exports.$Enums.ExpenseEntryType = {
   TRANSFER: 'TRANSFER'
 };
 
+exports.ExerciseType = exports.$Enums.ExerciseType = {
+  REPS: 'REPS',
+  TIME: 'TIME'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Activity: 'Activity',
@@ -248,7 +310,11 @@ exports.Prisma.ModelName = {
   ExpenseAccount: 'ExpenseAccount',
   ExpenseCategory: 'ExpenseCategory',
   ExpenseSubcategory: 'ExpenseSubcategory',
-  ExpenseEntry: 'ExpenseEntry'
+  ExpenseEntry: 'ExpenseEntry',
+  MuscleGroup: 'MuscleGroup',
+  Exercise: 'Exercise',
+  Workout: 'Workout',
+  WorkoutSet: 'WorkoutSet'
 };
 
 /**

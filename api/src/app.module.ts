@@ -13,6 +13,10 @@ import { ExpenseAccountsModule } from './modules/expense-accounts/expense-accoun
 import { ExpenseCategoriesModule } from './modules/expense-categories/expense-categories.module';
 import { ExpenseSubcategoriesModule } from './modules/expense-subcategories/expense-subcategories.module';
 import { ExpenseEntriesModule } from './modules/expense-entries/expense-entries.module';
+import { ExercisesModule } from './modules/exercises/exercises.module';
+import { MuscleGroupsModule } from './modules/muscle-groups/muscle-groups.module';
+import { WorkoutsModule } from './modules/workouts/workouts.module';
+import { WorkoutSetsModule } from './modules/workout-sets/workout-sets.module';
 
 @Module({
   imports: [
@@ -28,6 +32,10 @@ import { ExpenseEntriesModule } from './modules/expense-entries/expense-entries.
     ExpenseCategoriesModule,
     ExpenseSubcategoriesModule,
     ExpenseEntriesModule,
+    ExercisesModule,
+    MuscleGroupsModule,
+    WorkoutsModule,
+    WorkoutSetsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
