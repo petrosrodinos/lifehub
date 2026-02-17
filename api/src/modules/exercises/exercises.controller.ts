@@ -1,34 +1,55 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ExercisesService } from './exercises.service';
-import { CreateExerciseDto } from './dto/create-exercise.dto';
-import { UpdateExerciseDto } from './dto/update-exercise.dto';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, UseGuards } from '@nestjs/common'
+import { ExercisesService } from './exercises.service'
+import { CreateExerciseDto } from './dto/create-exercise.dto'
+import { UpdateExerciseDto } from './dto/update-exercise.dto'
+import { JwtGuard } from '@/shared/guards/jwt.guard'
+import { CurrentUser } from '@/shared/decorators/current-user.decorator'
 
 @Controller('exercises')
+@UseGuards(JwtGuard)
 export class ExercisesController {
-  constructor(private readonly exercisesService: ExercisesService) {}
+  constructor(private readonly exercisesService: ExercisesService) { }
 
   @Post()
-  create(@Body() createExerciseDto: CreateExerciseDto) {
-    return this.exercisesService.create(createExerciseDto);
+  @HttpCode(HttpStatus.CREATED)
+  create(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Body() createExerciseDto: CreateExerciseDto,
+  ) {
+    return this.exercisesService.create(user_uuid, createExerciseDto)
   }
 
   @Get()
-  findAll() {
-    return this.exercisesService.findAll();
+  @HttpCode(HttpStatus.OK)
+  findAll(@CurrentUser('user_uuid') user_uuid: string) {
+    return this.exercisesService.findAll(user_uuid)
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.exercisesService.findOne(+id);
+  @Get(':uuid')
+  @HttpCode(HttpStatus.OK)
+  findOne(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string,
+  ) {
+    return this.exercisesService.findOne(uuid, user_uuid)
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateExerciseDto: UpdateExerciseDto) {
-    return this.exercisesService.update(+id, updateExerciseDto);
+  @Patch(':uuid')
+  @HttpCode(HttpStatus.OK)
+  update(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string,
+    @Body() updateExerciseDto: UpdateExerciseDto,
+  ) {
+    return this.exercisesService.update(uuid, user_uuid, updateExerciseDto)
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.exercisesService.remove(+id);
+  @Delete(':uuid')
+  @HttpCode(HttpStatus.OK)
+  remove(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string,
+  ) {
+    return this.exercisesService.remove(uuid, user_uuid)
   }
 }

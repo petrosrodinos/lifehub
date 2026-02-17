@@ -1,26 +1,107 @@
-import { Injectable } from '@nestjs/common';
-import { CreateWorkoutDto } from './dto/create-workout.dto';
-import { UpdateWorkoutDto } from './dto/update-workout.dto';
+import { Injectable, NotFoundException } from '@nestjs/common'
+import { PrismaService } from '@/core/databases/prisma/prisma.service'
+import { CreateWorkoutDto } from './dto/create-workout.dto'
+import { UpdateWorkoutDto } from './dto/update-workout.dto'
 
 @Injectable()
 export class WorkoutsService {
-  create(createWorkoutDto: CreateWorkoutDto) {
-    return 'This action adds a new workout';
+  constructor(private readonly prisma: PrismaService) { }
+
+  async create(user_uuid: string, createWorkoutDto: CreateWorkoutDto) {
+    return this.prisma.workout.create({
+      data: {
+        user_uuid,
+        name: createWorkoutDto.name,
+        notes: createWorkoutDto.notes,
+        started_at: createWorkoutDto.started_at ? new Date(createWorkoutDto.started_at) : undefined,
+        finished_at: createWorkoutDto.finished_at ? new Date(createWorkoutDto.finished_at) : undefined,
+      },
+    })
   }
 
-  findAll() {
-    return `This action returns all workouts`;
+  async findAll(user_uuid: string) {
+    return this.prisma.workout.findMany({
+      where: {
+        user_uuid,
+      },
+      include: {
+        sets: {
+          include: {
+            exercise: true,
+          },
+          orderBy: {
+            order: 'asc',
+          },
+        },
+      },
+      orderBy: {
+        started_at: 'desc',
+      },
+    })
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} workout`;
+  async findOne(uuid: string, user_uuid: string) {
+    const workout = await this.prisma.workout.findFirst({
+      where: {
+        uuid,
+        user_uuid,
+      },
+      include: {
+        sets: {
+          include: {
+            exercise: true,
+          },
+          orderBy: {
+            order: 'asc',
+          },
+        },
+      },
+    })
+
+    if (!workout) {
+      throw new NotFoundException('Workout not found')
+    }
+
+    return workout
   }
 
-  update(id: number, updateWorkoutDto: UpdateWorkoutDto) {
-    return `This action updates a #${id} workout`;
+  async update(uuid: string, user_uuid: string, updateWorkoutDto: UpdateWorkoutDto) {
+    const workout = await this.prisma.workout.findFirst({
+      where: {
+        uuid,
+        user_uuid,
+      },
+    })
+
+    if (!workout) {
+      throw new NotFoundException('Workout not found or you do not have permission to update it')
+    }
+
+    return this.prisma.workout.update({
+      where: { uuid },
+      data: {
+        name: updateWorkoutDto.name,
+        notes: updateWorkoutDto.notes,
+        started_at: updateWorkoutDto.started_at ? new Date(updateWorkoutDto.started_at) : undefined,
+        finished_at: updateWorkoutDto.finished_at ? new Date(updateWorkoutDto.finished_at) : undefined,
+      },
+    })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} workout`;
+  async remove(uuid: string, user_uuid: string) {
+    const workout = await this.prisma.workout.findFirst({
+      where: {
+        uuid,
+        user_uuid,
+      },
+    })
+
+    if (!workout) {
+      throw new NotFoundException('Workout not found or you do not have permission to delete it')
+    }
+
+    return this.prisma.workout.delete({
+      where: { uuid },
+    })
   }
 }

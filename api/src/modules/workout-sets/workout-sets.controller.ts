@@ -1,34 +1,55 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { WorkoutSetsService } from './workout-sets.service';
-import { CreateWorkoutSetDto } from './dto/create-workout-set.dto';
-import { UpdateWorkoutSetDto } from './dto/update-workout-set.dto';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, UseGuards } from '@nestjs/common'
+import { WorkoutSetsService } from './workout-sets.service'
+import { CreateWorkoutSetDto } from './dto/create-workout-set.dto'
+import { UpdateWorkoutSetDto } from './dto/update-workout-set.dto'
+import { JwtGuard } from '@/shared/guards/jwt.guard'
+import { CurrentUser } from '@/shared/decorators/current-user.decorator'
 
 @Controller('workout-sets')
+@UseGuards(JwtGuard)
 export class WorkoutSetsController {
-  constructor(private readonly workoutSetsService: WorkoutSetsService) {}
+  constructor(private readonly workoutSetsService: WorkoutSetsService) { }
 
   @Post()
-  create(@Body() createWorkoutSetDto: CreateWorkoutSetDto) {
-    return this.workoutSetsService.create(createWorkoutSetDto);
+  @HttpCode(HttpStatus.CREATED)
+  create(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Body() createWorkoutSetDto: CreateWorkoutSetDto,
+  ) {
+    return this.workoutSetsService.create(user_uuid, createWorkoutSetDto)
   }
 
   @Get()
-  findAll() {
-    return this.workoutSetsService.findAll();
+  @HttpCode(HttpStatus.OK)
+  findAll(@CurrentUser('user_uuid') user_uuid: string) {
+    return this.workoutSetsService.findAll(user_uuid)
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.workoutSetsService.findOne(+id);
+  @Get(':uuid')
+  @HttpCode(HttpStatus.OK)
+  findOne(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string,
+  ) {
+    return this.workoutSetsService.findOne(uuid, user_uuid)
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWorkoutSetDto: UpdateWorkoutSetDto) {
-    return this.workoutSetsService.update(+id, updateWorkoutSetDto);
+  @Patch(':uuid')
+  @HttpCode(HttpStatus.OK)
+  update(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string,
+    @Body() updateWorkoutSetDto: UpdateWorkoutSetDto,
+  ) {
+    return this.workoutSetsService.update(uuid, user_uuid, updateWorkoutSetDto)
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.workoutSetsService.remove(+id);
+  @Delete(':uuid')
+  @HttpCode(HttpStatus.OK)
+  remove(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string,
+  ) {
+    return this.workoutSetsService.remove(uuid, user_uuid)
   }
 }
