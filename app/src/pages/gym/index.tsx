@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { List, Calendar } from "lucide-react";
 import { GymHeader } from "./components/GymHeader";
 import { GymCategoriesMenu } from "./components/exercises/GymCategoriesMenu";
 import { WorkoutsList } from "./components/workouts/WorkoutsList";
+import { WorkoutsCalendar } from "./components/workouts/WorkoutsCalendar";
 import { CreateWorkoutModal } from "./components/workouts/CreateWorkoutModal";
 import { GymAnalytics } from "./components/analytics";
 import { GYM_TABS, type GymTabId } from "./config/gym-tabs.config";
+import { WORKOUT_VIEWS, type WorkoutViewId } from "./config/workout-views.config";
 
 export const GymPage = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [createWorkoutModalOpen, setCreateWorkoutModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<GymTabId>("workouts");
+  const [workoutView, setWorkoutView] = useState<WorkoutViewId>(WORKOUT_VIEWS.LIST);
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
@@ -50,8 +54,36 @@ export const GymPage = () => {
 
         {activeTab === "workouts" && (
           <section>
-            <h2 className="text-lg font-semibold text-white mb-4">Recent Workouts</h2>
-            <WorkoutsList />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+              <h2 className="text-lg font-semibold text-white">Recent Workouts</h2>
+              <div className="flex gap-1 bg-slate-900/60 rounded-lg border border-slate-800/80 p-1 w-full sm:w-auto">
+                <button
+                  type="button"
+                  onClick={() => setWorkoutView(WORKOUT_VIEWS.LIST)}
+                  className={`flex items-center justify-center gap-2 px-3 py-1.5 text-sm font-medium rounded transition-all flex-1 sm:flex-initial ${
+                    workoutView === WORKOUT_VIEWS.LIST
+                      ? "bg-violet-500/20 text-violet-300 border border-violet-500/30"
+                      : "text-slate-400 hover:text-slate-200 border border-transparent"
+                  }`}
+                >
+                  <List className="w-4 h-4" />
+                  <span className="hidden xs:inline">List</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setWorkoutView(WORKOUT_VIEWS.CALENDAR)}
+                  className={`flex items-center justify-center gap-2 px-3 py-1.5 text-sm font-medium rounded transition-all flex-1 sm:flex-initial ${
+                    workoutView === WORKOUT_VIEWS.CALENDAR
+                      ? "bg-violet-500/20 text-violet-300 border border-violet-500/30"
+                      : "text-slate-400 hover:text-slate-200 border border-transparent"
+                  }`}
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span className="hidden xs:inline">Calendar</span>
+                </button>
+              </div>
+            </div>
+            {workoutView === WORKOUT_VIEWS.LIST ? <WorkoutsList /> : <WorkoutsCalendar />}
           </section>
         )}
 
