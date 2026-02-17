@@ -258,7 +258,7 @@ model WorkoutSet {
   weight           Decimal?
   duration_seconds Int?
   distance_meters  Int?
-  reset_seconds    Int?
+  rest_seconds     Int?
   notes            String?
   is_dropset       Boolean      @default(false)
   is_amrap         Boolean      @default(false)

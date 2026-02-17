@@ -11,7 +11,7 @@ export interface WorkoutSet {
   weight?: number | null
   duration_seconds?: number | null
   distance_meters?: number | null
-  reset_seconds?: number | null
+  rest_seconds?: number | null
   notes?: string | null
   is_dropset?: boolean
   is_amrap?: boolean
@@ -34,7 +34,7 @@ export interface CreateWorkoutSetDto {
   weight?: number
   duration_seconds?: number
   distance_meters?: number
-  reset_seconds?: number
+  rest_seconds?: number
   notes?: string
   is_dropset?: boolean
   is_amrap?: boolean
@@ -53,7 +53,7 @@ export interface UpdateWorkoutSetDto {
   weight?: number
   duration_seconds?: number
   distance_meters?: number
-  reset_seconds?: number
+  rest_seconds?: number
   notes?: string
   is_dropset?: boolean
   is_amrap?: boolean

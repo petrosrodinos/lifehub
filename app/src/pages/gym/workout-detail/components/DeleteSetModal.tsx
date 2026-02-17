@@ -1,0 +1,39 @@
+import { useDeleteWorkoutSet } from "../../../../features/workout-sets/hooks/use-workout-sets";
+import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
+import type { WorkoutSet } from "../../../../features/workout-sets/interfaces/workout-sets.interface";
+
+type DeleteSetModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  set: WorkoutSet;
+};
+
+export function DeleteSetModal({ isOpen, onClose, set }: DeleteSetModalProps) {
+  const deleteSet = useDeleteWorkoutSet();
+
+  const handleConfirm = () => {
+    deleteSet.mutate(set.uuid, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
+  };
+
+  const setDescription = set.exercise?.name
+    ? `${set.exercise.name} - Set #${set.order}`
+    : `Set #${set.order}`;
+
+  return (
+    <ConfirmationModal
+      isOpen={isOpen}
+      onClose={onClose}
+      onConfirm={handleConfirm}
+      title="Delete Set"
+      description={`Are you sure you want to delete ${setDescription}? This action cannot be undone.`}
+      confirmText="Delete"
+      cancelText="Cancel"
+      variant="danger"
+      isPending={deleteSet.isPending}
+    />
+  );
+}

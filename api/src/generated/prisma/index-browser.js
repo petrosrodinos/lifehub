@@ -248,7 +248,7 @@ exports.Prisma.WorkoutSetScalarFieldEnum = {
   weight: 'weight',
   duration_seconds: 'duration_seconds',
   distance_meters: 'distance_meters',
-  reset_seconds: 'reset_seconds',
+  rest_seconds: 'rest_seconds',
   notes: 'notes',
   is_dropset: 'is_dropset',
   is_amrap: 'is_amrap',

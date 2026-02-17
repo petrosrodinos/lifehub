@@ -1,8 +1,6 @@
 import type { MuscleGroup } from '../../muscle-groups/interfaces/muscle-groups.interface'
 import type { WorkoutSet } from '../../workout-sets/interfaces/workout-sets.interface'
 
-export type ExerciseType = 'REPS' | 'TIME'
-
 export interface Exercise {
   id?: number
   uuid: string
@@ -30,3 +28,10 @@ export interface UpdateExerciseDto {
   description?: string
   type?: ExerciseType
 }
+
+export const ExerciseTypes = {
+  REPS: 'REPS',
+  TIME: 'TIME',
+} as const;
+
+export type ExerciseType = (typeof ExerciseTypes)[keyof typeof ExerciseTypes];

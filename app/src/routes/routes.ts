@@ -19,4 +19,7 @@ export const Routes = {
     settings: {
         security: '/dashboard/settings/security',
     },
+    gym: {
+        prefix: '/dashboard/gym',
+    },
 };

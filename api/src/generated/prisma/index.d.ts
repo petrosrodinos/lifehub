@@ -14282,7 +14282,7 @@ export namespace Prisma {
     weight: Decimal | null
     duration_seconds: number | null
     distance_meters: number | null
-    reset_seconds: number | null
+    rest_seconds: number | null
     order: number | null
   }
 
@@ -14292,7 +14292,7 @@ export namespace Prisma {
     weight: Decimal | null
     duration_seconds: number | null
     distance_meters: number | null
-    reset_seconds: number | null
+    rest_seconds: number | null
     order: number | null
   }
 
@@ -14306,7 +14306,7 @@ export namespace Prisma {
     weight: Decimal | null
     duration_seconds: number | null
     distance_meters: number | null
-    reset_seconds: number | null
+    rest_seconds: number | null
     notes: string | null
     is_dropset: boolean | null
     is_amrap: boolean | null
@@ -14329,7 +14329,7 @@ export namespace Prisma {
     weight: Decimal | null
     duration_seconds: number | null
     distance_meters: number | null
-    reset_seconds: number | null
+    rest_seconds: number | null
     notes: string | null
     is_dropset: boolean | null
     is_amrap: boolean | null
@@ -14352,7 +14352,7 @@ export namespace Prisma {
     weight: number
     duration_seconds: number
     distance_meters: number
-    reset_seconds: number
+    rest_seconds: number
     notes: number
     is_dropset: number
     is_amrap: number
@@ -14373,7 +14373,7 @@ export namespace Prisma {
     weight?: true
     duration_seconds?: true
     distance_meters?: true
-    reset_seconds?: true
+    rest_seconds?: true
     order?: true
   }
 
@@ -14383,7 +14383,7 @@ export namespace Prisma {
     weight?: true
     duration_seconds?: true
     distance_meters?: true
-    reset_seconds?: true
+    rest_seconds?: true
     order?: true
   }
 
@@ -14397,7 +14397,7 @@ export namespace Prisma {
     weight?: true
     duration_seconds?: true
     distance_meters?: true
-    reset_seconds?: true
+    rest_seconds?: true
     notes?: true
     is_dropset?: true
     is_amrap?: true
@@ -14420,7 +14420,7 @@ export namespace Prisma {
     weight?: true
     duration_seconds?: true
     distance_meters?: true
-    reset_seconds?: true
+    rest_seconds?: true
     notes?: true
     is_dropset?: true
     is_amrap?: true
@@ -14443,7 +14443,7 @@ export namespace Prisma {
     weight?: true
     duration_seconds?: true
     distance_meters?: true
-    reset_seconds?: true
+    rest_seconds?: true
     notes?: true
     is_dropset?: true
     is_amrap?: true
@@ -14553,7 +14553,7 @@ export namespace Prisma {
     weight: Decimal | null
     duration_seconds: number | null
     distance_meters: number | null
-    reset_seconds: number | null
+    rest_seconds: number | null
     notes: string | null
     is_dropset: boolean
     is_amrap: boolean
@@ -14595,7 +14595,7 @@ export namespace Prisma {
     weight?: boolean
     duration_seconds?: boolean
     distance_meters?: boolean
-    reset_seconds?: boolean
+    rest_seconds?: boolean
     notes?: boolean
     is_dropset?: boolean
     is_amrap?: boolean
@@ -14620,7 +14620,7 @@ export namespace Prisma {
     weight?: boolean
     duration_seconds?: boolean
     distance_meters?: boolean
-    reset_seconds?: boolean
+    rest_seconds?: boolean
     notes?: boolean
     is_dropset?: boolean
     is_amrap?: boolean
@@ -14645,7 +14645,7 @@ export namespace Prisma {
     weight?: boolean
     duration_seconds?: boolean
     distance_meters?: boolean
-    reset_seconds?: boolean
+    rest_seconds?: boolean
     notes?: boolean
     is_dropset?: boolean
     is_amrap?: boolean
@@ -14670,7 +14670,7 @@ export namespace Prisma {
     weight?: boolean
     duration_seconds?: boolean
     distance_meters?: boolean
-    reset_seconds?: boolean
+    rest_seconds?: boolean
     notes?: boolean
     is_dropset?: boolean
     is_amrap?: boolean
@@ -14683,7 +14683,7 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type WorkoutSetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "workout_uuid" | "exercise_uuid" | "type" | "reps" | "weight" | "duration_seconds" | "distance_meters" | "reset_seconds" | "notes" | "is_dropset" | "is_amrap" | "is_rest" | "is_warmup" | "is_cooldown" | "is_super_set" | "order" | "created_at" | "updated_at", ExtArgs["result"]["workoutSet"]>
+  export type WorkoutSetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "workout_uuid" | "exercise_uuid" | "type" | "reps" | "weight" | "duration_seconds" | "distance_meters" | "rest_seconds" | "notes" | "is_dropset" | "is_amrap" | "is_rest" | "is_warmup" | "is_cooldown" | "is_super_set" | "order" | "created_at" | "updated_at", ExtArgs["result"]["workoutSet"]>
   export type WorkoutSetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workout?: boolean | WorkoutDefaultArgs<ExtArgs>
     exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
@@ -14713,7 +14713,7 @@ export namespace Prisma {
       weight: Prisma.Decimal | null
       duration_seconds: number | null
       distance_meters: number | null
-      reset_seconds: number | null
+      rest_seconds: number | null
       notes: string | null
       is_dropset: boolean
       is_amrap: boolean
@@ -15158,7 +15158,7 @@ export namespace Prisma {
     readonly weight: FieldRef<"WorkoutSet", 'Decimal'>
     readonly duration_seconds: FieldRef<"WorkoutSet", 'Int'>
     readonly distance_meters: FieldRef<"WorkoutSet", 'Int'>
-    readonly reset_seconds: FieldRef<"WorkoutSet", 'Int'>
+    readonly rest_seconds: FieldRef<"WorkoutSet", 'Int'>
     readonly notes: FieldRef<"WorkoutSet", 'String'>
     readonly is_dropset: FieldRef<"WorkoutSet", 'Boolean'>
     readonly is_amrap: FieldRef<"WorkoutSet", 'Boolean'>
@@ -15755,7 +15755,7 @@ export namespace Prisma {
     weight: 'weight',
     duration_seconds: 'duration_seconds',
     distance_meters: 'distance_meters',
-    reset_seconds: 'reset_seconds',
+    rest_seconds: 'rest_seconds',
     notes: 'notes',
     is_dropset: 'is_dropset',
     is_amrap: 'is_amrap',
@@ -16781,7 +16781,7 @@ export namespace Prisma {
     weight?: DecimalNullableFilter<"WorkoutSet"> | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
     distance_meters?: IntNullableFilter<"WorkoutSet"> | number | null
-    reset_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
+    rest_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
     notes?: StringNullableFilter<"WorkoutSet"> | string | null
     is_dropset?: BoolFilter<"WorkoutSet"> | boolean
     is_amrap?: BoolFilter<"WorkoutSet"> | boolean
@@ -16806,7 +16806,7 @@ export namespace Prisma {
     weight?: SortOrderInput | SortOrder
     duration_seconds?: SortOrderInput | SortOrder
     distance_meters?: SortOrderInput | SortOrder
-    reset_seconds?: SortOrderInput | SortOrder
+    rest_seconds?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     is_dropset?: SortOrder
     is_amrap?: SortOrder
@@ -16834,7 +16834,7 @@ export namespace Prisma {
     weight?: DecimalNullableFilter<"WorkoutSet"> | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
     distance_meters?: IntNullableFilter<"WorkoutSet"> | number | null
-    reset_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
+    rest_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
     notes?: StringNullableFilter<"WorkoutSet"> | string | null
     is_dropset?: BoolFilter<"WorkoutSet"> | boolean
     is_amrap?: BoolFilter<"WorkoutSet"> | boolean
@@ -16859,7 +16859,7 @@ export namespace Prisma {
     weight?: SortOrderInput | SortOrder
     duration_seconds?: SortOrderInput | SortOrder
     distance_meters?: SortOrderInput | SortOrder
-    reset_seconds?: SortOrderInput | SortOrder
+    rest_seconds?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     is_dropset?: SortOrder
     is_amrap?: SortOrder
@@ -16890,7 +16890,7 @@ export namespace Prisma {
     weight?: DecimalNullableWithAggregatesFilter<"WorkoutSet"> | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: IntNullableWithAggregatesFilter<"WorkoutSet"> | number | null
     distance_meters?: IntNullableWithAggregatesFilter<"WorkoutSet"> | number | null
-    reset_seconds?: IntNullableWithAggregatesFilter<"WorkoutSet"> | number | null
+    rest_seconds?: IntNullableWithAggregatesFilter<"WorkoutSet"> | number | null
     notes?: StringNullableWithAggregatesFilter<"WorkoutSet"> | string | null
     is_dropset?: BoolWithAggregatesFilter<"WorkoutSet"> | boolean
     is_amrap?: BoolWithAggregatesFilter<"WorkoutSet"> | boolean
@@ -17762,7 +17762,7 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     duration_seconds?: number | null
     distance_meters?: number | null
-    reset_seconds?: number | null
+    rest_seconds?: number | null
     notes?: string | null
     is_dropset?: boolean
     is_amrap?: boolean
@@ -17787,7 +17787,7 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     duration_seconds?: number | null
     distance_meters?: number | null
-    reset_seconds?: number | null
+    rest_seconds?: number | null
     notes?: string | null
     is_dropset?: boolean
     is_amrap?: boolean
@@ -17807,7 +17807,7 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    reset_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     is_dropset?: BoolFieldUpdateOperationsInput | boolean
     is_amrap?: BoolFieldUpdateOperationsInput | boolean
@@ -17832,7 +17832,7 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    reset_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     is_dropset?: BoolFieldUpdateOperationsInput | boolean
     is_amrap?: BoolFieldUpdateOperationsInput | boolean
@@ -17855,7 +17855,7 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     duration_seconds?: number | null
     distance_meters?: number | null
-    reset_seconds?: number | null
+    rest_seconds?: number | null
     notes?: string | null
     is_dropset?: boolean
     is_amrap?: boolean
@@ -17875,7 +17875,7 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    reset_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     is_dropset?: BoolFieldUpdateOperationsInput | boolean
     is_amrap?: BoolFieldUpdateOperationsInput | boolean
@@ -17898,7 +17898,7 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    reset_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     is_dropset?: BoolFieldUpdateOperationsInput | boolean
     is_amrap?: BoolFieldUpdateOperationsInput | boolean
@@ -18754,7 +18754,7 @@ export namespace Prisma {
     weight?: SortOrder
     duration_seconds?: SortOrder
     distance_meters?: SortOrder
-    reset_seconds?: SortOrder
+    rest_seconds?: SortOrder
     notes?: SortOrder
     is_dropset?: SortOrder
     is_amrap?: SortOrder
@@ -18773,7 +18773,7 @@ export namespace Prisma {
     weight?: SortOrder
     duration_seconds?: SortOrder
     distance_meters?: SortOrder
-    reset_seconds?: SortOrder
+    rest_seconds?: SortOrder
     order?: SortOrder
   }
 
@@ -18787,7 +18787,7 @@ export namespace Prisma {
     weight?: SortOrder
     duration_seconds?: SortOrder
     distance_meters?: SortOrder
-    reset_seconds?: SortOrder
+    rest_seconds?: SortOrder
     notes?: SortOrder
     is_dropset?: SortOrder
     is_amrap?: SortOrder
@@ -18810,7 +18810,7 @@ export namespace Prisma {
     weight?: SortOrder
     duration_seconds?: SortOrder
     distance_meters?: SortOrder
-    reset_seconds?: SortOrder
+    rest_seconds?: SortOrder
     notes?: SortOrder
     is_dropset?: SortOrder
     is_amrap?: SortOrder
@@ -18829,7 +18829,7 @@ export namespace Prisma {
     weight?: SortOrder
     duration_seconds?: SortOrder
     distance_meters?: SortOrder
-    reset_seconds?: SortOrder
+    rest_seconds?: SortOrder
     order?: SortOrder
   }
 
@@ -22310,7 +22310,7 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     duration_seconds?: number | null
     distance_meters?: number | null
-    reset_seconds?: number | null
+    rest_seconds?: number | null
     notes?: string | null
     is_dropset?: boolean
     is_amrap?: boolean
@@ -22333,7 +22333,7 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     duration_seconds?: number | null
     distance_meters?: number | null
-    reset_seconds?: number | null
+    rest_seconds?: number | null
     notes?: string | null
     is_dropset?: boolean
     is_amrap?: boolean
@@ -22467,7 +22467,7 @@ export namespace Prisma {
     weight?: DecimalNullableFilter<"WorkoutSet"> | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
     distance_meters?: IntNullableFilter<"WorkoutSet"> | number | null
-    reset_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
+    rest_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
     notes?: StringNullableFilter<"WorkoutSet"> | string | null
     is_dropset?: BoolFilter<"WorkoutSet"> | boolean
     is_amrap?: BoolFilter<"WorkoutSet"> | boolean
@@ -22533,7 +22533,7 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     duration_seconds?: number | null
     distance_meters?: number | null
-    reset_seconds?: number | null
+    rest_seconds?: number | null
     notes?: string | null
     is_dropset?: boolean
     is_amrap?: boolean
@@ -22556,7 +22556,7 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     duration_seconds?: number | null
     distance_meters?: number | null
-    reset_seconds?: number | null
+    rest_seconds?: number | null
     notes?: string | null
     is_dropset?: boolean
     is_amrap?: boolean
@@ -23534,7 +23534,7 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     duration_seconds?: number | null
     distance_meters?: number | null
-    reset_seconds?: number | null
+    rest_seconds?: number | null
     notes?: string | null
     is_dropset?: boolean
     is_amrap?: boolean
@@ -23554,7 +23554,7 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    reset_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     is_dropset?: BoolFieldUpdateOperationsInput | boolean
     is_amrap?: BoolFieldUpdateOperationsInput | boolean
@@ -23577,7 +23577,7 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    reset_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     is_dropset?: BoolFieldUpdateOperationsInput | boolean
     is_amrap?: BoolFieldUpdateOperationsInput | boolean
@@ -23599,7 +23599,7 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    reset_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     is_dropset?: BoolFieldUpdateOperationsInput | boolean
     is_amrap?: BoolFieldUpdateOperationsInput | boolean
@@ -23621,7 +23621,7 @@ export namespace Prisma {
     weight?: Decimal | DecimalJsLike | number | string | null
     duration_seconds?: number | null
     distance_meters?: number | null
-    reset_seconds?: number | null
+    rest_seconds?: number | null
     notes?: string | null
     is_dropset?: boolean
     is_amrap?: boolean
@@ -23641,7 +23641,7 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    reset_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     is_dropset?: BoolFieldUpdateOperationsInput | boolean
     is_amrap?: BoolFieldUpdateOperationsInput | boolean
@@ -23664,7 +23664,7 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    reset_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     is_dropset?: BoolFieldUpdateOperationsInput | boolean
     is_amrap?: BoolFieldUpdateOperationsInput | boolean
@@ -23686,7 +23686,7 @@ export namespace Prisma {
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    reset_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     is_dropset?: BoolFieldUpdateOperationsInput | boolean
     is_amrap?: BoolFieldUpdateOperationsInput | boolean
