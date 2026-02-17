@@ -4,14 +4,17 @@ import { GymHeader } from "./components/GymHeader";
 import { GymCategoriesMenu } from "./components/exercises/GymCategoriesMenu";
 import { WorkoutsList } from "./components/workouts/WorkoutsList";
 import { CreateWorkoutModal } from "./components/workouts/CreateWorkoutModal";
+import { GymAnalytics } from "./components/analytics";
+import { GYM_TABS, type GymTabId } from "./config/gym-tabs.config";
 
 export const GymPage = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [createWorkoutModalOpen, setCreateWorkoutModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<GymTabId>("workouts");
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
+    <div className="min-h-screen text-white relative overflow-hidden">
       <GymCategoriesMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       <CreateWorkoutModal
         isOpen={createWorkoutModalOpen}
@@ -28,10 +31,31 @@ export const GymPage = () => {
           onCreateWorkout={() => setCreateWorkoutModalOpen(true)}
         />
 
-        <section>
-          <h2 className="text-lg font-semibold text-white mb-4">Recent Workouts</h2>
-          <WorkoutsList />
-        </section>
+        <div className="flex gap-1 bg-slate-900/60 rounded-xl border border-slate-800/80 p-1">
+          {GYM_TABS.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all ${
+                activeTab === tab.id
+                  ? "bg-violet-500/20 text-violet-300 border border-violet-500/30"
+                  : "text-slate-400 hover:text-slate-200 border border-transparent"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {activeTab === "workouts" && (
+          <section>
+            <h2 className="text-lg font-semibold text-white mb-4">Recent Workouts</h2>
+            <WorkoutsList />
+          </section>
+        )}
+
+        {activeTab === "analytics" && <GymAnalytics />}
       </div>
     </div>
   );

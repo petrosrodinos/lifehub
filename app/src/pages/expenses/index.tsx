@@ -20,7 +20,7 @@ export function ExpenseAccountsPage() {
   const [activeTab, setActiveTab] = useState<TabOption>(TAB_OPTIONS.TRANSACTIONS);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
+    <div className="min-h-screen text-white relative overflow-hidden">
       <CategoriesMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.08),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.08),transparent_40%)] -z-10" />

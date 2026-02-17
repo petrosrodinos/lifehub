@@ -3,6 +3,7 @@ import toast from 'react-hot-toast'
 import type {
   CreateWorkoutEntryDto,
   UpdateWorkoutEntryDto,
+  WorkoutEntryAnalyticsParams,
 } from '../interfaces/workout-entries.interface'
 import {
   createWorkoutEntry,
@@ -10,11 +11,13 @@ import {
   getWorkoutEntry,
   getWorkoutEntries,
   updateWorkoutEntry,
+  getWorkoutEntryAnalytics,
 } from '../services/workout-entries'
 
 const QUERY_KEYS = {
   workoutEntries: ['workout-entries'],
   workoutEntry: (uuid: string) => ['workout-entries', uuid],
+  workoutEntryAnalytics: ['workout-entries', 'analytics'],
   workoutSets: ['workout-sets'],
   workouts: ['workouts'],
   exercises: ['exercises'],
@@ -24,6 +27,14 @@ export function useWorkoutEntries(params?: { exercise_uuid?: string; workout_uui
   return useQuery({
     queryKey: [...QUERY_KEYS.workoutEntries, params],
     queryFn: () => getWorkoutEntries(params),
+  })
+}
+
+export function useWorkoutEntryAnalytics(params: WorkoutEntryAnalyticsParams | null) {
+  return useQuery({
+    queryKey: [...QUERY_KEYS.workoutEntryAnalytics, params],
+    queryFn: () => getWorkoutEntryAnalytics(params!),
+    enabled: !!params?.exercise_uuid,
   })
 }
 

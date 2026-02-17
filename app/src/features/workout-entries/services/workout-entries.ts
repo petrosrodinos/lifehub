@@ -4,6 +4,8 @@ import type {
   CreateWorkoutEntryDto,
   UpdateWorkoutEntryDto,
   WorkoutEntry,
+  WorkoutEntryAnalyticsParams,
+  WorkoutEntryProgressPoint,
 } from '../interfaces/workout-entries.interface'
 
 export const getWorkoutEntries = async (params?: { exercise_uuid?: string; workout_uuid?: string }): Promise<WorkoutEntry[]> => {
@@ -50,5 +52,16 @@ export const deleteWorkoutEntry = async (uuid: string): Promise<void> => {
     await axiosInstance.delete(ApiRoutes.fitness.workoutEntries.delete(uuid))
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to delete workout entry')
+  }
+}
+
+export const getWorkoutEntryAnalytics = async (
+  params: WorkoutEntryAnalyticsParams
+): Promise<WorkoutEntryProgressPoint[]> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.fitness.workoutEntries.analytics.progress, { params })
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to fetch workout analytics')
   }
 }

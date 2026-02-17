@@ -3,6 +3,7 @@ import { PrismaService } from '@/core/databases/prisma/prisma.service'
 import { CreateWorkoutEntryDto } from './dto/create-workout-entry.dto'
 import { UpdateWorkoutEntryDto } from './dto/update-workout-entry.dto'
 import type { WorkoutEntriesQueryType } from './schemas/workout-entries-query.schema'
+import type { WorkoutEntriesAnalyticsQueryType } from './schemas/workout-entries-analytics-query.schema'
 
 @Injectable()
 export class WorkoutEntriesService {
@@ -130,6 +131,76 @@ export class WorkoutEntriesService {
 
     return this.prisma.workoutEntry.delete({
       where: { uuid },
+    })
+  }
+
+  async getAnalytics(user_uuid: string, query: WorkoutEntriesAnalyticsQueryType) {
+    const entries = await this.prisma.workoutEntry.findMany({
+      where: {
+        exercise_uuid: query.exercise_uuid,
+        workout: {
+          user_uuid,
+          ...(query.start_date || query.end_date
+            ? {
+              started_at: {
+                ...(query.start_date && { gte: new Date(query.start_date) }),
+                ...(query.end_date && { lte: new Date(query.end_date) }),
+              },
+            }
+            : {}),
+        },
+      },
+      include: {
+        workout: {
+          select: {
+            started_at: true,
+          },
+        },
+        sets: {
+          where: {
+            is_warmup: false,
+            is_cooldown: false,
+            is_rest: false,
+          },
+          orderBy: {
+            order: 'asc',
+          },
+        },
+      },
+      orderBy: {
+        workout: {
+          started_at: 'asc',
+        },
+      },
+    })
+
+    return entries.map((entry) => {
+      const weights = entry.sets
+        .map((s) => Number(s.weight) || 0)
+        .filter((w) => w > 0)
+
+      const reps = entry.sets
+        .map((s) => s.reps || 0)
+        .filter((r) => r > 0)
+
+      const totalVolume = entry.sets.reduce((sum, s) => {
+        const w = Number(s.weight) || 0
+        const r = s.reps || 0
+        return sum + w * r
+      }, 0)
+
+      const totalDuration = entry.sets.reduce((sum, s) => {
+        return sum + (s.duration_seconds || 0)
+      }, 0)
+
+      return {
+        date: entry.workout.started_at.toISOString(),
+        max_weight: weights.length > 0 ? Math.max(...weights) : null,
+        max_reps: reps.length > 0 ? Math.max(...reps) : null,
+        total_volume: totalVolume > 0 ? totalVolume : null,
+        total_sets: entry.sets.length,
+        total_duration: totalDuration > 0 ? totalDuration : null,
+      }
     })
   }
 

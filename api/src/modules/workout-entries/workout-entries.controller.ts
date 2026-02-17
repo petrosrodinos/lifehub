@@ -6,6 +6,7 @@ import { JwtGuard } from '@/shared/guards/jwt.guard'
 import { CurrentUser } from '@/shared/decorators/current-user.decorator'
 import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe'
 import { WorkoutEntriesQuerySchema, WorkoutEntriesQueryType } from './schemas/workout-entries-query.schema'
+import { WorkoutEntriesAnalyticsQuerySchema, WorkoutEntriesAnalyticsQueryType } from './schemas/workout-entries-analytics-query.schema'
 
 @Controller('workout-entries')
 @UseGuards(JwtGuard)
@@ -28,6 +29,15 @@ export class WorkoutEntriesController {
     @Query(new ZodValidationPipe(WorkoutEntriesQuerySchema)) query: WorkoutEntriesQueryType,
   ) {
     return this.workoutEntriesService.findAll(user_uuid, query)
+  }
+
+  @Get('analytics/progress')
+  @HttpCode(HttpStatus.OK)
+  getAnalytics(
+    @CurrentUser('uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(WorkoutEntriesAnalyticsQuerySchema)) query: WorkoutEntriesAnalyticsQueryType,
+  ) {
+    return this.workoutEntriesService.getAnalytics(user_uuid, query)
   }
 
   @Get(':uuid')

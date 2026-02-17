@@ -50,7 +50,7 @@ export function WorkoutDetailPage() {
 
   if (!workout) {
     return (
-      <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
+      <div className="min-h-screen text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.08),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(34,197,94,0.08),transparent_40%)] -z-10" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
           <div className="text-center py-12">
@@ -65,7 +65,7 @@ export function WorkoutDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
+    <div className="min-h-screen text-white relative overflow-hidden">
       <CreateWorkoutModal isOpen={isEditWorkoutModalOpen} onClose={() => setIsEditWorkoutModalOpen(false)} onDelete={() => navigate("/dashboard/gym")} workout={workout} mode="edit" />
 
       <AddExerciseModal isOpen={isAddExerciseModalOpen} onClose={() => setIsAddExerciseModalOpen(false)} workoutUuid={workout.uuid} />

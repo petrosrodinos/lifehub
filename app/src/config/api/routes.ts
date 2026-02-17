@@ -64,6 +64,9 @@ export const ApiRoutes = {
       get: (uuid: string) => `/workout-entries/${uuid}`,
       update: (uuid: string) => `/workout-entries/${uuid}`,
       delete: (uuid: string) => `/workout-entries/${uuid}`,
+      analytics: {
+        progress: "/workout-entries/analytics/progress",
+      },
     },
     workoutSets: {
       list: "/workout-sets",

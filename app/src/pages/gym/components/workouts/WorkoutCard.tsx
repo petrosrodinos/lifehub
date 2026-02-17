@@ -46,14 +46,14 @@ export function WorkoutCard({ workout }: WorkoutCardProps) {
             <ChevronRight className="w-5 h-5 text-slate-500 group-hover:text-violet-400 transition-colors shrink-0" />
           </div>
 
-          <div className="flex items-center gap-4 text-sm text-slate-400">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-400">
             <div className="flex items-center gap-1.5">
-              <Calendar className="w-4 h-4" />
+              <Calendar className="w-4 h-4 shrink-0" />
               <span>{formatDate(workout.started_at)}</span>
             </div>
             {duration !== null && (
               <div className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4" />
+                <Clock className="w-4 h-4 shrink-0" />
                 <span>{duration} min</span>
               </div>
             )}

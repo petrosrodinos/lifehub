@@ -26,3 +26,18 @@ export interface UpdateWorkoutEntryDto {
   exercise_uuid?: string
   order?: number
 }
+
+export interface WorkoutEntryAnalyticsParams {
+  exercise_uuid: string
+  start_date?: string
+  end_date?: string
+}
+
+export interface WorkoutEntryProgressPoint {
+  date: string
+  max_weight: number | null
+  max_reps: number | null
+  total_volume: number | null
+  total_sets: number
+  total_duration: number | null
+}

@@ -5,7 +5,7 @@ import { useWorkoutEntry } from "../../../features/workout-entries/hooks/use-wor
 import { ExerciseDetailSkeleton } from "./ExerciseDetailSkeleton";
 import { TrackTab } from "./TrackTab";
 import { HistoryTab } from "./HistoryTab";
-import { GraphTab } from "./GraphTab";
+import { GymAnalytics } from "../components/analytics";
 
 const TABS = [
   { id: "track", label: "Track" },
@@ -32,7 +32,7 @@ export function ExerciseDetailPage() {
 
   if (!entry) {
     return (
-      <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
+      <div className="min-h-screen text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.08),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(34,197,94,0.08),transparent_40%)] -z-10" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
           <div className="text-center py-12">
@@ -47,7 +47,7 @@ export function ExerciseDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
+    <div className="min-h-screen text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.08),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(34,197,94,0.08),transparent_40%)] -z-10" />
 
       <div className="relative max-w-2xl mx-auto px-4 sm:px-6 py-6 lg:py-8 space-y-6">
@@ -68,16 +68,7 @@ export function ExerciseDetailPage() {
 
         <div className="flex gap-1 bg-slate-900/60 rounded-xl border border-slate-800/80 p-1">
           {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all ${
-                activeTab === tab.id
-                  ? "bg-violet-500/20 text-violet-300 border border-violet-500/30"
-                  : "text-slate-400 hover:text-slate-200 border border-transparent"
-              }`}
-            >
+            <button key={tab.id} type="button" onClick={() => setActiveTab(tab.id)} className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all ${activeTab === tab.id ? "bg-violet-500/20 text-violet-300 border border-violet-500/30" : "text-slate-400 hover:text-slate-200 border border-transparent"}`}>
               {tab.label}
             </button>
           ))}
@@ -85,7 +76,7 @@ export function ExerciseDetailPage() {
 
         {activeTab === "track" && <TrackTab entry={entry} />}
         {activeTab === "history" && <HistoryTab exerciseUuid={entry.exercise_uuid} currentEntryUuid={entry.uuid} />}
-        {activeTab === "graph" && <GraphTab />}
+        {activeTab === "graph" && <GymAnalytics exerciseUuid={entry.exercise_uuid} />}
       </div>
     </div>
   );

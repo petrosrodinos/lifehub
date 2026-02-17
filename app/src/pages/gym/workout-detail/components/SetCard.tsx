@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Edit2, Trash2, Clock } from "lucide-react";
+import { Edit2, Trash2 } from "lucide-react";
 import { DateTime } from "luxon";
 import type { WorkoutSet } from "../../../../features/workout-sets/interfaces/workout-sets.interface";
 import { DeleteSetModal } from "./DeleteSetModal";
@@ -59,46 +59,36 @@ export function SetCard({ set, setNumber }: SetCardProps) {
 
   return (
     <>
-      <div className="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700 group hover:border-violet-500/40 transition-colors">
-        <div className="flex items-start gap-4 flex-1">
-          <div className="w-10 h-10 rounded-lg bg-violet-500/10 flex items-center justify-center shrink-0">
-            <span className="text-violet-400 font-semibold">{setNumber}</span>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 p-3 bg-slate-800/50 rounded-lg border border-slate-700 group hover:border-violet-500/40 transition-colors">
+        <div className="flex items-start gap-2.5 flex-1 min-w-0">
+          <div className="w-7 h-7 rounded-md bg-violet-500/10 flex items-center justify-center shrink-0">
+            <span className="text-violet-400 text-sm font-semibold">{setNumber}</span>
           </div>
 
-          <div className="flex-1 min-w-0">
-            <p className="text-white font-medium">{renderSetDetails()}</p>
+          <div className="flex-1 min-w-0 space-y-1">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <p className="text-white text-sm font-medium">{renderSetDetails()}</p>
+            </div>
 
-            {set.notes && <p className="text-sm text-slate-400 mt-1">{set.notes}</p>}
+            {set.created_at && <p className="text-xs text-slate-400 break-words">{formatTime(set.created_at)}</p>}
 
             {tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-2">
+              <div className="flex flex-wrap gap-1.5">
                 {tags.map((tag) => (
-                  <span key={tag} className="text-xs px-2 py-0.5 bg-violet-500/10 text-violet-300 rounded">
+                  <span key={tag} className="text-xs px-1.5 py-0.5 bg-violet-500/10 text-violet-300 rounded">
                     {tag}
                   </span>
                 ))}
               </div>
             )}
-
-            <div className="flex items-center gap-3 mt-2">
-              {set.created_at && (
-                <div className="flex items-center gap-1.5 text-xs text-slate-500">
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>{formatTime(set.created_at)}</span>
-                </div>
-              )}
-              {set.rest_seconds && (
-                <p className="text-xs text-slate-500">Rest: {set.rest_seconds}s</p>
-              )}
-            </div>
           </div>
         </div>
 
-        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button type="button" onClick={() => setIsEditModalOpen(true)} className="p-2 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-700 transition-colors">
+        <div className="flex gap-1 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity self-end sm:self-auto">
+          <button type="button" onClick={() => setIsEditModalOpen(true)} className="p-1.5 text-slate-400 hover:text-violet-400 rounded-md hover:bg-slate-700 transition-colors">
             <Edit2 className="w-4 h-4" />
           </button>
-          <button type="button" onClick={() => setIsDeleteModalOpen(true)} className="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-700 transition-colors">
+          <button type="button" onClick={() => setIsDeleteModalOpen(true)} className="p-1.5 text-slate-400 hover:text-red-400 rounded-md hover:bg-slate-700 transition-colors">
             <Trash2 className="w-4 h-4" />
           </button>
         </div>

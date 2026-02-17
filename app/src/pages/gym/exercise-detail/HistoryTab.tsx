@@ -57,21 +57,25 @@ export function HistoryTab({ exerciseUuid }: HistoryTabProps) {
             onClick={() => navigate(`/dashboard/gym/workout-entry/${entry.uuid}`)}
             className="w-full text-left bg-slate-900/60 backdrop-blur-sm rounded-xl border border-slate-800/80 p-5 hover:border-violet-500/40 transition-colors"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-slate-500" />
-                <span className="text-sm font-medium text-slate-300">{workoutDate}</span>
-                {workoutName && <span className="text-xs text-slate-500">— {workoutName}</span>}
+            <div className="flex items-start sm:items-center justify-between mb-4 gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-slate-500 shrink-0" />
+                  <span className="text-sm font-medium text-slate-300">{workoutDate}</span>
+                </div>
+                {workoutName && <span className="text-xs text-slate-500 truncate sm:before:content-['—'] sm:before:mr-2">{workoutName}</span>}
               </div>
-              <ChevronRight className="w-4 h-4 text-slate-600" />
+              <ChevronRight className="w-4 h-4 text-slate-600 shrink-0" />
             </div>
 
             <div className="space-y-2">
               {sets.map((set, idx) => (
-                <div key={set.uuid} className="flex items-center gap-3 px-3 py-2 bg-slate-800/40 rounded-lg">
-                  <span className="text-xs font-semibold text-violet-400 w-6 text-center">{idx + 1}</span>
-                  <span className="text-sm text-white">{formatSetDetails(set)}</span>
-                  {set.notes && <span className="text-xs text-slate-500 ml-auto truncate max-w-[120px]">{set.notes}</span>}
+                <div key={set.uuid} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 px-3 py-2 bg-slate-800/40 rounded-lg">
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <span className="text-xs font-semibold text-violet-400 w-6 text-center shrink-0">{idx + 1}</span>
+                    <span className="text-sm text-white">{formatSetDetails(set)}</span>
+                  </div>
+                  {set.notes && <span className="text-xs text-slate-500 truncate sm:max-w-[120px]">{set.notes}</span>}
                 </div>
               ))}
             </div>
