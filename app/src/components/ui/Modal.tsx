@@ -1,6 +1,7 @@
 import { X } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 type ModalProps = {
   isOpen: boolean
@@ -47,7 +48,7 @@ export function Modal({
     }
   }
 
-  return (
+  return createPortal(
     <>
       <div 
         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998]" 
@@ -94,6 +95,7 @@ export function Modal({
           }
         }
       `}</style>
-    </>
+    </>,
+    document.body,
   )
 }

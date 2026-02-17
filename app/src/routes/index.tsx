@@ -46,7 +46,7 @@ export default function AppRoutes() {
         <Route path="settings/security" element={<SettingsPage />} />
         <Route path="gym" element={<GymPage />} />
         <Route path="gym/workout/:uuid" element={<WorkoutDetailPage />} />
-        <Route path="gym/workout/:workoutUuid/exercise/:exerciseUuid" element={<ExerciseDetailPage />} />
+        <Route path="gym/workout-entry/:entryUuid" element={<ExerciseDetailPage />} />
       </Route>
 
       <Route path="/" element={<Navigate to="/auth/sign-in" replace />} />

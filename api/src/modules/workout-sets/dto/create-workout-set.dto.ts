@@ -5,18 +5,11 @@ import { IsBoolean, IsEnum, IsInt, IsNumber, IsOptional, IsString, Min } from 'c
 
 export class CreateWorkoutSetDto {
   @ApiProperty({
-    description: 'Workout UUID',
+    description: 'Workout Entry UUID',
     example: '123e4567-e89b-12d3-a456-426614174000',
   })
   @IsString()
-  workout_uuid: string
-
-  @ApiProperty({
-    description: 'Exercise UUID',
-    example: '123e4567-e89b-12d3-a456-426614174001',
-  })
-  @IsString()
-  exercise_uuid: string
+  workout_entry_uuid: string
 
   @ApiProperty({
     description: 'Set type',
@@ -54,7 +47,7 @@ export class CreateWorkoutSetDto {
   @IsOptional()
   @IsInt()
   @Type(() => Number)
-  reset_seconds?: number
+  rest_seconds?: number
 
   @ApiProperty({ required: false, example: 'Drop weight on last two reps' })
   @IsOptional()

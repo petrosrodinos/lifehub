@@ -1,71 +1,41 @@
-import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Minus, Plus, Loader2, Dumbbell } from "lucide-react";
-import { useWorkout } from "../../../features/workout/hooks/use-workout";
+import { ArrowLeft, Loader2, Dumbbell } from "lucide-react";
+import { useWorkoutEntry } from "../../../features/workout-entries/hooks/use-workout-entries";
 import { useCreateWorkoutSet } from "../../../features/workout-sets/hooks/use-workout-sets";
 import { ExerciseTypes } from "../../../features/exercises/interfaces/exercises.interface";
-import type { WorkoutSet, CreateWorkoutSetDto } from "../../../features/workout-sets/interfaces/workout-sets.interface";
+import type { CreateWorkoutSetDto } from "../../../features/workout-sets/interfaces/workout-sets.interface";
 import { SetCard } from "../workout-detail/components/SetCard";
-
-const REPS_STEP = 1;
-const REPS_MIN = 0;
-const REPS_MAX = 999;
-const WEIGHT_STEP = 2.5;
-const WEIGHT_MIN = 0;
-const WEIGHT_MAX = 999;
-const DURATION_STEP = 5;
-const DURATION_MIN = 0;
-const DURATION_MAX = 3600;
-const DISTANCE_STEP = 10;
-const DISTANCE_MIN = 0;
-const DISTANCE_MAX = 99999;
-
-function clamp(value: number, min: number, max: number): number {
-  return Math.min(Math.max(value, min), max);
-}
+import { SetForm } from "../workout-detail/components/SetForm";
+import type { SetFormValues } from "../workout-detail/components/SetForm";
 
 export function ExerciseDetailPage() {
-  const { workoutUuid, exerciseUuid } = useParams<{ workoutUuid: string; exerciseUuid: string }>();
+  const { entryUuid } = useParams<{ entryUuid: string }>();
   const navigate = useNavigate();
-  const { data: workout, isLoading } = useWorkout(workoutUuid || "");
+  const { data: entry, isLoading } = useWorkoutEntry(entryUuid || "");
   const createSet = useCreateWorkoutSet();
 
-  const [reps, setReps] = useState(10);
-  const [weight, setWeight] = useState(20);
-  const [durationSeconds, setDurationSeconds] = useState(60);
-  const [distanceMeters, setDistanceMeters] = useState(100);
-
-  const exerciseSets: WorkoutSet[] = workout?.sets?.filter((s) => s.exercise_uuid === exerciseUuid) || [];
-  const exercise = exerciseSets.length > 0 ? exerciseSets[0].exercise : undefined;
+  const exercise = entry?.exercise;
+  const exerciseSets = entry?.sets || [];
   const exerciseType = exercise?.type || ExerciseTypes.REPS;
+  const workoutUuid = entry?.workout_uuid;
 
-  const handleDecrementReps = () => setReps((prev) => clamp(prev - REPS_STEP, REPS_MIN, REPS_MAX));
-  const handleIncrementReps = () => setReps((prev) => clamp(prev + REPS_STEP, REPS_MIN, REPS_MAX));
-  const handleDecrementWeight = () => setWeight((prev) => clamp(prev - WEIGHT_STEP, WEIGHT_MIN, WEIGHT_MAX));
-  const handleIncrementWeight = () => setWeight((prev) => clamp(prev + WEIGHT_STEP, WEIGHT_MIN, WEIGHT_MAX));
-  const handleDecrementDuration = () => setDurationSeconds((prev) => clamp(prev - DURATION_STEP, DURATION_MIN, DURATION_MAX));
-  const handleIncrementDuration = () => setDurationSeconds((prev) => clamp(prev + DURATION_STEP, DURATION_MIN, DURATION_MAX));
-  const handleDecrementDistance = () => setDistanceMeters((prev) => clamp(prev - DISTANCE_STEP, DISTANCE_MIN, DISTANCE_MAX));
-  const handleIncrementDistance = () => setDistanceMeters((prev) => clamp(prev + DISTANCE_STEP, DISTANCE_MIN, DISTANCE_MAX));
-
-  const handleSave = () => {
-    if (!workoutUuid || !exerciseUuid) return;
+  const handleSave = (values: SetFormValues) => {
+    if (!entryUuid) return;
 
     const data: CreateWorkoutSetDto = {
-      workout_uuid: workoutUuid,
-      exercise_uuid: exerciseUuid,
+      workout_entry_uuid: entryUuid,
       type: exerciseType,
       order: exerciseSets.length + 1,
     };
 
     if (exerciseType === ExerciseTypes.REPS) {
-      data.reps = reps;
-      if (weight > 0) data.weight = weight;
+      data.reps = values.reps;
+      if (values.weight > 0) data.weight = values.weight;
     }
 
     if (exerciseType === ExerciseTypes.TIME) {
-      if (durationSeconds > 0) data.duration_seconds = durationSeconds;
-      if (distanceMeters > 0) data.distance_meters = distanceMeters;
+      if (values.durationSeconds > 0) data.duration_seconds = values.durationSeconds;
+      if (values.distanceMeters > 0) data.distance_meters = values.distanceMeters;
     }
 
     createSet.mutate(data);
@@ -81,15 +51,15 @@ export function ExerciseDetailPage() {
     );
   }
 
-  if (!workout) {
+  if (!entry) {
     return (
       <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.08),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(34,197,94,0.08),transparent_40%)] -z-10" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
           <div className="text-center py-12">
-            <p className="text-slate-400">Workout not found</p>
-            <button type="button" onClick={handleBack} className="mt-4 text-violet-400 hover:text-violet-300">
-              Back to Workout
+            <p className="text-slate-400">Workout entry not found</p>
+            <button type="button" onClick={() => navigate("/dashboard/gym")} className="mt-4 text-violet-400 hover:text-violet-300">
+              Back to Gym
             </button>
           </div>
         </div>
@@ -123,78 +93,11 @@ export function ExerciseDetailPage() {
             <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-300">Add Set</h2>
           </div>
 
-          {exerciseType === ExerciseTypes.REPS && (
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <p className="text-xs font-medium text-slate-500 uppercase tracking-wider text-center">Reps</p>
-                <div className="flex items-center gap-3">
-                  <button type="button" onClick={handleDecrementReps} disabled={reps <= REPS_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
-                    <Minus className="w-4 h-4 text-slate-300" />
-                  </button>
-                  <div className="flex-1 text-center">
-                    <span className="text-3xl font-bold text-white tabular-nums">{reps}</span>
-                  </div>
-                  <button type="button" onClick={handleIncrementReps} disabled={reps >= REPS_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
-                    <Plus className="w-4 h-4 text-slate-300" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <p className="text-xs font-medium text-slate-500 uppercase tracking-wider text-center">Weight (kg)</p>
-                <div className="flex items-center gap-3">
-                  <button type="button" onClick={handleDecrementWeight} disabled={weight <= WEIGHT_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
-                    <Minus className="w-4 h-4 text-slate-300" />
-                  </button>
-                  <div className="flex-1 text-center">
-                    <span className="text-3xl font-bold text-white tabular-nums">{weight}</span>
-                  </div>
-                  <button type="button" onClick={handleIncrementWeight} disabled={weight >= WEIGHT_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
-                    <Plus className="w-4 h-4 text-slate-300" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {exerciseType === ExerciseTypes.TIME && (
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <p className="text-xs font-medium text-slate-500 uppercase tracking-wider text-center">Duration (seconds)</p>
-                <div className="flex items-center gap-3">
-                  <button type="button" onClick={handleDecrementDuration} disabled={durationSeconds <= DURATION_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
-                    <Minus className="w-4 h-4 text-slate-300" />
-                  </button>
-                  <div className="flex-1 text-center">
-                    <span className="text-3xl font-bold text-white tabular-nums">{durationSeconds}</span>
-                  </div>
-                  <button type="button" onClick={handleIncrementDuration} disabled={durationSeconds >= DURATION_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
-                    <Plus className="w-4 h-4 text-slate-300" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <p className="text-xs font-medium text-slate-500 uppercase tracking-wider text-center">Distance (meters)</p>
-                <div className="flex items-center gap-3">
-                  <button type="button" onClick={handleDecrementDistance} disabled={distanceMeters <= DISTANCE_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
-                    <Minus className="w-4 h-4 text-slate-300" />
-                  </button>
-                  <div className="flex-1 text-center">
-                    <span className="text-3xl font-bold text-white tabular-nums">{distanceMeters}</span>
-                  </div>
-                  <button type="button" onClick={handleIncrementDistance} disabled={distanceMeters >= DISTANCE_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
-                    <Plus className="w-4 h-4 text-slate-300" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <button type="button" onClick={handleSave} disabled={createSet.isPending} className="w-full py-3 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
-            {createSet.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" strokeWidth={2.5} />}
-            {createSet.isPending ? "Saving..." : "Save"}
-          </button>
+          <SetForm
+            exerciseType={exerciseType}
+            onSave={handleSave}
+            isPending={createSet.isPending}
+          />
         </div>
 
         <div className="space-y-3">

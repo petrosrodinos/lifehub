@@ -1,5 +1,6 @@
 import { X, AlertTriangle, Loader2 } from 'lucide-react'
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 export interface ConfirmationModalProps {
   isOpen: boolean
@@ -68,7 +69,7 @@ export function ConfirmationModal({
     }
   }
 
-  return (
+  return createPortal(
     <>
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[10000]"
@@ -129,6 +130,7 @@ export function ConfirmationModal({
           </div>
         </div>
       </div>
-    </>
+    </>,
+    document.body,
   )
 }

@@ -1,11 +1,10 @@
-import type { Exercise, ExerciseType } from '../../exercises/interfaces/exercises.interface'
-import type { Workout } from '../../workout/interfaces/workout.interface'
+import type { ExerciseType } from '../../exercises/interfaces/exercises.interface'
+import type { WorkoutEntry } from '../../workout-entries/interfaces/workout-entries.interface'
 
 export interface WorkoutSet {
   id?: number
   uuid: string
-  workout_uuid: string
-  exercise_uuid: string
+  workout_entry_uuid: string
   type: ExerciseType
   reps?: number | null
   weight?: number | null
@@ -20,15 +19,13 @@ export interface WorkoutSet {
   is_cooldown?: boolean
   is_super_set?: boolean
   order: number
-  workout?: Workout
-  exercise?: Exercise
+  workout_entry?: WorkoutEntry
   created_at?: string
   updated_at?: string
 }
 
 export interface CreateWorkoutSetDto {
-  workout_uuid: string
-  exercise_uuid: string
+  workout_entry_uuid: string
   type: ExerciseType
   reps?: number
   weight?: number
@@ -46,8 +43,7 @@ export interface CreateWorkoutSetDto {
 }
 
 export interface UpdateWorkoutSetDto {
-  workout_uuid?: string
-  exercise_uuid?: string
+  workout_entry_uuid?: string
   type?: ExerciseType
   reps?: number
   weight?: number

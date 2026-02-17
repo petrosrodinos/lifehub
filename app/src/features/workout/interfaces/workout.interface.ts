@@ -1,4 +1,4 @@
-import type { WorkoutSet } from '../../workout-sets/interfaces/workout-sets.interface'
+import type { WorkoutEntry } from '../../workout-entries/interfaces/workout-entries.interface'
 
 export interface Workout {
   id?: number
@@ -8,7 +8,7 @@ export interface Workout {
   notes?: string | null
   started_at?: string
   finished_at?: string
-  sets?: WorkoutSet[]
+  entries?: WorkoutEntry[]
   created_at?: string
   updated_at?: string
 }

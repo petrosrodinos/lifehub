@@ -15,6 +15,7 @@ import {
 const QUERY_KEYS = {
   workoutSets: ['workout-sets'],
   workoutSet: (uuid: string) => ['workout-sets', uuid],
+  workoutEntries: ['workout-entries'],
   workouts: ['workouts'],
   exercises: ['exercises'],
 }
@@ -41,6 +42,7 @@ export function useCreateWorkoutSet() {
     mutationFn: (data: CreateWorkoutSetDto) => createWorkoutSet(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutSets })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutEntries })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workouts })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.exercises })
       toast.success('Workout set created successfully', { duration: 2000 })
@@ -60,6 +62,7 @@ export function useUpdateWorkoutSet() {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutSets })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutSet(variables.uuid) })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutEntries })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workouts })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.exercises })
       toast.success('Workout set updated successfully', { duration: 2000 })
@@ -77,6 +80,7 @@ export function useDeleteWorkoutSet() {
     mutationFn: (uuid: string) => deleteWorkoutSet(uuid),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutSets })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutEntries })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workouts })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.exercises })
       toast.success('Workout set deleted successfully', { duration: 2000 })

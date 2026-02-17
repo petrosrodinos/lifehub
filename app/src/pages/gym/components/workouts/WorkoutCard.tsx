@@ -28,7 +28,7 @@ export function WorkoutCard({ workout }: WorkoutCardProps) {
   };
 
   const duration = calculateDuration();
-  const setsCount = workout.sets?.length || 0;
+  const setsCount = workout.entries?.reduce((sum, entry) => sum + (entry.sets?.length || 0), 0) || 0;
 
   const handleCardClick = () => {
     navigate(`/dashboard/gym/workout/${workout.uuid}`);

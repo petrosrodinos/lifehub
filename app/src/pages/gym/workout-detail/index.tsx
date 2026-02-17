@@ -4,7 +4,7 @@ import { ArrowLeft, Plus, Edit2, Calendar, Clock, Dumbbell, ChevronRight, Check 
 import { useWorkout, useUpdateWorkout } from "../../../features/workout/hooks/use-workout";
 import { CreateWorkoutModal } from "../components/workouts/CreateWorkoutModal";
 import { SetCard } from "./components/SetCard";
-import { AddSetModal } from "./components/AddSetModal";
+import { AddExerciseModal } from "./components/AddExerciseModal";
 import { WorkoutDetailLoading } from "./components/WorkoutDetailLoading";
 import { DateTime } from "luxon";
 
@@ -15,7 +15,7 @@ export function WorkoutDetailPage() {
   const updateWorkout = useUpdateWorkout();
 
   const [isEditWorkoutModalOpen, setIsEditWorkoutModalOpen] = useState(false);
-  const [isAddSetModalOpen, setIsAddSetModalOpen] = useState(false);
+  const [isAddExerciseModalOpen, setIsAddExerciseModalOpen] = useState(false);
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return "N/A";
@@ -31,28 +31,8 @@ export function WorkoutDetailPage() {
 
   const duration = calculateDuration();
 
-  const groupSetsByExercise = () => {
-    if (!workout?.sets) return [];
-
-    const grouped = workout.sets.reduce((acc: any, set) => {
-      const exerciseUuid = set.exercise_uuid;
-
-      if (!acc[exerciseUuid]) {
-        acc[exerciseUuid] = {
-          exercise: set.exercise,
-          sets: [],
-        };
-      }
-
-      acc[exerciseUuid].sets.push(set);
-
-      return acc;
-    }, {});
-
-    return Object.values(grouped);
-  };
-
-  const exerciseGroups = groupSetsByExercise();
+  const entries = workout?.entries || [];
+  const totalSets = entries.reduce((sum, entry) => sum + (entry.sets?.length || 0), 0);
 
   const handleFinishWorkout = () => {
     if (!uuid) return;
@@ -88,7 +68,7 @@ export function WorkoutDetailPage() {
     <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
       <CreateWorkoutModal isOpen={isEditWorkoutModalOpen} onClose={() => setIsEditWorkoutModalOpen(false)} onDelete={() => navigate("/dashboard/gym")} workout={workout} mode="edit" />
 
-      <AddSetModal isOpen={isAddSetModalOpen} onClose={() => setIsAddSetModalOpen(false)} workoutUuid={workout.uuid} />
+      <AddExerciseModal isOpen={isAddExerciseModalOpen} onClose={() => setIsAddExerciseModalOpen(false)} workoutUuid={workout.uuid} />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.08),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(34,197,94,0.08),transparent_40%)] -z-10" />
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMwIDYuNjI3LTUuMzczIDEyLTEyIDEycy0xMi01LjM3My0xMi0xMiA1LjM3My0xMiAxMi0xMiAxMiA1LjM3MyAxMiAxMnoiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvZz48L3N2Zz4=')] opacity-20 -z-10" />
@@ -108,9 +88,9 @@ export function WorkoutDetailPage() {
               <Check className="w-4 h-4" strokeWidth={2} />
               <span className="hidden sm:inline">Finish</span>
             </button>
-            <button type="button" onClick={() => setIsAddSetModalOpen(true)} className="flex items-center gap-2 px-3 py-1.5 bg-violet-500 hover:bg-violet-600 text-white text-sm font-medium rounded-lg transition-colors">
+            <button type="button" onClick={() => setIsAddExerciseModalOpen(true)} className="flex items-center gap-2 px-3 py-1.5 bg-violet-500 hover:bg-violet-600 text-white text-sm font-medium rounded-lg transition-colors">
               <Plus className="w-4 h-4" strokeWidth={2} />
-              <span className="hidden sm:inline">Add Set</span>
+              <span className="hidden sm:inline">Add Exercise</span>
             </button>
           </div>
         </div>
@@ -147,39 +127,39 @@ export function WorkoutDetailPage() {
               </div>
               <div>
                 <p className="text-xs text-slate-500">Total Sets</p>
-                <p className="text-sm font-medium text-white">{workout.sets?.length || 0}</p>
+                <p className="text-sm font-medium text-white">{totalSets}</p>
               </div>
             </div>
           </div>
         </div>
 
         <div className="space-y-6">
-          {exerciseGroups.length === 0 ? (
+          {entries.length === 0 ? (
             <div className="text-center py-12 px-4 border border-dashed border-slate-700 rounded-xl">
-              <p className="text-slate-300 font-medium">No sets recorded yet</p>
-              <p className="text-sm text-slate-500 mt-1">Start adding sets to track your workout progress.</p>
-              <button type="button" onClick={() => setIsAddSetModalOpen(true)} className="mt-4 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors">
-                Add First Set
+              <p className="text-slate-300 font-medium">No exercises added yet</p>
+              <p className="text-sm text-slate-500 mt-1">Start adding exercises to track your workout progress.</p>
+              <button type="button" onClick={() => setIsAddExerciseModalOpen(true)} className="mt-4 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors">
+                Add First Exercise
               </button>
             </div>
           ) : (
-            exerciseGroups.map((group: any) => (
-              <div key={group.exercise?.uuid} className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/80 p-6">
-                <button type="button" onClick={() => navigate(`/dashboard/gym/workout/${uuid}/exercise/${group.exercise?.uuid}`)} className="flex items-center justify-between mb-4 w-full text-left group/header">
+            entries.map((entry) => (
+              <div key={entry.uuid} className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/80 p-6">
+                <button type="button" onClick={() => navigate(`/dashboard/gym/workout-entry/${entry.uuid}`)} className="flex items-center justify-between mb-4 w-full text-left group/header">
                   <div>
-                    <h2 className="text-lg font-semibold text-white group-hover/header:text-violet-300 transition-colors">{group.exercise?.name || "Unknown Exercise"}</h2>
-                    {group.exercise?.description && <p className="text-sm text-slate-400 mt-1">{group.exercise.description}</p>}
+                    <h2 className="text-lg font-semibold text-white group-hover/header:text-violet-300 transition-colors">{entry.exercise?.name || "Unknown Exercise"}</h2>
+                    {entry.exercise?.description && <p className="text-sm text-slate-400 mt-1">{entry.exercise.description}</p>}
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-slate-500 bg-slate-800 px-3 py-1 rounded-lg">
-                      {group.sets.length} {group.sets.length === 1 ? "set" : "sets"}
+                      {entry.sets?.length || 0} {(entry.sets?.length || 0) === 1 ? "set" : "sets"}
                     </span>
                     <ChevronRight className="w-5 h-5 text-slate-600 group-hover/header:text-violet-400 transition-colors" />
                   </div>
                 </button>
 
                 <div className="space-y-3">
-                  {group.sets.map((set: any, index: number) => (
+                  {entry.sets?.map((set, index) => (
                     <SetCard key={set.uuid} set={set} setNumber={index + 1} />
                   ))}
                 </div>

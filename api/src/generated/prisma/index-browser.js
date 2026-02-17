@@ -238,11 +238,20 @@ exports.Prisma.WorkoutScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
-exports.Prisma.WorkoutSetScalarFieldEnum = {
+exports.Prisma.WorkoutEntryScalarFieldEnum = {
   id: 'id',
   uuid: 'uuid',
   workout_uuid: 'workout_uuid',
   exercise_uuid: 'exercise_uuid',
+  order: 'order',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.WorkoutSetScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  workout_entry_uuid: 'workout_entry_uuid',
   type: 'type',
   reps: 'reps',
   weight: 'weight',
@@ -314,6 +323,7 @@ exports.Prisma.ModelName = {
   MuscleGroup: 'MuscleGroup',
   Exercise: 'Exercise',
   Workout: 'Workout',
+  WorkoutEntry: 'WorkoutEntry',
   WorkoutSet: 'WorkoutSet'
 };
 

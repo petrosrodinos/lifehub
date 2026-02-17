@@ -220,9 +220,9 @@ model Exercise {
   created_at        DateTime     @default(now())
   updated_at        DateTime     @updatedAt
 
-  user         User?        @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  muscle_group MuscleGroup  @relation(fields: [muscle_group_uuid], references: [uuid], onDelete: Cascade)
-  sets         WorkoutSet[]
+  user         User?          @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  muscle_group MuscleGroup    @relation(fields: [muscle_group_uuid], references: [uuid], onDelete: Cascade)
+  entries      WorkoutEntry[]
 
   @@index([user_uuid])
   @@index([muscle_group_uuid])
@@ -240,38 +240,56 @@ model Workout {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 
-  user User?        @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  sets WorkoutSet[]
+  user    User?          @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  entries WorkoutEntry[]
 
   @@index([user_uuid])
   @@index([started_at])
   @@map("workouts")
 }
 
+model WorkoutEntry {
+  id            Int      @id @default(autoincrement())
+  uuid          String   @unique @default(uuid())
+  workout_uuid  String
+  exercise_uuid String
+  order         Int      @default(0)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  workout  Workout      @relation(fields: [workout_uuid], references: [uuid], onDelete: Cascade)
+  exercise Exercise     @relation(fields: [exercise_uuid], references: [uuid], onDelete: Cascade)
+  sets     WorkoutSet[]
+
+  @@index([workout_uuid])
+  @@index([exercise_uuid])
+  @@map("workout_entries")
+}
+
 model WorkoutSet {
-  id               Int          @id @default(autoincrement())
-  uuid             String       @unique @default(uuid())
-  workout_uuid     String
-  exercise_uuid    String
-  type             ExerciseType
-  reps             Int?
-  weight           Decimal?
-  duration_seconds Int?
-  distance_meters  Int?
-  rest_seconds     Int?
-  notes            String?
-  is_dropset       Boolean      @default(false)
-  is_amrap         Boolean      @default(false)
-  is_rest          Boolean      @default(false)
-  is_warmup        Boolean      @default(false)
-  is_cooldown      Boolean      @default(false)
-  is_super_set     Boolean      @default(false)
-  order            Int
-  created_at       DateTime     @default(now())
-  updated_at       DateTime     @updatedAt
+  id                 Int          @id @default(autoincrement())
+  uuid               String       @unique @default(uuid())
+  workout_entry_uuid String
+  type               ExerciseType
+  reps               Int?
+  weight             Decimal?
+  duration_seconds   Int?
+  distance_meters    Int?
+  rest_seconds       Int?
+  notes              String?
+  is_dropset         Boolean      @default(false)
+  is_amrap           Boolean      @default(false)
+  is_rest            Boolean      @default(false)
+  is_warmup          Boolean      @default(false)
+  is_cooldown        Boolean      @default(false)
+  is_super_set       Boolean      @default(false)
+  order              Int          @default(0)
+  created_at         DateTime     @default(now())
+  updated_at         DateTime     @updatedAt
 
-  workout  Workout  @relation(fields: [workout_uuid], references: [uuid], onDelete: Cascade)
-  exercise Exercise @relation(fields: [exercise_uuid], references: [uuid], onDelete: Cascade)
+  workout_entry WorkoutEntry @relation(fields: [workout_entry_uuid], references: [uuid], onDelete: Cascade)
 
+  @@index([workout_entry_uuid])
+  @@index([order])
   @@map("workout_sets")
 }

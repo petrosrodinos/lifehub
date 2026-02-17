@@ -25,17 +25,12 @@ export class WorkoutsService {
         user_uuid,
       },
       include: {
-        sets: {
+        entries: {
           include: {
             exercise: true,
-          },
-          orderBy: {
-            order: 'asc',
+            sets: true,
           },
         },
-      },
-      orderBy: {
-        started_at: 'desc',
       },
     })
   }
@@ -47,12 +42,10 @@ export class WorkoutsService {
         user_uuid,
       },
       include: {
-        sets: {
+        entries: {
           include: {
             exercise: true,
-          },
-          orderBy: {
-            order: 'asc',
+            sets: true,
           },
         },
       },

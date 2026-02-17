@@ -51,7 +51,6 @@ export class ExercisesService {
       },
       include: {
         muscle_group: true,
-        sets: true,
       },
     })
 

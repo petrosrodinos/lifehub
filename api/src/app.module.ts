@@ -17,6 +17,7 @@ import { ExercisesModule } from './modules/exercises/exercises.module';
 import { MuscleGroupsModule } from './modules/muscle-groups/muscle-groups.module';
 import { WorkoutsModule } from './modules/workouts/workouts.module';
 import { WorkoutSetsModule } from './modules/workout-sets/workout-sets.module';
+import { WorkoutEntriesModule } from './modules/workout-entries/workout-entries.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { WorkoutSetsModule } from './modules/workout-sets/workout-sets.module';
     MuscleGroupsModule,
     WorkoutsModule,
     WorkoutSetsModule,
+    WorkoutEntriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

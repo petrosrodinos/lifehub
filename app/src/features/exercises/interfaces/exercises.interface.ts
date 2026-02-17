@@ -1,5 +1,5 @@
 import type { MuscleGroup } from '../../muscle-groups/interfaces/muscle-groups.interface'
-import type { WorkoutSet } from '../../workout-sets/interfaces/workout-sets.interface'
+import type { WorkoutEntry } from '../../workout-entries/interfaces/workout-entries.interface'
 
 export interface Exercise {
   id?: number
@@ -10,7 +10,7 @@ export interface Exercise {
   description?: string | null
   type: ExerciseType
   muscle_group?: MuscleGroup
-  sets?: WorkoutSet[]
+  entries?: WorkoutEntry[]
   created_at?: string
   updated_at?: string
 }

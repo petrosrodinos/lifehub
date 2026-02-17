@@ -64,6 +64,11 @@ export type Exercise = $Result.DefaultSelection<Prisma.$ExercisePayload>
  */
 export type Workout = $Result.DefaultSelection<Prisma.$WorkoutPayload>
 /**
+ * Model WorkoutEntry
+ * 
+ */
+export type WorkoutEntry = $Result.DefaultSelection<Prisma.$WorkoutEntryPayload>
+/**
  * Model WorkoutSet
  * 
  */
@@ -346,6 +351,16 @@ export class PrismaClient<
     * ```
     */
   get workout(): Prisma.WorkoutDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.workoutEntry`: Exposes CRUD operations for the **WorkoutEntry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WorkoutEntries
+    * const workoutEntries = await prisma.workoutEntry.findMany()
+    * ```
+    */
+  get workoutEntry(): Prisma.WorkoutEntryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.workoutSet`: Exposes CRUD operations for the **WorkoutSet** model.
@@ -800,6 +815,7 @@ export namespace Prisma {
     MuscleGroup: 'MuscleGroup',
     Exercise: 'Exercise',
     Workout: 'Workout',
+    WorkoutEntry: 'WorkoutEntry',
     WorkoutSet: 'WorkoutSet'
   };
 
@@ -816,7 +832,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "activity" | "scheduleSlot" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "muscleGroup" | "exercise" | "workout" | "workoutSet"
+      modelProps: "user" | "activity" | "scheduleSlot" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1560,6 +1576,80 @@ export namespace Prisma {
           }
         }
       }
+      WorkoutEntry: {
+        payload: Prisma.$WorkoutEntryPayload<ExtArgs>
+        fields: Prisma.WorkoutEntryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WorkoutEntryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WorkoutEntryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload>
+          }
+          findFirst: {
+            args: Prisma.WorkoutEntryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WorkoutEntryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload>
+          }
+          findMany: {
+            args: Prisma.WorkoutEntryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload>[]
+          }
+          create: {
+            args: Prisma.WorkoutEntryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload>
+          }
+          createMany: {
+            args: Prisma.WorkoutEntryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WorkoutEntryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload>[]
+          }
+          delete: {
+            args: Prisma.WorkoutEntryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload>
+          }
+          update: {
+            args: Prisma.WorkoutEntryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload>
+          }
+          deleteMany: {
+            args: Prisma.WorkoutEntryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WorkoutEntryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WorkoutEntryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload>[]
+          }
+          upsert: {
+            args: Prisma.WorkoutEntryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkoutEntryPayload>
+          }
+          aggregate: {
+            args: Prisma.WorkoutEntryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWorkoutEntry>
+          }
+          groupBy: {
+            args: Prisma.WorkoutEntryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WorkoutEntryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WorkoutEntryCountArgs<ExtArgs>
+            result: $Utils.Optional<WorkoutEntryCountAggregateOutputType> | number
+          }
+        }
+      }
       WorkoutSet: {
         payload: Prisma.$WorkoutSetPayload<ExtArgs>
         fields: Prisma.WorkoutSetFieldRefs
@@ -1752,6 +1842,7 @@ export namespace Prisma {
     muscleGroup?: MuscleGroupOmit
     exercise?: ExerciseOmit
     workout?: WorkoutOmit
+    workoutEntry?: WorkoutEntryOmit
     workoutSet?: WorkoutSetOmit
   }
 
@@ -2109,11 +2200,11 @@ export namespace Prisma {
    */
 
   export type ExerciseCountOutputType = {
-    sets: number
+    entries: number
   }
 
   export type ExerciseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sets?: boolean | ExerciseCountOutputTypeCountSetsArgs
+    entries?: boolean | ExerciseCountOutputTypeCountEntriesArgs
   }
 
   // Custom InputTypes
@@ -2130,8 +2221,8 @@ export namespace Prisma {
   /**
    * ExerciseCountOutputType without action
    */
-  export type ExerciseCountOutputTypeCountSetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: WorkoutSetWhereInput
+  export type ExerciseCountOutputTypeCountEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WorkoutEntryWhereInput
   }
 
 
@@ -2140,11 +2231,11 @@ export namespace Prisma {
    */
 
   export type WorkoutCountOutputType = {
-    sets: number
+    entries: number
   }
 
   export type WorkoutCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sets?: boolean | WorkoutCountOutputTypeCountSetsArgs
+    entries?: boolean | WorkoutCountOutputTypeCountEntriesArgs
   }
 
   // Custom InputTypes
@@ -2161,7 +2252,38 @@ export namespace Prisma {
   /**
    * WorkoutCountOutputType without action
    */
-  export type WorkoutCountOutputTypeCountSetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type WorkoutCountOutputTypeCountEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WorkoutEntryWhereInput
+  }
+
+
+  /**
+   * Count Type WorkoutEntryCountOutputType
+   */
+
+  export type WorkoutEntryCountOutputType = {
+    sets: number
+  }
+
+  export type WorkoutEntryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sets?: boolean | WorkoutEntryCountOutputTypeCountSetsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * WorkoutEntryCountOutputType without action
+   */
+  export type WorkoutEntryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntryCountOutputType
+     */
+    select?: WorkoutEntryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WorkoutEntryCountOutputType without action
+   */
+  export type WorkoutEntryCountOutputTypeCountSetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WorkoutSetWhereInput
   }
 
@@ -12102,7 +12224,7 @@ export namespace Prisma {
     updated_at?: boolean
     user?: boolean | Exercise$userArgs<ExtArgs>
     muscle_group?: boolean | MuscleGroupDefaultArgs<ExtArgs>
-    sets?: boolean | Exercise$setsArgs<ExtArgs>
+    entries?: boolean | Exercise$entriesArgs<ExtArgs>
     _count?: boolean | ExerciseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["exercise"]>
 
@@ -12150,7 +12272,7 @@ export namespace Prisma {
   export type ExerciseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Exercise$userArgs<ExtArgs>
     muscle_group?: boolean | MuscleGroupDefaultArgs<ExtArgs>
-    sets?: boolean | Exercise$setsArgs<ExtArgs>
+    entries?: boolean | Exercise$entriesArgs<ExtArgs>
     _count?: boolean | ExerciseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExerciseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12167,7 +12289,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null
       muscle_group: Prisma.$MuscleGroupPayload<ExtArgs>
-      sets: Prisma.$WorkoutSetPayload<ExtArgs>[]
+      entries: Prisma.$WorkoutEntryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -12575,7 +12697,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends Exercise$userArgs<ExtArgs> = {}>(args?: Subset<T, Exercise$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     muscle_group<T extends MuscleGroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MuscleGroupDefaultArgs<ExtArgs>>): Prisma__MuscleGroupClient<$Result.GetResult<Prisma.$MuscleGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    sets<T extends Exercise$setsArgs<ExtArgs> = {}>(args?: Subset<T, Exercise$setsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutSetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    entries<T extends Exercise$entriesArgs<ExtArgs> = {}>(args?: Subset<T, Exercise$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13029,27 +13151,27 @@ export namespace Prisma {
   }
 
   /**
-   * Exercise.sets
+   * Exercise.entries
    */
-  export type Exercise$setsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Exercise$entriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the WorkoutSet
+     * Select specific fields to fetch from the WorkoutEntry
      */
-    select?: WorkoutSetSelect<ExtArgs> | null
+    select?: WorkoutEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the WorkoutSet
+     * Omit specific fields from the WorkoutEntry
      */
-    omit?: WorkoutSetOmit<ExtArgs> | null
+    omit?: WorkoutEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: WorkoutSetInclude<ExtArgs> | null
-    where?: WorkoutSetWhereInput
-    orderBy?: WorkoutSetOrderByWithRelationInput | WorkoutSetOrderByWithRelationInput[]
-    cursor?: WorkoutSetWhereUniqueInput
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    where?: WorkoutEntryWhereInput
+    orderBy?: WorkoutEntryOrderByWithRelationInput | WorkoutEntryOrderByWithRelationInput[]
+    cursor?: WorkoutEntryWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: WorkoutSetScalarFieldEnum | WorkoutSetScalarFieldEnum[]
+    distinct?: WorkoutEntryScalarFieldEnum | WorkoutEntryScalarFieldEnum[]
   }
 
   /**
@@ -13302,7 +13424,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | Workout$userArgs<ExtArgs>
-    sets?: boolean | Workout$setsArgs<ExtArgs>
+    entries?: boolean | Workout$entriesArgs<ExtArgs>
     _count?: boolean | WorkoutCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workout"]>
 
@@ -13347,7 +13469,7 @@ export namespace Prisma {
   export type WorkoutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "notes" | "started_at" | "finished_at" | "created_at" | "updated_at", ExtArgs["result"]["workout"]>
   export type WorkoutInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Workout$userArgs<ExtArgs>
-    sets?: boolean | Workout$setsArgs<ExtArgs>
+    entries?: boolean | Workout$entriesArgs<ExtArgs>
     _count?: boolean | WorkoutCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type WorkoutIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13361,7 +13483,7 @@ export namespace Prisma {
     name: "Workout"
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null
-      sets: Prisma.$WorkoutSetPayload<ExtArgs>[]
+      entries: Prisma.$WorkoutEntryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -13768,7 +13890,7 @@ export namespace Prisma {
   export interface Prisma__WorkoutClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends Workout$userArgs<ExtArgs> = {}>(args?: Subset<T, Workout$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    sets<T extends Workout$setsArgs<ExtArgs> = {}>(args?: Subset<T, Workout$setsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutSetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    entries<T extends Workout$entriesArgs<ExtArgs> = {}>(args?: Subset<T, Workout$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14222,9 +14344,1169 @@ export namespace Prisma {
   }
 
   /**
-   * Workout.sets
+   * Workout.entries
    */
-  export type Workout$setsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Workout$entriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    where?: WorkoutEntryWhereInput
+    orderBy?: WorkoutEntryOrderByWithRelationInput | WorkoutEntryOrderByWithRelationInput[]
+    cursor?: WorkoutEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WorkoutEntryScalarFieldEnum | WorkoutEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Workout without action
+   */
+  export type WorkoutDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Workout
+     */
+    select?: WorkoutSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Workout
+     */
+    omit?: WorkoutOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WorkoutEntry
+   */
+
+  export type AggregateWorkoutEntry = {
+    _count: WorkoutEntryCountAggregateOutputType | null
+    _avg: WorkoutEntryAvgAggregateOutputType | null
+    _sum: WorkoutEntrySumAggregateOutputType | null
+    _min: WorkoutEntryMinAggregateOutputType | null
+    _max: WorkoutEntryMaxAggregateOutputType | null
+  }
+
+  export type WorkoutEntryAvgAggregateOutputType = {
+    id: number | null
+    order: number | null
+  }
+
+  export type WorkoutEntrySumAggregateOutputType = {
+    id: number | null
+    order: number | null
+  }
+
+  export type WorkoutEntryMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    workout_uuid: string | null
+    exercise_uuid: string | null
+    order: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type WorkoutEntryMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    workout_uuid: string | null
+    exercise_uuid: string | null
+    order: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type WorkoutEntryCountAggregateOutputType = {
+    id: number
+    uuid: number
+    workout_uuid: number
+    exercise_uuid: number
+    order: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type WorkoutEntryAvgAggregateInputType = {
+    id?: true
+    order?: true
+  }
+
+  export type WorkoutEntrySumAggregateInputType = {
+    id?: true
+    order?: true
+  }
+
+  export type WorkoutEntryMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    workout_uuid?: true
+    exercise_uuid?: true
+    order?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type WorkoutEntryMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    workout_uuid?: true
+    exercise_uuid?: true
+    order?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type WorkoutEntryCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    workout_uuid?: true
+    exercise_uuid?: true
+    order?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type WorkoutEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WorkoutEntry to aggregate.
+     */
+    where?: WorkoutEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkoutEntries to fetch.
+     */
+    orderBy?: WorkoutEntryOrderByWithRelationInput | WorkoutEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WorkoutEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkoutEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkoutEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WorkoutEntries
+    **/
+    _count?: true | WorkoutEntryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WorkoutEntryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WorkoutEntrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WorkoutEntryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WorkoutEntryMaxAggregateInputType
+  }
+
+  export type GetWorkoutEntryAggregateType<T extends WorkoutEntryAggregateArgs> = {
+        [P in keyof T & keyof AggregateWorkoutEntry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWorkoutEntry[P]>
+      : GetScalarType<T[P], AggregateWorkoutEntry[P]>
+  }
+
+
+
+
+  export type WorkoutEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WorkoutEntryWhereInput
+    orderBy?: WorkoutEntryOrderByWithAggregationInput | WorkoutEntryOrderByWithAggregationInput[]
+    by: WorkoutEntryScalarFieldEnum[] | WorkoutEntryScalarFieldEnum
+    having?: WorkoutEntryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WorkoutEntryCountAggregateInputType | true
+    _avg?: WorkoutEntryAvgAggregateInputType
+    _sum?: WorkoutEntrySumAggregateInputType
+    _min?: WorkoutEntryMinAggregateInputType
+    _max?: WorkoutEntryMaxAggregateInputType
+  }
+
+  export type WorkoutEntryGroupByOutputType = {
+    id: number
+    uuid: string
+    workout_uuid: string
+    exercise_uuid: string
+    order: number
+    created_at: Date
+    updated_at: Date
+    _count: WorkoutEntryCountAggregateOutputType | null
+    _avg: WorkoutEntryAvgAggregateOutputType | null
+    _sum: WorkoutEntrySumAggregateOutputType | null
+    _min: WorkoutEntryMinAggregateOutputType | null
+    _max: WorkoutEntryMaxAggregateOutputType | null
+  }
+
+  type GetWorkoutEntryGroupByPayload<T extends WorkoutEntryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WorkoutEntryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WorkoutEntryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WorkoutEntryGroupByOutputType[P]>
+            : GetScalarType<T[P], WorkoutEntryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WorkoutEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    workout_uuid?: boolean
+    exercise_uuid?: boolean
+    order?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
+    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+    sets?: boolean | WorkoutEntry$setsArgs<ExtArgs>
+    _count?: boolean | WorkoutEntryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workoutEntry"]>
+
+  export type WorkoutEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    workout_uuid?: boolean
+    exercise_uuid?: boolean
+    order?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
+    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workoutEntry"]>
+
+  export type WorkoutEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    workout_uuid?: boolean
+    exercise_uuid?: boolean
+    order?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
+    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workoutEntry"]>
+
+  export type WorkoutEntrySelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    workout_uuid?: boolean
+    exercise_uuid?: boolean
+    order?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type WorkoutEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "workout_uuid" | "exercise_uuid" | "order" | "created_at" | "updated_at", ExtArgs["result"]["workoutEntry"]>
+  export type WorkoutEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
+    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+    sets?: boolean | WorkoutEntry$setsArgs<ExtArgs>
+    _count?: boolean | WorkoutEntryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type WorkoutEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
+    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+  }
+  export type WorkoutEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
+    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+  }
+
+  export type $WorkoutEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WorkoutEntry"
+    objects: {
+      workout: Prisma.$WorkoutPayload<ExtArgs>
+      exercise: Prisma.$ExercisePayload<ExtArgs>
+      sets: Prisma.$WorkoutSetPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      workout_uuid: string
+      exercise_uuid: string
+      order: number
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["workoutEntry"]>
+    composites: {}
+  }
+
+  type WorkoutEntryGetPayload<S extends boolean | null | undefined | WorkoutEntryDefaultArgs> = $Result.GetResult<Prisma.$WorkoutEntryPayload, S>
+
+  type WorkoutEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WorkoutEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WorkoutEntryCountAggregateInputType | true
+    }
+
+  export interface WorkoutEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WorkoutEntry'], meta: { name: 'WorkoutEntry' } }
+    /**
+     * Find zero or one WorkoutEntry that matches the filter.
+     * @param {WorkoutEntryFindUniqueArgs} args - Arguments to find a WorkoutEntry
+     * @example
+     * // Get one WorkoutEntry
+     * const workoutEntry = await prisma.workoutEntry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WorkoutEntryFindUniqueArgs>(args: SelectSubset<T, WorkoutEntryFindUniqueArgs<ExtArgs>>): Prisma__WorkoutEntryClient<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WorkoutEntry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WorkoutEntryFindUniqueOrThrowArgs} args - Arguments to find a WorkoutEntry
+     * @example
+     * // Get one WorkoutEntry
+     * const workoutEntry = await prisma.workoutEntry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WorkoutEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, WorkoutEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WorkoutEntryClient<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WorkoutEntry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkoutEntryFindFirstArgs} args - Arguments to find a WorkoutEntry
+     * @example
+     * // Get one WorkoutEntry
+     * const workoutEntry = await prisma.workoutEntry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WorkoutEntryFindFirstArgs>(args?: SelectSubset<T, WorkoutEntryFindFirstArgs<ExtArgs>>): Prisma__WorkoutEntryClient<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WorkoutEntry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkoutEntryFindFirstOrThrowArgs} args - Arguments to find a WorkoutEntry
+     * @example
+     * // Get one WorkoutEntry
+     * const workoutEntry = await prisma.workoutEntry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WorkoutEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, WorkoutEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__WorkoutEntryClient<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WorkoutEntries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkoutEntryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WorkoutEntries
+     * const workoutEntries = await prisma.workoutEntry.findMany()
+     * 
+     * // Get first 10 WorkoutEntries
+     * const workoutEntries = await prisma.workoutEntry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const workoutEntryWithIdOnly = await prisma.workoutEntry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WorkoutEntryFindManyArgs>(args?: SelectSubset<T, WorkoutEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WorkoutEntry.
+     * @param {WorkoutEntryCreateArgs} args - Arguments to create a WorkoutEntry.
+     * @example
+     * // Create one WorkoutEntry
+     * const WorkoutEntry = await prisma.workoutEntry.create({
+     *   data: {
+     *     // ... data to create a WorkoutEntry
+     *   }
+     * })
+     * 
+     */
+    create<T extends WorkoutEntryCreateArgs>(args: SelectSubset<T, WorkoutEntryCreateArgs<ExtArgs>>): Prisma__WorkoutEntryClient<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WorkoutEntries.
+     * @param {WorkoutEntryCreateManyArgs} args - Arguments to create many WorkoutEntries.
+     * @example
+     * // Create many WorkoutEntries
+     * const workoutEntry = await prisma.workoutEntry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WorkoutEntryCreateManyArgs>(args?: SelectSubset<T, WorkoutEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WorkoutEntries and returns the data saved in the database.
+     * @param {WorkoutEntryCreateManyAndReturnArgs} args - Arguments to create many WorkoutEntries.
+     * @example
+     * // Create many WorkoutEntries
+     * const workoutEntry = await prisma.workoutEntry.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WorkoutEntries and only return the `id`
+     * const workoutEntryWithIdOnly = await prisma.workoutEntry.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WorkoutEntryCreateManyAndReturnArgs>(args?: SelectSubset<T, WorkoutEntryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WorkoutEntry.
+     * @param {WorkoutEntryDeleteArgs} args - Arguments to delete one WorkoutEntry.
+     * @example
+     * // Delete one WorkoutEntry
+     * const WorkoutEntry = await prisma.workoutEntry.delete({
+     *   where: {
+     *     // ... filter to delete one WorkoutEntry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WorkoutEntryDeleteArgs>(args: SelectSubset<T, WorkoutEntryDeleteArgs<ExtArgs>>): Prisma__WorkoutEntryClient<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WorkoutEntry.
+     * @param {WorkoutEntryUpdateArgs} args - Arguments to update one WorkoutEntry.
+     * @example
+     * // Update one WorkoutEntry
+     * const workoutEntry = await prisma.workoutEntry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WorkoutEntryUpdateArgs>(args: SelectSubset<T, WorkoutEntryUpdateArgs<ExtArgs>>): Prisma__WorkoutEntryClient<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WorkoutEntries.
+     * @param {WorkoutEntryDeleteManyArgs} args - Arguments to filter WorkoutEntries to delete.
+     * @example
+     * // Delete a few WorkoutEntries
+     * const { count } = await prisma.workoutEntry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WorkoutEntryDeleteManyArgs>(args?: SelectSubset<T, WorkoutEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WorkoutEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkoutEntryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WorkoutEntries
+     * const workoutEntry = await prisma.workoutEntry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WorkoutEntryUpdateManyArgs>(args: SelectSubset<T, WorkoutEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WorkoutEntries and returns the data updated in the database.
+     * @param {WorkoutEntryUpdateManyAndReturnArgs} args - Arguments to update many WorkoutEntries.
+     * @example
+     * // Update many WorkoutEntries
+     * const workoutEntry = await prisma.workoutEntry.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WorkoutEntries and only return the `id`
+     * const workoutEntryWithIdOnly = await prisma.workoutEntry.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WorkoutEntryUpdateManyAndReturnArgs>(args: SelectSubset<T, WorkoutEntryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WorkoutEntry.
+     * @param {WorkoutEntryUpsertArgs} args - Arguments to update or create a WorkoutEntry.
+     * @example
+     * // Update or create a WorkoutEntry
+     * const workoutEntry = await prisma.workoutEntry.upsert({
+     *   create: {
+     *     // ... data to create a WorkoutEntry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WorkoutEntry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WorkoutEntryUpsertArgs>(args: SelectSubset<T, WorkoutEntryUpsertArgs<ExtArgs>>): Prisma__WorkoutEntryClient<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WorkoutEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkoutEntryCountArgs} args - Arguments to filter WorkoutEntries to count.
+     * @example
+     * // Count the number of WorkoutEntries
+     * const count = await prisma.workoutEntry.count({
+     *   where: {
+     *     // ... the filter for the WorkoutEntries we want to count
+     *   }
+     * })
+    **/
+    count<T extends WorkoutEntryCountArgs>(
+      args?: Subset<T, WorkoutEntryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WorkoutEntryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WorkoutEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkoutEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WorkoutEntryAggregateArgs>(args: Subset<T, WorkoutEntryAggregateArgs>): Prisma.PrismaPromise<GetWorkoutEntryAggregateType<T>>
+
+    /**
+     * Group by WorkoutEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkoutEntryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WorkoutEntryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WorkoutEntryGroupByArgs['orderBy'] }
+        : { orderBy?: WorkoutEntryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WorkoutEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWorkoutEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WorkoutEntry model
+   */
+  readonly fields: WorkoutEntryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WorkoutEntry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WorkoutEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    workout<T extends WorkoutDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkoutDefaultArgs<ExtArgs>>): Prisma__WorkoutClient<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    exercise<T extends ExerciseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExerciseDefaultArgs<ExtArgs>>): Prisma__ExerciseClient<$Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sets<T extends WorkoutEntry$setsArgs<ExtArgs> = {}>(args?: Subset<T, WorkoutEntry$setsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutSetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WorkoutEntry model
+   */
+  interface WorkoutEntryFieldRefs {
+    readonly id: FieldRef<"WorkoutEntry", 'Int'>
+    readonly uuid: FieldRef<"WorkoutEntry", 'String'>
+    readonly workout_uuid: FieldRef<"WorkoutEntry", 'String'>
+    readonly exercise_uuid: FieldRef<"WorkoutEntry", 'String'>
+    readonly order: FieldRef<"WorkoutEntry", 'Int'>
+    readonly created_at: FieldRef<"WorkoutEntry", 'DateTime'>
+    readonly updated_at: FieldRef<"WorkoutEntry", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WorkoutEntry findUnique
+   */
+  export type WorkoutEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkoutEntry to fetch.
+     */
+    where: WorkoutEntryWhereUniqueInput
+  }
+
+  /**
+   * WorkoutEntry findUniqueOrThrow
+   */
+  export type WorkoutEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkoutEntry to fetch.
+     */
+    where: WorkoutEntryWhereUniqueInput
+  }
+
+  /**
+   * WorkoutEntry findFirst
+   */
+  export type WorkoutEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkoutEntry to fetch.
+     */
+    where?: WorkoutEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkoutEntries to fetch.
+     */
+    orderBy?: WorkoutEntryOrderByWithRelationInput | WorkoutEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WorkoutEntries.
+     */
+    cursor?: WorkoutEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkoutEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkoutEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WorkoutEntries.
+     */
+    distinct?: WorkoutEntryScalarFieldEnum | WorkoutEntryScalarFieldEnum[]
+  }
+
+  /**
+   * WorkoutEntry findFirstOrThrow
+   */
+  export type WorkoutEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkoutEntry to fetch.
+     */
+    where?: WorkoutEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkoutEntries to fetch.
+     */
+    orderBy?: WorkoutEntryOrderByWithRelationInput | WorkoutEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WorkoutEntries.
+     */
+    cursor?: WorkoutEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkoutEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkoutEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WorkoutEntries.
+     */
+    distinct?: WorkoutEntryScalarFieldEnum | WorkoutEntryScalarFieldEnum[]
+  }
+
+  /**
+   * WorkoutEntry findMany
+   */
+  export type WorkoutEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkoutEntries to fetch.
+     */
+    where?: WorkoutEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkoutEntries to fetch.
+     */
+    orderBy?: WorkoutEntryOrderByWithRelationInput | WorkoutEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WorkoutEntries.
+     */
+    cursor?: WorkoutEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkoutEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkoutEntries.
+     */
+    skip?: number
+    distinct?: WorkoutEntryScalarFieldEnum | WorkoutEntryScalarFieldEnum[]
+  }
+
+  /**
+   * WorkoutEntry create
+   */
+  export type WorkoutEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WorkoutEntry.
+     */
+    data: XOR<WorkoutEntryCreateInput, WorkoutEntryUncheckedCreateInput>
+  }
+
+  /**
+   * WorkoutEntry createMany
+   */
+  export type WorkoutEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WorkoutEntries.
+     */
+    data: WorkoutEntryCreateManyInput | WorkoutEntryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WorkoutEntry createManyAndReturn
+   */
+  export type WorkoutEntryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * The data used to create many WorkoutEntries.
+     */
+    data: WorkoutEntryCreateManyInput | WorkoutEntryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WorkoutEntry update
+   */
+  export type WorkoutEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WorkoutEntry.
+     */
+    data: XOR<WorkoutEntryUpdateInput, WorkoutEntryUncheckedUpdateInput>
+    /**
+     * Choose, which WorkoutEntry to update.
+     */
+    where: WorkoutEntryWhereUniqueInput
+  }
+
+  /**
+   * WorkoutEntry updateMany
+   */
+  export type WorkoutEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WorkoutEntries.
+     */
+    data: XOR<WorkoutEntryUpdateManyMutationInput, WorkoutEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which WorkoutEntries to update
+     */
+    where?: WorkoutEntryWhereInput
+    /**
+     * Limit how many WorkoutEntries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WorkoutEntry updateManyAndReturn
+   */
+  export type WorkoutEntryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * The data used to update WorkoutEntries.
+     */
+    data: XOR<WorkoutEntryUpdateManyMutationInput, WorkoutEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which WorkoutEntries to update
+     */
+    where?: WorkoutEntryWhereInput
+    /**
+     * Limit how many WorkoutEntries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WorkoutEntry upsert
+   */
+  export type WorkoutEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WorkoutEntry to update in case it exists.
+     */
+    where: WorkoutEntryWhereUniqueInput
+    /**
+     * In case the WorkoutEntry found by the `where` argument doesn't exist, create a new WorkoutEntry with this data.
+     */
+    create: XOR<WorkoutEntryCreateInput, WorkoutEntryUncheckedCreateInput>
+    /**
+     * In case the WorkoutEntry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WorkoutEntryUpdateInput, WorkoutEntryUncheckedUpdateInput>
+  }
+
+  /**
+   * WorkoutEntry delete
+   */
+  export type WorkoutEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkoutEntry
+     */
+    select?: WorkoutEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkoutEntry
+     */
+    omit?: WorkoutEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkoutEntryInclude<ExtArgs> | null
+    /**
+     * Filter which WorkoutEntry to delete.
+     */
+    where: WorkoutEntryWhereUniqueInput
+  }
+
+  /**
+   * WorkoutEntry deleteMany
+   */
+  export type WorkoutEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WorkoutEntries to delete
+     */
+    where?: WorkoutEntryWhereInput
+    /**
+     * Limit how many WorkoutEntries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WorkoutEntry.sets
+   */
+  export type WorkoutEntry$setsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WorkoutSet
      */
@@ -14246,21 +15528,21 @@ export namespace Prisma {
   }
 
   /**
-   * Workout without action
+   * WorkoutEntry without action
    */
-  export type WorkoutDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type WorkoutEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Workout
+     * Select specific fields to fetch from the WorkoutEntry
      */
-    select?: WorkoutSelect<ExtArgs> | null
+    select?: WorkoutEntrySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Workout
+     * Omit specific fields from the WorkoutEntry
      */
-    omit?: WorkoutOmit<ExtArgs> | null
+    omit?: WorkoutEntryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: WorkoutInclude<ExtArgs> | null
+    include?: WorkoutEntryInclude<ExtArgs> | null
   }
 
 
@@ -14299,8 +15581,7 @@ export namespace Prisma {
   export type WorkoutSetMinAggregateOutputType = {
     id: number | null
     uuid: string | null
-    workout_uuid: string | null
-    exercise_uuid: string | null
+    workout_entry_uuid: string | null
     type: $Enums.ExerciseType | null
     reps: number | null
     weight: Decimal | null
@@ -14322,8 +15603,7 @@ export namespace Prisma {
   export type WorkoutSetMaxAggregateOutputType = {
     id: number | null
     uuid: string | null
-    workout_uuid: string | null
-    exercise_uuid: string | null
+    workout_entry_uuid: string | null
     type: $Enums.ExerciseType | null
     reps: number | null
     weight: Decimal | null
@@ -14345,8 +15625,7 @@ export namespace Prisma {
   export type WorkoutSetCountAggregateOutputType = {
     id: number
     uuid: number
-    workout_uuid: number
-    exercise_uuid: number
+    workout_entry_uuid: number
     type: number
     reps: number
     weight: number
@@ -14390,8 +15669,7 @@ export namespace Prisma {
   export type WorkoutSetMinAggregateInputType = {
     id?: true
     uuid?: true
-    workout_uuid?: true
-    exercise_uuid?: true
+    workout_entry_uuid?: true
     type?: true
     reps?: true
     weight?: true
@@ -14413,8 +15691,7 @@ export namespace Prisma {
   export type WorkoutSetMaxAggregateInputType = {
     id?: true
     uuid?: true
-    workout_uuid?: true
-    exercise_uuid?: true
+    workout_entry_uuid?: true
     type?: true
     reps?: true
     weight?: true
@@ -14436,8 +15713,7 @@ export namespace Prisma {
   export type WorkoutSetCountAggregateInputType = {
     id?: true
     uuid?: true
-    workout_uuid?: true
-    exercise_uuid?: true
+    workout_entry_uuid?: true
     type?: true
     reps?: true
     weight?: true
@@ -14546,8 +15822,7 @@ export namespace Prisma {
   export type WorkoutSetGroupByOutputType = {
     id: number
     uuid: string
-    workout_uuid: string
-    exercise_uuid: string
+    workout_entry_uuid: string
     type: $Enums.ExerciseType
     reps: number | null
     weight: Decimal | null
@@ -14588,8 +15863,7 @@ export namespace Prisma {
   export type WorkoutSetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     uuid?: boolean
-    workout_uuid?: boolean
-    exercise_uuid?: boolean
+    workout_entry_uuid?: boolean
     type?: boolean
     reps?: boolean
     weight?: boolean
@@ -14606,15 +15880,13 @@ export namespace Prisma {
     order?: boolean
     created_at?: boolean
     updated_at?: boolean
-    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
-    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+    workout_entry?: boolean | WorkoutEntryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workoutSet"]>
 
   export type WorkoutSetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     uuid?: boolean
-    workout_uuid?: boolean
-    exercise_uuid?: boolean
+    workout_entry_uuid?: boolean
     type?: boolean
     reps?: boolean
     weight?: boolean
@@ -14631,15 +15903,13 @@ export namespace Prisma {
     order?: boolean
     created_at?: boolean
     updated_at?: boolean
-    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
-    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+    workout_entry?: boolean | WorkoutEntryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workoutSet"]>
 
   export type WorkoutSetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     uuid?: boolean
-    workout_uuid?: boolean
-    exercise_uuid?: boolean
+    workout_entry_uuid?: boolean
     type?: boolean
     reps?: boolean
     weight?: boolean
@@ -14656,15 +15926,13 @@ export namespace Prisma {
     order?: boolean
     created_at?: boolean
     updated_at?: boolean
-    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
-    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+    workout_entry?: boolean | WorkoutEntryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workoutSet"]>
 
   export type WorkoutSetSelectScalar = {
     id?: boolean
     uuid?: boolean
-    workout_uuid?: boolean
-    exercise_uuid?: boolean
+    workout_entry_uuid?: boolean
     type?: boolean
     reps?: boolean
     weight?: boolean
@@ -14683,31 +15951,26 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type WorkoutSetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "workout_uuid" | "exercise_uuid" | "type" | "reps" | "weight" | "duration_seconds" | "distance_meters" | "rest_seconds" | "notes" | "is_dropset" | "is_amrap" | "is_rest" | "is_warmup" | "is_cooldown" | "is_super_set" | "order" | "created_at" | "updated_at", ExtArgs["result"]["workoutSet"]>
+  export type WorkoutSetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "workout_entry_uuid" | "type" | "reps" | "weight" | "duration_seconds" | "distance_meters" | "rest_seconds" | "notes" | "is_dropset" | "is_amrap" | "is_rest" | "is_warmup" | "is_cooldown" | "is_super_set" | "order" | "created_at" | "updated_at", ExtArgs["result"]["workoutSet"]>
   export type WorkoutSetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
-    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+    workout_entry?: boolean | WorkoutEntryDefaultArgs<ExtArgs>
   }
   export type WorkoutSetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
-    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+    workout_entry?: boolean | WorkoutEntryDefaultArgs<ExtArgs>
   }
   export type WorkoutSetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    workout?: boolean | WorkoutDefaultArgs<ExtArgs>
-    exercise?: boolean | ExerciseDefaultArgs<ExtArgs>
+    workout_entry?: boolean | WorkoutEntryDefaultArgs<ExtArgs>
   }
 
   export type $WorkoutSetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "WorkoutSet"
     objects: {
-      workout: Prisma.$WorkoutPayload<ExtArgs>
-      exercise: Prisma.$ExercisePayload<ExtArgs>
+      workout_entry: Prisma.$WorkoutEntryPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       uuid: string
-      workout_uuid: string
-      exercise_uuid: string
+      workout_entry_uuid: string
       type: $Enums.ExerciseType
       reps: number | null
       weight: Prisma.Decimal | null
@@ -15118,8 +16381,7 @@ export namespace Prisma {
    */
   export interface Prisma__WorkoutSetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    workout<T extends WorkoutDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkoutDefaultArgs<ExtArgs>>): Prisma__WorkoutClient<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    exercise<T extends ExerciseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExerciseDefaultArgs<ExtArgs>>): Prisma__ExerciseClient<$Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    workout_entry<T extends WorkoutEntryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkoutEntryDefaultArgs<ExtArgs>>): Prisma__WorkoutEntryClient<$Result.GetResult<Prisma.$WorkoutEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15151,8 +16413,7 @@ export namespace Prisma {
   interface WorkoutSetFieldRefs {
     readonly id: FieldRef<"WorkoutSet", 'Int'>
     readonly uuid: FieldRef<"WorkoutSet", 'String'>
-    readonly workout_uuid: FieldRef<"WorkoutSet", 'String'>
-    readonly exercise_uuid: FieldRef<"WorkoutSet", 'String'>
+    readonly workout_entry_uuid: FieldRef<"WorkoutSet", 'String'>
     readonly type: FieldRef<"WorkoutSet", 'ExerciseType'>
     readonly reps: FieldRef<"WorkoutSet", 'Int'>
     readonly weight: FieldRef<"WorkoutSet", 'Decimal'>
@@ -15745,11 +17006,23 @@ export namespace Prisma {
   export type WorkoutScalarFieldEnum = (typeof WorkoutScalarFieldEnum)[keyof typeof WorkoutScalarFieldEnum]
 
 
-  export const WorkoutSetScalarFieldEnum: {
+  export const WorkoutEntryScalarFieldEnum: {
     id: 'id',
     uuid: 'uuid',
     workout_uuid: 'workout_uuid',
     exercise_uuid: 'exercise_uuid',
+    order: 'order',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type WorkoutEntryScalarFieldEnum = (typeof WorkoutEntryScalarFieldEnum)[keyof typeof WorkoutEntryScalarFieldEnum]
+
+
+  export const WorkoutSetScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    workout_entry_uuid: 'workout_entry_uuid',
     type: 'type',
     reps: 'reps',
     weight: 'weight',
@@ -16620,7 +17893,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Exercise"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     muscle_group?: XOR<MuscleGroupScalarRelationFilter, MuscleGroupWhereInput>
-    sets?: WorkoutSetListRelationFilter
+    entries?: WorkoutEntryListRelationFilter
   }
 
   export type ExerciseOrderByWithRelationInput = {
@@ -16635,7 +17908,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
     muscle_group?: MuscleGroupOrderByWithRelationInput
-    sets?: WorkoutSetOrderByRelationAggregateInput
+    entries?: WorkoutEntryOrderByRelationAggregateInput
   }
 
   export type ExerciseWhereUniqueInput = Prisma.AtLeast<{
@@ -16653,7 +17926,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Exercise"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     muscle_group?: XOR<MuscleGroupScalarRelationFilter, MuscleGroupWhereInput>
-    sets?: WorkoutSetListRelationFilter
+    entries?: WorkoutEntryListRelationFilter
   }, "id" | "uuid">
 
   export type ExerciseOrderByWithAggregationInput = {
@@ -16702,7 +17975,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Workout"> | Date | string
     updated_at?: DateTimeFilter<"Workout"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    sets?: WorkoutSetListRelationFilter
+    entries?: WorkoutEntryListRelationFilter
   }
 
   export type WorkoutOrderByWithRelationInput = {
@@ -16716,7 +17989,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
-    sets?: WorkoutSetOrderByRelationAggregateInput
+    entries?: WorkoutEntryOrderByRelationAggregateInput
   }
 
   export type WorkoutWhereUniqueInput = Prisma.AtLeast<{
@@ -16733,7 +18006,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Workout"> | Date | string
     updated_at?: DateTimeFilter<"Workout"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    sets?: WorkoutSetListRelationFilter
+    entries?: WorkoutEntryListRelationFilter
   }, "id" | "uuid">
 
   export type WorkoutOrderByWithAggregationInput = {
@@ -16768,14 +18041,86 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"Workout"> | Date | string
   }
 
+  export type WorkoutEntryWhereInput = {
+    AND?: WorkoutEntryWhereInput | WorkoutEntryWhereInput[]
+    OR?: WorkoutEntryWhereInput[]
+    NOT?: WorkoutEntryWhereInput | WorkoutEntryWhereInput[]
+    id?: IntFilter<"WorkoutEntry"> | number
+    uuid?: StringFilter<"WorkoutEntry"> | string
+    workout_uuid?: StringFilter<"WorkoutEntry"> | string
+    exercise_uuid?: StringFilter<"WorkoutEntry"> | string
+    order?: IntFilter<"WorkoutEntry"> | number
+    created_at?: DateTimeFilter<"WorkoutEntry"> | Date | string
+    updated_at?: DateTimeFilter<"WorkoutEntry"> | Date | string
+    workout?: XOR<WorkoutScalarRelationFilter, WorkoutWhereInput>
+    exercise?: XOR<ExerciseScalarRelationFilter, ExerciseWhereInput>
+    sets?: WorkoutSetListRelationFilter
+  }
+
+  export type WorkoutEntryOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    workout_uuid?: SortOrder
+    exercise_uuid?: SortOrder
+    order?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    workout?: WorkoutOrderByWithRelationInput
+    exercise?: ExerciseOrderByWithRelationInput
+    sets?: WorkoutSetOrderByRelationAggregateInput
+  }
+
+  export type WorkoutEntryWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: WorkoutEntryWhereInput | WorkoutEntryWhereInput[]
+    OR?: WorkoutEntryWhereInput[]
+    NOT?: WorkoutEntryWhereInput | WorkoutEntryWhereInput[]
+    workout_uuid?: StringFilter<"WorkoutEntry"> | string
+    exercise_uuid?: StringFilter<"WorkoutEntry"> | string
+    order?: IntFilter<"WorkoutEntry"> | number
+    created_at?: DateTimeFilter<"WorkoutEntry"> | Date | string
+    updated_at?: DateTimeFilter<"WorkoutEntry"> | Date | string
+    workout?: XOR<WorkoutScalarRelationFilter, WorkoutWhereInput>
+    exercise?: XOR<ExerciseScalarRelationFilter, ExerciseWhereInput>
+    sets?: WorkoutSetListRelationFilter
+  }, "id" | "uuid">
+
+  export type WorkoutEntryOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    workout_uuid?: SortOrder
+    exercise_uuid?: SortOrder
+    order?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: WorkoutEntryCountOrderByAggregateInput
+    _avg?: WorkoutEntryAvgOrderByAggregateInput
+    _max?: WorkoutEntryMaxOrderByAggregateInput
+    _min?: WorkoutEntryMinOrderByAggregateInput
+    _sum?: WorkoutEntrySumOrderByAggregateInput
+  }
+
+  export type WorkoutEntryScalarWhereWithAggregatesInput = {
+    AND?: WorkoutEntryScalarWhereWithAggregatesInput | WorkoutEntryScalarWhereWithAggregatesInput[]
+    OR?: WorkoutEntryScalarWhereWithAggregatesInput[]
+    NOT?: WorkoutEntryScalarWhereWithAggregatesInput | WorkoutEntryScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"WorkoutEntry"> | number
+    uuid?: StringWithAggregatesFilter<"WorkoutEntry"> | string
+    workout_uuid?: StringWithAggregatesFilter<"WorkoutEntry"> | string
+    exercise_uuid?: StringWithAggregatesFilter<"WorkoutEntry"> | string
+    order?: IntWithAggregatesFilter<"WorkoutEntry"> | number
+    created_at?: DateTimeWithAggregatesFilter<"WorkoutEntry"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"WorkoutEntry"> | Date | string
+  }
+
   export type WorkoutSetWhereInput = {
     AND?: WorkoutSetWhereInput | WorkoutSetWhereInput[]
     OR?: WorkoutSetWhereInput[]
     NOT?: WorkoutSetWhereInput | WorkoutSetWhereInput[]
     id?: IntFilter<"WorkoutSet"> | number
     uuid?: StringFilter<"WorkoutSet"> | string
-    workout_uuid?: StringFilter<"WorkoutSet"> | string
-    exercise_uuid?: StringFilter<"WorkoutSet"> | string
+    workout_entry_uuid?: StringFilter<"WorkoutSet"> | string
     type?: EnumExerciseTypeFilter<"WorkoutSet"> | $Enums.ExerciseType
     reps?: IntNullableFilter<"WorkoutSet"> | number | null
     weight?: DecimalNullableFilter<"WorkoutSet"> | Decimal | DecimalJsLike | number | string | null
@@ -16792,15 +18137,13 @@ export namespace Prisma {
     order?: IntFilter<"WorkoutSet"> | number
     created_at?: DateTimeFilter<"WorkoutSet"> | Date | string
     updated_at?: DateTimeFilter<"WorkoutSet"> | Date | string
-    workout?: XOR<WorkoutScalarRelationFilter, WorkoutWhereInput>
-    exercise?: XOR<ExerciseScalarRelationFilter, ExerciseWhereInput>
+    workout_entry?: XOR<WorkoutEntryScalarRelationFilter, WorkoutEntryWhereInput>
   }
 
   export type WorkoutSetOrderByWithRelationInput = {
     id?: SortOrder
     uuid?: SortOrder
-    workout_uuid?: SortOrder
-    exercise_uuid?: SortOrder
+    workout_entry_uuid?: SortOrder
     type?: SortOrder
     reps?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
@@ -16817,8 +18160,7 @@ export namespace Prisma {
     order?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    workout?: WorkoutOrderByWithRelationInput
-    exercise?: ExerciseOrderByWithRelationInput
+    workout_entry?: WorkoutEntryOrderByWithRelationInput
   }
 
   export type WorkoutSetWhereUniqueInput = Prisma.AtLeast<{
@@ -16827,8 +18169,7 @@ export namespace Prisma {
     AND?: WorkoutSetWhereInput | WorkoutSetWhereInput[]
     OR?: WorkoutSetWhereInput[]
     NOT?: WorkoutSetWhereInput | WorkoutSetWhereInput[]
-    workout_uuid?: StringFilter<"WorkoutSet"> | string
-    exercise_uuid?: StringFilter<"WorkoutSet"> | string
+    workout_entry_uuid?: StringFilter<"WorkoutSet"> | string
     type?: EnumExerciseTypeFilter<"WorkoutSet"> | $Enums.ExerciseType
     reps?: IntNullableFilter<"WorkoutSet"> | number | null
     weight?: DecimalNullableFilter<"WorkoutSet"> | Decimal | DecimalJsLike | number | string | null
@@ -16845,15 +18186,13 @@ export namespace Prisma {
     order?: IntFilter<"WorkoutSet"> | number
     created_at?: DateTimeFilter<"WorkoutSet"> | Date | string
     updated_at?: DateTimeFilter<"WorkoutSet"> | Date | string
-    workout?: XOR<WorkoutScalarRelationFilter, WorkoutWhereInput>
-    exercise?: XOR<ExerciseScalarRelationFilter, ExerciseWhereInput>
+    workout_entry?: XOR<WorkoutEntryScalarRelationFilter, WorkoutEntryWhereInput>
   }, "id" | "uuid">
 
   export type WorkoutSetOrderByWithAggregationInput = {
     id?: SortOrder
     uuid?: SortOrder
-    workout_uuid?: SortOrder
-    exercise_uuid?: SortOrder
+    workout_entry_uuid?: SortOrder
     type?: SortOrder
     reps?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
@@ -16883,8 +18222,7 @@ export namespace Prisma {
     NOT?: WorkoutSetScalarWhereWithAggregatesInput | WorkoutSetScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"WorkoutSet"> | number
     uuid?: StringWithAggregatesFilter<"WorkoutSet"> | string
-    workout_uuid?: StringWithAggregatesFilter<"WorkoutSet"> | string
-    exercise_uuid?: StringWithAggregatesFilter<"WorkoutSet"> | string
+    workout_entry_uuid?: StringWithAggregatesFilter<"WorkoutSet"> | string
     type?: EnumExerciseTypeWithAggregatesFilter<"WorkoutSet"> | $Enums.ExerciseType
     reps?: IntNullableWithAggregatesFilter<"WorkoutSet"> | number | null
     weight?: DecimalNullableWithAggregatesFilter<"WorkoutSet"> | Decimal | DecimalJsLike | number | string | null
@@ -17597,7 +18935,7 @@ export namespace Prisma {
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutExercisesInput
     muscle_group: MuscleGroupCreateNestedOneWithoutExercisesInput
-    sets?: WorkoutSetCreateNestedManyWithoutExerciseInput
+    entries?: WorkoutEntryCreateNestedManyWithoutExerciseInput
   }
 
   export type ExerciseUncheckedCreateInput = {
@@ -17610,7 +18948,7 @@ export namespace Prisma {
     type: $Enums.ExerciseType
     created_at?: Date | string
     updated_at?: Date | string
-    sets?: WorkoutSetUncheckedCreateNestedManyWithoutExerciseInput
+    entries?: WorkoutEntryUncheckedCreateNestedManyWithoutExerciseInput
   }
 
   export type ExerciseUpdateInput = {
@@ -17622,7 +18960,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutExercisesNestedInput
     muscle_group?: MuscleGroupUpdateOneRequiredWithoutExercisesNestedInput
-    sets?: WorkoutSetUpdateManyWithoutExerciseNestedInput
+    entries?: WorkoutEntryUpdateManyWithoutExerciseNestedInput
   }
 
   export type ExerciseUncheckedUpdateInput = {
@@ -17635,7 +18973,7 @@ export namespace Prisma {
     type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sets?: WorkoutSetUncheckedUpdateManyWithoutExerciseNestedInput
+    entries?: WorkoutEntryUncheckedUpdateManyWithoutExerciseNestedInput
   }
 
   export type ExerciseCreateManyInput = {
@@ -17680,7 +19018,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutWorkoutsInput
-    sets?: WorkoutSetCreateNestedManyWithoutWorkoutInput
+    entries?: WorkoutEntryCreateNestedManyWithoutWorkoutInput
   }
 
   export type WorkoutUncheckedCreateInput = {
@@ -17693,7 +19031,7 @@ export namespace Prisma {
     finished_at?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
-    sets?: WorkoutSetUncheckedCreateNestedManyWithoutWorkoutInput
+    entries?: WorkoutEntryUncheckedCreateNestedManyWithoutWorkoutInput
   }
 
   export type WorkoutUpdateInput = {
@@ -17705,7 +19043,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutWorkoutsNestedInput
-    sets?: WorkoutSetUpdateManyWithoutWorkoutNestedInput
+    entries?: WorkoutEntryUpdateManyWithoutWorkoutNestedInput
   }
 
   export type WorkoutUncheckedUpdateInput = {
@@ -17718,7 +19056,7 @@ export namespace Prisma {
     finished_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sets?: WorkoutSetUncheckedUpdateManyWithoutWorkoutNestedInput
+    entries?: WorkoutEntryUncheckedUpdateManyWithoutWorkoutNestedInput
   }
 
   export type WorkoutCreateManyInput = {
@@ -17755,6 +19093,75 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type WorkoutEntryCreateInput = {
+    uuid?: string
+    order?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    workout: WorkoutCreateNestedOneWithoutEntriesInput
+    exercise: ExerciseCreateNestedOneWithoutEntriesInput
+    sets?: WorkoutSetCreateNestedManyWithoutWorkout_entryInput
+  }
+
+  export type WorkoutEntryUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    workout_uuid: string
+    exercise_uuid: string
+    order?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    sets?: WorkoutSetUncheckedCreateNestedManyWithoutWorkout_entryInput
+  }
+
+  export type WorkoutEntryUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    workout?: WorkoutUpdateOneRequiredWithoutEntriesNestedInput
+    exercise?: ExerciseUpdateOneRequiredWithoutEntriesNestedInput
+    sets?: WorkoutSetUpdateManyWithoutWorkout_entryNestedInput
+  }
+
+  export type WorkoutEntryUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    workout_uuid?: StringFieldUpdateOperationsInput | string
+    exercise_uuid?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sets?: WorkoutSetUncheckedUpdateManyWithoutWorkout_entryNestedInput
+  }
+
+  export type WorkoutEntryCreateManyInput = {
+    id?: number
+    uuid?: string
+    workout_uuid: string
+    exercise_uuid: string
+    order?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type WorkoutEntryUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkoutEntryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    workout_uuid?: StringFieldUpdateOperationsInput | string
+    exercise_uuid?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type WorkoutSetCreateInput = {
     uuid?: string
     type: $Enums.ExerciseType
@@ -17770,18 +19177,16 @@ export namespace Prisma {
     is_warmup?: boolean
     is_cooldown?: boolean
     is_super_set?: boolean
-    order: number
+    order?: number
     created_at?: Date | string
     updated_at?: Date | string
-    workout: WorkoutCreateNestedOneWithoutSetsInput
-    exercise: ExerciseCreateNestedOneWithoutSetsInput
+    workout_entry: WorkoutEntryCreateNestedOneWithoutSetsInput
   }
 
   export type WorkoutSetUncheckedCreateInput = {
     id?: number
     uuid?: string
-    workout_uuid: string
-    exercise_uuid: string
+    workout_entry_uuid: string
     type: $Enums.ExerciseType
     reps?: number | null
     weight?: Decimal | DecimalJsLike | number | string | null
@@ -17795,7 +19200,7 @@ export namespace Prisma {
     is_warmup?: boolean
     is_cooldown?: boolean
     is_super_set?: boolean
-    order: number
+    order?: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -17818,15 +19223,13 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    workout?: WorkoutUpdateOneRequiredWithoutSetsNestedInput
-    exercise?: ExerciseUpdateOneRequiredWithoutSetsNestedInput
+    workout_entry?: WorkoutEntryUpdateOneRequiredWithoutSetsNestedInput
   }
 
   export type WorkoutSetUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
-    workout_uuid?: StringFieldUpdateOperationsInput | string
-    exercise_uuid?: StringFieldUpdateOperationsInput | string
+    workout_entry_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
     reps?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -17848,8 +19251,7 @@ export namespace Prisma {
   export type WorkoutSetCreateManyInput = {
     id?: number
     uuid?: string
-    workout_uuid: string
-    exercise_uuid: string
+    workout_entry_uuid: string
     type: $Enums.ExerciseType
     reps?: number | null
     weight?: Decimal | DecimalJsLike | number | string | null
@@ -17863,7 +19265,7 @@ export namespace Prisma {
     is_warmup?: boolean
     is_cooldown?: boolean
     is_super_set?: boolean
-    order: number
+    order?: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -17891,8 +19293,7 @@ export namespace Prisma {
   export type WorkoutSetUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
-    workout_uuid?: StringFieldUpdateOperationsInput | string
-    exercise_uuid?: StringFieldUpdateOperationsInput | string
+    workout_entry_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
     reps?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -18599,13 +20000,13 @@ export namespace Prisma {
     isNot?: MuscleGroupWhereInput
   }
 
-  export type WorkoutSetListRelationFilter = {
-    every?: WorkoutSetWhereInput
-    some?: WorkoutSetWhereInput
-    none?: WorkoutSetWhereInput
+  export type WorkoutEntryListRelationFilter = {
+    every?: WorkoutEntryWhereInput
+    some?: WorkoutEntryWhereInput
+    none?: WorkoutEntryWhereInput
   }
 
-  export type WorkoutSetOrderByRelationAggregateInput = {
+  export type WorkoutEntryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18707,6 +20108,66 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type WorkoutScalarRelationFilter = {
+    is?: WorkoutWhereInput
+    isNot?: WorkoutWhereInput
+  }
+
+  export type ExerciseScalarRelationFilter = {
+    is?: ExerciseWhereInput
+    isNot?: ExerciseWhereInput
+  }
+
+  export type WorkoutSetListRelationFilter = {
+    every?: WorkoutSetWhereInput
+    some?: WorkoutSetWhereInput
+    none?: WorkoutSetWhereInput
+  }
+
+  export type WorkoutSetOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WorkoutEntryCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    workout_uuid?: SortOrder
+    exercise_uuid?: SortOrder
+    order?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type WorkoutEntryAvgOrderByAggregateInput = {
+    id?: SortOrder
+    order?: SortOrder
+  }
+
+  export type WorkoutEntryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    workout_uuid?: SortOrder
+    exercise_uuid?: SortOrder
+    order?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type WorkoutEntryMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    workout_uuid?: SortOrder
+    exercise_uuid?: SortOrder
+    order?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type WorkoutEntrySumOrderByAggregateInput = {
+    id?: SortOrder
+    order?: SortOrder
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -18734,21 +20195,15 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type WorkoutScalarRelationFilter = {
-    is?: WorkoutWhereInput
-    isNot?: WorkoutWhereInput
-  }
-
-  export type ExerciseScalarRelationFilter = {
-    is?: ExerciseWhereInput
-    isNot?: ExerciseWhereInput
+  export type WorkoutEntryScalarRelationFilter = {
+    is?: WorkoutEntryWhereInput
+    isNot?: WorkoutEntryWhereInput
   }
 
   export type WorkoutSetCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
-    workout_uuid?: SortOrder
-    exercise_uuid?: SortOrder
+    workout_entry_uuid?: SortOrder
     type?: SortOrder
     reps?: SortOrder
     weight?: SortOrder
@@ -18780,8 +20235,7 @@ export namespace Prisma {
   export type WorkoutSetMaxOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
-    workout_uuid?: SortOrder
-    exercise_uuid?: SortOrder
+    workout_entry_uuid?: SortOrder
     type?: SortOrder
     reps?: SortOrder
     weight?: SortOrder
@@ -18803,8 +20257,7 @@ export namespace Prisma {
   export type WorkoutSetMinOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
-    workout_uuid?: SortOrder
-    exercise_uuid?: SortOrder
+    workout_entry_uuid?: SortOrder
     type?: SortOrder
     reps?: SortOrder
     weight?: SortOrder
@@ -19787,18 +21240,18 @@ export namespace Prisma {
     connect?: MuscleGroupWhereUniqueInput
   }
 
-  export type WorkoutSetCreateNestedManyWithoutExerciseInput = {
-    create?: XOR<WorkoutSetCreateWithoutExerciseInput, WorkoutSetUncheckedCreateWithoutExerciseInput> | WorkoutSetCreateWithoutExerciseInput[] | WorkoutSetUncheckedCreateWithoutExerciseInput[]
-    connectOrCreate?: WorkoutSetCreateOrConnectWithoutExerciseInput | WorkoutSetCreateOrConnectWithoutExerciseInput[]
-    createMany?: WorkoutSetCreateManyExerciseInputEnvelope
-    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+  export type WorkoutEntryCreateNestedManyWithoutExerciseInput = {
+    create?: XOR<WorkoutEntryCreateWithoutExerciseInput, WorkoutEntryUncheckedCreateWithoutExerciseInput> | WorkoutEntryCreateWithoutExerciseInput[] | WorkoutEntryUncheckedCreateWithoutExerciseInput[]
+    connectOrCreate?: WorkoutEntryCreateOrConnectWithoutExerciseInput | WorkoutEntryCreateOrConnectWithoutExerciseInput[]
+    createMany?: WorkoutEntryCreateManyExerciseInputEnvelope
+    connect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
   }
 
-  export type WorkoutSetUncheckedCreateNestedManyWithoutExerciseInput = {
-    create?: XOR<WorkoutSetCreateWithoutExerciseInput, WorkoutSetUncheckedCreateWithoutExerciseInput> | WorkoutSetCreateWithoutExerciseInput[] | WorkoutSetUncheckedCreateWithoutExerciseInput[]
-    connectOrCreate?: WorkoutSetCreateOrConnectWithoutExerciseInput | WorkoutSetCreateOrConnectWithoutExerciseInput[]
-    createMany?: WorkoutSetCreateManyExerciseInputEnvelope
-    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+  export type WorkoutEntryUncheckedCreateNestedManyWithoutExerciseInput = {
+    create?: XOR<WorkoutEntryCreateWithoutExerciseInput, WorkoutEntryUncheckedCreateWithoutExerciseInput> | WorkoutEntryCreateWithoutExerciseInput[] | WorkoutEntryUncheckedCreateWithoutExerciseInput[]
+    connectOrCreate?: WorkoutEntryCreateOrConnectWithoutExerciseInput | WorkoutEntryCreateOrConnectWithoutExerciseInput[]
+    createMany?: WorkoutEntryCreateManyExerciseInputEnvelope
+    connect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
   }
 
   export type EnumExerciseTypeFieldUpdateOperationsInput = {
@@ -19823,32 +21276,32 @@ export namespace Prisma {
     update?: XOR<XOR<MuscleGroupUpdateToOneWithWhereWithoutExercisesInput, MuscleGroupUpdateWithoutExercisesInput>, MuscleGroupUncheckedUpdateWithoutExercisesInput>
   }
 
-  export type WorkoutSetUpdateManyWithoutExerciseNestedInput = {
-    create?: XOR<WorkoutSetCreateWithoutExerciseInput, WorkoutSetUncheckedCreateWithoutExerciseInput> | WorkoutSetCreateWithoutExerciseInput[] | WorkoutSetUncheckedCreateWithoutExerciseInput[]
-    connectOrCreate?: WorkoutSetCreateOrConnectWithoutExerciseInput | WorkoutSetCreateOrConnectWithoutExerciseInput[]
-    upsert?: WorkoutSetUpsertWithWhereUniqueWithoutExerciseInput | WorkoutSetUpsertWithWhereUniqueWithoutExerciseInput[]
-    createMany?: WorkoutSetCreateManyExerciseInputEnvelope
-    set?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    disconnect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    delete?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    update?: WorkoutSetUpdateWithWhereUniqueWithoutExerciseInput | WorkoutSetUpdateWithWhereUniqueWithoutExerciseInput[]
-    updateMany?: WorkoutSetUpdateManyWithWhereWithoutExerciseInput | WorkoutSetUpdateManyWithWhereWithoutExerciseInput[]
-    deleteMany?: WorkoutSetScalarWhereInput | WorkoutSetScalarWhereInput[]
+  export type WorkoutEntryUpdateManyWithoutExerciseNestedInput = {
+    create?: XOR<WorkoutEntryCreateWithoutExerciseInput, WorkoutEntryUncheckedCreateWithoutExerciseInput> | WorkoutEntryCreateWithoutExerciseInput[] | WorkoutEntryUncheckedCreateWithoutExerciseInput[]
+    connectOrCreate?: WorkoutEntryCreateOrConnectWithoutExerciseInput | WorkoutEntryCreateOrConnectWithoutExerciseInput[]
+    upsert?: WorkoutEntryUpsertWithWhereUniqueWithoutExerciseInput | WorkoutEntryUpsertWithWhereUniqueWithoutExerciseInput[]
+    createMany?: WorkoutEntryCreateManyExerciseInputEnvelope
+    set?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    disconnect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    delete?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    connect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    update?: WorkoutEntryUpdateWithWhereUniqueWithoutExerciseInput | WorkoutEntryUpdateWithWhereUniqueWithoutExerciseInput[]
+    updateMany?: WorkoutEntryUpdateManyWithWhereWithoutExerciseInput | WorkoutEntryUpdateManyWithWhereWithoutExerciseInput[]
+    deleteMany?: WorkoutEntryScalarWhereInput | WorkoutEntryScalarWhereInput[]
   }
 
-  export type WorkoutSetUncheckedUpdateManyWithoutExerciseNestedInput = {
-    create?: XOR<WorkoutSetCreateWithoutExerciseInput, WorkoutSetUncheckedCreateWithoutExerciseInput> | WorkoutSetCreateWithoutExerciseInput[] | WorkoutSetUncheckedCreateWithoutExerciseInput[]
-    connectOrCreate?: WorkoutSetCreateOrConnectWithoutExerciseInput | WorkoutSetCreateOrConnectWithoutExerciseInput[]
-    upsert?: WorkoutSetUpsertWithWhereUniqueWithoutExerciseInput | WorkoutSetUpsertWithWhereUniqueWithoutExerciseInput[]
-    createMany?: WorkoutSetCreateManyExerciseInputEnvelope
-    set?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    disconnect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    delete?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    update?: WorkoutSetUpdateWithWhereUniqueWithoutExerciseInput | WorkoutSetUpdateWithWhereUniqueWithoutExerciseInput[]
-    updateMany?: WorkoutSetUpdateManyWithWhereWithoutExerciseInput | WorkoutSetUpdateManyWithWhereWithoutExerciseInput[]
-    deleteMany?: WorkoutSetScalarWhereInput | WorkoutSetScalarWhereInput[]
+  export type WorkoutEntryUncheckedUpdateManyWithoutExerciseNestedInput = {
+    create?: XOR<WorkoutEntryCreateWithoutExerciseInput, WorkoutEntryUncheckedCreateWithoutExerciseInput> | WorkoutEntryCreateWithoutExerciseInput[] | WorkoutEntryUncheckedCreateWithoutExerciseInput[]
+    connectOrCreate?: WorkoutEntryCreateOrConnectWithoutExerciseInput | WorkoutEntryCreateOrConnectWithoutExerciseInput[]
+    upsert?: WorkoutEntryUpsertWithWhereUniqueWithoutExerciseInput | WorkoutEntryUpsertWithWhereUniqueWithoutExerciseInput[]
+    createMany?: WorkoutEntryCreateManyExerciseInputEnvelope
+    set?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    disconnect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    delete?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    connect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    update?: WorkoutEntryUpdateWithWhereUniqueWithoutExerciseInput | WorkoutEntryUpdateWithWhereUniqueWithoutExerciseInput[]
+    updateMany?: WorkoutEntryUpdateManyWithWhereWithoutExerciseInput | WorkoutEntryUpdateManyWithWhereWithoutExerciseInput[]
+    deleteMany?: WorkoutEntryScalarWhereInput | WorkoutEntryScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutWorkoutsInput = {
@@ -19857,18 +21310,18 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type WorkoutSetCreateNestedManyWithoutWorkoutInput = {
-    create?: XOR<WorkoutSetCreateWithoutWorkoutInput, WorkoutSetUncheckedCreateWithoutWorkoutInput> | WorkoutSetCreateWithoutWorkoutInput[] | WorkoutSetUncheckedCreateWithoutWorkoutInput[]
-    connectOrCreate?: WorkoutSetCreateOrConnectWithoutWorkoutInput | WorkoutSetCreateOrConnectWithoutWorkoutInput[]
-    createMany?: WorkoutSetCreateManyWorkoutInputEnvelope
-    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+  export type WorkoutEntryCreateNestedManyWithoutWorkoutInput = {
+    create?: XOR<WorkoutEntryCreateWithoutWorkoutInput, WorkoutEntryUncheckedCreateWithoutWorkoutInput> | WorkoutEntryCreateWithoutWorkoutInput[] | WorkoutEntryUncheckedCreateWithoutWorkoutInput[]
+    connectOrCreate?: WorkoutEntryCreateOrConnectWithoutWorkoutInput | WorkoutEntryCreateOrConnectWithoutWorkoutInput[]
+    createMany?: WorkoutEntryCreateManyWorkoutInputEnvelope
+    connect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
   }
 
-  export type WorkoutSetUncheckedCreateNestedManyWithoutWorkoutInput = {
-    create?: XOR<WorkoutSetCreateWithoutWorkoutInput, WorkoutSetUncheckedCreateWithoutWorkoutInput> | WorkoutSetCreateWithoutWorkoutInput[] | WorkoutSetUncheckedCreateWithoutWorkoutInput[]
-    connectOrCreate?: WorkoutSetCreateOrConnectWithoutWorkoutInput | WorkoutSetCreateOrConnectWithoutWorkoutInput[]
-    createMany?: WorkoutSetCreateManyWorkoutInputEnvelope
-    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+  export type WorkoutEntryUncheckedCreateNestedManyWithoutWorkoutInput = {
+    create?: XOR<WorkoutEntryCreateWithoutWorkoutInput, WorkoutEntryUncheckedCreateWithoutWorkoutInput> | WorkoutEntryCreateWithoutWorkoutInput[] | WorkoutEntryUncheckedCreateWithoutWorkoutInput[]
+    connectOrCreate?: WorkoutEntryCreateOrConnectWithoutWorkoutInput | WorkoutEntryCreateOrConnectWithoutWorkoutInput[]
+    createMany?: WorkoutEntryCreateManyWorkoutInputEnvelope
+    connect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutWorkoutsNestedInput = {
@@ -19881,44 +21334,108 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWorkoutsInput, UserUpdateWithoutWorkoutsInput>, UserUncheckedUpdateWithoutWorkoutsInput>
   }
 
-  export type WorkoutSetUpdateManyWithoutWorkoutNestedInput = {
-    create?: XOR<WorkoutSetCreateWithoutWorkoutInput, WorkoutSetUncheckedCreateWithoutWorkoutInput> | WorkoutSetCreateWithoutWorkoutInput[] | WorkoutSetUncheckedCreateWithoutWorkoutInput[]
-    connectOrCreate?: WorkoutSetCreateOrConnectWithoutWorkoutInput | WorkoutSetCreateOrConnectWithoutWorkoutInput[]
-    upsert?: WorkoutSetUpsertWithWhereUniqueWithoutWorkoutInput | WorkoutSetUpsertWithWhereUniqueWithoutWorkoutInput[]
-    createMany?: WorkoutSetCreateManyWorkoutInputEnvelope
-    set?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    disconnect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    delete?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    update?: WorkoutSetUpdateWithWhereUniqueWithoutWorkoutInput | WorkoutSetUpdateWithWhereUniqueWithoutWorkoutInput[]
-    updateMany?: WorkoutSetUpdateManyWithWhereWithoutWorkoutInput | WorkoutSetUpdateManyWithWhereWithoutWorkoutInput[]
-    deleteMany?: WorkoutSetScalarWhereInput | WorkoutSetScalarWhereInput[]
+  export type WorkoutEntryUpdateManyWithoutWorkoutNestedInput = {
+    create?: XOR<WorkoutEntryCreateWithoutWorkoutInput, WorkoutEntryUncheckedCreateWithoutWorkoutInput> | WorkoutEntryCreateWithoutWorkoutInput[] | WorkoutEntryUncheckedCreateWithoutWorkoutInput[]
+    connectOrCreate?: WorkoutEntryCreateOrConnectWithoutWorkoutInput | WorkoutEntryCreateOrConnectWithoutWorkoutInput[]
+    upsert?: WorkoutEntryUpsertWithWhereUniqueWithoutWorkoutInput | WorkoutEntryUpsertWithWhereUniqueWithoutWorkoutInput[]
+    createMany?: WorkoutEntryCreateManyWorkoutInputEnvelope
+    set?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    disconnect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    delete?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    connect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    update?: WorkoutEntryUpdateWithWhereUniqueWithoutWorkoutInput | WorkoutEntryUpdateWithWhereUniqueWithoutWorkoutInput[]
+    updateMany?: WorkoutEntryUpdateManyWithWhereWithoutWorkoutInput | WorkoutEntryUpdateManyWithWhereWithoutWorkoutInput[]
+    deleteMany?: WorkoutEntryScalarWhereInput | WorkoutEntryScalarWhereInput[]
   }
 
-  export type WorkoutSetUncheckedUpdateManyWithoutWorkoutNestedInput = {
-    create?: XOR<WorkoutSetCreateWithoutWorkoutInput, WorkoutSetUncheckedCreateWithoutWorkoutInput> | WorkoutSetCreateWithoutWorkoutInput[] | WorkoutSetUncheckedCreateWithoutWorkoutInput[]
-    connectOrCreate?: WorkoutSetCreateOrConnectWithoutWorkoutInput | WorkoutSetCreateOrConnectWithoutWorkoutInput[]
-    upsert?: WorkoutSetUpsertWithWhereUniqueWithoutWorkoutInput | WorkoutSetUpsertWithWhereUniqueWithoutWorkoutInput[]
-    createMany?: WorkoutSetCreateManyWorkoutInputEnvelope
-    set?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    disconnect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    delete?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
-    update?: WorkoutSetUpdateWithWhereUniqueWithoutWorkoutInput | WorkoutSetUpdateWithWhereUniqueWithoutWorkoutInput[]
-    updateMany?: WorkoutSetUpdateManyWithWhereWithoutWorkoutInput | WorkoutSetUpdateManyWithWhereWithoutWorkoutInput[]
-    deleteMany?: WorkoutSetScalarWhereInput | WorkoutSetScalarWhereInput[]
+  export type WorkoutEntryUncheckedUpdateManyWithoutWorkoutNestedInput = {
+    create?: XOR<WorkoutEntryCreateWithoutWorkoutInput, WorkoutEntryUncheckedCreateWithoutWorkoutInput> | WorkoutEntryCreateWithoutWorkoutInput[] | WorkoutEntryUncheckedCreateWithoutWorkoutInput[]
+    connectOrCreate?: WorkoutEntryCreateOrConnectWithoutWorkoutInput | WorkoutEntryCreateOrConnectWithoutWorkoutInput[]
+    upsert?: WorkoutEntryUpsertWithWhereUniqueWithoutWorkoutInput | WorkoutEntryUpsertWithWhereUniqueWithoutWorkoutInput[]
+    createMany?: WorkoutEntryCreateManyWorkoutInputEnvelope
+    set?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    disconnect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    delete?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    connect?: WorkoutEntryWhereUniqueInput | WorkoutEntryWhereUniqueInput[]
+    update?: WorkoutEntryUpdateWithWhereUniqueWithoutWorkoutInput | WorkoutEntryUpdateWithWhereUniqueWithoutWorkoutInput[]
+    updateMany?: WorkoutEntryUpdateManyWithWhereWithoutWorkoutInput | WorkoutEntryUpdateManyWithWhereWithoutWorkoutInput[]
+    deleteMany?: WorkoutEntryScalarWhereInput | WorkoutEntryScalarWhereInput[]
   }
 
-  export type WorkoutCreateNestedOneWithoutSetsInput = {
-    create?: XOR<WorkoutCreateWithoutSetsInput, WorkoutUncheckedCreateWithoutSetsInput>
-    connectOrCreate?: WorkoutCreateOrConnectWithoutSetsInput
+  export type WorkoutCreateNestedOneWithoutEntriesInput = {
+    create?: XOR<WorkoutCreateWithoutEntriesInput, WorkoutUncheckedCreateWithoutEntriesInput>
+    connectOrCreate?: WorkoutCreateOrConnectWithoutEntriesInput
     connect?: WorkoutWhereUniqueInput
   }
 
-  export type ExerciseCreateNestedOneWithoutSetsInput = {
-    create?: XOR<ExerciseCreateWithoutSetsInput, ExerciseUncheckedCreateWithoutSetsInput>
-    connectOrCreate?: ExerciseCreateOrConnectWithoutSetsInput
+  export type ExerciseCreateNestedOneWithoutEntriesInput = {
+    create?: XOR<ExerciseCreateWithoutEntriesInput, ExerciseUncheckedCreateWithoutEntriesInput>
+    connectOrCreate?: ExerciseCreateOrConnectWithoutEntriesInput
     connect?: ExerciseWhereUniqueInput
+  }
+
+  export type WorkoutSetCreateNestedManyWithoutWorkout_entryInput = {
+    create?: XOR<WorkoutSetCreateWithoutWorkout_entryInput, WorkoutSetUncheckedCreateWithoutWorkout_entryInput> | WorkoutSetCreateWithoutWorkout_entryInput[] | WorkoutSetUncheckedCreateWithoutWorkout_entryInput[]
+    connectOrCreate?: WorkoutSetCreateOrConnectWithoutWorkout_entryInput | WorkoutSetCreateOrConnectWithoutWorkout_entryInput[]
+    createMany?: WorkoutSetCreateManyWorkout_entryInputEnvelope
+    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+  }
+
+  export type WorkoutSetUncheckedCreateNestedManyWithoutWorkout_entryInput = {
+    create?: XOR<WorkoutSetCreateWithoutWorkout_entryInput, WorkoutSetUncheckedCreateWithoutWorkout_entryInput> | WorkoutSetCreateWithoutWorkout_entryInput[] | WorkoutSetUncheckedCreateWithoutWorkout_entryInput[]
+    connectOrCreate?: WorkoutSetCreateOrConnectWithoutWorkout_entryInput | WorkoutSetCreateOrConnectWithoutWorkout_entryInput[]
+    createMany?: WorkoutSetCreateManyWorkout_entryInputEnvelope
+    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+  }
+
+  export type WorkoutUpdateOneRequiredWithoutEntriesNestedInput = {
+    create?: XOR<WorkoutCreateWithoutEntriesInput, WorkoutUncheckedCreateWithoutEntriesInput>
+    connectOrCreate?: WorkoutCreateOrConnectWithoutEntriesInput
+    upsert?: WorkoutUpsertWithoutEntriesInput
+    connect?: WorkoutWhereUniqueInput
+    update?: XOR<XOR<WorkoutUpdateToOneWithWhereWithoutEntriesInput, WorkoutUpdateWithoutEntriesInput>, WorkoutUncheckedUpdateWithoutEntriesInput>
+  }
+
+  export type ExerciseUpdateOneRequiredWithoutEntriesNestedInput = {
+    create?: XOR<ExerciseCreateWithoutEntriesInput, ExerciseUncheckedCreateWithoutEntriesInput>
+    connectOrCreate?: ExerciseCreateOrConnectWithoutEntriesInput
+    upsert?: ExerciseUpsertWithoutEntriesInput
+    connect?: ExerciseWhereUniqueInput
+    update?: XOR<XOR<ExerciseUpdateToOneWithWhereWithoutEntriesInput, ExerciseUpdateWithoutEntriesInput>, ExerciseUncheckedUpdateWithoutEntriesInput>
+  }
+
+  export type WorkoutSetUpdateManyWithoutWorkout_entryNestedInput = {
+    create?: XOR<WorkoutSetCreateWithoutWorkout_entryInput, WorkoutSetUncheckedCreateWithoutWorkout_entryInput> | WorkoutSetCreateWithoutWorkout_entryInput[] | WorkoutSetUncheckedCreateWithoutWorkout_entryInput[]
+    connectOrCreate?: WorkoutSetCreateOrConnectWithoutWorkout_entryInput | WorkoutSetCreateOrConnectWithoutWorkout_entryInput[]
+    upsert?: WorkoutSetUpsertWithWhereUniqueWithoutWorkout_entryInput | WorkoutSetUpsertWithWhereUniqueWithoutWorkout_entryInput[]
+    createMany?: WorkoutSetCreateManyWorkout_entryInputEnvelope
+    set?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+    disconnect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+    delete?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+    update?: WorkoutSetUpdateWithWhereUniqueWithoutWorkout_entryInput | WorkoutSetUpdateWithWhereUniqueWithoutWorkout_entryInput[]
+    updateMany?: WorkoutSetUpdateManyWithWhereWithoutWorkout_entryInput | WorkoutSetUpdateManyWithWhereWithoutWorkout_entryInput[]
+    deleteMany?: WorkoutSetScalarWhereInput | WorkoutSetScalarWhereInput[]
+  }
+
+  export type WorkoutSetUncheckedUpdateManyWithoutWorkout_entryNestedInput = {
+    create?: XOR<WorkoutSetCreateWithoutWorkout_entryInput, WorkoutSetUncheckedCreateWithoutWorkout_entryInput> | WorkoutSetCreateWithoutWorkout_entryInput[] | WorkoutSetUncheckedCreateWithoutWorkout_entryInput[]
+    connectOrCreate?: WorkoutSetCreateOrConnectWithoutWorkout_entryInput | WorkoutSetCreateOrConnectWithoutWorkout_entryInput[]
+    upsert?: WorkoutSetUpsertWithWhereUniqueWithoutWorkout_entryInput | WorkoutSetUpsertWithWhereUniqueWithoutWorkout_entryInput[]
+    createMany?: WorkoutSetCreateManyWorkout_entryInputEnvelope
+    set?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+    disconnect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+    delete?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+    connect?: WorkoutSetWhereUniqueInput | WorkoutSetWhereUniqueInput[]
+    update?: WorkoutSetUpdateWithWhereUniqueWithoutWorkout_entryInput | WorkoutSetUpdateWithWhereUniqueWithoutWorkout_entryInput[]
+    updateMany?: WorkoutSetUpdateManyWithWhereWithoutWorkout_entryInput | WorkoutSetUpdateManyWithWhereWithoutWorkout_entryInput[]
+    deleteMany?: WorkoutSetScalarWhereInput | WorkoutSetScalarWhereInput[]
+  }
+
+  export type WorkoutEntryCreateNestedOneWithoutSetsInput = {
+    create?: XOR<WorkoutEntryCreateWithoutSetsInput, WorkoutEntryUncheckedCreateWithoutSetsInput>
+    connectOrCreate?: WorkoutEntryCreateOrConnectWithoutSetsInput
+    connect?: WorkoutEntryWhereUniqueInput
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -19941,20 +21458,12 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type WorkoutUpdateOneRequiredWithoutSetsNestedInput = {
-    create?: XOR<WorkoutCreateWithoutSetsInput, WorkoutUncheckedCreateWithoutSetsInput>
-    connectOrCreate?: WorkoutCreateOrConnectWithoutSetsInput
-    upsert?: WorkoutUpsertWithoutSetsInput
-    connect?: WorkoutWhereUniqueInput
-    update?: XOR<XOR<WorkoutUpdateToOneWithWhereWithoutSetsInput, WorkoutUpdateWithoutSetsInput>, WorkoutUncheckedUpdateWithoutSetsInput>
-  }
-
-  export type ExerciseUpdateOneRequiredWithoutSetsNestedInput = {
-    create?: XOR<ExerciseCreateWithoutSetsInput, ExerciseUncheckedCreateWithoutSetsInput>
-    connectOrCreate?: ExerciseCreateOrConnectWithoutSetsInput
-    upsert?: ExerciseUpsertWithoutSetsInput
-    connect?: ExerciseWhereUniqueInput
-    update?: XOR<XOR<ExerciseUpdateToOneWithWhereWithoutSetsInput, ExerciseUpdateWithoutSetsInput>, ExerciseUncheckedUpdateWithoutSetsInput>
+  export type WorkoutEntryUpdateOneRequiredWithoutSetsNestedInput = {
+    create?: XOR<WorkoutEntryCreateWithoutSetsInput, WorkoutEntryUncheckedCreateWithoutSetsInput>
+    connectOrCreate?: WorkoutEntryCreateOrConnectWithoutSetsInput
+    upsert?: WorkoutEntryUpsertWithoutSetsInput
+    connect?: WorkoutEntryWhereUniqueInput
+    update?: XOR<XOR<WorkoutEntryUpdateToOneWithWhereWithoutSetsInput, WorkoutEntryUpdateWithoutSetsInput>, WorkoutEntryUncheckedUpdateWithoutSetsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -20488,7 +21997,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     muscle_group: MuscleGroupCreateNestedOneWithoutExercisesInput
-    sets?: WorkoutSetCreateNestedManyWithoutExerciseInput
+    entries?: WorkoutEntryCreateNestedManyWithoutExerciseInput
   }
 
   export type ExerciseUncheckedCreateWithoutUserInput = {
@@ -20500,7 +22009,7 @@ export namespace Prisma {
     type: $Enums.ExerciseType
     created_at?: Date | string
     updated_at?: Date | string
-    sets?: WorkoutSetUncheckedCreateNestedManyWithoutExerciseInput
+    entries?: WorkoutEntryUncheckedCreateNestedManyWithoutExerciseInput
   }
 
   export type ExerciseCreateOrConnectWithoutUserInput = {
@@ -20521,7 +22030,7 @@ export namespace Prisma {
     finished_at?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
-    sets?: WorkoutSetCreateNestedManyWithoutWorkoutInput
+    entries?: WorkoutEntryCreateNestedManyWithoutWorkoutInput
   }
 
   export type WorkoutUncheckedCreateWithoutUserInput = {
@@ -20533,7 +22042,7 @@ export namespace Prisma {
     finished_at?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
-    sets?: WorkoutSetUncheckedCreateNestedManyWithoutWorkoutInput
+    entries?: WorkoutEntryUncheckedCreateNestedManyWithoutWorkoutInput
   }
 
   export type WorkoutCreateOrConnectWithoutUserInput = {
@@ -22140,7 +23649,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutExercisesInput
-    sets?: WorkoutSetCreateNestedManyWithoutExerciseInput
+    entries?: WorkoutEntryCreateNestedManyWithoutExerciseInput
   }
 
   export type ExerciseUncheckedCreateWithoutMuscle_groupInput = {
@@ -22152,7 +23661,7 @@ export namespace Prisma {
     type: $Enums.ExerciseType
     created_at?: Date | string
     updated_at?: Date | string
-    sets?: WorkoutSetUncheckedCreateNestedManyWithoutExerciseInput
+    entries?: WorkoutEntryUncheckedCreateNestedManyWithoutExerciseInput
   }
 
   export type ExerciseCreateOrConnectWithoutMuscle_groupInput = {
@@ -22303,56 +23812,32 @@ export namespace Prisma {
     create: XOR<MuscleGroupCreateWithoutExercisesInput, MuscleGroupUncheckedCreateWithoutExercisesInput>
   }
 
-  export type WorkoutSetCreateWithoutExerciseInput = {
+  export type WorkoutEntryCreateWithoutExerciseInput = {
     uuid?: string
-    type: $Enums.ExerciseType
-    reps?: number | null
-    weight?: Decimal | DecimalJsLike | number | string | null
-    duration_seconds?: number | null
-    distance_meters?: number | null
-    rest_seconds?: number | null
-    notes?: string | null
-    is_dropset?: boolean
-    is_amrap?: boolean
-    is_rest?: boolean
-    is_warmup?: boolean
-    is_cooldown?: boolean
-    is_super_set?: boolean
-    order: number
+    order?: number
     created_at?: Date | string
     updated_at?: Date | string
-    workout: WorkoutCreateNestedOneWithoutSetsInput
+    workout: WorkoutCreateNestedOneWithoutEntriesInput
+    sets?: WorkoutSetCreateNestedManyWithoutWorkout_entryInput
   }
 
-  export type WorkoutSetUncheckedCreateWithoutExerciseInput = {
+  export type WorkoutEntryUncheckedCreateWithoutExerciseInput = {
     id?: number
     uuid?: string
     workout_uuid: string
-    type: $Enums.ExerciseType
-    reps?: number | null
-    weight?: Decimal | DecimalJsLike | number | string | null
-    duration_seconds?: number | null
-    distance_meters?: number | null
-    rest_seconds?: number | null
-    notes?: string | null
-    is_dropset?: boolean
-    is_amrap?: boolean
-    is_rest?: boolean
-    is_warmup?: boolean
-    is_cooldown?: boolean
-    is_super_set?: boolean
-    order: number
+    order?: number
     created_at?: Date | string
     updated_at?: Date | string
+    sets?: WorkoutSetUncheckedCreateNestedManyWithoutWorkout_entryInput
   }
 
-  export type WorkoutSetCreateOrConnectWithoutExerciseInput = {
-    where: WorkoutSetWhereUniqueInput
-    create: XOR<WorkoutSetCreateWithoutExerciseInput, WorkoutSetUncheckedCreateWithoutExerciseInput>
+  export type WorkoutEntryCreateOrConnectWithoutExerciseInput = {
+    where: WorkoutEntryWhereUniqueInput
+    create: XOR<WorkoutEntryCreateWithoutExerciseInput, WorkoutEntryUncheckedCreateWithoutExerciseInput>
   }
 
-  export type WorkoutSetCreateManyExerciseInputEnvelope = {
-    data: WorkoutSetCreateManyExerciseInput | WorkoutSetCreateManyExerciseInput[]
+  export type WorkoutEntryCreateManyExerciseInputEnvelope = {
+    data: WorkoutEntryCreateManyExerciseInput | WorkoutEntryCreateManyExerciseInput[]
     skipDuplicates?: boolean
   }
 
@@ -22438,46 +23923,33 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type WorkoutSetUpsertWithWhereUniqueWithoutExerciseInput = {
-    where: WorkoutSetWhereUniqueInput
-    update: XOR<WorkoutSetUpdateWithoutExerciseInput, WorkoutSetUncheckedUpdateWithoutExerciseInput>
-    create: XOR<WorkoutSetCreateWithoutExerciseInput, WorkoutSetUncheckedCreateWithoutExerciseInput>
+  export type WorkoutEntryUpsertWithWhereUniqueWithoutExerciseInput = {
+    where: WorkoutEntryWhereUniqueInput
+    update: XOR<WorkoutEntryUpdateWithoutExerciseInput, WorkoutEntryUncheckedUpdateWithoutExerciseInput>
+    create: XOR<WorkoutEntryCreateWithoutExerciseInput, WorkoutEntryUncheckedCreateWithoutExerciseInput>
   }
 
-  export type WorkoutSetUpdateWithWhereUniqueWithoutExerciseInput = {
-    where: WorkoutSetWhereUniqueInput
-    data: XOR<WorkoutSetUpdateWithoutExerciseInput, WorkoutSetUncheckedUpdateWithoutExerciseInput>
+  export type WorkoutEntryUpdateWithWhereUniqueWithoutExerciseInput = {
+    where: WorkoutEntryWhereUniqueInput
+    data: XOR<WorkoutEntryUpdateWithoutExerciseInput, WorkoutEntryUncheckedUpdateWithoutExerciseInput>
   }
 
-  export type WorkoutSetUpdateManyWithWhereWithoutExerciseInput = {
-    where: WorkoutSetScalarWhereInput
-    data: XOR<WorkoutSetUpdateManyMutationInput, WorkoutSetUncheckedUpdateManyWithoutExerciseInput>
+  export type WorkoutEntryUpdateManyWithWhereWithoutExerciseInput = {
+    where: WorkoutEntryScalarWhereInput
+    data: XOR<WorkoutEntryUpdateManyMutationInput, WorkoutEntryUncheckedUpdateManyWithoutExerciseInput>
   }
 
-  export type WorkoutSetScalarWhereInput = {
-    AND?: WorkoutSetScalarWhereInput | WorkoutSetScalarWhereInput[]
-    OR?: WorkoutSetScalarWhereInput[]
-    NOT?: WorkoutSetScalarWhereInput | WorkoutSetScalarWhereInput[]
-    id?: IntFilter<"WorkoutSet"> | number
-    uuid?: StringFilter<"WorkoutSet"> | string
-    workout_uuid?: StringFilter<"WorkoutSet"> | string
-    exercise_uuid?: StringFilter<"WorkoutSet"> | string
-    type?: EnumExerciseTypeFilter<"WorkoutSet"> | $Enums.ExerciseType
-    reps?: IntNullableFilter<"WorkoutSet"> | number | null
-    weight?: DecimalNullableFilter<"WorkoutSet"> | Decimal | DecimalJsLike | number | string | null
-    duration_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
-    distance_meters?: IntNullableFilter<"WorkoutSet"> | number | null
-    rest_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
-    notes?: StringNullableFilter<"WorkoutSet"> | string | null
-    is_dropset?: BoolFilter<"WorkoutSet"> | boolean
-    is_amrap?: BoolFilter<"WorkoutSet"> | boolean
-    is_rest?: BoolFilter<"WorkoutSet"> | boolean
-    is_warmup?: BoolFilter<"WorkoutSet"> | boolean
-    is_cooldown?: BoolFilter<"WorkoutSet"> | boolean
-    is_super_set?: BoolFilter<"WorkoutSet"> | boolean
-    order?: IntFilter<"WorkoutSet"> | number
-    created_at?: DateTimeFilter<"WorkoutSet"> | Date | string
-    updated_at?: DateTimeFilter<"WorkoutSet"> | Date | string
+  export type WorkoutEntryScalarWhereInput = {
+    AND?: WorkoutEntryScalarWhereInput | WorkoutEntryScalarWhereInput[]
+    OR?: WorkoutEntryScalarWhereInput[]
+    NOT?: WorkoutEntryScalarWhereInput | WorkoutEntryScalarWhereInput[]
+    id?: IntFilter<"WorkoutEntry"> | number
+    uuid?: StringFilter<"WorkoutEntry"> | string
+    workout_uuid?: StringFilter<"WorkoutEntry"> | string
+    exercise_uuid?: StringFilter<"WorkoutEntry"> | string
+    order?: IntFilter<"WorkoutEntry"> | number
+    created_at?: DateTimeFilter<"WorkoutEntry"> | Date | string
+    updated_at?: DateTimeFilter<"WorkoutEntry"> | Date | string
   }
 
   export type UserCreateWithoutWorkoutsInput = {
@@ -22526,56 +23998,32 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutWorkoutsInput, UserUncheckedCreateWithoutWorkoutsInput>
   }
 
-  export type WorkoutSetCreateWithoutWorkoutInput = {
+  export type WorkoutEntryCreateWithoutWorkoutInput = {
     uuid?: string
-    type: $Enums.ExerciseType
-    reps?: number | null
-    weight?: Decimal | DecimalJsLike | number | string | null
-    duration_seconds?: number | null
-    distance_meters?: number | null
-    rest_seconds?: number | null
-    notes?: string | null
-    is_dropset?: boolean
-    is_amrap?: boolean
-    is_rest?: boolean
-    is_warmup?: boolean
-    is_cooldown?: boolean
-    is_super_set?: boolean
-    order: number
+    order?: number
     created_at?: Date | string
     updated_at?: Date | string
-    exercise: ExerciseCreateNestedOneWithoutSetsInput
+    exercise: ExerciseCreateNestedOneWithoutEntriesInput
+    sets?: WorkoutSetCreateNestedManyWithoutWorkout_entryInput
   }
 
-  export type WorkoutSetUncheckedCreateWithoutWorkoutInput = {
+  export type WorkoutEntryUncheckedCreateWithoutWorkoutInput = {
     id?: number
     uuid?: string
     exercise_uuid: string
-    type: $Enums.ExerciseType
-    reps?: number | null
-    weight?: Decimal | DecimalJsLike | number | string | null
-    duration_seconds?: number | null
-    distance_meters?: number | null
-    rest_seconds?: number | null
-    notes?: string | null
-    is_dropset?: boolean
-    is_amrap?: boolean
-    is_rest?: boolean
-    is_warmup?: boolean
-    is_cooldown?: boolean
-    is_super_set?: boolean
-    order: number
+    order?: number
     created_at?: Date | string
     updated_at?: Date | string
+    sets?: WorkoutSetUncheckedCreateNestedManyWithoutWorkout_entryInput
   }
 
-  export type WorkoutSetCreateOrConnectWithoutWorkoutInput = {
-    where: WorkoutSetWhereUniqueInput
-    create: XOR<WorkoutSetCreateWithoutWorkoutInput, WorkoutSetUncheckedCreateWithoutWorkoutInput>
+  export type WorkoutEntryCreateOrConnectWithoutWorkoutInput = {
+    where: WorkoutEntryWhereUniqueInput
+    create: XOR<WorkoutEntryCreateWithoutWorkoutInput, WorkoutEntryUncheckedCreateWithoutWorkoutInput>
   }
 
-  export type WorkoutSetCreateManyWorkoutInputEnvelope = {
-    data: WorkoutSetCreateManyWorkoutInput | WorkoutSetCreateManyWorkoutInput[]
+  export type WorkoutEntryCreateManyWorkoutInputEnvelope = {
+    data: WorkoutEntryCreateManyWorkoutInput | WorkoutEntryCreateManyWorkoutInput[]
     skipDuplicates?: boolean
   }
 
@@ -22631,23 +24079,23 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type WorkoutSetUpsertWithWhereUniqueWithoutWorkoutInput = {
-    where: WorkoutSetWhereUniqueInput
-    update: XOR<WorkoutSetUpdateWithoutWorkoutInput, WorkoutSetUncheckedUpdateWithoutWorkoutInput>
-    create: XOR<WorkoutSetCreateWithoutWorkoutInput, WorkoutSetUncheckedCreateWithoutWorkoutInput>
+  export type WorkoutEntryUpsertWithWhereUniqueWithoutWorkoutInput = {
+    where: WorkoutEntryWhereUniqueInput
+    update: XOR<WorkoutEntryUpdateWithoutWorkoutInput, WorkoutEntryUncheckedUpdateWithoutWorkoutInput>
+    create: XOR<WorkoutEntryCreateWithoutWorkoutInput, WorkoutEntryUncheckedCreateWithoutWorkoutInput>
   }
 
-  export type WorkoutSetUpdateWithWhereUniqueWithoutWorkoutInput = {
-    where: WorkoutSetWhereUniqueInput
-    data: XOR<WorkoutSetUpdateWithoutWorkoutInput, WorkoutSetUncheckedUpdateWithoutWorkoutInput>
+  export type WorkoutEntryUpdateWithWhereUniqueWithoutWorkoutInput = {
+    where: WorkoutEntryWhereUniqueInput
+    data: XOR<WorkoutEntryUpdateWithoutWorkoutInput, WorkoutEntryUncheckedUpdateWithoutWorkoutInput>
   }
 
-  export type WorkoutSetUpdateManyWithWhereWithoutWorkoutInput = {
-    where: WorkoutSetScalarWhereInput
-    data: XOR<WorkoutSetUpdateManyMutationInput, WorkoutSetUncheckedUpdateManyWithoutWorkoutInput>
+  export type WorkoutEntryUpdateManyWithWhereWithoutWorkoutInput = {
+    where: WorkoutEntryScalarWhereInput
+    data: XOR<WorkoutEntryUpdateManyMutationInput, WorkoutEntryUncheckedUpdateManyWithoutWorkoutInput>
   }
 
-  export type WorkoutCreateWithoutSetsInput = {
+  export type WorkoutCreateWithoutEntriesInput = {
     uuid?: string
     name?: string | null
     notes?: string | null
@@ -22658,7 +24106,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutWorkoutsInput
   }
 
-  export type WorkoutUncheckedCreateWithoutSetsInput = {
+  export type WorkoutUncheckedCreateWithoutEntriesInput = {
     id?: number
     uuid?: string
     user_uuid?: string | null
@@ -22670,12 +24118,12 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type WorkoutCreateOrConnectWithoutSetsInput = {
+  export type WorkoutCreateOrConnectWithoutEntriesInput = {
     where: WorkoutWhereUniqueInput
-    create: XOR<WorkoutCreateWithoutSetsInput, WorkoutUncheckedCreateWithoutSetsInput>
+    create: XOR<WorkoutCreateWithoutEntriesInput, WorkoutUncheckedCreateWithoutEntriesInput>
   }
 
-  export type ExerciseCreateWithoutSetsInput = {
+  export type ExerciseCreateWithoutEntriesInput = {
     uuid?: string
     name: string
     description?: string | null
@@ -22686,7 +24134,7 @@ export namespace Prisma {
     muscle_group: MuscleGroupCreateNestedOneWithoutExercisesInput
   }
 
-  export type ExerciseUncheckedCreateWithoutSetsInput = {
+  export type ExerciseUncheckedCreateWithoutEntriesInput = {
     id?: number
     uuid?: string
     user_uuid?: string | null
@@ -22698,23 +24146,74 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type ExerciseCreateOrConnectWithoutSetsInput = {
+  export type ExerciseCreateOrConnectWithoutEntriesInput = {
     where: ExerciseWhereUniqueInput
-    create: XOR<ExerciseCreateWithoutSetsInput, ExerciseUncheckedCreateWithoutSetsInput>
+    create: XOR<ExerciseCreateWithoutEntriesInput, ExerciseUncheckedCreateWithoutEntriesInput>
   }
 
-  export type WorkoutUpsertWithoutSetsInput = {
-    update: XOR<WorkoutUpdateWithoutSetsInput, WorkoutUncheckedUpdateWithoutSetsInput>
-    create: XOR<WorkoutCreateWithoutSetsInput, WorkoutUncheckedCreateWithoutSetsInput>
+  export type WorkoutSetCreateWithoutWorkout_entryInput = {
+    uuid?: string
+    type: $Enums.ExerciseType
+    reps?: number | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    duration_seconds?: number | null
+    distance_meters?: number | null
+    rest_seconds?: number | null
+    notes?: string | null
+    is_dropset?: boolean
+    is_amrap?: boolean
+    is_rest?: boolean
+    is_warmup?: boolean
+    is_cooldown?: boolean
+    is_super_set?: boolean
+    order?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type WorkoutSetUncheckedCreateWithoutWorkout_entryInput = {
+    id?: number
+    uuid?: string
+    type: $Enums.ExerciseType
+    reps?: number | null
+    weight?: Decimal | DecimalJsLike | number | string | null
+    duration_seconds?: number | null
+    distance_meters?: number | null
+    rest_seconds?: number | null
+    notes?: string | null
+    is_dropset?: boolean
+    is_amrap?: boolean
+    is_rest?: boolean
+    is_warmup?: boolean
+    is_cooldown?: boolean
+    is_super_set?: boolean
+    order?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type WorkoutSetCreateOrConnectWithoutWorkout_entryInput = {
+    where: WorkoutSetWhereUniqueInput
+    create: XOR<WorkoutSetCreateWithoutWorkout_entryInput, WorkoutSetUncheckedCreateWithoutWorkout_entryInput>
+  }
+
+  export type WorkoutSetCreateManyWorkout_entryInputEnvelope = {
+    data: WorkoutSetCreateManyWorkout_entryInput | WorkoutSetCreateManyWorkout_entryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WorkoutUpsertWithoutEntriesInput = {
+    update: XOR<WorkoutUpdateWithoutEntriesInput, WorkoutUncheckedUpdateWithoutEntriesInput>
+    create: XOR<WorkoutCreateWithoutEntriesInput, WorkoutUncheckedCreateWithoutEntriesInput>
     where?: WorkoutWhereInput
   }
 
-  export type WorkoutUpdateToOneWithWhereWithoutSetsInput = {
+  export type WorkoutUpdateToOneWithWhereWithoutEntriesInput = {
     where?: WorkoutWhereInput
-    data: XOR<WorkoutUpdateWithoutSetsInput, WorkoutUncheckedUpdateWithoutSetsInput>
+    data: XOR<WorkoutUpdateWithoutEntriesInput, WorkoutUncheckedUpdateWithoutEntriesInput>
   }
 
-  export type WorkoutUpdateWithoutSetsInput = {
+  export type WorkoutUpdateWithoutEntriesInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22725,7 +24224,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutWorkoutsNestedInput
   }
 
-  export type WorkoutUncheckedUpdateWithoutSetsInput = {
+  export type WorkoutUncheckedUpdateWithoutEntriesInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22737,18 +24236,18 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ExerciseUpsertWithoutSetsInput = {
-    update: XOR<ExerciseUpdateWithoutSetsInput, ExerciseUncheckedUpdateWithoutSetsInput>
-    create: XOR<ExerciseCreateWithoutSetsInput, ExerciseUncheckedCreateWithoutSetsInput>
+  export type ExerciseUpsertWithoutEntriesInput = {
+    update: XOR<ExerciseUpdateWithoutEntriesInput, ExerciseUncheckedUpdateWithoutEntriesInput>
+    create: XOR<ExerciseCreateWithoutEntriesInput, ExerciseUncheckedCreateWithoutEntriesInput>
     where?: ExerciseWhereInput
   }
 
-  export type ExerciseUpdateToOneWithWhereWithoutSetsInput = {
+  export type ExerciseUpdateToOneWithWhereWithoutEntriesInput = {
     where?: ExerciseWhereInput
-    data: XOR<ExerciseUpdateWithoutSetsInput, ExerciseUncheckedUpdateWithoutSetsInput>
+    data: XOR<ExerciseUpdateWithoutEntriesInput, ExerciseUncheckedUpdateWithoutEntriesInput>
   }
 
-  export type ExerciseUpdateWithoutSetsInput = {
+  export type ExerciseUpdateWithoutEntriesInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22759,7 +24258,7 @@ export namespace Prisma {
     muscle_group?: MuscleGroupUpdateOneRequiredWithoutExercisesNestedInput
   }
 
-  export type ExerciseUncheckedUpdateWithoutSetsInput = {
+  export type ExerciseUncheckedUpdateWithoutEntriesInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22767,6 +24266,101 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkoutSetUpsertWithWhereUniqueWithoutWorkout_entryInput = {
+    where: WorkoutSetWhereUniqueInput
+    update: XOR<WorkoutSetUpdateWithoutWorkout_entryInput, WorkoutSetUncheckedUpdateWithoutWorkout_entryInput>
+    create: XOR<WorkoutSetCreateWithoutWorkout_entryInput, WorkoutSetUncheckedCreateWithoutWorkout_entryInput>
+  }
+
+  export type WorkoutSetUpdateWithWhereUniqueWithoutWorkout_entryInput = {
+    where: WorkoutSetWhereUniqueInput
+    data: XOR<WorkoutSetUpdateWithoutWorkout_entryInput, WorkoutSetUncheckedUpdateWithoutWorkout_entryInput>
+  }
+
+  export type WorkoutSetUpdateManyWithWhereWithoutWorkout_entryInput = {
+    where: WorkoutSetScalarWhereInput
+    data: XOR<WorkoutSetUpdateManyMutationInput, WorkoutSetUncheckedUpdateManyWithoutWorkout_entryInput>
+  }
+
+  export type WorkoutSetScalarWhereInput = {
+    AND?: WorkoutSetScalarWhereInput | WorkoutSetScalarWhereInput[]
+    OR?: WorkoutSetScalarWhereInput[]
+    NOT?: WorkoutSetScalarWhereInput | WorkoutSetScalarWhereInput[]
+    id?: IntFilter<"WorkoutSet"> | number
+    uuid?: StringFilter<"WorkoutSet"> | string
+    workout_entry_uuid?: StringFilter<"WorkoutSet"> | string
+    type?: EnumExerciseTypeFilter<"WorkoutSet"> | $Enums.ExerciseType
+    reps?: IntNullableFilter<"WorkoutSet"> | number | null
+    weight?: DecimalNullableFilter<"WorkoutSet"> | Decimal | DecimalJsLike | number | string | null
+    duration_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
+    distance_meters?: IntNullableFilter<"WorkoutSet"> | number | null
+    rest_seconds?: IntNullableFilter<"WorkoutSet"> | number | null
+    notes?: StringNullableFilter<"WorkoutSet"> | string | null
+    is_dropset?: BoolFilter<"WorkoutSet"> | boolean
+    is_amrap?: BoolFilter<"WorkoutSet"> | boolean
+    is_rest?: BoolFilter<"WorkoutSet"> | boolean
+    is_warmup?: BoolFilter<"WorkoutSet"> | boolean
+    is_cooldown?: BoolFilter<"WorkoutSet"> | boolean
+    is_super_set?: BoolFilter<"WorkoutSet"> | boolean
+    order?: IntFilter<"WorkoutSet"> | number
+    created_at?: DateTimeFilter<"WorkoutSet"> | Date | string
+    updated_at?: DateTimeFilter<"WorkoutSet"> | Date | string
+  }
+
+  export type WorkoutEntryCreateWithoutSetsInput = {
+    uuid?: string
+    order?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    workout: WorkoutCreateNestedOneWithoutEntriesInput
+    exercise: ExerciseCreateNestedOneWithoutEntriesInput
+  }
+
+  export type WorkoutEntryUncheckedCreateWithoutSetsInput = {
+    id?: number
+    uuid?: string
+    workout_uuid: string
+    exercise_uuid: string
+    order?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type WorkoutEntryCreateOrConnectWithoutSetsInput = {
+    where: WorkoutEntryWhereUniqueInput
+    create: XOR<WorkoutEntryCreateWithoutSetsInput, WorkoutEntryUncheckedCreateWithoutSetsInput>
+  }
+
+  export type WorkoutEntryUpsertWithoutSetsInput = {
+    update: XOR<WorkoutEntryUpdateWithoutSetsInput, WorkoutEntryUncheckedUpdateWithoutSetsInput>
+    create: XOR<WorkoutEntryCreateWithoutSetsInput, WorkoutEntryUncheckedCreateWithoutSetsInput>
+    where?: WorkoutEntryWhereInput
+  }
+
+  export type WorkoutEntryUpdateToOneWithWhereWithoutSetsInput = {
+    where?: WorkoutEntryWhereInput
+    data: XOR<WorkoutEntryUpdateWithoutSetsInput, WorkoutEntryUncheckedUpdateWithoutSetsInput>
+  }
+
+  export type WorkoutEntryUpdateWithoutSetsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    workout?: WorkoutUpdateOneRequiredWithoutEntriesNestedInput
+    exercise?: ExerciseUpdateOneRequiredWithoutEntriesNestedInput
+  }
+
+  export type WorkoutEntryUncheckedUpdateWithoutSetsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    workout_uuid?: StringFieldUpdateOperationsInput | string
+    exercise_uuid?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23104,7 +24698,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     muscle_group?: MuscleGroupUpdateOneRequiredWithoutExercisesNestedInput
-    sets?: WorkoutSetUpdateManyWithoutExerciseNestedInput
+    entries?: WorkoutEntryUpdateManyWithoutExerciseNestedInput
   }
 
   export type ExerciseUncheckedUpdateWithoutUserInput = {
@@ -23116,7 +24710,7 @@ export namespace Prisma {
     type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sets?: WorkoutSetUncheckedUpdateManyWithoutExerciseNestedInput
+    entries?: WorkoutEntryUncheckedUpdateManyWithoutExerciseNestedInput
   }
 
   export type ExerciseUncheckedUpdateManyWithoutUserInput = {
@@ -23138,7 +24732,7 @@ export namespace Prisma {
     finished_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sets?: WorkoutSetUpdateManyWithoutWorkoutNestedInput
+    entries?: WorkoutEntryUpdateManyWithoutWorkoutNestedInput
   }
 
   export type WorkoutUncheckedUpdateWithoutUserInput = {
@@ -23150,7 +24744,7 @@ export namespace Prisma {
     finished_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sets?: WorkoutSetUncheckedUpdateManyWithoutWorkoutNestedInput
+    entries?: WorkoutEntryUncheckedUpdateManyWithoutWorkoutNestedInput
   }
 
   export type WorkoutUncheckedUpdateManyWithoutUserInput = {
@@ -23499,7 +25093,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutExercisesNestedInput
-    sets?: WorkoutSetUpdateManyWithoutExerciseNestedInput
+    entries?: WorkoutEntryUpdateManyWithoutExerciseNestedInput
   }
 
   export type ExerciseUncheckedUpdateWithoutMuscle_groupInput = {
@@ -23511,7 +25105,7 @@ export namespace Prisma {
     type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sets?: WorkoutSetUncheckedUpdateManyWithoutExerciseNestedInput
+    entries?: WorkoutEntryUncheckedUpdateManyWithoutExerciseNestedInput
   }
 
   export type ExerciseUncheckedUpdateManyWithoutMuscle_groupInput = {
@@ -23525,97 +25119,83 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type WorkoutSetCreateManyExerciseInput = {
+  export type WorkoutEntryCreateManyExerciseInput = {
     id?: number
     uuid?: string
     workout_uuid: string
-    type: $Enums.ExerciseType
-    reps?: number | null
-    weight?: Decimal | DecimalJsLike | number | string | null
-    duration_seconds?: number | null
-    distance_meters?: number | null
-    rest_seconds?: number | null
-    notes?: string | null
-    is_dropset?: boolean
-    is_amrap?: boolean
-    is_rest?: boolean
-    is_warmup?: boolean
-    is_cooldown?: boolean
-    is_super_set?: boolean
-    order: number
+    order?: number
     created_at?: Date | string
     updated_at?: Date | string
   }
 
-  export type WorkoutSetUpdateWithoutExerciseInput = {
+  export type WorkoutEntryUpdateWithoutExerciseInput = {
     uuid?: StringFieldUpdateOperationsInput | string
-    type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
-    reps?: NullableIntFieldUpdateOperationsInput | number | null
-    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
-    distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    is_dropset?: BoolFieldUpdateOperationsInput | boolean
-    is_amrap?: BoolFieldUpdateOperationsInput | boolean
-    is_rest?: BoolFieldUpdateOperationsInput | boolean
-    is_warmup?: BoolFieldUpdateOperationsInput | boolean
-    is_cooldown?: BoolFieldUpdateOperationsInput | boolean
-    is_super_set?: BoolFieldUpdateOperationsInput | boolean
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    workout?: WorkoutUpdateOneRequiredWithoutSetsNestedInput
+    workout?: WorkoutUpdateOneRequiredWithoutEntriesNestedInput
+    sets?: WorkoutSetUpdateManyWithoutWorkout_entryNestedInput
   }
 
-  export type WorkoutSetUncheckedUpdateWithoutExerciseInput = {
+  export type WorkoutEntryUncheckedUpdateWithoutExerciseInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     workout_uuid?: StringFieldUpdateOperationsInput | string
-    type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
-    reps?: NullableIntFieldUpdateOperationsInput | number | null
-    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
-    distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    is_dropset?: BoolFieldUpdateOperationsInput | boolean
-    is_amrap?: BoolFieldUpdateOperationsInput | boolean
-    is_rest?: BoolFieldUpdateOperationsInput | boolean
-    is_warmup?: BoolFieldUpdateOperationsInput | boolean
-    is_cooldown?: BoolFieldUpdateOperationsInput | boolean
-    is_super_set?: BoolFieldUpdateOperationsInput | boolean
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sets?: WorkoutSetUncheckedUpdateManyWithoutWorkout_entryNestedInput
   }
 
-  export type WorkoutSetUncheckedUpdateManyWithoutExerciseInput = {
+  export type WorkoutEntryUncheckedUpdateManyWithoutExerciseInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     workout_uuid?: StringFieldUpdateOperationsInput | string
-    type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
-    reps?: NullableIntFieldUpdateOperationsInput | number | null
-    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
-    distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    is_dropset?: BoolFieldUpdateOperationsInput | boolean
-    is_amrap?: BoolFieldUpdateOperationsInput | boolean
-    is_rest?: BoolFieldUpdateOperationsInput | boolean
-    is_warmup?: BoolFieldUpdateOperationsInput | boolean
-    is_cooldown?: BoolFieldUpdateOperationsInput | boolean
-    is_super_set?: BoolFieldUpdateOperationsInput | boolean
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type WorkoutSetCreateManyWorkoutInput = {
+  export type WorkoutEntryCreateManyWorkoutInput = {
     id?: number
     uuid?: string
     exercise_uuid: string
+    order?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type WorkoutEntryUpdateWithoutWorkoutInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    exercise?: ExerciseUpdateOneRequiredWithoutEntriesNestedInput
+    sets?: WorkoutSetUpdateManyWithoutWorkout_entryNestedInput
+  }
+
+  export type WorkoutEntryUncheckedUpdateWithoutWorkoutInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    exercise_uuid?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sets?: WorkoutSetUncheckedUpdateManyWithoutWorkout_entryNestedInput
+  }
+
+  export type WorkoutEntryUncheckedUpdateManyWithoutWorkoutInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    exercise_uuid?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkoutSetCreateManyWorkout_entryInput = {
+    id?: number
+    uuid?: string
     type: $Enums.ExerciseType
     reps?: number | null
     weight?: Decimal | DecimalJsLike | number | string | null
@@ -23629,36 +25209,13 @@ export namespace Prisma {
     is_warmup?: boolean
     is_cooldown?: boolean
     is_super_set?: boolean
-    order: number
+    order?: number
     created_at?: Date | string
     updated_at?: Date | string
   }
 
-  export type WorkoutSetUpdateWithoutWorkoutInput = {
+  export type WorkoutSetUpdateWithoutWorkout_entryInput = {
     uuid?: StringFieldUpdateOperationsInput | string
-    type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
-    reps?: NullableIntFieldUpdateOperationsInput | number | null
-    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
-    distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
-    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    is_dropset?: BoolFieldUpdateOperationsInput | boolean
-    is_amrap?: BoolFieldUpdateOperationsInput | boolean
-    is_rest?: BoolFieldUpdateOperationsInput | boolean
-    is_warmup?: BoolFieldUpdateOperationsInput | boolean
-    is_cooldown?: BoolFieldUpdateOperationsInput | boolean
-    is_super_set?: BoolFieldUpdateOperationsInput | boolean
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    exercise?: ExerciseUpdateOneRequiredWithoutSetsNestedInput
-  }
-
-  export type WorkoutSetUncheckedUpdateWithoutWorkoutInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
-    exercise_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
     reps?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
@@ -23677,10 +25234,30 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type WorkoutSetUncheckedUpdateManyWithoutWorkoutInput = {
+  export type WorkoutSetUncheckedUpdateWithoutWorkout_entryInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
-    exercise_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
+    reps?: NullableIntFieldUpdateOperationsInput | number | null
+    weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    duration_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    distance_meters?: NullableIntFieldUpdateOperationsInput | number | null
+    rest_seconds?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    is_dropset?: BoolFieldUpdateOperationsInput | boolean
+    is_amrap?: BoolFieldUpdateOperationsInput | boolean
+    is_rest?: BoolFieldUpdateOperationsInput | boolean
+    is_warmup?: BoolFieldUpdateOperationsInput | boolean
+    is_cooldown?: BoolFieldUpdateOperationsInput | boolean
+    is_super_set?: BoolFieldUpdateOperationsInput | boolean
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkoutSetUncheckedUpdateManyWithoutWorkout_entryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExerciseTypeFieldUpdateOperationsInput | $Enums.ExerciseType
     reps?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null

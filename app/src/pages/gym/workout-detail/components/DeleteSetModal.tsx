@@ -19,8 +19,8 @@ export function DeleteSetModal({ isOpen, onClose, set }: DeleteSetModalProps) {
     });
   };
 
-  const setDescription = set.exercise?.name
-    ? `${set.exercise.name} - Set #${set.order}`
+  const setDescription = set.workout_entry?.exercise?.name
+    ? `${set.workout_entry.exercise.name} - Set #${set.order}`
     : `Set #${set.order}`;
 
   return (

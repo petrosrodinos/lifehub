@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Edit2, Trash2, Clock } from "lucide-react";
 import { DateTime } from "luxon";
 import type { WorkoutSet } from "../../../../features/workout-sets/interfaces/workout-sets.interface";
-import { AddSetModal } from "./AddSetModal";
 import { DeleteSetModal } from "./DeleteSetModal";
+import { EditSetModal } from "./EditSetModal";
 import { ExerciseTypes } from "../../../../features/exercises/interfaces/exercises.interface";
 
 type SetCardProps = {
@@ -45,6 +45,7 @@ export function SetCard({ set, setNumber }: SetCardProps) {
     if (set.is_amrap) tags.push("AMRAP");
     if (set.is_super_set) tags.push("Superset");
     if (set.is_cooldown) tags.push("Cooldown");
+    if (set.is_rest) tags.push("Rest");
 
     return tags;
   };
@@ -103,7 +104,7 @@ export function SetCard({ set, setNumber }: SetCardProps) {
         </div>
       </div>
 
-      <AddSetModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} workoutUuid={set.workout_uuid} set={set} mode="edit" />
+      <EditSetModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} set={set} />
 
       <DeleteSetModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} set={set} />
     </>

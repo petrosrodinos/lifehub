@@ -58,6 +58,13 @@ export const ApiRoutes = {
       update: (uuid: string) => `/workouts/${uuid}`,
       delete: (uuid: string) => `/workouts/${uuid}`,
     },
+    workoutEntries: {
+      list: "/workout-entries",
+      create: "/workout-entries",
+      get: (uuid: string) => `/workout-entries/${uuid}`,
+      update: (uuid: string) => `/workout-entries/${uuid}`,
+      delete: (uuid: string) => `/workout-entries/${uuid}`,
+    },
     workoutSets: {
       list: "/workout-sets",
       create: "/workout-sets",
