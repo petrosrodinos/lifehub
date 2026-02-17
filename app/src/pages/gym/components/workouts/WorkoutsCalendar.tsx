@@ -11,8 +11,10 @@ const MONTHS = ["January", "February", "March", "April", "May", "June", "July", 
 
 export function WorkoutsCalendar() {
   const navigate = useNavigate();
-  const { data: workouts = [], isLoading } = useWorkouts();
+  const { data, isLoading } = useWorkouts({ all: true });
   const [currentMonth, setCurrentMonth] = useState(DateTime.now().startOf("month"));
+
+  const workouts = Array.isArray(data) ? data : [];
 
   const workoutsByDate = useMemo(() => {
     const grouped = new Map<string, Workout[]>();

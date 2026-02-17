@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from '@/core/databases/prisma/prisma.service'
 import { CreateWorkoutDto } from './dto/create-workout.dto'
 import { UpdateWorkoutDto } from './dto/update-workout.dto'
+import { WorkoutsQueryType } from './schemas/workouts-query.schema'
 
 @Injectable()
 export class WorkoutsService {
@@ -19,20 +20,75 @@ export class WorkoutsService {
     })
   }
 
-  async findAll(user_uuid: string) {
-    return this.prisma.workout.findMany({
-      where: {
-        user_uuid,
-      },
-      include: {
-        entries: {
-          include: {
-            exercise: true,
-            sets: true,
+  async findAll(user_uuid: string, query: WorkoutsQueryType) {
+    const whereClause: any = {
+      user_uuid,
+    }
+
+    if (query.from_date || query.to_date) {
+      whereClause.started_at = {}
+
+      if (query.from_date) {
+        whereClause.started_at.gte = query.from_date
+      }
+
+      if (query.to_date) {
+        whereClause.started_at.lte = query.to_date
+      }
+    }
+
+    if (query.all) {
+      return this.prisma.workout.findMany({
+        where: whereClause,
+        include: {
+          entries: {
+            include: {
+              exercise: true,
+              sets: true,
+            },
           },
         },
+        orderBy: {
+          started_at: 'desc',
+        },
+      })
+    }
+
+    const page = query.page
+    const limit = query.limit
+    const skip = (page - 1) * limit
+
+    const [workouts, total] = await Promise.all([
+      this.prisma.workout.findMany({
+        where: whereClause,
+        include: {
+          entries: {
+            include: {
+              exercise: true,
+              sets: true,
+            },
+          },
+        },
+        orderBy: {
+          started_at: 'desc',
+        },
+        skip,
+        take: limit,
+      }),
+      this.prisma.workout.count({
+        where: whereClause,
+      }),
+    ])
+
+    return {
+      data: workouts,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       },
-    })
+    }
   }
 
   async findOne(uuid: string, user_uuid: string) {

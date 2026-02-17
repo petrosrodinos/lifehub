@@ -7,18 +7,19 @@ import {
   getWorkout,
   getWorkouts,
   updateWorkout,
+  type WorkoutsQueryParams,
 } from '../services/workout'
 
 const QUERY_KEYS = {
-  workouts: ['workouts'],
+  workouts: (params?: WorkoutsQueryParams) => ['workouts', params],
   workout: (uuid: string) => ['workouts', uuid],
   workoutSets: ['workout-sets'],
 }
 
-export function useWorkouts() {
+export function useWorkouts(params?: WorkoutsQueryParams) {
   return useQuery({
-    queryKey: QUERY_KEYS.workouts,
-    queryFn: getWorkouts,
+    queryKey: QUERY_KEYS.workouts(params),
+    queryFn: () => getWorkouts(params),
   })
 }
 
@@ -36,7 +37,7 @@ export function useCreateWorkout() {
   return useMutation({
     mutationFn: (data: CreateWorkoutDto) => createWorkout(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workouts })
+      queryClient.invalidateQueries({ queryKey: ['workouts'] })
       toast.success('Workout created successfully', { duration: 2000 })
     },
     onError: (error: Error) => {
@@ -52,7 +53,7 @@ export function useUpdateWorkout() {
     mutationFn: ({ uuid, data }: { uuid: string; data: UpdateWorkoutDto }) =>
       updateWorkout(uuid, data),
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workouts })
+      queryClient.invalidateQueries({ queryKey: ['workouts'] })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workout(variables.uuid) })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutSets })
       toast.success('Workout updated successfully', { duration: 2000 })
@@ -69,7 +70,7 @@ export function useDeleteWorkout() {
   return useMutation({
     mutationFn: (uuid: string) => deleteWorkout(uuid),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workouts })
+      queryClient.invalidateQueries({ queryKey: ['workouts'] })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutSets })
       toast.success('Workout deleted successfully', { duration: 2000 })
     },

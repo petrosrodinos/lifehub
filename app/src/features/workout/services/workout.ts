@@ -2,9 +2,27 @@ import axiosInstance from '../../../config/api/axios'
 import { ApiRoutes } from '../../../config/api/routes'
 import type { CreateWorkoutDto, UpdateWorkoutDto, Workout } from '../interfaces/workout.interface'
 
-export const getWorkouts = async (): Promise<Workout[]> => {
+export type WorkoutsQueryParams = {
+  page?: number
+  limit?: number
+  from_date?: string
+  to_date?: string
+  all?: boolean
+}
+
+export type PaginatedWorkoutsResponse = {
+  data: Workout[]
+  meta: {
+    total: number
+    page: number
+    limit: number
+    totalPages: number
+  }
+}
+
+export const getWorkouts = async (params?: WorkoutsQueryParams): Promise<Workout[] | PaginatedWorkoutsResponse> => {
   try {
-    const response = await axiosInstance.get(ApiRoutes.fitness.workouts.list)
+    const response = await axiosInstance.get(ApiRoutes.fitness.workouts.list, { params })
     return response.data
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to fetch workouts')

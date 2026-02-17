@@ -16,6 +16,13 @@ export const GymPage = () => {
   const [createWorkoutModalOpen, setCreateWorkoutModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<GymTabId>("workouts");
   const [workoutView, setWorkoutView] = useState<WorkoutViewId>(WORKOUT_VIEWS.LIST);
+  const [fromDate, setFromDate] = useState<string>();
+  const [toDate, setToDate] = useState<string>();
+
+  const handleFilterChange = (filters: { fromDate?: string; toDate?: string }) => {
+    setFromDate(filters.fromDate);
+    setToDate(filters.toDate);
+  };
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
@@ -83,7 +90,15 @@ export const GymPage = () => {
                 </button>
               </div>
             </div>
-            {workoutView === WORKOUT_VIEWS.LIST ? <WorkoutsList /> : <WorkoutsCalendar />}
+            {workoutView === WORKOUT_VIEWS.LIST ? (
+              <WorkoutsList
+                fromDate={fromDate}
+                toDate={toDate}
+                onFilterChange={handleFilterChange}
+              />
+            ) : (
+              <WorkoutsCalendar />
+            )}
           </section>
         )}
 
