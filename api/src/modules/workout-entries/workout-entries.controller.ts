@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus } from '@nestjs/common'
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus, Query } from '@nestjs/common'
 import { WorkoutEntriesService } from './workout-entries.service'
 import { CreateWorkoutEntryDto } from './dto/create-workout-entry.dto'
 import { UpdateWorkoutEntryDto } from './dto/update-workout-entry.dto'
 import { JwtGuard } from '@/shared/guards/jwt.guard'
 import { CurrentUser } from '@/shared/decorators/current-user.decorator'
+import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe'
+import { WorkoutEntriesQuerySchema, WorkoutEntriesQueryType } from './schemas/workout-entries-query.schema'
 
 @Controller('workout-entries')
 @UseGuards(JwtGuard)
@@ -21,8 +23,11 @@ export class WorkoutEntriesController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  findAll(@CurrentUser('uuid') user_uuid: string) {
-    return this.workoutEntriesService.findAll(user_uuid)
+  findAll(
+    @CurrentUser('uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(WorkoutEntriesQuerySchema)) query: WorkoutEntriesQueryType,
+  ) {
+    return this.workoutEntriesService.findAll(user_uuid, query)
   }
 
   @Get(':uuid')

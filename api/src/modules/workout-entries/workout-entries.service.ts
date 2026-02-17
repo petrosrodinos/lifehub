@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from '@/core/databases/prisma/prisma.service'
 import { CreateWorkoutEntryDto } from './dto/create-workout-entry.dto'
 import { UpdateWorkoutEntryDto } from './dto/update-workout-entry.dto'
+import type { WorkoutEntriesQueryType } from './schemas/workout-entries-query.schema'
 
 @Injectable()
 export class WorkoutEntriesService {
@@ -29,12 +30,14 @@ export class WorkoutEntriesService {
     })
   }
 
-  async findAll(user_uuid: string) {
+  async findAll(user_uuid: string, query: WorkoutEntriesQueryType) {
     return this.prisma.workoutEntry.findMany({
       where: {
         workout: {
           user_uuid,
         },
+        ...(query.exercise_uuid && { exercise_uuid: query.exercise_uuid }),
+        ...(query.workout_uuid && { workout_uuid: query.workout_uuid }),
       },
       include: {
         workout: true,

@@ -6,9 +6,9 @@ import type {
   WorkoutEntry,
 } from '../interfaces/workout-entries.interface'
 
-export const getWorkoutEntries = async (): Promise<WorkoutEntry[]> => {
+export const getWorkoutEntries = async (params?: { exercise_uuid?: string; workout_uuid?: string }): Promise<WorkoutEntry[]> => {
   try {
-    const response = await axiosInstance.get(ApiRoutes.fitness.workoutEntries.list)
+    const response = await axiosInstance.get(ApiRoutes.fitness.workoutEntries.list, { params })
     return response.data
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to fetch workout entries')
