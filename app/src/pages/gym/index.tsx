@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { GymHeader } from "./components/GymHeader";
 import { GymCategoriesMenu } from "./components/exercises/GymCategoriesMenu";
 import { WorkoutsList } from "./components/workouts/WorkoutsList";
 import { CreateWorkoutModal } from "./components/workouts/CreateWorkoutModal";
 
 export const GymPage = () => {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [createWorkoutModalOpen, setCreateWorkoutModalOpen] = useState(false);
 
@@ -14,6 +16,7 @@ export const GymPage = () => {
       <CreateWorkoutModal
         isOpen={createWorkoutModalOpen}
         onClose={() => setCreateWorkoutModalOpen(false)}
+        onCreate={(workout) => navigate(`/dashboard/gym/workout/${workout.uuid}`)}
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.08),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(34,197,94,0.08),transparent_40%)] -z-10" />

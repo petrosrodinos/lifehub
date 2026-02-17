@@ -9,11 +9,13 @@ import { useState } from "react";
 type CreateWorkoutModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  onCreate?: (workout: Workout) => void;
+  onDelete?: () => void;
   workout?: Workout;
   mode?: "create" | "edit";
 };
 
-export function CreateWorkoutModal({ isOpen, onClose, workout, mode = "create" }: CreateWorkoutModalProps) {
+export function CreateWorkoutModal({ isOpen, onClose, onCreate, onDelete, workout, mode = "create" }: CreateWorkoutModalProps) {
   const createWorkout = useCreateWorkout();
   const updateWorkout = useUpdateWorkout();
   const deleteWorkout = useDeleteWorkout();
@@ -33,8 +35,8 @@ export function CreateWorkoutModal({ isOpen, onClose, workout, mode = "create" }
       );
     } else {
       createWorkout.mutate(data as CreateWorkoutDto, {
-        onSuccess: () => {
-          onClose();
+        onSuccess: (createdWorkout) => {
+          onCreate ? onCreate(createdWorkout) : onClose();
         },
       });
     }
@@ -49,7 +51,7 @@ export function CreateWorkoutModal({ isOpen, onClose, workout, mode = "create" }
       deleteWorkout.mutate(workout.uuid, {
         onSuccess: () => {
           setIsDeleteModalOpen(false);
-          onClose();
+          onDelete ? onDelete() : onClose();
         },
       });
     }

@@ -21,5 +21,7 @@ export const Routes = {
     },
     gym: {
         prefix: '/dashboard/gym',
+        workoutExercise: (workoutUuid: string, exerciseUuid: string) =>
+            `/dashboard/gym/workout/${workoutUuid}/exercise/${exerciseUuid}`,
     },
 };

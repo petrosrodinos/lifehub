@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Edit2, Trash2 } from "lucide-react";
+import { Edit2, Trash2, Clock } from "lucide-react";
+import { DateTime } from "luxon";
 import type { WorkoutSet } from "../../../../features/workout-sets/interfaces/workout-sets.interface";
 import { AddSetModal } from "./AddSetModal";
 import { DeleteSetModal } from "./DeleteSetModal";
+import { ExerciseTypes } from "../../../../features/exercises/interfaces/exercises.interface";
 
 type SetCardProps = {
   set: WorkoutSet;
@@ -16,11 +18,11 @@ export function SetCard({ set, setNumber }: SetCardProps) {
   const renderSetDetails = () => {
     const details = [];
 
-    if (set.type === "REPS" && set.reps) {
+    if (set.type === ExerciseTypes.REPS && set.reps) {
       details.push(`${set.reps} reps`);
     }
 
-    if (set.type === "TIME" && set.duration_seconds) {
+    if (set.type === ExerciseTypes.TIME && set.duration_seconds) {
       details.push(`${set.duration_seconds}s`);
     }
 
@@ -49,6 +51,11 @@ export function SetCard({ set, setNumber }: SetCardProps) {
 
   const tags = renderTags();
 
+  const formatTime = (timestamp?: string) => {
+    if (!timestamp) return null;
+    return DateTime.fromISO(timestamp).toFormat("h:mm a");
+  };
+
   return (
     <>
       <div className="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700 group hover:border-violet-500/40 transition-colors">
@@ -72,7 +79,17 @@ export function SetCard({ set, setNumber }: SetCardProps) {
               </div>
             )}
 
-            {set.rest_seconds && <p className="text-xs text-slate-500 mt-2">Rest: {set.rest_seconds}s</p>}
+            <div className="flex items-center gap-3 mt-2">
+              {set.created_at && (
+                <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>{formatTime(set.created_at)}</span>
+                </div>
+              )}
+              {set.rest_seconds && (
+                <p className="text-xs text-slate-500">Rest: {set.rest_seconds}s</p>
+              )}
+            </div>
           </div>
         </div>
 

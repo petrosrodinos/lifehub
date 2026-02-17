@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Plus, Edit2, Calendar, Clock, Dumbbell } from "lucide-react";
-import { useWorkout } from "../../../features/workout/hooks/use-workout";
+import { ArrowLeft, Plus, Edit2, Calendar, Clock, Dumbbell, ChevronRight, Check } from "lucide-react";
+import { useWorkout, useUpdateWorkout } from "../../../features/workout/hooks/use-workout";
 import { CreateWorkoutModal } from "../components/workouts/CreateWorkoutModal";
 import { SetCard } from "./components/SetCard";
 import { AddSetModal } from "./components/AddSetModal";
@@ -12,6 +12,7 @@ export function WorkoutDetailPage() {
   const { uuid } = useParams<{ uuid: string }>();
   const navigate = useNavigate();
   const { data: workout, isLoading } = useWorkout(uuid || "");
+  const updateWorkout = useUpdateWorkout();
 
   const [isEditWorkoutModalOpen, setIsEditWorkoutModalOpen] = useState(false);
   const [isAddSetModalOpen, setIsAddSetModalOpen] = useState(false);
@@ -53,6 +54,16 @@ export function WorkoutDetailPage() {
 
   const exerciseGroups = groupSetsByExercise();
 
+  const handleFinishWorkout = () => {
+    if (!uuid) return;
+    updateWorkout.mutate({
+      uuid,
+      data: {
+        finished_at: new Date().toISOString(),
+      },
+    });
+  };
+
   if (isLoading) {
     return <WorkoutDetailLoading />;
   }
@@ -75,7 +86,7 @@ export function WorkoutDetailPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden">
-      <CreateWorkoutModal isOpen={isEditWorkoutModalOpen} onClose={() => setIsEditWorkoutModalOpen(false)} workout={workout} mode="edit" />
+      <CreateWorkoutModal isOpen={isEditWorkoutModalOpen} onClose={() => setIsEditWorkoutModalOpen(false)} onDelete={() => navigate("/dashboard/gym")} workout={workout} mode="edit" />
 
       <AddSetModal isOpen={isAddSetModalOpen} onClose={() => setIsAddSetModalOpen(false)} workoutUuid={workout.uuid} />
 
@@ -92,6 +103,10 @@ export function WorkoutDetailPage() {
           <div className="flex items-center gap-2">
             <button type="button" onClick={() => setIsEditWorkoutModalOpen(true)} className="p-2.5 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-800/50 transition-colors" title="Edit workout">
               <Edit2 className="w-5 h-5" />
+            </button>
+            <button type="button" onClick={handleFinishWorkout} disabled={updateWorkout.isPending} className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+              <Check className="w-4 h-4" strokeWidth={2} />
+              <span className="hidden sm:inline">Finish</span>
             </button>
             <button type="button" onClick={() => setIsAddSetModalOpen(true)} className="flex items-center gap-2 px-3 py-1.5 bg-violet-500 hover:bg-violet-600 text-white text-sm font-medium rounded-lg transition-colors">
               <Plus className="w-4 h-4" strokeWidth={2} />
@@ -150,15 +165,18 @@ export function WorkoutDetailPage() {
           ) : (
             exerciseGroups.map((group: any) => (
               <div key={group.exercise?.uuid} className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/80 p-6">
-                <div className="flex items-center justify-between mb-4">
+                <button type="button" onClick={() => navigate(`/dashboard/gym/workout/${uuid}/exercise/${group.exercise?.uuid}`)} className="flex items-center justify-between mb-4 w-full text-left group/header">
                   <div>
-                    <h2 className="text-lg font-semibold text-white">{group.exercise?.name || "Unknown Exercise"}</h2>
+                    <h2 className="text-lg font-semibold text-white group-hover/header:text-violet-300 transition-colors">{group.exercise?.name || "Unknown Exercise"}</h2>
                     {group.exercise?.description && <p className="text-sm text-slate-400 mt-1">{group.exercise.description}</p>}
                   </div>
-                  <span className="text-sm text-slate-500 bg-slate-800 px-3 py-1 rounded-lg">
-                    {group.sets.length} {group.sets.length === 1 ? "set" : "sets"}
-                  </span>
-                </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-slate-500 bg-slate-800 px-3 py-1 rounded-lg">
+                      {group.sets.length} {group.sets.length === 1 ? "set" : "sets"}
+                    </span>
+                    <ChevronRight className="w-5 h-5 text-slate-600 group-hover/header:text-violet-400 transition-colors" />
+                  </div>
+                </button>
 
                 <div className="space-y-3">
                   {group.sets.map((set: any, index: number) => (
