@@ -1,6 +1,6 @@
-import type { HabitSchedule } from '../../habbits/activity-schedules/interfaces/activity-schedules.interface'
-import type { HabitOccurrence } from '../../habbits/activity-occurrences/interfaces/activity-occurrences.interface'
-import type { HabitLog } from '../../habbits/activity-logs/interfaces/activity-logs.interface'
+import type { ActivitySchedule } from '../../habbits/activity-schedules/interfaces/activity-schedules.interface'
+import type { ActivityOccurrence } from '../../habbits/activity-occurrences/interfaces/activity-occurrences.interface'
+import type { ActivityLog } from '../../habbits/activity-logs/interfaces/activity-logs.interface'
 import type { FrequencyPeriod } from '../../routine/interfaces/routine.interface'
 
 export interface Activity {
@@ -12,17 +12,17 @@ export interface Activity {
   icon?: string | null
   color: string
   visible?: boolean
-  current_schedule?: HabitSchedule | null
-  today_occurrence?: HabitOccurrence | null
+  current_schedule?: ActivitySchedule | null
+  today_occurrence?: ActivityOccurrence | null
   analytics?: ActivityProgressResponse
   created_at?: string
   updated_at?: string
 }
 
 export interface ActivityDetail extends Activity {
-  activity_schedules?: HabitSchedule[]
-  activity_occurrences?: HabitOccurrence[]
-  activity_logs?: HabitLog[]
+  activity_schedules?: ActivitySchedule[]
+  activity_occurrences?: ActivityOccurrence[]
+  activity_logs?: ActivityLog[]
 }
 
 export interface CreateActivityDto {

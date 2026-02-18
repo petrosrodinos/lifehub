@@ -1,9 +1,4 @@
-export type ActivityRepeatType = 'DAILY' | 'WEEKDAYS' | 'INTERVAL' | 'DATES' | 'FREQUENCY'
-export type ActivityTargetType = 'BOOLEAN' | 'QUANTITY'
-export type ActivityTargetUnit = 'PAGES' | 'MINUTES' | 'KM' | 'TIMES' | 'CUSTOM'
-export type FrequencyPeriod = 'WEEK' | 'MONTH'
-
-export interface HabitSchedule {
+export interface ActivitySchedule {
   uuid: string
   user_uuid: string
   activity_uuid: string
@@ -39,4 +34,44 @@ export interface CreateActivityScheduleDto {
   specific_dates?: string[]
 }
 
-export type UpdateActivityScheduleDto = Partial<CreateActivityScheduleDto>
+export interface UpdateActivityScheduleDto {
+  repeat_type?: ActivityRepeatType
+  interval_days?: number
+  time_of_day?: string
+  frequency_value?: number
+  frequency_period?: FrequencyPeriod
+  target_type?: ActivityTargetType
+  target_value?: number
+}
+
+export const ActivityRepeatTypes = {
+  DAILY: 'DAILY',
+  WEEKDAYS: 'WEEKDAYS',
+  INTERVAL: 'INTERVAL',
+  DATES: 'DATES',
+  FREQUENCY: 'FREQUENCY',
+} as const
+
+export const ActivityTargetTypes = {
+  BOOLEAN: 'BOOLEAN',
+  QUANTITY: 'QUANTITY',
+}
+
+export const ActivityTargetUnits = {
+  PAGES: 'PAGES',
+  MINUTES: 'MINUTES',
+  KM: 'KM',
+  TIMES: 'TIMES',
+  CUSTOM: 'CUSTOM',
+} as const
+
+export const FrequencyPeriods = {
+  WEEK: 'WEEK',
+  MONTH: 'MONTH',
+} as const
+
+
+export type ActivityRepeatType = typeof ActivityRepeatTypes[keyof typeof ActivityRepeatTypes]
+export type ActivityTargetType = typeof ActivityTargetTypes[keyof typeof ActivityTargetTypes]
+export type ActivityTargetUnit = typeof ActivityTargetUnits[keyof typeof ActivityTargetUnits]
+export type FrequencyPeriod = typeof FrequencyPeriods[keyof typeof FrequencyPeriods]

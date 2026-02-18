@@ -1,12 +1,14 @@
-export interface HabitLog {
+import type { ActivityTargetType, ActivityTargetUnit } from "../../activity-schedules/interfaces/activity-schedules.interface"
+
+export interface ActivityLog {
   uuid: string
   user_uuid: string
   activity_uuid: string
   schedule_uuid: string
   occurrence_uuid: string
-  snapshot_target_type: 'BOOLEAN' | 'QUANTITY'
+  snapshot_target_type: ActivityTargetType
   snapshot_target_value?: number | null
-  snapshot_target_unit?: 'PAGES' | 'MINUTES' | 'KM' | 'TIMES' | 'CUSTOM' | null
+  snapshot_target_unit?: ActivityTargetUnit | null
   snapshot_target_unit_label?: string | null
   value?: number | null
   completed: boolean
@@ -18,7 +20,7 @@ export interface HabitLog {
   updated_at: string
 }
 
-export interface HabitLogsQuery {
+export interface ActivityLogsQuery {
   activity_uuid?: string
   schedule_uuid?: string
   from_date?: string

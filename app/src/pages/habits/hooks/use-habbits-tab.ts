@@ -3,7 +3,7 @@ import { DateTime } from 'luxon'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import type { Activity } from '../../../features/activities/interfaces/activities.interface'
-import type { HabitLog } from '../../../features/habbits/activity-logs/interfaces/activity-logs.interface'
+import type { ActivityLog } from '../../../features/habbits/activity-logs/interfaces/activity-logs.interface'
 import type { OccurrenceStatus } from '../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface'
 import type { UpdateActivityScheduleDto } from '../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface'
 import { useActivities } from '../../../features/activities/hooks/use-activities'
@@ -59,8 +59,8 @@ function parseTimeOfDay(timeOfDay?: string | null): number {
   return parsed.hour * 60 + parsed.minute
 }
 
-function groupLogsByDate(logs: HabitLog[]): GroupedActivityLogs[] {
-  const grouped = new Map<string, HabitLog[]>()
+function groupLogsByDate(logs: ActivityLog[]): GroupedActivityLogs[] {
+  const grouped = new Map<string, ActivityLog[]>()
 
   logs.forEach((log) => {
     const key = DateTime.fromISO(log.created_at).toFormat('yyyy-LL-dd')

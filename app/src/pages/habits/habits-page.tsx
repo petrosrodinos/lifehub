@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react'
 import { DateTime } from 'luxon'
-import { ChevronDown, ChevronUp, Flame, ListChecks } from 'lucide-react'
+import { ChevronDown, ChevronUp, Flame, ListChecks, Plus } from 'lucide-react'
 import { HabitCard } from './components/HabitCard/HabitCard'
 import { HabitCompletionActions } from './components/HabitCompletionActions/HabitCompletionActions'
 import { HabitProgressSummary } from './components/HabitProgressSummary/HabitProgressSummary'
 import { HabitHistoryList } from './components/HabitHistoryList/HabitHistoryList'
 import { HabitScheduleCard } from './components/HabitScheduleCard/HabitScheduleCard'
+import { CreateActivityScheduleModal } from './components/CreateActivityScheduleModal/CreateActivityScheduleModal'
 import { useHabbitsTab } from './hooks/use-habbits-tab'
 import type { ActivityTodayItem } from './interfaces/habbits-tab.interface'
 
@@ -35,6 +36,7 @@ export function HabitsPage() {
   } = useHabbitsTab()
 
   const [activeActionItem, setActiveActionItem] = useState<ActivityTodayItem | null>(null)
+  const [isCreateScheduleOpen, setIsCreateScheduleOpen] = useState(false)
   const [expandedSections, setExpandedSections] = useState<Record<ExpandableSection, boolean>>({
     progress: true,
     history: true,
@@ -71,9 +73,19 @@ export function HabitsPage() {
                 {completedToday} of {totalToday} completed
               </p>
             </div>
-            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-violet-500/35 bg-violet-500/10 text-violet-200 text-xs sm:text-sm">
-              <Flame className="w-4 h-4" />
-              <span>{overview?.best_streak_activity?.current_streak ?? 0} day streak</span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setIsCreateScheduleOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-emerald-500/35 bg-emerald-500/10 text-emerald-200 text-xs sm:text-sm hover:bg-emerald-500/20 transition-colors"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Schedule</span>
+              </button>
+              <div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-violet-500/35 bg-violet-500/10 text-violet-200 text-xs sm:text-sm">
+                <Flame className="w-4 h-4" />
+                <span>{overview?.best_streak_activity?.current_streak ?? 0} day streak</span>
+              </div>
             </div>
           </div>
         </header>
@@ -177,6 +189,11 @@ export function HabitsPage() {
           if (!activeActionItem?.occurrenceUuid) return
           await skipOccurrence(activeActionItem.occurrenceUuid, activeActionItem.status)
         }}
+      />
+
+      <CreateActivityScheduleModal
+        isOpen={isCreateScheduleOpen}
+        onClose={() => setIsCreateScheduleOpen(false)}
       />
     </div>
   )

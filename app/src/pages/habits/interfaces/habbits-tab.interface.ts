@@ -1,11 +1,11 @@
 import type { Activity } from '../../../features/activities/interfaces/activities.interface'
-import type { HabitLog } from '../../../features/habbits/activity-logs/interfaces/activity-logs.interface'
+import type { ActivityLog } from '../../../features/habbits/activity-logs/interfaces/activity-logs.interface'
 import type { OccurrenceStatus } from '../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface'
-import type { HabitSchedule, UpdateActivityScheduleDto } from '../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface'
+import type { ActivitySchedule, UpdateActivityScheduleDto } from '../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface'
 
 export interface ActivityTodayItem {
   activity: Activity
-  schedule: HabitSchedule | null
+  schedule: ActivitySchedule | null
   status: OccurrenceStatus
   occurrenceUuid: string | null
   quantityValue: number | null
@@ -20,7 +20,7 @@ export interface ActivityProgressSummaryData {
 
 export interface GroupedActivityLogs {
   date: string
-  logs: HabitLog[]
+  logs: ActivityLog[]
 }
 
 export interface OccurrenceCompletionPayload {

@@ -1,6 +1,4 @@
-export type OccurrenceStatus = 'PENDING' | 'COMPLETED' | 'SKIPPED' | 'FAILED'
-
-export interface HabitOccurrence {
+export interface ActivityOccurrence {
   uuid: string
   user_uuid: string
   activity_uuid: string
@@ -20,3 +18,12 @@ export interface SkipOccurrenceDto {
   skip_reason?: string
   notes?: string
 }
+
+export const OccurrenceStatuses = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  SKIPPED: 'SKIPPED',
+  FAILED: 'FAILED',
+} as const
+
+export type OccurrenceStatus = typeof OccurrenceStatuses[keyof typeof OccurrenceStatuses]
