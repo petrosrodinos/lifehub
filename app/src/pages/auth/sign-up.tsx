@@ -61,16 +61,16 @@ export function SignUp() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-4 py-12">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(251,191,36,0.05),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.08),transparent_50%)]" />
       
       <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl mb-4 shadow-lg shadow-amber-500/20">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-violet-500 to-violet-600 rounded-2xl mb-4 shadow-lg shadow-violet-500/20">
             <Calendar className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2 flex items-center justify-center gap-2">
             Create your account
-            <Sparkles className="w-6 h-6 text-amber-400" />
+            <Sparkles className="w-6 h-6 text-violet-400" />
           </h1>
           <p className="text-slate-400">Start organizing your life with LifeHub</p>
         </div>
@@ -88,7 +88,7 @@ export function SignUp() {
                     type="text"
                     id="first_name"
                     {...register('first_name')}
-                    className="w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-colors"
+                    className="w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition-colors"
                     placeholder="John"
                   />
                 </div>
@@ -107,7 +107,7 @@ export function SignUp() {
                     type="text"
                     id="last_name"
                     {...register('last_name')}
-                    className="w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-colors"
+                    className="w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition-colors"
                     placeholder="Doe"
                   />
                 </div>
@@ -127,7 +127,7 @@ export function SignUp() {
                   type="email"
                   id="email"
                   {...register('email')}
-                  className="w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-colors"
+                  className="w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition-colors"
                   placeholder="you@example.com"
                 />
               </div>
@@ -146,7 +146,7 @@ export function SignUp() {
                   type="tel"
                   id="phone"
                   {...register('phone')}
-                  className="w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-colors"
+                  className="w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition-colors"
                   placeholder="+1234567890"
                 />
               </div>
@@ -165,7 +165,7 @@ export function SignUp() {
                   type="password"
                   id="password"
                   {...register('password')}
-                  className="w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-colors"
+                  className="w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition-colors"
                   placeholder="••••••••"
                 />
               </div>
@@ -177,7 +177,7 @@ export function SignUp() {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white py-3 px-4 rounded-lg font-medium shadow-lg shadow-amber-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-violet-500 to-violet-600 hover:from-violet-600 hover:to-violet-700 text-white py-3 px-4 rounded-lg font-medium shadow-lg shadow-violet-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
             >
               {isPending ? (
                 <>
@@ -195,7 +195,7 @@ export function SignUp() {
               Already have an account?{' '}
               <Link
                 to="/auth/sign-in"
-                className="text-amber-400 hover:text-amber-300 font-medium transition-colors"
+                className="text-violet-400 hover:text-violet-300 font-medium transition-colors"
               >
                 Sign in
               </Link>

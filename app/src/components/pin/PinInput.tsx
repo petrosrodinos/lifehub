@@ -95,11 +95,11 @@ export function PinInput({ length, value, onChange, onComplete, error = false, d
             ${error 
               ? 'border-red-500 bg-red-500/10 text-red-400' 
               : focusedIndex === index 
-                ? 'border-amber-500 bg-slate-800/50 text-white shadow-lg shadow-amber-500/20' 
+                ? 'border-violet-500 bg-slate-800/50 text-white shadow-lg shadow-violet-500/20' 
                 : 'border-slate-600 bg-slate-800/30 text-white'
             }
-            ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-amber-400/50'}
-            focus:outline-none focus:ring-2 focus:ring-amber-500/50
+            ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-violet-400/50'}
+            focus:outline-none focus:ring-2 focus:ring-violet-500/50
           `}
         />
       ))}

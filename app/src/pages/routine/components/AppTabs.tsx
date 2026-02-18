@@ -27,7 +27,7 @@ export function AppTabs() {
                 onClick={() => setActiveTab(id)}
                 className={`px-4 py-3 text-sm font-medium transition-colors rounded-t-lg ${
                   activeTab === id
-                    ? 'text-amber-400 bg-slate-800/80 border-b-2 border-amber-400'
+                    ? 'text-violet-400 bg-slate-800/80 border-b-2 border-violet-400'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
                 }`}
               >
@@ -38,7 +38,7 @@ export function AppTabs() {
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
-            className="p-2 text-slate-400 hover:text-amber-400 rounded-lg hover:bg-slate-800/40 transition-colors"
+            className="p-2 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-800/40 transition-colors"
             title="Manage activities"
           >
             <Settings className="w-5 h-5" />

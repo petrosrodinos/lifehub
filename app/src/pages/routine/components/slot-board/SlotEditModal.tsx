@@ -117,15 +117,15 @@ export function SlotEditModal({ day, slot, onClose, mode }: SlotEditModalProps) 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-1">Start</label>
-            <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
+            <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-1">End</label>
-            <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
+            <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-1">Activity</label>
-            <select value={activityUuid} onChange={(e) => setActivityUuid(e.target.value)} className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 capitalize">
+            <select value={activityUuid} onChange={(e) => setActivityUuid(e.target.value)} className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 capitalize">
               {activities.length === 0 ? (
                 <option value="">No activities available</option>
               ) : (
@@ -141,7 +141,7 @@ export function SlotEditModal({ day, slot, onClose, mode }: SlotEditModalProps) 
           {error && <p className="text-sm text-red-400">{error}</p>}
 
           <div className="flex gap-2 pt-2">
-            <button type="submit" disabled={createSlot.isPending || updateSlot.isPending || activities.length === 0} className="flex-1 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+            <button type="submit" disabled={createSlot.isPending || updateSlot.isPending || activities.length === 0} className="flex-1 px-4 py-2 bg-violet-500 hover:bg-violet-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
               {(createSlot.isPending || updateSlot.isPending) && <Loader2 className="h-4 w-4 animate-spin" />}
               {mode === "add" ? "Add" : "Save"}
             </button>

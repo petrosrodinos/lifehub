@@ -52,7 +52,7 @@ export function PinSettings() {
             <p className="text-sm text-slate-400 mb-4">{hasPin ? "Your app is protected with a PIN code" : "Secure your app with a PIN code lock"}</p>
 
             {!hasPin && (
-              <button onClick={handleEnablePin} className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-medium transition-colors">
+              <button onClick={handleEnablePin} className="inline-flex items-center gap-2 px-4 py-2 bg-violet-500 hover:bg-violet-600 text-white rounded-lg font-medium transition-colors">
                 <Lock className="w-4 h-4" />
                 Enable PIN Lock
               </button>

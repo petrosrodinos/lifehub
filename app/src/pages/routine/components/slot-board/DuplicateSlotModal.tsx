@@ -51,7 +51,7 @@ export function DuplicateSlotModal({ slot, onClose }: DuplicateSlotModalProps) {
             <div className="space-y-2">
               {availableDays.map((day) => (
                 <label key={day} className="flex items-center gap-2 p-2 rounded-lg hover:bg-slate-700/50 cursor-pointer transition-colors">
-                  <input type="checkbox" checked={selectedDays.includes(day)} onChange={() => toggleDay(day)} className="w-4 h-4 rounded border-slate-600 bg-slate-900 text-amber-500 focus:ring-2 focus:ring-amber-500/50" />
+                  <input type="checkbox" checked={selectedDays.includes(day)} onChange={() => toggleDay(day)} className="w-4 h-4 rounded border-slate-600 bg-slate-900 text-violet-500 focus:ring-2 focus:ring-violet-500/50" />
                   <span className="text-sm text-slate-300 capitalize">{day}</span>
                 </label>
               ))}
@@ -62,7 +62,7 @@ export function DuplicateSlotModal({ slot, onClose }: DuplicateSlotModalProps) {
             <button type="button" onClick={onClose} className="flex-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white font-medium rounded-lg transition-colors">
               Cancel
             </button>
-            <button type="submit" disabled={duplicateSlot.isPending || selectedDays.length === 0} className="flex-1 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+            <button type="submit" disabled={duplicateSlot.isPending || selectedDays.length === 0} className="flex-1 px-4 py-2 bg-violet-500 hover:bg-violet-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
               {duplicateSlot.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
               Duplicate
             </button>

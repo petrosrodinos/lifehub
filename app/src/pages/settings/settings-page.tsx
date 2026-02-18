@@ -36,7 +36,7 @@ export function SettingsPage() {
 
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
-            <SettingsIcon className="w-8 h-8 text-amber-400" />
+            <SettingsIcon className="w-8 h-8 text-violet-400" />
             Settings
           </h1>
           <p className="text-slate-400">Manage your account preferences and security</p>
@@ -45,7 +45,7 @@ export function SettingsPage() {
         <div className="space-y-6">
           <section>
             <div className="flex items-center gap-2 mb-4">
-              <User className="w-5 h-5 text-amber-400" />
+              <User className="w-5 h-5 text-violet-400" />
               <h2 className="text-xl font-semibold text-white">Account</h2>
             </div>
             <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-6">
@@ -65,7 +65,7 @@ export function SettingsPage() {
 
           <section>
             <div className="flex items-center gap-2 mb-4">
-              <ShieldCheck className="w-5 h-5 text-amber-400" />
+              <ShieldCheck className="w-5 h-5 text-violet-400" />
               <h2 className="text-xl font-semibold text-white">Security</h2>
             </div>
             <PinSettings />

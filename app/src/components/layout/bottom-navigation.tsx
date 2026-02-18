@@ -39,11 +39,11 @@ export function BottomNavigation() {
             const isActive = location.pathname === tab.path || location.pathname.startsWith(tab.path + "/");
             const Icon = tab.icon;
             return (
-              <Link key={tab.id} to={tab.path} className={`flex flex-col items-center justify-center flex-1 h-full transition-all duration-200 ${isActive ? "text-amber-400" : "text-slate-400 hover:text-slate-200"}`}>
+              <Link key={tab.id} to={tab.path} className={`flex flex-col items-center justify-center flex-1 h-full transition-all duration-200 ${isActive ? "text-violet-400" : "text-slate-400 hover:text-slate-200"}`}>
                 <div className={`transition-all duration-200 ${isActive ? "scale-110" : ""}`}>
-                  <Icon className={`w-6 h-6 ${isActive ? "drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]" : ""}`} />
+                  <Icon className={`w-6 h-6 ${isActive ? "drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]" : ""}`} />
                 </div>
-                <span className={`text-xs mt-1 font-medium ${isActive ? "text-amber-400" : "text-slate-500"}`}>{tab.label}</span>
+                <span className={`text-xs mt-1 font-medium ${isActive ? "text-violet-400" : "text-slate-500"}`}>{tab.label}</span>
               </Link>
             );
           })}

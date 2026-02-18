@@ -14,7 +14,7 @@ export function MainLayout() {
       <header className="bg-slate-950/80 backdrop-blur-sm shadow-2xl border-b border-slate-700/50 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-violet-600 flex items-center justify-center shadow-lg">
               <span className="text-white font-bold text-lg">LH</span>
             </div>
             <div>
@@ -25,7 +25,7 @@ export function MainLayout() {
               </div>
             </div>
           </div>
-          <Link to="/dashboard/settings/security" className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 border ${isSettingsPage ? "text-amber-400 bg-amber-500/10 border-amber-400/30" : "text-slate-300 hover:text-amber-400 hover:bg-slate-800/60 border-slate-700/50 hover:border-amber-400/30"}`}>
+          <Link to="/dashboard/settings/security" className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 border ${isSettingsPage ? "text-violet-400 bg-violet-500/10 border-violet-400/30" : "text-slate-300 hover:text-violet-400 hover:bg-slate-800/60 border-slate-700/50 hover:border-violet-400/30"}`}>
             <Settings className="w-5 h-5" />
           </Link>
         </div>

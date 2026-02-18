@@ -46,9 +46,9 @@ export function ConfirmationModal({
       button: 'bg-red-600 hover:bg-red-700',
     },
     warning: {
-      icon: 'text-amber-400',
-      iconBg: 'bg-amber-500/10',
-      button: 'bg-amber-600 hover:bg-amber-700',
+      icon: 'text-violet-400',
+      iconBg: 'bg-violet-500/10',
+      button: 'bg-violet-600 hover:bg-violet-700',
     },
     info: {
       icon: 'text-blue-400',

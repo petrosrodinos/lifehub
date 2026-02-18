@@ -49,7 +49,7 @@ export function WeeklySlotBoard() {
           </svg>
           <h2 className="text-2xl font-bold text-white mb-3">No Activities Yet</h2>
           <p className="text-slate-400 mb-6">Create your first activity to start building your weekly schedule</p>
-          <button type="button" onClick={() => setShowActivitiesMenu(true)} className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors">
+          <button type="button" onClick={() => setShowActivitiesMenu(true)} className="px-6 py-3 bg-violet-500 hover:bg-violet-600 text-white font-medium rounded-lg transition-colors">
             Create Your First Activity
           </button>
         </div>

@@ -89,11 +89,11 @@ export function PinLock() {
 
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(251,191,36,0.05),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.08),transparent_50%)]" />
       
       <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl mb-6 shadow-lg shadow-amber-500/20">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-violet-500 to-violet-600 rounded-2xl mb-6 shadow-lg shadow-violet-500/20">
             <Lock className="w-10 h-10 text-white" />
           </div>
           {full_name && (
@@ -119,14 +119,14 @@ export function PinLock() {
                   ${error 
                     ? 'border-red-500 bg-red-500/10' 
                     : pin.length > index
-                      ? 'border-amber-500 bg-amber-500/20 shadow-lg shadow-amber-500/20' 
+                      ? 'border-violet-500 bg-violet-500/20 shadow-lg shadow-violet-500/20' 
                       : 'border-slate-600 bg-slate-800/30'
                   }
                   ${isLocked ? 'opacity-50' : ''}
                 `}
               >
                 {pin[index] && (
-                  <div className={`w-3 h-3 rounded-full ${error ? 'bg-red-400' : 'bg-amber-400'}`} />
+                  <div className={`w-3 h-3 rounded-full ${error ? 'bg-red-400' : 'bg-violet-400'}`} />
                 )}
               </div>
             ))}
@@ -142,7 +142,7 @@ export function PinLock() {
           {!isLocked && attempts > 0 && !error && (
             <div className="h-1 bg-slate-700 rounded-full overflow-hidden mb-6">
               <div 
-                className="h-full bg-amber-500 transition-all duration-300"
+                className="h-full bg-violet-500 transition-all duration-300"
                 style={{ width: `${(attempts / PIN_CONFIG.MAX_ATTEMPTS) * 100}%` }}
               />
             </div>
@@ -154,7 +154,7 @@ export function PinLock() {
                 key={num}
                 onClick={() => handleNumberClick(num.toString())}
                 disabled={isLocked || pin.length >= PIN_LENGTH}
-                className="h-16 rounded-xl bg-slate-800/50 hover:bg-slate-800 border border-slate-600 hover:border-amber-500/50 text-white text-2xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
+                className="h-16 rounded-xl bg-slate-800/50 hover:bg-slate-800 border border-slate-600 hover:border-violet-500/50 text-white text-2xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
               >
                 {num}
               </button>
@@ -163,7 +163,7 @@ export function PinLock() {
             <button
               onClick={() => handleNumberClick('0')}
               disabled={isLocked || pin.length >= PIN_LENGTH}
-              className="h-16 rounded-xl bg-slate-800/50 hover:bg-slate-800 border border-slate-600 hover:border-amber-500/50 text-white text-2xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
+              className="h-16 rounded-xl bg-slate-800/50 hover:bg-slate-800 border border-slate-600 hover:border-violet-500/50 text-white text-2xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
             >
               0
             </button>

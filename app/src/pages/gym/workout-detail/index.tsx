@@ -122,8 +122,8 @@ export function WorkoutDetailPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center">
-                <Dumbbell className="w-5 h-5 text-amber-400" />
+              <div className="w-10 h-10 rounded-lg bg-violet-500/10 flex items-center justify-center">
+                <Dumbbell className="w-5 h-5 text-violet-400" />
               </div>
               <div>
                 <p className="text-xs text-slate-500">Total Sets</p>

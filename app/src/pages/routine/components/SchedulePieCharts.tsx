@@ -158,7 +158,7 @@ export function SchedulePieCharts() {
           <select
             value={displayMode}
             onChange={(e) => setDisplayMode(e.target.value as ChartDisplayMode)}
-            className="px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 w-fit"
+            className="px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 w-fit"
           >
             {CHART_DISPLAY_OPTIONS.map((opt) => (
               <option key={opt.id} value={opt.id}>
@@ -188,7 +188,7 @@ export function SchedulePieCharts() {
             <select
               value={timePeriod}
               onChange={(e) => setTimePeriod(e.target.value as TimePeriod)}
-              className="px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 text-sm"
+              className="px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 text-sm"
             >
               {TIME_PERIOD_OPTIONS.map((opt) => (
                 <option key={opt.id} value={opt.id}>

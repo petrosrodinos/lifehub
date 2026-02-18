@@ -9,7 +9,7 @@ type ActivitiesMenuProps = {
   onClose: () => void;
 };
 
-const PRESET_COLORS = ["#f59e0b", "#0284c7", "#10b981", "#8b5cf6", "#f43f5e", "#f97316", "#dc2626", "#6366f1", "#14b8a6", "#eab308"];
+const PRESET_COLORS = ["#8b5cf6", "#0284c7", "#10b981", "#a78bfa", "#f43f5e", "#06b6d4", "#dc2626", "#6366f1", "#14b8a6", "#eab308"];
 
 type ActivityFormProps = {
   initialName: string;
@@ -34,10 +34,10 @@ function ActivityForm({ initialName, initialColor, onSubmit, onCancel, submitLab
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
-      <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Activity name" className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50" autoFocus disabled={isPending} />
+      <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Activity name" className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50" autoFocus disabled={isPending} />
       <ColorPicker value={color} onChange={setColor} presetColors={PRESET_COLORS} disabled={isPending} />
       <div className="flex gap-2">
-        <button type="submit" disabled={isPending} className="flex-1 px-3 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+        <button type="submit" disabled={isPending} className="flex-1 px-3 py-2 bg-violet-500 hover:bg-violet-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
           {isPending && <Loader2 className="h-4 w-4 animate-spin" />}
           {submitLabel}
         </button>
@@ -127,7 +127,7 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
               <ActivityForm initialName="" initialColor={PRESET_COLORS[0]} onSubmit={handleAdd} onCancel={() => setIsAdding(false)} submitLabel="Add" isPending={createActivity.isPending} />
             </div>
           ) : (
-            <button type="button" onClick={() => setIsAdding(true)} className="w-full py-3 border-2 border-dashed border-slate-600 rounded-xl text-slate-400 hover:text-amber-400 hover:border-amber-500/50 transition-colors font-medium">
+            <button type="button" onClick={() => setIsAdding(true)} className="w-full py-3 border-2 border-dashed border-slate-600 rounded-xl text-slate-400 hover:text-violet-400 hover:border-violet-500/50 transition-colors font-medium">
               + Add activity
             </button>
           )}
@@ -141,7 +141,7 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
                 <ClipboardList className="w-16 h-16 mx-auto text-slate-600 mb-4" />
                 <p className="text-slate-400 mb-2">No activities yet</p>
                 <p className="text-sm text-slate-500 mb-4">Create your first activity to get started</p>
-                <button type="button" onClick={() => setIsAdding(true)} className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-lg transition-colors">
+                <button type="button" onClick={() => setIsAdding(true)} className="px-4 py-2 bg-violet-500 hover:bg-violet-600 text-white font-medium rounded-lg transition-colors">
                   Create First Activity
                 </button>
               </div>
@@ -158,7 +158,7 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
                       <span className="flex-1 text-white font-medium capitalize">{activity.name}</span>
 
                       <div className="flex gap-1">
-                        <button type="button" onClick={() => setEditingUuid(activity.uuid)} className="p-2 text-slate-400 hover:text-amber-400 rounded-lg hover:bg-slate-700 transition-colors">
+                        <button type="button" onClick={() => setEditingUuid(activity.uuid)} className="p-2 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-700 transition-colors">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button type="button" onClick={() => handleDeleteClick(activity.uuid)} className="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-700 transition-colors">
