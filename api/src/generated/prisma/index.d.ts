@@ -29,6 +29,31 @@ export type Activity = $Result.DefaultSelection<Prisma.$ActivityPayload>
  */
 export type ScheduleSlot = $Result.DefaultSelection<Prisma.$ScheduleSlotPayload>
 /**
+ * Model ActivitySchedule
+ * 
+ */
+export type ActivitySchedule = $Result.DefaultSelection<Prisma.$ActivitySchedulePayload>
+/**
+ * Model ActivityScheduleWeekday
+ * 
+ */
+export type ActivityScheduleWeekday = $Result.DefaultSelection<Prisma.$ActivityScheduleWeekdayPayload>
+/**
+ * Model ActivityScheduleDate
+ * 
+ */
+export type ActivityScheduleDate = $Result.DefaultSelection<Prisma.$ActivityScheduleDatePayload>
+/**
+ * Model ActivityOccurrence
+ * 
+ */
+export type ActivityOccurrence = $Result.DefaultSelection<Prisma.$ActivityOccurrencePayload>
+/**
+ * Model ActivityLog
+ * 
+ */
+export type ActivityLog = $Result.DefaultSelection<Prisma.$ActivityLogPayload>
+/**
  * Model ExpenseAccount
  * 
  */
@@ -117,6 +142,54 @@ export const ExerciseType: {
 
 export type ExerciseType = (typeof ExerciseType)[keyof typeof ExerciseType]
 
+
+export const ActivityRepeatType: {
+  DAILY: 'DAILY',
+  WEEKDAYS: 'WEEKDAYS',
+  INTERVAL: 'INTERVAL',
+  DATES: 'DATES',
+  FREQUENCY: 'FREQUENCY'
+};
+
+export type ActivityRepeatType = (typeof ActivityRepeatType)[keyof typeof ActivityRepeatType]
+
+
+export const ActivityTargetType: {
+  BOOLEAN: 'BOOLEAN',
+  QUANTITY: 'QUANTITY'
+};
+
+export type ActivityTargetType = (typeof ActivityTargetType)[keyof typeof ActivityTargetType]
+
+
+export const ActivityTargetUnit: {
+  PAGES: 'PAGES',
+  MINUTES: 'MINUTES',
+  KM: 'KM',
+  TIMES: 'TIMES',
+  CUSTOM: 'CUSTOM'
+};
+
+export type ActivityTargetUnit = (typeof ActivityTargetUnit)[keyof typeof ActivityTargetUnit]
+
+
+export const FrequencyPeriod: {
+  WEEK: 'WEEK',
+  MONTH: 'MONTH'
+};
+
+export type FrequencyPeriod = (typeof FrequencyPeriod)[keyof typeof FrequencyPeriod]
+
+
+export const OccurrenceStatus: {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  SKIPPED: 'SKIPPED',
+  FAILED: 'FAILED'
+};
+
+export type OccurrenceStatus = (typeof OccurrenceStatus)[keyof typeof OccurrenceStatus]
+
 }
 
 export type AuthRole = $Enums.AuthRole
@@ -134,6 +207,26 @@ export const ExpenseEntryType: typeof $Enums.ExpenseEntryType
 export type ExerciseType = $Enums.ExerciseType
 
 export const ExerciseType: typeof $Enums.ExerciseType
+
+export type ActivityRepeatType = $Enums.ActivityRepeatType
+
+export const ActivityRepeatType: typeof $Enums.ActivityRepeatType
+
+export type ActivityTargetType = $Enums.ActivityTargetType
+
+export const ActivityTargetType: typeof $Enums.ActivityTargetType
+
+export type ActivityTargetUnit = $Enums.ActivityTargetUnit
+
+export const ActivityTargetUnit: typeof $Enums.ActivityTargetUnit
+
+export type FrequencyPeriod = $Enums.FrequencyPeriod
+
+export const FrequencyPeriod: typeof $Enums.FrequencyPeriod
+
+export type OccurrenceStatus = $Enums.OccurrenceStatus
+
+export const OccurrenceStatus: typeof $Enums.OccurrenceStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -281,6 +374,56 @@ export class PrismaClient<
     * ```
     */
   get scheduleSlot(): Prisma.ScheduleSlotDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.activitySchedule`: Exposes CRUD operations for the **ActivitySchedule** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ActivitySchedules
+    * const activitySchedules = await prisma.activitySchedule.findMany()
+    * ```
+    */
+  get activitySchedule(): Prisma.ActivityScheduleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.activityScheduleWeekday`: Exposes CRUD operations for the **ActivityScheduleWeekday** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ActivityScheduleWeekdays
+    * const activityScheduleWeekdays = await prisma.activityScheduleWeekday.findMany()
+    * ```
+    */
+  get activityScheduleWeekday(): Prisma.ActivityScheduleWeekdayDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.activityScheduleDate`: Exposes CRUD operations for the **ActivityScheduleDate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ActivityScheduleDates
+    * const activityScheduleDates = await prisma.activityScheduleDate.findMany()
+    * ```
+    */
+  get activityScheduleDate(): Prisma.ActivityScheduleDateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.activityOccurrence`: Exposes CRUD operations for the **ActivityOccurrence** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ActivityOccurrences
+    * const activityOccurrences = await prisma.activityOccurrence.findMany()
+    * ```
+    */
+  get activityOccurrence(): Prisma.ActivityOccurrenceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.activityLog`: Exposes CRUD operations for the **ActivityLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ActivityLogs
+    * const activityLogs = await prisma.activityLog.findMany()
+    * ```
+    */
+  get activityLog(): Prisma.ActivityLogDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.expenseAccount`: Exposes CRUD operations for the **ExpenseAccount** model.
@@ -808,6 +951,11 @@ export namespace Prisma {
     User: 'User',
     Activity: 'Activity',
     ScheduleSlot: 'ScheduleSlot',
+    ActivitySchedule: 'ActivitySchedule',
+    ActivityScheduleWeekday: 'ActivityScheduleWeekday',
+    ActivityScheduleDate: 'ActivityScheduleDate',
+    ActivityOccurrence: 'ActivityOccurrence',
+    ActivityLog: 'ActivityLog',
     ExpenseAccount: 'ExpenseAccount',
     ExpenseCategory: 'ExpenseCategory',
     ExpenseSubcategory: 'ExpenseSubcategory',
@@ -832,7 +980,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "activity" | "scheduleSlot" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet"
+      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1055,6 +1203,376 @@ export namespace Prisma {
           count: {
             args: Prisma.ScheduleSlotCountArgs<ExtArgs>
             result: $Utils.Optional<ScheduleSlotCountAggregateOutputType> | number
+          }
+        }
+      }
+      ActivitySchedule: {
+        payload: Prisma.$ActivitySchedulePayload<ExtArgs>
+        fields: Prisma.ActivityScheduleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ActivityScheduleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ActivityScheduleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload>
+          }
+          findFirst: {
+            args: Prisma.ActivityScheduleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ActivityScheduleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload>
+          }
+          findMany: {
+            args: Prisma.ActivityScheduleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload>[]
+          }
+          create: {
+            args: Prisma.ActivityScheduleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload>
+          }
+          createMany: {
+            args: Prisma.ActivityScheduleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ActivityScheduleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload>[]
+          }
+          delete: {
+            args: Prisma.ActivityScheduleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload>
+          }
+          update: {
+            args: Prisma.ActivityScheduleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload>
+          }
+          deleteMany: {
+            args: Prisma.ActivityScheduleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ActivityScheduleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ActivityScheduleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload>[]
+          }
+          upsert: {
+            args: Prisma.ActivityScheduleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivitySchedulePayload>
+          }
+          aggregate: {
+            args: Prisma.ActivityScheduleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActivitySchedule>
+          }
+          groupBy: {
+            args: Prisma.ActivityScheduleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActivityScheduleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ActivityScheduleCountArgs<ExtArgs>
+            result: $Utils.Optional<ActivityScheduleCountAggregateOutputType> | number
+          }
+        }
+      }
+      ActivityScheduleWeekday: {
+        payload: Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>
+        fields: Prisma.ActivityScheduleWeekdayFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ActivityScheduleWeekdayFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ActivityScheduleWeekdayFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload>
+          }
+          findFirst: {
+            args: Prisma.ActivityScheduleWeekdayFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ActivityScheduleWeekdayFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload>
+          }
+          findMany: {
+            args: Prisma.ActivityScheduleWeekdayFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload>[]
+          }
+          create: {
+            args: Prisma.ActivityScheduleWeekdayCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload>
+          }
+          createMany: {
+            args: Prisma.ActivityScheduleWeekdayCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ActivityScheduleWeekdayCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload>[]
+          }
+          delete: {
+            args: Prisma.ActivityScheduleWeekdayDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload>
+          }
+          update: {
+            args: Prisma.ActivityScheduleWeekdayUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload>
+          }
+          deleteMany: {
+            args: Prisma.ActivityScheduleWeekdayDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ActivityScheduleWeekdayUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ActivityScheduleWeekdayUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload>[]
+          }
+          upsert: {
+            args: Prisma.ActivityScheduleWeekdayUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleWeekdayPayload>
+          }
+          aggregate: {
+            args: Prisma.ActivityScheduleWeekdayAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActivityScheduleWeekday>
+          }
+          groupBy: {
+            args: Prisma.ActivityScheduleWeekdayGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActivityScheduleWeekdayGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ActivityScheduleWeekdayCountArgs<ExtArgs>
+            result: $Utils.Optional<ActivityScheduleWeekdayCountAggregateOutputType> | number
+          }
+        }
+      }
+      ActivityScheduleDate: {
+        payload: Prisma.$ActivityScheduleDatePayload<ExtArgs>
+        fields: Prisma.ActivityScheduleDateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ActivityScheduleDateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ActivityScheduleDateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload>
+          }
+          findFirst: {
+            args: Prisma.ActivityScheduleDateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ActivityScheduleDateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload>
+          }
+          findMany: {
+            args: Prisma.ActivityScheduleDateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload>[]
+          }
+          create: {
+            args: Prisma.ActivityScheduleDateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload>
+          }
+          createMany: {
+            args: Prisma.ActivityScheduleDateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ActivityScheduleDateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload>[]
+          }
+          delete: {
+            args: Prisma.ActivityScheduleDateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload>
+          }
+          update: {
+            args: Prisma.ActivityScheduleDateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload>
+          }
+          deleteMany: {
+            args: Prisma.ActivityScheduleDateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ActivityScheduleDateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ActivityScheduleDateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload>[]
+          }
+          upsert: {
+            args: Prisma.ActivityScheduleDateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityScheduleDatePayload>
+          }
+          aggregate: {
+            args: Prisma.ActivityScheduleDateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActivityScheduleDate>
+          }
+          groupBy: {
+            args: Prisma.ActivityScheduleDateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActivityScheduleDateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ActivityScheduleDateCountArgs<ExtArgs>
+            result: $Utils.Optional<ActivityScheduleDateCountAggregateOutputType> | number
+          }
+        }
+      }
+      ActivityOccurrence: {
+        payload: Prisma.$ActivityOccurrencePayload<ExtArgs>
+        fields: Prisma.ActivityOccurrenceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ActivityOccurrenceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ActivityOccurrenceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload>
+          }
+          findFirst: {
+            args: Prisma.ActivityOccurrenceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ActivityOccurrenceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload>
+          }
+          findMany: {
+            args: Prisma.ActivityOccurrenceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload>[]
+          }
+          create: {
+            args: Prisma.ActivityOccurrenceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload>
+          }
+          createMany: {
+            args: Prisma.ActivityOccurrenceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ActivityOccurrenceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload>[]
+          }
+          delete: {
+            args: Prisma.ActivityOccurrenceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload>
+          }
+          update: {
+            args: Prisma.ActivityOccurrenceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload>
+          }
+          deleteMany: {
+            args: Prisma.ActivityOccurrenceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ActivityOccurrenceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ActivityOccurrenceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload>[]
+          }
+          upsert: {
+            args: Prisma.ActivityOccurrenceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityOccurrencePayload>
+          }
+          aggregate: {
+            args: Prisma.ActivityOccurrenceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActivityOccurrence>
+          }
+          groupBy: {
+            args: Prisma.ActivityOccurrenceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActivityOccurrenceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ActivityOccurrenceCountArgs<ExtArgs>
+            result: $Utils.Optional<ActivityOccurrenceCountAggregateOutputType> | number
+          }
+        }
+      }
+      ActivityLog: {
+        payload: Prisma.$ActivityLogPayload<ExtArgs>
+        fields: Prisma.ActivityLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ActivityLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ActivityLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload>
+          }
+          findFirst: {
+            args: Prisma.ActivityLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ActivityLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload>
+          }
+          findMany: {
+            args: Prisma.ActivityLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload>[]
+          }
+          create: {
+            args: Prisma.ActivityLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload>
+          }
+          createMany: {
+            args: Prisma.ActivityLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ActivityLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload>[]
+          }
+          delete: {
+            args: Prisma.ActivityLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload>
+          }
+          update: {
+            args: Prisma.ActivityLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.ActivityLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ActivityLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ActivityLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload>[]
+          }
+          upsert: {
+            args: Prisma.ActivityLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActivityLogPayload>
+          }
+          aggregate: {
+            args: Prisma.ActivityLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActivityLog>
+          }
+          groupBy: {
+            args: Prisma.ActivityLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActivityLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ActivityLogCountArgs<ExtArgs>
+            result: $Utils.Optional<ActivityLogCountAggregateOutputType> | number
           }
         }
       }
@@ -1835,6 +2353,11 @@ export namespace Prisma {
     user?: UserOmit
     activity?: ActivityOmit
     scheduleSlot?: ScheduleSlotOmit
+    activitySchedule?: ActivityScheduleOmit
+    activityScheduleWeekday?: ActivityScheduleWeekdayOmit
+    activityScheduleDate?: ActivityScheduleDateOmit
+    activityOccurrence?: ActivityOccurrenceOmit
+    activityLog?: ActivityLogOmit
     expenseAccount?: ExpenseAccountOmit
     expenseCategory?: ExpenseCategoryOmit
     expenseSubcategory?: ExpenseSubcategoryOmit
@@ -1926,6 +2449,9 @@ export namespace Prisma {
   export type UserCountOutputType = {
     activities: number
     schedule_slots: number
+    activity_schedules: number
+    activity_logs: number
+    activity_occurrences: number
     expense_accounts: number
     expense_entries: number
     categories: number
@@ -1938,6 +2464,9 @@ export namespace Prisma {
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     activities?: boolean | UserCountOutputTypeCountActivitiesArgs
     schedule_slots?: boolean | UserCountOutputTypeCountSchedule_slotsArgs
+    activity_schedules?: boolean | UserCountOutputTypeCountActivity_schedulesArgs
+    activity_logs?: boolean | UserCountOutputTypeCountActivity_logsArgs
+    activity_occurrences?: boolean | UserCountOutputTypeCountActivity_occurrencesArgs
     expense_accounts?: boolean | UserCountOutputTypeCountExpense_accountsArgs
     expense_entries?: boolean | UserCountOutputTypeCountExpense_entriesArgs
     categories?: boolean | UserCountOutputTypeCountCategoriesArgs
@@ -1970,6 +2499,27 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSchedule_slotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ScheduleSlotWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountActivity_schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityScheduleWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountActivity_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityLogWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountActivity_occurrencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityOccurrenceWhereInput
   }
 
   /**
@@ -2028,10 +2578,16 @@ export namespace Prisma {
 
   export type ActivityCountOutputType = {
     schedule_slots: number
+    activity_schedules: number
+    activity_logs: number
+    activity_occurrences: number
   }
 
   export type ActivityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule_slots?: boolean | ActivityCountOutputTypeCountSchedule_slotsArgs
+    activity_schedules?: boolean | ActivityCountOutputTypeCountActivity_schedulesArgs
+    activity_logs?: boolean | ActivityCountOutputTypeCountActivity_logsArgs
+    activity_occurrences?: boolean | ActivityCountOutputTypeCountActivity_occurrencesArgs
   }
 
   // Custom InputTypes
@@ -2050,6 +2606,85 @@ export namespace Prisma {
    */
   export type ActivityCountOutputTypeCountSchedule_slotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ScheduleSlotWhereInput
+  }
+
+  /**
+   * ActivityCountOutputType without action
+   */
+  export type ActivityCountOutputTypeCountActivity_schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityScheduleWhereInput
+  }
+
+  /**
+   * ActivityCountOutputType without action
+   */
+  export type ActivityCountOutputTypeCountActivity_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityLogWhereInput
+  }
+
+  /**
+   * ActivityCountOutputType without action
+   */
+  export type ActivityCountOutputTypeCountActivity_occurrencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityOccurrenceWhereInput
+  }
+
+
+  /**
+   * Count Type ActivityScheduleCountOutputType
+   */
+
+  export type ActivityScheduleCountOutputType = {
+    weekdays: number
+    specific_dates: number
+    occurrences: number
+    logs: number
+  }
+
+  export type ActivityScheduleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    weekdays?: boolean | ActivityScheduleCountOutputTypeCountWeekdaysArgs
+    specific_dates?: boolean | ActivityScheduleCountOutputTypeCountSpecific_datesArgs
+    occurrences?: boolean | ActivityScheduleCountOutputTypeCountOccurrencesArgs
+    logs?: boolean | ActivityScheduleCountOutputTypeCountLogsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ActivityScheduleCountOutputType without action
+   */
+  export type ActivityScheduleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleCountOutputType
+     */
+    select?: ActivityScheduleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ActivityScheduleCountOutputType without action
+   */
+  export type ActivityScheduleCountOutputTypeCountWeekdaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityScheduleWeekdayWhereInput
+  }
+
+  /**
+   * ActivityScheduleCountOutputType without action
+   */
+  export type ActivityScheduleCountOutputTypeCountSpecific_datesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityScheduleDateWhereInput
+  }
+
+  /**
+   * ActivityScheduleCountOutputType without action
+   */
+  export type ActivityScheduleCountOutputTypeCountOccurrencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityOccurrenceWhereInput
+  }
+
+  /**
+   * ActivityScheduleCountOutputType without action
+   */
+  export type ActivityScheduleCountOutputTypeCountLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityLogWhereInput
   }
 
 
@@ -2532,6 +3167,9 @@ export namespace Prisma {
     updated_at?: boolean
     activities?: boolean | User$activitiesArgs<ExtArgs>
     schedule_slots?: boolean | User$schedule_slotsArgs<ExtArgs>
+    activity_schedules?: boolean | User$activity_schedulesArgs<ExtArgs>
+    activity_logs?: boolean | User$activity_logsArgs<ExtArgs>
+    activity_occurrences?: boolean | User$activity_occurrencesArgs<ExtArgs>
     expense_accounts?: boolean | User$expense_accountsArgs<ExtArgs>
     expense_entries?: boolean | User$expense_entriesArgs<ExtArgs>
     categories?: boolean | User$categoriesArgs<ExtArgs>
@@ -2585,6 +3223,9 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     activities?: boolean | User$activitiesArgs<ExtArgs>
     schedule_slots?: boolean | User$schedule_slotsArgs<ExtArgs>
+    activity_schedules?: boolean | User$activity_schedulesArgs<ExtArgs>
+    activity_logs?: boolean | User$activity_logsArgs<ExtArgs>
+    activity_occurrences?: boolean | User$activity_occurrencesArgs<ExtArgs>
     expense_accounts?: boolean | User$expense_accountsArgs<ExtArgs>
     expense_entries?: boolean | User$expense_entriesArgs<ExtArgs>
     categories?: boolean | User$categoriesArgs<ExtArgs>
@@ -2602,6 +3243,9 @@ export namespace Prisma {
     objects: {
       activities: Prisma.$ActivityPayload<ExtArgs>[]
       schedule_slots: Prisma.$ScheduleSlotPayload<ExtArgs>[]
+      activity_schedules: Prisma.$ActivitySchedulePayload<ExtArgs>[]
+      activity_logs: Prisma.$ActivityLogPayload<ExtArgs>[]
+      activity_occurrences: Prisma.$ActivityOccurrencePayload<ExtArgs>[]
       expense_accounts: Prisma.$ExpenseAccountPayload<ExtArgs>[]
       expense_entries: Prisma.$ExpenseEntryPayload<ExtArgs>[]
       categories: Prisma.$ExpenseCategoryPayload<ExtArgs>[]
@@ -3017,6 +3661,9 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     activities<T extends User$activitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     schedule_slots<T extends User$schedule_slotsArgs<ExtArgs> = {}>(args?: Subset<T, User$schedule_slotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activity_schedules<T extends User$activity_schedulesArgs<ExtArgs> = {}>(args?: Subset<T, User$activity_schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activity_logs<T extends User$activity_logsArgs<ExtArgs> = {}>(args?: Subset<T, User$activity_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activity_occurrences<T extends User$activity_occurrencesArgs<ExtArgs> = {}>(args?: Subset<T, User$activity_occurrencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_accounts<T extends User$expense_accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_entries<T extends User$expense_entriesArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categories<T extends User$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3499,6 +4146,78 @@ export namespace Prisma {
   }
 
   /**
+   * User.activity_schedules
+   */
+  export type User$activity_schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    where?: ActivityScheduleWhereInput
+    orderBy?: ActivityScheduleOrderByWithRelationInput | ActivityScheduleOrderByWithRelationInput[]
+    cursor?: ActivityScheduleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityScheduleScalarFieldEnum | ActivityScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * User.activity_logs
+   */
+  export type User$activity_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    where?: ActivityLogWhereInput
+    orderBy?: ActivityLogOrderByWithRelationInput | ActivityLogOrderByWithRelationInput[]
+    cursor?: ActivityLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
+  }
+
+  /**
+   * User.activity_occurrences
+   */
+  export type User$activity_occurrencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    where?: ActivityOccurrenceWhereInput
+    orderBy?: ActivityOccurrenceOrderByWithRelationInput | ActivityOccurrenceOrderByWithRelationInput[]
+    cursor?: ActivityOccurrenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityOccurrenceScalarFieldEnum | ActivityOccurrenceScalarFieldEnum[]
+  }
+
+  /**
    * User.expense_accounts
    */
   export type User$expense_accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3710,7 +4429,10 @@ export namespace Prisma {
     uuid: string | null
     user_uuid: string | null
     name: string | null
+    description: string | null
+    icon: string | null
     color: string | null
+    visible: boolean | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -3720,7 +4442,10 @@ export namespace Prisma {
     uuid: string | null
     user_uuid: string | null
     name: string | null
+    description: string | null
+    icon: string | null
     color: string | null
+    visible: boolean | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -3730,7 +4455,10 @@ export namespace Prisma {
     uuid: number
     user_uuid: number
     name: number
+    description: number
+    icon: number
     color: number
+    visible: number
     created_at: number
     updated_at: number
     _all: number
@@ -3750,7 +4478,10 @@ export namespace Prisma {
     uuid?: true
     user_uuid?: true
     name?: true
+    description?: true
+    icon?: true
     color?: true
+    visible?: true
     created_at?: true
     updated_at?: true
   }
@@ -3760,7 +4491,10 @@ export namespace Prisma {
     uuid?: true
     user_uuid?: true
     name?: true
+    description?: true
+    icon?: true
     color?: true
+    visible?: true
     created_at?: true
     updated_at?: true
   }
@@ -3770,7 +4504,10 @@ export namespace Prisma {
     uuid?: true
     user_uuid?: true
     name?: true
+    description?: true
+    icon?: true
     color?: true
+    visible?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -3867,7 +4604,10 @@ export namespace Prisma {
     uuid: string
     user_uuid: string
     name: string
-    color: string
+    description: string | null
+    icon: string | null
+    color: string | null
+    visible: boolean
     created_at: Date
     updated_at: Date
     _count: ActivityCountAggregateOutputType | null
@@ -3896,11 +4636,17 @@ export namespace Prisma {
     uuid?: boolean
     user_uuid?: boolean
     name?: boolean
+    description?: boolean
+    icon?: boolean
     color?: boolean
+    visible?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     schedule_slots?: boolean | Activity$schedule_slotsArgs<ExtArgs>
+    activity_schedules?: boolean | Activity$activity_schedulesArgs<ExtArgs>
+    activity_logs?: boolean | Activity$activity_logsArgs<ExtArgs>
+    activity_occurrences?: boolean | Activity$activity_occurrencesArgs<ExtArgs>
     _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["activity"]>
 
@@ -3909,7 +4655,10 @@ export namespace Prisma {
     uuid?: boolean
     user_uuid?: boolean
     name?: boolean
+    description?: boolean
+    icon?: boolean
     color?: boolean
+    visible?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3920,7 +4669,10 @@ export namespace Prisma {
     uuid?: boolean
     user_uuid?: boolean
     name?: boolean
+    description?: boolean
+    icon?: boolean
     color?: boolean
+    visible?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3931,15 +4683,21 @@ export namespace Prisma {
     uuid?: boolean
     user_uuid?: boolean
     name?: boolean
+    description?: boolean
+    icon?: boolean
     color?: boolean
+    visible?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type ActivityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "color" | "created_at" | "updated_at", ExtArgs["result"]["activity"]>
+  export type ActivityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "description" | "icon" | "color" | "visible" | "created_at" | "updated_at", ExtArgs["result"]["activity"]>
   export type ActivityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     schedule_slots?: boolean | Activity$schedule_slotsArgs<ExtArgs>
+    activity_schedules?: boolean | Activity$activity_schedulesArgs<ExtArgs>
+    activity_logs?: boolean | Activity$activity_logsArgs<ExtArgs>
+    activity_occurrences?: boolean | Activity$activity_occurrencesArgs<ExtArgs>
     _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ActivityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3954,13 +4712,19 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       schedule_slots: Prisma.$ScheduleSlotPayload<ExtArgs>[]
+      activity_schedules: Prisma.$ActivitySchedulePayload<ExtArgs>[]
+      activity_logs: Prisma.$ActivityLogPayload<ExtArgs>[]
+      activity_occurrences: Prisma.$ActivityOccurrencePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       uuid: string
       user_uuid: string
       name: string
-      color: string
+      description: string | null
+      icon: string | null
+      color: string | null
+      visible: boolean
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["activity"]>
@@ -4359,6 +5123,9 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     schedule_slots<T extends Activity$schedule_slotsArgs<ExtArgs> = {}>(args?: Subset<T, Activity$schedule_slotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activity_schedules<T extends Activity$activity_schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Activity$activity_schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activity_logs<T extends Activity$activity_logsArgs<ExtArgs> = {}>(args?: Subset<T, Activity$activity_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    activity_occurrences<T extends Activity$activity_occurrencesArgs<ExtArgs> = {}>(args?: Subset<T, Activity$activity_occurrencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4392,7 +5159,10 @@ export namespace Prisma {
     readonly uuid: FieldRef<"Activity", 'String'>
     readonly user_uuid: FieldRef<"Activity", 'String'>
     readonly name: FieldRef<"Activity", 'String'>
+    readonly description: FieldRef<"Activity", 'String'>
+    readonly icon: FieldRef<"Activity", 'String'>
     readonly color: FieldRef<"Activity", 'String'>
+    readonly visible: FieldRef<"Activity", 'Boolean'>
     readonly created_at: FieldRef<"Activity", 'DateTime'>
     readonly updated_at: FieldRef<"Activity", 'DateTime'>
   }
@@ -4812,6 +5582,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ScheduleSlotScalarFieldEnum | ScheduleSlotScalarFieldEnum[]
+  }
+
+  /**
+   * Activity.activity_schedules
+   */
+  export type Activity$activity_schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    where?: ActivityScheduleWhereInput
+    orderBy?: ActivityScheduleOrderByWithRelationInput | ActivityScheduleOrderByWithRelationInput[]
+    cursor?: ActivityScheduleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityScheduleScalarFieldEnum | ActivityScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * Activity.activity_logs
+   */
+  export type Activity$activity_logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    where?: ActivityLogWhereInput
+    orderBy?: ActivityLogOrderByWithRelationInput | ActivityLogOrderByWithRelationInput[]
+    cursor?: ActivityLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
+  }
+
+  /**
+   * Activity.activity_occurrences
+   */
+  export type Activity$activity_occurrencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    where?: ActivityOccurrenceWhereInput
+    orderBy?: ActivityOccurrenceOrderByWithRelationInput | ActivityOccurrenceOrderByWithRelationInput[]
+    cursor?: ActivityOccurrenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityOccurrenceScalarFieldEnum | ActivityOccurrenceScalarFieldEnum[]
   }
 
   /**
@@ -5982,6 +6824,6013 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ScheduleSlotInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ActivitySchedule
+   */
+
+  export type AggregateActivitySchedule = {
+    _count: ActivityScheduleCountAggregateOutputType | null
+    _avg: ActivityScheduleAvgAggregateOutputType | null
+    _sum: ActivityScheduleSumAggregateOutputType | null
+    _min: ActivityScheduleMinAggregateOutputType | null
+    _max: ActivityScheduleMaxAggregateOutputType | null
+  }
+
+  export type ActivityScheduleAvgAggregateOutputType = {
+    id: number | null
+    interval_days: number | null
+    frequency_value: number | null
+    target_value: number | null
+  }
+
+  export type ActivityScheduleSumAggregateOutputType = {
+    id: number | null
+    interval_days: number | null
+    frequency_value: number | null
+    target_value: number | null
+  }
+
+  export type ActivityScheduleMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    activity_uuid: string | null
+    valid_from: Date | null
+    valid_until: Date | null
+    repeat_type: $Enums.ActivityRepeatType | null
+    interval_days: number | null
+    time_of_day: string | null
+    frequency_value: number | null
+    frequency_period: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType | null
+    target_value: number | null
+    target_unit: $Enums.ActivityTargetUnit | null
+    target_unit_label: string | null
+    is_active: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ActivityScheduleMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    activity_uuid: string | null
+    valid_from: Date | null
+    valid_until: Date | null
+    repeat_type: $Enums.ActivityRepeatType | null
+    interval_days: number | null
+    time_of_day: string | null
+    frequency_value: number | null
+    frequency_period: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType | null
+    target_value: number | null
+    target_unit: $Enums.ActivityTargetUnit | null
+    target_unit_label: string | null
+    is_active: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ActivityScheduleCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    activity_uuid: number
+    valid_from: number
+    valid_until: number
+    repeat_type: number
+    interval_days: number
+    time_of_day: number
+    frequency_value: number
+    frequency_period: number
+    target_type: number
+    target_value: number
+    target_unit: number
+    target_unit_label: number
+    is_active: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type ActivityScheduleAvgAggregateInputType = {
+    id?: true
+    interval_days?: true
+    frequency_value?: true
+    target_value?: true
+  }
+
+  export type ActivityScheduleSumAggregateInputType = {
+    id?: true
+    interval_days?: true
+    frequency_value?: true
+    target_value?: true
+  }
+
+  export type ActivityScheduleMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    valid_from?: true
+    valid_until?: true
+    repeat_type?: true
+    interval_days?: true
+    time_of_day?: true
+    frequency_value?: true
+    frequency_period?: true
+    target_type?: true
+    target_value?: true
+    target_unit?: true
+    target_unit_label?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ActivityScheduleMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    valid_from?: true
+    valid_until?: true
+    repeat_type?: true
+    interval_days?: true
+    time_of_day?: true
+    frequency_value?: true
+    frequency_period?: true
+    target_type?: true
+    target_value?: true
+    target_unit?: true
+    target_unit_label?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ActivityScheduleCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    valid_from?: true
+    valid_until?: true
+    repeat_type?: true
+    interval_days?: true
+    time_of_day?: true
+    frequency_value?: true
+    frequency_period?: true
+    target_type?: true
+    target_value?: true
+    target_unit?: true
+    target_unit_label?: true
+    is_active?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type ActivityScheduleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActivitySchedule to aggregate.
+     */
+    where?: ActivityScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivitySchedules to fetch.
+     */
+    orderBy?: ActivityScheduleOrderByWithRelationInput | ActivityScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ActivityScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivitySchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivitySchedules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ActivitySchedules
+    **/
+    _count?: true | ActivityScheduleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ActivityScheduleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ActivityScheduleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActivityScheduleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActivityScheduleMaxAggregateInputType
+  }
+
+  export type GetActivityScheduleAggregateType<T extends ActivityScheduleAggregateArgs> = {
+        [P in keyof T & keyof AggregateActivitySchedule]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActivitySchedule[P]>
+      : GetScalarType<T[P], AggregateActivitySchedule[P]>
+  }
+
+
+
+
+  export type ActivityScheduleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityScheduleWhereInput
+    orderBy?: ActivityScheduleOrderByWithAggregationInput | ActivityScheduleOrderByWithAggregationInput[]
+    by: ActivityScheduleScalarFieldEnum[] | ActivityScheduleScalarFieldEnum
+    having?: ActivityScheduleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActivityScheduleCountAggregateInputType | true
+    _avg?: ActivityScheduleAvgAggregateInputType
+    _sum?: ActivityScheduleSumAggregateInputType
+    _min?: ActivityScheduleMinAggregateInputType
+    _max?: ActivityScheduleMaxAggregateInputType
+  }
+
+  export type ActivityScheduleGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    activity_uuid: string
+    valid_from: Date
+    valid_until: Date | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days: number | null
+    time_of_day: string | null
+    frequency_value: number | null
+    frequency_period: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value: number | null
+    target_unit: $Enums.ActivityTargetUnit | null
+    target_unit_label: string | null
+    is_active: boolean
+    created_at: Date
+    updated_at: Date
+    _count: ActivityScheduleCountAggregateOutputType | null
+    _avg: ActivityScheduleAvgAggregateOutputType | null
+    _sum: ActivityScheduleSumAggregateOutputType | null
+    _min: ActivityScheduleMinAggregateOutputType | null
+    _max: ActivityScheduleMaxAggregateOutputType | null
+  }
+
+  type GetActivityScheduleGroupByPayload<T extends ActivityScheduleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActivityScheduleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActivityScheduleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActivityScheduleGroupByOutputType[P]>
+            : GetScalarType<T[P], ActivityScheduleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ActivityScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    valid_from?: boolean
+    valid_until?: boolean
+    repeat_type?: boolean
+    interval_days?: boolean
+    time_of_day?: boolean
+    frequency_value?: boolean
+    frequency_period?: boolean
+    target_type?: boolean
+    target_value?: boolean
+    target_unit?: boolean
+    target_unit_label?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    weekdays?: boolean | ActivitySchedule$weekdaysArgs<ExtArgs>
+    specific_dates?: boolean | ActivitySchedule$specific_datesArgs<ExtArgs>
+    occurrences?: boolean | ActivitySchedule$occurrencesArgs<ExtArgs>
+    logs?: boolean | ActivitySchedule$logsArgs<ExtArgs>
+    _count?: boolean | ActivityScheduleCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activitySchedule"]>
+
+  export type ActivityScheduleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    valid_from?: boolean
+    valid_until?: boolean
+    repeat_type?: boolean
+    interval_days?: boolean
+    time_of_day?: boolean
+    frequency_value?: boolean
+    frequency_period?: boolean
+    target_type?: boolean
+    target_value?: boolean
+    target_unit?: boolean
+    target_unit_label?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activitySchedule"]>
+
+  export type ActivityScheduleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    valid_from?: boolean
+    valid_until?: boolean
+    repeat_type?: boolean
+    interval_days?: boolean
+    time_of_day?: boolean
+    frequency_value?: boolean
+    frequency_period?: boolean
+    target_type?: boolean
+    target_value?: boolean
+    target_unit?: boolean
+    target_unit_label?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activitySchedule"]>
+
+  export type ActivityScheduleSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    valid_from?: boolean
+    valid_until?: boolean
+    repeat_type?: boolean
+    interval_days?: boolean
+    time_of_day?: boolean
+    frequency_value?: boolean
+    frequency_period?: boolean
+    target_type?: boolean
+    target_value?: boolean
+    target_unit?: boolean
+    target_unit_label?: boolean
+    is_active?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type ActivityScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "activity_uuid" | "valid_from" | "valid_until" | "repeat_type" | "interval_days" | "time_of_day" | "frequency_value" | "frequency_period" | "target_type" | "target_value" | "target_unit" | "target_unit_label" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["activitySchedule"]>
+  export type ActivityScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    weekdays?: boolean | ActivitySchedule$weekdaysArgs<ExtArgs>
+    specific_dates?: boolean | ActivitySchedule$specific_datesArgs<ExtArgs>
+    occurrences?: boolean | ActivitySchedule$occurrencesArgs<ExtArgs>
+    logs?: boolean | ActivitySchedule$logsArgs<ExtArgs>
+    _count?: boolean | ActivityScheduleCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ActivityScheduleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ActivityScheduleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ActivitySchedulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ActivitySchedule"
+    objects: {
+      activity: Prisma.$ActivityPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+      weekdays: Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>[]
+      specific_dates: Prisma.$ActivityScheduleDatePayload<ExtArgs>[]
+      occurrences: Prisma.$ActivityOccurrencePayload<ExtArgs>[]
+      logs: Prisma.$ActivityLogPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      activity_uuid: string
+      valid_from: Date
+      valid_until: Date | null
+      repeat_type: $Enums.ActivityRepeatType
+      interval_days: number | null
+      time_of_day: string | null
+      frequency_value: number | null
+      frequency_period: $Enums.FrequencyPeriod | null
+      target_type: $Enums.ActivityTargetType
+      target_value: number | null
+      target_unit: $Enums.ActivityTargetUnit | null
+      target_unit_label: string | null
+      is_active: boolean
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["activitySchedule"]>
+    composites: {}
+  }
+
+  type ActivityScheduleGetPayload<S extends boolean | null | undefined | ActivityScheduleDefaultArgs> = $Result.GetResult<Prisma.$ActivitySchedulePayload, S>
+
+  type ActivityScheduleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ActivityScheduleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ActivityScheduleCountAggregateInputType | true
+    }
+
+  export interface ActivityScheduleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ActivitySchedule'], meta: { name: 'ActivitySchedule' } }
+    /**
+     * Find zero or one ActivitySchedule that matches the filter.
+     * @param {ActivityScheduleFindUniqueArgs} args - Arguments to find a ActivitySchedule
+     * @example
+     * // Get one ActivitySchedule
+     * const activitySchedule = await prisma.activitySchedule.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ActivityScheduleFindUniqueArgs>(args: SelectSubset<T, ActivityScheduleFindUniqueArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ActivitySchedule that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ActivityScheduleFindUniqueOrThrowArgs} args - Arguments to find a ActivitySchedule
+     * @example
+     * // Get one ActivitySchedule
+     * const activitySchedule = await prisma.activitySchedule.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ActivityScheduleFindUniqueOrThrowArgs>(args: SelectSubset<T, ActivityScheduleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivitySchedule that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleFindFirstArgs} args - Arguments to find a ActivitySchedule
+     * @example
+     * // Get one ActivitySchedule
+     * const activitySchedule = await prisma.activitySchedule.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ActivityScheduleFindFirstArgs>(args?: SelectSubset<T, ActivityScheduleFindFirstArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivitySchedule that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleFindFirstOrThrowArgs} args - Arguments to find a ActivitySchedule
+     * @example
+     * // Get one ActivitySchedule
+     * const activitySchedule = await prisma.activitySchedule.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ActivityScheduleFindFirstOrThrowArgs>(args?: SelectSubset<T, ActivityScheduleFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ActivitySchedules that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ActivitySchedules
+     * const activitySchedules = await prisma.activitySchedule.findMany()
+     * 
+     * // Get first 10 ActivitySchedules
+     * const activitySchedules = await prisma.activitySchedule.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const activityScheduleWithIdOnly = await prisma.activitySchedule.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ActivityScheduleFindManyArgs>(args?: SelectSubset<T, ActivityScheduleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ActivitySchedule.
+     * @param {ActivityScheduleCreateArgs} args - Arguments to create a ActivitySchedule.
+     * @example
+     * // Create one ActivitySchedule
+     * const ActivitySchedule = await prisma.activitySchedule.create({
+     *   data: {
+     *     // ... data to create a ActivitySchedule
+     *   }
+     * })
+     * 
+     */
+    create<T extends ActivityScheduleCreateArgs>(args: SelectSubset<T, ActivityScheduleCreateArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ActivitySchedules.
+     * @param {ActivityScheduleCreateManyArgs} args - Arguments to create many ActivitySchedules.
+     * @example
+     * // Create many ActivitySchedules
+     * const activitySchedule = await prisma.activitySchedule.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ActivityScheduleCreateManyArgs>(args?: SelectSubset<T, ActivityScheduleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ActivitySchedules and returns the data saved in the database.
+     * @param {ActivityScheduleCreateManyAndReturnArgs} args - Arguments to create many ActivitySchedules.
+     * @example
+     * // Create many ActivitySchedules
+     * const activitySchedule = await prisma.activitySchedule.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ActivitySchedules and only return the `id`
+     * const activityScheduleWithIdOnly = await prisma.activitySchedule.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ActivityScheduleCreateManyAndReturnArgs>(args?: SelectSubset<T, ActivityScheduleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ActivitySchedule.
+     * @param {ActivityScheduleDeleteArgs} args - Arguments to delete one ActivitySchedule.
+     * @example
+     * // Delete one ActivitySchedule
+     * const ActivitySchedule = await prisma.activitySchedule.delete({
+     *   where: {
+     *     // ... filter to delete one ActivitySchedule
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ActivityScheduleDeleteArgs>(args: SelectSubset<T, ActivityScheduleDeleteArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ActivitySchedule.
+     * @param {ActivityScheduleUpdateArgs} args - Arguments to update one ActivitySchedule.
+     * @example
+     * // Update one ActivitySchedule
+     * const activitySchedule = await prisma.activitySchedule.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ActivityScheduleUpdateArgs>(args: SelectSubset<T, ActivityScheduleUpdateArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ActivitySchedules.
+     * @param {ActivityScheduleDeleteManyArgs} args - Arguments to filter ActivitySchedules to delete.
+     * @example
+     * // Delete a few ActivitySchedules
+     * const { count } = await prisma.activitySchedule.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ActivityScheduleDeleteManyArgs>(args?: SelectSubset<T, ActivityScheduleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivitySchedules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ActivitySchedules
+     * const activitySchedule = await prisma.activitySchedule.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ActivityScheduleUpdateManyArgs>(args: SelectSubset<T, ActivityScheduleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivitySchedules and returns the data updated in the database.
+     * @param {ActivityScheduleUpdateManyAndReturnArgs} args - Arguments to update many ActivitySchedules.
+     * @example
+     * // Update many ActivitySchedules
+     * const activitySchedule = await prisma.activitySchedule.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ActivitySchedules and only return the `id`
+     * const activityScheduleWithIdOnly = await prisma.activitySchedule.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ActivityScheduleUpdateManyAndReturnArgs>(args: SelectSubset<T, ActivityScheduleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ActivitySchedule.
+     * @param {ActivityScheduleUpsertArgs} args - Arguments to update or create a ActivitySchedule.
+     * @example
+     * // Update or create a ActivitySchedule
+     * const activitySchedule = await prisma.activitySchedule.upsert({
+     *   create: {
+     *     // ... data to create a ActivitySchedule
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ActivitySchedule we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ActivityScheduleUpsertArgs>(args: SelectSubset<T, ActivityScheduleUpsertArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ActivitySchedules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleCountArgs} args - Arguments to filter ActivitySchedules to count.
+     * @example
+     * // Count the number of ActivitySchedules
+     * const count = await prisma.activitySchedule.count({
+     *   where: {
+     *     // ... the filter for the ActivitySchedules we want to count
+     *   }
+     * })
+    **/
+    count<T extends ActivityScheduleCountArgs>(
+      args?: Subset<T, ActivityScheduleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActivityScheduleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ActivitySchedule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActivityScheduleAggregateArgs>(args: Subset<T, ActivityScheduleAggregateArgs>): Prisma.PrismaPromise<GetActivityScheduleAggregateType<T>>
+
+    /**
+     * Group by ActivitySchedule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ActivityScheduleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ActivityScheduleGroupByArgs['orderBy'] }
+        : { orderBy?: ActivityScheduleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ActivityScheduleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActivityScheduleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ActivitySchedule model
+   */
+  readonly fields: ActivityScheduleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ActivitySchedule.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ActivityScheduleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    activity<T extends ActivityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActivityDefaultArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    weekdays<T extends ActivitySchedule$weekdaysArgs<ExtArgs> = {}>(args?: Subset<T, ActivitySchedule$weekdaysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    specific_dates<T extends ActivitySchedule$specific_datesArgs<ExtArgs> = {}>(args?: Subset<T, ActivitySchedule$specific_datesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    occurrences<T extends ActivitySchedule$occurrencesArgs<ExtArgs> = {}>(args?: Subset<T, ActivitySchedule$occurrencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    logs<T extends ActivitySchedule$logsArgs<ExtArgs> = {}>(args?: Subset<T, ActivitySchedule$logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ActivitySchedule model
+   */
+  interface ActivityScheduleFieldRefs {
+    readonly id: FieldRef<"ActivitySchedule", 'Int'>
+    readonly uuid: FieldRef<"ActivitySchedule", 'String'>
+    readonly user_uuid: FieldRef<"ActivitySchedule", 'String'>
+    readonly activity_uuid: FieldRef<"ActivitySchedule", 'String'>
+    readonly valid_from: FieldRef<"ActivitySchedule", 'DateTime'>
+    readonly valid_until: FieldRef<"ActivitySchedule", 'DateTime'>
+    readonly repeat_type: FieldRef<"ActivitySchedule", 'ActivityRepeatType'>
+    readonly interval_days: FieldRef<"ActivitySchedule", 'Int'>
+    readonly time_of_day: FieldRef<"ActivitySchedule", 'String'>
+    readonly frequency_value: FieldRef<"ActivitySchedule", 'Int'>
+    readonly frequency_period: FieldRef<"ActivitySchedule", 'FrequencyPeriod'>
+    readonly target_type: FieldRef<"ActivitySchedule", 'ActivityTargetType'>
+    readonly target_value: FieldRef<"ActivitySchedule", 'Float'>
+    readonly target_unit: FieldRef<"ActivitySchedule", 'ActivityTargetUnit'>
+    readonly target_unit_label: FieldRef<"ActivitySchedule", 'String'>
+    readonly is_active: FieldRef<"ActivitySchedule", 'Boolean'>
+    readonly created_at: FieldRef<"ActivitySchedule", 'DateTime'>
+    readonly updated_at: FieldRef<"ActivitySchedule", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ActivitySchedule findUnique
+   */
+  export type ActivityScheduleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivitySchedule to fetch.
+     */
+    where: ActivityScheduleWhereUniqueInput
+  }
+
+  /**
+   * ActivitySchedule findUniqueOrThrow
+   */
+  export type ActivityScheduleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivitySchedule to fetch.
+     */
+    where: ActivityScheduleWhereUniqueInput
+  }
+
+  /**
+   * ActivitySchedule findFirst
+   */
+  export type ActivityScheduleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivitySchedule to fetch.
+     */
+    where?: ActivityScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivitySchedules to fetch.
+     */
+    orderBy?: ActivityScheduleOrderByWithRelationInput | ActivityScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActivitySchedules.
+     */
+    cursor?: ActivityScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivitySchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivitySchedules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivitySchedules.
+     */
+    distinct?: ActivityScheduleScalarFieldEnum | ActivityScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * ActivitySchedule findFirstOrThrow
+   */
+  export type ActivityScheduleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivitySchedule to fetch.
+     */
+    where?: ActivityScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivitySchedules to fetch.
+     */
+    orderBy?: ActivityScheduleOrderByWithRelationInput | ActivityScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActivitySchedules.
+     */
+    cursor?: ActivityScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivitySchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivitySchedules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivitySchedules.
+     */
+    distinct?: ActivityScheduleScalarFieldEnum | ActivityScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * ActivitySchedule findMany
+   */
+  export type ActivityScheduleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivitySchedules to fetch.
+     */
+    where?: ActivityScheduleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivitySchedules to fetch.
+     */
+    orderBy?: ActivityScheduleOrderByWithRelationInput | ActivityScheduleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ActivitySchedules.
+     */
+    cursor?: ActivityScheduleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivitySchedules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivitySchedules.
+     */
+    skip?: number
+    distinct?: ActivityScheduleScalarFieldEnum | ActivityScheduleScalarFieldEnum[]
+  }
+
+  /**
+   * ActivitySchedule create
+   */
+  export type ActivityScheduleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ActivitySchedule.
+     */
+    data: XOR<ActivityScheduleCreateInput, ActivityScheduleUncheckedCreateInput>
+  }
+
+  /**
+   * ActivitySchedule createMany
+   */
+  export type ActivityScheduleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ActivitySchedules.
+     */
+    data: ActivityScheduleCreateManyInput | ActivityScheduleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ActivitySchedule createManyAndReturn
+   */
+  export type ActivityScheduleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * The data used to create many ActivitySchedules.
+     */
+    data: ActivityScheduleCreateManyInput | ActivityScheduleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActivitySchedule update
+   */
+  export type ActivityScheduleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ActivitySchedule.
+     */
+    data: XOR<ActivityScheduleUpdateInput, ActivityScheduleUncheckedUpdateInput>
+    /**
+     * Choose, which ActivitySchedule to update.
+     */
+    where: ActivityScheduleWhereUniqueInput
+  }
+
+  /**
+   * ActivitySchedule updateMany
+   */
+  export type ActivityScheduleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ActivitySchedules.
+     */
+    data: XOR<ActivityScheduleUpdateManyMutationInput, ActivityScheduleUncheckedUpdateManyInput>
+    /**
+     * Filter which ActivitySchedules to update
+     */
+    where?: ActivityScheduleWhereInput
+    /**
+     * Limit how many ActivitySchedules to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActivitySchedule updateManyAndReturn
+   */
+  export type ActivityScheduleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * The data used to update ActivitySchedules.
+     */
+    data: XOR<ActivityScheduleUpdateManyMutationInput, ActivityScheduleUncheckedUpdateManyInput>
+    /**
+     * Filter which ActivitySchedules to update
+     */
+    where?: ActivityScheduleWhereInput
+    /**
+     * Limit how many ActivitySchedules to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActivitySchedule upsert
+   */
+  export type ActivityScheduleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ActivitySchedule to update in case it exists.
+     */
+    where: ActivityScheduleWhereUniqueInput
+    /**
+     * In case the ActivitySchedule found by the `where` argument doesn't exist, create a new ActivitySchedule with this data.
+     */
+    create: XOR<ActivityScheduleCreateInput, ActivityScheduleUncheckedCreateInput>
+    /**
+     * In case the ActivitySchedule was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ActivityScheduleUpdateInput, ActivityScheduleUncheckedUpdateInput>
+  }
+
+  /**
+   * ActivitySchedule delete
+   */
+  export type ActivityScheduleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+    /**
+     * Filter which ActivitySchedule to delete.
+     */
+    where: ActivityScheduleWhereUniqueInput
+  }
+
+  /**
+   * ActivitySchedule deleteMany
+   */
+  export type ActivityScheduleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActivitySchedules to delete
+     */
+    where?: ActivityScheduleWhereInput
+    /**
+     * Limit how many ActivitySchedules to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActivitySchedule.weekdays
+   */
+  export type ActivitySchedule$weekdaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+    where?: ActivityScheduleWeekdayWhereInput
+    orderBy?: ActivityScheduleWeekdayOrderByWithRelationInput | ActivityScheduleWeekdayOrderByWithRelationInput[]
+    cursor?: ActivityScheduleWeekdayWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityScheduleWeekdayScalarFieldEnum | ActivityScheduleWeekdayScalarFieldEnum[]
+  }
+
+  /**
+   * ActivitySchedule.specific_dates
+   */
+  export type ActivitySchedule$specific_datesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+    where?: ActivityScheduleDateWhereInput
+    orderBy?: ActivityScheduleDateOrderByWithRelationInput | ActivityScheduleDateOrderByWithRelationInput[]
+    cursor?: ActivityScheduleDateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityScheduleDateScalarFieldEnum | ActivityScheduleDateScalarFieldEnum[]
+  }
+
+  /**
+   * ActivitySchedule.occurrences
+   */
+  export type ActivitySchedule$occurrencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    where?: ActivityOccurrenceWhereInput
+    orderBy?: ActivityOccurrenceOrderByWithRelationInput | ActivityOccurrenceOrderByWithRelationInput[]
+    cursor?: ActivityOccurrenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityOccurrenceScalarFieldEnum | ActivityOccurrenceScalarFieldEnum[]
+  }
+
+  /**
+   * ActivitySchedule.logs
+   */
+  export type ActivitySchedule$logsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    where?: ActivityLogWhereInput
+    orderBy?: ActivityLogOrderByWithRelationInput | ActivityLogOrderByWithRelationInput[]
+    cursor?: ActivityLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
+  }
+
+  /**
+   * ActivitySchedule without action
+   */
+  export type ActivityScheduleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivitySchedule
+     */
+    select?: ActivityScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivitySchedule
+     */
+    omit?: ActivityScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ActivityScheduleWeekday
+   */
+
+  export type AggregateActivityScheduleWeekday = {
+    _count: ActivityScheduleWeekdayCountAggregateOutputType | null
+    _avg: ActivityScheduleWeekdayAvgAggregateOutputType | null
+    _sum: ActivityScheduleWeekdaySumAggregateOutputType | null
+    _min: ActivityScheduleWeekdayMinAggregateOutputType | null
+    _max: ActivityScheduleWeekdayMaxAggregateOutputType | null
+  }
+
+  export type ActivityScheduleWeekdayAvgAggregateOutputType = {
+    id: number | null
+    weekday: number | null
+  }
+
+  export type ActivityScheduleWeekdaySumAggregateOutputType = {
+    id: number | null
+    weekday: number | null
+  }
+
+  export type ActivityScheduleWeekdayMinAggregateOutputType = {
+    id: number | null
+    schedule_uuid: string | null
+    weekday: number | null
+  }
+
+  export type ActivityScheduleWeekdayMaxAggregateOutputType = {
+    id: number | null
+    schedule_uuid: string | null
+    weekday: number | null
+  }
+
+  export type ActivityScheduleWeekdayCountAggregateOutputType = {
+    id: number
+    schedule_uuid: number
+    weekday: number
+    _all: number
+  }
+
+
+  export type ActivityScheduleWeekdayAvgAggregateInputType = {
+    id?: true
+    weekday?: true
+  }
+
+  export type ActivityScheduleWeekdaySumAggregateInputType = {
+    id?: true
+    weekday?: true
+  }
+
+  export type ActivityScheduleWeekdayMinAggregateInputType = {
+    id?: true
+    schedule_uuid?: true
+    weekday?: true
+  }
+
+  export type ActivityScheduleWeekdayMaxAggregateInputType = {
+    id?: true
+    schedule_uuid?: true
+    weekday?: true
+  }
+
+  export type ActivityScheduleWeekdayCountAggregateInputType = {
+    id?: true
+    schedule_uuid?: true
+    weekday?: true
+    _all?: true
+  }
+
+  export type ActivityScheduleWeekdayAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActivityScheduleWeekday to aggregate.
+     */
+    where?: ActivityScheduleWeekdayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityScheduleWeekdays to fetch.
+     */
+    orderBy?: ActivityScheduleWeekdayOrderByWithRelationInput | ActivityScheduleWeekdayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ActivityScheduleWeekdayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityScheduleWeekdays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityScheduleWeekdays.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ActivityScheduleWeekdays
+    **/
+    _count?: true | ActivityScheduleWeekdayCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ActivityScheduleWeekdayAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ActivityScheduleWeekdaySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActivityScheduleWeekdayMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActivityScheduleWeekdayMaxAggregateInputType
+  }
+
+  export type GetActivityScheduleWeekdayAggregateType<T extends ActivityScheduleWeekdayAggregateArgs> = {
+        [P in keyof T & keyof AggregateActivityScheduleWeekday]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActivityScheduleWeekday[P]>
+      : GetScalarType<T[P], AggregateActivityScheduleWeekday[P]>
+  }
+
+
+
+
+  export type ActivityScheduleWeekdayGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityScheduleWeekdayWhereInput
+    orderBy?: ActivityScheduleWeekdayOrderByWithAggregationInput | ActivityScheduleWeekdayOrderByWithAggregationInput[]
+    by: ActivityScheduleWeekdayScalarFieldEnum[] | ActivityScheduleWeekdayScalarFieldEnum
+    having?: ActivityScheduleWeekdayScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActivityScheduleWeekdayCountAggregateInputType | true
+    _avg?: ActivityScheduleWeekdayAvgAggregateInputType
+    _sum?: ActivityScheduleWeekdaySumAggregateInputType
+    _min?: ActivityScheduleWeekdayMinAggregateInputType
+    _max?: ActivityScheduleWeekdayMaxAggregateInputType
+  }
+
+  export type ActivityScheduleWeekdayGroupByOutputType = {
+    id: number
+    schedule_uuid: string
+    weekday: number
+    _count: ActivityScheduleWeekdayCountAggregateOutputType | null
+    _avg: ActivityScheduleWeekdayAvgAggregateOutputType | null
+    _sum: ActivityScheduleWeekdaySumAggregateOutputType | null
+    _min: ActivityScheduleWeekdayMinAggregateOutputType | null
+    _max: ActivityScheduleWeekdayMaxAggregateOutputType | null
+  }
+
+  type GetActivityScheduleWeekdayGroupByPayload<T extends ActivityScheduleWeekdayGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActivityScheduleWeekdayGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActivityScheduleWeekdayGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActivityScheduleWeekdayGroupByOutputType[P]>
+            : GetScalarType<T[P], ActivityScheduleWeekdayGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ActivityScheduleWeekdaySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schedule_uuid?: boolean
+    weekday?: boolean
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityScheduleWeekday"]>
+
+  export type ActivityScheduleWeekdaySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schedule_uuid?: boolean
+    weekday?: boolean
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityScheduleWeekday"]>
+
+  export type ActivityScheduleWeekdaySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schedule_uuid?: boolean
+    weekday?: boolean
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityScheduleWeekday"]>
+
+  export type ActivityScheduleWeekdaySelectScalar = {
+    id?: boolean
+    schedule_uuid?: boolean
+    weekday?: boolean
+  }
+
+  export type ActivityScheduleWeekdayOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schedule_uuid" | "weekday", ExtArgs["result"]["activityScheduleWeekday"]>
+  export type ActivityScheduleWeekdayInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }
+  export type ActivityScheduleWeekdayIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }
+  export type ActivityScheduleWeekdayIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }
+
+  export type $ActivityScheduleWeekdayPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ActivityScheduleWeekday"
+    objects: {
+      schedule: Prisma.$ActivitySchedulePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      schedule_uuid: string
+      weekday: number
+    }, ExtArgs["result"]["activityScheduleWeekday"]>
+    composites: {}
+  }
+
+  type ActivityScheduleWeekdayGetPayload<S extends boolean | null | undefined | ActivityScheduleWeekdayDefaultArgs> = $Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload, S>
+
+  type ActivityScheduleWeekdayCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ActivityScheduleWeekdayFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ActivityScheduleWeekdayCountAggregateInputType | true
+    }
+
+  export interface ActivityScheduleWeekdayDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ActivityScheduleWeekday'], meta: { name: 'ActivityScheduleWeekday' } }
+    /**
+     * Find zero or one ActivityScheduleWeekday that matches the filter.
+     * @param {ActivityScheduleWeekdayFindUniqueArgs} args - Arguments to find a ActivityScheduleWeekday
+     * @example
+     * // Get one ActivityScheduleWeekday
+     * const activityScheduleWeekday = await prisma.activityScheduleWeekday.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ActivityScheduleWeekdayFindUniqueArgs>(args: SelectSubset<T, ActivityScheduleWeekdayFindUniqueArgs<ExtArgs>>): Prisma__ActivityScheduleWeekdayClient<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ActivityScheduleWeekday that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ActivityScheduleWeekdayFindUniqueOrThrowArgs} args - Arguments to find a ActivityScheduleWeekday
+     * @example
+     * // Get one ActivityScheduleWeekday
+     * const activityScheduleWeekday = await prisma.activityScheduleWeekday.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ActivityScheduleWeekdayFindUniqueOrThrowArgs>(args: SelectSubset<T, ActivityScheduleWeekdayFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActivityScheduleWeekdayClient<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivityScheduleWeekday that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleWeekdayFindFirstArgs} args - Arguments to find a ActivityScheduleWeekday
+     * @example
+     * // Get one ActivityScheduleWeekday
+     * const activityScheduleWeekday = await prisma.activityScheduleWeekday.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ActivityScheduleWeekdayFindFirstArgs>(args?: SelectSubset<T, ActivityScheduleWeekdayFindFirstArgs<ExtArgs>>): Prisma__ActivityScheduleWeekdayClient<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivityScheduleWeekday that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleWeekdayFindFirstOrThrowArgs} args - Arguments to find a ActivityScheduleWeekday
+     * @example
+     * // Get one ActivityScheduleWeekday
+     * const activityScheduleWeekday = await prisma.activityScheduleWeekday.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ActivityScheduleWeekdayFindFirstOrThrowArgs>(args?: SelectSubset<T, ActivityScheduleWeekdayFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActivityScheduleWeekdayClient<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ActivityScheduleWeekdays that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleWeekdayFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ActivityScheduleWeekdays
+     * const activityScheduleWeekdays = await prisma.activityScheduleWeekday.findMany()
+     * 
+     * // Get first 10 ActivityScheduleWeekdays
+     * const activityScheduleWeekdays = await prisma.activityScheduleWeekday.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const activityScheduleWeekdayWithIdOnly = await prisma.activityScheduleWeekday.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ActivityScheduleWeekdayFindManyArgs>(args?: SelectSubset<T, ActivityScheduleWeekdayFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ActivityScheduleWeekday.
+     * @param {ActivityScheduleWeekdayCreateArgs} args - Arguments to create a ActivityScheduleWeekday.
+     * @example
+     * // Create one ActivityScheduleWeekday
+     * const ActivityScheduleWeekday = await prisma.activityScheduleWeekday.create({
+     *   data: {
+     *     // ... data to create a ActivityScheduleWeekday
+     *   }
+     * })
+     * 
+     */
+    create<T extends ActivityScheduleWeekdayCreateArgs>(args: SelectSubset<T, ActivityScheduleWeekdayCreateArgs<ExtArgs>>): Prisma__ActivityScheduleWeekdayClient<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ActivityScheduleWeekdays.
+     * @param {ActivityScheduleWeekdayCreateManyArgs} args - Arguments to create many ActivityScheduleWeekdays.
+     * @example
+     * // Create many ActivityScheduleWeekdays
+     * const activityScheduleWeekday = await prisma.activityScheduleWeekday.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ActivityScheduleWeekdayCreateManyArgs>(args?: SelectSubset<T, ActivityScheduleWeekdayCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ActivityScheduleWeekdays and returns the data saved in the database.
+     * @param {ActivityScheduleWeekdayCreateManyAndReturnArgs} args - Arguments to create many ActivityScheduleWeekdays.
+     * @example
+     * // Create many ActivityScheduleWeekdays
+     * const activityScheduleWeekday = await prisma.activityScheduleWeekday.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ActivityScheduleWeekdays and only return the `id`
+     * const activityScheduleWeekdayWithIdOnly = await prisma.activityScheduleWeekday.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ActivityScheduleWeekdayCreateManyAndReturnArgs>(args?: SelectSubset<T, ActivityScheduleWeekdayCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ActivityScheduleWeekday.
+     * @param {ActivityScheduleWeekdayDeleteArgs} args - Arguments to delete one ActivityScheduleWeekday.
+     * @example
+     * // Delete one ActivityScheduleWeekday
+     * const ActivityScheduleWeekday = await prisma.activityScheduleWeekday.delete({
+     *   where: {
+     *     // ... filter to delete one ActivityScheduleWeekday
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ActivityScheduleWeekdayDeleteArgs>(args: SelectSubset<T, ActivityScheduleWeekdayDeleteArgs<ExtArgs>>): Prisma__ActivityScheduleWeekdayClient<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ActivityScheduleWeekday.
+     * @param {ActivityScheduleWeekdayUpdateArgs} args - Arguments to update one ActivityScheduleWeekday.
+     * @example
+     * // Update one ActivityScheduleWeekday
+     * const activityScheduleWeekday = await prisma.activityScheduleWeekday.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ActivityScheduleWeekdayUpdateArgs>(args: SelectSubset<T, ActivityScheduleWeekdayUpdateArgs<ExtArgs>>): Prisma__ActivityScheduleWeekdayClient<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ActivityScheduleWeekdays.
+     * @param {ActivityScheduleWeekdayDeleteManyArgs} args - Arguments to filter ActivityScheduleWeekdays to delete.
+     * @example
+     * // Delete a few ActivityScheduleWeekdays
+     * const { count } = await prisma.activityScheduleWeekday.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ActivityScheduleWeekdayDeleteManyArgs>(args?: SelectSubset<T, ActivityScheduleWeekdayDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivityScheduleWeekdays.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleWeekdayUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ActivityScheduleWeekdays
+     * const activityScheduleWeekday = await prisma.activityScheduleWeekday.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ActivityScheduleWeekdayUpdateManyArgs>(args: SelectSubset<T, ActivityScheduleWeekdayUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivityScheduleWeekdays and returns the data updated in the database.
+     * @param {ActivityScheduleWeekdayUpdateManyAndReturnArgs} args - Arguments to update many ActivityScheduleWeekdays.
+     * @example
+     * // Update many ActivityScheduleWeekdays
+     * const activityScheduleWeekday = await prisma.activityScheduleWeekday.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ActivityScheduleWeekdays and only return the `id`
+     * const activityScheduleWeekdayWithIdOnly = await prisma.activityScheduleWeekday.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ActivityScheduleWeekdayUpdateManyAndReturnArgs>(args: SelectSubset<T, ActivityScheduleWeekdayUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ActivityScheduleWeekday.
+     * @param {ActivityScheduleWeekdayUpsertArgs} args - Arguments to update or create a ActivityScheduleWeekday.
+     * @example
+     * // Update or create a ActivityScheduleWeekday
+     * const activityScheduleWeekday = await prisma.activityScheduleWeekday.upsert({
+     *   create: {
+     *     // ... data to create a ActivityScheduleWeekday
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ActivityScheduleWeekday we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ActivityScheduleWeekdayUpsertArgs>(args: SelectSubset<T, ActivityScheduleWeekdayUpsertArgs<ExtArgs>>): Prisma__ActivityScheduleWeekdayClient<$Result.GetResult<Prisma.$ActivityScheduleWeekdayPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ActivityScheduleWeekdays.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleWeekdayCountArgs} args - Arguments to filter ActivityScheduleWeekdays to count.
+     * @example
+     * // Count the number of ActivityScheduleWeekdays
+     * const count = await prisma.activityScheduleWeekday.count({
+     *   where: {
+     *     // ... the filter for the ActivityScheduleWeekdays we want to count
+     *   }
+     * })
+    **/
+    count<T extends ActivityScheduleWeekdayCountArgs>(
+      args?: Subset<T, ActivityScheduleWeekdayCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActivityScheduleWeekdayCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ActivityScheduleWeekday.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleWeekdayAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActivityScheduleWeekdayAggregateArgs>(args: Subset<T, ActivityScheduleWeekdayAggregateArgs>): Prisma.PrismaPromise<GetActivityScheduleWeekdayAggregateType<T>>
+
+    /**
+     * Group by ActivityScheduleWeekday.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleWeekdayGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ActivityScheduleWeekdayGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ActivityScheduleWeekdayGroupByArgs['orderBy'] }
+        : { orderBy?: ActivityScheduleWeekdayGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ActivityScheduleWeekdayGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActivityScheduleWeekdayGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ActivityScheduleWeekday model
+   */
+  readonly fields: ActivityScheduleWeekdayFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ActivityScheduleWeekday.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ActivityScheduleWeekdayClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    schedule<T extends ActivityScheduleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActivityScheduleDefaultArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ActivityScheduleWeekday model
+   */
+  interface ActivityScheduleWeekdayFieldRefs {
+    readonly id: FieldRef<"ActivityScheduleWeekday", 'Int'>
+    readonly schedule_uuid: FieldRef<"ActivityScheduleWeekday", 'String'>
+    readonly weekday: FieldRef<"ActivityScheduleWeekday", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ActivityScheduleWeekday findUnique
+   */
+  export type ActivityScheduleWeekdayFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityScheduleWeekday to fetch.
+     */
+    where: ActivityScheduleWeekdayWhereUniqueInput
+  }
+
+  /**
+   * ActivityScheduleWeekday findUniqueOrThrow
+   */
+  export type ActivityScheduleWeekdayFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityScheduleWeekday to fetch.
+     */
+    where: ActivityScheduleWeekdayWhereUniqueInput
+  }
+
+  /**
+   * ActivityScheduleWeekday findFirst
+   */
+  export type ActivityScheduleWeekdayFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityScheduleWeekday to fetch.
+     */
+    where?: ActivityScheduleWeekdayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityScheduleWeekdays to fetch.
+     */
+    orderBy?: ActivityScheduleWeekdayOrderByWithRelationInput | ActivityScheduleWeekdayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActivityScheduleWeekdays.
+     */
+    cursor?: ActivityScheduleWeekdayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityScheduleWeekdays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityScheduleWeekdays.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityScheduleWeekdays.
+     */
+    distinct?: ActivityScheduleWeekdayScalarFieldEnum | ActivityScheduleWeekdayScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityScheduleWeekday findFirstOrThrow
+   */
+  export type ActivityScheduleWeekdayFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityScheduleWeekday to fetch.
+     */
+    where?: ActivityScheduleWeekdayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityScheduleWeekdays to fetch.
+     */
+    orderBy?: ActivityScheduleWeekdayOrderByWithRelationInput | ActivityScheduleWeekdayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActivityScheduleWeekdays.
+     */
+    cursor?: ActivityScheduleWeekdayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityScheduleWeekdays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityScheduleWeekdays.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityScheduleWeekdays.
+     */
+    distinct?: ActivityScheduleWeekdayScalarFieldEnum | ActivityScheduleWeekdayScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityScheduleWeekday findMany
+   */
+  export type ActivityScheduleWeekdayFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityScheduleWeekdays to fetch.
+     */
+    where?: ActivityScheduleWeekdayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityScheduleWeekdays to fetch.
+     */
+    orderBy?: ActivityScheduleWeekdayOrderByWithRelationInput | ActivityScheduleWeekdayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ActivityScheduleWeekdays.
+     */
+    cursor?: ActivityScheduleWeekdayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityScheduleWeekdays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityScheduleWeekdays.
+     */
+    skip?: number
+    distinct?: ActivityScheduleWeekdayScalarFieldEnum | ActivityScheduleWeekdayScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityScheduleWeekday create
+   */
+  export type ActivityScheduleWeekdayCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ActivityScheduleWeekday.
+     */
+    data: XOR<ActivityScheduleWeekdayCreateInput, ActivityScheduleWeekdayUncheckedCreateInput>
+  }
+
+  /**
+   * ActivityScheduleWeekday createMany
+   */
+  export type ActivityScheduleWeekdayCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ActivityScheduleWeekdays.
+     */
+    data: ActivityScheduleWeekdayCreateManyInput | ActivityScheduleWeekdayCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ActivityScheduleWeekday createManyAndReturn
+   */
+  export type ActivityScheduleWeekdayCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * The data used to create many ActivityScheduleWeekdays.
+     */
+    data: ActivityScheduleWeekdayCreateManyInput | ActivityScheduleWeekdayCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActivityScheduleWeekday update
+   */
+  export type ActivityScheduleWeekdayUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ActivityScheduleWeekday.
+     */
+    data: XOR<ActivityScheduleWeekdayUpdateInput, ActivityScheduleWeekdayUncheckedUpdateInput>
+    /**
+     * Choose, which ActivityScheduleWeekday to update.
+     */
+    where: ActivityScheduleWeekdayWhereUniqueInput
+  }
+
+  /**
+   * ActivityScheduleWeekday updateMany
+   */
+  export type ActivityScheduleWeekdayUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ActivityScheduleWeekdays.
+     */
+    data: XOR<ActivityScheduleWeekdayUpdateManyMutationInput, ActivityScheduleWeekdayUncheckedUpdateManyInput>
+    /**
+     * Filter which ActivityScheduleWeekdays to update
+     */
+    where?: ActivityScheduleWeekdayWhereInput
+    /**
+     * Limit how many ActivityScheduleWeekdays to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActivityScheduleWeekday updateManyAndReturn
+   */
+  export type ActivityScheduleWeekdayUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * The data used to update ActivityScheduleWeekdays.
+     */
+    data: XOR<ActivityScheduleWeekdayUpdateManyMutationInput, ActivityScheduleWeekdayUncheckedUpdateManyInput>
+    /**
+     * Filter which ActivityScheduleWeekdays to update
+     */
+    where?: ActivityScheduleWeekdayWhereInput
+    /**
+     * Limit how many ActivityScheduleWeekdays to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActivityScheduleWeekday upsert
+   */
+  export type ActivityScheduleWeekdayUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ActivityScheduleWeekday to update in case it exists.
+     */
+    where: ActivityScheduleWeekdayWhereUniqueInput
+    /**
+     * In case the ActivityScheduleWeekday found by the `where` argument doesn't exist, create a new ActivityScheduleWeekday with this data.
+     */
+    create: XOR<ActivityScheduleWeekdayCreateInput, ActivityScheduleWeekdayUncheckedCreateInput>
+    /**
+     * In case the ActivityScheduleWeekday was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ActivityScheduleWeekdayUpdateInput, ActivityScheduleWeekdayUncheckedUpdateInput>
+  }
+
+  /**
+   * ActivityScheduleWeekday delete
+   */
+  export type ActivityScheduleWeekdayDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+    /**
+     * Filter which ActivityScheduleWeekday to delete.
+     */
+    where: ActivityScheduleWeekdayWhereUniqueInput
+  }
+
+  /**
+   * ActivityScheduleWeekday deleteMany
+   */
+  export type ActivityScheduleWeekdayDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActivityScheduleWeekdays to delete
+     */
+    where?: ActivityScheduleWeekdayWhereInput
+    /**
+     * Limit how many ActivityScheduleWeekdays to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActivityScheduleWeekday without action
+   */
+  export type ActivityScheduleWeekdayDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleWeekday
+     */
+    select?: ActivityScheduleWeekdaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleWeekday
+     */
+    omit?: ActivityScheduleWeekdayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleWeekdayInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ActivityScheduleDate
+   */
+
+  export type AggregateActivityScheduleDate = {
+    _count: ActivityScheduleDateCountAggregateOutputType | null
+    _avg: ActivityScheduleDateAvgAggregateOutputType | null
+    _sum: ActivityScheduleDateSumAggregateOutputType | null
+    _min: ActivityScheduleDateMinAggregateOutputType | null
+    _max: ActivityScheduleDateMaxAggregateOutputType | null
+  }
+
+  export type ActivityScheduleDateAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ActivityScheduleDateSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ActivityScheduleDateMinAggregateOutputType = {
+    id: number | null
+    schedule_uuid: string | null
+    date: Date | null
+  }
+
+  export type ActivityScheduleDateMaxAggregateOutputType = {
+    id: number | null
+    schedule_uuid: string | null
+    date: Date | null
+  }
+
+  export type ActivityScheduleDateCountAggregateOutputType = {
+    id: number
+    schedule_uuid: number
+    date: number
+    _all: number
+  }
+
+
+  export type ActivityScheduleDateAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ActivityScheduleDateSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ActivityScheduleDateMinAggregateInputType = {
+    id?: true
+    schedule_uuid?: true
+    date?: true
+  }
+
+  export type ActivityScheduleDateMaxAggregateInputType = {
+    id?: true
+    schedule_uuid?: true
+    date?: true
+  }
+
+  export type ActivityScheduleDateCountAggregateInputType = {
+    id?: true
+    schedule_uuid?: true
+    date?: true
+    _all?: true
+  }
+
+  export type ActivityScheduleDateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActivityScheduleDate to aggregate.
+     */
+    where?: ActivityScheduleDateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityScheduleDates to fetch.
+     */
+    orderBy?: ActivityScheduleDateOrderByWithRelationInput | ActivityScheduleDateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ActivityScheduleDateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityScheduleDates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityScheduleDates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ActivityScheduleDates
+    **/
+    _count?: true | ActivityScheduleDateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ActivityScheduleDateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ActivityScheduleDateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActivityScheduleDateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActivityScheduleDateMaxAggregateInputType
+  }
+
+  export type GetActivityScheduleDateAggregateType<T extends ActivityScheduleDateAggregateArgs> = {
+        [P in keyof T & keyof AggregateActivityScheduleDate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActivityScheduleDate[P]>
+      : GetScalarType<T[P], AggregateActivityScheduleDate[P]>
+  }
+
+
+
+
+  export type ActivityScheduleDateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityScheduleDateWhereInput
+    orderBy?: ActivityScheduleDateOrderByWithAggregationInput | ActivityScheduleDateOrderByWithAggregationInput[]
+    by: ActivityScheduleDateScalarFieldEnum[] | ActivityScheduleDateScalarFieldEnum
+    having?: ActivityScheduleDateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActivityScheduleDateCountAggregateInputType | true
+    _avg?: ActivityScheduleDateAvgAggregateInputType
+    _sum?: ActivityScheduleDateSumAggregateInputType
+    _min?: ActivityScheduleDateMinAggregateInputType
+    _max?: ActivityScheduleDateMaxAggregateInputType
+  }
+
+  export type ActivityScheduleDateGroupByOutputType = {
+    id: number
+    schedule_uuid: string
+    date: Date
+    _count: ActivityScheduleDateCountAggregateOutputType | null
+    _avg: ActivityScheduleDateAvgAggregateOutputType | null
+    _sum: ActivityScheduleDateSumAggregateOutputType | null
+    _min: ActivityScheduleDateMinAggregateOutputType | null
+    _max: ActivityScheduleDateMaxAggregateOutputType | null
+  }
+
+  type GetActivityScheduleDateGroupByPayload<T extends ActivityScheduleDateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActivityScheduleDateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActivityScheduleDateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActivityScheduleDateGroupByOutputType[P]>
+            : GetScalarType<T[P], ActivityScheduleDateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ActivityScheduleDateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schedule_uuid?: boolean
+    date?: boolean
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityScheduleDate"]>
+
+  export type ActivityScheduleDateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schedule_uuid?: boolean
+    date?: boolean
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityScheduleDate"]>
+
+  export type ActivityScheduleDateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schedule_uuid?: boolean
+    date?: boolean
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityScheduleDate"]>
+
+  export type ActivityScheduleDateSelectScalar = {
+    id?: boolean
+    schedule_uuid?: boolean
+    date?: boolean
+  }
+
+  export type ActivityScheduleDateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schedule_uuid" | "date", ExtArgs["result"]["activityScheduleDate"]>
+  export type ActivityScheduleDateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }
+  export type ActivityScheduleDateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }
+  export type ActivityScheduleDateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+  }
+
+  export type $ActivityScheduleDatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ActivityScheduleDate"
+    objects: {
+      schedule: Prisma.$ActivitySchedulePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      schedule_uuid: string
+      date: Date
+    }, ExtArgs["result"]["activityScheduleDate"]>
+    composites: {}
+  }
+
+  type ActivityScheduleDateGetPayload<S extends boolean | null | undefined | ActivityScheduleDateDefaultArgs> = $Result.GetResult<Prisma.$ActivityScheduleDatePayload, S>
+
+  type ActivityScheduleDateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ActivityScheduleDateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ActivityScheduleDateCountAggregateInputType | true
+    }
+
+  export interface ActivityScheduleDateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ActivityScheduleDate'], meta: { name: 'ActivityScheduleDate' } }
+    /**
+     * Find zero or one ActivityScheduleDate that matches the filter.
+     * @param {ActivityScheduleDateFindUniqueArgs} args - Arguments to find a ActivityScheduleDate
+     * @example
+     * // Get one ActivityScheduleDate
+     * const activityScheduleDate = await prisma.activityScheduleDate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ActivityScheduleDateFindUniqueArgs>(args: SelectSubset<T, ActivityScheduleDateFindUniqueArgs<ExtArgs>>): Prisma__ActivityScheduleDateClient<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ActivityScheduleDate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ActivityScheduleDateFindUniqueOrThrowArgs} args - Arguments to find a ActivityScheduleDate
+     * @example
+     * // Get one ActivityScheduleDate
+     * const activityScheduleDate = await prisma.activityScheduleDate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ActivityScheduleDateFindUniqueOrThrowArgs>(args: SelectSubset<T, ActivityScheduleDateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActivityScheduleDateClient<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivityScheduleDate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleDateFindFirstArgs} args - Arguments to find a ActivityScheduleDate
+     * @example
+     * // Get one ActivityScheduleDate
+     * const activityScheduleDate = await prisma.activityScheduleDate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ActivityScheduleDateFindFirstArgs>(args?: SelectSubset<T, ActivityScheduleDateFindFirstArgs<ExtArgs>>): Prisma__ActivityScheduleDateClient<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivityScheduleDate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleDateFindFirstOrThrowArgs} args - Arguments to find a ActivityScheduleDate
+     * @example
+     * // Get one ActivityScheduleDate
+     * const activityScheduleDate = await prisma.activityScheduleDate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ActivityScheduleDateFindFirstOrThrowArgs>(args?: SelectSubset<T, ActivityScheduleDateFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActivityScheduleDateClient<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ActivityScheduleDates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleDateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ActivityScheduleDates
+     * const activityScheduleDates = await prisma.activityScheduleDate.findMany()
+     * 
+     * // Get first 10 ActivityScheduleDates
+     * const activityScheduleDates = await prisma.activityScheduleDate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const activityScheduleDateWithIdOnly = await prisma.activityScheduleDate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ActivityScheduleDateFindManyArgs>(args?: SelectSubset<T, ActivityScheduleDateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ActivityScheduleDate.
+     * @param {ActivityScheduleDateCreateArgs} args - Arguments to create a ActivityScheduleDate.
+     * @example
+     * // Create one ActivityScheduleDate
+     * const ActivityScheduleDate = await prisma.activityScheduleDate.create({
+     *   data: {
+     *     // ... data to create a ActivityScheduleDate
+     *   }
+     * })
+     * 
+     */
+    create<T extends ActivityScheduleDateCreateArgs>(args: SelectSubset<T, ActivityScheduleDateCreateArgs<ExtArgs>>): Prisma__ActivityScheduleDateClient<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ActivityScheduleDates.
+     * @param {ActivityScheduleDateCreateManyArgs} args - Arguments to create many ActivityScheduleDates.
+     * @example
+     * // Create many ActivityScheduleDates
+     * const activityScheduleDate = await prisma.activityScheduleDate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ActivityScheduleDateCreateManyArgs>(args?: SelectSubset<T, ActivityScheduleDateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ActivityScheduleDates and returns the data saved in the database.
+     * @param {ActivityScheduleDateCreateManyAndReturnArgs} args - Arguments to create many ActivityScheduleDates.
+     * @example
+     * // Create many ActivityScheduleDates
+     * const activityScheduleDate = await prisma.activityScheduleDate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ActivityScheduleDates and only return the `id`
+     * const activityScheduleDateWithIdOnly = await prisma.activityScheduleDate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ActivityScheduleDateCreateManyAndReturnArgs>(args?: SelectSubset<T, ActivityScheduleDateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ActivityScheduleDate.
+     * @param {ActivityScheduleDateDeleteArgs} args - Arguments to delete one ActivityScheduleDate.
+     * @example
+     * // Delete one ActivityScheduleDate
+     * const ActivityScheduleDate = await prisma.activityScheduleDate.delete({
+     *   where: {
+     *     // ... filter to delete one ActivityScheduleDate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ActivityScheduleDateDeleteArgs>(args: SelectSubset<T, ActivityScheduleDateDeleteArgs<ExtArgs>>): Prisma__ActivityScheduleDateClient<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ActivityScheduleDate.
+     * @param {ActivityScheduleDateUpdateArgs} args - Arguments to update one ActivityScheduleDate.
+     * @example
+     * // Update one ActivityScheduleDate
+     * const activityScheduleDate = await prisma.activityScheduleDate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ActivityScheduleDateUpdateArgs>(args: SelectSubset<T, ActivityScheduleDateUpdateArgs<ExtArgs>>): Prisma__ActivityScheduleDateClient<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ActivityScheduleDates.
+     * @param {ActivityScheduleDateDeleteManyArgs} args - Arguments to filter ActivityScheduleDates to delete.
+     * @example
+     * // Delete a few ActivityScheduleDates
+     * const { count } = await prisma.activityScheduleDate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ActivityScheduleDateDeleteManyArgs>(args?: SelectSubset<T, ActivityScheduleDateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivityScheduleDates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleDateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ActivityScheduleDates
+     * const activityScheduleDate = await prisma.activityScheduleDate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ActivityScheduleDateUpdateManyArgs>(args: SelectSubset<T, ActivityScheduleDateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivityScheduleDates and returns the data updated in the database.
+     * @param {ActivityScheduleDateUpdateManyAndReturnArgs} args - Arguments to update many ActivityScheduleDates.
+     * @example
+     * // Update many ActivityScheduleDates
+     * const activityScheduleDate = await prisma.activityScheduleDate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ActivityScheduleDates and only return the `id`
+     * const activityScheduleDateWithIdOnly = await prisma.activityScheduleDate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ActivityScheduleDateUpdateManyAndReturnArgs>(args: SelectSubset<T, ActivityScheduleDateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ActivityScheduleDate.
+     * @param {ActivityScheduleDateUpsertArgs} args - Arguments to update or create a ActivityScheduleDate.
+     * @example
+     * // Update or create a ActivityScheduleDate
+     * const activityScheduleDate = await prisma.activityScheduleDate.upsert({
+     *   create: {
+     *     // ... data to create a ActivityScheduleDate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ActivityScheduleDate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ActivityScheduleDateUpsertArgs>(args: SelectSubset<T, ActivityScheduleDateUpsertArgs<ExtArgs>>): Prisma__ActivityScheduleDateClient<$Result.GetResult<Prisma.$ActivityScheduleDatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ActivityScheduleDates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleDateCountArgs} args - Arguments to filter ActivityScheduleDates to count.
+     * @example
+     * // Count the number of ActivityScheduleDates
+     * const count = await prisma.activityScheduleDate.count({
+     *   where: {
+     *     // ... the filter for the ActivityScheduleDates we want to count
+     *   }
+     * })
+    **/
+    count<T extends ActivityScheduleDateCountArgs>(
+      args?: Subset<T, ActivityScheduleDateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActivityScheduleDateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ActivityScheduleDate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleDateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActivityScheduleDateAggregateArgs>(args: Subset<T, ActivityScheduleDateAggregateArgs>): Prisma.PrismaPromise<GetActivityScheduleDateAggregateType<T>>
+
+    /**
+     * Group by ActivityScheduleDate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityScheduleDateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ActivityScheduleDateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ActivityScheduleDateGroupByArgs['orderBy'] }
+        : { orderBy?: ActivityScheduleDateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ActivityScheduleDateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActivityScheduleDateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ActivityScheduleDate model
+   */
+  readonly fields: ActivityScheduleDateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ActivityScheduleDate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ActivityScheduleDateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    schedule<T extends ActivityScheduleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActivityScheduleDefaultArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ActivityScheduleDate model
+   */
+  interface ActivityScheduleDateFieldRefs {
+    readonly id: FieldRef<"ActivityScheduleDate", 'Int'>
+    readonly schedule_uuid: FieldRef<"ActivityScheduleDate", 'String'>
+    readonly date: FieldRef<"ActivityScheduleDate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ActivityScheduleDate findUnique
+   */
+  export type ActivityScheduleDateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityScheduleDate to fetch.
+     */
+    where: ActivityScheduleDateWhereUniqueInput
+  }
+
+  /**
+   * ActivityScheduleDate findUniqueOrThrow
+   */
+  export type ActivityScheduleDateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityScheduleDate to fetch.
+     */
+    where: ActivityScheduleDateWhereUniqueInput
+  }
+
+  /**
+   * ActivityScheduleDate findFirst
+   */
+  export type ActivityScheduleDateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityScheduleDate to fetch.
+     */
+    where?: ActivityScheduleDateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityScheduleDates to fetch.
+     */
+    orderBy?: ActivityScheduleDateOrderByWithRelationInput | ActivityScheduleDateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActivityScheduleDates.
+     */
+    cursor?: ActivityScheduleDateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityScheduleDates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityScheduleDates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityScheduleDates.
+     */
+    distinct?: ActivityScheduleDateScalarFieldEnum | ActivityScheduleDateScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityScheduleDate findFirstOrThrow
+   */
+  export type ActivityScheduleDateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityScheduleDate to fetch.
+     */
+    where?: ActivityScheduleDateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityScheduleDates to fetch.
+     */
+    orderBy?: ActivityScheduleDateOrderByWithRelationInput | ActivityScheduleDateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActivityScheduleDates.
+     */
+    cursor?: ActivityScheduleDateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityScheduleDates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityScheduleDates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityScheduleDates.
+     */
+    distinct?: ActivityScheduleDateScalarFieldEnum | ActivityScheduleDateScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityScheduleDate findMany
+   */
+  export type ActivityScheduleDateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityScheduleDates to fetch.
+     */
+    where?: ActivityScheduleDateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityScheduleDates to fetch.
+     */
+    orderBy?: ActivityScheduleDateOrderByWithRelationInput | ActivityScheduleDateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ActivityScheduleDates.
+     */
+    cursor?: ActivityScheduleDateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityScheduleDates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityScheduleDates.
+     */
+    skip?: number
+    distinct?: ActivityScheduleDateScalarFieldEnum | ActivityScheduleDateScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityScheduleDate create
+   */
+  export type ActivityScheduleDateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ActivityScheduleDate.
+     */
+    data: XOR<ActivityScheduleDateCreateInput, ActivityScheduleDateUncheckedCreateInput>
+  }
+
+  /**
+   * ActivityScheduleDate createMany
+   */
+  export type ActivityScheduleDateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ActivityScheduleDates.
+     */
+    data: ActivityScheduleDateCreateManyInput | ActivityScheduleDateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ActivityScheduleDate createManyAndReturn
+   */
+  export type ActivityScheduleDateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * The data used to create many ActivityScheduleDates.
+     */
+    data: ActivityScheduleDateCreateManyInput | ActivityScheduleDateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActivityScheduleDate update
+   */
+  export type ActivityScheduleDateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ActivityScheduleDate.
+     */
+    data: XOR<ActivityScheduleDateUpdateInput, ActivityScheduleDateUncheckedUpdateInput>
+    /**
+     * Choose, which ActivityScheduleDate to update.
+     */
+    where: ActivityScheduleDateWhereUniqueInput
+  }
+
+  /**
+   * ActivityScheduleDate updateMany
+   */
+  export type ActivityScheduleDateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ActivityScheduleDates.
+     */
+    data: XOR<ActivityScheduleDateUpdateManyMutationInput, ActivityScheduleDateUncheckedUpdateManyInput>
+    /**
+     * Filter which ActivityScheduleDates to update
+     */
+    where?: ActivityScheduleDateWhereInput
+    /**
+     * Limit how many ActivityScheduleDates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActivityScheduleDate updateManyAndReturn
+   */
+  export type ActivityScheduleDateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * The data used to update ActivityScheduleDates.
+     */
+    data: XOR<ActivityScheduleDateUpdateManyMutationInput, ActivityScheduleDateUncheckedUpdateManyInput>
+    /**
+     * Filter which ActivityScheduleDates to update
+     */
+    where?: ActivityScheduleDateWhereInput
+    /**
+     * Limit how many ActivityScheduleDates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActivityScheduleDate upsert
+   */
+  export type ActivityScheduleDateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ActivityScheduleDate to update in case it exists.
+     */
+    where: ActivityScheduleDateWhereUniqueInput
+    /**
+     * In case the ActivityScheduleDate found by the `where` argument doesn't exist, create a new ActivityScheduleDate with this data.
+     */
+    create: XOR<ActivityScheduleDateCreateInput, ActivityScheduleDateUncheckedCreateInput>
+    /**
+     * In case the ActivityScheduleDate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ActivityScheduleDateUpdateInput, ActivityScheduleDateUncheckedUpdateInput>
+  }
+
+  /**
+   * ActivityScheduleDate delete
+   */
+  export type ActivityScheduleDateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+    /**
+     * Filter which ActivityScheduleDate to delete.
+     */
+    where: ActivityScheduleDateWhereUniqueInput
+  }
+
+  /**
+   * ActivityScheduleDate deleteMany
+   */
+  export type ActivityScheduleDateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActivityScheduleDates to delete
+     */
+    where?: ActivityScheduleDateWhereInput
+    /**
+     * Limit how many ActivityScheduleDates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActivityScheduleDate without action
+   */
+  export type ActivityScheduleDateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityScheduleDate
+     */
+    select?: ActivityScheduleDateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityScheduleDate
+     */
+    omit?: ActivityScheduleDateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityScheduleDateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ActivityOccurrence
+   */
+
+  export type AggregateActivityOccurrence = {
+    _count: ActivityOccurrenceCountAggregateOutputType | null
+    _avg: ActivityOccurrenceAvgAggregateOutputType | null
+    _sum: ActivityOccurrenceSumAggregateOutputType | null
+    _min: ActivityOccurrenceMinAggregateOutputType | null
+    _max: ActivityOccurrenceMaxAggregateOutputType | null
+  }
+
+  export type ActivityOccurrenceAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ActivityOccurrenceSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ActivityOccurrenceMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    activity_uuid: string | null
+    schedule_uuid: string | null
+    scheduled_for: Date | null
+    status: $Enums.OccurrenceStatus | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ActivityOccurrenceMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    activity_uuid: string | null
+    schedule_uuid: string | null
+    scheduled_for: Date | null
+    status: $Enums.OccurrenceStatus | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ActivityOccurrenceCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    activity_uuid: number
+    schedule_uuid: number
+    scheduled_for: number
+    status: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type ActivityOccurrenceAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ActivityOccurrenceSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ActivityOccurrenceMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    schedule_uuid?: true
+    scheduled_for?: true
+    status?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ActivityOccurrenceMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    schedule_uuid?: true
+    scheduled_for?: true
+    status?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ActivityOccurrenceCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    schedule_uuid?: true
+    scheduled_for?: true
+    status?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type ActivityOccurrenceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActivityOccurrence to aggregate.
+     */
+    where?: ActivityOccurrenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityOccurrences to fetch.
+     */
+    orderBy?: ActivityOccurrenceOrderByWithRelationInput | ActivityOccurrenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ActivityOccurrenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityOccurrences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityOccurrences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ActivityOccurrences
+    **/
+    _count?: true | ActivityOccurrenceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ActivityOccurrenceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ActivityOccurrenceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActivityOccurrenceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActivityOccurrenceMaxAggregateInputType
+  }
+
+  export type GetActivityOccurrenceAggregateType<T extends ActivityOccurrenceAggregateArgs> = {
+        [P in keyof T & keyof AggregateActivityOccurrence]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActivityOccurrence[P]>
+      : GetScalarType<T[P], AggregateActivityOccurrence[P]>
+  }
+
+
+
+
+  export type ActivityOccurrenceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityOccurrenceWhereInput
+    orderBy?: ActivityOccurrenceOrderByWithAggregationInput | ActivityOccurrenceOrderByWithAggregationInput[]
+    by: ActivityOccurrenceScalarFieldEnum[] | ActivityOccurrenceScalarFieldEnum
+    having?: ActivityOccurrenceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActivityOccurrenceCountAggregateInputType | true
+    _avg?: ActivityOccurrenceAvgAggregateInputType
+    _sum?: ActivityOccurrenceSumAggregateInputType
+    _min?: ActivityOccurrenceMinAggregateInputType
+    _max?: ActivityOccurrenceMaxAggregateInputType
+  }
+
+  export type ActivityOccurrenceGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    activity_uuid: string
+    schedule_uuid: string
+    scheduled_for: Date
+    status: $Enums.OccurrenceStatus
+    created_at: Date
+    updated_at: Date
+    _count: ActivityOccurrenceCountAggregateOutputType | null
+    _avg: ActivityOccurrenceAvgAggregateOutputType | null
+    _sum: ActivityOccurrenceSumAggregateOutputType | null
+    _min: ActivityOccurrenceMinAggregateOutputType | null
+    _max: ActivityOccurrenceMaxAggregateOutputType | null
+  }
+
+  type GetActivityOccurrenceGroupByPayload<T extends ActivityOccurrenceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActivityOccurrenceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActivityOccurrenceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActivityOccurrenceGroupByOutputType[P]>
+            : GetScalarType<T[P], ActivityOccurrenceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ActivityOccurrenceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    schedule_uuid?: boolean
+    scheduled_for?: boolean
+    status?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    log?: boolean | ActivityOccurrence$logArgs<ExtArgs>
+  }, ExtArgs["result"]["activityOccurrence"]>
+
+  export type ActivityOccurrenceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    schedule_uuid?: boolean
+    scheduled_for?: boolean
+    status?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityOccurrence"]>
+
+  export type ActivityOccurrenceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    schedule_uuid?: boolean
+    scheduled_for?: boolean
+    status?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityOccurrence"]>
+
+  export type ActivityOccurrenceSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    schedule_uuid?: boolean
+    scheduled_for?: boolean
+    status?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type ActivityOccurrenceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "activity_uuid" | "schedule_uuid" | "scheduled_for" | "status" | "created_at" | "updated_at", ExtArgs["result"]["activityOccurrence"]>
+  export type ActivityOccurrenceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    log?: boolean | ActivityOccurrence$logArgs<ExtArgs>
+  }
+  export type ActivityOccurrenceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ActivityOccurrenceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ActivityOccurrencePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ActivityOccurrence"
+    objects: {
+      activity: Prisma.$ActivityPayload<ExtArgs>
+      schedule: Prisma.$ActivitySchedulePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+      log: Prisma.$ActivityLogPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      activity_uuid: string
+      schedule_uuid: string
+      scheduled_for: Date
+      status: $Enums.OccurrenceStatus
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["activityOccurrence"]>
+    composites: {}
+  }
+
+  type ActivityOccurrenceGetPayload<S extends boolean | null | undefined | ActivityOccurrenceDefaultArgs> = $Result.GetResult<Prisma.$ActivityOccurrencePayload, S>
+
+  type ActivityOccurrenceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ActivityOccurrenceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ActivityOccurrenceCountAggregateInputType | true
+    }
+
+  export interface ActivityOccurrenceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ActivityOccurrence'], meta: { name: 'ActivityOccurrence' } }
+    /**
+     * Find zero or one ActivityOccurrence that matches the filter.
+     * @param {ActivityOccurrenceFindUniqueArgs} args - Arguments to find a ActivityOccurrence
+     * @example
+     * // Get one ActivityOccurrence
+     * const activityOccurrence = await prisma.activityOccurrence.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ActivityOccurrenceFindUniqueArgs>(args: SelectSubset<T, ActivityOccurrenceFindUniqueArgs<ExtArgs>>): Prisma__ActivityOccurrenceClient<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ActivityOccurrence that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ActivityOccurrenceFindUniqueOrThrowArgs} args - Arguments to find a ActivityOccurrence
+     * @example
+     * // Get one ActivityOccurrence
+     * const activityOccurrence = await prisma.activityOccurrence.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ActivityOccurrenceFindUniqueOrThrowArgs>(args: SelectSubset<T, ActivityOccurrenceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActivityOccurrenceClient<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivityOccurrence that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityOccurrenceFindFirstArgs} args - Arguments to find a ActivityOccurrence
+     * @example
+     * // Get one ActivityOccurrence
+     * const activityOccurrence = await prisma.activityOccurrence.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ActivityOccurrenceFindFirstArgs>(args?: SelectSubset<T, ActivityOccurrenceFindFirstArgs<ExtArgs>>): Prisma__ActivityOccurrenceClient<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivityOccurrence that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityOccurrenceFindFirstOrThrowArgs} args - Arguments to find a ActivityOccurrence
+     * @example
+     * // Get one ActivityOccurrence
+     * const activityOccurrence = await prisma.activityOccurrence.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ActivityOccurrenceFindFirstOrThrowArgs>(args?: SelectSubset<T, ActivityOccurrenceFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActivityOccurrenceClient<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ActivityOccurrences that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityOccurrenceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ActivityOccurrences
+     * const activityOccurrences = await prisma.activityOccurrence.findMany()
+     * 
+     * // Get first 10 ActivityOccurrences
+     * const activityOccurrences = await prisma.activityOccurrence.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const activityOccurrenceWithIdOnly = await prisma.activityOccurrence.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ActivityOccurrenceFindManyArgs>(args?: SelectSubset<T, ActivityOccurrenceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ActivityOccurrence.
+     * @param {ActivityOccurrenceCreateArgs} args - Arguments to create a ActivityOccurrence.
+     * @example
+     * // Create one ActivityOccurrence
+     * const ActivityOccurrence = await prisma.activityOccurrence.create({
+     *   data: {
+     *     // ... data to create a ActivityOccurrence
+     *   }
+     * })
+     * 
+     */
+    create<T extends ActivityOccurrenceCreateArgs>(args: SelectSubset<T, ActivityOccurrenceCreateArgs<ExtArgs>>): Prisma__ActivityOccurrenceClient<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ActivityOccurrences.
+     * @param {ActivityOccurrenceCreateManyArgs} args - Arguments to create many ActivityOccurrences.
+     * @example
+     * // Create many ActivityOccurrences
+     * const activityOccurrence = await prisma.activityOccurrence.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ActivityOccurrenceCreateManyArgs>(args?: SelectSubset<T, ActivityOccurrenceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ActivityOccurrences and returns the data saved in the database.
+     * @param {ActivityOccurrenceCreateManyAndReturnArgs} args - Arguments to create many ActivityOccurrences.
+     * @example
+     * // Create many ActivityOccurrences
+     * const activityOccurrence = await prisma.activityOccurrence.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ActivityOccurrences and only return the `id`
+     * const activityOccurrenceWithIdOnly = await prisma.activityOccurrence.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ActivityOccurrenceCreateManyAndReturnArgs>(args?: SelectSubset<T, ActivityOccurrenceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ActivityOccurrence.
+     * @param {ActivityOccurrenceDeleteArgs} args - Arguments to delete one ActivityOccurrence.
+     * @example
+     * // Delete one ActivityOccurrence
+     * const ActivityOccurrence = await prisma.activityOccurrence.delete({
+     *   where: {
+     *     // ... filter to delete one ActivityOccurrence
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ActivityOccurrenceDeleteArgs>(args: SelectSubset<T, ActivityOccurrenceDeleteArgs<ExtArgs>>): Prisma__ActivityOccurrenceClient<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ActivityOccurrence.
+     * @param {ActivityOccurrenceUpdateArgs} args - Arguments to update one ActivityOccurrence.
+     * @example
+     * // Update one ActivityOccurrence
+     * const activityOccurrence = await prisma.activityOccurrence.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ActivityOccurrenceUpdateArgs>(args: SelectSubset<T, ActivityOccurrenceUpdateArgs<ExtArgs>>): Prisma__ActivityOccurrenceClient<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ActivityOccurrences.
+     * @param {ActivityOccurrenceDeleteManyArgs} args - Arguments to filter ActivityOccurrences to delete.
+     * @example
+     * // Delete a few ActivityOccurrences
+     * const { count } = await prisma.activityOccurrence.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ActivityOccurrenceDeleteManyArgs>(args?: SelectSubset<T, ActivityOccurrenceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivityOccurrences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityOccurrenceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ActivityOccurrences
+     * const activityOccurrence = await prisma.activityOccurrence.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ActivityOccurrenceUpdateManyArgs>(args: SelectSubset<T, ActivityOccurrenceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivityOccurrences and returns the data updated in the database.
+     * @param {ActivityOccurrenceUpdateManyAndReturnArgs} args - Arguments to update many ActivityOccurrences.
+     * @example
+     * // Update many ActivityOccurrences
+     * const activityOccurrence = await prisma.activityOccurrence.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ActivityOccurrences and only return the `id`
+     * const activityOccurrenceWithIdOnly = await prisma.activityOccurrence.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ActivityOccurrenceUpdateManyAndReturnArgs>(args: SelectSubset<T, ActivityOccurrenceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ActivityOccurrence.
+     * @param {ActivityOccurrenceUpsertArgs} args - Arguments to update or create a ActivityOccurrence.
+     * @example
+     * // Update or create a ActivityOccurrence
+     * const activityOccurrence = await prisma.activityOccurrence.upsert({
+     *   create: {
+     *     // ... data to create a ActivityOccurrence
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ActivityOccurrence we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ActivityOccurrenceUpsertArgs>(args: SelectSubset<T, ActivityOccurrenceUpsertArgs<ExtArgs>>): Prisma__ActivityOccurrenceClient<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ActivityOccurrences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityOccurrenceCountArgs} args - Arguments to filter ActivityOccurrences to count.
+     * @example
+     * // Count the number of ActivityOccurrences
+     * const count = await prisma.activityOccurrence.count({
+     *   where: {
+     *     // ... the filter for the ActivityOccurrences we want to count
+     *   }
+     * })
+    **/
+    count<T extends ActivityOccurrenceCountArgs>(
+      args?: Subset<T, ActivityOccurrenceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActivityOccurrenceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ActivityOccurrence.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityOccurrenceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActivityOccurrenceAggregateArgs>(args: Subset<T, ActivityOccurrenceAggregateArgs>): Prisma.PrismaPromise<GetActivityOccurrenceAggregateType<T>>
+
+    /**
+     * Group by ActivityOccurrence.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityOccurrenceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ActivityOccurrenceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ActivityOccurrenceGroupByArgs['orderBy'] }
+        : { orderBy?: ActivityOccurrenceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ActivityOccurrenceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActivityOccurrenceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ActivityOccurrence model
+   */
+  readonly fields: ActivityOccurrenceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ActivityOccurrence.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ActivityOccurrenceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    activity<T extends ActivityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActivityDefaultArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    schedule<T extends ActivityScheduleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActivityScheduleDefaultArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    log<T extends ActivityOccurrence$logArgs<ExtArgs> = {}>(args?: Subset<T, ActivityOccurrence$logArgs<ExtArgs>>): Prisma__ActivityLogClient<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ActivityOccurrence model
+   */
+  interface ActivityOccurrenceFieldRefs {
+    readonly id: FieldRef<"ActivityOccurrence", 'Int'>
+    readonly uuid: FieldRef<"ActivityOccurrence", 'String'>
+    readonly user_uuid: FieldRef<"ActivityOccurrence", 'String'>
+    readonly activity_uuid: FieldRef<"ActivityOccurrence", 'String'>
+    readonly schedule_uuid: FieldRef<"ActivityOccurrence", 'String'>
+    readonly scheduled_for: FieldRef<"ActivityOccurrence", 'DateTime'>
+    readonly status: FieldRef<"ActivityOccurrence", 'OccurrenceStatus'>
+    readonly created_at: FieldRef<"ActivityOccurrence", 'DateTime'>
+    readonly updated_at: FieldRef<"ActivityOccurrence", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ActivityOccurrence findUnique
+   */
+  export type ActivityOccurrenceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityOccurrence to fetch.
+     */
+    where: ActivityOccurrenceWhereUniqueInput
+  }
+
+  /**
+   * ActivityOccurrence findUniqueOrThrow
+   */
+  export type ActivityOccurrenceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityOccurrence to fetch.
+     */
+    where: ActivityOccurrenceWhereUniqueInput
+  }
+
+  /**
+   * ActivityOccurrence findFirst
+   */
+  export type ActivityOccurrenceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityOccurrence to fetch.
+     */
+    where?: ActivityOccurrenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityOccurrences to fetch.
+     */
+    orderBy?: ActivityOccurrenceOrderByWithRelationInput | ActivityOccurrenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActivityOccurrences.
+     */
+    cursor?: ActivityOccurrenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityOccurrences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityOccurrences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityOccurrences.
+     */
+    distinct?: ActivityOccurrenceScalarFieldEnum | ActivityOccurrenceScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityOccurrence findFirstOrThrow
+   */
+  export type ActivityOccurrenceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityOccurrence to fetch.
+     */
+    where?: ActivityOccurrenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityOccurrences to fetch.
+     */
+    orderBy?: ActivityOccurrenceOrderByWithRelationInput | ActivityOccurrenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActivityOccurrences.
+     */
+    cursor?: ActivityOccurrenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityOccurrences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityOccurrences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityOccurrences.
+     */
+    distinct?: ActivityOccurrenceScalarFieldEnum | ActivityOccurrenceScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityOccurrence findMany
+   */
+  export type ActivityOccurrenceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityOccurrences to fetch.
+     */
+    where?: ActivityOccurrenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityOccurrences to fetch.
+     */
+    orderBy?: ActivityOccurrenceOrderByWithRelationInput | ActivityOccurrenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ActivityOccurrences.
+     */
+    cursor?: ActivityOccurrenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityOccurrences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityOccurrences.
+     */
+    skip?: number
+    distinct?: ActivityOccurrenceScalarFieldEnum | ActivityOccurrenceScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityOccurrence create
+   */
+  export type ActivityOccurrenceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ActivityOccurrence.
+     */
+    data: XOR<ActivityOccurrenceCreateInput, ActivityOccurrenceUncheckedCreateInput>
+  }
+
+  /**
+   * ActivityOccurrence createMany
+   */
+  export type ActivityOccurrenceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ActivityOccurrences.
+     */
+    data: ActivityOccurrenceCreateManyInput | ActivityOccurrenceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ActivityOccurrence createManyAndReturn
+   */
+  export type ActivityOccurrenceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * The data used to create many ActivityOccurrences.
+     */
+    data: ActivityOccurrenceCreateManyInput | ActivityOccurrenceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActivityOccurrence update
+   */
+  export type ActivityOccurrenceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ActivityOccurrence.
+     */
+    data: XOR<ActivityOccurrenceUpdateInput, ActivityOccurrenceUncheckedUpdateInput>
+    /**
+     * Choose, which ActivityOccurrence to update.
+     */
+    where: ActivityOccurrenceWhereUniqueInput
+  }
+
+  /**
+   * ActivityOccurrence updateMany
+   */
+  export type ActivityOccurrenceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ActivityOccurrences.
+     */
+    data: XOR<ActivityOccurrenceUpdateManyMutationInput, ActivityOccurrenceUncheckedUpdateManyInput>
+    /**
+     * Filter which ActivityOccurrences to update
+     */
+    where?: ActivityOccurrenceWhereInput
+    /**
+     * Limit how many ActivityOccurrences to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActivityOccurrence updateManyAndReturn
+   */
+  export type ActivityOccurrenceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * The data used to update ActivityOccurrences.
+     */
+    data: XOR<ActivityOccurrenceUpdateManyMutationInput, ActivityOccurrenceUncheckedUpdateManyInput>
+    /**
+     * Filter which ActivityOccurrences to update
+     */
+    where?: ActivityOccurrenceWhereInput
+    /**
+     * Limit how many ActivityOccurrences to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActivityOccurrence upsert
+   */
+  export type ActivityOccurrenceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ActivityOccurrence to update in case it exists.
+     */
+    where: ActivityOccurrenceWhereUniqueInput
+    /**
+     * In case the ActivityOccurrence found by the `where` argument doesn't exist, create a new ActivityOccurrence with this data.
+     */
+    create: XOR<ActivityOccurrenceCreateInput, ActivityOccurrenceUncheckedCreateInput>
+    /**
+     * In case the ActivityOccurrence was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ActivityOccurrenceUpdateInput, ActivityOccurrenceUncheckedUpdateInput>
+  }
+
+  /**
+   * ActivityOccurrence delete
+   */
+  export type ActivityOccurrenceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+    /**
+     * Filter which ActivityOccurrence to delete.
+     */
+    where: ActivityOccurrenceWhereUniqueInput
+  }
+
+  /**
+   * ActivityOccurrence deleteMany
+   */
+  export type ActivityOccurrenceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActivityOccurrences to delete
+     */
+    where?: ActivityOccurrenceWhereInput
+    /**
+     * Limit how many ActivityOccurrences to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActivityOccurrence.log
+   */
+  export type ActivityOccurrence$logArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    where?: ActivityLogWhereInput
+  }
+
+  /**
+   * ActivityOccurrence without action
+   */
+  export type ActivityOccurrenceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityOccurrence
+     */
+    select?: ActivityOccurrenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityOccurrence
+     */
+    omit?: ActivityOccurrenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityOccurrenceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ActivityLog
+   */
+
+  export type AggregateActivityLog = {
+    _count: ActivityLogCountAggregateOutputType | null
+    _avg: ActivityLogAvgAggregateOutputType | null
+    _sum: ActivityLogSumAggregateOutputType | null
+    _min: ActivityLogMinAggregateOutputType | null
+    _max: ActivityLogMaxAggregateOutputType | null
+  }
+
+  export type ActivityLogAvgAggregateOutputType = {
+    id: number | null
+    snapshot_target_value: number | null
+    value: number | null
+  }
+
+  export type ActivityLogSumAggregateOutputType = {
+    id: number | null
+    snapshot_target_value: number | null
+    value: number | null
+  }
+
+  export type ActivityLogMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    activity_uuid: string | null
+    schedule_uuid: string | null
+    occurrence_uuid: string | null
+    snapshot_target_type: $Enums.ActivityTargetType | null
+    snapshot_target_value: number | null
+    snapshot_target_unit: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label: string | null
+    value: number | null
+    completed: boolean | null
+    completed_at: Date | null
+    skipped: boolean | null
+    skip_reason: string | null
+    notes: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ActivityLogMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    activity_uuid: string | null
+    schedule_uuid: string | null
+    occurrence_uuid: string | null
+    snapshot_target_type: $Enums.ActivityTargetType | null
+    snapshot_target_value: number | null
+    snapshot_target_unit: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label: string | null
+    value: number | null
+    completed: boolean | null
+    completed_at: Date | null
+    skipped: boolean | null
+    skip_reason: string | null
+    notes: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ActivityLogCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    activity_uuid: number
+    schedule_uuid: number
+    occurrence_uuid: number
+    snapshot_target_type: number
+    snapshot_target_value: number
+    snapshot_target_unit: number
+    snapshot_target_unit_label: number
+    value: number
+    completed: number
+    completed_at: number
+    skipped: number
+    skip_reason: number
+    notes: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type ActivityLogAvgAggregateInputType = {
+    id?: true
+    snapshot_target_value?: true
+    value?: true
+  }
+
+  export type ActivityLogSumAggregateInputType = {
+    id?: true
+    snapshot_target_value?: true
+    value?: true
+  }
+
+  export type ActivityLogMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    schedule_uuid?: true
+    occurrence_uuid?: true
+    snapshot_target_type?: true
+    snapshot_target_value?: true
+    snapshot_target_unit?: true
+    snapshot_target_unit_label?: true
+    value?: true
+    completed?: true
+    completed_at?: true
+    skipped?: true
+    skip_reason?: true
+    notes?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ActivityLogMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    schedule_uuid?: true
+    occurrence_uuid?: true
+    snapshot_target_type?: true
+    snapshot_target_value?: true
+    snapshot_target_unit?: true
+    snapshot_target_unit_label?: true
+    value?: true
+    completed?: true
+    completed_at?: true
+    skipped?: true
+    skip_reason?: true
+    notes?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ActivityLogCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    schedule_uuid?: true
+    occurrence_uuid?: true
+    snapshot_target_type?: true
+    snapshot_target_value?: true
+    snapshot_target_unit?: true
+    snapshot_target_unit_label?: true
+    value?: true
+    completed?: true
+    completed_at?: true
+    skipped?: true
+    skip_reason?: true
+    notes?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type ActivityLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActivityLog to aggregate.
+     */
+    where?: ActivityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityLogs to fetch.
+     */
+    orderBy?: ActivityLogOrderByWithRelationInput | ActivityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ActivityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ActivityLogs
+    **/
+    _count?: true | ActivityLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ActivityLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ActivityLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActivityLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActivityLogMaxAggregateInputType
+  }
+
+  export type GetActivityLogAggregateType<T extends ActivityLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateActivityLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActivityLog[P]>
+      : GetScalarType<T[P], AggregateActivityLog[P]>
+  }
+
+
+
+
+  export type ActivityLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActivityLogWhereInput
+    orderBy?: ActivityLogOrderByWithAggregationInput | ActivityLogOrderByWithAggregationInput[]
+    by: ActivityLogScalarFieldEnum[] | ActivityLogScalarFieldEnum
+    having?: ActivityLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActivityLogCountAggregateInputType | true
+    _avg?: ActivityLogAvgAggregateInputType
+    _sum?: ActivityLogSumAggregateInputType
+    _min?: ActivityLogMinAggregateInputType
+    _max?: ActivityLogMaxAggregateInputType
+  }
+
+  export type ActivityLogGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    activity_uuid: string
+    schedule_uuid: string
+    occurrence_uuid: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value: number | null
+    snapshot_target_unit: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label: string | null
+    value: number | null
+    completed: boolean
+    completed_at: Date | null
+    skipped: boolean
+    skip_reason: string | null
+    notes: string | null
+    created_at: Date
+    updated_at: Date
+    _count: ActivityLogCountAggregateOutputType | null
+    _avg: ActivityLogAvgAggregateOutputType | null
+    _sum: ActivityLogSumAggregateOutputType | null
+    _min: ActivityLogMinAggregateOutputType | null
+    _max: ActivityLogMaxAggregateOutputType | null
+  }
+
+  type GetActivityLogGroupByPayload<T extends ActivityLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActivityLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActivityLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActivityLogGroupByOutputType[P]>
+            : GetScalarType<T[P], ActivityLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ActivityLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    schedule_uuid?: boolean
+    occurrence_uuid?: boolean
+    snapshot_target_type?: boolean
+    snapshot_target_value?: boolean
+    snapshot_target_unit?: boolean
+    snapshot_target_unit_label?: boolean
+    value?: boolean
+    completed?: boolean
+    completed_at?: boolean
+    skipped?: boolean
+    skip_reason?: boolean
+    notes?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    occurrence?: boolean | ActivityOccurrenceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityLog"]>
+
+  export type ActivityLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    schedule_uuid?: boolean
+    occurrence_uuid?: boolean
+    snapshot_target_type?: boolean
+    snapshot_target_value?: boolean
+    snapshot_target_unit?: boolean
+    snapshot_target_unit_label?: boolean
+    value?: boolean
+    completed?: boolean
+    completed_at?: boolean
+    skipped?: boolean
+    skip_reason?: boolean
+    notes?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    occurrence?: boolean | ActivityOccurrenceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityLog"]>
+
+  export type ActivityLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    schedule_uuid?: boolean
+    occurrence_uuid?: boolean
+    snapshot_target_type?: boolean
+    snapshot_target_value?: boolean
+    snapshot_target_unit?: boolean
+    snapshot_target_unit_label?: boolean
+    value?: boolean
+    completed?: boolean
+    completed_at?: boolean
+    skipped?: boolean
+    skip_reason?: boolean
+    notes?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    occurrence?: boolean | ActivityOccurrenceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activityLog"]>
+
+  export type ActivityLogSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    schedule_uuid?: boolean
+    occurrence_uuid?: boolean
+    snapshot_target_type?: boolean
+    snapshot_target_value?: boolean
+    snapshot_target_unit?: boolean
+    snapshot_target_unit_label?: boolean
+    value?: boolean
+    completed?: boolean
+    completed_at?: boolean
+    skipped?: boolean
+    skip_reason?: boolean
+    notes?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type ActivityLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "activity_uuid" | "schedule_uuid" | "occurrence_uuid" | "snapshot_target_type" | "snapshot_target_value" | "snapshot_target_unit" | "snapshot_target_unit_label" | "value" | "completed" | "completed_at" | "skipped" | "skip_reason" | "notes" | "created_at" | "updated_at", ExtArgs["result"]["activityLog"]>
+  export type ActivityLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    occurrence?: boolean | ActivityOccurrenceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ActivityLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    occurrence?: boolean | ActivityOccurrenceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ActivityLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+    schedule?: boolean | ActivityScheduleDefaultArgs<ExtArgs>
+    occurrence?: boolean | ActivityOccurrenceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ActivityLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ActivityLog"
+    objects: {
+      activity: Prisma.$ActivityPayload<ExtArgs>
+      schedule: Prisma.$ActivitySchedulePayload<ExtArgs>
+      occurrence: Prisma.$ActivityOccurrencePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      activity_uuid: string
+      schedule_uuid: string
+      occurrence_uuid: string
+      snapshot_target_type: $Enums.ActivityTargetType
+      snapshot_target_value: number | null
+      snapshot_target_unit: $Enums.ActivityTargetUnit | null
+      snapshot_target_unit_label: string | null
+      value: number | null
+      completed: boolean
+      completed_at: Date | null
+      skipped: boolean
+      skip_reason: string | null
+      notes: string | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["activityLog"]>
+    composites: {}
+  }
+
+  type ActivityLogGetPayload<S extends boolean | null | undefined | ActivityLogDefaultArgs> = $Result.GetResult<Prisma.$ActivityLogPayload, S>
+
+  type ActivityLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ActivityLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ActivityLogCountAggregateInputType | true
+    }
+
+  export interface ActivityLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ActivityLog'], meta: { name: 'ActivityLog' } }
+    /**
+     * Find zero or one ActivityLog that matches the filter.
+     * @param {ActivityLogFindUniqueArgs} args - Arguments to find a ActivityLog
+     * @example
+     * // Get one ActivityLog
+     * const activityLog = await prisma.activityLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ActivityLogFindUniqueArgs>(args: SelectSubset<T, ActivityLogFindUniqueArgs<ExtArgs>>): Prisma__ActivityLogClient<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ActivityLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ActivityLogFindUniqueOrThrowArgs} args - Arguments to find a ActivityLog
+     * @example
+     * // Get one ActivityLog
+     * const activityLog = await prisma.activityLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ActivityLogFindUniqueOrThrowArgs>(args: SelectSubset<T, ActivityLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActivityLogClient<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivityLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityLogFindFirstArgs} args - Arguments to find a ActivityLog
+     * @example
+     * // Get one ActivityLog
+     * const activityLog = await prisma.activityLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ActivityLogFindFirstArgs>(args?: SelectSubset<T, ActivityLogFindFirstArgs<ExtArgs>>): Prisma__ActivityLogClient<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ActivityLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityLogFindFirstOrThrowArgs} args - Arguments to find a ActivityLog
+     * @example
+     * // Get one ActivityLog
+     * const activityLog = await prisma.activityLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ActivityLogFindFirstOrThrowArgs>(args?: SelectSubset<T, ActivityLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActivityLogClient<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ActivityLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ActivityLogs
+     * const activityLogs = await prisma.activityLog.findMany()
+     * 
+     * // Get first 10 ActivityLogs
+     * const activityLogs = await prisma.activityLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const activityLogWithIdOnly = await prisma.activityLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ActivityLogFindManyArgs>(args?: SelectSubset<T, ActivityLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ActivityLog.
+     * @param {ActivityLogCreateArgs} args - Arguments to create a ActivityLog.
+     * @example
+     * // Create one ActivityLog
+     * const ActivityLog = await prisma.activityLog.create({
+     *   data: {
+     *     // ... data to create a ActivityLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends ActivityLogCreateArgs>(args: SelectSubset<T, ActivityLogCreateArgs<ExtArgs>>): Prisma__ActivityLogClient<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ActivityLogs.
+     * @param {ActivityLogCreateManyArgs} args - Arguments to create many ActivityLogs.
+     * @example
+     * // Create many ActivityLogs
+     * const activityLog = await prisma.activityLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ActivityLogCreateManyArgs>(args?: SelectSubset<T, ActivityLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ActivityLogs and returns the data saved in the database.
+     * @param {ActivityLogCreateManyAndReturnArgs} args - Arguments to create many ActivityLogs.
+     * @example
+     * // Create many ActivityLogs
+     * const activityLog = await prisma.activityLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ActivityLogs and only return the `id`
+     * const activityLogWithIdOnly = await prisma.activityLog.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ActivityLogCreateManyAndReturnArgs>(args?: SelectSubset<T, ActivityLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ActivityLog.
+     * @param {ActivityLogDeleteArgs} args - Arguments to delete one ActivityLog.
+     * @example
+     * // Delete one ActivityLog
+     * const ActivityLog = await prisma.activityLog.delete({
+     *   where: {
+     *     // ... filter to delete one ActivityLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ActivityLogDeleteArgs>(args: SelectSubset<T, ActivityLogDeleteArgs<ExtArgs>>): Prisma__ActivityLogClient<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ActivityLog.
+     * @param {ActivityLogUpdateArgs} args - Arguments to update one ActivityLog.
+     * @example
+     * // Update one ActivityLog
+     * const activityLog = await prisma.activityLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ActivityLogUpdateArgs>(args: SelectSubset<T, ActivityLogUpdateArgs<ExtArgs>>): Prisma__ActivityLogClient<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ActivityLogs.
+     * @param {ActivityLogDeleteManyArgs} args - Arguments to filter ActivityLogs to delete.
+     * @example
+     * // Delete a few ActivityLogs
+     * const { count } = await prisma.activityLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ActivityLogDeleteManyArgs>(args?: SelectSubset<T, ActivityLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivityLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ActivityLogs
+     * const activityLog = await prisma.activityLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ActivityLogUpdateManyArgs>(args: SelectSubset<T, ActivityLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActivityLogs and returns the data updated in the database.
+     * @param {ActivityLogUpdateManyAndReturnArgs} args - Arguments to update many ActivityLogs.
+     * @example
+     * // Update many ActivityLogs
+     * const activityLog = await prisma.activityLog.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ActivityLogs and only return the `id`
+     * const activityLogWithIdOnly = await prisma.activityLog.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ActivityLogUpdateManyAndReturnArgs>(args: SelectSubset<T, ActivityLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ActivityLog.
+     * @param {ActivityLogUpsertArgs} args - Arguments to update or create a ActivityLog.
+     * @example
+     * // Update or create a ActivityLog
+     * const activityLog = await prisma.activityLog.upsert({
+     *   create: {
+     *     // ... data to create a ActivityLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ActivityLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ActivityLogUpsertArgs>(args: SelectSubset<T, ActivityLogUpsertArgs<ExtArgs>>): Prisma__ActivityLogClient<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ActivityLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityLogCountArgs} args - Arguments to filter ActivityLogs to count.
+     * @example
+     * // Count the number of ActivityLogs
+     * const count = await prisma.activityLog.count({
+     *   where: {
+     *     // ... the filter for the ActivityLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends ActivityLogCountArgs>(
+      args?: Subset<T, ActivityLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActivityLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ActivityLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActivityLogAggregateArgs>(args: Subset<T, ActivityLogAggregateArgs>): Prisma.PrismaPromise<GetActivityLogAggregateType<T>>
+
+    /**
+     * Group by ActivityLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActivityLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ActivityLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ActivityLogGroupByArgs['orderBy'] }
+        : { orderBy?: ActivityLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ActivityLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActivityLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ActivityLog model
+   */
+  readonly fields: ActivityLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ActivityLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ActivityLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    activity<T extends ActivityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActivityDefaultArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    schedule<T extends ActivityScheduleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActivityScheduleDefaultArgs<ExtArgs>>): Prisma__ActivityScheduleClient<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    occurrence<T extends ActivityOccurrenceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActivityOccurrenceDefaultArgs<ExtArgs>>): Prisma__ActivityOccurrenceClient<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ActivityLog model
+   */
+  interface ActivityLogFieldRefs {
+    readonly id: FieldRef<"ActivityLog", 'Int'>
+    readonly uuid: FieldRef<"ActivityLog", 'String'>
+    readonly user_uuid: FieldRef<"ActivityLog", 'String'>
+    readonly activity_uuid: FieldRef<"ActivityLog", 'String'>
+    readonly schedule_uuid: FieldRef<"ActivityLog", 'String'>
+    readonly occurrence_uuid: FieldRef<"ActivityLog", 'String'>
+    readonly snapshot_target_type: FieldRef<"ActivityLog", 'ActivityTargetType'>
+    readonly snapshot_target_value: FieldRef<"ActivityLog", 'Float'>
+    readonly snapshot_target_unit: FieldRef<"ActivityLog", 'ActivityTargetUnit'>
+    readonly snapshot_target_unit_label: FieldRef<"ActivityLog", 'String'>
+    readonly value: FieldRef<"ActivityLog", 'Float'>
+    readonly completed: FieldRef<"ActivityLog", 'Boolean'>
+    readonly completed_at: FieldRef<"ActivityLog", 'DateTime'>
+    readonly skipped: FieldRef<"ActivityLog", 'Boolean'>
+    readonly skip_reason: FieldRef<"ActivityLog", 'String'>
+    readonly notes: FieldRef<"ActivityLog", 'String'>
+    readonly created_at: FieldRef<"ActivityLog", 'DateTime'>
+    readonly updated_at: FieldRef<"ActivityLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ActivityLog findUnique
+   */
+  export type ActivityLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityLog to fetch.
+     */
+    where: ActivityLogWhereUniqueInput
+  }
+
+  /**
+   * ActivityLog findUniqueOrThrow
+   */
+  export type ActivityLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityLog to fetch.
+     */
+    where: ActivityLogWhereUniqueInput
+  }
+
+  /**
+   * ActivityLog findFirst
+   */
+  export type ActivityLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityLog to fetch.
+     */
+    where?: ActivityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityLogs to fetch.
+     */
+    orderBy?: ActivityLogOrderByWithRelationInput | ActivityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActivityLogs.
+     */
+    cursor?: ActivityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityLogs.
+     */
+    distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityLog findFirstOrThrow
+   */
+  export type ActivityLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityLog to fetch.
+     */
+    where?: ActivityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityLogs to fetch.
+     */
+    orderBy?: ActivityLogOrderByWithRelationInput | ActivityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActivityLogs.
+     */
+    cursor?: ActivityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityLogs.
+     */
+    distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityLog findMany
+   */
+  export type ActivityLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    /**
+     * Filter, which ActivityLogs to fetch.
+     */
+    where?: ActivityLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActivityLogs to fetch.
+     */
+    orderBy?: ActivityLogOrderByWithRelationInput | ActivityLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ActivityLogs.
+     */
+    cursor?: ActivityLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActivityLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActivityLogs.
+     */
+    skip?: number
+    distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
+  }
+
+  /**
+   * ActivityLog create
+   */
+  export type ActivityLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ActivityLog.
+     */
+    data: XOR<ActivityLogCreateInput, ActivityLogUncheckedCreateInput>
+  }
+
+  /**
+   * ActivityLog createMany
+   */
+  export type ActivityLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ActivityLogs.
+     */
+    data: ActivityLogCreateManyInput | ActivityLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ActivityLog createManyAndReturn
+   */
+  export type ActivityLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * The data used to create many ActivityLogs.
+     */
+    data: ActivityLogCreateManyInput | ActivityLogCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActivityLog update
+   */
+  export type ActivityLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ActivityLog.
+     */
+    data: XOR<ActivityLogUpdateInput, ActivityLogUncheckedUpdateInput>
+    /**
+     * Choose, which ActivityLog to update.
+     */
+    where: ActivityLogWhereUniqueInput
+  }
+
+  /**
+   * ActivityLog updateMany
+   */
+  export type ActivityLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ActivityLogs.
+     */
+    data: XOR<ActivityLogUpdateManyMutationInput, ActivityLogUncheckedUpdateManyInput>
+    /**
+     * Filter which ActivityLogs to update
+     */
+    where?: ActivityLogWhereInput
+    /**
+     * Limit how many ActivityLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActivityLog updateManyAndReturn
+   */
+  export type ActivityLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * The data used to update ActivityLogs.
+     */
+    data: XOR<ActivityLogUpdateManyMutationInput, ActivityLogUncheckedUpdateManyInput>
+    /**
+     * Filter which ActivityLogs to update
+     */
+    where?: ActivityLogWhereInput
+    /**
+     * Limit how many ActivityLogs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActivityLog upsert
+   */
+  export type ActivityLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ActivityLog to update in case it exists.
+     */
+    where: ActivityLogWhereUniqueInput
+    /**
+     * In case the ActivityLog found by the `where` argument doesn't exist, create a new ActivityLog with this data.
+     */
+    create: XOR<ActivityLogCreateInput, ActivityLogUncheckedCreateInput>
+    /**
+     * In case the ActivityLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ActivityLogUpdateInput, ActivityLogUncheckedUpdateInput>
+  }
+
+  /**
+   * ActivityLog delete
+   */
+  export type ActivityLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
+    /**
+     * Filter which ActivityLog to delete.
+     */
+    where: ActivityLogWhereUniqueInput
+  }
+
+  /**
+   * ActivityLog deleteMany
+   */
+  export type ActivityLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActivityLogs to delete
+     */
+    where?: ActivityLogWhereInput
+    /**
+     * Limit how many ActivityLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ActivityLog without action
+   */
+  export type ActivityLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActivityLog
+     */
+    select?: ActivityLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ActivityLog
+     */
+    omit?: ActivityLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityLogInclude<ExtArgs> | null
   }
 
 
@@ -16879,7 +23728,10 @@ export namespace Prisma {
     uuid: 'uuid',
     user_uuid: 'user_uuid',
     name: 'name',
+    description: 'description',
+    icon: 'icon',
     color: 'color',
+    visible: 'visible',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -16900,6 +23752,87 @@ export namespace Prisma {
   };
 
   export type ScheduleSlotScalarFieldEnum = (typeof ScheduleSlotScalarFieldEnum)[keyof typeof ScheduleSlotScalarFieldEnum]
+
+
+  export const ActivityScheduleScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    activity_uuid: 'activity_uuid',
+    valid_from: 'valid_from',
+    valid_until: 'valid_until',
+    repeat_type: 'repeat_type',
+    interval_days: 'interval_days',
+    time_of_day: 'time_of_day',
+    frequency_value: 'frequency_value',
+    frequency_period: 'frequency_period',
+    target_type: 'target_type',
+    target_value: 'target_value',
+    target_unit: 'target_unit',
+    target_unit_label: 'target_unit_label',
+    is_active: 'is_active',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type ActivityScheduleScalarFieldEnum = (typeof ActivityScheduleScalarFieldEnum)[keyof typeof ActivityScheduleScalarFieldEnum]
+
+
+  export const ActivityScheduleWeekdayScalarFieldEnum: {
+    id: 'id',
+    schedule_uuid: 'schedule_uuid',
+    weekday: 'weekday'
+  };
+
+  export type ActivityScheduleWeekdayScalarFieldEnum = (typeof ActivityScheduleWeekdayScalarFieldEnum)[keyof typeof ActivityScheduleWeekdayScalarFieldEnum]
+
+
+  export const ActivityScheduleDateScalarFieldEnum: {
+    id: 'id',
+    schedule_uuid: 'schedule_uuid',
+    date: 'date'
+  };
+
+  export type ActivityScheduleDateScalarFieldEnum = (typeof ActivityScheduleDateScalarFieldEnum)[keyof typeof ActivityScheduleDateScalarFieldEnum]
+
+
+  export const ActivityOccurrenceScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    activity_uuid: 'activity_uuid',
+    schedule_uuid: 'schedule_uuid',
+    scheduled_for: 'scheduled_for',
+    status: 'status',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type ActivityOccurrenceScalarFieldEnum = (typeof ActivityOccurrenceScalarFieldEnum)[keyof typeof ActivityOccurrenceScalarFieldEnum]
+
+
+  export const ActivityLogScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    activity_uuid: 'activity_uuid',
+    schedule_uuid: 'schedule_uuid',
+    occurrence_uuid: 'occurrence_uuid',
+    snapshot_target_type: 'snapshot_target_type',
+    snapshot_target_value: 'snapshot_target_value',
+    snapshot_target_unit: 'snapshot_target_unit',
+    snapshot_target_unit_label: 'snapshot_target_unit_label',
+    value: 'value',
+    completed: 'completed',
+    completed_at: 'completed_at',
+    skipped: 'skipped',
+    skip_reason: 'skip_reason',
+    notes: 'notes',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
 
 
   export const ExpenseAccountScalarFieldEnum: {
@@ -17130,6 +24063,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'ScheduleDay'
    */
   export type EnumScheduleDayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduleDay'>
@@ -17140,6 +24080,90 @@ export namespace Prisma {
    * Reference to a field of type 'ScheduleDay[]'
    */
   export type ListEnumScheduleDayFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduleDay[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActivityRepeatType'
+   */
+  export type EnumActivityRepeatTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityRepeatType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActivityRepeatType[]'
+   */
+  export type ListEnumActivityRepeatTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityRepeatType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'FrequencyPeriod'
+   */
+  export type EnumFrequencyPeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FrequencyPeriod'>
+    
+
+
+  /**
+   * Reference to a field of type 'FrequencyPeriod[]'
+   */
+  export type ListEnumFrequencyPeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FrequencyPeriod[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActivityTargetType'
+   */
+  export type EnumActivityTargetTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityTargetType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActivityTargetType[]'
+   */
+  export type ListEnumActivityTargetTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityTargetType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActivityTargetUnit'
+   */
+  export type EnumActivityTargetUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityTargetUnit'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActivityTargetUnit[]'
+   */
+  export type ListEnumActivityTargetUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityTargetUnit[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'OccurrenceStatus'
+   */
+  export type EnumOccurrenceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OccurrenceStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'OccurrenceStatus[]'
+   */
+  export type ListEnumOccurrenceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OccurrenceStatus[]'>
     
 
 
@@ -17183,27 +24207,6 @@ export namespace Prisma {
    */
   export type ListEnumExerciseTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExerciseType[]'>
     
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
   /**
    * Deep Input Types
    */
@@ -17225,6 +24228,9 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"User"> | Date | string
     activities?: ActivityListRelationFilter
     schedule_slots?: ScheduleSlotListRelationFilter
+    activity_schedules?: ActivityScheduleListRelationFilter
+    activity_logs?: ActivityLogListRelationFilter
+    activity_occurrences?: ActivityOccurrenceListRelationFilter
     expense_accounts?: ExpenseAccountListRelationFilter
     expense_entries?: ExpenseEntryListRelationFilter
     categories?: ExpenseCategoryListRelationFilter
@@ -17247,6 +24253,9 @@ export namespace Prisma {
     updated_at?: SortOrder
     activities?: ActivityOrderByRelationAggregateInput
     schedule_slots?: ScheduleSlotOrderByRelationAggregateInput
+    activity_schedules?: ActivityScheduleOrderByRelationAggregateInput
+    activity_logs?: ActivityLogOrderByRelationAggregateInput
+    activity_occurrences?: ActivityOccurrenceOrderByRelationAggregateInput
     expense_accounts?: ExpenseAccountOrderByRelationAggregateInput
     expense_entries?: ExpenseEntryOrderByRelationAggregateInput
     categories?: ExpenseCategoryOrderByRelationAggregateInput
@@ -17272,6 +24281,9 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"User"> | Date | string
     activities?: ActivityListRelationFilter
     schedule_slots?: ScheduleSlotListRelationFilter
+    activity_schedules?: ActivityScheduleListRelationFilter
+    activity_logs?: ActivityLogListRelationFilter
+    activity_occurrences?: ActivityOccurrenceListRelationFilter
     expense_accounts?: ExpenseAccountListRelationFilter
     expense_entries?: ExpenseEntryListRelationFilter
     categories?: ExpenseCategoryListRelationFilter
@@ -17323,11 +24335,17 @@ export namespace Prisma {
     uuid?: StringFilter<"Activity"> | string
     user_uuid?: StringFilter<"Activity"> | string
     name?: StringFilter<"Activity"> | string
-    color?: StringFilter<"Activity"> | string
+    description?: StringNullableFilter<"Activity"> | string | null
+    icon?: StringNullableFilter<"Activity"> | string | null
+    color?: StringNullableFilter<"Activity"> | string | null
+    visible?: BoolFilter<"Activity"> | boolean
     created_at?: DateTimeFilter<"Activity"> | Date | string
     updated_at?: DateTimeFilter<"Activity"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     schedule_slots?: ScheduleSlotListRelationFilter
+    activity_schedules?: ActivityScheduleListRelationFilter
+    activity_logs?: ActivityLogListRelationFilter
+    activity_occurrences?: ActivityOccurrenceListRelationFilter
   }
 
   export type ActivityOrderByWithRelationInput = {
@@ -17335,11 +24353,17 @@ export namespace Prisma {
     uuid?: SortOrder
     user_uuid?: SortOrder
     name?: SortOrder
-    color?: SortOrder
+    description?: SortOrderInput | SortOrder
+    icon?: SortOrderInput | SortOrder
+    color?: SortOrderInput | SortOrder
+    visible?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
     schedule_slots?: ScheduleSlotOrderByRelationAggregateInput
+    activity_schedules?: ActivityScheduleOrderByRelationAggregateInput
+    activity_logs?: ActivityLogOrderByRelationAggregateInput
+    activity_occurrences?: ActivityOccurrenceOrderByRelationAggregateInput
   }
 
   export type ActivityWhereUniqueInput = Prisma.AtLeast<{
@@ -17350,11 +24374,17 @@ export namespace Prisma {
     NOT?: ActivityWhereInput | ActivityWhereInput[]
     user_uuid?: StringFilter<"Activity"> | string
     name?: StringFilter<"Activity"> | string
-    color?: StringFilter<"Activity"> | string
+    description?: StringNullableFilter<"Activity"> | string | null
+    icon?: StringNullableFilter<"Activity"> | string | null
+    color?: StringNullableFilter<"Activity"> | string | null
+    visible?: BoolFilter<"Activity"> | boolean
     created_at?: DateTimeFilter<"Activity"> | Date | string
     updated_at?: DateTimeFilter<"Activity"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     schedule_slots?: ScheduleSlotListRelationFilter
+    activity_schedules?: ActivityScheduleListRelationFilter
+    activity_logs?: ActivityLogListRelationFilter
+    activity_occurrences?: ActivityOccurrenceListRelationFilter
   }, "id" | "uuid">
 
   export type ActivityOrderByWithAggregationInput = {
@@ -17362,7 +24392,10 @@ export namespace Prisma {
     uuid?: SortOrder
     user_uuid?: SortOrder
     name?: SortOrder
-    color?: SortOrder
+    description?: SortOrderInput | SortOrder
+    icon?: SortOrderInput | SortOrder
+    color?: SortOrderInput | SortOrder
+    visible?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: ActivityCountOrderByAggregateInput
@@ -17380,7 +24413,10 @@ export namespace Prisma {
     uuid?: StringWithAggregatesFilter<"Activity"> | string
     user_uuid?: StringWithAggregatesFilter<"Activity"> | string
     name?: StringWithAggregatesFilter<"Activity"> | string
-    color?: StringWithAggregatesFilter<"Activity"> | string
+    description?: StringNullableWithAggregatesFilter<"Activity"> | string | null
+    icon?: StringNullableWithAggregatesFilter<"Activity"> | string | null
+    color?: StringNullableWithAggregatesFilter<"Activity"> | string | null
+    visible?: BoolWithAggregatesFilter<"Activity"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Activity"> | Date | string
   }
@@ -17463,6 +24499,457 @@ export namespace Prisma {
     end_time?: StringWithAggregatesFilter<"ScheduleSlot"> | string
     created_at?: DateTimeWithAggregatesFilter<"ScheduleSlot"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ScheduleSlot"> | Date | string
+  }
+
+  export type ActivityScheduleWhereInput = {
+    AND?: ActivityScheduleWhereInput | ActivityScheduleWhereInput[]
+    OR?: ActivityScheduleWhereInput[]
+    NOT?: ActivityScheduleWhereInput | ActivityScheduleWhereInput[]
+    id?: IntFilter<"ActivitySchedule"> | number
+    uuid?: StringFilter<"ActivitySchedule"> | string
+    user_uuid?: StringFilter<"ActivitySchedule"> | string
+    activity_uuid?: StringFilter<"ActivitySchedule"> | string
+    valid_from?: DateTimeFilter<"ActivitySchedule"> | Date | string
+    valid_until?: DateTimeNullableFilter<"ActivitySchedule"> | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFilter<"ActivitySchedule"> | $Enums.ActivityRepeatType
+    interval_days?: IntNullableFilter<"ActivitySchedule"> | number | null
+    time_of_day?: StringNullableFilter<"ActivitySchedule"> | string | null
+    frequency_value?: IntNullableFilter<"ActivitySchedule"> | number | null
+    frequency_period?: EnumFrequencyPeriodNullableFilter<"ActivitySchedule"> | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFilter<"ActivitySchedule"> | $Enums.ActivityTargetType
+    target_value?: FloatNullableFilter<"ActivitySchedule"> | number | null
+    target_unit?: EnumActivityTargetUnitNullableFilter<"ActivitySchedule"> | $Enums.ActivityTargetUnit | null
+    target_unit_label?: StringNullableFilter<"ActivitySchedule"> | string | null
+    is_active?: BoolFilter<"ActivitySchedule"> | boolean
+    created_at?: DateTimeFilter<"ActivitySchedule"> | Date | string
+    updated_at?: DateTimeFilter<"ActivitySchedule"> | Date | string
+    activity?: XOR<ActivityScalarRelationFilter, ActivityWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    weekdays?: ActivityScheduleWeekdayListRelationFilter
+    specific_dates?: ActivityScheduleDateListRelationFilter
+    occurrences?: ActivityOccurrenceListRelationFilter
+    logs?: ActivityLogListRelationFilter
+  }
+
+  export type ActivityScheduleOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    valid_from?: SortOrder
+    valid_until?: SortOrderInput | SortOrder
+    repeat_type?: SortOrder
+    interval_days?: SortOrderInput | SortOrder
+    time_of_day?: SortOrderInput | SortOrder
+    frequency_value?: SortOrderInput | SortOrder
+    frequency_period?: SortOrderInput | SortOrder
+    target_type?: SortOrder
+    target_value?: SortOrderInput | SortOrder
+    target_unit?: SortOrderInput | SortOrder
+    target_unit_label?: SortOrderInput | SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    activity?: ActivityOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    weekdays?: ActivityScheduleWeekdayOrderByRelationAggregateInput
+    specific_dates?: ActivityScheduleDateOrderByRelationAggregateInput
+    occurrences?: ActivityOccurrenceOrderByRelationAggregateInput
+    logs?: ActivityLogOrderByRelationAggregateInput
+  }
+
+  export type ActivityScheduleWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: ActivityScheduleWhereInput | ActivityScheduleWhereInput[]
+    OR?: ActivityScheduleWhereInput[]
+    NOT?: ActivityScheduleWhereInput | ActivityScheduleWhereInput[]
+    user_uuid?: StringFilter<"ActivitySchedule"> | string
+    activity_uuid?: StringFilter<"ActivitySchedule"> | string
+    valid_from?: DateTimeFilter<"ActivitySchedule"> | Date | string
+    valid_until?: DateTimeNullableFilter<"ActivitySchedule"> | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFilter<"ActivitySchedule"> | $Enums.ActivityRepeatType
+    interval_days?: IntNullableFilter<"ActivitySchedule"> | number | null
+    time_of_day?: StringNullableFilter<"ActivitySchedule"> | string | null
+    frequency_value?: IntNullableFilter<"ActivitySchedule"> | number | null
+    frequency_period?: EnumFrequencyPeriodNullableFilter<"ActivitySchedule"> | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFilter<"ActivitySchedule"> | $Enums.ActivityTargetType
+    target_value?: FloatNullableFilter<"ActivitySchedule"> | number | null
+    target_unit?: EnumActivityTargetUnitNullableFilter<"ActivitySchedule"> | $Enums.ActivityTargetUnit | null
+    target_unit_label?: StringNullableFilter<"ActivitySchedule"> | string | null
+    is_active?: BoolFilter<"ActivitySchedule"> | boolean
+    created_at?: DateTimeFilter<"ActivitySchedule"> | Date | string
+    updated_at?: DateTimeFilter<"ActivitySchedule"> | Date | string
+    activity?: XOR<ActivityScalarRelationFilter, ActivityWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    weekdays?: ActivityScheduleWeekdayListRelationFilter
+    specific_dates?: ActivityScheduleDateListRelationFilter
+    occurrences?: ActivityOccurrenceListRelationFilter
+    logs?: ActivityLogListRelationFilter
+  }, "id" | "uuid">
+
+  export type ActivityScheduleOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    valid_from?: SortOrder
+    valid_until?: SortOrderInput | SortOrder
+    repeat_type?: SortOrder
+    interval_days?: SortOrderInput | SortOrder
+    time_of_day?: SortOrderInput | SortOrder
+    frequency_value?: SortOrderInput | SortOrder
+    frequency_period?: SortOrderInput | SortOrder
+    target_type?: SortOrder
+    target_value?: SortOrderInput | SortOrder
+    target_unit?: SortOrderInput | SortOrder
+    target_unit_label?: SortOrderInput | SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: ActivityScheduleCountOrderByAggregateInput
+    _avg?: ActivityScheduleAvgOrderByAggregateInput
+    _max?: ActivityScheduleMaxOrderByAggregateInput
+    _min?: ActivityScheduleMinOrderByAggregateInput
+    _sum?: ActivityScheduleSumOrderByAggregateInput
+  }
+
+  export type ActivityScheduleScalarWhereWithAggregatesInput = {
+    AND?: ActivityScheduleScalarWhereWithAggregatesInput | ActivityScheduleScalarWhereWithAggregatesInput[]
+    OR?: ActivityScheduleScalarWhereWithAggregatesInput[]
+    NOT?: ActivityScheduleScalarWhereWithAggregatesInput | ActivityScheduleScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ActivitySchedule"> | number
+    uuid?: StringWithAggregatesFilter<"ActivitySchedule"> | string
+    user_uuid?: StringWithAggregatesFilter<"ActivitySchedule"> | string
+    activity_uuid?: StringWithAggregatesFilter<"ActivitySchedule"> | string
+    valid_from?: DateTimeWithAggregatesFilter<"ActivitySchedule"> | Date | string
+    valid_until?: DateTimeNullableWithAggregatesFilter<"ActivitySchedule"> | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeWithAggregatesFilter<"ActivitySchedule"> | $Enums.ActivityRepeatType
+    interval_days?: IntNullableWithAggregatesFilter<"ActivitySchedule"> | number | null
+    time_of_day?: StringNullableWithAggregatesFilter<"ActivitySchedule"> | string | null
+    frequency_value?: IntNullableWithAggregatesFilter<"ActivitySchedule"> | number | null
+    frequency_period?: EnumFrequencyPeriodNullableWithAggregatesFilter<"ActivitySchedule"> | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeWithAggregatesFilter<"ActivitySchedule"> | $Enums.ActivityTargetType
+    target_value?: FloatNullableWithAggregatesFilter<"ActivitySchedule"> | number | null
+    target_unit?: EnumActivityTargetUnitNullableWithAggregatesFilter<"ActivitySchedule"> | $Enums.ActivityTargetUnit | null
+    target_unit_label?: StringNullableWithAggregatesFilter<"ActivitySchedule"> | string | null
+    is_active?: BoolWithAggregatesFilter<"ActivitySchedule"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"ActivitySchedule"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ActivitySchedule"> | Date | string
+  }
+
+  export type ActivityScheduleWeekdayWhereInput = {
+    AND?: ActivityScheduleWeekdayWhereInput | ActivityScheduleWeekdayWhereInput[]
+    OR?: ActivityScheduleWeekdayWhereInput[]
+    NOT?: ActivityScheduleWeekdayWhereInput | ActivityScheduleWeekdayWhereInput[]
+    id?: IntFilter<"ActivityScheduleWeekday"> | number
+    schedule_uuid?: StringFilter<"ActivityScheduleWeekday"> | string
+    weekday?: IntFilter<"ActivityScheduleWeekday"> | number
+    schedule?: XOR<ActivityScheduleScalarRelationFilter, ActivityScheduleWhereInput>
+  }
+
+  export type ActivityScheduleWeekdayOrderByWithRelationInput = {
+    id?: SortOrder
+    schedule_uuid?: SortOrder
+    weekday?: SortOrder
+    schedule?: ActivityScheduleOrderByWithRelationInput
+  }
+
+  export type ActivityScheduleWeekdayWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    schedule_uuid_weekday?: ActivityScheduleWeekdaySchedule_uuidWeekdayCompoundUniqueInput
+    AND?: ActivityScheduleWeekdayWhereInput | ActivityScheduleWeekdayWhereInput[]
+    OR?: ActivityScheduleWeekdayWhereInput[]
+    NOT?: ActivityScheduleWeekdayWhereInput | ActivityScheduleWeekdayWhereInput[]
+    schedule_uuid?: StringFilter<"ActivityScheduleWeekday"> | string
+    weekday?: IntFilter<"ActivityScheduleWeekday"> | number
+    schedule?: XOR<ActivityScheduleScalarRelationFilter, ActivityScheduleWhereInput>
+  }, "id" | "schedule_uuid_weekday">
+
+  export type ActivityScheduleWeekdayOrderByWithAggregationInput = {
+    id?: SortOrder
+    schedule_uuid?: SortOrder
+    weekday?: SortOrder
+    _count?: ActivityScheduleWeekdayCountOrderByAggregateInput
+    _avg?: ActivityScheduleWeekdayAvgOrderByAggregateInput
+    _max?: ActivityScheduleWeekdayMaxOrderByAggregateInput
+    _min?: ActivityScheduleWeekdayMinOrderByAggregateInput
+    _sum?: ActivityScheduleWeekdaySumOrderByAggregateInput
+  }
+
+  export type ActivityScheduleWeekdayScalarWhereWithAggregatesInput = {
+    AND?: ActivityScheduleWeekdayScalarWhereWithAggregatesInput | ActivityScheduleWeekdayScalarWhereWithAggregatesInput[]
+    OR?: ActivityScheduleWeekdayScalarWhereWithAggregatesInput[]
+    NOT?: ActivityScheduleWeekdayScalarWhereWithAggregatesInput | ActivityScheduleWeekdayScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ActivityScheduleWeekday"> | number
+    schedule_uuid?: StringWithAggregatesFilter<"ActivityScheduleWeekday"> | string
+    weekday?: IntWithAggregatesFilter<"ActivityScheduleWeekday"> | number
+  }
+
+  export type ActivityScheduleDateWhereInput = {
+    AND?: ActivityScheduleDateWhereInput | ActivityScheduleDateWhereInput[]
+    OR?: ActivityScheduleDateWhereInput[]
+    NOT?: ActivityScheduleDateWhereInput | ActivityScheduleDateWhereInput[]
+    id?: IntFilter<"ActivityScheduleDate"> | number
+    schedule_uuid?: StringFilter<"ActivityScheduleDate"> | string
+    date?: DateTimeFilter<"ActivityScheduleDate"> | Date | string
+    schedule?: XOR<ActivityScheduleScalarRelationFilter, ActivityScheduleWhereInput>
+  }
+
+  export type ActivityScheduleDateOrderByWithRelationInput = {
+    id?: SortOrder
+    schedule_uuid?: SortOrder
+    date?: SortOrder
+    schedule?: ActivityScheduleOrderByWithRelationInput
+  }
+
+  export type ActivityScheduleDateWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    schedule_uuid_date?: ActivityScheduleDateSchedule_uuidDateCompoundUniqueInput
+    AND?: ActivityScheduleDateWhereInput | ActivityScheduleDateWhereInput[]
+    OR?: ActivityScheduleDateWhereInput[]
+    NOT?: ActivityScheduleDateWhereInput | ActivityScheduleDateWhereInput[]
+    schedule_uuid?: StringFilter<"ActivityScheduleDate"> | string
+    date?: DateTimeFilter<"ActivityScheduleDate"> | Date | string
+    schedule?: XOR<ActivityScheduleScalarRelationFilter, ActivityScheduleWhereInput>
+  }, "id" | "schedule_uuid_date">
+
+  export type ActivityScheduleDateOrderByWithAggregationInput = {
+    id?: SortOrder
+    schedule_uuid?: SortOrder
+    date?: SortOrder
+    _count?: ActivityScheduleDateCountOrderByAggregateInput
+    _avg?: ActivityScheduleDateAvgOrderByAggregateInput
+    _max?: ActivityScheduleDateMaxOrderByAggregateInput
+    _min?: ActivityScheduleDateMinOrderByAggregateInput
+    _sum?: ActivityScheduleDateSumOrderByAggregateInput
+  }
+
+  export type ActivityScheduleDateScalarWhereWithAggregatesInput = {
+    AND?: ActivityScheduleDateScalarWhereWithAggregatesInput | ActivityScheduleDateScalarWhereWithAggregatesInput[]
+    OR?: ActivityScheduleDateScalarWhereWithAggregatesInput[]
+    NOT?: ActivityScheduleDateScalarWhereWithAggregatesInput | ActivityScheduleDateScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ActivityScheduleDate"> | number
+    schedule_uuid?: StringWithAggregatesFilter<"ActivityScheduleDate"> | string
+    date?: DateTimeWithAggregatesFilter<"ActivityScheduleDate"> | Date | string
+  }
+
+  export type ActivityOccurrenceWhereInput = {
+    AND?: ActivityOccurrenceWhereInput | ActivityOccurrenceWhereInput[]
+    OR?: ActivityOccurrenceWhereInput[]
+    NOT?: ActivityOccurrenceWhereInput | ActivityOccurrenceWhereInput[]
+    id?: IntFilter<"ActivityOccurrence"> | number
+    uuid?: StringFilter<"ActivityOccurrence"> | string
+    user_uuid?: StringFilter<"ActivityOccurrence"> | string
+    activity_uuid?: StringFilter<"ActivityOccurrence"> | string
+    schedule_uuid?: StringFilter<"ActivityOccurrence"> | string
+    scheduled_for?: DateTimeFilter<"ActivityOccurrence"> | Date | string
+    status?: EnumOccurrenceStatusFilter<"ActivityOccurrence"> | $Enums.OccurrenceStatus
+    created_at?: DateTimeFilter<"ActivityOccurrence"> | Date | string
+    updated_at?: DateTimeFilter<"ActivityOccurrence"> | Date | string
+    activity?: XOR<ActivityScalarRelationFilter, ActivityWhereInput>
+    schedule?: XOR<ActivityScheduleScalarRelationFilter, ActivityScheduleWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    log?: XOR<ActivityLogNullableScalarRelationFilter, ActivityLogWhereInput> | null
+  }
+
+  export type ActivityOccurrenceOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    schedule_uuid?: SortOrder
+    scheduled_for?: SortOrder
+    status?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    activity?: ActivityOrderByWithRelationInput
+    schedule?: ActivityScheduleOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+    log?: ActivityLogOrderByWithRelationInput
+  }
+
+  export type ActivityOccurrenceWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    schedule_uuid_scheduled_for?: ActivityOccurrenceSchedule_uuidScheduled_forCompoundUniqueInput
+    AND?: ActivityOccurrenceWhereInput | ActivityOccurrenceWhereInput[]
+    OR?: ActivityOccurrenceWhereInput[]
+    NOT?: ActivityOccurrenceWhereInput | ActivityOccurrenceWhereInput[]
+    user_uuid?: StringFilter<"ActivityOccurrence"> | string
+    activity_uuid?: StringFilter<"ActivityOccurrence"> | string
+    schedule_uuid?: StringFilter<"ActivityOccurrence"> | string
+    scheduled_for?: DateTimeFilter<"ActivityOccurrence"> | Date | string
+    status?: EnumOccurrenceStatusFilter<"ActivityOccurrence"> | $Enums.OccurrenceStatus
+    created_at?: DateTimeFilter<"ActivityOccurrence"> | Date | string
+    updated_at?: DateTimeFilter<"ActivityOccurrence"> | Date | string
+    activity?: XOR<ActivityScalarRelationFilter, ActivityWhereInput>
+    schedule?: XOR<ActivityScheduleScalarRelationFilter, ActivityScheduleWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    log?: XOR<ActivityLogNullableScalarRelationFilter, ActivityLogWhereInput> | null
+  }, "id" | "uuid" | "schedule_uuid_scheduled_for">
+
+  export type ActivityOccurrenceOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    schedule_uuid?: SortOrder
+    scheduled_for?: SortOrder
+    status?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: ActivityOccurrenceCountOrderByAggregateInput
+    _avg?: ActivityOccurrenceAvgOrderByAggregateInput
+    _max?: ActivityOccurrenceMaxOrderByAggregateInput
+    _min?: ActivityOccurrenceMinOrderByAggregateInput
+    _sum?: ActivityOccurrenceSumOrderByAggregateInput
+  }
+
+  export type ActivityOccurrenceScalarWhereWithAggregatesInput = {
+    AND?: ActivityOccurrenceScalarWhereWithAggregatesInput | ActivityOccurrenceScalarWhereWithAggregatesInput[]
+    OR?: ActivityOccurrenceScalarWhereWithAggregatesInput[]
+    NOT?: ActivityOccurrenceScalarWhereWithAggregatesInput | ActivityOccurrenceScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ActivityOccurrence"> | number
+    uuid?: StringWithAggregatesFilter<"ActivityOccurrence"> | string
+    user_uuid?: StringWithAggregatesFilter<"ActivityOccurrence"> | string
+    activity_uuid?: StringWithAggregatesFilter<"ActivityOccurrence"> | string
+    schedule_uuid?: StringWithAggregatesFilter<"ActivityOccurrence"> | string
+    scheduled_for?: DateTimeWithAggregatesFilter<"ActivityOccurrence"> | Date | string
+    status?: EnumOccurrenceStatusWithAggregatesFilter<"ActivityOccurrence"> | $Enums.OccurrenceStatus
+    created_at?: DateTimeWithAggregatesFilter<"ActivityOccurrence"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ActivityOccurrence"> | Date | string
+  }
+
+  export type ActivityLogWhereInput = {
+    AND?: ActivityLogWhereInput | ActivityLogWhereInput[]
+    OR?: ActivityLogWhereInput[]
+    NOT?: ActivityLogWhereInput | ActivityLogWhereInput[]
+    id?: IntFilter<"ActivityLog"> | number
+    uuid?: StringFilter<"ActivityLog"> | string
+    user_uuid?: StringFilter<"ActivityLog"> | string
+    activity_uuid?: StringFilter<"ActivityLog"> | string
+    schedule_uuid?: StringFilter<"ActivityLog"> | string
+    occurrence_uuid?: StringFilter<"ActivityLog"> | string
+    snapshot_target_type?: EnumActivityTargetTypeFilter<"ActivityLog"> | $Enums.ActivityTargetType
+    snapshot_target_value?: FloatNullableFilter<"ActivityLog"> | number | null
+    snapshot_target_unit?: EnumActivityTargetUnitNullableFilter<"ActivityLog"> | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: StringNullableFilter<"ActivityLog"> | string | null
+    value?: FloatNullableFilter<"ActivityLog"> | number | null
+    completed?: BoolFilter<"ActivityLog"> | boolean
+    completed_at?: DateTimeNullableFilter<"ActivityLog"> | Date | string | null
+    skipped?: BoolFilter<"ActivityLog"> | boolean
+    skip_reason?: StringNullableFilter<"ActivityLog"> | string | null
+    notes?: StringNullableFilter<"ActivityLog"> | string | null
+    created_at?: DateTimeFilter<"ActivityLog"> | Date | string
+    updated_at?: DateTimeFilter<"ActivityLog"> | Date | string
+    activity?: XOR<ActivityScalarRelationFilter, ActivityWhereInput>
+    schedule?: XOR<ActivityScheduleScalarRelationFilter, ActivityScheduleWhereInput>
+    occurrence?: XOR<ActivityOccurrenceScalarRelationFilter, ActivityOccurrenceWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ActivityLogOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    schedule_uuid?: SortOrder
+    occurrence_uuid?: SortOrder
+    snapshot_target_type?: SortOrder
+    snapshot_target_value?: SortOrderInput | SortOrder
+    snapshot_target_unit?: SortOrderInput | SortOrder
+    snapshot_target_unit_label?: SortOrderInput | SortOrder
+    value?: SortOrderInput | SortOrder
+    completed?: SortOrder
+    completed_at?: SortOrderInput | SortOrder
+    skipped?: SortOrder
+    skip_reason?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    activity?: ActivityOrderByWithRelationInput
+    schedule?: ActivityScheduleOrderByWithRelationInput
+    occurrence?: ActivityOccurrenceOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ActivityLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    occurrence_uuid?: string
+    AND?: ActivityLogWhereInput | ActivityLogWhereInput[]
+    OR?: ActivityLogWhereInput[]
+    NOT?: ActivityLogWhereInput | ActivityLogWhereInput[]
+    user_uuid?: StringFilter<"ActivityLog"> | string
+    activity_uuid?: StringFilter<"ActivityLog"> | string
+    schedule_uuid?: StringFilter<"ActivityLog"> | string
+    snapshot_target_type?: EnumActivityTargetTypeFilter<"ActivityLog"> | $Enums.ActivityTargetType
+    snapshot_target_value?: FloatNullableFilter<"ActivityLog"> | number | null
+    snapshot_target_unit?: EnumActivityTargetUnitNullableFilter<"ActivityLog"> | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: StringNullableFilter<"ActivityLog"> | string | null
+    value?: FloatNullableFilter<"ActivityLog"> | number | null
+    completed?: BoolFilter<"ActivityLog"> | boolean
+    completed_at?: DateTimeNullableFilter<"ActivityLog"> | Date | string | null
+    skipped?: BoolFilter<"ActivityLog"> | boolean
+    skip_reason?: StringNullableFilter<"ActivityLog"> | string | null
+    notes?: StringNullableFilter<"ActivityLog"> | string | null
+    created_at?: DateTimeFilter<"ActivityLog"> | Date | string
+    updated_at?: DateTimeFilter<"ActivityLog"> | Date | string
+    activity?: XOR<ActivityScalarRelationFilter, ActivityWhereInput>
+    schedule?: XOR<ActivityScheduleScalarRelationFilter, ActivityScheduleWhereInput>
+    occurrence?: XOR<ActivityOccurrenceScalarRelationFilter, ActivityOccurrenceWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "uuid" | "occurrence_uuid">
+
+  export type ActivityLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    schedule_uuid?: SortOrder
+    occurrence_uuid?: SortOrder
+    snapshot_target_type?: SortOrder
+    snapshot_target_value?: SortOrderInput | SortOrder
+    snapshot_target_unit?: SortOrderInput | SortOrder
+    snapshot_target_unit_label?: SortOrderInput | SortOrder
+    value?: SortOrderInput | SortOrder
+    completed?: SortOrder
+    completed_at?: SortOrderInput | SortOrder
+    skipped?: SortOrder
+    skip_reason?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: ActivityLogCountOrderByAggregateInput
+    _avg?: ActivityLogAvgOrderByAggregateInput
+    _max?: ActivityLogMaxOrderByAggregateInput
+    _min?: ActivityLogMinOrderByAggregateInput
+    _sum?: ActivityLogSumOrderByAggregateInput
+  }
+
+  export type ActivityLogScalarWhereWithAggregatesInput = {
+    AND?: ActivityLogScalarWhereWithAggregatesInput | ActivityLogScalarWhereWithAggregatesInput[]
+    OR?: ActivityLogScalarWhereWithAggregatesInput[]
+    NOT?: ActivityLogScalarWhereWithAggregatesInput | ActivityLogScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ActivityLog"> | number
+    uuid?: StringWithAggregatesFilter<"ActivityLog"> | string
+    user_uuid?: StringWithAggregatesFilter<"ActivityLog"> | string
+    activity_uuid?: StringWithAggregatesFilter<"ActivityLog"> | string
+    schedule_uuid?: StringWithAggregatesFilter<"ActivityLog"> | string
+    occurrence_uuid?: StringWithAggregatesFilter<"ActivityLog"> | string
+    snapshot_target_type?: EnumActivityTargetTypeWithAggregatesFilter<"ActivityLog"> | $Enums.ActivityTargetType
+    snapshot_target_value?: FloatNullableWithAggregatesFilter<"ActivityLog"> | number | null
+    snapshot_target_unit?: EnumActivityTargetUnitNullableWithAggregatesFilter<"ActivityLog"> | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: StringNullableWithAggregatesFilter<"ActivityLog"> | string | null
+    value?: FloatNullableWithAggregatesFilter<"ActivityLog"> | number | null
+    completed?: BoolWithAggregatesFilter<"ActivityLog"> | boolean
+    completed_at?: DateTimeNullableWithAggregatesFilter<"ActivityLog"> | Date | string | null
+    skipped?: BoolWithAggregatesFilter<"ActivityLog"> | boolean
+    skip_reason?: StringNullableWithAggregatesFilter<"ActivityLog"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"ActivityLog"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"ActivityLog"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ActivityLog"> | Date | string
   }
 
   export type ExpenseAccountWhereInput = {
@@ -18253,6 +25740,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
@@ -18275,6 +25765,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -18296,6 +25789,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
@@ -18318,6 +25814,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -18368,11 +25867,17 @@ export namespace Prisma {
   export type ActivityCreateInput = {
     uuid?: string
     name: string
-    color: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutActivitiesInput
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateInput = {
@@ -18380,20 +25885,32 @@ export namespace Prisma {
     uuid?: string
     user_uuid: string
     name: string
-    color: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutActivitiesNestedInput
     schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateInput = {
@@ -18401,10 +25918,16 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     user_uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityCreateManyInput = {
@@ -18412,7 +25935,10 @@ export namespace Prisma {
     uuid?: string
     user_uuid: string
     name: string
-    color: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -18420,7 +25946,10 @@ export namespace Prisma {
   export type ActivityUpdateManyMutationInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18430,7 +25959,10 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     user_uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18510,6 +26042,462 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityScheduleCreateInput = {
+    uuid?: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_schedulesInput
+    user: UserCreateNestedOneWithoutActivity_schedulesInput
+    weekdays?: ActivityScheduleWeekdayCreateNestedManyWithoutScheduleInput
+    specific_dates?: ActivityScheduleDateCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedCreateNestedManyWithoutScheduleInput
+    specific_dates?: ActivityScheduleDateUncheckedCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    weekdays?: ActivityScheduleWeekdayUpdateManyWithoutScheduleNestedInput
+    specific_dates?: ActivityScheduleDateUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedUpdateManyWithoutScheduleNestedInput
+    specific_dates?: ActivityScheduleDateUncheckedUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityScheduleUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityScheduleUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityScheduleWeekdayCreateInput = {
+    weekday: number
+    schedule: ActivityScheduleCreateNestedOneWithoutWeekdaysInput
+  }
+
+  export type ActivityScheduleWeekdayUncheckedCreateInput = {
+    id?: number
+    schedule_uuid: string
+    weekday: number
+  }
+
+  export type ActivityScheduleWeekdayUpdateInput = {
+    weekday?: IntFieldUpdateOperationsInput | number
+    schedule?: ActivityScheduleUpdateOneRequiredWithoutWeekdaysNestedInput
+  }
+
+  export type ActivityScheduleWeekdayUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    weekday?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ActivityScheduleWeekdayCreateManyInput = {
+    id?: number
+    schedule_uuid: string
+    weekday: number
+  }
+
+  export type ActivityScheduleWeekdayUpdateManyMutationInput = {
+    weekday?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ActivityScheduleWeekdayUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    weekday?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ActivityScheduleDateCreateInput = {
+    date: Date | string
+    schedule: ActivityScheduleCreateNestedOneWithoutSpecific_datesInput
+  }
+
+  export type ActivityScheduleDateUncheckedCreateInput = {
+    id?: number
+    schedule_uuid: string
+    date: Date | string
+  }
+
+  export type ActivityScheduleDateUpdateInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ActivityScheduleUpdateOneRequiredWithoutSpecific_datesNestedInput
+  }
+
+  export type ActivityScheduleDateUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityScheduleDateCreateManyInput = {
+    id?: number
+    schedule_uuid: string
+    date: Date | string
+  }
+
+  export type ActivityScheduleDateUpdateManyMutationInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityScheduleDateUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityOccurrenceCreateInput = {
+    uuid?: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_occurrencesInput
+    schedule: ActivityScheduleCreateNestedOneWithoutOccurrencesInput
+    user: UserCreateNestedOneWithoutActivity_occurrencesInput
+    log?: ActivityLogCreateNestedOneWithoutOccurrenceInput
+  }
+
+  export type ActivityOccurrenceUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    schedule_uuid: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+    log?: ActivityLogUncheckedCreateNestedOneWithoutOccurrenceInput
+  }
+
+  export type ActivityOccurrenceUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_occurrencesNestedInput
+    schedule?: ActivityScheduleUpdateOneRequiredWithoutOccurrencesNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_occurrencesNestedInput
+    log?: ActivityLogUpdateOneWithoutOccurrenceNestedInput
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    log?: ActivityLogUncheckedUpdateOneWithoutOccurrenceNestedInput
+  }
+
+  export type ActivityOccurrenceCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    schedule_uuid: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityOccurrenceUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityLogCreateInput = {
+    uuid?: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_logsInput
+    schedule: ActivityScheduleCreateNestedOneWithoutLogsInput
+    occurrence: ActivityOccurrenceCreateNestedOneWithoutLogInput
+    user: UserCreateNestedOneWithoutActivity_logsInput
+  }
+
+  export type ActivityLogUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    schedule_uuid: string
+    occurrence_uuid: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityLogUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_logsNestedInput
+    schedule?: ActivityScheduleUpdateOneRequiredWithoutLogsNestedInput
+    occurrence?: ActivityOccurrenceUpdateOneRequiredWithoutLogNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_logsNestedInput
+  }
+
+  export type ActivityLogUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    occurrence_uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityLogCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    schedule_uuid: string
+    occurrence_uuid: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityLogUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityLogUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    occurrence_uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19383,6 +27371,24 @@ export namespace Prisma {
     none?: ScheduleSlotWhereInput
   }
 
+  export type ActivityScheduleListRelationFilter = {
+    every?: ActivityScheduleWhereInput
+    some?: ActivityScheduleWhereInput
+    none?: ActivityScheduleWhereInput
+  }
+
+  export type ActivityLogListRelationFilter = {
+    every?: ActivityLogWhereInput
+    some?: ActivityLogWhereInput
+    none?: ActivityLogWhereInput
+  }
+
+  export type ActivityOccurrenceListRelationFilter = {
+    every?: ActivityOccurrenceWhereInput
+    some?: ActivityOccurrenceWhereInput
+    none?: ActivityOccurrenceWhereInput
+  }
+
   export type ExpenseAccountListRelationFilter = {
     every?: ExpenseAccountWhereInput
     some?: ExpenseAccountWhereInput
@@ -19435,6 +27441,18 @@ export namespace Prisma {
   }
 
   export type ScheduleSlotOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ActivityScheduleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ActivityLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ActivityOccurrenceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19589,6 +27607,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -19599,7 +27622,10 @@ export namespace Prisma {
     uuid?: SortOrder
     user_uuid?: SortOrder
     name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
     color?: SortOrder
+    visible?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -19613,7 +27639,10 @@ export namespace Prisma {
     uuid?: SortOrder
     user_uuid?: SortOrder
     name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
     color?: SortOrder
+    visible?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -19623,13 +27652,24 @@ export namespace Prisma {
     uuid?: SortOrder
     user_uuid?: SortOrder
     name?: SortOrder
+    description?: SortOrder
+    icon?: SortOrder
     color?: SortOrder
+    visible?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type ActivitySumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumScheduleDayFilter<$PrismaModel = never> = {
@@ -19696,6 +27736,470 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumScheduleDayFilter<$PrismaModel>
     _max?: NestedEnumScheduleDayFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type EnumActivityRepeatTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityRepeatType | EnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityRepeatType[] | ListEnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActivityRepeatType[] | ListEnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActivityRepeatTypeFilter<$PrismaModel> | $Enums.ActivityRepeatType
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type EnumFrequencyPeriodNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.FrequencyPeriod | EnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.FrequencyPeriod[] | ListEnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.FrequencyPeriod[] | ListEnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumFrequencyPeriodNullableFilter<$PrismaModel> | $Enums.FrequencyPeriod | null
+  }
+
+  export type EnumActivityTargetTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityTargetType | EnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityTargetType[] | ListEnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActivityTargetType[] | ListEnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActivityTargetTypeFilter<$PrismaModel> | $Enums.ActivityTargetType
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type EnumActivityTargetUnitNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityTargetUnit | EnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ActivityTargetUnit[] | ListEnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ActivityTargetUnit[] | ListEnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumActivityTargetUnitNullableFilter<$PrismaModel> | $Enums.ActivityTargetUnit | null
+  }
+
+  export type ActivityScheduleWeekdayListRelationFilter = {
+    every?: ActivityScheduleWeekdayWhereInput
+    some?: ActivityScheduleWeekdayWhereInput
+    none?: ActivityScheduleWeekdayWhereInput
+  }
+
+  export type ActivityScheduleDateListRelationFilter = {
+    every?: ActivityScheduleDateWhereInput
+    some?: ActivityScheduleDateWhereInput
+    none?: ActivityScheduleDateWhereInput
+  }
+
+  export type ActivityScheduleWeekdayOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ActivityScheduleDateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ActivityScheduleCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    valid_from?: SortOrder
+    valid_until?: SortOrder
+    repeat_type?: SortOrder
+    interval_days?: SortOrder
+    time_of_day?: SortOrder
+    frequency_value?: SortOrder
+    frequency_period?: SortOrder
+    target_type?: SortOrder
+    target_value?: SortOrder
+    target_unit?: SortOrder
+    target_unit_label?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityScheduleAvgOrderByAggregateInput = {
+    id?: SortOrder
+    interval_days?: SortOrder
+    frequency_value?: SortOrder
+    target_value?: SortOrder
+  }
+
+  export type ActivityScheduleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    valid_from?: SortOrder
+    valid_until?: SortOrder
+    repeat_type?: SortOrder
+    interval_days?: SortOrder
+    time_of_day?: SortOrder
+    frequency_value?: SortOrder
+    frequency_period?: SortOrder
+    target_type?: SortOrder
+    target_value?: SortOrder
+    target_unit?: SortOrder
+    target_unit_label?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityScheduleMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    valid_from?: SortOrder
+    valid_until?: SortOrder
+    repeat_type?: SortOrder
+    interval_days?: SortOrder
+    time_of_day?: SortOrder
+    frequency_value?: SortOrder
+    frequency_period?: SortOrder
+    target_type?: SortOrder
+    target_value?: SortOrder
+    target_unit?: SortOrder
+    target_unit_label?: SortOrder
+    is_active?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityScheduleSumOrderByAggregateInput = {
+    id?: SortOrder
+    interval_days?: SortOrder
+    frequency_value?: SortOrder
+    target_value?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumActivityRepeatTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityRepeatType | EnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityRepeatType[] | ListEnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActivityRepeatType[] | ListEnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActivityRepeatTypeWithAggregatesFilter<$PrismaModel> | $Enums.ActivityRepeatType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActivityRepeatTypeFilter<$PrismaModel>
+    _max?: NestedEnumActivityRepeatTypeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumFrequencyPeriodNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FrequencyPeriod | EnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.FrequencyPeriod[] | ListEnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.FrequencyPeriod[] | ListEnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumFrequencyPeriodNullableWithAggregatesFilter<$PrismaModel> | $Enums.FrequencyPeriod | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumFrequencyPeriodNullableFilter<$PrismaModel>
+    _max?: NestedEnumFrequencyPeriodNullableFilter<$PrismaModel>
+  }
+
+  export type EnumActivityTargetTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityTargetType | EnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityTargetType[] | ListEnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActivityTargetType[] | ListEnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActivityTargetTypeWithAggregatesFilter<$PrismaModel> | $Enums.ActivityTargetType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActivityTargetTypeFilter<$PrismaModel>
+    _max?: NestedEnumActivityTargetTypeFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type EnumActivityTargetUnitNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityTargetUnit | EnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ActivityTargetUnit[] | ListEnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ActivityTargetUnit[] | ListEnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumActivityTargetUnitNullableWithAggregatesFilter<$PrismaModel> | $Enums.ActivityTargetUnit | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumActivityTargetUnitNullableFilter<$PrismaModel>
+    _max?: NestedEnumActivityTargetUnitNullableFilter<$PrismaModel>
+  }
+
+  export type ActivityScheduleScalarRelationFilter = {
+    is?: ActivityScheduleWhereInput
+    isNot?: ActivityScheduleWhereInput
+  }
+
+  export type ActivityScheduleWeekdaySchedule_uuidWeekdayCompoundUniqueInput = {
+    schedule_uuid: string
+    weekday: number
+  }
+
+  export type ActivityScheduleWeekdayCountOrderByAggregateInput = {
+    id?: SortOrder
+    schedule_uuid?: SortOrder
+    weekday?: SortOrder
+  }
+
+  export type ActivityScheduleWeekdayAvgOrderByAggregateInput = {
+    id?: SortOrder
+    weekday?: SortOrder
+  }
+
+  export type ActivityScheduleWeekdayMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schedule_uuid?: SortOrder
+    weekday?: SortOrder
+  }
+
+  export type ActivityScheduleWeekdayMinOrderByAggregateInput = {
+    id?: SortOrder
+    schedule_uuid?: SortOrder
+    weekday?: SortOrder
+  }
+
+  export type ActivityScheduleWeekdaySumOrderByAggregateInput = {
+    id?: SortOrder
+    weekday?: SortOrder
+  }
+
+  export type ActivityScheduleDateSchedule_uuidDateCompoundUniqueInput = {
+    schedule_uuid: string
+    date: Date | string
+  }
+
+  export type ActivityScheduleDateCountOrderByAggregateInput = {
+    id?: SortOrder
+    schedule_uuid?: SortOrder
+    date?: SortOrder
+  }
+
+  export type ActivityScheduleDateAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ActivityScheduleDateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schedule_uuid?: SortOrder
+    date?: SortOrder
+  }
+
+  export type ActivityScheduleDateMinOrderByAggregateInput = {
+    id?: SortOrder
+    schedule_uuid?: SortOrder
+    date?: SortOrder
+  }
+
+  export type ActivityScheduleDateSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumOccurrenceStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.OccurrenceStatus | EnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OccurrenceStatus[] | ListEnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OccurrenceStatus[] | ListEnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOccurrenceStatusFilter<$PrismaModel> | $Enums.OccurrenceStatus
+  }
+
+  export type ActivityLogNullableScalarRelationFilter = {
+    is?: ActivityLogWhereInput | null
+    isNot?: ActivityLogWhereInput | null
+  }
+
+  export type ActivityOccurrenceSchedule_uuidScheduled_forCompoundUniqueInput = {
+    schedule_uuid: string
+    scheduled_for: Date | string
+  }
+
+  export type ActivityOccurrenceCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    schedule_uuid?: SortOrder
+    scheduled_for?: SortOrder
+    status?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityOccurrenceAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ActivityOccurrenceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    schedule_uuid?: SortOrder
+    scheduled_for?: SortOrder
+    status?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityOccurrenceMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    schedule_uuid?: SortOrder
+    scheduled_for?: SortOrder
+    status?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityOccurrenceSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumOccurrenceStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OccurrenceStatus | EnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OccurrenceStatus[] | ListEnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OccurrenceStatus[] | ListEnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOccurrenceStatusWithAggregatesFilter<$PrismaModel> | $Enums.OccurrenceStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOccurrenceStatusFilter<$PrismaModel>
+    _max?: NestedEnumOccurrenceStatusFilter<$PrismaModel>
+  }
+
+  export type ActivityOccurrenceScalarRelationFilter = {
+    is?: ActivityOccurrenceWhereInput
+    isNot?: ActivityOccurrenceWhereInput
+  }
+
+  export type ActivityLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    schedule_uuid?: SortOrder
+    occurrence_uuid?: SortOrder
+    snapshot_target_type?: SortOrder
+    snapshot_target_value?: SortOrder
+    snapshot_target_unit?: SortOrder
+    snapshot_target_unit_label?: SortOrder
+    value?: SortOrder
+    completed?: SortOrder
+    completed_at?: SortOrder
+    skipped?: SortOrder
+    skip_reason?: SortOrder
+    notes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityLogAvgOrderByAggregateInput = {
+    id?: SortOrder
+    snapshot_target_value?: SortOrder
+    value?: SortOrder
+  }
+
+  export type ActivityLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    schedule_uuid?: SortOrder
+    occurrence_uuid?: SortOrder
+    snapshot_target_type?: SortOrder
+    snapshot_target_value?: SortOrder
+    snapshot_target_unit?: SortOrder
+    snapshot_target_unit_label?: SortOrder
+    value?: SortOrder
+    completed?: SortOrder
+    completed_at?: SortOrder
+    skipped?: SortOrder
+    skip_reason?: SortOrder
+    notes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    schedule_uuid?: SortOrder
+    occurrence_uuid?: SortOrder
+    snapshot_target_type?: SortOrder
+    snapshot_target_value?: SortOrder
+    snapshot_target_unit?: SortOrder
+    snapshot_target_unit_label?: SortOrder
+    value?: SortOrder
+    completed?: SortOrder
+    completed_at?: SortOrder
+    skipped?: SortOrder
+    skip_reason?: SortOrder
+    notes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActivityLogSumOrderByAggregateInput = {
+    id?: SortOrder
+    snapshot_target_value?: SortOrder
+    value?: SortOrder
   }
 
   export type DecimalFilter<$PrismaModel = never> = {
@@ -20168,17 +28672,6 @@ export namespace Prisma {
     order?: SortOrder
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type DecimalNullableFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -20188,11 +28681,6 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type WorkoutEntryScalarRelationFilter = {
@@ -20286,22 +28774,6 @@ export namespace Prisma {
     order?: SortOrder
   }
 
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
   export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -20318,14 +28790,6 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type ActivityCreateNestedManyWithoutUserInput = {
     create?: XOR<ActivityCreateWithoutUserInput, ActivityUncheckedCreateWithoutUserInput> | ActivityCreateWithoutUserInput[] | ActivityUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ActivityCreateOrConnectWithoutUserInput | ActivityCreateOrConnectWithoutUserInput[]
@@ -20338,6 +28802,27 @@ export namespace Prisma {
     connectOrCreate?: ScheduleSlotCreateOrConnectWithoutUserInput | ScheduleSlotCreateOrConnectWithoutUserInput[]
     createMany?: ScheduleSlotCreateManyUserInputEnvelope
     connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+  }
+
+  export type ActivityScheduleCreateNestedManyWithoutUserInput = {
+    create?: XOR<ActivityScheduleCreateWithoutUserInput, ActivityScheduleUncheckedCreateWithoutUserInput> | ActivityScheduleCreateWithoutUserInput[] | ActivityScheduleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutUserInput | ActivityScheduleCreateOrConnectWithoutUserInput[]
+    createMany?: ActivityScheduleCreateManyUserInputEnvelope
+    connect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+  }
+
+  export type ActivityLogCreateNestedManyWithoutUserInput = {
+    create?: XOR<ActivityLogCreateWithoutUserInput, ActivityLogUncheckedCreateWithoutUserInput> | ActivityLogCreateWithoutUserInput[] | ActivityLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutUserInput | ActivityLogCreateOrConnectWithoutUserInput[]
+    createMany?: ActivityLogCreateManyUserInputEnvelope
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+  }
+
+  export type ActivityOccurrenceCreateNestedManyWithoutUserInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutUserInput, ActivityOccurrenceUncheckedCreateWithoutUserInput> | ActivityOccurrenceCreateWithoutUserInput[] | ActivityOccurrenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutUserInput | ActivityOccurrenceCreateOrConnectWithoutUserInput[]
+    createMany?: ActivityOccurrenceCreateManyUserInputEnvelope
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
   }
 
   export type ExpenseAccountCreateNestedManyWithoutUserInput = {
@@ -20401,6 +28886,27 @@ export namespace Prisma {
     connectOrCreate?: ScheduleSlotCreateOrConnectWithoutUserInput | ScheduleSlotCreateOrConnectWithoutUserInput[]
     createMany?: ScheduleSlotCreateManyUserInputEnvelope
     connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+  }
+
+  export type ActivityScheduleUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ActivityScheduleCreateWithoutUserInput, ActivityScheduleUncheckedCreateWithoutUserInput> | ActivityScheduleCreateWithoutUserInput[] | ActivityScheduleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutUserInput | ActivityScheduleCreateOrConnectWithoutUserInput[]
+    createMany?: ActivityScheduleCreateManyUserInputEnvelope
+    connect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+  }
+
+  export type ActivityLogUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ActivityLogCreateWithoutUserInput, ActivityLogUncheckedCreateWithoutUserInput> | ActivityLogCreateWithoutUserInput[] | ActivityLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutUserInput | ActivityLogCreateOrConnectWithoutUserInput[]
+    createMany?: ActivityLogCreateManyUserInputEnvelope
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+  }
+
+  export type ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutUserInput, ActivityOccurrenceUncheckedCreateWithoutUserInput> | ActivityOccurrenceCreateWithoutUserInput[] | ActivityOccurrenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutUserInput | ActivityOccurrenceCreateOrConnectWithoutUserInput[]
+    createMany?: ActivityOccurrenceCreateManyUserInputEnvelope
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
   }
 
   export type ExpenseAccountUncheckedCreateNestedManyWithoutUserInput = {
@@ -20494,6 +29000,48 @@ export namespace Prisma {
     update?: ScheduleSlotUpdateWithWhereUniqueWithoutUserInput | ScheduleSlotUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ScheduleSlotUpdateManyWithWhereWithoutUserInput | ScheduleSlotUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ScheduleSlotScalarWhereInput | ScheduleSlotScalarWhereInput[]
+  }
+
+  export type ActivityScheduleUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ActivityScheduleCreateWithoutUserInput, ActivityScheduleUncheckedCreateWithoutUserInput> | ActivityScheduleCreateWithoutUserInput[] | ActivityScheduleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutUserInput | ActivityScheduleCreateOrConnectWithoutUserInput[]
+    upsert?: ActivityScheduleUpsertWithWhereUniqueWithoutUserInput | ActivityScheduleUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ActivityScheduleCreateManyUserInputEnvelope
+    set?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    disconnect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    delete?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    connect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    update?: ActivityScheduleUpdateWithWhereUniqueWithoutUserInput | ActivityScheduleUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ActivityScheduleUpdateManyWithWhereWithoutUserInput | ActivityScheduleUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ActivityScheduleScalarWhereInput | ActivityScheduleScalarWhereInput[]
+  }
+
+  export type ActivityLogUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ActivityLogCreateWithoutUserInput, ActivityLogUncheckedCreateWithoutUserInput> | ActivityLogCreateWithoutUserInput[] | ActivityLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutUserInput | ActivityLogCreateOrConnectWithoutUserInput[]
+    upsert?: ActivityLogUpsertWithWhereUniqueWithoutUserInput | ActivityLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ActivityLogCreateManyUserInputEnvelope
+    set?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    disconnect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    delete?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    update?: ActivityLogUpdateWithWhereUniqueWithoutUserInput | ActivityLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ActivityLogUpdateManyWithWhereWithoutUserInput | ActivityLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
+  }
+
+  export type ActivityOccurrenceUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutUserInput, ActivityOccurrenceUncheckedCreateWithoutUserInput> | ActivityOccurrenceCreateWithoutUserInput[] | ActivityOccurrenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutUserInput | ActivityOccurrenceCreateOrConnectWithoutUserInput[]
+    upsert?: ActivityOccurrenceUpsertWithWhereUniqueWithoutUserInput | ActivityOccurrenceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ActivityOccurrenceCreateManyUserInputEnvelope
+    set?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    disconnect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    delete?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    update?: ActivityOccurrenceUpdateWithWhereUniqueWithoutUserInput | ActivityOccurrenceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ActivityOccurrenceUpdateManyWithWhereWithoutUserInput | ActivityOccurrenceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
   }
 
   export type ExpenseAccountUpdateManyWithoutUserNestedInput = {
@@ -20630,6 +29178,48 @@ export namespace Prisma {
     deleteMany?: ScheduleSlotScalarWhereInput | ScheduleSlotScalarWhereInput[]
   }
 
+  export type ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ActivityScheduleCreateWithoutUserInput, ActivityScheduleUncheckedCreateWithoutUserInput> | ActivityScheduleCreateWithoutUserInput[] | ActivityScheduleUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutUserInput | ActivityScheduleCreateOrConnectWithoutUserInput[]
+    upsert?: ActivityScheduleUpsertWithWhereUniqueWithoutUserInput | ActivityScheduleUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ActivityScheduleCreateManyUserInputEnvelope
+    set?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    disconnect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    delete?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    connect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    update?: ActivityScheduleUpdateWithWhereUniqueWithoutUserInput | ActivityScheduleUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ActivityScheduleUpdateManyWithWhereWithoutUserInput | ActivityScheduleUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ActivityScheduleScalarWhereInput | ActivityScheduleScalarWhereInput[]
+  }
+
+  export type ActivityLogUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ActivityLogCreateWithoutUserInput, ActivityLogUncheckedCreateWithoutUserInput> | ActivityLogCreateWithoutUserInput[] | ActivityLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutUserInput | ActivityLogCreateOrConnectWithoutUserInput[]
+    upsert?: ActivityLogUpsertWithWhereUniqueWithoutUserInput | ActivityLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ActivityLogCreateManyUserInputEnvelope
+    set?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    disconnect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    delete?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    update?: ActivityLogUpdateWithWhereUniqueWithoutUserInput | ActivityLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ActivityLogUpdateManyWithWhereWithoutUserInput | ActivityLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutUserInput, ActivityOccurrenceUncheckedCreateWithoutUserInput> | ActivityOccurrenceCreateWithoutUserInput[] | ActivityOccurrenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutUserInput | ActivityOccurrenceCreateOrConnectWithoutUserInput[]
+    upsert?: ActivityOccurrenceUpsertWithWhereUniqueWithoutUserInput | ActivityOccurrenceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ActivityOccurrenceCreateManyUserInputEnvelope
+    set?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    disconnect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    delete?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    update?: ActivityOccurrenceUpdateWithWhereUniqueWithoutUserInput | ActivityOccurrenceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ActivityOccurrenceUpdateManyWithWhereWithoutUserInput | ActivityOccurrenceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
+  }
+
   export type ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ExpenseAccountCreateWithoutUserInput, ExpenseAccountUncheckedCreateWithoutUserInput> | ExpenseAccountCreateWithoutUserInput[] | ExpenseAccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ExpenseAccountCreateOrConnectWithoutUserInput | ExpenseAccountCreateOrConnectWithoutUserInput[]
@@ -20741,11 +29331,57 @@ export namespace Prisma {
     connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
   }
 
+  export type ActivityScheduleCreateNestedManyWithoutActivityInput = {
+    create?: XOR<ActivityScheduleCreateWithoutActivityInput, ActivityScheduleUncheckedCreateWithoutActivityInput> | ActivityScheduleCreateWithoutActivityInput[] | ActivityScheduleUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutActivityInput | ActivityScheduleCreateOrConnectWithoutActivityInput[]
+    createMany?: ActivityScheduleCreateManyActivityInputEnvelope
+    connect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+  }
+
+  export type ActivityLogCreateNestedManyWithoutActivityInput = {
+    create?: XOR<ActivityLogCreateWithoutActivityInput, ActivityLogUncheckedCreateWithoutActivityInput> | ActivityLogCreateWithoutActivityInput[] | ActivityLogUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutActivityInput | ActivityLogCreateOrConnectWithoutActivityInput[]
+    createMany?: ActivityLogCreateManyActivityInputEnvelope
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+  }
+
+  export type ActivityOccurrenceCreateNestedManyWithoutActivityInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutActivityInput, ActivityOccurrenceUncheckedCreateWithoutActivityInput> | ActivityOccurrenceCreateWithoutActivityInput[] | ActivityOccurrenceUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutActivityInput | ActivityOccurrenceCreateOrConnectWithoutActivityInput[]
+    createMany?: ActivityOccurrenceCreateManyActivityInputEnvelope
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+  }
+
   export type ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput = {
     create?: XOR<ScheduleSlotCreateWithoutActivityInput, ScheduleSlotUncheckedCreateWithoutActivityInput> | ScheduleSlotCreateWithoutActivityInput[] | ScheduleSlotUncheckedCreateWithoutActivityInput[]
     connectOrCreate?: ScheduleSlotCreateOrConnectWithoutActivityInput | ScheduleSlotCreateOrConnectWithoutActivityInput[]
     createMany?: ScheduleSlotCreateManyActivityInputEnvelope
     connect?: ScheduleSlotWhereUniqueInput | ScheduleSlotWhereUniqueInput[]
+  }
+
+  export type ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput = {
+    create?: XOR<ActivityScheduleCreateWithoutActivityInput, ActivityScheduleUncheckedCreateWithoutActivityInput> | ActivityScheduleCreateWithoutActivityInput[] | ActivityScheduleUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutActivityInput | ActivityScheduleCreateOrConnectWithoutActivityInput[]
+    createMany?: ActivityScheduleCreateManyActivityInputEnvelope
+    connect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+  }
+
+  export type ActivityLogUncheckedCreateNestedManyWithoutActivityInput = {
+    create?: XOR<ActivityLogCreateWithoutActivityInput, ActivityLogUncheckedCreateWithoutActivityInput> | ActivityLogCreateWithoutActivityInput[] | ActivityLogUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutActivityInput | ActivityLogCreateOrConnectWithoutActivityInput[]
+    createMany?: ActivityLogCreateManyActivityInputEnvelope
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+  }
+
+  export type ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutActivityInput, ActivityOccurrenceUncheckedCreateWithoutActivityInput> | ActivityOccurrenceCreateWithoutActivityInput[] | ActivityOccurrenceUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutActivityInput | ActivityOccurrenceCreateOrConnectWithoutActivityInput[]
+    createMany?: ActivityOccurrenceCreateManyActivityInputEnvelope
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutActivitiesNestedInput = {
@@ -20770,6 +29406,48 @@ export namespace Prisma {
     deleteMany?: ScheduleSlotScalarWhereInput | ScheduleSlotScalarWhereInput[]
   }
 
+  export type ActivityScheduleUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<ActivityScheduleCreateWithoutActivityInput, ActivityScheduleUncheckedCreateWithoutActivityInput> | ActivityScheduleCreateWithoutActivityInput[] | ActivityScheduleUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutActivityInput | ActivityScheduleCreateOrConnectWithoutActivityInput[]
+    upsert?: ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput | ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: ActivityScheduleCreateManyActivityInputEnvelope
+    set?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    disconnect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    delete?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    connect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    update?: ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput | ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: ActivityScheduleUpdateManyWithWhereWithoutActivityInput | ActivityScheduleUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: ActivityScheduleScalarWhereInput | ActivityScheduleScalarWhereInput[]
+  }
+
+  export type ActivityLogUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<ActivityLogCreateWithoutActivityInput, ActivityLogUncheckedCreateWithoutActivityInput> | ActivityLogCreateWithoutActivityInput[] | ActivityLogUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutActivityInput | ActivityLogCreateOrConnectWithoutActivityInput[]
+    upsert?: ActivityLogUpsertWithWhereUniqueWithoutActivityInput | ActivityLogUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: ActivityLogCreateManyActivityInputEnvelope
+    set?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    disconnect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    delete?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    update?: ActivityLogUpdateWithWhereUniqueWithoutActivityInput | ActivityLogUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: ActivityLogUpdateManyWithWhereWithoutActivityInput | ActivityLogUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
+  }
+
+  export type ActivityOccurrenceUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutActivityInput, ActivityOccurrenceUncheckedCreateWithoutActivityInput> | ActivityOccurrenceCreateWithoutActivityInput[] | ActivityOccurrenceUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutActivityInput | ActivityOccurrenceCreateOrConnectWithoutActivityInput[]
+    upsert?: ActivityOccurrenceUpsertWithWhereUniqueWithoutActivityInput | ActivityOccurrenceUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: ActivityOccurrenceCreateManyActivityInputEnvelope
+    set?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    disconnect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    delete?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    update?: ActivityOccurrenceUpdateWithWhereUniqueWithoutActivityInput | ActivityOccurrenceUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: ActivityOccurrenceUpdateManyWithWhereWithoutActivityInput | ActivityOccurrenceUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
+  }
+
   export type ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput = {
     create?: XOR<ScheduleSlotCreateWithoutActivityInput, ScheduleSlotUncheckedCreateWithoutActivityInput> | ScheduleSlotCreateWithoutActivityInput[] | ScheduleSlotUncheckedCreateWithoutActivityInput[]
     connectOrCreate?: ScheduleSlotCreateOrConnectWithoutActivityInput | ScheduleSlotCreateOrConnectWithoutActivityInput[]
@@ -20782,6 +29460,48 @@ export namespace Prisma {
     update?: ScheduleSlotUpdateWithWhereUniqueWithoutActivityInput | ScheduleSlotUpdateWithWhereUniqueWithoutActivityInput[]
     updateMany?: ScheduleSlotUpdateManyWithWhereWithoutActivityInput | ScheduleSlotUpdateManyWithWhereWithoutActivityInput[]
     deleteMany?: ScheduleSlotScalarWhereInput | ScheduleSlotScalarWhereInput[]
+  }
+
+  export type ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<ActivityScheduleCreateWithoutActivityInput, ActivityScheduleUncheckedCreateWithoutActivityInput> | ActivityScheduleCreateWithoutActivityInput[] | ActivityScheduleUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutActivityInput | ActivityScheduleCreateOrConnectWithoutActivityInput[]
+    upsert?: ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput | ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: ActivityScheduleCreateManyActivityInputEnvelope
+    set?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    disconnect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    delete?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    connect?: ActivityScheduleWhereUniqueInput | ActivityScheduleWhereUniqueInput[]
+    update?: ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput | ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: ActivityScheduleUpdateManyWithWhereWithoutActivityInput | ActivityScheduleUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: ActivityScheduleScalarWhereInput | ActivityScheduleScalarWhereInput[]
+  }
+
+  export type ActivityLogUncheckedUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<ActivityLogCreateWithoutActivityInput, ActivityLogUncheckedCreateWithoutActivityInput> | ActivityLogCreateWithoutActivityInput[] | ActivityLogUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutActivityInput | ActivityLogCreateOrConnectWithoutActivityInput[]
+    upsert?: ActivityLogUpsertWithWhereUniqueWithoutActivityInput | ActivityLogUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: ActivityLogCreateManyActivityInputEnvelope
+    set?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    disconnect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    delete?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    update?: ActivityLogUpdateWithWhereUniqueWithoutActivityInput | ActivityLogUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: ActivityLogUpdateManyWithWhereWithoutActivityInput | ActivityLogUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutActivityInput, ActivityOccurrenceUncheckedCreateWithoutActivityInput> | ActivityOccurrenceCreateWithoutActivityInput[] | ActivityOccurrenceUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutActivityInput | ActivityOccurrenceCreateOrConnectWithoutActivityInput[]
+    upsert?: ActivityOccurrenceUpsertWithWhereUniqueWithoutActivityInput | ActivityOccurrenceUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: ActivityOccurrenceCreateManyActivityInputEnvelope
+    set?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    disconnect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    delete?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    update?: ActivityOccurrenceUpdateWithWhereUniqueWithoutActivityInput | ActivityOccurrenceUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: ActivityOccurrenceUpdateManyWithWhereWithoutActivityInput | ActivityOccurrenceUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSchedule_slotsInput = {
@@ -20814,6 +29534,400 @@ export namespace Prisma {
     upsert?: ActivityUpsertWithoutSchedule_slotsInput
     connect?: ActivityWhereUniqueInput
     update?: XOR<XOR<ActivityUpdateToOneWithWhereWithoutSchedule_slotsInput, ActivityUpdateWithoutSchedule_slotsInput>, ActivityUncheckedUpdateWithoutSchedule_slotsInput>
+  }
+
+  export type ActivityCreateNestedOneWithoutActivity_schedulesInput = {
+    create?: XOR<ActivityCreateWithoutActivity_schedulesInput, ActivityUncheckedCreateWithoutActivity_schedulesInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutActivity_schedulesInput
+    connect?: ActivityWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutActivity_schedulesInput = {
+    create?: XOR<UserCreateWithoutActivity_schedulesInput, UserUncheckedCreateWithoutActivity_schedulesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutActivity_schedulesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ActivityScheduleWeekdayCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<ActivityScheduleWeekdayCreateWithoutScheduleInput, ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput> | ActivityScheduleWeekdayCreateWithoutScheduleInput[] | ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityScheduleWeekdayCreateOrConnectWithoutScheduleInput | ActivityScheduleWeekdayCreateOrConnectWithoutScheduleInput[]
+    createMany?: ActivityScheduleWeekdayCreateManyScheduleInputEnvelope
+    connect?: ActivityScheduleWeekdayWhereUniqueInput | ActivityScheduleWeekdayWhereUniqueInput[]
+  }
+
+  export type ActivityScheduleDateCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<ActivityScheduleDateCreateWithoutScheduleInput, ActivityScheduleDateUncheckedCreateWithoutScheduleInput> | ActivityScheduleDateCreateWithoutScheduleInput[] | ActivityScheduleDateUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityScheduleDateCreateOrConnectWithoutScheduleInput | ActivityScheduleDateCreateOrConnectWithoutScheduleInput[]
+    createMany?: ActivityScheduleDateCreateManyScheduleInputEnvelope
+    connect?: ActivityScheduleDateWhereUniqueInput | ActivityScheduleDateWhereUniqueInput[]
+  }
+
+  export type ActivityOccurrenceCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutScheduleInput, ActivityOccurrenceUncheckedCreateWithoutScheduleInput> | ActivityOccurrenceCreateWithoutScheduleInput[] | ActivityOccurrenceUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutScheduleInput | ActivityOccurrenceCreateOrConnectWithoutScheduleInput[]
+    createMany?: ActivityOccurrenceCreateManyScheduleInputEnvelope
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+  }
+
+  export type ActivityLogCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<ActivityLogCreateWithoutScheduleInput, ActivityLogUncheckedCreateWithoutScheduleInput> | ActivityLogCreateWithoutScheduleInput[] | ActivityLogUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutScheduleInput | ActivityLogCreateOrConnectWithoutScheduleInput[]
+    createMany?: ActivityLogCreateManyScheduleInputEnvelope
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+  }
+
+  export type ActivityScheduleWeekdayUncheckedCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<ActivityScheduleWeekdayCreateWithoutScheduleInput, ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput> | ActivityScheduleWeekdayCreateWithoutScheduleInput[] | ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityScheduleWeekdayCreateOrConnectWithoutScheduleInput | ActivityScheduleWeekdayCreateOrConnectWithoutScheduleInput[]
+    createMany?: ActivityScheduleWeekdayCreateManyScheduleInputEnvelope
+    connect?: ActivityScheduleWeekdayWhereUniqueInput | ActivityScheduleWeekdayWhereUniqueInput[]
+  }
+
+  export type ActivityScheduleDateUncheckedCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<ActivityScheduleDateCreateWithoutScheduleInput, ActivityScheduleDateUncheckedCreateWithoutScheduleInput> | ActivityScheduleDateCreateWithoutScheduleInput[] | ActivityScheduleDateUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityScheduleDateCreateOrConnectWithoutScheduleInput | ActivityScheduleDateCreateOrConnectWithoutScheduleInput[]
+    createMany?: ActivityScheduleDateCreateManyScheduleInputEnvelope
+    connect?: ActivityScheduleDateWhereUniqueInput | ActivityScheduleDateWhereUniqueInput[]
+  }
+
+  export type ActivityOccurrenceUncheckedCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutScheduleInput, ActivityOccurrenceUncheckedCreateWithoutScheduleInput> | ActivityOccurrenceCreateWithoutScheduleInput[] | ActivityOccurrenceUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutScheduleInput | ActivityOccurrenceCreateOrConnectWithoutScheduleInput[]
+    createMany?: ActivityOccurrenceCreateManyScheduleInputEnvelope
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+  }
+
+  export type ActivityLogUncheckedCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<ActivityLogCreateWithoutScheduleInput, ActivityLogUncheckedCreateWithoutScheduleInput> | ActivityLogCreateWithoutScheduleInput[] | ActivityLogUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutScheduleInput | ActivityLogCreateOrConnectWithoutScheduleInput[]
+    createMany?: ActivityLogCreateManyScheduleInputEnvelope
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type EnumActivityRepeatTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ActivityRepeatType
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableEnumFrequencyPeriodFieldUpdateOperationsInput = {
+    set?: $Enums.FrequencyPeriod | null
+  }
+
+  export type EnumActivityTargetTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ActivityTargetType
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableEnumActivityTargetUnitFieldUpdateOperationsInput = {
+    set?: $Enums.ActivityTargetUnit | null
+  }
+
+  export type ActivityUpdateOneRequiredWithoutActivity_schedulesNestedInput = {
+    create?: XOR<ActivityCreateWithoutActivity_schedulesInput, ActivityUncheckedCreateWithoutActivity_schedulesInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutActivity_schedulesInput
+    upsert?: ActivityUpsertWithoutActivity_schedulesInput
+    connect?: ActivityWhereUniqueInput
+    update?: XOR<XOR<ActivityUpdateToOneWithWhereWithoutActivity_schedulesInput, ActivityUpdateWithoutActivity_schedulesInput>, ActivityUncheckedUpdateWithoutActivity_schedulesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutActivity_schedulesNestedInput = {
+    create?: XOR<UserCreateWithoutActivity_schedulesInput, UserUncheckedCreateWithoutActivity_schedulesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutActivity_schedulesInput
+    upsert?: UserUpsertWithoutActivity_schedulesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutActivity_schedulesInput, UserUpdateWithoutActivity_schedulesInput>, UserUncheckedUpdateWithoutActivity_schedulesInput>
+  }
+
+  export type ActivityScheduleWeekdayUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<ActivityScheduleWeekdayCreateWithoutScheduleInput, ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput> | ActivityScheduleWeekdayCreateWithoutScheduleInput[] | ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityScheduleWeekdayCreateOrConnectWithoutScheduleInput | ActivityScheduleWeekdayCreateOrConnectWithoutScheduleInput[]
+    upsert?: ActivityScheduleWeekdayUpsertWithWhereUniqueWithoutScheduleInput | ActivityScheduleWeekdayUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: ActivityScheduleWeekdayCreateManyScheduleInputEnvelope
+    set?: ActivityScheduleWeekdayWhereUniqueInput | ActivityScheduleWeekdayWhereUniqueInput[]
+    disconnect?: ActivityScheduleWeekdayWhereUniqueInput | ActivityScheduleWeekdayWhereUniqueInput[]
+    delete?: ActivityScheduleWeekdayWhereUniqueInput | ActivityScheduleWeekdayWhereUniqueInput[]
+    connect?: ActivityScheduleWeekdayWhereUniqueInput | ActivityScheduleWeekdayWhereUniqueInput[]
+    update?: ActivityScheduleWeekdayUpdateWithWhereUniqueWithoutScheduleInput | ActivityScheduleWeekdayUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: ActivityScheduleWeekdayUpdateManyWithWhereWithoutScheduleInput | ActivityScheduleWeekdayUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: ActivityScheduleWeekdayScalarWhereInput | ActivityScheduleWeekdayScalarWhereInput[]
+  }
+
+  export type ActivityScheduleDateUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<ActivityScheduleDateCreateWithoutScheduleInput, ActivityScheduleDateUncheckedCreateWithoutScheduleInput> | ActivityScheduleDateCreateWithoutScheduleInput[] | ActivityScheduleDateUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityScheduleDateCreateOrConnectWithoutScheduleInput | ActivityScheduleDateCreateOrConnectWithoutScheduleInput[]
+    upsert?: ActivityScheduleDateUpsertWithWhereUniqueWithoutScheduleInput | ActivityScheduleDateUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: ActivityScheduleDateCreateManyScheduleInputEnvelope
+    set?: ActivityScheduleDateWhereUniqueInput | ActivityScheduleDateWhereUniqueInput[]
+    disconnect?: ActivityScheduleDateWhereUniqueInput | ActivityScheduleDateWhereUniqueInput[]
+    delete?: ActivityScheduleDateWhereUniqueInput | ActivityScheduleDateWhereUniqueInput[]
+    connect?: ActivityScheduleDateWhereUniqueInput | ActivityScheduleDateWhereUniqueInput[]
+    update?: ActivityScheduleDateUpdateWithWhereUniqueWithoutScheduleInput | ActivityScheduleDateUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: ActivityScheduleDateUpdateManyWithWhereWithoutScheduleInput | ActivityScheduleDateUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: ActivityScheduleDateScalarWhereInput | ActivityScheduleDateScalarWhereInput[]
+  }
+
+  export type ActivityOccurrenceUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutScheduleInput, ActivityOccurrenceUncheckedCreateWithoutScheduleInput> | ActivityOccurrenceCreateWithoutScheduleInput[] | ActivityOccurrenceUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutScheduleInput | ActivityOccurrenceCreateOrConnectWithoutScheduleInput[]
+    upsert?: ActivityOccurrenceUpsertWithWhereUniqueWithoutScheduleInput | ActivityOccurrenceUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: ActivityOccurrenceCreateManyScheduleInputEnvelope
+    set?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    disconnect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    delete?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    update?: ActivityOccurrenceUpdateWithWhereUniqueWithoutScheduleInput | ActivityOccurrenceUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: ActivityOccurrenceUpdateManyWithWhereWithoutScheduleInput | ActivityOccurrenceUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
+  }
+
+  export type ActivityLogUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<ActivityLogCreateWithoutScheduleInput, ActivityLogUncheckedCreateWithoutScheduleInput> | ActivityLogCreateWithoutScheduleInput[] | ActivityLogUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutScheduleInput | ActivityLogCreateOrConnectWithoutScheduleInput[]
+    upsert?: ActivityLogUpsertWithWhereUniqueWithoutScheduleInput | ActivityLogUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: ActivityLogCreateManyScheduleInputEnvelope
+    set?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    disconnect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    delete?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    update?: ActivityLogUpdateWithWhereUniqueWithoutScheduleInput | ActivityLogUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: ActivityLogUpdateManyWithWhereWithoutScheduleInput | ActivityLogUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
+  }
+
+  export type ActivityScheduleWeekdayUncheckedUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<ActivityScheduleWeekdayCreateWithoutScheduleInput, ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput> | ActivityScheduleWeekdayCreateWithoutScheduleInput[] | ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityScheduleWeekdayCreateOrConnectWithoutScheduleInput | ActivityScheduleWeekdayCreateOrConnectWithoutScheduleInput[]
+    upsert?: ActivityScheduleWeekdayUpsertWithWhereUniqueWithoutScheduleInput | ActivityScheduleWeekdayUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: ActivityScheduleWeekdayCreateManyScheduleInputEnvelope
+    set?: ActivityScheduleWeekdayWhereUniqueInput | ActivityScheduleWeekdayWhereUniqueInput[]
+    disconnect?: ActivityScheduleWeekdayWhereUniqueInput | ActivityScheduleWeekdayWhereUniqueInput[]
+    delete?: ActivityScheduleWeekdayWhereUniqueInput | ActivityScheduleWeekdayWhereUniqueInput[]
+    connect?: ActivityScheduleWeekdayWhereUniqueInput | ActivityScheduleWeekdayWhereUniqueInput[]
+    update?: ActivityScheduleWeekdayUpdateWithWhereUniqueWithoutScheduleInput | ActivityScheduleWeekdayUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: ActivityScheduleWeekdayUpdateManyWithWhereWithoutScheduleInput | ActivityScheduleWeekdayUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: ActivityScheduleWeekdayScalarWhereInput | ActivityScheduleWeekdayScalarWhereInput[]
+  }
+
+  export type ActivityScheduleDateUncheckedUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<ActivityScheduleDateCreateWithoutScheduleInput, ActivityScheduleDateUncheckedCreateWithoutScheduleInput> | ActivityScheduleDateCreateWithoutScheduleInput[] | ActivityScheduleDateUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityScheduleDateCreateOrConnectWithoutScheduleInput | ActivityScheduleDateCreateOrConnectWithoutScheduleInput[]
+    upsert?: ActivityScheduleDateUpsertWithWhereUniqueWithoutScheduleInput | ActivityScheduleDateUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: ActivityScheduleDateCreateManyScheduleInputEnvelope
+    set?: ActivityScheduleDateWhereUniqueInput | ActivityScheduleDateWhereUniqueInput[]
+    disconnect?: ActivityScheduleDateWhereUniqueInput | ActivityScheduleDateWhereUniqueInput[]
+    delete?: ActivityScheduleDateWhereUniqueInput | ActivityScheduleDateWhereUniqueInput[]
+    connect?: ActivityScheduleDateWhereUniqueInput | ActivityScheduleDateWhereUniqueInput[]
+    update?: ActivityScheduleDateUpdateWithWhereUniqueWithoutScheduleInput | ActivityScheduleDateUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: ActivityScheduleDateUpdateManyWithWhereWithoutScheduleInput | ActivityScheduleDateUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: ActivityScheduleDateScalarWhereInput | ActivityScheduleDateScalarWhereInput[]
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutScheduleInput, ActivityOccurrenceUncheckedCreateWithoutScheduleInput> | ActivityOccurrenceCreateWithoutScheduleInput[] | ActivityOccurrenceUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutScheduleInput | ActivityOccurrenceCreateOrConnectWithoutScheduleInput[]
+    upsert?: ActivityOccurrenceUpsertWithWhereUniqueWithoutScheduleInput | ActivityOccurrenceUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: ActivityOccurrenceCreateManyScheduleInputEnvelope
+    set?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    disconnect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    delete?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+    update?: ActivityOccurrenceUpdateWithWhereUniqueWithoutScheduleInput | ActivityOccurrenceUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: ActivityOccurrenceUpdateManyWithWhereWithoutScheduleInput | ActivityOccurrenceUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
+  }
+
+  export type ActivityLogUncheckedUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<ActivityLogCreateWithoutScheduleInput, ActivityLogUncheckedCreateWithoutScheduleInput> | ActivityLogCreateWithoutScheduleInput[] | ActivityLogUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutScheduleInput | ActivityLogCreateOrConnectWithoutScheduleInput[]
+    upsert?: ActivityLogUpsertWithWhereUniqueWithoutScheduleInput | ActivityLogUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: ActivityLogCreateManyScheduleInputEnvelope
+    set?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    disconnect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    delete?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
+    update?: ActivityLogUpdateWithWhereUniqueWithoutScheduleInput | ActivityLogUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: ActivityLogUpdateManyWithWhereWithoutScheduleInput | ActivityLogUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
+  }
+
+  export type ActivityScheduleCreateNestedOneWithoutWeekdaysInput = {
+    create?: XOR<ActivityScheduleCreateWithoutWeekdaysInput, ActivityScheduleUncheckedCreateWithoutWeekdaysInput>
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutWeekdaysInput
+    connect?: ActivityScheduleWhereUniqueInput
+  }
+
+  export type ActivityScheduleUpdateOneRequiredWithoutWeekdaysNestedInput = {
+    create?: XOR<ActivityScheduleCreateWithoutWeekdaysInput, ActivityScheduleUncheckedCreateWithoutWeekdaysInput>
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutWeekdaysInput
+    upsert?: ActivityScheduleUpsertWithoutWeekdaysInput
+    connect?: ActivityScheduleWhereUniqueInput
+    update?: XOR<XOR<ActivityScheduleUpdateToOneWithWhereWithoutWeekdaysInput, ActivityScheduleUpdateWithoutWeekdaysInput>, ActivityScheduleUncheckedUpdateWithoutWeekdaysInput>
+  }
+
+  export type ActivityScheduleCreateNestedOneWithoutSpecific_datesInput = {
+    create?: XOR<ActivityScheduleCreateWithoutSpecific_datesInput, ActivityScheduleUncheckedCreateWithoutSpecific_datesInput>
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutSpecific_datesInput
+    connect?: ActivityScheduleWhereUniqueInput
+  }
+
+  export type ActivityScheduleUpdateOneRequiredWithoutSpecific_datesNestedInput = {
+    create?: XOR<ActivityScheduleCreateWithoutSpecific_datesInput, ActivityScheduleUncheckedCreateWithoutSpecific_datesInput>
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutSpecific_datesInput
+    upsert?: ActivityScheduleUpsertWithoutSpecific_datesInput
+    connect?: ActivityScheduleWhereUniqueInput
+    update?: XOR<XOR<ActivityScheduleUpdateToOneWithWhereWithoutSpecific_datesInput, ActivityScheduleUpdateWithoutSpecific_datesInput>, ActivityScheduleUncheckedUpdateWithoutSpecific_datesInput>
+  }
+
+  export type ActivityCreateNestedOneWithoutActivity_occurrencesInput = {
+    create?: XOR<ActivityCreateWithoutActivity_occurrencesInput, ActivityUncheckedCreateWithoutActivity_occurrencesInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutActivity_occurrencesInput
+    connect?: ActivityWhereUniqueInput
+  }
+
+  export type ActivityScheduleCreateNestedOneWithoutOccurrencesInput = {
+    create?: XOR<ActivityScheduleCreateWithoutOccurrencesInput, ActivityScheduleUncheckedCreateWithoutOccurrencesInput>
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutOccurrencesInput
+    connect?: ActivityScheduleWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutActivity_occurrencesInput = {
+    create?: XOR<UserCreateWithoutActivity_occurrencesInput, UserUncheckedCreateWithoutActivity_occurrencesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutActivity_occurrencesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ActivityLogCreateNestedOneWithoutOccurrenceInput = {
+    create?: XOR<ActivityLogCreateWithoutOccurrenceInput, ActivityLogUncheckedCreateWithoutOccurrenceInput>
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutOccurrenceInput
+    connect?: ActivityLogWhereUniqueInput
+  }
+
+  export type ActivityLogUncheckedCreateNestedOneWithoutOccurrenceInput = {
+    create?: XOR<ActivityLogCreateWithoutOccurrenceInput, ActivityLogUncheckedCreateWithoutOccurrenceInput>
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutOccurrenceInput
+    connect?: ActivityLogWhereUniqueInput
+  }
+
+  export type EnumOccurrenceStatusFieldUpdateOperationsInput = {
+    set?: $Enums.OccurrenceStatus
+  }
+
+  export type ActivityUpdateOneRequiredWithoutActivity_occurrencesNestedInput = {
+    create?: XOR<ActivityCreateWithoutActivity_occurrencesInput, ActivityUncheckedCreateWithoutActivity_occurrencesInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutActivity_occurrencesInput
+    upsert?: ActivityUpsertWithoutActivity_occurrencesInput
+    connect?: ActivityWhereUniqueInput
+    update?: XOR<XOR<ActivityUpdateToOneWithWhereWithoutActivity_occurrencesInput, ActivityUpdateWithoutActivity_occurrencesInput>, ActivityUncheckedUpdateWithoutActivity_occurrencesInput>
+  }
+
+  export type ActivityScheduleUpdateOneRequiredWithoutOccurrencesNestedInput = {
+    create?: XOR<ActivityScheduleCreateWithoutOccurrencesInput, ActivityScheduleUncheckedCreateWithoutOccurrencesInput>
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutOccurrencesInput
+    upsert?: ActivityScheduleUpsertWithoutOccurrencesInput
+    connect?: ActivityScheduleWhereUniqueInput
+    update?: XOR<XOR<ActivityScheduleUpdateToOneWithWhereWithoutOccurrencesInput, ActivityScheduleUpdateWithoutOccurrencesInput>, ActivityScheduleUncheckedUpdateWithoutOccurrencesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutActivity_occurrencesNestedInput = {
+    create?: XOR<UserCreateWithoutActivity_occurrencesInput, UserUncheckedCreateWithoutActivity_occurrencesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutActivity_occurrencesInput
+    upsert?: UserUpsertWithoutActivity_occurrencesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutActivity_occurrencesInput, UserUpdateWithoutActivity_occurrencesInput>, UserUncheckedUpdateWithoutActivity_occurrencesInput>
+  }
+
+  export type ActivityLogUpdateOneWithoutOccurrenceNestedInput = {
+    create?: XOR<ActivityLogCreateWithoutOccurrenceInput, ActivityLogUncheckedCreateWithoutOccurrenceInput>
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutOccurrenceInput
+    upsert?: ActivityLogUpsertWithoutOccurrenceInput
+    disconnect?: ActivityLogWhereInput | boolean
+    delete?: ActivityLogWhereInput | boolean
+    connect?: ActivityLogWhereUniqueInput
+    update?: XOR<XOR<ActivityLogUpdateToOneWithWhereWithoutOccurrenceInput, ActivityLogUpdateWithoutOccurrenceInput>, ActivityLogUncheckedUpdateWithoutOccurrenceInput>
+  }
+
+  export type ActivityLogUncheckedUpdateOneWithoutOccurrenceNestedInput = {
+    create?: XOR<ActivityLogCreateWithoutOccurrenceInput, ActivityLogUncheckedCreateWithoutOccurrenceInput>
+    connectOrCreate?: ActivityLogCreateOrConnectWithoutOccurrenceInput
+    upsert?: ActivityLogUpsertWithoutOccurrenceInput
+    disconnect?: ActivityLogWhereInput | boolean
+    delete?: ActivityLogWhereInput | boolean
+    connect?: ActivityLogWhereUniqueInput
+    update?: XOR<XOR<ActivityLogUpdateToOneWithWhereWithoutOccurrenceInput, ActivityLogUpdateWithoutOccurrenceInput>, ActivityLogUncheckedUpdateWithoutOccurrenceInput>
+  }
+
+  export type ActivityCreateNestedOneWithoutActivity_logsInput = {
+    create?: XOR<ActivityCreateWithoutActivity_logsInput, ActivityUncheckedCreateWithoutActivity_logsInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutActivity_logsInput
+    connect?: ActivityWhereUniqueInput
+  }
+
+  export type ActivityScheduleCreateNestedOneWithoutLogsInput = {
+    create?: XOR<ActivityScheduleCreateWithoutLogsInput, ActivityScheduleUncheckedCreateWithoutLogsInput>
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutLogsInput
+    connect?: ActivityScheduleWhereUniqueInput
+  }
+
+  export type ActivityOccurrenceCreateNestedOneWithoutLogInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutLogInput, ActivityOccurrenceUncheckedCreateWithoutLogInput>
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutLogInput
+    connect?: ActivityOccurrenceWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutActivity_logsInput = {
+    create?: XOR<UserCreateWithoutActivity_logsInput, UserUncheckedCreateWithoutActivity_logsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutActivity_logsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ActivityUpdateOneRequiredWithoutActivity_logsNestedInput = {
+    create?: XOR<ActivityCreateWithoutActivity_logsInput, ActivityUncheckedCreateWithoutActivity_logsInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutActivity_logsInput
+    upsert?: ActivityUpsertWithoutActivity_logsInput
+    connect?: ActivityWhereUniqueInput
+    update?: XOR<XOR<ActivityUpdateToOneWithWhereWithoutActivity_logsInput, ActivityUpdateWithoutActivity_logsInput>, ActivityUncheckedUpdateWithoutActivity_logsInput>
+  }
+
+  export type ActivityScheduleUpdateOneRequiredWithoutLogsNestedInput = {
+    create?: XOR<ActivityScheduleCreateWithoutLogsInput, ActivityScheduleUncheckedCreateWithoutLogsInput>
+    connectOrCreate?: ActivityScheduleCreateOrConnectWithoutLogsInput
+    upsert?: ActivityScheduleUpsertWithoutLogsInput
+    connect?: ActivityScheduleWhereUniqueInput
+    update?: XOR<XOR<ActivityScheduleUpdateToOneWithWhereWithoutLogsInput, ActivityScheduleUpdateWithoutLogsInput>, ActivityScheduleUncheckedUpdateWithoutLogsInput>
+  }
+
+  export type ActivityOccurrenceUpdateOneRequiredWithoutLogNestedInput = {
+    create?: XOR<ActivityOccurrenceCreateWithoutLogInput, ActivityOccurrenceUncheckedCreateWithoutLogInput>
+    connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutLogInput
+    upsert?: ActivityOccurrenceUpsertWithoutLogInput
+    connect?: ActivityOccurrenceWhereUniqueInput
+    update?: XOR<XOR<ActivityOccurrenceUpdateToOneWithWhereWithoutLogInput, ActivityOccurrenceUpdateWithoutLogInput>, ActivityOccurrenceUncheckedUpdateWithoutLogInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutActivity_logsNestedInput = {
+    create?: XOR<UserCreateWithoutActivity_logsInput, UserUncheckedCreateWithoutActivity_logsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutActivity_logsInput
+    upsert?: UserUpsertWithoutActivity_logsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutActivity_logsInput, UserUpdateWithoutActivity_logsInput>, UserUncheckedUpdateWithoutActivity_logsInput>
   }
 
   export type UserCreateNestedOneWithoutExpense_accountsInput = {
@@ -21438,24 +30552,12 @@ export namespace Prisma {
     connect?: WorkoutEntryWhereUniqueInput
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type NullableDecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string | null
     increment?: Decimal | DecimalJsLike | number | string
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type WorkoutEntryUpdateOneRequiredWithoutSetsNestedInput = {
@@ -21619,6 +30721,19 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedEnumScheduleDayFilter<$PrismaModel = never> = {
     equals?: $Enums.ScheduleDay | EnumScheduleDayFieldRefInput<$PrismaModel>
     in?: $Enums.ScheduleDay[] | ListEnumScheduleDayFieldRefInput<$PrismaModel>
@@ -21634,6 +30749,159 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumScheduleDayFilter<$PrismaModel>
     _max?: NestedEnumScheduleDayFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumActivityRepeatTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityRepeatType | EnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityRepeatType[] | ListEnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActivityRepeatType[] | ListEnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActivityRepeatTypeFilter<$PrismaModel> | $Enums.ActivityRepeatType
+  }
+
+  export type NestedEnumFrequencyPeriodNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.FrequencyPeriod | EnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.FrequencyPeriod[] | ListEnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.FrequencyPeriod[] | ListEnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumFrequencyPeriodNullableFilter<$PrismaModel> | $Enums.FrequencyPeriod | null
+  }
+
+  export type NestedEnumActivityTargetTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityTargetType | EnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityTargetType[] | ListEnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActivityTargetType[] | ListEnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActivityTargetTypeFilter<$PrismaModel> | $Enums.ActivityTargetType
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumActivityTargetUnitNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityTargetUnit | EnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ActivityTargetUnit[] | ListEnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ActivityTargetUnit[] | ListEnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumActivityTargetUnitNullableFilter<$PrismaModel> | $Enums.ActivityTargetUnit | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumActivityRepeatTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityRepeatType | EnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityRepeatType[] | ListEnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActivityRepeatType[] | ListEnumActivityRepeatTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActivityRepeatTypeWithAggregatesFilter<$PrismaModel> | $Enums.ActivityRepeatType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActivityRepeatTypeFilter<$PrismaModel>
+    _max?: NestedEnumActivityRepeatTypeFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumFrequencyPeriodNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FrequencyPeriod | EnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.FrequencyPeriod[] | ListEnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.FrequencyPeriod[] | ListEnumFrequencyPeriodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumFrequencyPeriodNullableWithAggregatesFilter<$PrismaModel> | $Enums.FrequencyPeriod | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumFrequencyPeriodNullableFilter<$PrismaModel>
+    _max?: NestedEnumFrequencyPeriodNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumActivityTargetTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityTargetType | EnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ActivityTargetType[] | ListEnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActivityTargetType[] | ListEnumActivityTargetTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumActivityTargetTypeWithAggregatesFilter<$PrismaModel> | $Enums.ActivityTargetType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActivityTargetTypeFilter<$PrismaModel>
+    _max?: NestedEnumActivityTargetTypeFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumActivityTargetUnitNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActivityTargetUnit | EnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ActivityTargetUnit[] | ListEnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ActivityTargetUnit[] | ListEnumActivityTargetUnitFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumActivityTargetUnitNullableWithAggregatesFilter<$PrismaModel> | $Enums.ActivityTargetUnit | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumActivityTargetUnitNullableFilter<$PrismaModel>
+    _max?: NestedEnumActivityTargetUnitNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumOccurrenceStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.OccurrenceStatus | EnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OccurrenceStatus[] | ListEnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OccurrenceStatus[] | ListEnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOccurrenceStatusFilter<$PrismaModel> | $Enums.OccurrenceStatus
+  }
+
+  export type NestedEnumOccurrenceStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OccurrenceStatus | EnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OccurrenceStatus[] | ListEnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OccurrenceStatus[] | ListEnumOccurrenceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOccurrenceStatusWithAggregatesFilter<$PrismaModel> | $Enums.OccurrenceStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOccurrenceStatusFilter<$PrismaModel>
+    _max?: NestedEnumOccurrenceStatusFilter<$PrismaModel>
   }
 
   export type NestedDecimalFilter<$PrismaModel = never> = {
@@ -21708,38 +30976,6 @@ export namespace Prisma {
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -21756,31 +30992,35 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type ActivityCreateWithoutUserInput = {
     uuid?: string
     name: string
-    color: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutUserInput = {
     id?: number
     uuid?: string
     name: string
-    color: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutUserInput = {
@@ -21821,6 +31061,145 @@ export namespace Prisma {
 
   export type ScheduleSlotCreateManyUserInputEnvelope = {
     data: ScheduleSlotCreateManyUserInput | ScheduleSlotCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityScheduleCreateWithoutUserInput = {
+    uuid?: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_schedulesInput
+    weekdays?: ActivityScheduleWeekdayCreateNestedManyWithoutScheduleInput
+    specific_dates?: ActivityScheduleDateCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    activity_uuid: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedCreateNestedManyWithoutScheduleInput
+    specific_dates?: ActivityScheduleDateUncheckedCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleCreateOrConnectWithoutUserInput = {
+    where: ActivityScheduleWhereUniqueInput
+    create: XOR<ActivityScheduleCreateWithoutUserInput, ActivityScheduleUncheckedCreateWithoutUserInput>
+  }
+
+  export type ActivityScheduleCreateManyUserInputEnvelope = {
+    data: ActivityScheduleCreateManyUserInput | ActivityScheduleCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityLogCreateWithoutUserInput = {
+    uuid?: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_logsInput
+    schedule: ActivityScheduleCreateNestedOneWithoutLogsInput
+    occurrence: ActivityOccurrenceCreateNestedOneWithoutLogInput
+  }
+
+  export type ActivityLogUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    activity_uuid: string
+    schedule_uuid: string
+    occurrence_uuid: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityLogCreateOrConnectWithoutUserInput = {
+    where: ActivityLogWhereUniqueInput
+    create: XOR<ActivityLogCreateWithoutUserInput, ActivityLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type ActivityLogCreateManyUserInputEnvelope = {
+    data: ActivityLogCreateManyUserInput | ActivityLogCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityOccurrenceCreateWithoutUserInput = {
+    uuid?: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_occurrencesInput
+    schedule: ActivityScheduleCreateNestedOneWithoutOccurrencesInput
+    log?: ActivityLogCreateNestedOneWithoutOccurrenceInput
+  }
+
+  export type ActivityOccurrenceUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    activity_uuid: string
+    schedule_uuid: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+    log?: ActivityLogUncheckedCreateNestedOneWithoutOccurrenceInput
+  }
+
+  export type ActivityOccurrenceCreateOrConnectWithoutUserInput = {
+    where: ActivityOccurrenceWhereUniqueInput
+    create: XOR<ActivityOccurrenceCreateWithoutUserInput, ActivityOccurrenceUncheckedCreateWithoutUserInput>
+  }
+
+  export type ActivityOccurrenceCreateManyUserInputEnvelope = {
+    data: ActivityOccurrenceCreateManyUserInput | ActivityOccurrenceCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -22079,7 +31458,10 @@ export namespace Prisma {
     uuid?: StringFilter<"Activity"> | string
     user_uuid?: StringFilter<"Activity"> | string
     name?: StringFilter<"Activity"> | string
-    color?: StringFilter<"Activity"> | string
+    description?: StringNullableFilter<"Activity"> | string | null
+    icon?: StringNullableFilter<"Activity"> | string | null
+    color?: StringNullableFilter<"Activity"> | string | null
+    visible?: BoolFilter<"Activity"> | boolean
     created_at?: DateTimeFilter<"Activity"> | Date | string
     updated_at?: DateTimeFilter<"Activity"> | Date | string
   }
@@ -22113,6 +31495,117 @@ export namespace Prisma {
     end_time?: StringFilter<"ScheduleSlot"> | string
     created_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
     updated_at?: DateTimeFilter<"ScheduleSlot"> | Date | string
+  }
+
+  export type ActivityScheduleUpsertWithWhereUniqueWithoutUserInput = {
+    where: ActivityScheduleWhereUniqueInput
+    update: XOR<ActivityScheduleUpdateWithoutUserInput, ActivityScheduleUncheckedUpdateWithoutUserInput>
+    create: XOR<ActivityScheduleCreateWithoutUserInput, ActivityScheduleUncheckedCreateWithoutUserInput>
+  }
+
+  export type ActivityScheduleUpdateWithWhereUniqueWithoutUserInput = {
+    where: ActivityScheduleWhereUniqueInput
+    data: XOR<ActivityScheduleUpdateWithoutUserInput, ActivityScheduleUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ActivityScheduleUpdateManyWithWhereWithoutUserInput = {
+    where: ActivityScheduleScalarWhereInput
+    data: XOR<ActivityScheduleUpdateManyMutationInput, ActivityScheduleUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ActivityScheduleScalarWhereInput = {
+    AND?: ActivityScheduleScalarWhereInput | ActivityScheduleScalarWhereInput[]
+    OR?: ActivityScheduleScalarWhereInput[]
+    NOT?: ActivityScheduleScalarWhereInput | ActivityScheduleScalarWhereInput[]
+    id?: IntFilter<"ActivitySchedule"> | number
+    uuid?: StringFilter<"ActivitySchedule"> | string
+    user_uuid?: StringFilter<"ActivitySchedule"> | string
+    activity_uuid?: StringFilter<"ActivitySchedule"> | string
+    valid_from?: DateTimeFilter<"ActivitySchedule"> | Date | string
+    valid_until?: DateTimeNullableFilter<"ActivitySchedule"> | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFilter<"ActivitySchedule"> | $Enums.ActivityRepeatType
+    interval_days?: IntNullableFilter<"ActivitySchedule"> | number | null
+    time_of_day?: StringNullableFilter<"ActivitySchedule"> | string | null
+    frequency_value?: IntNullableFilter<"ActivitySchedule"> | number | null
+    frequency_period?: EnumFrequencyPeriodNullableFilter<"ActivitySchedule"> | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFilter<"ActivitySchedule"> | $Enums.ActivityTargetType
+    target_value?: FloatNullableFilter<"ActivitySchedule"> | number | null
+    target_unit?: EnumActivityTargetUnitNullableFilter<"ActivitySchedule"> | $Enums.ActivityTargetUnit | null
+    target_unit_label?: StringNullableFilter<"ActivitySchedule"> | string | null
+    is_active?: BoolFilter<"ActivitySchedule"> | boolean
+    created_at?: DateTimeFilter<"ActivitySchedule"> | Date | string
+    updated_at?: DateTimeFilter<"ActivitySchedule"> | Date | string
+  }
+
+  export type ActivityLogUpsertWithWhereUniqueWithoutUserInput = {
+    where: ActivityLogWhereUniqueInput
+    update: XOR<ActivityLogUpdateWithoutUserInput, ActivityLogUncheckedUpdateWithoutUserInput>
+    create: XOR<ActivityLogCreateWithoutUserInput, ActivityLogUncheckedCreateWithoutUserInput>
+  }
+
+  export type ActivityLogUpdateWithWhereUniqueWithoutUserInput = {
+    where: ActivityLogWhereUniqueInput
+    data: XOR<ActivityLogUpdateWithoutUserInput, ActivityLogUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ActivityLogUpdateManyWithWhereWithoutUserInput = {
+    where: ActivityLogScalarWhereInput
+    data: XOR<ActivityLogUpdateManyMutationInput, ActivityLogUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ActivityLogScalarWhereInput = {
+    AND?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
+    OR?: ActivityLogScalarWhereInput[]
+    NOT?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
+    id?: IntFilter<"ActivityLog"> | number
+    uuid?: StringFilter<"ActivityLog"> | string
+    user_uuid?: StringFilter<"ActivityLog"> | string
+    activity_uuid?: StringFilter<"ActivityLog"> | string
+    schedule_uuid?: StringFilter<"ActivityLog"> | string
+    occurrence_uuid?: StringFilter<"ActivityLog"> | string
+    snapshot_target_type?: EnumActivityTargetTypeFilter<"ActivityLog"> | $Enums.ActivityTargetType
+    snapshot_target_value?: FloatNullableFilter<"ActivityLog"> | number | null
+    snapshot_target_unit?: EnumActivityTargetUnitNullableFilter<"ActivityLog"> | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: StringNullableFilter<"ActivityLog"> | string | null
+    value?: FloatNullableFilter<"ActivityLog"> | number | null
+    completed?: BoolFilter<"ActivityLog"> | boolean
+    completed_at?: DateTimeNullableFilter<"ActivityLog"> | Date | string | null
+    skipped?: BoolFilter<"ActivityLog"> | boolean
+    skip_reason?: StringNullableFilter<"ActivityLog"> | string | null
+    notes?: StringNullableFilter<"ActivityLog"> | string | null
+    created_at?: DateTimeFilter<"ActivityLog"> | Date | string
+    updated_at?: DateTimeFilter<"ActivityLog"> | Date | string
+  }
+
+  export type ActivityOccurrenceUpsertWithWhereUniqueWithoutUserInput = {
+    where: ActivityOccurrenceWhereUniqueInput
+    update: XOR<ActivityOccurrenceUpdateWithoutUserInput, ActivityOccurrenceUncheckedUpdateWithoutUserInput>
+    create: XOR<ActivityOccurrenceCreateWithoutUserInput, ActivityOccurrenceUncheckedCreateWithoutUserInput>
+  }
+
+  export type ActivityOccurrenceUpdateWithWhereUniqueWithoutUserInput = {
+    where: ActivityOccurrenceWhereUniqueInput
+    data: XOR<ActivityOccurrenceUpdateWithoutUserInput, ActivityOccurrenceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ActivityOccurrenceUpdateManyWithWhereWithoutUserInput = {
+    where: ActivityOccurrenceScalarWhereInput
+    data: XOR<ActivityOccurrenceUpdateManyMutationInput, ActivityOccurrenceUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ActivityOccurrenceScalarWhereInput = {
+    AND?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
+    OR?: ActivityOccurrenceScalarWhereInput[]
+    NOT?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
+    id?: IntFilter<"ActivityOccurrence"> | number
+    uuid?: StringFilter<"ActivityOccurrence"> | string
+    user_uuid?: StringFilter<"ActivityOccurrence"> | string
+    activity_uuid?: StringFilter<"ActivityOccurrence"> | string
+    schedule_uuid?: StringFilter<"ActivityOccurrence"> | string
+    scheduled_for?: DateTimeFilter<"ActivityOccurrence"> | Date | string
+    status?: EnumOccurrenceStatusFilter<"ActivityOccurrence"> | $Enums.OccurrenceStatus
+    created_at?: DateTimeFilter<"ActivityOccurrence"> | Date | string
+    updated_at?: DateTimeFilter<"ActivityOccurrence"> | Date | string
   }
 
   export type ExpenseAccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -22342,6 +31835,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
@@ -22363,6 +31859,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -22408,6 +31907,145 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ActivityScheduleCreateWithoutActivityInput = {
+    uuid?: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutActivity_schedulesInput
+    weekdays?: ActivityScheduleWeekdayCreateNestedManyWithoutScheduleInput
+    specific_dates?: ActivityScheduleDateCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleUncheckedCreateWithoutActivityInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedCreateNestedManyWithoutScheduleInput
+    specific_dates?: ActivityScheduleDateUncheckedCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleCreateOrConnectWithoutActivityInput = {
+    where: ActivityScheduleWhereUniqueInput
+    create: XOR<ActivityScheduleCreateWithoutActivityInput, ActivityScheduleUncheckedCreateWithoutActivityInput>
+  }
+
+  export type ActivityScheduleCreateManyActivityInputEnvelope = {
+    data: ActivityScheduleCreateManyActivityInput | ActivityScheduleCreateManyActivityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityLogCreateWithoutActivityInput = {
+    uuid?: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule: ActivityScheduleCreateNestedOneWithoutLogsInput
+    occurrence: ActivityOccurrenceCreateNestedOneWithoutLogInput
+    user: UserCreateNestedOneWithoutActivity_logsInput
+  }
+
+  export type ActivityLogUncheckedCreateWithoutActivityInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    schedule_uuid: string
+    occurrence_uuid: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityLogCreateOrConnectWithoutActivityInput = {
+    where: ActivityLogWhereUniqueInput
+    create: XOR<ActivityLogCreateWithoutActivityInput, ActivityLogUncheckedCreateWithoutActivityInput>
+  }
+
+  export type ActivityLogCreateManyActivityInputEnvelope = {
+    data: ActivityLogCreateManyActivityInput | ActivityLogCreateManyActivityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityOccurrenceCreateWithoutActivityInput = {
+    uuid?: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule: ActivityScheduleCreateNestedOneWithoutOccurrencesInput
+    user: UserCreateNestedOneWithoutActivity_occurrencesInput
+    log?: ActivityLogCreateNestedOneWithoutOccurrenceInput
+  }
+
+  export type ActivityOccurrenceUncheckedCreateWithoutActivityInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    schedule_uuid: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+    log?: ActivityLogUncheckedCreateNestedOneWithoutOccurrenceInput
+  }
+
+  export type ActivityOccurrenceCreateOrConnectWithoutActivityInput = {
+    where: ActivityOccurrenceWhereUniqueInput
+    create: XOR<ActivityOccurrenceCreateWithoutActivityInput, ActivityOccurrenceUncheckedCreateWithoutActivityInput>
+  }
+
+  export type ActivityOccurrenceCreateManyActivityInputEnvelope = {
+    data: ActivityOccurrenceCreateManyActivityInput | ActivityOccurrenceCreateManyActivityInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutActivitiesInput = {
     update: XOR<UserUpdateWithoutActivitiesInput, UserUncheckedUpdateWithoutActivitiesInput>
     create: XOR<UserCreateWithoutActivitiesInput, UserUncheckedCreateWithoutActivitiesInput>
@@ -22430,6 +32068,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
@@ -22451,6 +32092,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -22476,6 +32120,54 @@ export namespace Prisma {
     data: XOR<ScheduleSlotUpdateManyMutationInput, ScheduleSlotUncheckedUpdateManyWithoutActivityInput>
   }
 
+  export type ActivityScheduleUpsertWithWhereUniqueWithoutActivityInput = {
+    where: ActivityScheduleWhereUniqueInput
+    update: XOR<ActivityScheduleUpdateWithoutActivityInput, ActivityScheduleUncheckedUpdateWithoutActivityInput>
+    create: XOR<ActivityScheduleCreateWithoutActivityInput, ActivityScheduleUncheckedCreateWithoutActivityInput>
+  }
+
+  export type ActivityScheduleUpdateWithWhereUniqueWithoutActivityInput = {
+    where: ActivityScheduleWhereUniqueInput
+    data: XOR<ActivityScheduleUpdateWithoutActivityInput, ActivityScheduleUncheckedUpdateWithoutActivityInput>
+  }
+
+  export type ActivityScheduleUpdateManyWithWhereWithoutActivityInput = {
+    where: ActivityScheduleScalarWhereInput
+    data: XOR<ActivityScheduleUpdateManyMutationInput, ActivityScheduleUncheckedUpdateManyWithoutActivityInput>
+  }
+
+  export type ActivityLogUpsertWithWhereUniqueWithoutActivityInput = {
+    where: ActivityLogWhereUniqueInput
+    update: XOR<ActivityLogUpdateWithoutActivityInput, ActivityLogUncheckedUpdateWithoutActivityInput>
+    create: XOR<ActivityLogCreateWithoutActivityInput, ActivityLogUncheckedCreateWithoutActivityInput>
+  }
+
+  export type ActivityLogUpdateWithWhereUniqueWithoutActivityInput = {
+    where: ActivityLogWhereUniqueInput
+    data: XOR<ActivityLogUpdateWithoutActivityInput, ActivityLogUncheckedUpdateWithoutActivityInput>
+  }
+
+  export type ActivityLogUpdateManyWithWhereWithoutActivityInput = {
+    where: ActivityLogScalarWhereInput
+    data: XOR<ActivityLogUpdateManyMutationInput, ActivityLogUncheckedUpdateManyWithoutActivityInput>
+  }
+
+  export type ActivityOccurrenceUpsertWithWhereUniqueWithoutActivityInput = {
+    where: ActivityOccurrenceWhereUniqueInput
+    update: XOR<ActivityOccurrenceUpdateWithoutActivityInput, ActivityOccurrenceUncheckedUpdateWithoutActivityInput>
+    create: XOR<ActivityOccurrenceCreateWithoutActivityInput, ActivityOccurrenceUncheckedCreateWithoutActivityInput>
+  }
+
+  export type ActivityOccurrenceUpdateWithWhereUniqueWithoutActivityInput = {
+    where: ActivityOccurrenceWhereUniqueInput
+    data: XOR<ActivityOccurrenceUpdateWithoutActivityInput, ActivityOccurrenceUncheckedUpdateWithoutActivityInput>
+  }
+
+  export type ActivityOccurrenceUpdateManyWithWhereWithoutActivityInput = {
+    where: ActivityOccurrenceScalarWhereInput
+    data: XOR<ActivityOccurrenceUpdateManyMutationInput, ActivityOccurrenceUncheckedUpdateManyWithoutActivityInput>
+  }
+
   export type UserCreateWithoutSchedule_slotsInput = {
     uuid?: string
     email: string
@@ -22487,6 +32179,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     activities?: ActivityCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
@@ -22508,6 +32203,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -22525,10 +32223,16 @@ export namespace Prisma {
   export type ActivityCreateWithoutSchedule_slotsInput = {
     uuid?: string
     name: string
-    color: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutActivitiesInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutSchedule_slotsInput = {
@@ -22536,9 +32240,15 @@ export namespace Prisma {
     uuid?: string
     user_uuid: string
     name: string
-    color: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
     created_at?: Date | string
     updated_at?: Date | string
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutSchedule_slotsInput = {
@@ -22568,6 +32278,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
@@ -22589,6 +32302,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -22612,10 +32328,16 @@ export namespace Prisma {
   export type ActivityUpdateWithoutSchedule_slotsInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutActivitiesNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutSchedule_slotsInput = {
@@ -22623,9 +32345,1377 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     user_uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityCreateWithoutActivity_schedulesInput = {
+    uuid?: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutActivitiesInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateWithoutActivity_schedulesInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityCreateOrConnectWithoutActivity_schedulesInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutActivity_schedulesInput, ActivityUncheckedCreateWithoutActivity_schedulesInput>
+  }
+
+  export type UserCreateWithoutActivity_schedulesInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutActivity_schedulesInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutActivity_schedulesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutActivity_schedulesInput, UserUncheckedCreateWithoutActivity_schedulesInput>
+  }
+
+  export type ActivityScheduleWeekdayCreateWithoutScheduleInput = {
+    weekday: number
+  }
+
+  export type ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput = {
+    id?: number
+    weekday: number
+  }
+
+  export type ActivityScheduleWeekdayCreateOrConnectWithoutScheduleInput = {
+    where: ActivityScheduleWeekdayWhereUniqueInput
+    create: XOR<ActivityScheduleWeekdayCreateWithoutScheduleInput, ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type ActivityScheduleWeekdayCreateManyScheduleInputEnvelope = {
+    data: ActivityScheduleWeekdayCreateManyScheduleInput | ActivityScheduleWeekdayCreateManyScheduleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityScheduleDateCreateWithoutScheduleInput = {
+    date: Date | string
+  }
+
+  export type ActivityScheduleDateUncheckedCreateWithoutScheduleInput = {
+    id?: number
+    date: Date | string
+  }
+
+  export type ActivityScheduleDateCreateOrConnectWithoutScheduleInput = {
+    where: ActivityScheduleDateWhereUniqueInput
+    create: XOR<ActivityScheduleDateCreateWithoutScheduleInput, ActivityScheduleDateUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type ActivityScheduleDateCreateManyScheduleInputEnvelope = {
+    data: ActivityScheduleDateCreateManyScheduleInput | ActivityScheduleDateCreateManyScheduleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityOccurrenceCreateWithoutScheduleInput = {
+    uuid?: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_occurrencesInput
+    user: UserCreateNestedOneWithoutActivity_occurrencesInput
+    log?: ActivityLogCreateNestedOneWithoutOccurrenceInput
+  }
+
+  export type ActivityOccurrenceUncheckedCreateWithoutScheduleInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+    log?: ActivityLogUncheckedCreateNestedOneWithoutOccurrenceInput
+  }
+
+  export type ActivityOccurrenceCreateOrConnectWithoutScheduleInput = {
+    where: ActivityOccurrenceWhereUniqueInput
+    create: XOR<ActivityOccurrenceCreateWithoutScheduleInput, ActivityOccurrenceUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type ActivityOccurrenceCreateManyScheduleInputEnvelope = {
+    data: ActivityOccurrenceCreateManyScheduleInput | ActivityOccurrenceCreateManyScheduleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityLogCreateWithoutScheduleInput = {
+    uuid?: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_logsInput
+    occurrence: ActivityOccurrenceCreateNestedOneWithoutLogInput
+    user: UserCreateNestedOneWithoutActivity_logsInput
+  }
+
+  export type ActivityLogUncheckedCreateWithoutScheduleInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    occurrence_uuid: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityLogCreateOrConnectWithoutScheduleInput = {
+    where: ActivityLogWhereUniqueInput
+    create: XOR<ActivityLogCreateWithoutScheduleInput, ActivityLogUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type ActivityLogCreateManyScheduleInputEnvelope = {
+    data: ActivityLogCreateManyScheduleInput | ActivityLogCreateManyScheduleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActivityUpsertWithoutActivity_schedulesInput = {
+    update: XOR<ActivityUpdateWithoutActivity_schedulesInput, ActivityUncheckedUpdateWithoutActivity_schedulesInput>
+    create: XOR<ActivityCreateWithoutActivity_schedulesInput, ActivityUncheckedCreateWithoutActivity_schedulesInput>
+    where?: ActivityWhereInput
+  }
+
+  export type ActivityUpdateToOneWithWhereWithoutActivity_schedulesInput = {
+    where?: ActivityWhereInput
+    data: XOR<ActivityUpdateWithoutActivity_schedulesInput, ActivityUncheckedUpdateWithoutActivity_schedulesInput>
+  }
+
+  export type ActivityUpdateWithoutActivity_schedulesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutActivitiesNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutActivity_schedulesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
+  export type UserUpsertWithoutActivity_schedulesInput = {
+    update: XOR<UserUpdateWithoutActivity_schedulesInput, UserUncheckedUpdateWithoutActivity_schedulesInput>
+    create: XOR<UserCreateWithoutActivity_schedulesInput, UserUncheckedCreateWithoutActivity_schedulesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutActivity_schedulesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutActivity_schedulesInput, UserUncheckedUpdateWithoutActivity_schedulesInput>
+  }
+
+  export type UserUpdateWithoutActivity_schedulesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutActivity_schedulesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ActivityScheduleWeekdayUpsertWithWhereUniqueWithoutScheduleInput = {
+    where: ActivityScheduleWeekdayWhereUniqueInput
+    update: XOR<ActivityScheduleWeekdayUpdateWithoutScheduleInput, ActivityScheduleWeekdayUncheckedUpdateWithoutScheduleInput>
+    create: XOR<ActivityScheduleWeekdayCreateWithoutScheduleInput, ActivityScheduleWeekdayUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type ActivityScheduleWeekdayUpdateWithWhereUniqueWithoutScheduleInput = {
+    where: ActivityScheduleWeekdayWhereUniqueInput
+    data: XOR<ActivityScheduleWeekdayUpdateWithoutScheduleInput, ActivityScheduleWeekdayUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type ActivityScheduleWeekdayUpdateManyWithWhereWithoutScheduleInput = {
+    where: ActivityScheduleWeekdayScalarWhereInput
+    data: XOR<ActivityScheduleWeekdayUpdateManyMutationInput, ActivityScheduleWeekdayUncheckedUpdateManyWithoutScheduleInput>
+  }
+
+  export type ActivityScheduleWeekdayScalarWhereInput = {
+    AND?: ActivityScheduleWeekdayScalarWhereInput | ActivityScheduleWeekdayScalarWhereInput[]
+    OR?: ActivityScheduleWeekdayScalarWhereInput[]
+    NOT?: ActivityScheduleWeekdayScalarWhereInput | ActivityScheduleWeekdayScalarWhereInput[]
+    id?: IntFilter<"ActivityScheduleWeekday"> | number
+    schedule_uuid?: StringFilter<"ActivityScheduleWeekday"> | string
+    weekday?: IntFilter<"ActivityScheduleWeekday"> | number
+  }
+
+  export type ActivityScheduleDateUpsertWithWhereUniqueWithoutScheduleInput = {
+    where: ActivityScheduleDateWhereUniqueInput
+    update: XOR<ActivityScheduleDateUpdateWithoutScheduleInput, ActivityScheduleDateUncheckedUpdateWithoutScheduleInput>
+    create: XOR<ActivityScheduleDateCreateWithoutScheduleInput, ActivityScheduleDateUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type ActivityScheduleDateUpdateWithWhereUniqueWithoutScheduleInput = {
+    where: ActivityScheduleDateWhereUniqueInput
+    data: XOR<ActivityScheduleDateUpdateWithoutScheduleInput, ActivityScheduleDateUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type ActivityScheduleDateUpdateManyWithWhereWithoutScheduleInput = {
+    where: ActivityScheduleDateScalarWhereInput
+    data: XOR<ActivityScheduleDateUpdateManyMutationInput, ActivityScheduleDateUncheckedUpdateManyWithoutScheduleInput>
+  }
+
+  export type ActivityScheduleDateScalarWhereInput = {
+    AND?: ActivityScheduleDateScalarWhereInput | ActivityScheduleDateScalarWhereInput[]
+    OR?: ActivityScheduleDateScalarWhereInput[]
+    NOT?: ActivityScheduleDateScalarWhereInput | ActivityScheduleDateScalarWhereInput[]
+    id?: IntFilter<"ActivityScheduleDate"> | number
+    schedule_uuid?: StringFilter<"ActivityScheduleDate"> | string
+    date?: DateTimeFilter<"ActivityScheduleDate"> | Date | string
+  }
+
+  export type ActivityOccurrenceUpsertWithWhereUniqueWithoutScheduleInput = {
+    where: ActivityOccurrenceWhereUniqueInput
+    update: XOR<ActivityOccurrenceUpdateWithoutScheduleInput, ActivityOccurrenceUncheckedUpdateWithoutScheduleInput>
+    create: XOR<ActivityOccurrenceCreateWithoutScheduleInput, ActivityOccurrenceUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type ActivityOccurrenceUpdateWithWhereUniqueWithoutScheduleInput = {
+    where: ActivityOccurrenceWhereUniqueInput
+    data: XOR<ActivityOccurrenceUpdateWithoutScheduleInput, ActivityOccurrenceUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type ActivityOccurrenceUpdateManyWithWhereWithoutScheduleInput = {
+    where: ActivityOccurrenceScalarWhereInput
+    data: XOR<ActivityOccurrenceUpdateManyMutationInput, ActivityOccurrenceUncheckedUpdateManyWithoutScheduleInput>
+  }
+
+  export type ActivityLogUpsertWithWhereUniqueWithoutScheduleInput = {
+    where: ActivityLogWhereUniqueInput
+    update: XOR<ActivityLogUpdateWithoutScheduleInput, ActivityLogUncheckedUpdateWithoutScheduleInput>
+    create: XOR<ActivityLogCreateWithoutScheduleInput, ActivityLogUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type ActivityLogUpdateWithWhereUniqueWithoutScheduleInput = {
+    where: ActivityLogWhereUniqueInput
+    data: XOR<ActivityLogUpdateWithoutScheduleInput, ActivityLogUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type ActivityLogUpdateManyWithWhereWithoutScheduleInput = {
+    where: ActivityLogScalarWhereInput
+    data: XOR<ActivityLogUpdateManyMutationInput, ActivityLogUncheckedUpdateManyWithoutScheduleInput>
+  }
+
+  export type ActivityScheduleCreateWithoutWeekdaysInput = {
+    uuid?: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_schedulesInput
+    user: UserCreateNestedOneWithoutActivity_schedulesInput
+    specific_dates?: ActivityScheduleDateCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleUncheckedCreateWithoutWeekdaysInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    specific_dates?: ActivityScheduleDateUncheckedCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleCreateOrConnectWithoutWeekdaysInput = {
+    where: ActivityScheduleWhereUniqueInput
+    create: XOR<ActivityScheduleCreateWithoutWeekdaysInput, ActivityScheduleUncheckedCreateWithoutWeekdaysInput>
+  }
+
+  export type ActivityScheduleUpsertWithoutWeekdaysInput = {
+    update: XOR<ActivityScheduleUpdateWithoutWeekdaysInput, ActivityScheduleUncheckedUpdateWithoutWeekdaysInput>
+    create: XOR<ActivityScheduleCreateWithoutWeekdaysInput, ActivityScheduleUncheckedCreateWithoutWeekdaysInput>
+    where?: ActivityScheduleWhereInput
+  }
+
+  export type ActivityScheduleUpdateToOneWithWhereWithoutWeekdaysInput = {
+    where?: ActivityScheduleWhereInput
+    data: XOR<ActivityScheduleUpdateWithoutWeekdaysInput, ActivityScheduleUncheckedUpdateWithoutWeekdaysInput>
+  }
+
+  export type ActivityScheduleUpdateWithoutWeekdaysInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    specific_dates?: ActivityScheduleDateUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleUncheckedUpdateWithoutWeekdaysInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    specific_dates?: ActivityScheduleDateUncheckedUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleCreateWithoutSpecific_datesInput = {
+    uuid?: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_schedulesInput
+    user: UserCreateNestedOneWithoutActivity_schedulesInput
+    weekdays?: ActivityScheduleWeekdayCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleUncheckedCreateWithoutSpecific_datesInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleCreateOrConnectWithoutSpecific_datesInput = {
+    where: ActivityScheduleWhereUniqueInput
+    create: XOR<ActivityScheduleCreateWithoutSpecific_datesInput, ActivityScheduleUncheckedCreateWithoutSpecific_datesInput>
+  }
+
+  export type ActivityScheduleUpsertWithoutSpecific_datesInput = {
+    update: XOR<ActivityScheduleUpdateWithoutSpecific_datesInput, ActivityScheduleUncheckedUpdateWithoutSpecific_datesInput>
+    create: XOR<ActivityScheduleCreateWithoutSpecific_datesInput, ActivityScheduleUncheckedCreateWithoutSpecific_datesInput>
+    where?: ActivityScheduleWhereInput
+  }
+
+  export type ActivityScheduleUpdateToOneWithWhereWithoutSpecific_datesInput = {
+    where?: ActivityScheduleWhereInput
+    data: XOR<ActivityScheduleUpdateWithoutSpecific_datesInput, ActivityScheduleUncheckedUpdateWithoutSpecific_datesInput>
+  }
+
+  export type ActivityScheduleUpdateWithoutSpecific_datesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    weekdays?: ActivityScheduleWeekdayUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleUncheckedUpdateWithoutSpecific_datesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityCreateWithoutActivity_occurrencesInput = {
+    uuid?: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutActivitiesInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateWithoutActivity_occurrencesInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityCreateOrConnectWithoutActivity_occurrencesInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutActivity_occurrencesInput, ActivityUncheckedCreateWithoutActivity_occurrencesInput>
+  }
+
+  export type ActivityScheduleCreateWithoutOccurrencesInput = {
+    uuid?: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_schedulesInput
+    user: UserCreateNestedOneWithoutActivity_schedulesInput
+    weekdays?: ActivityScheduleWeekdayCreateNestedManyWithoutScheduleInput
+    specific_dates?: ActivityScheduleDateCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleUncheckedCreateWithoutOccurrencesInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedCreateNestedManyWithoutScheduleInput
+    specific_dates?: ActivityScheduleDateUncheckedCreateNestedManyWithoutScheduleInput
+    logs?: ActivityLogUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleCreateOrConnectWithoutOccurrencesInput = {
+    where: ActivityScheduleWhereUniqueInput
+    create: XOR<ActivityScheduleCreateWithoutOccurrencesInput, ActivityScheduleUncheckedCreateWithoutOccurrencesInput>
+  }
+
+  export type UserCreateWithoutActivity_occurrencesInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutActivity_occurrencesInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutActivity_occurrencesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutActivity_occurrencesInput, UserUncheckedCreateWithoutActivity_occurrencesInput>
+  }
+
+  export type ActivityLogCreateWithoutOccurrenceInput = {
+    uuid?: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_logsInput
+    schedule: ActivityScheduleCreateNestedOneWithoutLogsInput
+    user: UserCreateNestedOneWithoutActivity_logsInput
+  }
+
+  export type ActivityLogUncheckedCreateWithoutOccurrenceInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    schedule_uuid: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityLogCreateOrConnectWithoutOccurrenceInput = {
+    where: ActivityLogWhereUniqueInput
+    create: XOR<ActivityLogCreateWithoutOccurrenceInput, ActivityLogUncheckedCreateWithoutOccurrenceInput>
+  }
+
+  export type ActivityUpsertWithoutActivity_occurrencesInput = {
+    update: XOR<ActivityUpdateWithoutActivity_occurrencesInput, ActivityUncheckedUpdateWithoutActivity_occurrencesInput>
+    create: XOR<ActivityCreateWithoutActivity_occurrencesInput, ActivityUncheckedCreateWithoutActivity_occurrencesInput>
+    where?: ActivityWhereInput
+  }
+
+  export type ActivityUpdateToOneWithWhereWithoutActivity_occurrencesInput = {
+    where?: ActivityWhereInput
+    data: XOR<ActivityUpdateWithoutActivity_occurrencesInput, ActivityUncheckedUpdateWithoutActivity_occurrencesInput>
+  }
+
+  export type ActivityUpdateWithoutActivity_occurrencesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutActivitiesNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutActivity_occurrencesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityScheduleUpsertWithoutOccurrencesInput = {
+    update: XOR<ActivityScheduleUpdateWithoutOccurrencesInput, ActivityScheduleUncheckedUpdateWithoutOccurrencesInput>
+    create: XOR<ActivityScheduleCreateWithoutOccurrencesInput, ActivityScheduleUncheckedCreateWithoutOccurrencesInput>
+    where?: ActivityScheduleWhereInput
+  }
+
+  export type ActivityScheduleUpdateToOneWithWhereWithoutOccurrencesInput = {
+    where?: ActivityScheduleWhereInput
+    data: XOR<ActivityScheduleUpdateWithoutOccurrencesInput, ActivityScheduleUncheckedUpdateWithoutOccurrencesInput>
+  }
+
+  export type ActivityScheduleUpdateWithoutOccurrencesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    weekdays?: ActivityScheduleWeekdayUpdateManyWithoutScheduleNestedInput
+    specific_dates?: ActivityScheduleDateUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleUncheckedUpdateWithoutOccurrencesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedUpdateManyWithoutScheduleNestedInput
+    specific_dates?: ActivityScheduleDateUncheckedUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type UserUpsertWithoutActivity_occurrencesInput = {
+    update: XOR<UserUpdateWithoutActivity_occurrencesInput, UserUncheckedUpdateWithoutActivity_occurrencesInput>
+    create: XOR<UserCreateWithoutActivity_occurrencesInput, UserUncheckedCreateWithoutActivity_occurrencesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutActivity_occurrencesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutActivity_occurrencesInput, UserUncheckedUpdateWithoutActivity_occurrencesInput>
+  }
+
+  export type UserUpdateWithoutActivity_occurrencesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutActivity_occurrencesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ActivityLogUpsertWithoutOccurrenceInput = {
+    update: XOR<ActivityLogUpdateWithoutOccurrenceInput, ActivityLogUncheckedUpdateWithoutOccurrenceInput>
+    create: XOR<ActivityLogCreateWithoutOccurrenceInput, ActivityLogUncheckedCreateWithoutOccurrenceInput>
+    where?: ActivityLogWhereInput
+  }
+
+  export type ActivityLogUpdateToOneWithWhereWithoutOccurrenceInput = {
+    where?: ActivityLogWhereInput
+    data: XOR<ActivityLogUpdateWithoutOccurrenceInput, ActivityLogUncheckedUpdateWithoutOccurrenceInput>
+  }
+
+  export type ActivityLogUpdateWithoutOccurrenceInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_logsNestedInput
+    schedule?: ActivityScheduleUpdateOneRequiredWithoutLogsNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_logsNestedInput
+  }
+
+  export type ActivityLogUncheckedUpdateWithoutOccurrenceInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityCreateWithoutActivity_logsInput = {
+    uuid?: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutActivitiesInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateWithoutActivity_logsInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityCreateOrConnectWithoutActivity_logsInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutActivity_logsInput, ActivityUncheckedCreateWithoutActivity_logsInput>
+  }
+
+  export type ActivityScheduleCreateWithoutLogsInput = {
+    uuid?: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_schedulesInput
+    user: UserCreateNestedOneWithoutActivity_schedulesInput
+    weekdays?: ActivityScheduleWeekdayCreateNestedManyWithoutScheduleInput
+    specific_dates?: ActivityScheduleDateCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleUncheckedCreateWithoutLogsInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedCreateNestedManyWithoutScheduleInput
+    specific_dates?: ActivityScheduleDateUncheckedCreateNestedManyWithoutScheduleInput
+    occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ActivityScheduleCreateOrConnectWithoutLogsInput = {
+    where: ActivityScheduleWhereUniqueInput
+    create: XOR<ActivityScheduleCreateWithoutLogsInput, ActivityScheduleUncheckedCreateWithoutLogsInput>
+  }
+
+  export type ActivityOccurrenceCreateWithoutLogInput = {
+    uuid?: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutActivity_occurrencesInput
+    schedule: ActivityScheduleCreateNestedOneWithoutOccurrencesInput
+    user: UserCreateNestedOneWithoutActivity_occurrencesInput
+  }
+
+  export type ActivityOccurrenceUncheckedCreateWithoutLogInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    schedule_uuid: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityOccurrenceCreateOrConnectWithoutLogInput = {
+    where: ActivityOccurrenceWhereUniqueInput
+    create: XOR<ActivityOccurrenceCreateWithoutLogInput, ActivityOccurrenceUncheckedCreateWithoutLogInput>
+  }
+
+  export type UserCreateWithoutActivity_logsInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutActivity_logsInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutActivity_logsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutActivity_logsInput, UserUncheckedCreateWithoutActivity_logsInput>
+  }
+
+  export type ActivityUpsertWithoutActivity_logsInput = {
+    update: XOR<ActivityUpdateWithoutActivity_logsInput, ActivityUncheckedUpdateWithoutActivity_logsInput>
+    create: XOR<ActivityCreateWithoutActivity_logsInput, ActivityUncheckedCreateWithoutActivity_logsInput>
+    where?: ActivityWhereInput
+  }
+
+  export type ActivityUpdateToOneWithWhereWithoutActivity_logsInput = {
+    where?: ActivityWhereInput
+    data: XOR<ActivityUpdateWithoutActivity_logsInput, ActivityUncheckedUpdateWithoutActivity_logsInput>
+  }
+
+  export type ActivityUpdateWithoutActivity_logsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutActivitiesNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutActivity_logsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityScheduleUpsertWithoutLogsInput = {
+    update: XOR<ActivityScheduleUpdateWithoutLogsInput, ActivityScheduleUncheckedUpdateWithoutLogsInput>
+    create: XOR<ActivityScheduleCreateWithoutLogsInput, ActivityScheduleUncheckedCreateWithoutLogsInput>
+    where?: ActivityScheduleWhereInput
+  }
+
+  export type ActivityScheduleUpdateToOneWithWhereWithoutLogsInput = {
+    where?: ActivityScheduleWhereInput
+    data: XOR<ActivityScheduleUpdateWithoutLogsInput, ActivityScheduleUncheckedUpdateWithoutLogsInput>
+  }
+
+  export type ActivityScheduleUpdateWithoutLogsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    weekdays?: ActivityScheduleWeekdayUpdateManyWithoutScheduleNestedInput
+    specific_dates?: ActivityScheduleDateUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleUncheckedUpdateWithoutLogsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedUpdateManyWithoutScheduleNestedInput
+    specific_dates?: ActivityScheduleDateUncheckedUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityOccurrenceUpsertWithoutLogInput = {
+    update: XOR<ActivityOccurrenceUpdateWithoutLogInput, ActivityOccurrenceUncheckedUpdateWithoutLogInput>
+    create: XOR<ActivityOccurrenceCreateWithoutLogInput, ActivityOccurrenceUncheckedCreateWithoutLogInput>
+    where?: ActivityOccurrenceWhereInput
+  }
+
+  export type ActivityOccurrenceUpdateToOneWithWhereWithoutLogInput = {
+    where?: ActivityOccurrenceWhereInput
+    data: XOR<ActivityOccurrenceUpdateWithoutLogInput, ActivityOccurrenceUncheckedUpdateWithoutLogInput>
+  }
+
+  export type ActivityOccurrenceUpdateWithoutLogInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_occurrencesNestedInput
+    schedule?: ActivityScheduleUpdateOneRequiredWithoutOccurrencesNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_occurrencesNestedInput
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateWithoutLogInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutActivity_logsInput = {
+    update: XOR<UserUpdateWithoutActivity_logsInput, UserUncheckedUpdateWithoutActivity_logsInput>
+    create: XOR<UserCreateWithoutActivity_logsInput, UserUncheckedCreateWithoutActivity_logsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutActivity_logsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutActivity_logsInput, UserUncheckedUpdateWithoutActivity_logsInput>
+  }
+
+  export type UserUpdateWithoutActivity_logsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutActivity_logsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutExpense_accountsInput = {
@@ -22640,6 +33730,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
@@ -22661,6 +33754,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
@@ -22775,6 +33871,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
@@ -22796,6 +33895,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -22848,6 +33950,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
@@ -22869,6 +33974,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
@@ -22973,6 +34081,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
@@ -22994,6 +34105,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -23046,6 +34160,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
@@ -23067,6 +34184,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -23170,6 +34290,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
@@ -23191,6 +34314,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -23261,6 +34387,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
@@ -23282,6 +34411,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
@@ -23430,6 +34562,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
@@ -23451,6 +34586,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -23607,6 +34745,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
@@ -23628,6 +34769,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -23697,6 +34841,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
@@ -23718,6 +34865,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -23754,6 +34904,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
@@ -23775,6 +34928,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -23864,6 +35020,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
@@ -23885,6 +35044,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -23964,6 +35126,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
@@ -23985,6 +35150,9 @@ export namespace Prisma {
     updated_at?: Date | string
     activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -24050,6 +35218,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
@@ -24071,6 +35242,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -24369,7 +35543,10 @@ export namespace Prisma {
     id?: number
     uuid?: string
     name: string
-    color: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -24381,6 +35558,57 @@ export namespace Prisma {
     day: $Enums.ScheduleDay
     start_time: string
     end_time: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityScheduleCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    activity_uuid: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityLogCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    activity_uuid: string
+    schedule_uuid: string
+    occurrence_uuid: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityOccurrenceCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    activity_uuid: string
+    schedule_uuid: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -24464,27 +35692,42 @@ export namespace Prisma {
   export type ActivityUpdateWithoutUserInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24517,6 +35760,166 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityScheduleUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    weekdays?: ActivityScheduleWeekdayUpdateManyWithoutScheduleNestedInput
+    specific_dates?: ActivityScheduleDateUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedUpdateManyWithoutScheduleNestedInput
+    specific_dates?: ActivityScheduleDateUncheckedUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityLogUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_logsNestedInput
+    schedule?: ActivityScheduleUpdateOneRequiredWithoutLogsNestedInput
+    occurrence?: ActivityOccurrenceUpdateOneRequiredWithoutLogNestedInput
+  }
+
+  export type ActivityLogUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    occurrence_uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityLogUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    occurrence_uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityOccurrenceUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_occurrencesNestedInput
+    schedule?: ActivityScheduleUpdateOneRequiredWithoutOccurrencesNestedInput
+    log?: ActivityLogUpdateOneWithoutOccurrenceNestedInput
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    log?: ActivityLogUncheckedUpdateOneWithoutOccurrenceNestedInput
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24769,6 +36172,57 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type ActivityScheduleCreateManyActivityInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    valid_from?: Date | string
+    valid_until?: Date | string | null
+    repeat_type: $Enums.ActivityRepeatType
+    interval_days?: number | null
+    time_of_day?: string | null
+    frequency_value?: number | null
+    frequency_period?: $Enums.FrequencyPeriod | null
+    target_type: $Enums.ActivityTargetType
+    target_value?: number | null
+    target_unit?: $Enums.ActivityTargetUnit | null
+    target_unit_label?: string | null
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityLogCreateManyActivityInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    schedule_uuid: string
+    occurrence_uuid: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityOccurrenceCreateManyActivityInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    schedule_uuid: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type ScheduleSlotUpdateWithoutActivityInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
@@ -24797,6 +36251,328 @@ export namespace Prisma {
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
     start_time?: StringFieldUpdateOperationsInput | string
     end_time?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityScheduleUpdateWithoutActivityInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutActivity_schedulesNestedInput
+    weekdays?: ActivityScheduleWeekdayUpdateManyWithoutScheduleNestedInput
+    specific_dates?: ActivityScheduleDateUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleUncheckedUpdateWithoutActivityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    weekdays?: ActivityScheduleWeekdayUncheckedUpdateManyWithoutScheduleNestedInput
+    specific_dates?: ActivityScheduleDateUncheckedUpdateManyWithoutScheduleNestedInput
+    occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutScheduleNestedInput
+    logs?: ActivityLogUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ActivityScheduleUncheckedUpdateManyWithoutActivityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    valid_from?: DateTimeFieldUpdateOperationsInput | Date | string
+    valid_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    repeat_type?: EnumActivityRepeatTypeFieldUpdateOperationsInput | $Enums.ActivityRepeatType
+    interval_days?: NullableIntFieldUpdateOperationsInput | number | null
+    time_of_day?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency_value?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency_period?: NullableEnumFrequencyPeriodFieldUpdateOperationsInput | $Enums.FrequencyPeriod | null
+    target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityLogUpdateWithoutActivityInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ActivityScheduleUpdateOneRequiredWithoutLogsNestedInput
+    occurrence?: ActivityOccurrenceUpdateOneRequiredWithoutLogNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_logsNestedInput
+  }
+
+  export type ActivityLogUncheckedUpdateWithoutActivityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    occurrence_uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityLogUncheckedUpdateManyWithoutActivityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    occurrence_uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityOccurrenceUpdateWithoutActivityInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ActivityScheduleUpdateOneRequiredWithoutOccurrencesNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_occurrencesNestedInput
+    log?: ActivityLogUpdateOneWithoutOccurrenceNestedInput
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateWithoutActivityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    log?: ActivityLogUncheckedUpdateOneWithoutOccurrenceNestedInput
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateManyWithoutActivityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    schedule_uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityScheduleWeekdayCreateManyScheduleInput = {
+    id?: number
+    weekday: number
+  }
+
+  export type ActivityScheduleDateCreateManyScheduleInput = {
+    id?: number
+    date: Date | string
+  }
+
+  export type ActivityOccurrenceCreateManyScheduleInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    scheduled_for: Date | string
+    status?: $Enums.OccurrenceStatus
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityLogCreateManyScheduleInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    occurrence_uuid: string
+    snapshot_target_type: $Enums.ActivityTargetType
+    snapshot_target_value?: number | null
+    snapshot_target_unit?: $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: string | null
+    value?: number | null
+    completed?: boolean
+    completed_at?: Date | string | null
+    skipped?: boolean
+    skip_reason?: string | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ActivityScheduleWeekdayUpdateWithoutScheduleInput = {
+    weekday?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ActivityScheduleWeekdayUncheckedUpdateWithoutScheduleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    weekday?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ActivityScheduleWeekdayUncheckedUpdateManyWithoutScheduleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    weekday?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ActivityScheduleDateUpdateWithoutScheduleInput = {
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityScheduleDateUncheckedUpdateWithoutScheduleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityScheduleDateUncheckedUpdateManyWithoutScheduleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityOccurrenceUpdateWithoutScheduleInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_occurrencesNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_occurrencesNestedInput
+    log?: ActivityLogUpdateOneWithoutOccurrenceNestedInput
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateWithoutScheduleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    log?: ActivityLogUncheckedUpdateOneWithoutOccurrenceNestedInput
+  }
+
+  export type ActivityOccurrenceUncheckedUpdateManyWithoutScheduleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityLogUpdateWithoutScheduleInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutActivity_logsNestedInput
+    occurrence?: ActivityOccurrenceUpdateOneRequiredWithoutLogNestedInput
+    user?: UserUpdateOneRequiredWithoutActivity_logsNestedInput
+  }
+
+  export type ActivityLogUncheckedUpdateWithoutScheduleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    occurrence_uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActivityLogUncheckedUpdateManyWithoutScheduleInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    occurrence_uuid?: StringFieldUpdateOperationsInput | string
+    snapshot_target_type?: EnumActivityTargetTypeFieldUpdateOperationsInput | $Enums.ActivityTargetType
+    snapshot_target_value?: NullableFloatFieldUpdateOperationsInput | number | null
+    snapshot_target_unit?: NullableEnumActivityTargetUnitFieldUpdateOperationsInput | $Enums.ActivityTargetUnit | null
+    snapshot_target_unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    completed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    skipped?: BoolFieldUpdateOperationsInput | boolean
+    skip_reason?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

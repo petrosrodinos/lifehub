@@ -138,7 +138,10 @@ exports.Prisma.ActivityScalarFieldEnum = {
   uuid: 'uuid',
   user_uuid: 'user_uuid',
   name: 'name',
+  description: 'description',
+  icon: 'icon',
   color: 'color',
+  visible: 'visible',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -151,6 +154,72 @@ exports.Prisma.ScheduleSlotScalarFieldEnum = {
   day: 'day',
   start_time: 'start_time',
   end_time: 'end_time',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.ActivityScheduleScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  activity_uuid: 'activity_uuid',
+  valid_from: 'valid_from',
+  valid_until: 'valid_until',
+  repeat_type: 'repeat_type',
+  interval_days: 'interval_days',
+  time_of_day: 'time_of_day',
+  frequency_value: 'frequency_value',
+  frequency_period: 'frequency_period',
+  target_type: 'target_type',
+  target_value: 'target_value',
+  target_unit: 'target_unit',
+  target_unit_label: 'target_unit_label',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.ActivityScheduleWeekdayScalarFieldEnum = {
+  id: 'id',
+  schedule_uuid: 'schedule_uuid',
+  weekday: 'weekday'
+};
+
+exports.Prisma.ActivityScheduleDateScalarFieldEnum = {
+  id: 'id',
+  schedule_uuid: 'schedule_uuid',
+  date: 'date'
+};
+
+exports.Prisma.ActivityOccurrenceScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  activity_uuid: 'activity_uuid',
+  schedule_uuid: 'schedule_uuid',
+  scheduled_for: 'scheduled_for',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.ActivityLogScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  activity_uuid: 'activity_uuid',
+  schedule_uuid: 'schedule_uuid',
+  occurrence_uuid: 'occurrence_uuid',
+  snapshot_target_type: 'snapshot_target_type',
+  snapshot_target_value: 'snapshot_target_value',
+  snapshot_target_unit: 'snapshot_target_unit',
+  snapshot_target_unit_label: 'snapshot_target_unit_label',
+  value: 'value',
+  completed: 'completed',
+  completed_at: 'completed_at',
+  skipped: 'skipped',
+  skip_reason: 'skip_reason',
+  notes: 'notes',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -301,6 +370,39 @@ exports.ScheduleDay = exports.$Enums.ScheduleDay = {
   SUNDAY: 'SUNDAY'
 };
 
+exports.ActivityRepeatType = exports.$Enums.ActivityRepeatType = {
+  DAILY: 'DAILY',
+  WEEKDAYS: 'WEEKDAYS',
+  INTERVAL: 'INTERVAL',
+  DATES: 'DATES',
+  FREQUENCY: 'FREQUENCY'
+};
+
+exports.FrequencyPeriod = exports.$Enums.FrequencyPeriod = {
+  WEEK: 'WEEK',
+  MONTH: 'MONTH'
+};
+
+exports.ActivityTargetType = exports.$Enums.ActivityTargetType = {
+  BOOLEAN: 'BOOLEAN',
+  QUANTITY: 'QUANTITY'
+};
+
+exports.ActivityTargetUnit = exports.$Enums.ActivityTargetUnit = {
+  PAGES: 'PAGES',
+  MINUTES: 'MINUTES',
+  KM: 'KM',
+  TIMES: 'TIMES',
+  CUSTOM: 'CUSTOM'
+};
+
+exports.OccurrenceStatus = exports.$Enums.OccurrenceStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  SKIPPED: 'SKIPPED',
+  FAILED: 'FAILED'
+};
+
 exports.ExpenseEntryType = exports.$Enums.ExpenseEntryType = {
   INCOME: 'INCOME',
   EXPENSE: 'EXPENSE',
@@ -316,6 +418,11 @@ exports.Prisma.ModelName = {
   User: 'User',
   Activity: 'Activity',
   ScheduleSlot: 'ScheduleSlot',
+  ActivitySchedule: 'ActivitySchedule',
+  ActivityScheduleWeekday: 'ActivityScheduleWeekday',
+  ActivityScheduleDate: 'ActivityScheduleDate',
+  ActivityOccurrence: 'ActivityOccurrence',
+  ActivityLog: 'ActivityLog',
   ExpenseAccount: 'ExpenseAccount',
   ExpenseCategory: 'ExpenseCategory',
   ExpenseSubcategory: 'ExpenseSubcategory',

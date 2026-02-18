@@ -18,6 +18,11 @@ import { MuscleGroupsModule } from './modules/muscle-groups/muscle-groups.module
 import { WorkoutsModule } from './modules/workouts/workouts.module';
 import { WorkoutSetsModule } from './modules/workout-sets/workout-sets.module';
 import { WorkoutEntriesModule } from './modules/workout-entries/workout-entries.module';
+import { ActivitySchedulesModule } from './modules/habbits/activity-schedules/activity-schedules.module';
+import { ActivityScheduleDatesModule } from './modules/habbits/activity-schedule-dates/activity-schedule-dates.module';
+import { ActivityScheduleWeekDaysModule } from './modules/habbits/activity-schedule-week-days/activity-schedule-week-days.module';
+import { ActivityOccurrencesModule } from './modules/habbits/activity-occurrences/activity-occurrences.module';
+import { ActivityLogsModule } from './modules/habbits/activity-logs/activity-logs.module';
 
 @Module({
   imports: [
@@ -38,6 +43,11 @@ import { WorkoutEntriesModule } from './modules/workout-entries/workout-entries.
     WorkoutsModule,
     WorkoutSetsModule,
     WorkoutEntriesModule,
+    ActivitySchedulesModule,
+    ActivityScheduleDatesModule,
+    ActivityScheduleWeekDaysModule,
+    ActivityOccurrencesModule,
+    ActivityLogsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -41,6 +41,39 @@ enum ExerciseType {
   TIME
 }
 
+enum ActivityRepeatType {
+  DAILY // every day
+  WEEKDAYS // specific days of the week (Mon/Wed/Fri)
+  INTERVAL // every N days
+  DATES // specific calendar dates
+  FREQUENCY // X times per week/month (e.g. gym 3x/week)
+}
+
+enum ActivityTargetType {
+  BOOLEAN
+  QUANTITY
+}
+
+enum ActivityTargetUnit {
+  PAGES
+  MINUTES
+  KM
+  TIMES // for frequency-based (run 3 times/week)
+  CUSTOM // user-defined unit label
+}
+
+enum FrequencyPeriod {
+  WEEK
+  MONTH
+}
+
+enum OccurrenceStatus {
+  PENDING
+  COMPLETED
+  SKIPPED
+  FAILED // missed without being explicitly skipped
+}
+
 model User {
   id         Int      @id @default(autoincrement())
   uuid       String   @unique @default(uuid())
@@ -54,8 +87,11 @@ model User {
   updated_at DateTime @updatedAt
 
   // Routine
-  activities     Activity[]
-  schedule_slots ScheduleSlot[]
+  activities           Activity[]
+  schedule_slots       ScheduleSlot[]
+  activity_schedules   ActivitySchedule[]
+  activity_logs        ActivityLog[]
+  activity_occurrences ActivityOccurrence[]
 
   // Expenses
   expense_accounts ExpenseAccount[]
@@ -75,16 +111,22 @@ model User {
 }
 
 model Activity {
-  id         Int      @id @default(autoincrement())
-  uuid       String   @unique @default(uuid())
-  user_uuid  String
-  name       String
-  color      String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  uuid        String   @unique @default(uuid())
+  user_uuid   String
+  name        String
+  description String?
+  icon        String?
+  color       String?
+  visible     Boolean  @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
-  user           User           @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  schedule_slots ScheduleSlot[]
+  user                 User                 @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  schedule_slots       ScheduleSlot[]
+  activity_schedules   ActivitySchedule[]
+  activity_logs        ActivityLog[]
+  activity_occurrences ActivityOccurrence[]
 
   @@index([uuid])
   @@index([user_uuid])
@@ -109,6 +151,131 @@ model ScheduleSlot {
   @@index([user_uuid])
   @@index([day])
   @@map("schedule_slots")
+}
+
+model ActivitySchedule {
+  id                Int                 @id @default(autoincrement())
+  uuid              String              @unique @default(uuid())
+  user_uuid         String
+  activity_uuid     String
+  // When this schedule config is active
+  valid_from        DateTime            @default(now())
+  valid_until       DateTime? // null = currently active
+  // Repeat configuration
+  repeat_type       ActivityRepeatType
+  interval_days     Int? // used when repeat_type = INTERVAL
+  time_of_day       String? // "17:00" — store as HH:MM string
+  // Frequency config (e.g. 3 times per week)
+  frequency_value   Int? // e.g. 3
+  frequency_period  FrequencyPeriod? // e.g. WEEK
+  // Target config — snapshotted per schedule version
+  target_type       ActivityTargetType
+  target_value      Float?
+  target_unit       ActivityTargetUnit?
+  target_unit_label String? // for CUSTOM unit, e.g. "laps"
+  is_active         Boolean             @default(true)
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+
+  activity       Activity                  @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
+  user           User                      @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  weekdays       ActivityScheduleWeekday[]
+  specific_dates ActivityScheduleDate[]
+  occurrences    ActivityOccurrence[]
+  logs           ActivityLog[]
+
+  @@index([activity_uuid])
+  @@index([user_uuid])
+  @@index([valid_from])
+  @@map("activity_schedules")
+}
+
+// Which weekdays the activity repeats on (Mon=1 ... Sun=7, ISO)
+model ActivityScheduleWeekday {
+  id            Int    @id @default(autoincrement())
+  schedule_uuid String
+  weekday       Int // 1=Mon, 7=Sun
+
+  schedule ActivitySchedule @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
+
+  @@unique([schedule_uuid, weekday])
+  @@map("activity_schedule_weekdays")
+}
+
+// Specific calendar dates for one-off or irregular schedules
+model ActivityScheduleDate {
+  id            Int      @id @default(autoincrement())
+  schedule_uuid String
+  date          DateTime // just the date portion matters
+
+  schedule ActivitySchedule @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
+
+  @@unique([schedule_uuid, date])
+  @@map("activity_schedule_dates")
+}
+
+// An "occurrence" is one expected instance of an activity on a given date.
+// Your backend generates these (e.g. daily cron or on-demand for the next 30 days).
+// This is what the user checks off. Separating this from the log lets you
+// distinguish "not done yet" vs "skipped" vs "completed".
+model ActivityOccurrence {
+  id            Int              @id @default(autoincrement())
+  uuid          String           @unique @default(uuid())
+  user_uuid     String
+  activity_uuid String
+  schedule_uuid String
+  scheduled_for DateTime // the date (and implied time) this is due
+  status        OccurrenceStatus @default(PENDING)
+  created_at    DateTime         @default(now())
+  updated_at    DateTime         @updatedAt
+
+  activity Activity         @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
+  schedule ActivitySchedule @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
+  user     User             @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  log      ActivityLog? // one-to-one: log is created when user acts on it
+
+  @@unique([schedule_uuid, scheduled_for])
+  @@index([user_uuid, scheduled_for])
+  @@index([activity_uuid])
+  @@map("activity_occurrences")
+}
+
+model ActivityLog {
+  id              Int    @id @default(autoincrement())
+  uuid            String @unique @default(uuid())
+  user_uuid       String
+  activity_uuid   String
+  schedule_uuid   String
+  occurrence_uuid String @unique // one log per occurrence
+
+  // Snapshot of the goal AT THE TIME of this log entry
+  // This is critical — don't rely on schedule.target_value for history
+  snapshot_target_type       ActivityTargetType
+  snapshot_target_value      Float?
+  snapshot_target_unit       ActivityTargetUnit?
+  snapshot_target_unit_label String?
+
+  // What the user actually did
+  value        Float? // actual quantity completed
+  completed    Boolean   @default(false)
+  completed_at DateTime? // set explicitly when user marks done
+  skipped      Boolean   @default(false)
+  skip_reason  String?
+
+  notes      String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  activity   Activity           @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
+  schedule   ActivitySchedule   @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
+  occurrence ActivityOccurrence @relation(fields: [occurrence_uuid], references: [uuid], onDelete: Cascade)
+  user       User               @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+
+  @@index([user_uuid])
+  @@index([activity_uuid])
+  @@index([completed_at])
+  @@index([schedule_uuid])
+  @@map("activity_logs")
 }
 
 model ExpenseAccount {
