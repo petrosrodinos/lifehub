@@ -41,3 +41,5 @@ export interface WorkoutEntryProgressPoint {
   total_sets: number
   total_duration: number | null
 }
+
+export type ReorderWorkoutEntriesPayload = { uuid: string; order: number }[]

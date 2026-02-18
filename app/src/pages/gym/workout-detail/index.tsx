@@ -1,18 +1,22 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Plus, Edit2, Calendar, Clock, Dumbbell, ChevronRight, Check } from "lucide-react";
+import { ArrowLeft, Plus, Edit2, Calendar, Clock, Dumbbell, Check } from "lucide-react";
 import { useWorkout, useUpdateWorkout } from "../../../features/workout/hooks/use-workout";
+import { useReorderWorkoutEntries } from "../../../features/workout-entries/hooks/use-workout-entries";
 import { CreateWorkoutModal } from "../components/workouts/CreateWorkoutModal";
-import { SetCard } from "./components/SetCard";
 import { AddExerciseModal } from "./components/AddExerciseModal";
 import { WorkoutDetailLoading } from "./components/WorkoutDetailLoading";
+import { SortableWorkoutEntryCard } from "./components/SortableWorkoutEntryCard";
+import { ReorderableList } from "../../../components/ui/ReorderableList";
 import { DateTime } from "luxon";
+import type { WorkoutEntry } from "../../../features/workout-entries/interfaces/workout-entries.interface";
 
 export function WorkoutDetailPage() {
   const { uuid } = useParams<{ uuid: string }>();
   const navigate = useNavigate();
   const { data: workout, isLoading } = useWorkout(uuid || "");
   const updateWorkout = useUpdateWorkout();
+  const reorderEntries = useReorderWorkoutEntries();
 
   const [isEditWorkoutModalOpen, setIsEditWorkoutModalOpen] = useState(false);
   const [isAddExerciseModalOpen, setIsAddExerciseModalOpen] = useState(false);
@@ -33,6 +37,10 @@ export function WorkoutDetailPage() {
 
   const entries = workout?.entries || [];
   const totalSets = entries.reduce((sum, entry) => sum + (entry.sets?.length || 0), 0);
+
+  const handleReorderEntries = (reordered: WorkoutEntry[]) => {
+    reorderEntries.mutate(reordered.map((e, i) => ({ uuid: e.uuid, order: i })));
+  };
 
   const handleFinishWorkout = () => {
     if (!uuid) return;
@@ -143,28 +151,17 @@ export function WorkoutDetailPage() {
               </button>
             </div>
           ) : (
-            entries.map((entry) => (
-              <div key={entry.uuid} className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/80 p-6">
-                <button type="button" onClick={() => navigate(`/dashboard/gym/workout-entry/${entry.uuid}`)} className="flex items-center justify-between mb-4 w-full text-left group/header">
-                  <div>
-                    <h2 className="text-lg font-semibold text-white group-hover/header:text-violet-300 transition-colors">{entry.exercise?.name || "Unknown Exercise"}</h2>
-                    {entry.exercise?.description && <p className="text-sm text-slate-400 mt-1">{entry.exercise.description}</p>}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-slate-500 bg-slate-800 px-3 py-1 rounded-lg">
-                      {entry.sets?.length || 0} {(entry.sets?.length || 0) === 1 ? "set" : "sets"}
-                    </span>
-                    <ChevronRight className="w-5 h-5 text-slate-600 group-hover/header:text-violet-400 transition-colors" />
-                  </div>
-                </button>
-
-                <div className="space-y-3">
-                  {entry.sets?.map((set, index) => (
-                    <SetCard key={set.uuid} set={set} setNumber={index + 1} />
-                  ))}
-                </div>
-              </div>
-            ))
+            <ReorderableList
+              items={entries}
+              getItemId={(e) => e.uuid}
+              onReorder={handleReorderEntries}
+              orderKey="order"
+              gapClass="space-y-6"
+            >
+              {(entry, _, sortableProps) => (
+                <SortableWorkoutEntryCard entry={entry} sortableProps={sortableProps} />
+              )}
+            </ReorderableList>
           )}
         </div>
       </div>

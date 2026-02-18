@@ -2,6 +2,7 @@ import axiosInstance from '../../../config/api/axios'
 import { ApiRoutes } from '../../../config/api/routes'
 import type {
   CreateWorkoutSetDto,
+  ReorderWorkoutSetsPayload,
   UpdateWorkoutSetDto,
   WorkoutSet,
 } from '../interfaces/workout-sets.interface'
@@ -50,5 +51,14 @@ export const deleteWorkoutSet = async (uuid: string): Promise<void> => {
     await axiosInstance.delete(ApiRoutes.fitness.workoutSets.delete(uuid))
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to delete workout set')
+  }
+}
+
+
+export const reorderWorkoutSets = async (updates: ReorderWorkoutSetsPayload): Promise<void> => {
+  try {
+    await Promise.all(updates.map(({ uuid, order }) => axiosInstance.patch(ApiRoutes.fitness.workoutSets.update(uuid), { order })))
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to reorder workout sets')
   }
 }

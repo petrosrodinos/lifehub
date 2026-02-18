@@ -1,11 +1,13 @@
 import { Dumbbell } from "lucide-react";
 import type { WorkoutEntry } from "../../../features/workout-entries/interfaces/workout-entries.interface";
-import { useCreateWorkoutSet } from "../../../features/workout-sets/hooks/use-workout-sets";
+import { useCreateWorkoutSet, useReorderWorkoutSets } from "../../../features/workout-sets/hooks/use-workout-sets";
 import { ExerciseTypes } from "../../../features/exercises/interfaces/exercises.interface";
 import type { CreateWorkoutSetDto } from "../../../features/workout-sets/interfaces/workout-sets.interface";
-import { SetCard } from "../workout-detail/components/SetCard";
+import type { WorkoutSet } from "../../../features/workout-sets/interfaces/workout-sets.interface";
 import { SetForm } from "../workout-detail/components/SetForm";
 import type { SetFormValues } from "../workout-detail/components/SetForm";
+import { SortableSetCard } from "./SortableSetCard";
+import { ReorderableList } from "../../../components/ui/ReorderableList";
 
 type TrackTabProps = {
   entry: WorkoutEntry;
@@ -13,10 +15,15 @@ type TrackTabProps = {
 
 export function TrackTab({ entry }: TrackTabProps) {
   const createSet = useCreateWorkoutSet();
+  const reorderSets = useReorderWorkoutSets();
 
   const exercise = entry.exercise;
   const exerciseSets = entry.sets || [];
   const exerciseType = exercise?.type || ExerciseTypes.REPS;
+
+  const handleReorderSets = (reordered: WorkoutSet[]) => {
+    reorderSets.mutate(reordered.map((s, i) => ({ uuid: s.uuid, order: i })));
+  };
 
   const handleSave = (values: SetFormValues) => {
     const data: CreateWorkoutSetDto = {
@@ -61,7 +68,17 @@ export function TrackTab({ entry }: TrackTabProps) {
             <p className="text-sm text-slate-500 mt-1">Use the controls above to add your first set.</p>
           </div>
         ) : (
-          exerciseSets.map((set, index) => <SetCard key={set.uuid} set={set} setNumber={index + 1} />)
+          <ReorderableList
+            items={exerciseSets}
+            getItemId={(s) => s.uuid}
+            onReorder={handleReorderSets}
+            orderKey="order"
+            gapClass="space-y-3"
+          >
+            {(set, index, sortableProps) => (
+              <SortableSetCard set={set} setNumber={index + 1} sortableProps={sortableProps} />
+            )}
+          </ReorderableList>
         )}
       </div>
     </div>

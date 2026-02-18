@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import type {
   CreateWorkoutEntryDto,
+  ReorderWorkoutEntriesPayload,
   UpdateWorkoutEntryDto,
   WorkoutEntryAnalyticsParams,
 } from '../interfaces/workout-entries.interface'
@@ -11,6 +12,7 @@ import {
   getWorkoutEntry,
   getWorkoutEntries,
   updateWorkoutEntry,
+  reorderWorkoutEntries,
   getWorkoutEntryAnalytics,
 } from '../services/workout-entries'
 
@@ -80,6 +82,23 @@ export function useUpdateWorkoutEntry() {
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to update workout entry', { duration: 3000 })
+    },
+  })
+}
+
+export function useReorderWorkoutEntries() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (updates: ReorderWorkoutEntriesPayload) => reorderWorkoutEntries(updates),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutEntries })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workoutSets })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.workouts })
+      toast.success('Order updated', { duration: 2000 })
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Failed to reorder', { duration: 3000 })
     },
   })
 }

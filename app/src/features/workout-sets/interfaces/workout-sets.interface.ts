@@ -59,3 +59,6 @@ export interface UpdateWorkoutSetDto {
   is_super_set?: boolean
   order?: number
 }
+
+export type ReorderWorkoutSetsPayload = { uuid: string; order: number }[]
+
