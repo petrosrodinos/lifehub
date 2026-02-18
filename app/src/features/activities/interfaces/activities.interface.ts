@@ -1,3 +1,8 @@
+import type { HabitSchedule } from '../../habbits/activity-schedules/interfaces/activity-schedules.interface'
+import type { HabitOccurrence } from '../../habbits/activity-occurrences/interfaces/activity-occurrences.interface'
+import type { HabitLog } from '../../habbits/activity-logs/interfaces/activity-logs.interface'
+import type { FrequencyPeriod } from '../../routine/interfaces/routine.interface'
+
 export interface Activity {
   id?: number
   uuid: string
@@ -12,6 +17,12 @@ export interface Activity {
   analytics?: ActivityProgressResponse
   created_at?: string
   updated_at?: string
+}
+
+export interface ActivityDetail extends Activity {
+  activity_schedules?: HabitSchedule[]
+  activity_occurrences?: HabitOccurrence[]
+  activity_logs?: HabitLog[]
 }
 
 export interface CreateActivityDto {
@@ -30,41 +41,6 @@ export interface UpdateActivityDto {
   visible?: boolean
 }
 
-export type ActivityRepeatType = 'DAILY' | 'WEEKDAYS' | 'INTERVAL' | 'DATES' | 'FREQUENCY'
-export type ActivityTargetType = 'BOOLEAN' | 'QUANTITY'
-export type ActivityTargetUnit = 'PAGES' | 'MINUTES' | 'KM' | 'TIMES' | 'CUSTOM'
-export type FrequencyPeriod = 'WEEK' | 'MONTH'
-export type OccurrenceStatus = 'PENDING' | 'COMPLETED' | 'SKIPPED' | 'FAILED'
-
-export interface HabitSchedule {
-  uuid: string
-  activity_uuid: string
-  user_uuid: string
-  valid_from: string
-  valid_until?: string | null
-  repeat_type: ActivityRepeatType
-  interval_days?: number | null
-  time_of_day?: string | null
-  frequency_value?: number | null
-  frequency_period?: FrequencyPeriod | null
-  target_type: ActivityTargetType
-  target_value?: number | null
-  target_unit?: ActivityTargetUnit | null
-  target_unit_label?: string | null
-  is_active: boolean
-}
-
-export interface HabitOccurrence {
-  uuid: string
-  activity_uuid: string
-  schedule_uuid: string
-  user_uuid: string
-  scheduled_for: string
-  status: OccurrenceStatus
-  created_at?: string
-  updated_at?: string
-}
-
 export interface ActivityProgressResponse {
   range: '7d' | '30d' | '90d' | '1y'
   completion_rate: number
@@ -75,4 +51,55 @@ export interface ActivityProgressResponse {
     currentStreak: number
     longestStreak: number
   }
+}
+
+
+export type ProgressRange = '7d' | '30d' | '90d' | '1y'
+
+export interface HabitActivityProgress {
+  range: ProgressRange
+  completion_rate: number
+  total_completed: number
+  total_skipped: number
+  total_failed: number
+  streak: {
+    currentStreak: number
+    longestStreak: number
+  }
+  quantity?: {
+    total_quantity_completed: number
+    average_per_day: number
+    average_per_week: number
+    trend_vs_previous_period: number
+    percent_of_target_achieved: number
+  } | null
+  frequency?: Array<{
+    schedule_uuid: string
+    frequency_period: FrequencyPeriod
+    periods: Array<{
+      period_key: string
+      required_count: number
+      completed_count: number
+      success_rate: number
+    }>
+  }>
+}
+
+export interface HabitOverview {
+  total_active_activities: number
+  completion_rate_last_7_days: number
+  best_streak_activity: {
+    activity_uuid: string
+    name: string
+    current_streak: number
+  } | null
+  most_skipped_activity: {
+    activity_uuid: string
+    name: string
+    skipped_count: number
+  } | null
+  daily_completion_heatmap: Array<{
+    date: string
+    count: number
+  }>
 }

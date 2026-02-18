@@ -24,6 +24,7 @@ export const ApiRoutes = {
       get: (uuid: string) => `/activities/${uuid}`,
       update: (uuid: string) => `/activities/${uuid}`,
       delete: (uuid: string) => `/activities/${uuid}`,
+      progress: (uuid: string) => `/activities/${uuid}/progress`,
     },
     scheduleSlots: {
       list: "/schedule-slots",
@@ -37,14 +38,6 @@ export const ApiRoutes = {
     },
   },
   habbits: {
-    activities: {
-      list: "/activities",
-      create: "/activities",
-      get: (uuid: string) => `/activities/${uuid}`,
-      update: (uuid: string) => `/activities/${uuid}`,
-      delete: (uuid: string) => `/activities/${uuid}`,
-      progress: (uuid: string) => `/activities/${uuid}/progress`,
-    },
     schedules: {
       createForActivity: (activity_uuid: string) => `/activities/${activity_uuid}/schedules`,
       update: (uuid: string) => `/schedules/${uuid}`,

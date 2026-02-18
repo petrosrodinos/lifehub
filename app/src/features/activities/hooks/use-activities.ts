@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import type {
   CreateActivityDto,
+  ProgressRange,
   UpdateActivityDto,
 } from '../interfaces/activities.interface'
 import {
@@ -10,12 +11,16 @@ import {
   createActivity,
   updateActivity,
   deleteActivity,
+  getHabitOverview,
+  getHabitActivityProgress,
 } from '../services/activities'
 
 const QUERY_KEYS = {
   activities: ['activities'],
   activity: (uuid: string) => ['activities', uuid],
   scheduleSlots: ['schedule-slots'],
+  overview: ['habbits', 'analytics', 'overview'],
+  progress: (activity_uuid: string, range: ProgressRange) => ['habbits', 'activities', activity_uuid, 'progress', range],
 }
 
 export function useActivities() {
@@ -79,5 +84,20 @@ export function useDeleteActivity() {
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to delete activity', { duration: 3000 })
     },
+  })
+}
+
+export function useHabitOverview() {
+  return useQuery({
+    queryKey: QUERY_KEYS.overview,
+    queryFn: getHabitOverview,
+  })
+}
+
+export function useHabitActivityProgress(activity_uuid: string, range: ProgressRange = '30d') {
+  return useQuery({
+    queryKey: QUERY_KEYS.progress(activity_uuid, range),
+    queryFn: () => getHabitActivityProgress(activity_uuid, range),
+    enabled: !!activity_uuid,
   })
 }

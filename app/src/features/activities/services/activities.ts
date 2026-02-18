@@ -5,6 +5,8 @@ import type {
   CreateActivityDto,
   UpdateActivityDto,
 } from '../interfaces/activities.interface'
+import type { HabitActivityProgress, HabitOverview, ProgressRange } from '../interfaces/activities.interface'
+
 
 export const getActivities = async (): Promise<Activity[]> => {
   try {
@@ -53,5 +55,28 @@ export const deleteActivity = async (uuid: string): Promise<void> => {
     await axiosInstance.delete(ApiRoutes.routine.activities.delete(uuid))
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to delete activity')
+  }
+}
+
+export const getHabitActivityProgress = async (
+  activity_uuid: string,
+  range: ProgressRange = '30d',
+): Promise<HabitActivityProgress> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.routine.activities.progress(activity_uuid), { params: { range } })
+    return response.data
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Failed to fetch activity progress'
+    throw new Error(message)
+  }
+}
+
+export const getHabitOverview = async (): Promise<HabitOverview> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.habbits.analytics.overview)
+    return response.data
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Failed to fetch overview analytics'
+    throw new Error(message)
   }
 }
