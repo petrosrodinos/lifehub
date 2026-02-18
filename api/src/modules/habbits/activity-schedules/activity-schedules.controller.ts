@@ -1,34 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ActivitySchedulesService } from './activity-schedules.service';
-import { CreateActivityScheduleDto } from './dto/create-activity-schedule.dto';
-import { UpdateActivityScheduleDto } from './dto/update-activity-schedule.dto';
+import { Body, Controller, HttpCode, HttpStatus, Param, Patch, Post, UseGuards } from '@nestjs/common'
+import { ActivitySchedulesService } from './activity-schedules.service'
+import { CreateActivityScheduleDto } from './dto/create-activity-schedule.dto'
+import { UpdateActivityScheduleDto } from './dto/update-activity-schedule.dto'
+import { JwtGuard } from '@/shared/guards/jwt.guard'
+import { CurrentUser } from '@/shared/decorators/current-user.decorator'
 
-@Controller('activity-schedules')
+@Controller()
+@UseGuards(JwtGuard)
 export class ActivitySchedulesController {
-  constructor(private readonly activitySchedulesService: ActivitySchedulesService) {}
+  constructor(private readonly activitySchedulesService: ActivitySchedulesService) { }
 
-  @Post()
-  create(@Body() createActivityScheduleDto: CreateActivityScheduleDto) {
-    return this.activitySchedulesService.create(createActivityScheduleDto);
+  @Post('activities/:activity_uuid/schedules')
+  @HttpCode(HttpStatus.CREATED)
+  create(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('activity_uuid') activity_uuid: string,
+    @Body() createActivityScheduleDto: CreateActivityScheduleDto,
+  ) {
+    return this.activitySchedulesService.createForActivity(user_uuid, activity_uuid, createActivityScheduleDto)
   }
 
-  @Get()
-  findAll() {
-    return this.activitySchedulesService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.activitySchedulesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateActivityScheduleDto: UpdateActivityScheduleDto) {
-    return this.activitySchedulesService.update(+id, updateActivityScheduleDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.activitySchedulesService.remove(+id);
+  @Patch('schedules/:uuid')
+  @HttpCode(HttpStatus.OK)
+  update(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string,
+    @Body() updateActivityScheduleDto: UpdateActivityScheduleDto,
+  ) {
+    return this.activitySchedulesService.updateWithVersioning(user_uuid, uuid, updateActivityScheduleDto)
   }
 }

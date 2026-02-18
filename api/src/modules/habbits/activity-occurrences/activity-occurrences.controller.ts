@@ -1,34 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ActivityOccurrencesService } from './activity-occurrences.service';
-import { CreateActivityOccurrenceDto } from './dto/create-activity-occurrence.dto';
-import { UpdateActivityOccurrenceDto } from './dto/update-activity-occurrence.dto';
+import { Body, Controller, HttpCode, HttpStatus, Param, Post, UseGuards } from '@nestjs/common'
+import { ActivityOccurrencesService } from './activity-occurrences.service'
+import { JwtGuard } from '@/shared/guards/jwt.guard'
+import { CurrentUser } from '@/shared/decorators/current-user.decorator'
+import { CompleteOccurrenceDto } from './dto/complete-occurrence.dto'
+import { SkipOccurrenceDto } from './dto/skip-occurrence.dto'
 
-@Controller('activity-occurrences')
+@Controller('occurrences')
+@UseGuards(JwtGuard)
 export class ActivityOccurrencesController {
-  constructor(private readonly activityOccurrencesService: ActivityOccurrencesService) {}
+  constructor(private readonly activityOccurrencesService: ActivityOccurrencesService) { }
 
-  @Post()
-  create(@Body() createActivityOccurrenceDto: CreateActivityOccurrenceDto) {
-    return this.activityOccurrencesService.create(createActivityOccurrenceDto);
+  @Post(':uuid/complete')
+  @HttpCode(HttpStatus.CREATED)
+  complete(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string,
+    @Body() dto: CompleteOccurrenceDto,
+  ) {
+    return this.activityOccurrencesService.completeOccurrence(user_uuid, uuid, dto)
   }
 
-  @Get()
-  findAll() {
-    return this.activityOccurrencesService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.activityOccurrencesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateActivityOccurrenceDto: UpdateActivityOccurrenceDto) {
-    return this.activityOccurrencesService.update(+id, updateActivityOccurrenceDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.activityOccurrencesService.remove(+id);
+  @Post(':uuid/skip')
+  @HttpCode(HttpStatus.CREATED)
+  skip(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string,
+    @Body() dto: SkipOccurrenceDto,
+  ) {
+    return this.activityOccurrencesService.skipOccurrence(user_uuid, uuid, dto)
   }
 }

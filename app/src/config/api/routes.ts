@@ -36,6 +36,44 @@ export const ApiRoutes = {
       duplicateSlot: "/schedule-slots/duplicate-slot",
     },
   },
+  habbits: {
+    activities: {
+      list: "/activities",
+      create: "/activities",
+      get: (uuid: string) => `/activities/${uuid}`,
+      update: (uuid: string) => `/activities/${uuid}`,
+      delete: (uuid: string) => `/activities/${uuid}`,
+      progress: (uuid: string) => `/activities/${uuid}/progress`,
+    },
+    schedules: {
+      createForActivity: (activity_uuid: string) => `/activities/${activity_uuid}/schedules`,
+      update: (uuid: string) => `/schedules/${uuid}`,
+    },
+    scheduleDates: {
+      list: "/activity-schedule-dates",
+      create: "/activity-schedule-dates",
+      get: (id: number) => `/activity-schedule-dates/${id}`,
+      update: (id: number) => `/activity-schedule-dates/${id}`,
+      delete: (id: number) => `/activity-schedule-dates/${id}`,
+    },
+    schduleWeekDays: {
+      list: "/activity-schedule-week-days",
+      create: "/activity-schedule-week-days",
+      get: (id: number) => `/activity-schedule-week-days/${id}`,
+      update: (id: number) => `/activity-schedule-week-days/${id}`,
+      delete: (id: number) => `/activity-schedule-week-days/${id}`,
+    },
+    occurrences: {
+      complete: (uuid: string) => `/occurrences/${uuid}/complete`,
+      skip: (uuid: string) => `/occurrences/${uuid}/skip`,
+    },
+    logs: {
+      list: "/logs",
+    },
+    analytics: {
+      overview: "/analytics/overview",
+    },
+  },
   fitness: {
     muscleGroups: {
       list: "/muscle-groups",

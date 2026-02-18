@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MailModule } from './modules/internal/mail/mail.module';
@@ -23,9 +24,11 @@ import { ActivityScheduleDatesModule } from './modules/habbits/activity-schedule
 import { ActivityScheduleWeekDaysModule } from './modules/habbits/activity-schedule-week-days/activity-schedule-week-days.module';
 import { ActivityOccurrencesModule } from './modules/habbits/activity-occurrences/activity-occurrences.module';
 import { ActivityLogsModule } from './modules/habbits/activity-logs/activity-logs.module';
+import { AnalyticsModule } from './modules/habbits/analytics/analytics.module';
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule,
     MailModule,
     SmsModule,
@@ -48,6 +51,7 @@ import { ActivityLogsModule } from './modules/habbits/activity-logs/activity-log
     ActivityScheduleWeekDaysModule,
     ActivityOccurrencesModule,
     ActivityLogsModule,
+    AnalyticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
