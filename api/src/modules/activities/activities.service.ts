@@ -5,6 +5,7 @@ import { UpdateActivityDto } from './dto/update-activity.dto'
 import { AnalyticsService } from '@/modules/habbits/analytics/analytics.service'
 import { DateTime } from 'luxon'
 import { ActivityProgressRangeType } from '../habbits/analytics/schemas/activity-progress-query.schema'
+import { ActivityHabbitsQueryType } from './schemas/activity-habbits-query.schema'
 
 @Injectable()
 export class ActivitiesService {
@@ -47,14 +48,17 @@ export class ActivitiesService {
     return activities
   }
 
-  async activityOccurrences(user_uuid: string) {
+  async getActivityHabbits(user_uuid: string, query: ActivityHabbitsQueryType) {
     const now = new Date()
-    const dayStart = DateTime.now().startOf('day').toJSDate()
-    const dayEnd = DateTime.now().endOf('day').toJSDate()
+    const rangeStart = query.date_from ? DateTime.fromISO(query.date_from).startOf('day') : DateTime.now().startOf('day')
+    const rangeEnd = query.date_to ? DateTime.fromISO(query.date_to).endOf('day') : rangeStart.endOf('day')
+    const dayStart = rangeStart.toJSDate()
+    const dayEnd = rangeEnd.toJSDate()
 
     const activities = await this.prisma.activity.findMany({
       where: {
-        user_uuid: user_uuid,
+        user_uuid,
+        visible: true,
       },
       include: {
         activity_schedules: {
@@ -66,39 +70,41 @@ export class ActivitiesService {
             weekdays: true,
             specific_dates: true,
           },
-          orderBy: {
-            valid_from: 'desc',
-          },
+          orderBy: { valid_from: 'desc' },
           take: 1,
         },
         activity_occurrences: {
           where: {
-            scheduled_for: {
-              gte: dayStart,
-              lte: dayEnd,
-            },
+            scheduled_for: { gte: dayStart, lte: dayEnd },
           },
-          include: {
-            log: true,
-          },
-          orderBy: {
-            scheduled_for: 'asc',
-          },
+          include: { log: true },
+          orderBy: { scheduled_for: 'asc' },
           take: 1,
         },
       },
-      orderBy: {
-        created_at: 'asc',
-      },
     })
 
-    return activities.map((activity) => ({
-      ...activity,
-      current_schedule: activity.activity_schedules[0] ?? null,
-      today_occurrence: activity.activity_occurrences[0] ?? null,
-      activity_schedules: undefined,
-      activity_occurrences: undefined,
-    }))
+    const parseTimeOfDay = (timeOfDay?: string | null): number => {
+      if (!timeOfDay) return Number.MAX_SAFE_INTEGER
+      const [hours, minutes] = timeOfDay.split(':').map(Number)
+      return hours * 60 + (minutes ?? 0)
+    }
+
+    return activities
+      .filter((activity) => activity.activity_occurrences.length > 0)
+      .map((activity) => {
+        const { activity_schedules, activity_occurrences, ...activityData } = activity
+        const schedule = activity_schedules[0] ?? null
+        const occurrence = activity_occurrences[0]
+        return {
+          activity: activityData,
+          schedule,
+          status: occurrence.status,
+          occurrence_uuid: occurrence.uuid,
+          quantity_value: (occurrence.log?.value as number | null | undefined) ?? null,
+        }
+      })
+      .sort((a, b) => parseTimeOfDay(a.schedule?.time_of_day) - parseTimeOfDay(b.schedule?.time_of_day))
   }
 
   async findOne(uuid: string, user_uuid: string) {
@@ -126,11 +132,11 @@ export class ActivitiesService {
     const frequency_success_rate =
       frequencyPeriods.length > 0
         ? Number(
-            (
-              frequencyPeriods.reduce((sum, period) => sum + period.success_rate, 0) /
-              frequencyPeriods.length
-            ).toFixed(2),
-          )
+          (
+            frequencyPeriods.reduce((sum, period) => sum + period.success_rate, 0) /
+            frequencyPeriods.length
+          ).toFixed(2),
+        )
         : null
 
     return {

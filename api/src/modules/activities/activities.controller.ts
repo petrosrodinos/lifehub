@@ -7,6 +7,7 @@ import { ActivitiesService } from './activities.service'
 import { CreateActivityDto } from './dto/create-activity.dto'
 import { UpdateActivityDto } from './dto/update-activity.dto'
 import { ActivityProgressQuerySchema, ActivityProgressQueryType } from '../habbits/analytics/schemas/activity-progress-query.schema'
+import { ActivityHabbitsQuerySchema, ActivityHabbitsQueryType } from './schemas/activity-habbits-query.schema'
 
 @ApiTags('Activities')
 @Controller('activities')
@@ -33,11 +34,14 @@ export class ActivitiesController {
     return this.activitiesService.findAll(userUuid)
   }
 
-  @Get('occurrences')
-  @ApiOperation({ summary: 'Get all activity occurrences' })
+  @Get('habbits')
+  @ApiOperation({ summary: 'Get all activity habbits' })
   @ApiResponse({ status: 200, description: 'Activity occurrences retrieved successfully' })
-  activityOccurrences(@CurrentUser('user_uuid') userUuid: string) {
-    return this.activitiesService.activityOccurrences(userUuid)
+  getActivityHabbits(
+    @CurrentUser('user_uuid') userUuid: string,
+    @Query(new ZodValidationPipe(ActivityHabbitsQuerySchema)) query: ActivityHabbitsQueryType,
+  ) {
+    return this.activitiesService.getActivityHabbits(userUuid, query)
   }
 
   @Get(':uuid/progress-summary')

@@ -2,6 +2,8 @@ import axiosInstance from '../../../config/api/axios'
 import { ApiRoutes } from '../../../config/api/routes'
 import type {
   Activity,
+  ActivityHabitItem,
+  ActivityHabbitsQuery,
   ActivityProgressSummary,
   CreateActivityDto,
   UpdateActivityDto,
@@ -81,12 +83,14 @@ export const getHabitOverview = async (): Promise<HabitOverview> => {
   }
 }
 
-export const getActivityOccurrences = async (): Promise<Activity[]> => {
+export const getActivityHabbits = async (query?: ActivityHabbitsQuery): Promise<ActivityHabitItem[]> => {
   try {
-    const response = await axiosInstance.get(ApiRoutes.routine.activities.occurrences)
+    const response = await axiosInstance.get(ApiRoutes.routine.activities.habbits, {
+      params: query,
+    })
     return response.data
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Failed to fetch activity occurrences'
+    const message = error instanceof Error ? error.message : 'Failed to fetch activity habbits'
     throw new Error(message)
   }
 }

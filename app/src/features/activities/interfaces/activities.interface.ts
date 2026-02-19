@@ -1,7 +1,6 @@
 import type { ActivitySchedule } from '../../habbits/activity-schedules/interfaces/activity-schedules.interface'
-import type { ActivityOccurrence } from '../../habbits/activity-occurrences/interfaces/activity-occurrences.interface'
+import type { ActivityOccurrence, OccurrenceStatus } from '../../habbits/activity-occurrences/interfaces/activity-occurrences.interface'
 import type { ActivityLog } from '../../habbits/activity-logs/interfaces/activity-logs.interface'
-import type { FrequencyPeriod } from '../../routine/interfaces/routine.interface'
 
 export interface Activity {
   id?: number
@@ -54,6 +53,19 @@ export interface ActivityProgressResponse {
 }
 
 
+
+export interface ActivityHabbitsQuery {
+  date_from?: string
+  date_to?: string
+}
+
+export interface ActivityHabitItem {
+  activity: Activity
+  schedule: ActivitySchedule | null
+  status: OccurrenceStatus
+  occurrence_uuid: string
+  quantity_value: number | null
+}
 
 export interface ActivityProgressSummary {
   completion_rate_7d: number

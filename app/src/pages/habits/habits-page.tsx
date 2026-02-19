@@ -96,12 +96,10 @@ export function HabitsPage() {
                   onSelect={() => setSelectedActivityUuid(item.activity.uuid)}
                   onOpenActions={() => setActiveActionItem(item)}
                   onSwipeComplete={async () => {
-                    if (!item.occurrenceUuid) return;
-                    await completeOccurrence(item.occurrenceUuid, item.status, item.schedule?.target_type === "QUANTITY" ? (item.quantityValue ?? 0) : undefined);
+                    await completeOccurrence(item.occurrence_uuid, item.status, item.schedule?.target_type === "QUANTITY" ? (item.quantity_value ?? 0) : undefined);
                   }}
                   onSwipeSkip={async () => {
-                    if (!item.occurrenceUuid) return;
-                    await skipOccurrence(item.occurrenceUuid, item.status);
+                    await skipOccurrence(item.occurrence_uuid, item.status);
                   }}
                 />
               ))}
@@ -140,12 +138,12 @@ export function HabitsPage() {
         loading={isActionPending}
         onClose={() => setActiveActionItem(null)}
         onComplete={async (value) => {
-          if (!activeActionItem?.occurrenceUuid) return;
-          await completeOccurrence(activeActionItem.occurrenceUuid, activeActionItem.status, value);
+          if (!activeActionItem) return;
+          await completeOccurrence(activeActionItem.occurrence_uuid, activeActionItem.status, value);
         }}
         onSkip={async () => {
-          if (!activeActionItem?.occurrenceUuid) return;
-          await skipOccurrence(activeActionItem.occurrenceUuid, activeActionItem.status);
+          if (!activeActionItem) return;
+          await skipOccurrence(activeActionItem.occurrence_uuid, activeActionItem.status);
         }}
       />
 

@@ -2,11 +2,11 @@ import { useMemo, useState } from 'react'
 import { DateTime } from 'luxon'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
-import type { Activity } from '../../../features/activities/interfaces/activities.interface'
+import type { ActivityHabitItem } from '../../../features/activities/interfaces/activities.interface'
 import type { ActivityLog } from '../../../features/habbits/activity-logs/interfaces/activity-logs.interface'
 import { OccurrenceStatuses, type OccurrenceStatus } from '../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface'
 import type { UpdateActivityScheduleDto } from '../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface'
-import { useActivityOccurrences, useActivityProgressSummary, useHabitOverview } from '../../../features/activities/hooks/use-activities'
+import { useActivityHabbits, useActivityProgressSummary, useHabitOverview } from '../../../features/activities/hooks/use-activities'
 import { useActivityLogs } from '../../../features/habbits/activity-logs/hooks/use-activity-logs'
 import { completeActivityOccurrence, skipActivityOccurrence } from '../../../features/habbits/activity-occurrences/services/activity-occurrences'
 import { updateActivitySchedule } from '../../../features/habbits/activity-schedules/services/activity-schedules'
@@ -20,41 +20,24 @@ import type {
 } from '../interfaces/habbits-tab.interface'
 
 const QUERY_KEYS = {
-  activities: ['activities'],
+  habbits: ['habbits', 'activities', 'occurrences'],
   logs: ['habbits', 'activity-logs'],
   overview: ['habbits', 'analytics', 'overview'],
 }
 
 type OccurrencePatch = {
-  activityUuid: string
+  occurrenceUuid: string
   status: OccurrenceStatus
 }
 
 function patchOccurrenceStatus(
-  activities: Activity[] | undefined,
+  items: ActivityHabitItem[] | undefined,
   patch: OccurrencePatch,
-): Activity[] | undefined {
-  if (!activities) return activities
-
-  return activities.map((activity) => {
-    if (activity.uuid !== patch.activityUuid || !activity.today_occurrence) {
-      return activity
-    }
-    return {
-      ...activity,
-      today_occurrence: {
-        ...activity.today_occurrence,
-        status: patch.status,
-      },
-    }
-  })
-}
-
-function parseTimeOfDay(timeOfDay?: string | null): number {
-  if (!timeOfDay) return Number.MAX_SAFE_INTEGER
-  const parsed = DateTime.fromFormat(timeOfDay, 'HH:mm:ss')
-  if (!parsed.isValid) return Number.MAX_SAFE_INTEGER
-  return parsed.hour * 60 + parsed.minute
+): ActivityHabitItem[] | undefined {
+  if (!items) return items
+  return items.map((item) =>
+    item.occurrence_uuid === patch.occurrenceUuid ? { ...item, status: patch.status } : item,
+  )
 }
 
 function groupLogsByDate(logs: ActivityLog[]): GroupedActivityLogs[] {
@@ -79,28 +62,10 @@ export function useHabbitsTab() {
   const queryClient = useQueryClient()
   const [selectedActivityUuid, setSelectedActivityUuid] = useState<string | null>(null)
 
-  const activitiesQuery = useActivityOccurrences()
+  const activitiesQuery = useActivityHabbits()
   const overviewQuery = useHabitOverview()
 
-  const activities = activitiesQuery.data ?? []
-
-  const todayHabits = useMemo<ActivityTodayItem[]>(() => {
-    return activities
-      .filter((activity) => activity.visible && activity.today_occurrence)
-      .map((activity) => {
-        const occurrence = activity.today_occurrence!
-        const schedule = activity.current_schedule ?? null
-
-        return {
-          activity,
-          schedule,
-          status: occurrence.status,
-          occurrenceUuid: occurrence.uuid,
-          quantityValue: occurrence.log?.value ?? null,
-        }
-      })
-      .sort((a, b) => parseTimeOfDay(a.schedule?.time_of_day) - parseTimeOfDay(b.schedule?.time_of_day))
-  }, [activities])
+  const todayHabits: ActivityTodayItem[] = activitiesQuery.data ?? []
 
   const resolvedSelectedActivityUuid =
     selectedActivityUuid && todayHabits.some((item) => item.activity.uuid === selectedActivityUuid)
@@ -136,30 +101,25 @@ export function useHabbitsTab() {
     mutationFn: ({ occurrenceUuid, value }: OccurrenceCompletionPayload) =>
       completeActivityOccurrence(occurrenceUuid, value !== undefined ? { value } : {}),
     onMutate: async ({ occurrenceUuid }) => {
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.activities })
-      const previousActivities = queryClient.getQueryData<Activity[]>(QUERY_KEYS.activities)
-      const activityUuid =
-        previousActivities?.find((activity) => activity.today_occurrence?.uuid === occurrenceUuid)?.uuid ?? null
-      if (activityUuid) {
-        queryClient.setQueryData<Activity[]>(
-          QUERY_KEYS.activities,
-          patchOccurrenceStatus(previousActivities, { activityUuid, status: OccurrenceStatuses.COMPLETED }),
-        )
-      }
-
-      return { previousActivities }
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.habbits })
+      const previousItems = queryClient.getQueryData<ActivityHabitItem[]>(QUERY_KEYS.habbits)
+      queryClient.setQueryData<ActivityHabitItem[]>(
+        QUERY_KEYS.habbits,
+        patchOccurrenceStatus(previousItems, { occurrenceUuid, status: OccurrenceStatuses.COMPLETED }),
+      )
+      return { previousItems }
     },
     onSuccess: () => {
       toast.success('Occurrence completed', { duration: 1600 })
     },
     onError: (error, _, context) => {
-      if (context?.previousActivities) {
-        queryClient.setQueryData(QUERY_KEYS.activities, context.previousActivities)
+      if (context?.previousItems) {
+        queryClient.setQueryData(QUERY_KEYS.habbits, context.previousItems)
       }
       toast.error(error.message || 'Could not complete occurrence')
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.activities })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.habbits })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.logs })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.overview })
       if (resolvedSelectedActivityUuid) {
@@ -172,30 +132,25 @@ export function useHabbitsTab() {
     mutationFn: ({ occurrenceUuid, skipReason }: OccurrenceSkipPayload) =>
       skipActivityOccurrence(occurrenceUuid, skipReason ? { skip_reason: skipReason } : {}),
     onMutate: async ({ occurrenceUuid }) => {
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.activities })
-      const previousActivities = queryClient.getQueryData<Activity[]>(QUERY_KEYS.activities)
-      const activityUuid =
-        previousActivities?.find((activity) => activity.today_occurrence?.uuid === occurrenceUuid)?.uuid ?? null
-      if (activityUuid) {
-        queryClient.setQueryData<Activity[]>(
-          QUERY_KEYS.activities,
-          patchOccurrenceStatus(previousActivities, { activityUuid, status: OccurrenceStatuses.SKIPPED }),
-        )
-      }
-
-      return { previousActivities }
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.habbits })
+      const previousItems = queryClient.getQueryData<ActivityHabitItem[]>(QUERY_KEYS.habbits)
+      queryClient.setQueryData<ActivityHabitItem[]>(
+        QUERY_KEYS.habbits,
+        patchOccurrenceStatus(previousItems, { occurrenceUuid, status: OccurrenceStatuses.SKIPPED }),
+      )
+      return { previousItems }
     },
     onSuccess: () => {
       toast.success('Occurrence skipped', { duration: 1600 })
     },
     onError: (error, _, context) => {
-      if (context?.previousActivities) {
-        queryClient.setQueryData(QUERY_KEYS.activities, context.previousActivities)
+      if (context?.previousItems) {
+        queryClient.setQueryData(QUERY_KEYS.habbits, context.previousItems)
       }
       toast.error(error.message || 'Could not skip occurrence')
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.activities })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.habbits })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.logs })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.overview })
       if (resolvedSelectedActivityUuid) {
@@ -213,7 +168,7 @@ export function useHabbitsTab() {
       toast.error(error.message || 'Could not update schedule')
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.activities })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.habbits })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.logs })
       if (resolvedSelectedActivityUuid) {
         queryClient.invalidateQueries({ queryKey: ['habbits', 'activities', resolvedSelectedActivityUuid, 'progress-summary'] })

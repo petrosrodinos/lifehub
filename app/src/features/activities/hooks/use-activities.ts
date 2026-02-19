@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import type {
+  ActivityHabbitsQuery,
   CreateActivityDto,
   ProgressRange,
   UpdateActivityDto,
@@ -14,8 +15,8 @@ import {
   updateActivity,
   deleteActivity,
   getHabitOverview,
-  getActivityOccurrences,
   getActivityProgressSummary,
+  getActivityHabbits,
 } from '../services/activities'
 
 const QUERY_KEYS = {
@@ -93,10 +94,10 @@ export function useDeleteActivity() {
   })
 }
 
-export function useActivityOccurrences() {
+export function useActivityHabbits(query?: ActivityHabbitsQuery) {
   return useQuery({
-    queryKey: QUERY_KEYS.occurrences,
-    queryFn: () => getActivityOccurrences(),
+    queryKey: [...QUERY_KEYS.occurrences, query],
+    queryFn: () => getActivityHabbits(query),
   })
 }
 
