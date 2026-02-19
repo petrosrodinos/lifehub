@@ -1,3 +1,5 @@
+import type { Activity } from "../../../activities/interfaces/activities.interface"
+
 export interface ActivitySchedule {
   uuid: string
   user_uuid: string
@@ -18,6 +20,7 @@ export interface ActivitySchedule {
   updated_at: string
   weekdays?: Array<{ weekday: number }>
   specific_dates?: Array<{ date: string }>
+  activity?: Activity
 }
 
 export interface CreateActivityScheduleDto {

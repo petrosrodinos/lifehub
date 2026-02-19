@@ -171,6 +171,65 @@ export class ActivitySchedulesService {
     })
   }
 
+  async findAll(user_uuid: string) {
+    return this.prisma.activitySchedule.findMany({
+      where: { user_uuid },
+      include: {
+        weekdays: true,
+        specific_dates: true,
+        activity: true,
+      },
+      orderBy: [{ is_active: 'desc' }, { valid_from: 'desc' }],
+    })
+  }
+
+  async findAllForActivity(user_uuid: string, activity_uuid: string) {
+    const activity = await this.prisma.activity.findFirst({
+      where: { uuid: activity_uuid, user_uuid },
+    })
+
+    if (!activity) {
+      throw new NotFoundException('Activity not found')
+    }
+
+    return this.prisma.activitySchedule.findMany({
+      where: { activity_uuid, user_uuid },
+      include: {
+        weekdays: true,
+        specific_dates: true,
+      },
+      orderBy: { valid_from: 'desc' },
+    })
+  }
+
+  async remove(user_uuid: string, schedule_uuid: string): Promise<void> {
+    const schedule = await this.prisma.activitySchedule.findFirst({
+      where: { uuid: schedule_uuid, user_uuid },
+    })
+
+    if (!schedule) {
+      throw new NotFoundException('Schedule not found')
+    }
+
+    const now = new Date()
+
+    await this.prisma.$transaction(async (tx) => {
+      await tx.activityOccurrence.deleteMany({
+        where: {
+          schedule_uuid,
+          user_uuid,
+          status: 'PENDING',
+          scheduled_for: { gte: now },
+        },
+      })
+
+      await tx.activitySchedule.update({
+        where: { uuid: schedule_uuid },
+        data: { is_active: false, valid_until: now },
+      })
+    })
+  }
+
   private validateScheduleDto(dto: CreateActivityScheduleDto) {
     if (dto.repeat_type === ActivityRepeatType.WEEKDAYS && (!dto.weekdays || dto.weekdays.length === 0)) {
       throw new BadRequestException('weekdays are required for WEEKDAYS repeat_type')

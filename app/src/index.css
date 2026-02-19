@@ -3,6 +3,7 @@
 @theme {
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --breakpoint-xs: 480px;
 }
 
 @layer base {

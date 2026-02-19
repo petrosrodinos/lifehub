@@ -41,8 +41,11 @@ export const ApiRoutes = {
   },
   habbits: {
     schedules: {
+      listAll: '/schedules',
+      list: (activity_uuid: string) => `/activities/${activity_uuid}/schedules`,
       createForActivity: (activity_uuid: string) => `/activities/${activity_uuid}/schedules`,
       update: (uuid: string) => `/schedules/${uuid}`,
+      delete: (uuid: string) => `/schedules/${uuid}`,
     },
     scheduleDates: {
       list: "/activity-schedule-dates",

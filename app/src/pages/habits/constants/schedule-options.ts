@@ -7,6 +7,14 @@ export const REPEAT_TYPE_OPTIONS = [
   { value: ActivityRepeatTypes.FREQUENCY, label: 'Frequency based' },
 ] as const
 
+export const REPEAT_LABELS: Record<string, string> = {
+  DAILY: "Daily",
+  WEEKDAYS: "Weekdays",
+  INTERVAL: "Every N days",
+  DATES: "Specific dates",
+  FREQUENCY: "Frequency",
+};
+
 export const TARGET_TYPE_OPTIONS = [
   { value: ActivityTargetTypes.BOOLEAN, label: 'Boolean (done / not done)' },
   { value: ActivityTargetTypes.QUANTITY, label: 'Quantity' },
@@ -34,3 +42,6 @@ export const WEEKDAY_OPTIONS = [
   { value: 6, label: 'Sat' },
   { value: 7, label: 'Sun' },
 ] as const
+
+export const WEEKDAY_NAMES = ['', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
