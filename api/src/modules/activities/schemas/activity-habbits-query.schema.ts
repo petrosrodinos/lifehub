@@ -9,6 +9,7 @@ export const ActivityHabbitsQuerySchema = z.object({
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, 'date_to must be in YYYY-MM-DD format')
     .optional(),
+  activity_uuid: z.string().uuid('activity_uuid must be a valid UUID').optional(),
 })
 
 export type ActivityHabbitsQueryType = z.infer<typeof ActivityHabbitsQuerySchema>

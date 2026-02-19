@@ -57,6 +57,7 @@ export interface ActivityProgressResponse {
 export interface ActivityHabbitsQuery {
   date_from?: string
   date_to?: string
+  activity_uuid?: string
 }
 
 export interface ActivityHabitItem {

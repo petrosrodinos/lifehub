@@ -4,7 +4,7 @@ import { SignIn } from "../pages/auth/sign-in";
 import { SignUp } from "../pages/auth/sign-up";
 import { MainLayout } from "../components/layout/main-layout";
 import { RoutinePage } from "../pages/routine/index";
-import { HabitsPage } from "../pages/habits/habits-page";
+import { HabitsPage } from "../pages/habits";
 import { SettingsPage } from "../pages/settings/settings-page";
 import { ExpenseAccountsPage } from "../pages/expenses";
 import { GymPage } from "../pages/gym";

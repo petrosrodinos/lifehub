@@ -59,6 +59,7 @@ export class ActivitiesService {
       where: {
         user_uuid,
         visible: true,
+        ...(query.activity_uuid ? { uuid: query.activity_uuid } : {}),
       },
       include: {
         activity_schedules: {

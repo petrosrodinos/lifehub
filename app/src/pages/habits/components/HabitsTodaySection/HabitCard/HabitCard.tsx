@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import { useRef } from "react";
 import type { ActivityTodayItem } from "../../../interfaces/habbits-tab.interface";
 import { OccurrenceStatuses } from "../../../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface";
+import { ActivityTargetTypes } from "../../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface";
 
 type HabitCardProps = {
   item: ActivityTodayItem;
@@ -29,7 +30,7 @@ function getStatusIcon(status: ActivityTodayItem["status"]) {
 }
 
 function formatTargetSummary(item: ActivityTodayItem) {
-  if (item.schedule?.target_type !== "QUANTITY") return "Mark as done";
+  if (item.schedule?.target_type !== ActivityTargetTypes.QUANTITY) return "Mark as done";
   const value = item.quantity_value ?? 0;
   const target = item.schedule.target_value ?? 0;
   const unit = item.schedule.target_unit_label ?? item.schedule.target_unit?.toLowerCase() ?? "units";
