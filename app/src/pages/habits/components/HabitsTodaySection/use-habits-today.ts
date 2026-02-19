@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { DateTime } from 'luxon'
 import toast from 'react-hot-toast'
-import { useActivityHabbits, useActivities } from '../../../../features/activities/hooks/use-activities'
+import { useActivityHabbits } from '../../../../features/activities/hooks/use-activities'
 import type { ActivityHabbitsQuery } from '../../../../features/activities/interfaces/activities.interface'
 import { OccurrenceStatuses } from '../../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface'
 import {
@@ -11,14 +11,20 @@ import {
 import { useHabitsPageContext } from '../../context/habits-page.context'
 import type { ActivityTodayItem } from '../../interfaces/habbits-tab.interface'
 
+export interface HabitsTodayFilter {
+  dateFrom: string
+  dateTo: string
+  activityUuid: string
+}
+
+const DEFAULT_FILTER: HabitsTodayFilter = { dateFrom: '', dateTo: '', activityUuid: '' }
+
 export function useHabitsToday() {
   const { selectedActivityUuid, setSelectedActivityUuid } = useHabitsPageContext()
 
   const [activeDate, setActiveDate] = useState<string>(() => DateTime.now().toISODate() ?? '')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
-  const [filterDateFrom, setFilterDateFrom] = useState('')
-  const [filterDateTo, setFilterDateTo] = useState('')
-  const [filterActivityUuid, setFilterActivityUuid] = useState('')
+  const [filter, setFilter] = useState<HabitsTodayFilter>(DEFAULT_FILTER)
 
   const goToPreviousDay = useCallback(() => {
     setActiveDate((prev) => DateTime.fromISO(prev).minus({ days: 1 }).toISODate() ?? prev)
@@ -39,19 +45,18 @@ export function useHabitsToday() {
 
   const query = useMemo<ActivityHabbitsQuery>(() => {
     const result: ActivityHabbitsQuery = {}
-    if (filterDateFrom || filterDateTo) {
-      if (filterDateFrom) result.date_from = filterDateFrom
-      if (filterDateTo) result.date_to = filterDateTo
+    if (filter.dateFrom || filter.dateTo) {
+      if (filter.dateFrom) result.date_from = filter.dateFrom
+      if (filter.dateTo) result.date_to = filter.dateTo
     } else {
       result.date_from = activeDate
       result.date_to = activeDate
     }
-    if (filterActivityUuid) result.activity_uuid = filterActivityUuid
+    if (filter.activityUuid) result.activity_uuid = filter.activityUuid
     return result
-  }, [activeDate, filterDateFrom, filterDateTo, filterActivityUuid])
+  }, [activeDate, filter])
 
   const { data: todayHabits = [], isLoading, isError } = useActivityHabbits(query)
-  const { data: allActivities = [] } = useActivities()
 
   const [activeActionItem, setActiveActionItem] = useState<ActivityTodayItem | null>(null)
 
@@ -76,7 +81,7 @@ export function useHabitsToday() {
 
   return {
     todayHabits,
-    isLoading: isLoading,
+    isLoading,
     hasError: isError,
     isActionPending: completeMutation.isPending || skipMutation.isPending,
     selectedActivityUuid,
@@ -91,12 +96,6 @@ export function useHabitsToday() {
     goToNextDay,
     isFiltersOpen,
     setIsFiltersOpen,
-    filterDateFrom,
-    setFilterDateFrom,
-    filterDateTo,
-    setFilterDateTo,
-    filterActivityUuid,
-    setFilterActivityUuid,
-    allActivities,
+    setFilter,
   }
 }
