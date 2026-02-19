@@ -15,6 +15,7 @@ import {
   deleteActivity,
   getActivityProgressSummary,
   getActivityHabbits,
+  getCompletionHeatmaps,
 } from '../services/activities'
 
 const QUERY_KEYS = {
@@ -25,6 +26,7 @@ const QUERY_KEYS = {
   progress: (activity_uuid: string, range: ProgressRange) => ['habbits', 'activities', activity_uuid, 'progress', range],
   occurrences: ['habbits', 'activities', 'occurrences'],
   progressSummary: (activity_uuid: string) => ['habbits', 'activities', activity_uuid, 'progress-summary'],
+  heatmaps: ['habbits', 'activities', 'heatmaps'],
   analytics: (activity_uuid: string) => ['habbits', 'activities', activity_uuid, 'analytics'],
 }
 
@@ -104,5 +106,12 @@ export function useActivityProgressSummary(query: ActivityHabbitsQuery) {
   return useQuery({
     queryKey: [...QUERY_KEYS.progressSummary(query.activity_uuid ?? 'all'), query],
     queryFn: () => getActivityProgressSummary(query),
+  })
+}
+
+export function useCompletionHeatmaps() {
+  return useQuery({
+    queryKey: QUERY_KEYS.heatmaps,
+    queryFn: getCompletionHeatmaps,
   })
 }

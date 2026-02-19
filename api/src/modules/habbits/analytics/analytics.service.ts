@@ -171,28 +171,79 @@ export class AnalyticsService {
   async getDailyCompletionHeatmap(
     user_uuid: string,
     activity_uuid: string | undefined,
-  ): Promise<Array<{ date: string; count: number }>> {
+  ): Promise<Array<{ date: string; completed: number; skipped: number; failed: number }>> {
     const { start, end } = getDateRangeByPreset('30d')
 
     const occurrences = await this.prisma.activityOccurrence.findMany({
       where: {
         user_uuid,
         ...(activity_uuid ? { activity_uuid } : {}),
-        status: OccurrenceStatus.COMPLETED,
         scheduled_for: { gte: start, lte: end },
       },
-      select: { scheduled_for: true },
+      select: { scheduled_for: true, status: true },
     })
 
-    const heatmapMap = new Map<string, number>()
+    const heatmapMap = new Map<
+      string,
+      { completed: number; skipped: number; failed: number }
+    >()
     for (const item of occurrences) {
       const key = toDayKey(item.scheduled_for)
-      heatmapMap.set(key, (heatmapMap.get(key) ?? 0) + 1)
+      const current = heatmapMap.get(key) ?? {
+        completed: 0,
+        skipped: 0,
+        failed: 0,
+      }
+      if (item.status === OccurrenceStatus.COMPLETED) current.completed += 1
+      else if (item.status === OccurrenceStatus.SKIPPED) current.skipped += 1
+      else if (item.status === OccurrenceStatus.FAILED) current.failed += 1
+      heatmapMap.set(key, current)
     }
 
     return Array.from(heatmapMap.entries())
       .sort((a, b) => a[0].localeCompare(b[0]))
-      .map(([date, count]) => ({ date, count }))
+      .map(([date, counts]) => ({ date, ...counts }))
+  }
+
+  async getCompletionHeatmaps(user_uuid: string): Promise<{
+    daily_completion_heatmap: Array<{
+      date: string
+      completed: number
+      skipped: number
+      failed: number
+    }>
+    activity_heatmaps: Array<{
+      activity_uuid: string
+      name: string
+      heatmap: Array<{
+        date: string
+        completed: number
+        skipped: number
+        failed: number
+      }>
+    }>
+  }> {
+    const now = new Date()
+    const daily_completion_heatmap = await this.getDailyCompletionHeatmap(user_uuid, undefined)
+    const scheduledActivities = await this.prisma.activitySchedule.findMany({
+      where: {
+        user_uuid,
+        is_active: true,
+        OR: [{ valid_until: null }, { valid_until: { gt: now } }],
+      },
+      distinct: ['activity_uuid'],
+      select: {
+        activity_uuid: true,
+        activity: { select: { name: true } },
+      },
+    })
+    const activity_heatmaps = await Promise.all(
+      scheduledActivities.map(async ({ activity_uuid, activity }) => {
+        const heatmap = await this.getDailyCompletionHeatmap(user_uuid, activity_uuid)
+        return { activity_uuid, name: activity.name, heatmap }
+      }),
+    )
+    return { daily_completion_heatmap, activity_heatmaps }
   }
 
   private async getQuantityAnalytics(user_uuid: string, activity_uuid: string, range: '7d' | '30d' | '90d' | '1y') {

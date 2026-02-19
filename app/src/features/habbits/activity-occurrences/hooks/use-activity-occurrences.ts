@@ -43,6 +43,7 @@ export function useCompleteActivityOccurrence() {
       queryClient.invalidateQueries({ queryKey: OCCURRENCES_KEY })
       queryClient.invalidateQueries({ queryKey: LOGS_KEY })
       queryClient.invalidateQueries({ queryKey: OVERVIEW_KEY })
+      queryClient.invalidateQueries({ queryKey: ['habbits', 'activities', 'heatmaps'] })
       if (variables.activityUuid) {
         queryClient.invalidateQueries({
           queryKey: ['habbits', 'activities', variables.activityUuid, 'progress-summary'],
@@ -86,6 +87,7 @@ export function useSkipActivityOccurrence() {
       queryClient.invalidateQueries({ queryKey: OCCURRENCES_KEY })
       queryClient.invalidateQueries({ queryKey: LOGS_KEY })
       queryClient.invalidateQueries({ queryKey: OVERVIEW_KEY })
+      queryClient.invalidateQueries({ queryKey: ['habbits', 'activities', 'heatmaps'] })
       if (variables.activityUuid) {
         queryClient.invalidateQueries({
           queryKey: ['habbits', 'activities', variables.activityUuid, 'progress-summary'],

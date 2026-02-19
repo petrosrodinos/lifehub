@@ -87,7 +87,22 @@ export interface ActivityProgressSummary {
     name: string
     skipped_count: number
   } | null
-  daily_completion_heatmap: Array<{ date: string; count: number }>
+}
+
+export interface CompletionHeatmapItem {
+  date: string
+  completed: number
+  skipped: number
+  failed: number
+}
+
+export interface CompletionHeatmapsResponse {
+  daily_completion_heatmap: CompletionHeatmapItem[]
+  activity_heatmaps: Array<{
+    activity_uuid: string
+    name: string
+    heatmap: CompletionHeatmapItem[]
+  }>
 }
 
 export interface ActivityHabbitsQuery {

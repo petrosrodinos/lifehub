@@ -119,11 +119,10 @@ export class ActivitiesService {
   }
 
   async getProgressSummary(user_uuid: string, query: ActivityHabbitsQueryType) {
-    const [progress_7d, progress_30d, most_skipped_activity, daily_completion_heatmap] = await Promise.all([
+    const [progress_7d, progress_30d, most_skipped_activity] = await Promise.all([
       this.analyticsService.getActivityProgress(user_uuid, query.activity_uuid, '7d'),
       this.analyticsService.getActivityProgress(user_uuid, query.activity_uuid, '30d'),
       this.analyticsService.getMostSkippedActivity(user_uuid, query.activity_uuid),
-      this.analyticsService.getDailyCompletionHeatmap(user_uuid, query.activity_uuid),
     ])
 
     const frequencyPeriods = progress_30d.frequency?.flatMap((entry) => entry.periods) ?? []
@@ -145,10 +144,12 @@ export class ActivitiesService {
       progress_7d,
       progress_30d,
       most_skipped_activity,
-      daily_completion_heatmap,
     }
   }
 
+  async getCompletionHeatmaps(user_uuid: string) {
+    return this.analyticsService.getCompletionHeatmaps(user_uuid)
+  }
 
   async update(uuid: string, dto: UpdateActivityDto, user_uuid: string) {
     const activity = await this.prisma.activity.findFirst({

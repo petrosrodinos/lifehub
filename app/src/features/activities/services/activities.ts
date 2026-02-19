@@ -5,6 +5,7 @@ import type {
   ActivityHabitItem,
   ActivityHabbitsQuery,
   ActivityProgressSummary,
+  CompletionHeatmapsResponse,
   CreateActivityDto,
   UpdateActivityDto,
 } from '../interfaces/activities.interface'
@@ -71,6 +72,14 @@ export const getActivityProgressSummary = async (
   }
 }
 
+export const getCompletionHeatmaps = async (): Promise<CompletionHeatmapsResponse> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.routine.activities.heatmaps)
+    return response.data
+  } catch (error: unknown) {
+    throw new Error(error instanceof Error ? error.message : 'Failed to fetch completion heatmaps')
+  }
+}
 
 export const getActivityHabbits = async (query?: ActivityHabbitsQuery): Promise<ActivityHabitItem[]> => {
   try {

@@ -1,7 +1,7 @@
 import { BarChart3, CalendarDays, CheckCircle2, CircleX, Flame, Gauge, MinusCircle, TrendingUp } from "lucide-react";
-import { DateTime } from "luxon";
 import type { ActivityHabbitsQuery } from "../../../../features/activities/interfaces/activities.interface";
 import { useActivityProgressSummary } from "../../../../features/activities/hooks/use-activities";
+import { CompletionHeatmaps } from "./CompletionHeatmaps";
 
 function formatPercent(value: number) {
   return `${Math.round(value)}%`;
@@ -14,26 +14,16 @@ interface HabitsProgressSectionProps {
 export function HabitsProgressSection({ filter }: HabitsProgressSectionProps) {
   const { data } = useActivityProgressSummary(filter);
   const hasFrequency = data?.frequency_success_rate != null;
-  const heatmap = data?.daily_completion_heatmap ?? [];
-  const maxCount = Math.max(1, ...heatmap.map((d: { date: string; count: number }) => d.count));
-  const heatmapByDate = Object.fromEntries(heatmap.map((d: { date: string; count: number }) => [d.date, d.count]));
-
-  const days = Array.from(
-    { length: 30 },
-    (_, i) =>
-      DateTime.now()
-        .minus({ days: 29 - i })
-        .toISODate() ?? "",
-  );
 
   return (
-    <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 overflow-hidden">
-      <div className="px-4 sm:px-5 py-3.5 border-b border-slate-700/60 flex items-center justify-between">
-        <h3 className="text-sm sm:text-base font-semibold text-white">Progress Summary</h3>
-        <BarChart3 className="w-4 h-4 text-violet-400" />
-      </div>
+    <div className="space-y-5">
+      <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 overflow-hidden">
+        <div className="px-4 sm:px-5 py-3.5 border-b border-slate-700/60 flex items-center justify-between">
+          <h3 className="text-sm sm:text-base font-semibold text-white">Progress Summary</h3>
+          <BarChart3 className="w-4 h-4 text-violet-400" />
+        </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-700/30">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-700/30">
         <div className="bg-slate-900/60 p-4 flex flex-col gap-1.5">
           <p className="text-[11px] uppercase tracking-wide text-slate-400 inline-flex items-center gap-1.5">
             <CalendarDays className="w-3.5 h-3.5" />7 days
@@ -106,10 +96,9 @@ export function HabitsProgressSection({ filter }: HabitsProgressSectionProps) {
             </>
           )}
         </div>
-      </div>
+        </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-700/30">
-        <div className="bg-slate-900/60 p-4 space-y-2">
+        <div className="border-t border-slate-700/60 bg-slate-900/60 p-4 space-y-2">
           <p className="text-[11px] uppercase tracking-wide text-slate-400 inline-flex items-center gap-1.5">
             <MinusCircle className="w-3.5 h-3.5" />
             Most skipped (30d)
@@ -123,22 +112,9 @@ export function HabitsProgressSection({ filter }: HabitsProgressSectionProps) {
             <p className="text-sm text-slate-500">No skips</p>
           )}
         </div>
-
-        <div className="bg-slate-900/60 p-4 space-y-2">
-          <p className="text-[11px] uppercase tracking-wide text-slate-400 inline-flex items-center gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            Daily completions (30d)
-          </p>
-          <div className="flex flex-wrap gap-0.5">
-            {days.map((day) => {
-              const count = heatmapByDate[day] ?? 0;
-              const intensity = count === 0 ? 0 : Math.ceil((count / maxCount) * 4);
-              const bg = ["bg-slate-700/40", "bg-emerald-900/60", "bg-emerald-700/70", "bg-emerald-500/80", "bg-emerald-400"][intensity];
-              return <div key={day} title={`${day}: ${count}`} className={`w-[10px] h-[10px] rounded-sm ${bg}`} />;
-            })}
-          </div>
-        </div>
       </div>
+
+      <CompletionHeatmaps />
     </div>
   );
 }

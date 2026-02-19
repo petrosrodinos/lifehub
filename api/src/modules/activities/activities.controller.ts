@@ -53,6 +53,12 @@ export class ActivitiesController {
     return this.activitiesService.getProgressSummary(userUuid, query)
   }
 
+  @Get('heatmaps')
+  @ApiOperation({ summary: 'Get general and per-activity daily completion heatmaps (30d)' })
+  @ApiResponse({ status: 200, description: 'Heatmaps retrieved successfully' })
+  getCompletionHeatmaps(@CurrentUser('user_uuid') userUuid: string) {
+    return this.activitiesService.getCompletionHeatmaps(userUuid)
+  }
 
   @Get(':uuid')
   @ApiOperation({ summary: 'Get a specific activity by UUID' })
