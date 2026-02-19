@@ -5,6 +5,8 @@ import type {
   ProgressRange,
   UpdateActivityDto,
 } from '../interfaces/activities.interface'
+
+const PROGRESS_SUMMARY_KEY = (activity_uuid: string) => ['habbits', 'activities', activity_uuid, 'progress-summary']
 import {
   getActivities,
   getActivity,
@@ -12,7 +14,8 @@ import {
   updateActivity,
   deleteActivity,
   getHabitOverview,
-  getHabitActivityProgress,
+  getActivityOccurrences,
+  getActivityProgressSummary,
 } from '../services/activities'
 
 const QUERY_KEYS = {
@@ -21,6 +24,9 @@ const QUERY_KEYS = {
   scheduleSlots: ['schedule-slots'],
   overview: ['habbits', 'analytics', 'overview'],
   progress: (activity_uuid: string, range: ProgressRange) => ['habbits', 'activities', activity_uuid, 'progress', range],
+  occurrences: ['habbits', 'activities', 'occurrences'],
+  progressSummary: (activity_uuid: string) => ['habbits', 'activities', activity_uuid, 'progress-summary'],
+  analytics: (activity_uuid: string) => ['habbits', 'activities', activity_uuid, 'analytics'],
 }
 
 export function useActivities() {
@@ -87,6 +93,14 @@ export function useDeleteActivity() {
   })
 }
 
+export function useActivityOccurrences() {
+  return useQuery({
+    queryKey: QUERY_KEYS.occurrences,
+    queryFn: () => getActivityOccurrences(),
+  })
+}
+
+
 export function useHabitOverview() {
   return useQuery({
     queryKey: QUERY_KEYS.overview,
@@ -94,10 +108,11 @@ export function useHabitOverview() {
   })
 }
 
-export function useHabitActivityProgress(activity_uuid: string, range: ProgressRange = '30d') {
+
+export function useActivityProgressSummary(activity_uuid: string | null) {
   return useQuery({
-    queryKey: QUERY_KEYS.progress(activity_uuid, range),
-    queryFn: () => getHabitActivityProgress(activity_uuid, range),
+    queryKey: PROGRESS_SUMMARY_KEY(activity_uuid ?? ''),
+    queryFn: () => getActivityProgressSummary(activity_uuid as string),
     enabled: !!activity_uuid,
   })
 }

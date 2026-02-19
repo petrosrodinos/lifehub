@@ -4,6 +4,7 @@ import { CreateActivityDto } from './dto/create-activity.dto'
 import { UpdateActivityDto } from './dto/update-activity.dto'
 import { AnalyticsService } from '@/modules/habbits/analytics/analytics.service'
 import { DateTime } from 'luxon'
+import { ActivityProgressRangeType } from '../habbits/analytics/schemas/activity-progress-query.schema'
 
 @Injectable()
 export class ActivitiesService {
@@ -37,6 +38,16 @@ export class ActivitiesService {
   }
 
   async findAll(user_uuid: string) {
+    const activities = await this.prisma.activity.findMany({
+      where: {
+        user_uuid: user_uuid,
+      }
+    })
+
+    return activities
+  }
+
+  async activityOccurrences(user_uuid: string) {
     const now = new Date()
     const dayStart = DateTime.now().startOf('day').toJSDate()
     const dayEnd = DateTime.now().endOf('day').toJSDate()
@@ -67,6 +78,9 @@ export class ActivitiesService {
               lte: dayEnd,
             },
           },
+          include: {
+            log: true,
+          },
           orderBy: {
             scheduled_for: 'asc',
           },
@@ -92,6 +106,51 @@ export class ActivitiesService {
       where: {
         uuid,
         user_uuid: user_uuid,
+      }
+    })
+
+    return activity
+  }
+
+  async getProgress(uuid: string, user_uuid: string, range: ActivityProgressRangeType) {
+    return this.analyticsService.getActivityProgress(user_uuid, uuid, range)
+  }
+
+  async getProgressSummary(uuid: string, user_uuid: string) {
+    const [progress7d, progress30d] = await Promise.all([
+      this.analyticsService.getActivityProgress(user_uuid, uuid, '7d'),
+      this.analyticsService.getActivityProgress(user_uuid, uuid, '30d'),
+    ])
+
+    const frequencyPeriods = progress30d.frequency?.flatMap((entry) => entry.periods) ?? []
+    const frequency_success_rate =
+      frequencyPeriods.length > 0
+        ? Number(
+            (
+              frequencyPeriods.reduce((sum, period) => sum + period.success_rate, 0) /
+              frequencyPeriods.length
+            ).toFixed(2),
+          )
+        : null
+
+    return {
+      completion_rate_7d: progress7d.completion_rate,
+      completion_rate_30d: progress30d.completion_rate,
+      quantity_total_30d: progress30d.quantity?.total_quantity_completed ?? 0,
+      frequency_success_rate,
+    }
+  }
+
+  async activityAnalytics(uuid: string, user_uuid: string) {
+    const dayStart = DateTime.now().startOf('day').toJSDate()
+    const dayEnd = DateTime.now().endOf('day').toJSDate()
+    const pastStart = DateTime.now().minus({ days: 30 }).startOf('day').toJSDate()
+    const futureEnd = DateTime.now().plus({ days: 30 }).endOf('day').toJSDate()
+
+    const activity = await this.prisma.activity.findFirst({
+      where: {
+        uuid,
+        user_uuid,
       },
       include: {
         activity_schedules: {
@@ -106,19 +165,16 @@ export class ActivitiesService {
         activity_occurrences: {
           where: {
             scheduled_for: {
-              gte: new Date(),
+              gte: pastStart,
+              lte: futureEnd,
             },
+          },
+          include: {
+            log: true,
           },
           orderBy: {
             scheduled_for: 'asc',
           },
-          take: 30,
-        },
-        activity_logs: {
-          orderBy: {
-            created_at: 'desc',
-          },
-          take: 30,
         },
       },
     })
@@ -129,8 +185,20 @@ export class ActivitiesService {
 
     const analytics = await this.analyticsService.getActivityProgress(user_uuid, uuid, '30d')
 
+    const current_schedule = activity.activity_schedules.find((s) => s.is_active && s.valid_until === null) ?? activity.activity_schedules[0] ?? null
+
+    const today_occurrence = activity.activity_occurrences.find(
+      (o) => o.scheduled_for >= dayStart && o.scheduled_for <= dayEnd,
+    ) ?? null
+
     return {
       ...activity,
+      current_schedule,
+      today_occurrence,
+      activity_schedules: undefined,
+      activity_occurrences: undefined,
+      schedules: activity.activity_schedules,
+      occurrences: activity.activity_occurrences,
       analytics,
     }
   }

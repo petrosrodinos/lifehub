@@ -69,11 +69,8 @@ export class ActivityOccurrencesService {
       if (!occurrence) {
         throw new NotFoundException('Occurrence not found')
       }
-      if (occurrence.status === OccurrenceStatus.COMPLETED) {
-        throw new ConflictException('Occurrence already completed')
-      }
-      if (occurrence.status === OccurrenceStatus.SKIPPED) {
-        throw new ConflictException('Skipped occurrence cannot be completed')
+      if (occurrence.status !== OccurrenceStatus.PENDING) {
+        throw new ConflictException(`Cannot complete an occurrence with status ${occurrence.status}`)
       }
 
       if (
@@ -126,11 +123,8 @@ export class ActivityOccurrencesService {
       if (!occurrence) {
         throw new NotFoundException('Occurrence not found')
       }
-      if (occurrence.status === OccurrenceStatus.COMPLETED) {
-        throw new ConflictException('Completed occurrence cannot be skipped')
-      }
-      if (occurrence.status === OccurrenceStatus.SKIPPED) {
-        throw new ConflictException('Occurrence already skipped')
+      if (occurrence.status !== OccurrenceStatus.PENDING) {
+        throw new ConflictException(`Cannot skip an occurrence with status ${occurrence.status}`)
       }
 
       await tx.activityLog.create({

@@ -1,17 +1,15 @@
 import { useMemo, useState } from 'react'
 import { DateTime } from 'luxon'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import type { Activity } from '../../../features/activities/interfaces/activities.interface'
 import type { ActivityLog } from '../../../features/habbits/activity-logs/interfaces/activity-logs.interface'
-import type { OccurrenceStatus } from '../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface'
+import { OccurrenceStatuses, type OccurrenceStatus } from '../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface'
 import type { UpdateActivityScheduleDto } from '../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface'
-import { useActivities } from '../../../features/activities/hooks/use-activities'
+import { useActivityOccurrences, useActivityProgressSummary, useHabitOverview } from '../../../features/activities/hooks/use-activities'
 import { useActivityLogs } from '../../../features/habbits/activity-logs/hooks/use-activity-logs'
 import { completeActivityOccurrence, skipActivityOccurrence } from '../../../features/habbits/activity-occurrences/services/activity-occurrences'
 import { updateActivitySchedule } from '../../../features/habbits/activity-schedules/services/activity-schedules'
-import { useHabitOverview } from '../../../features/activities/hooks/use-activities'
-import { getHabitActivityProgress } from '../../../features/activities/services/activities'
 import type {
   ActivityProgressSummaryData,
   ActivityTodayItem,
@@ -81,32 +79,28 @@ export function useHabbitsTab() {
   const queryClient = useQueryClient()
   const [selectedActivityUuid, setSelectedActivityUuid] = useState<string | null>(null)
 
-  const activitiesQuery = useActivities()
+  const activitiesQuery = useActivityOccurrences()
   const overviewQuery = useHabitOverview()
-  const logsQuery = useActivityLogs()
 
   const activities = activitiesQuery.data ?? []
-  const logs = logsQuery.data ?? []
 
   const todayHabits = useMemo<ActivityTodayItem[]>(() => {
     return activities
-      .filter((activity) => activity.visible)
+      .filter((activity) => activity.visible && activity.today_occurrence)
       .map((activity) => {
+        const occurrence = activity.today_occurrence!
         const schedule = activity.current_schedule ?? null
-        const matchingLog = logs
-          .filter((log) => log.activity_uuid === activity.uuid)
-          .sort((a, b) => (a.created_at < b.created_at ? 1 : -1))[0]
 
         return {
           activity,
           schedule,
-          status: activity.today_occurrence?.status ?? 'PENDING',
-          occurrenceUuid: activity.today_occurrence?.uuid ?? null,
-          quantityValue: matchingLog?.value ?? null,
+          status: occurrence.status,
+          occurrenceUuid: occurrence.uuid,
+          quantityValue: occurrence.log?.value ?? null,
         }
       })
       .sort((a, b) => parseTimeOfDay(a.schedule?.time_of_day) - parseTimeOfDay(b.schedule?.time_of_day))
-  }, [activities, logs])
+  }, [activities])
 
   const resolvedSelectedActivityUuid =
     selectedActivityUuid && todayHabits.some((item) => item.activity.uuid === selectedActivityUuid)
@@ -118,50 +112,25 @@ export function useHabbitsTab() {
     return todayHabits.find((item) => item.activity.uuid === resolvedSelectedActivityUuid) ?? null
   }, [todayHabits, resolvedSelectedActivityUuid])
 
-  const selectedLogs = useMemo(() => {
-    if (!resolvedSelectedActivityUuid) return []
-    return logs
-      .filter((log) => log.activity_uuid === resolvedSelectedActivityUuid)
-      .sort((a, b) => (a.created_at < b.created_at ? 1 : -1))
-  }, [logs, resolvedSelectedActivityUuid])
+  const logsQuery = useActivityLogs(
+    resolvedSelectedActivityUuid
+      ? { activity_uuid: resolvedSelectedActivityUuid }
+      : undefined,
+  )
+  const selectedLogs = logsQuery.data ?? []
 
   const groupedSelectedLogs = useMemo(() => groupLogsByDate(selectedLogs), [selectedLogs])
 
-  const progress7dQuery = useQuery({
-    queryKey: ['habbits', 'progress', resolvedSelectedActivityUuid, '7d'],
-    queryFn: () => getHabitActivityProgress(resolvedSelectedActivityUuid as string, '7d'),
-    enabled: !!resolvedSelectedActivityUuid,
-  })
-
-  const progress30dQuery = useQuery({
-    queryKey: ['habbits', 'progress', resolvedSelectedActivityUuid, '30d'],
-    queryFn: () => getHabitActivityProgress(resolvedSelectedActivityUuid as string, '30d'),
-    enabled: !!resolvedSelectedActivityUuid,
-  })
+  const progressSummaryQuery = useActivityProgressSummary(resolvedSelectedActivityUuid)
 
   const selectedSchedule = selectedHabit?.schedule ?? null
 
-  const progressSummary = useMemo<ActivityProgressSummaryData>(() => {
-    const completionRate7d = progress7dQuery.data?.completion_rate ?? overviewQuery.data?.completion_rate_last_7_days ?? 0
-    const completionRate30d = progress30dQuery.data?.completion_rate ?? 0
-    const logs30d = selectedLogs.filter((log) =>
-      DateTime.fromISO(log.created_at) >= DateTime.now().minus({ days: 30 }).startOf('day'),
-    )
-    const quantityTotal30d = logs30d.reduce((sum, log) => sum + (log.value ?? 0), 0)
-
-    const frequencyPeriods = progress30dQuery.data?.frequency?.flatMap((entry) => entry.periods) ?? []
-    const frequencySuccessRate =
-      frequencyPeriods.length > 0
-        ? frequencyPeriods.reduce((sum, period) => sum + period.success_rate, 0) / frequencyPeriods.length
-        : null
-
-    return {
-      completionRate7d,
-      completionRate30d,
-      quantityTotal30d,
-      frequencySuccessRate,
-    }
-  }, [overviewQuery.data?.completion_rate_last_7_days, progress30dQuery.data?.completion_rate, progress30dQuery.data?.frequency, progress7dQuery.data?.completion_rate, selectedLogs])
+  const progressSummary: ActivityProgressSummaryData = {
+    completionRate7d: progressSummaryQuery.data?.completion_rate_7d ?? overviewQuery.data?.completion_rate_last_7_days ?? 0,
+    completionRate30d: progressSummaryQuery.data?.completion_rate_30d ?? 0,
+    quantityTotal30d: progressSummaryQuery.data?.quantity_total_30d ?? 0,
+    frequencySuccessRate: progressSummaryQuery.data?.frequency_success_rate ?? null,
+  }
 
   const completeMutation = useMutation({
     mutationFn: ({ occurrenceUuid, value }: OccurrenceCompletionPayload) =>
@@ -174,7 +143,7 @@ export function useHabbitsTab() {
       if (activityUuid) {
         queryClient.setQueryData<Activity[]>(
           QUERY_KEYS.activities,
-          patchOccurrenceStatus(previousActivities, { activityUuid, status: 'COMPLETED' }),
+          patchOccurrenceStatus(previousActivities, { activityUuid, status: OccurrenceStatuses.COMPLETED }),
         )
       }
 
@@ -194,7 +163,7 @@ export function useHabbitsTab() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.logs })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.overview })
       if (resolvedSelectedActivityUuid) {
-        queryClient.invalidateQueries({ queryKey: ['habbits', 'progress', resolvedSelectedActivityUuid] })
+        queryClient.invalidateQueries({ queryKey: ['habbits', 'activities', resolvedSelectedActivityUuid, 'progress-summary'] })
       }
     },
   })
@@ -210,7 +179,7 @@ export function useHabbitsTab() {
       if (activityUuid) {
         queryClient.setQueryData<Activity[]>(
           QUERY_KEYS.activities,
-          patchOccurrenceStatus(previousActivities, { activityUuid, status: 'SKIPPED' }),
+          patchOccurrenceStatus(previousActivities, { activityUuid, status: OccurrenceStatuses.SKIPPED }),
         )
       }
 
@@ -230,7 +199,7 @@ export function useHabbitsTab() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.logs })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.overview })
       if (resolvedSelectedActivityUuid) {
-        queryClient.invalidateQueries({ queryKey: ['habbits', 'progress', resolvedSelectedActivityUuid] })
+        queryClient.invalidateQueries({ queryKey: ['habbits', 'activities', resolvedSelectedActivityUuid, 'progress-summary'] })
       }
     },
   })
@@ -247,17 +216,17 @@ export function useHabbitsTab() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.activities })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.logs })
       if (resolvedSelectedActivityUuid) {
-        queryClient.invalidateQueries({ queryKey: ['habbits', 'progress', resolvedSelectedActivityUuid] })
+        queryClient.invalidateQueries({ queryKey: ['habbits', 'activities', resolvedSelectedActivityUuid, 'progress-summary'] })
       }
     },
   })
 
   function canComplete(status: OccurrenceStatus) {
-    return status !== 'COMPLETED'
+    return status === OccurrenceStatuses.PENDING
   }
 
   function canSkip(status: OccurrenceStatus) {
-    return status !== 'COMPLETED' && status !== 'SKIPPED'
+    return status === OccurrenceStatuses.PENDING
   }
 
   async function completeOccurrence(occurrenceUuid: string, status: OccurrenceStatus, value?: number) {
@@ -280,7 +249,7 @@ export function useHabbitsTab() {
     await updateScheduleMutation.mutateAsync({ scheduleUuid, data })
   }
 
-  const completedToday = todayHabits.filter((habit) => habit.status === 'COMPLETED').length
+  const completedToday = todayHabits.filter((habit) => habit.status === OccurrenceStatuses.COMPLETED).length
   const totalToday = todayHabits.length
 
   return {
@@ -293,11 +262,10 @@ export function useHabbitsTab() {
     overview: overviewQuery.data,
     completedToday,
     totalToday,
-    isLoading:
-      activitiesQuery.isLoading || logsQuery.isLoading || overviewQuery.isLoading || progress7dQuery.isLoading || progress30dQuery.isLoading,
+    isLoading: activitiesQuery.isLoading || overviewQuery.isLoading,
     isActionPending: completeMutation.isPending || skipMutation.isPending,
     isScheduleSaving: updateScheduleMutation.isPending,
-    hasError: activitiesQuery.isError || logsQuery.isError || overviewQuery.isError,
+    hasError: activitiesQuery.isError || overviewQuery.isError,
     setSelectedActivityUuid,
     completeOccurrence,
     skipOccurrence,

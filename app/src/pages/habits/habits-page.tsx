@@ -1,61 +1,41 @@
-import { useMemo, useState } from 'react'
-import { DateTime } from 'luxon'
-import { ChevronDown, ChevronUp, Flame, ListChecks, Plus } from 'lucide-react'
-import { HabitCard } from './components/HabitCard/HabitCard'
-import { HabitCompletionActions } from './components/HabitCompletionActions/HabitCompletionActions'
-import { HabitProgressSummary } from './components/HabitProgressSummary/HabitProgressSummary'
-import { HabitHistoryList } from './components/HabitHistoryList/HabitHistoryList'
-import { HabitScheduleCard } from './components/HabitScheduleCard/HabitScheduleCard'
-import { CreateActivityScheduleModal } from './components/CreateActivityScheduleModal/CreateActivityScheduleModal'
-import { useHabbitsTab } from './hooks/use-habbits-tab'
-import type { ActivityTodayItem } from './interfaces/habbits-tab.interface'
+import { useMemo, useState } from "react";
+import { DateTime } from "luxon";
+import { ChevronDown, ChevronUp, Flame, ListChecks, Plus } from "lucide-react";
+import { HabitCard } from "./components/HabitCard/HabitCard";
+import { HabitCompletionActions } from "./components/HabitCompletionActions/HabitCompletionActions";
+import { HabitProgressSummary } from "./components/HabitProgressSummary/HabitProgressSummary";
+import { HabitHistoryList } from "./components/HabitHistoryList/HabitHistoryList";
+import { HabitScheduleCard } from "./components/HabitScheduleCard/HabitScheduleCard";
+import { CreateActivityScheduleModal } from "./components/CreateActivityScheduleModal/CreateActivityScheduleModal";
+import { useHabbitsTab } from "./hooks/use-habbits-tab";
+import type { ActivityTodayItem } from "./interfaces/habbits-tab.interface";
 
-type ExpandableSection = 'progress' | 'history' | 'schedule'
+type ExpandableSection = "progress" | "history" | "schedule";
 
 function SkeletonCard() {
-  return <div className="h-32 rounded-2xl border border-slate-700/60 bg-slate-800/50 animate-pulse" />
+  return <div className="h-32 rounded-2xl border border-slate-700/60 bg-slate-800/50 animate-pulse" />;
 }
 
 export function HabitsPage() {
-  const {
-    todayHabits,
-    selectedHabit,
-    groupedSelectedLogs,
-    progressSummary,
-    completedToday,
-    totalToday,
-    overview,
-    isLoading,
-    isActionPending,
-    isScheduleSaving,
-    hasError,
-    setSelectedActivityUuid,
-    completeOccurrence,
-    skipOccurrence,
-    saveSchedule,
-  } = useHabbitsTab()
+  const { todayHabits, selectedHabit, groupedSelectedLogs, progressSummary, completedToday, totalToday, overview, isLoading, isActionPending, isScheduleSaving, hasError, setSelectedActivityUuid, completeOccurrence, skipOccurrence, saveSchedule } = useHabbitsTab();
 
-  const [activeActionItem, setActiveActionItem] = useState<ActivityTodayItem | null>(null)
-  const [isCreateScheduleOpen, setIsCreateScheduleOpen] = useState(false)
+  const [activeActionItem, setActiveActionItem] = useState<ActivityTodayItem | null>(null);
+  const [isCreateScheduleOpen, setIsCreateScheduleOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<Record<ExpandableSection, boolean>>({
     progress: true,
     history: true,
     schedule: false,
-  })
+  });
 
-  const dateLabel = useMemo(() => DateTime.now().toFormat('EEEE, MMMM d'), [])
+  const dateLabel = useMemo(() => DateTime.now().toFormat("EEEE, MMMM d"), []);
 
-  const emptyStateMessage = hasError
-    ? 'Could not load habits right now. Try again in a moment.'
-    : todayHabits.length === 0
-      ? 'No occurrences scheduled for today.'
-      : null
+  const emptyStateMessage = hasError ? "Could not load habits right now. Try again in a moment." : todayHabits.length === 0 ? "No occurrences scheduled for today." : null;
 
   function toggleSection(section: ExpandableSection) {
     setExpandedSections((state) => ({
       ...state,
       [section]: !state[section],
-    }))
+    }));
   }
 
   return (
@@ -74,11 +54,7 @@ export function HabitsPage() {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setIsCreateScheduleOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-emerald-500/35 bg-emerald-500/10 text-emerald-200 text-xs sm:text-sm hover:bg-emerald-500/20 transition-colors"
-              >
+              <button type="button" onClick={() => setIsCreateScheduleOpen(true)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-emerald-500/35 bg-emerald-500/10 text-emerald-200 text-xs sm:text-sm hover:bg-emerald-500/20 transition-colors">
                 <Plus className="w-4 h-4" />
                 <span>Schedule</span>
               </button>
@@ -120,16 +96,12 @@ export function HabitsPage() {
                   onSelect={() => setSelectedActivityUuid(item.activity.uuid)}
                   onOpenActions={() => setActiveActionItem(item)}
                   onSwipeComplete={async () => {
-                    if (!item.occurrenceUuid) return
-                    await completeOccurrence(
-                      item.occurrenceUuid,
-                      item.status,
-                      item.schedule?.target_type === 'QUANTITY' ? (item.quantityValue ?? 0) : undefined,
-                    )
+                    if (!item.occurrenceUuid) return;
+                    await completeOccurrence(item.occurrenceUuid, item.status, item.schedule?.target_type === "QUANTITY" ? (item.quantityValue ?? 0) : undefined);
                   }}
                   onSwipeSkip={async () => {
-                    if (!item.occurrenceUuid) return
-                    await skipOccurrence(item.occurrenceUuid, item.status)
+                    if (!item.occurrenceUuid) return;
+                    await skipOccurrence(item.occurrenceUuid, item.status);
                   }}
                 />
               ))}
@@ -138,11 +110,7 @@ export function HabitsPage() {
         </section>
 
         <section className="space-y-3">
-          <button
-            type="button"
-            onClick={() => toggleSection('progress')}
-            className="w-full flex items-center justify-between rounded-xl border border-slate-700/60 bg-slate-900/60 px-4 py-3 text-left"
-          >
+          <button type="button" onClick={() => toggleSection("progress")} className="w-full flex items-center justify-between rounded-xl border border-slate-700/60 bg-slate-900/60 px-4 py-3 text-left">
             <span className="text-sm sm:text-base font-semibold">Progress Summary</span>
             {expandedSections.progress ? <ChevronUp className="w-4 h-4 text-slate-300" /> : <ChevronDown className="w-4 h-4 text-slate-300" />}
           </button>
@@ -150,11 +118,7 @@ export function HabitsPage() {
         </section>
 
         <section className="space-y-3">
-          <button
-            type="button"
-            onClick={() => toggleSection('history')}
-            className="w-full flex items-center justify-between rounded-xl border border-slate-700/60 bg-slate-900/60 px-4 py-3 text-left"
-          >
+          <button type="button" onClick={() => toggleSection("history")} className="w-full flex items-center justify-between rounded-xl border border-slate-700/60 bg-slate-900/60 px-4 py-3 text-left">
             <span className="text-sm sm:text-base font-semibold">Habit History</span>
             {expandedSections.history ? <ChevronUp className="w-4 h-4 text-slate-300" /> : <ChevronDown className="w-4 h-4 text-slate-300" />}
           </button>
@@ -162,17 +126,11 @@ export function HabitsPage() {
         </section>
 
         <section className="space-y-3">
-          <button
-            type="button"
-            onClick={() => toggleSection('schedule')}
-            className="w-full flex items-center justify-between rounded-xl border border-slate-700/60 bg-slate-900/60 px-4 py-3 text-left"
-          >
+          <button type="button" onClick={() => toggleSection("schedule")} className="w-full flex items-center justify-between rounded-xl border border-slate-700/60 bg-slate-900/60 px-4 py-3 text-left">
             <span className="text-sm sm:text-base font-semibold">Schedule Summary</span>
             {expandedSections.schedule ? <ChevronUp className="w-4 h-4 text-slate-300" /> : <ChevronDown className="w-4 h-4 text-slate-300" />}
           </button>
-          {expandedSections.schedule ? (
-            <HabitScheduleCard selectedHabit={selectedHabit} isSaving={isScheduleSaving} onSave={saveSchedule} />
-          ) : null}
+          {expandedSections.schedule ? <HabitScheduleCard selectedHabit={selectedHabit} isSaving={isScheduleSaving} onSave={saveSchedule} /> : null}
         </section>
       </div>
 
@@ -182,19 +140,16 @@ export function HabitsPage() {
         loading={isActionPending}
         onClose={() => setActiveActionItem(null)}
         onComplete={async (value) => {
-          if (!activeActionItem?.occurrenceUuid) return
-          await completeOccurrence(activeActionItem.occurrenceUuid, activeActionItem.status, value)
+          if (!activeActionItem?.occurrenceUuid) return;
+          await completeOccurrence(activeActionItem.occurrenceUuid, activeActionItem.status, value);
         }}
         onSkip={async () => {
-          if (!activeActionItem?.occurrenceUuid) return
-          await skipOccurrence(activeActionItem.occurrenceUuid, activeActionItem.status)
+          if (!activeActionItem?.occurrenceUuid) return;
+          await skipOccurrence(activeActionItem.occurrenceUuid, activeActionItem.status);
         }}
       />
 
-      <CreateActivityScheduleModal
-        isOpen={isCreateScheduleOpen}
-        onClose={() => setIsCreateScheduleOpen(false)}
-      />
+      <CreateActivityScheduleModal isOpen={isCreateScheduleOpen} onClose={() => setIsCreateScheduleOpen(false)} />
     </div>
-  )
+  );
 }

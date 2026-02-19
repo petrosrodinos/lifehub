@@ -54,35 +54,12 @@ export interface ActivityProgressResponse {
 }
 
 
-export type ProgressRange = '7d' | '30d' | '90d' | '1y'
 
-export interface HabitActivityProgress {
-  range: ProgressRange
-  completion_rate: number
-  total_completed: number
-  total_skipped: number
-  total_failed: number
-  streak: {
-    currentStreak: number
-    longestStreak: number
-  }
-  quantity?: {
-    total_quantity_completed: number
-    average_per_day: number
-    average_per_week: number
-    trend_vs_previous_period: number
-    percent_of_target_achieved: number
-  } | null
-  frequency?: Array<{
-    schedule_uuid: string
-    frequency_period: FrequencyPeriod
-    periods: Array<{
-      period_key: string
-      required_count: number
-      completed_count: number
-      success_rate: number
-    }>
-  }>
+export interface ActivityProgressSummary {
+  completion_rate_7d: number
+  completion_rate_30d: number
+  quantity_total_30d: number
+  frequency_success_rate: number | null
 }
 
 export interface HabitOverview {
@@ -103,3 +80,12 @@ export interface HabitOverview {
     count: number
   }>
 }
+
+export const ProgressRanges = {
+  '7d': '7d',
+  '30d': '30d',
+  '90d': '90d',
+  '1y': '1y',
+} as const
+
+export type ProgressRange = typeof ProgressRanges[keyof typeof ProgressRanges]

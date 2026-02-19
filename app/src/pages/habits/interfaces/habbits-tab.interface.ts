@@ -7,7 +7,7 @@ export interface ActivityTodayItem {
   activity: Activity
   schedule: ActivitySchedule | null
   status: OccurrenceStatus
-  occurrenceUuid: string | null
+  occurrenceUuid: string
   quantityValue: number | null
 }
 

@@ -24,7 +24,9 @@ export const ApiRoutes = {
       get: (uuid: string) => `/activities/${uuid}`,
       update: (uuid: string) => `/activities/${uuid}`,
       delete: (uuid: string) => `/activities/${uuid}`,
-      progress: (uuid: string) => `/activities/${uuid}/progress`,
+      progressSummary: (uuid: string) => `/activities/${uuid}/progress-summary`,
+      occurrences: "/activities/occurrences",
+      analytics: (uuid: string) => `/activities/${uuid}/analytics`,
     },
     scheduleSlots: {
       list: "/schedule-slots",

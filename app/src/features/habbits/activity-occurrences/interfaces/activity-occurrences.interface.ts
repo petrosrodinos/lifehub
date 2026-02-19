@@ -1,3 +1,5 @@
+import type { ActivityLog } from '../../activity-logs/interfaces/activity-logs.interface'
+
 export interface ActivityOccurrence {
   uuid: string
   user_uuid: string
@@ -5,6 +7,7 @@ export interface ActivityOccurrence {
   schedule_uuid: string
   scheduled_for: string
   status: OccurrenceStatus
+  log?: ActivityLog | null
   created_at: string
   updated_at: string
 }

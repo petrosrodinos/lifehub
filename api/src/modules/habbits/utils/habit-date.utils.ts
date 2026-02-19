@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
+import { ActivityProgressQueryType } from '../analytics/schemas/activity-progress-query.schema';
 
-export const getDateRangeByPreset = (preset: '7d' | '30d' | '90d' | '1y'): { start: Date; end: Date } => {
+export const getDateRangeByPreset = (preset: ActivityProgressQueryType['range']): { start: Date; end: Date } => {
   const end = DateTime.now().endOf('day')
   const start =
     preset === '7d'

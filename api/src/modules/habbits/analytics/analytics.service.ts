@@ -3,12 +3,13 @@ import { ActivityTargetType, FrequencyPeriod, OccurrenceStatus } from '@/generat
 import { PrismaService } from '@/core/databases/prisma/prisma.service'
 import { calculateStreakFromOccurrences } from '../utils/streak.utils'
 import { getDateRangeByPreset, toDayKey } from '../utils/habit-date.utils'
+import { ActivityProgressRangeType } from './schemas/activity-progress-query.schema'
 
 @Injectable()
 export class AnalyticsService {
   constructor(private readonly prisma: PrismaService) { }
 
-  async getActivityProgress(user_uuid: string, activity_uuid: string, range: '7d' | '30d' | '90d' | '1y') {
+  async getActivityProgress(user_uuid: string, activity_uuid: string, range: ActivityProgressRangeType) {
     const { start, end } = getDateRangeByPreset(range)
     const occurrences = await this.prisma.activityOccurrence.findMany({
       where: {
@@ -157,7 +158,9 @@ export class AnalyticsService {
         user_uuid,
         activity_uuid,
         completed: true,
-        created_at: { gte: start, lte: end },
+        occurrence: {
+          scheduled_for: { gte: start, lte: end },
+        },
       },
       select: {
         value: true,
@@ -172,7 +175,9 @@ export class AnalyticsService {
         user_uuid,
         activity_uuid,
         completed: true,
-        created_at: { gte: previousStart, lte: previousEnd },
+        occurrence: {
+          scheduled_for: { gte: previousStart, lte: previousEnd },
+        },
       },
       select: {
         value: true,

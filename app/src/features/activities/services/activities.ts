@@ -2,10 +2,11 @@ import axiosInstance from '../../../config/api/axios'
 import { ApiRoutes } from '../../../config/api/routes'
 import type {
   Activity,
+  ActivityProgressSummary,
   CreateActivityDto,
   UpdateActivityDto,
+  HabitOverview,
 } from '../interfaces/activities.interface'
-import type { HabitActivityProgress, HabitOverview, ProgressRange } from '../interfaces/activities.interface'
 
 
 export const getActivities = async (): Promise<Activity[]> => {
@@ -58,18 +59,17 @@ export const deleteActivity = async (uuid: string): Promise<void> => {
   }
 }
 
-export const getHabitActivityProgress = async (
+export const getActivityProgressSummary = async (
   activity_uuid: string,
-  range: ProgressRange = '30d',
-): Promise<HabitActivityProgress> => {
+): Promise<ActivityProgressSummary> => {
   try {
-    const response = await axiosInstance.get(ApiRoutes.routine.activities.progress(activity_uuid), { params: { range } })
+    const response = await axiosInstance.get(ApiRoutes.routine.activities.progressSummary(activity_uuid))
     return response.data
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Failed to fetch activity progress'
-    throw new Error(message)
+    throw new Error(error instanceof Error ? error.message : 'Failed to fetch activity progress summary')
   }
 }
+
 
 export const getHabitOverview = async (): Promise<HabitOverview> => {
   try {
@@ -77,6 +77,16 @@ export const getHabitOverview = async (): Promise<HabitOverview> => {
     return response.data
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Failed to fetch overview analytics'
+    throw new Error(message)
+  }
+}
+
+export const getActivityOccurrences = async (): Promise<Activity[]> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.routine.activities.occurrences)
+    return response.data
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Failed to fetch activity occurrences'
     throw new Error(message)
   }
 }
