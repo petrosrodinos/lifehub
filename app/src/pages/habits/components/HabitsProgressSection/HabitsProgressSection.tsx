@@ -1,12 +1,17 @@
 import { BarChart3, CalendarDays, Gauge, TrendingUp } from 'lucide-react'
+import type { ActivityHabbitsQuery } from '../../../../features/activities/interfaces/activities.interface'
 import { useHabitsProgress } from './use-habits-progress'
 
 function formatPercent(value: number) {
   return `${Math.round(value)}%`
 }
 
-export function HabitsProgressSection() {
-  const { progressSummary } = useHabitsProgress()
+interface HabitsProgressSectionProps {
+  filter: ActivityHabbitsQuery
+}
+
+export function HabitsProgressSection({ filter }: HabitsProgressSectionProps) {
+  const { progressSummary } = useHabitsProgress(filter)
   const hasFrequency = progressSummary.frequencySuccessRate !== null
   const gridClass = hasFrequency ? 'grid-cols-2 lg:grid-cols-4' : 'grid-cols-2 sm:grid-cols-3'
 

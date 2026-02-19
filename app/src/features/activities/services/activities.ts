@@ -62,10 +62,14 @@ export const deleteActivity = async (uuid: string): Promise<void> => {
 }
 
 export const getActivityProgressSummary = async (
-  activity_uuid: string,
+  query: ActivityHabbitsQuery,
 ): Promise<ActivityProgressSummary> => {
   try {
-    const response = await axiosInstance.get(ApiRoutes.routine.activities.progressSummary(activity_uuid))
+    const { activity_uuid, ...params } = query
+    const response = await axiosInstance.get(
+      ApiRoutes.routine.activities.progressSummary(activity_uuid!),
+      { params },
+    )
     return response.data
   } catch (error: unknown) {
     throw new Error(error instanceof Error ? error.message : 'Failed to fetch activity progress summary')

@@ -2,12 +2,11 @@ import {
   useActivityProgressSummary,
   useHabitOverview,
 } from '../../../../features/activities/hooks/use-activities'
-import { useHabitsPageContext } from '../../context/habits-page.context'
+import type { ActivityHabbitsQuery } from '../../../../features/activities/interfaces/activities.interface'
 import type { ActivityProgressSummaryData } from '../../interfaces/habbits-tab.interface'
 
-export function useHabitsProgress(): { progressSummary: ActivityProgressSummaryData } {
-  const { selectedActivityUuid } = useHabitsPageContext()
-  const progressSummaryQuery = useActivityProgressSummary(selectedActivityUuid)
+export function useHabitsProgress(filter: ActivityHabbitsQuery): { progressSummary: ActivityProgressSummaryData } {
+  const progressSummaryQuery = useActivityProgressSummary(filter)
   const overviewQuery = useHabitOverview()
 
   const progressSummary: ActivityProgressSummaryData = {

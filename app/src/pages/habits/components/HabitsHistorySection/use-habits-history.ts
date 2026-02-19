@@ -1,17 +1,34 @@
 import { useMemo } from 'react'
 import { useActivityLogs } from '../../../../features/habbits/activity-logs/hooks/use-activity-logs'
-import { useHabitsPageContext } from '../../context/habits-page.context'
+import { useActivities } from '../../../../features/activities/hooks/use-activities'
+import type { ActivityHabbitsQuery } from '../../../../features/activities/interfaces/activities.interface'
 import { groupLogsByDate } from '../../utils/habit-logs.utils'
 import type { GroupedActivityLogs } from '../../interfaces/habbits-tab.interface'
 
-export function useHabitsHistory(): { groupedSelectedLogs: GroupedActivityLogs[] } {
-  const { selectedActivityUuid } = useHabitsPageContext()
+export function useHabitsHistory(filter: ActivityHabbitsQuery): {
+  groupedSelectedLogs: GroupedActivityLogs[]
+  activityNameMap: Record<string, string>
+} {
+  const hasFilter = !!(filter.activity_uuid || filter.date_from || filter.date_to)
+
   const logsQuery = useActivityLogs(
-    selectedActivityUuid ? { activity_uuid: selectedActivityUuid } : undefined,
+    hasFilter
+      ? {
+          activity_uuid: filter.activity_uuid,
+          from_date: filter.date_from,
+          to_date: filter.date_to,
+        }
+      : undefined,
   )
-  const selectedLogs = logsQuery.data ?? []
 
-  const groupedSelectedLogs = useMemo(() => groupLogsByDate(selectedLogs), [selectedLogs])
+  const { data: activities = [] } = useActivities()
 
-  return { groupedSelectedLogs }
+  const groupedSelectedLogs = useMemo(() => groupLogsByDate(logsQuery.data ?? []), [logsQuery.data])
+
+  const activityNameMap = useMemo(
+    () => Object.fromEntries(activities.map((a) => [a.uuid, a.name])),
+    [activities],
+  )
+
+  return { groupedSelectedLogs, activityNameMap }
 }

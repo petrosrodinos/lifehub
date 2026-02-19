@@ -1,7 +1,7 @@
 import { ListChecks, ChevronLeft, ChevronRight, SlidersHorizontal } from "lucide-react";
 import { HabitCard } from "./HabitCard/HabitCard";
 import { HabitCompletionActions } from "./HabitCompletionActions/HabitCompletionActions";
-import { HabitsTodayFilters } from "../Filters/habbits";
+import { HabitsFilters } from "../Filters/habbits";
 import { useHabitsToday } from "./use-habits-today";
 import { ActivityTargetTypes } from "../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface";
 
@@ -41,7 +41,7 @@ export function HabitsTodaySection() {
           </div>
         </div>
 
-        {isFiltersOpen && <HabitsTodayFilters onFilterChange={setFilter} />}
+        {isFiltersOpen && <HabitsFilters onFilterChange={setFilter} />}
 
         {isLoading ? (
           <div className="space-y-2">

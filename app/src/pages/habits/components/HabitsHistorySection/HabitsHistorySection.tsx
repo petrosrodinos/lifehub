@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { CalendarClock, CheckCircle2, CircleX, FileText, MinusCircle } from "lucide-react";
 import { DateTime } from "luxon";
 import type { ActivityLog } from "../../../../features/habbits/activity-logs/interfaces/activity-logs.interface";
+import type { ActivityHabbitsQuery } from "../../../../features/activities/interfaces/activities.interface";
 import { useHabitsHistory } from "./use-habits-history";
 
 const PAGE_SIZE = 8;
@@ -37,8 +38,12 @@ function formatQuantity(value?: number | null) {
   return String(value);
 }
 
-export function HabitsHistorySection() {
-  const { groupedSelectedLogs } = useHabitsHistory();
+interface HabitsHistorySectionProps {
+  filter: ActivityHabbitsQuery
+}
+
+export function HabitsHistorySection({ filter }: HabitsHistorySectionProps) {
+  const { groupedSelectedLogs, activityNameMap } = useHabitsHistory(filter);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const flattenedLogs = useMemo(() => groupedSelectedLogs.flatMap((group) => group.logs.map((log) => ({ date: group.date, log }))), [groupedSelectedLogs]);
@@ -73,6 +78,7 @@ export function HabitsHistorySection() {
                       {config.icon}
                       <span>{config.label}</span>
                     </div>
+                    <p className="text-xs font-medium text-slate-300 truncate">{activityNameMap[log.activity_uuid] ?? log.activity_uuid}</p>
                     {log.skip_reason ? <p className="text-xs text-slate-500 truncate">{log.skip_reason}</p> : null}
                     {log.notes ? <FileText className="w-3.5 h-3.5 text-slate-500 shrink-0" /> : null}
                   </div>

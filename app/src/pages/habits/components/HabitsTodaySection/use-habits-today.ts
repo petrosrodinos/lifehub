@@ -8,23 +8,14 @@ import {
   useCompleteActivityOccurrence,
   useSkipActivityOccurrence,
 } from '../../../../features/habbits/activity-occurrences/hooks/use-activity-occurrences'
-import { useHabitsPageContext } from '../../context/habits-page.context'
 import type { ActivityTodayItem } from '../../interfaces/habbits-tab.interface'
 
-export interface HabitsTodayFilter {
-  dateFrom: string
-  dateTo: string
-  activityUuid: string
-}
-
-const DEFAULT_FILTER: HabitsTodayFilter = { dateFrom: '', dateTo: '', activityUuid: '' }
-
 export function useHabitsToday() {
-  const { selectedActivityUuid, setSelectedActivityUuid } = useHabitsPageContext()
+  const [selectedActivityUuid, setSelectedActivityUuid] = useState<string | null>(null)
 
   const [activeDate, setActiveDate] = useState<string>(() => DateTime.now().toISODate() ?? '')
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
-  const [filter, setFilter] = useState<HabitsTodayFilter>(DEFAULT_FILTER)
+  const [filter, setFilter] = useState<ActivityHabbitsQuery>({})
 
   const goToPreviousDay = useCallback(() => {
     setActiveDate((prev) => DateTime.fromISO(prev).minus({ days: 1 }).toISODate() ?? prev)
@@ -44,16 +35,8 @@ export function useHabitsToday() {
   }, [activeDate])
 
   const query = useMemo<ActivityHabbitsQuery>(() => {
-    const result: ActivityHabbitsQuery = {}
-    if (filter.dateFrom || filter.dateTo) {
-      if (filter.dateFrom) result.date_from = filter.dateFrom
-      if (filter.dateTo) result.date_to = filter.dateTo
-    } else {
-      result.date_from = activeDate
-      result.date_to = activeDate
-    }
-    if (filter.activityUuid) result.activity_uuid = filter.activityUuid
-    return result
+    if (filter.date_from || filter.date_to || filter.activity_uuid) return filter
+    return { date_from: activeDate, date_to: activeDate }
   }, [activeDate, filter])
 
   const { data: todayHabits = [], isLoading, isError } = useActivityHabbits(query)

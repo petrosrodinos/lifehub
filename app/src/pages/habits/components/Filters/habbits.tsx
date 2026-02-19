@@ -1,29 +1,27 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { useActivities } from "../../../../features/activities/hooks/use-activities";
-import type { HabitsTodayFilter } from "../HabitsTodaySection/use-habits-today";
+import type { ActivityHabbitsQuery } from "../../../../features/activities/interfaces/activities.interface";
 
-interface HabitsTodayFiltersProps {
-  onFilterChange: (filter: HabitsTodayFilter) => void;
+interface HabitsFiltersProps {
+  onFilterChange: (filter: ActivityHabbitsQuery) => void;
 }
 
-const DEFAULT: HabitsTodayFilter = { dateFrom: "", dateTo: "", activityUuid: "" };
-
-export function HabitsTodayFilters({ onFilterChange }: HabitsTodayFiltersProps) {
-  const [filter, setFilter] = useState<HabitsTodayFilter>(DEFAULT);
+export function HabitsFilters({ onFilterChange }: HabitsFiltersProps) {
+  const [filter, setFilter] = useState<ActivityHabbitsQuery>({});
   const { data: allActivities = [] } = useActivities();
 
-  const hasActiveFilters = !!(filter.dateFrom || filter.dateTo || filter.activityUuid);
+  const hasActiveFilters = !!(filter.date_from || filter.date_to || filter.activity_uuid);
 
-  const update = (patch: Partial<HabitsTodayFilter>) => {
+  const update = (patch: Partial<ActivityHabbitsQuery>) => {
     const next = { ...filter, ...patch };
     setFilter(next);
     onFilterChange(next);
   };
 
   const handleClear = () => {
-    setFilter(DEFAULT);
-    onFilterChange(DEFAULT);
+    setFilter({});
+    onFilterChange({});
   };
 
   return (
@@ -40,18 +38,18 @@ export function HabitsTodayFilters({ onFilterChange }: HabitsTodayFiltersProps) 
 
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1">
-          <label className="text-xs text-slate-400">From</label>
-          <input type="date" value={filter.dateFrom} onChange={(e) => update({ dateFrom: e.target.value })} className="w-full rounded-lg border border-slate-700/60 bg-slate-800/60 px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-violet-500/60" />
+          <label className="text-xs text-slate-400">Date from</label>
+          <input type="date" value={filter.date_from ?? ""} onChange={(e) => update({ date_from: e.target.value || undefined })} className="w-full rounded-lg border border-slate-700/60 bg-slate-800/60 px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-violet-500/60" />
         </div>
         <div className="space-y-1">
-          <label className="text-xs text-slate-400">To</label>
-          <input type="date" value={filter.dateTo} onChange={(e) => update({ dateTo: e.target.value })} className="w-full rounded-lg border border-slate-700/60 bg-slate-800/60 px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-violet-500/60" />
+          <label className="text-xs text-slate-400">Date to</label>
+          <input type="date" value={filter.date_to ?? ""} onChange={(e) => update({ date_to: e.target.value || undefined })} className="w-full rounded-lg border border-slate-700/60 bg-slate-800/60 px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-violet-500/60" />
         </div>
       </div>
 
       <div className="space-y-1">
         <label className="text-xs text-slate-400">Activity</label>
-        <select value={filter.activityUuid} onChange={(e) => update({ activityUuid: e.target.value })} className="w-full rounded-lg border border-slate-700/60 bg-slate-800/60 px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-violet-500/60">
+        <select value={filter.activity_uuid ?? ""} onChange={(e) => update({ activity_uuid: e.target.value || undefined })} className="w-full rounded-lg border border-slate-700/60 bg-slate-800/60 px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-violet-500/60">
           <option value="">All activities</option>
           {allActivities.map((activity) => (
             <option key={activity.uuid} value={activity.uuid}>

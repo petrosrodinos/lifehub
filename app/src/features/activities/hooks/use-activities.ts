@@ -7,7 +7,6 @@ import type {
   UpdateActivityDto,
 } from '../interfaces/activities.interface'
 
-const PROGRESS_SUMMARY_KEY = (activity_uuid: string) => ['habbits', 'activities', activity_uuid, 'progress-summary']
 import {
   getActivities,
   getActivity,
@@ -110,10 +109,10 @@ export function useHabitOverview() {
 }
 
 
-export function useActivityProgressSummary(activity_uuid: string | null) {
+export function useActivityProgressSummary(query: ActivityHabbitsQuery) {
   return useQuery({
-    queryKey: PROGRESS_SUMMARY_KEY(activity_uuid ?? ''),
-    queryFn: () => getActivityProgressSummary(activity_uuid as string),
-    enabled: !!activity_uuid,
+    queryKey: [...QUERY_KEYS.progressSummary(query.activity_uuid ?? ''), query],
+    queryFn: () => getActivityProgressSummary(query),
+    enabled: !!query.activity_uuid,
   })
 }
