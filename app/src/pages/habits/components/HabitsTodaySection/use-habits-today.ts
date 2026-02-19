@@ -39,7 +39,17 @@ export function useHabitsToday() {
     return { date_from: activeDate, date_to: activeDate }
   }, [activeDate, filter])
 
+  const tomorrowDate = useMemo(() => DateTime.now().plus({ days: 1 }).toISODate() ?? '', [])
+  const tomorrowQuery = useMemo<ActivityHabbitsQuery>(() => ({
+    date_from: tomorrowDate,
+    date_to: tomorrowDate,
+    ...(filter.activity_uuid ? { activity_uuid: filter.activity_uuid } : {}),
+  }), [tomorrowDate, filter.activity_uuid])
+
+  const showTomorrow = !filter.date_from && !filter.date_to
+
   const { data: todayHabits = [], isLoading, isError } = useActivityHabbits(query)
+  const { data: tomorrowHabits = [] } = useActivityHabbits(tomorrowQuery)
 
   const [activeActionItem, setActiveActionItem] = useState<ActivityTodayItem | null>(null)
 
@@ -64,6 +74,8 @@ export function useHabitsToday() {
 
   return {
     todayHabits,
+    tomorrowHabits,
+    showTomorrow,
     isLoading,
     hasError: isError,
     isActionPending: completeMutation.isPending || skipMutation.isPending,

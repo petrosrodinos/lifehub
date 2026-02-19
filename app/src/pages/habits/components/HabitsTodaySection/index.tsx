@@ -1,4 +1,4 @@
-import { ListChecks, ChevronLeft, ChevronRight, SlidersHorizontal } from "lucide-react";
+import { ListChecks, ChevronLeft, ChevronRight, SlidersHorizontal, CalendarDays } from "lucide-react";
 import { HabitCard } from "./HabitCard/HabitCard";
 import { HabitCompletionActions } from "./HabitCompletionActions/HabitCompletionActions";
 import { HabitsFilters } from "../Filters/habbits";
@@ -10,7 +10,7 @@ function SkeletonCard() {
 }
 
 export function HabitsTodaySection() {
-  const { todayHabits, isLoading, hasError, isActionPending, selectedActivityUuid, setSelectedActivityUuid, activeActionItem, setActiveActionItem, completeOccurrence, skipOccurrence, activeDateLabel, goToPreviousDay, goToNextDay, isFiltersOpen, setIsFiltersOpen, setFilter } = useHabitsToday();
+  const { todayHabits, tomorrowHabits, showTomorrow, isLoading, hasError, isActionPending, setSelectedActivityUuid, activeActionItem, setActiveActionItem, completeOccurrence, skipOccurrence, activeDateLabel, goToPreviousDay, goToNextDay, isFiltersOpen, setIsFiltersOpen, setFilter } = useHabitsToday();
 
   const emptyStateMessage = hasError ? "Could not load habits right now. Try again in a moment." : todayHabits.length === 0 ? `No occurrences scheduled for ${activeDateLabel.toLowerCase()}.` : null;
 
@@ -60,7 +60,6 @@ export function HabitsTodaySection() {
                 key={item.activity.uuid}
                 item={item}
                 isBusy={isActionPending}
-                isActive={selectedActivityUuid === item.activity.uuid}
                 onSelect={() => setSelectedActivityUuid(item.activity.uuid)}
                 onOpenActions={() => setActiveActionItem(item)}
                 onSwipeComplete={async () => {
@@ -74,6 +73,38 @@ export function HabitsTodaySection() {
           </div>
         )}
       </section>
+
+      {showTomorrow && (
+        <section className="space-y-3 pt-6 border-t border-slate-700/60">
+          <h2 className="text-base sm:text-lg font-semibold inline-flex items-center gap-2 text-slate-400">
+            <CalendarDays className="w-4 h-4" />
+            Tomorrow
+          </h2>
+          {tomorrowHabits.length === 0 ? (
+            <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-4 text-center">
+              <p className="text-slate-400 text-sm">No occurrences scheduled for tomorrow.</p>
+            </div>
+          ) : (
+            <div className="space-y-2 max-h-[30vh] overflow-y-auto pr-0.5 opacity-90">
+              {tomorrowHabits.map((item) => (
+                <HabitCard
+                  key={item.activity.uuid}
+                  item={item}
+                  isBusy={isActionPending}
+                  onSelect={() => setSelectedActivityUuid(item.activity.uuid)}
+                  onOpenActions={() => setActiveActionItem(item)}
+                  onSwipeComplete={async () => {
+                    await completeOccurrence(item.occurrence_uuid, item.status, item.schedule?.target_type === ActivityTargetTypes.QUANTITY ? (item.quantity_value ?? 0) : undefined, item.activity.uuid);
+                  }}
+                  onSwipeSkip={async () => {
+                    await skipOccurrence(item.occurrence_uuid, item.status, item.activity.uuid);
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+      )}
 
       <HabitCompletionActions
         isOpen={!!activeActionItem}

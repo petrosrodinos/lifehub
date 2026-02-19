@@ -7,7 +7,6 @@ import { ActivityTargetTypes } from "../../../../../features/habbits/activity-sc
 
 type HabitCardProps = {
   item: ActivityTodayItem;
-  isActive: boolean;
   isBusy: boolean;
   onSelect: () => void;
   onOpenActions: () => void;
@@ -44,7 +43,7 @@ function formatTime(timeOfDay?: string | null) {
   return parsed.toFormat("h:mm a");
 }
 
-export function HabitCard({ item, isActive, isBusy, onSelect, onOpenActions, onSwipeComplete, onSwipeSkip }: HabitCardProps) {
+export function HabitCard({ item, isBusy, onSelect, onOpenActions, onSwipeComplete, onSwipeSkip }: HabitCardProps) {
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
@@ -80,7 +79,7 @@ export function HabitCard({ item, isActive, isBusy, onSelect, onOpenActions, onS
       onTouchMove={(event) => onTouchMove(event.touches[0].clientX)}
       onTouchEnd={onTouchFinish}
       disabled={isBusy}
-      className={`w-full text-left rounded-2xl border transition-all duration-200 ${isActive ? "border-violet-400/70 bg-slate-800/90 shadow-[0_14px_34px_rgba(139,92,246,0.22)]" : "border-slate-700/60 bg-slate-900/60 hover:border-slate-500/70 hover:bg-slate-800/60"} ${isBusy ? "opacity-60 cursor-not-allowed" : ""}`}
+      className={`w-full text-left rounded-2xl border transition-all duration-200 border-slate-700/60 bg-slate-900/60 hover:border-slate-500/70 hover:bg-slate-800/60 ${isBusy ? "opacity-60 cursor-not-allowed" : ""}`}
     >
       <div className="p-4 sm:p-5 space-y-4">
         <div className="flex items-start justify-between gap-3">
