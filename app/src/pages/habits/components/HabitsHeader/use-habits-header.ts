@@ -1,11 +1,10 @@
 import { useMemo } from 'react'
 import { DateTime } from 'luxon'
-import { useActivityHabbits, useHabitOverview } from '../../../../features/activities/hooks/use-activities'
+import { useActivityHabbits } from '../../../../features/activities/hooks/use-activities'
 import { OccurrenceStatuses } from '../../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface'
 
 export function useHabitsHeader() {
   const activitiesQuery = useActivityHabbits()
-  const overviewQuery = useHabitOverview()
   const todayHabits = activitiesQuery.data ?? []
 
   const completedToday = useMemo(
@@ -21,6 +20,5 @@ export function useHabitsHeader() {
     dateLabel,
     completedToday,
     totalToday,
-    overview: overviewQuery.data,
   }
 }

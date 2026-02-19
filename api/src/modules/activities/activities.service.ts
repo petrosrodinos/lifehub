@@ -4,7 +4,6 @@ import { CreateActivityDto } from './dto/create-activity.dto'
 import { UpdateActivityDto } from './dto/update-activity.dto'
 import { AnalyticsService } from '@/modules/habbits/analytics/analytics.service'
 import { DateTime } from 'luxon'
-import { ActivityProgressRangeType } from '../habbits/analytics/schemas/activity-progress-query.schema'
 import { ActivityHabbitsQueryType } from './schemas/activity-habbits-query.schema'
 
 @Injectable()
@@ -119,17 +118,15 @@ export class ActivitiesService {
     return activity
   }
 
-  async getProgress(uuid: string, user_uuid: string, range: ActivityProgressRangeType) {
-    return this.analyticsService.getActivityProgress(user_uuid, uuid, range)
-  }
-
-  async getProgressSummary(uuid: string, user_uuid: string) {
-    const [progress7d, progress30d] = await Promise.all([
-      this.analyticsService.getActivityProgress(user_uuid, uuid, '7d'),
-      this.analyticsService.getActivityProgress(user_uuid, uuid, '30d'),
+  async getProgressSummary(user_uuid: string, query: ActivityHabbitsQueryType) {
+    const [progress_7d, progress_30d, most_skipped_activity, daily_completion_heatmap] = await Promise.all([
+      this.analyticsService.getActivityProgress(user_uuid, query.activity_uuid, '7d'),
+      this.analyticsService.getActivityProgress(user_uuid, query.activity_uuid, '30d'),
+      this.analyticsService.getMostSkippedActivity(user_uuid, query.activity_uuid),
+      this.analyticsService.getDailyCompletionHeatmap(user_uuid, query.activity_uuid),
     ])
 
-    const frequencyPeriods = progress30d.frequency?.flatMap((entry) => entry.periods) ?? []
+    const frequencyPeriods = progress_30d.frequency?.flatMap((entry) => entry.periods) ?? []
     const frequency_success_rate =
       frequencyPeriods.length > 0
         ? Number(
@@ -141,74 +138,17 @@ export class ActivitiesService {
         : null
 
     return {
-      completion_rate_7d: progress7d.completion_rate,
-      completion_rate_30d: progress30d.completion_rate,
-      quantity_total_30d: progress30d.quantity?.total_quantity_completed ?? 0,
+      completion_rate_7d: progress_7d.completion_rate,
+      completion_rate_30d: progress_30d.completion_rate,
+      quantity_total_30d: progress_30d.quantity?.total_quantity_completed ?? 0,
       frequency_success_rate,
+      progress_7d,
+      progress_30d,
+      most_skipped_activity,
+      daily_completion_heatmap,
     }
   }
 
-  async activityAnalytics(uuid: string, user_uuid: string) {
-    const dayStart = DateTime.now().startOf('day').toJSDate()
-    const dayEnd = DateTime.now().endOf('day').toJSDate()
-    const pastStart = DateTime.now().minus({ days: 30 }).startOf('day').toJSDate()
-    const futureEnd = DateTime.now().plus({ days: 30 }).endOf('day').toJSDate()
-
-    const activity = await this.prisma.activity.findFirst({
-      where: {
-        uuid,
-        user_uuid,
-      },
-      include: {
-        activity_schedules: {
-          include: {
-            weekdays: true,
-            specific_dates: true,
-          },
-          orderBy: {
-            valid_from: 'desc',
-          },
-        },
-        activity_occurrences: {
-          where: {
-            scheduled_for: {
-              gte: pastStart,
-              lte: futureEnd,
-            },
-          },
-          include: {
-            log: true,
-          },
-          orderBy: {
-            scheduled_for: 'asc',
-          },
-        },
-      },
-    })
-
-    if (!activity) {
-      throw new NotFoundException('Activity not found')
-    }
-
-    const analytics = await this.analyticsService.getActivityProgress(user_uuid, uuid, '30d')
-
-    const current_schedule = activity.activity_schedules.find((s) => s.is_active && s.valid_until === null) ?? activity.activity_schedules[0] ?? null
-
-    const today_occurrence = activity.activity_occurrences.find(
-      (o) => o.scheduled_for >= dayStart && o.scheduled_for <= dayEnd,
-    ) ?? null
-
-    return {
-      ...activity,
-      current_schedule,
-      today_occurrence,
-      activity_schedules: undefined,
-      activity_occurrences: undefined,
-      schedules: activity.activity_schedules,
-      occurrences: activity.activity_occurrences,
-      analytics,
-    }
-  }
 
   async update(uuid: string, dto: UpdateActivityDto, user_uuid: string) {
     const activity = await this.prisma.activity.findFirst({

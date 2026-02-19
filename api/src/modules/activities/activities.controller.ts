@@ -6,7 +6,6 @@ import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe'
 import { ActivitiesService } from './activities.service'
 import { CreateActivityDto } from './dto/create-activity.dto'
 import { UpdateActivityDto } from './dto/update-activity.dto'
-import { ActivityProgressQuerySchema, ActivityProgressQueryType } from '../habbits/analytics/schemas/activity-progress-query.schema'
 import { ActivityHabbitsQuerySchema, ActivityHabbitsQueryType } from './schemas/activity-habbits-query.schema'
 
 @ApiTags('Activities')
@@ -44,33 +43,16 @@ export class ActivitiesController {
     return this.activitiesService.getActivityHabbits(userUuid, query)
   }
 
-  @Get(':uuid/progress-summary')
-  @ApiOperation({ summary: 'Get activity progress summary' })
-  @ApiResponse({ status: 200, description: 'Activity progress summary retrieved successfully' })
+  @Get('progress-summary')
+  @ApiOperation({ summary: 'Get progress summary, optionally filtered by activity and date range' })
+  @ApiResponse({ status: 200, description: 'Progress summary retrieved successfully' })
   getProgressSummary(
-    @Param('uuid') uuid: string,
     @CurrentUser('user_uuid') userUuid: string,
+    @Query(new ZodValidationPipe(ActivityHabbitsQuerySchema)) query: ActivityHabbitsQueryType,
   ) {
-    return this.activitiesService.getProgressSummary(uuid, userUuid)
+    return this.activitiesService.getProgressSummary(userUuid, query)
   }
 
-  @Get(':uuid/progress')
-  @ApiOperation({ summary: 'Get activity progress analytics' })
-  @ApiResponse({ status: 200, description: 'Activity progress retrieved successfully' })
-  getProgress(
-    @Param('uuid') uuid: string,
-    @CurrentUser('user_uuid') userUuid: string,
-    @Query(new ZodValidationPipe(ActivityProgressQuerySchema)) query: ActivityProgressQueryType,
-  ) {
-    return this.activitiesService.getProgress(uuid, userUuid, query.range)
-  }
-
-  @Get(':uuid/analytics')
-  @ApiOperation({ summary: 'Get activity analytics' })
-  @ApiResponse({ status: 200, description: 'Activity analytics retrieved successfully' })
-  activityAnalytics(@Param('uuid') uuid: string, @CurrentUser('user_uuid') userUuid: string) {
-    return this.activitiesService.activityAnalytics(uuid, userUuid)
-  }
 
   @Get(':uuid')
   @ApiOperation({ summary: 'Get a specific activity by UUID' })

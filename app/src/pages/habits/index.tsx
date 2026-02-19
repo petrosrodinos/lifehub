@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HabitsHeader } from "./components/HabitsHeader/HabitsHeader";
-import { HabitsTodaySection } from "./components/HabitsTodaySection/HabitsTodaySection";
+import { HabitsTodaySection } from "./components/HabitsTodaySection";
 import { HabitsProgressSection } from "./components/HabitsProgressSection/HabitsProgressSection";
 import { HabitsHistorySection } from "./components/HabitsHistorySection/HabitsHistorySection";
 import { HabitsFilters } from "./components/Filters/habbits";

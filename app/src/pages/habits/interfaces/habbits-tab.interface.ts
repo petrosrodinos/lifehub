@@ -11,12 +11,6 @@ export interface ActivityTodayItem {
   quantity_value: number | null
 }
 
-export interface ActivityProgressSummaryData {
-  completionRate7d: number
-  completionRate30d: number
-  quantityTotal30d: number
-  frequencySuccessRate: number | null
-}
 
 export interface GroupedActivityLogs {
   date: string

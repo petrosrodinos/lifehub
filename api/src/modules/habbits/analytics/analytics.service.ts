@@ -9,12 +9,12 @@ import { ActivityProgressRangeType } from './schemas/activity-progress-query.sch
 export class AnalyticsService {
   constructor(private readonly prisma: PrismaService) { }
 
-  async getActivityProgress(user_uuid: string, activity_uuid: string, range: ActivityProgressRangeType) {
+  async getActivityProgress(user_uuid: string, activity_uuid: string | undefined, range: ActivityProgressRangeType) {
     const { start, end } = getDateRangeByPreset(range)
     const occurrences = await this.prisma.activityOccurrence.findMany({
       where: {
         user_uuid,
-        activity_uuid,
+        ...(activity_uuid ? { activity_uuid } : {}),
         scheduled_for: {
           gte: start,
           lte: end,
@@ -135,13 +135,73 @@ export class AnalyticsService {
     }
   }
 
+  async getMostSkippedActivity(
+    user_uuid: string,
+    activity_uuid: string | undefined,
+  ): Promise<{ activity_uuid: string; name: string; skipped_count: number } | null> {
+    const { start, end } = getDateRangeByPreset('30d')
+
+    const occurrences = await this.prisma.activityOccurrence.findMany({
+      where: {
+        user_uuid,
+        ...(activity_uuid ? { activity_uuid } : {}),
+        status: OccurrenceStatus.SKIPPED,
+        scheduled_for: { gte: start, lte: end },
+      },
+      select: { activity_uuid: true },
+    })
+
+    if (occurrences.length === 0) return null
+
+    const skippedMap = new Map<string, number>()
+    for (const item of occurrences) {
+      skippedMap.set(item.activity_uuid, (skippedMap.get(item.activity_uuid) ?? 0) + 1)
+    }
+
+    const [topUuid, skipped_count] = Array.from(skippedMap.entries()).sort((a, b) => b[1] - a[1])[0]
+
+    const activity = await this.prisma.activity.findFirst({
+      where: { uuid: topUuid },
+      select: { name: true },
+    })
+
+    return { activity_uuid: topUuid, name: activity?.name ?? '', skipped_count }
+  }
+
+  async getDailyCompletionHeatmap(
+    user_uuid: string,
+    activity_uuid: string | undefined,
+  ): Promise<Array<{ date: string; count: number }>> {
+    const { start, end } = getDateRangeByPreset('30d')
+
+    const occurrences = await this.prisma.activityOccurrence.findMany({
+      where: {
+        user_uuid,
+        ...(activity_uuid ? { activity_uuid } : {}),
+        status: OccurrenceStatus.COMPLETED,
+        scheduled_for: { gte: start, lte: end },
+      },
+      select: { scheduled_for: true },
+    })
+
+    const heatmapMap = new Map<string, number>()
+    for (const item of occurrences) {
+      const key = toDayKey(item.scheduled_for)
+      heatmapMap.set(key, (heatmapMap.get(key) ?? 0) + 1)
+    }
+
+    return Array.from(heatmapMap.entries())
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([date, count]) => ({ date, count }))
+  }
+
   private async getQuantityAnalytics(user_uuid: string, activity_uuid: string, range: '7d' | '30d' | '90d' | '1y') {
     const { start, end } = getDateRangeByPreset(range)
     const schedule = await this.prisma.activitySchedule.findFirst({
       where: {
         user_uuid,
         activity_uuid,
-        target_type: ActivityTargetType.QUANTITY,
+        // target_type: ActivityTargetType.QUANTITY,
         valid_from: { lte: end },
       },
       orderBy: {

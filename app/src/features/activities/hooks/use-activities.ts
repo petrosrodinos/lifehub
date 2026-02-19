@@ -13,7 +13,6 @@ import {
   createActivity,
   updateActivity,
   deleteActivity,
-  getHabitOverview,
   getActivityProgressSummary,
   getActivityHabbits,
 } from '../services/activities'
@@ -101,18 +100,9 @@ export function useActivityHabbits(query?: ActivityHabbitsQuery) {
 }
 
 
-export function useHabitOverview() {
-  return useQuery({
-    queryKey: QUERY_KEYS.overview,
-    queryFn: getHabitOverview,
-  })
-}
-
-
 export function useActivityProgressSummary(query: ActivityHabbitsQuery) {
   return useQuery({
-    queryKey: [...QUERY_KEYS.progressSummary(query.activity_uuid ?? ''), query],
+    queryKey: [...QUERY_KEYS.progressSummary(query.activity_uuid ?? 'all'), query],
     queryFn: () => getActivityProgressSummary(query),
-    enabled: !!query.activity_uuid,
   })
 }

@@ -7,7 +7,6 @@ import type {
   ActivityProgressSummary,
   CreateActivityDto,
   UpdateActivityDto,
-  HabitOverview,
 } from '../interfaces/activities.interface'
 
 
@@ -65,27 +64,13 @@ export const getActivityProgressSummary = async (
   query: ActivityHabbitsQuery,
 ): Promise<ActivityProgressSummary> => {
   try {
-    const { activity_uuid, ...params } = query
-    const response = await axiosInstance.get(
-      ApiRoutes.routine.activities.progressSummary(activity_uuid!),
-      { params },
-    )
+    const response = await axiosInstance.get(ApiRoutes.routine.activities.progressSummary, { params: query })
     return response.data
   } catch (error: unknown) {
     throw new Error(error instanceof Error ? error.message : 'Failed to fetch activity progress summary')
   }
 }
 
-
-export const getHabitOverview = async (): Promise<HabitOverview> => {
-  try {
-    const response = await axiosInstance.get(ApiRoutes.habbits.analytics.overview)
-    return response.data
-  } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Failed to fetch overview analytics'
-    throw new Error(message)
-  }
-}
 
 export const getActivityHabbits = async (query?: ActivityHabbitsQuery): Promise<ActivityHabitItem[]> => {
   try {

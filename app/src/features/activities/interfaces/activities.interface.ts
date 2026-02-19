@@ -40,6 +40,27 @@ export interface UpdateActivityDto {
   visible?: boolean
 }
 
+export interface ActivityProgressQuantity {
+  total_quantity_completed: number
+  average_per_day: number
+  average_per_week: number
+  trend_vs_previous_period: number
+  percent_of_target_achieved: number
+}
+
+export interface ActivityProgressFrequencyPeriod {
+  period_key: string
+  required_count: number
+  completed_count: number
+  success_rate: number
+}
+
+export interface ActivityProgressFrequency {
+  schedule_uuid: string
+  frequency_period: string
+  periods: ActivityProgressFrequencyPeriod[]
+}
+
 export interface ActivityProgressResponse {
   range: '7d' | '30d' | '90d' | '1y'
   completion_rate: number
@@ -50,9 +71,24 @@ export interface ActivityProgressResponse {
     currentStreak: number
     longestStreak: number
   }
+  quantity: ActivityProgressQuantity | null
+  frequency: ActivityProgressFrequency[]
 }
 
-
+export interface ActivityProgressSummary {
+  completion_rate_7d: number
+  completion_rate_30d: number
+  quantity_total_30d: number
+  frequency_success_rate: number | null
+  progress_7d: ActivityProgressResponse
+  progress_30d: ActivityProgressResponse
+  most_skipped_activity: {
+    activity_uuid: string
+    name: string
+    skipped_count: number
+  } | null
+  daily_completion_heatmap: Array<{ date: string; count: number }>
+}
 
 export interface ActivityHabbitsQuery {
   date_from?: string
@@ -66,13 +102,6 @@ export interface ActivityHabitItem {
   status: OccurrenceStatus
   occurrence_uuid: string
   quantity_value: number | null
-}
-
-export interface ActivityProgressSummary {
-  completion_rate_7d: number
-  completion_rate_30d: number
-  quantity_total_30d: number
-  frequency_success_rate: number | null
 }
 
 export interface HabitOverview {
