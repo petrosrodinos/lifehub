@@ -1,9 +1,9 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Modal } from "../../../../components/ui/Modal";
-import type { ActivityTodayItem } from "../../interfaces/habbits-tab.interface";
-import { ActivityTargetTypes } from "../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface";
-import { OccurrenceStatuses } from "../../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface";
+import { Modal } from "../../../../../components/ui/Modal";
+import type { ActivityTodayItem } from "../../../interfaces/habbits-tab.interface";
+import { ActivityTargetTypes } from "../../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface";
+import { OccurrenceStatuses } from "../../../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface";
 
 type HabitCompletionActionsProps = {
   isOpen: boolean;

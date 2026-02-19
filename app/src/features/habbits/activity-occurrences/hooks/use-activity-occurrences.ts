@@ -1,38 +1,96 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
-import type { CompleteOccurrenceDto, SkipOccurrenceDto } from '../interfaces/activity-occurrences.interface'
+import { OccurrenceStatuses } from '../interfaces/activity-occurrences.interface'
 import { completeActivityOccurrence, skipActivityOccurrence } from '../services/activity-occurrences'
+import { patchOccurrenceStatus } from '../utils/activity-occurrences.utils'
+import type { ActivityHabitItem } from '../../../activities/interfaces/activities.interface'
+
+const OCCURRENCES_KEY = ['habbits', 'activities', 'occurrences']
+const LOGS_KEY = ['habbits', 'activity-logs']
+const OVERVIEW_KEY = ['habbits', 'analytics', 'overview']
+
+type CompleteOccurrenceVars = {
+  occurrenceUuid: string
+  value?: number
+  activityUuid?: string
+}
 
 export function useCompleteActivityOccurrence() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: ({ uuid, data }: { uuid: string; data: CompleteOccurrenceDto }) =>
-      completeActivityOccurrence(uuid, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['habbits'] })
-      queryClient.invalidateQueries({ queryKey: ['activities'] })
-      toast.success('Occurrence completed', { duration: 2000 })
+    mutationFn: ({ occurrenceUuid, value }: CompleteOccurrenceVars) =>
+      completeActivityOccurrence(occurrenceUuid, value !== undefined ? { value } : {}),
+    onMutate: async ({ occurrenceUuid }) => {
+      await queryClient.cancelQueries({ queryKey: OCCURRENCES_KEY })
+      const previousItems = queryClient.getQueryData<ActivityHabitItem[]>(OCCURRENCES_KEY)
+      queryClient.setQueryData<ActivityHabitItem[]>(
+        OCCURRENCES_KEY,
+        patchOccurrenceStatus(previousItems, { occurrenceUuid, status: OccurrenceStatuses.COMPLETED }),
+      )
+      return { previousItems }
     },
-    onError: (error: Error) => {
-      toast.error(error.message || 'Failed to complete occurrence', { duration: 3000 })
+    onSuccess: () => {
+      toast.success('Occurrence completed', { duration: 1600 })
+    },
+    onError: (error: Error, _, context) => {
+      if (context?.previousItems) {
+        queryClient.setQueryData(OCCURRENCES_KEY, context.previousItems)
+      }
+      toast.error(error.message || 'Could not complete occurrence')
+    },
+    onSettled: (_, __, variables) => {
+      queryClient.invalidateQueries({ queryKey: OCCURRENCES_KEY })
+      queryClient.invalidateQueries({ queryKey: LOGS_KEY })
+      queryClient.invalidateQueries({ queryKey: OVERVIEW_KEY })
+      if (variables.activityUuid) {
+        queryClient.invalidateQueries({
+          queryKey: ['habbits', 'activities', variables.activityUuid, 'progress-summary'],
+        })
+      }
     },
   })
+}
+
+type SkipOccurrenceVars = {
+  occurrenceUuid: string
+  skipReason?: string
+  activityUuid?: string
 }
 
 export function useSkipActivityOccurrence() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: ({ uuid, data }: { uuid: string; data: SkipOccurrenceDto }) =>
-      skipActivityOccurrence(uuid, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['habbits'] })
-      queryClient.invalidateQueries({ queryKey: ['activities'] })
-      toast.success('Occurrence skipped', { duration: 2000 })
+    mutationFn: ({ occurrenceUuid, skipReason }: SkipOccurrenceVars) =>
+      skipActivityOccurrence(occurrenceUuid, skipReason ? { skip_reason: skipReason } : {}),
+    onMutate: async ({ occurrenceUuid }) => {
+      await queryClient.cancelQueries({ queryKey: OCCURRENCES_KEY })
+      const previousItems = queryClient.getQueryData<ActivityHabitItem[]>(OCCURRENCES_KEY)
+      queryClient.setQueryData<ActivityHabitItem[]>(
+        OCCURRENCES_KEY,
+        patchOccurrenceStatus(previousItems, { occurrenceUuid, status: OccurrenceStatuses.SKIPPED }),
+      )
+      return { previousItems }
     },
-    onError: (error: Error) => {
-      toast.error(error.message || 'Failed to skip occurrence', { duration: 3000 })
+    onSuccess: () => {
+      toast.success('Occurrence skipped', { duration: 1600 })
+    },
+    onError: (error: Error, _, context) => {
+      if (context?.previousItems) {
+        queryClient.setQueryData(OCCURRENCES_KEY, context.previousItems)
+      }
+      toast.error(error.message || 'Could not skip occurrence')
+    },
+    onSettled: (_, __, variables) => {
+      queryClient.invalidateQueries({ queryKey: OCCURRENCES_KEY })
+      queryClient.invalidateQueries({ queryKey: LOGS_KEY })
+      queryClient.invalidateQueries({ queryKey: OVERVIEW_KEY })
+      if (variables.activityUuid) {
+        queryClient.invalidateQueries({
+          queryKey: ['habbits', 'activities', variables.activityUuid, 'progress-summary'],
+        })
+      }
     },
   })
 }

@@ -1,7 +1,7 @@
-import { Modal } from '../../../../components/ui/Modal'
-import { useCreateActivitySchedule } from '../../../../features/habbits/activity-schedules/hooks/use-activity-schedules'
-import { useActivities } from '../../../../features/activities/hooks/use-activities'
-import type { CreateActivityScheduleDto } from '../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface'
+import { Modal } from '../../../../../components/ui/Modal'
+import { useCreateActivitySchedule } from '../../../../../features/habbits/activity-schedules/hooks/use-activity-schedules'
+import { useActivities } from '../../../../../features/activities/hooks/use-activities'
+import type { CreateActivityScheduleDto } from '../../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface'
 import { ActivityScheduleForm } from './ActivityScheduleForm'
 
 type CreateActivityScheduleModalProps = {

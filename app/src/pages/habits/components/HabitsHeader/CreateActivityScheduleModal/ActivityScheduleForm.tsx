@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { ActivityRepeatTypes, ActivityTargetTypes, ActivityTargetUnits, FrequencyPeriods, type ActivityRepeatType, type ActivityTargetType, type ActivityTargetUnit, type CreateActivityScheduleDto, type FrequencyPeriod } from "../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface";
-import type { Activity } from "../../../../features/activities/interfaces/activities.interface";
-import { REPEAT_TYPE_OPTIONS, TARGET_TYPE_OPTIONS, TARGET_UNIT_OPTIONS, FREQUENCY_PERIOD_OPTIONS, WEEKDAY_OPTIONS } from "../../constants/schedule-options";
+import { ActivityRepeatTypes, ActivityTargetTypes, ActivityTargetUnits, FrequencyPeriods, type ActivityRepeatType, type ActivityTargetType, type ActivityTargetUnit, type CreateActivityScheduleDto, type FrequencyPeriod } from "../../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface";
+import type { Activity } from "../../../../../features/activities/interfaces/activities.interface";
+import { REPEAT_TYPE_OPTIONS, TARGET_TYPE_OPTIONS, TARGET_UNIT_OPTIONS, FREQUENCY_PERIOD_OPTIONS, WEEKDAY_OPTIONS } from "../../../constants/schedule-options";
 
 type ActivityScheduleFormProps = {
   activities: Activity[];

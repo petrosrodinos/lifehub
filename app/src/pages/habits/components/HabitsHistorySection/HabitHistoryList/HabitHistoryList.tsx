@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { CalendarClock, CheckCircle2, CircleX, FileText, MinusCircle } from 'lucide-react'
 import { DateTime } from 'luxon'
-import type { GroupedActivityLogs } from '../../interfaces/habbits-tab.interface'
+import type { GroupedActivityLogs } from '../../../interfaces/habbits-tab.interface'
 
 type HabitHistoryListProps = {
   groupedLogs: GroupedActivityLogs[]

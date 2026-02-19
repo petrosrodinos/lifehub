@@ -1,26 +1,28 @@
+import { ActivityRepeatTypes, ActivityTargetTypes, ActivityTargetUnits, FrequencyPeriods } from "../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface"
+
 export const REPEAT_TYPE_OPTIONS = [
-  { value: 'DAILY', label: 'Daily' },
-  { value: 'WEEKDAYS', label: 'Specific weekdays' },
-  { value: 'INTERVAL', label: 'Every N days' },
-  { value: 'FREQUENCY', label: 'Frequency based' },
+  { value: ActivityRepeatTypes.DAILY, label: 'Daily' },
+  { value: ActivityRepeatTypes.WEEKDAYS, label: 'Specific weekdays' },
+  { value: ActivityRepeatTypes.INTERVAL, label: 'Every N days' },
+  { value: ActivityRepeatTypes.FREQUENCY, label: 'Frequency based' },
 ] as const
 
 export const TARGET_TYPE_OPTIONS = [
-  { value: 'BOOLEAN', label: 'Boolean (done / not done)' },
-  { value: 'QUANTITY', label: 'Quantity' },
+  { value: ActivityTargetTypes.BOOLEAN, label: 'Boolean (done / not done)' },
+  { value: ActivityTargetTypes.QUANTITY, label: 'Quantity' },
 ] as const
 
 export const TARGET_UNIT_OPTIONS = [
-  { value: 'PAGES', label: 'Pages' },
-  { value: 'MINUTES', label: 'Minutes' },
-  { value: 'KM', label: 'Kilometers' },
-  { value: 'TIMES', label: 'Times' },
-  { value: 'CUSTOM', label: 'Custom' },
+  { value: ActivityTargetUnits.PAGES, label: 'Pages' },
+  { value: ActivityTargetUnits.MINUTES, label: 'Minutes' },
+  { value: ActivityTargetUnits.KM, label: 'Kilometers' },
+  { value: ActivityTargetUnits.TIMES, label: 'Times' },
+  { value: ActivityTargetUnits.CUSTOM, label: 'Custom' },
 ] as const
 
 export const FREQUENCY_PERIOD_OPTIONS = [
-  { value: 'WEEK', label: 'Per week' },
-  { value: 'MONTH', label: 'Per month' },
+  { value: FrequencyPeriods.WEEK, label: 'Per week' },
+  { value: FrequencyPeriods.MONTH, label: 'Per month' },
 ] as const
 
 export const WEEKDAY_OPTIONS = [

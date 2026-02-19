@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
-import type { CreateActivityScheduleDto, UpdateActivityScheduleDto } from '../interfaces/activity-schedules.interface'
+import type { CreateActivityScheduleDto } from '../interfaces/activity-schedules.interface'
 import { createActivitySchedule, updateActivitySchedule } from '../services/activity-schedules'
 
 export function useCreateActivitySchedule() {
@@ -21,19 +21,26 @@ export function useCreateActivitySchedule() {
   })
 }
 
+
 export function useUpdateActivitySchedule() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: ({ uuid, data }: { uuid: string; data: UpdateActivityScheduleDto }) =>
-      updateActivitySchedule(uuid, data),
+    mutationFn: updateActivitySchedule,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['habbits'] })
-      queryClient.invalidateQueries({ queryKey: ['activities'] })
-      toast.success('Schedule updated successfully', { duration: 2000 })
+      toast.success('Schedule updated for future occurrences', { duration: 2000 })
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Failed to update schedule', { duration: 3000 })
+      toast.error(error.message || 'Could not update schedule')
+    },
+    onSettled: (_, __, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['habbits', 'activities', 'occurrences'] })
+      queryClient.invalidateQueries({ queryKey: ['habbits', 'activity-logs'] })
+      if (variables.activityUuid) {
+        queryClient.invalidateQueries({
+          queryKey: ['habbits', 'activities', variables.activityUuid, 'progress-summary'],
+        })
+      }
     },
   })
 }

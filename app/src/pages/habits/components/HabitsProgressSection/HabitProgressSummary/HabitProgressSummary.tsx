@@ -1,5 +1,5 @@
 import { BarChart3, CalendarDays, Gauge, TrendingUp } from 'lucide-react'
-import type { ActivityProgressSummaryData } from '../../interfaces/habbits-tab.interface'
+import type { ActivityProgressSummaryData } from '../../../interfaces/habbits-tab.interface'
 
 type HabitProgressSummaryProps = {
   progress: ActivityProgressSummaryData

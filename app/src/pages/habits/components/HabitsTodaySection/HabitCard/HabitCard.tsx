@@ -1,8 +1,8 @@
 import { CheckCircle2, CircleDashed, CircleX, Clock3, Flame, MinusCircle } from "lucide-react";
 import { DateTime } from "luxon";
 import { useRef } from "react";
-import type { ActivityTodayItem } from "../../interfaces/habbits-tab.interface";
-import { OccurrenceStatuses } from "../../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface";
+import type { ActivityTodayItem } from "../../../interfaces/habbits-tab.interface";
+import { OccurrenceStatuses } from "../../../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface";
 
 type HabitCardProps = {
   item: ActivityTodayItem;

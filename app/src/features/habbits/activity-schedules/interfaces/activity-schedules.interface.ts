@@ -44,6 +44,12 @@ export interface UpdateActivityScheduleDto {
   target_value?: number
 }
 
+export interface UpdateScheduleVars {
+  uuid: string
+  data: UpdateActivityScheduleDto
+  activityUuid?: string
+}
+
 export const ActivityRepeatTypes = {
   DAILY: 'DAILY',
   WEEKDAYS: 'WEEKDAYS',
