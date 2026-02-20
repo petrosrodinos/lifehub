@@ -109,6 +109,8 @@ export interface ActivityHabbitsQuery {
   date_from?: string
   date_to?: string
   activity_uuid?: string
+  page?: number
+  page_size?: number
 }
 
 export interface ActivityHabitItem {

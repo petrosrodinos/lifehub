@@ -67,6 +67,7 @@ export const ApiRoutes = {
     },
     logs: {
       list: "/logs",
+      grouped: "/logs/grouped",
     },
     analytics: {
       overview: "/analytics/overview",

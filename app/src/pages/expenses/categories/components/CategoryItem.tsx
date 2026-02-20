@@ -4,8 +4,8 @@ import type { ExpenseSubcategory } from "../../../../features/expense-subcategor
 import { CategoryForm } from "./CategoryForm";
 import { SubcategoryForm } from "./SubcategoryForm";
 import { SubcategoryItem } from "./SubcategoryItem";
-import { PRESET_COLORS } from "../../constants/expenses-colors";
-import { CATEGORY_PRESET_ICONS } from "../../constants/account-icons";
+import { PRESET_COLORS } from "../../../../config/constants/dropdowns/expenses-colors";
+import { CATEGORY_PRESET_ICONS } from "../../../../config/constants/dropdowns/account-icons";
 
 type CategoryItemProps = {
   category: ExpenseCategory;

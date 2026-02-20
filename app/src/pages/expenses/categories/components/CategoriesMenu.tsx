@@ -8,8 +8,8 @@ import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
 import { CategoryForm } from "./CategoryForm";
 import { CategoryItem } from "./CategoryItem";
 import { EmptyState } from "./EmptyState";
-import { PRESET_COLORS } from "../../constants/expenses-colors";
-import { CATEGORY_PRESET_ICONS } from "../../constants/account-icons";
+import { PRESET_COLORS } from "../../../../config/constants/dropdowns/expenses-colors";
+import { CATEGORY_PRESET_ICONS } from "../../../../config/constants/dropdowns/account-icons";
 
 type CategoriesMenuProps = {
   isOpen: boolean;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { CATEGORY_PRESET_ICONS } from "../../constants/account-icons";
-import { PRESET_COLORS } from "../../constants/expenses-colors";
+import { CATEGORY_PRESET_ICONS } from "../../../../config/constants/dropdowns/account-icons";
+import { PRESET_COLORS } from "../../../../config/constants/dropdowns/expenses-colors";
 import { EmojiPicker } from "../../../../components/ui/EmojiPicker";
 import { ColorPicker } from "../../../../components/ui/ColorPicker";
 

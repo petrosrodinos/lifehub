@@ -1,11 +1,10 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { CalendarClock, CheckCircle2, CircleX, FileText, MinusCircle } from "lucide-react";
 import { DateTime } from "luxon";
 import type { ActivityLog } from "../../../../features/habbits/activity-logs/interfaces/activity-logs.interface";
 import type { ActivityHabbitsQuery } from "../../../../features/activities/interfaces/activities.interface";
+import { Pagination } from "../../../../components/ui/Pagination";
 import { useHabitsHistory } from "./use-habits-history";
-
-const PAGE_SIZE = 8;
 
 type LogStatus = "completed" | "skipped" | "failed";
 
@@ -39,17 +38,17 @@ function formatQuantity(value?: number | null) {
 }
 
 interface HabitsHistorySectionProps {
-  filter: ActivityHabbitsQuery
+  filter: ActivityHabbitsQuery;
+  onPageChange?: (page: number) => void;
 }
 
-export function HabitsHistorySection({ filter }: HabitsHistorySectionProps) {
-  const { groupedSelectedLogs, activityNameMap } = useHabitsHistory(filter);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+export function HabitsHistorySection({ filter, onPageChange }: HabitsHistorySectionProps) {
+  const { groupedSelectedLogs, total, page, pageSize, totalPages } = useHabitsHistory(filter);
 
-  const flattenedLogs = useMemo(() => groupedSelectedLogs.flatMap((group) => group.logs.map((log) => ({ date: group.date, log }))), [groupedSelectedLogs]);
-
-  const visibleLogs = flattenedLogs.slice(0, visibleCount);
-  const hasMore = visibleCount < flattenedLogs.length;
+  const flattenedLogs = useMemo(
+    () => groupedSelectedLogs.flatMap((group) => group.logs.map((log) => ({ date: group.date, log }))),
+    [groupedSelectedLogs],
+  );
 
   return (
     <div className="rounded-2xl border border-slate-700/60 bg-slate-900/60 overflow-hidden">
@@ -66,7 +65,7 @@ export function HabitsHistorySection({ filter }: HabitsHistorySectionProps) {
       ) : (
         <>
           <div className="divide-y divide-slate-700/40">
-            {visibleLogs.map(({ date, log }) => {
+            {flattenedLogs.map(({ date, log }) => {
               const status = resolveStatus(log);
               const config = STATUS_CONFIG[status];
               const quantity = formatQuantity(log.value);
@@ -78,7 +77,7 @@ export function HabitsHistorySection({ filter }: HabitsHistorySectionProps) {
                       {config.icon}
                       <span>{config.label}</span>
                     </div>
-                    <p className="text-xs font-medium text-slate-300 truncate">{activityNameMap[log.activity_uuid] ?? log.activity_uuid}</p>
+                    <p className="text-xs font-medium text-slate-300 truncate">{log.activity?.name ?? log.activity_uuid}</p>
                     {log.skip_reason ? <p className="text-xs text-slate-500 truncate">{log.skip_reason}</p> : null}
                     {log.notes ? <FileText className="w-3.5 h-3.5 text-slate-500 shrink-0" /> : null}
                   </div>
@@ -92,12 +91,14 @@ export function HabitsHistorySection({ filter }: HabitsHistorySectionProps) {
             })}
           </div>
 
-          {hasMore ? (
-            <div className="px-4 sm:px-5 py-3 border-t border-slate-700/60">
-              <button type="button" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)} className="w-full py-2 rounded-xl border border-slate-700/70 text-sm text-slate-300 hover:bg-slate-800/60 transition-colors">
-                View more
-              </button>
-            </div>
+          {totalPages > 1 && onPageChange ? (
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              onPageChange={onPageChange}
+              totalItems={total}
+              pageSize={pageSize}
+            />
           ) : null}
         </>
       )}

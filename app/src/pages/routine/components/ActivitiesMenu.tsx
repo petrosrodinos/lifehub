@@ -3,38 +3,42 @@ import { X, ClipboardList, Edit2, Trash2, Loader2 } from "lucide-react";
 import { useActivities, useCreateActivity, useUpdateActivity, useDeleteActivity } from "../../../features/activities/hooks/use-activities";
 import { ConfirmationModal } from "../../../components/ui/ConfirmationModal";
 import { ColorPicker } from "../../../components/ui/ColorPicker";
+import { EmojiPicker } from "../../../components/ui/EmojiPicker";
+import { PRESET_COLORS } from "../../../config/constants/dropdowns/colors";
+import { PRESET_EMOJIS } from "../../../config/constants/dropdowns/activity-icons";
 
 type ActivitiesMenuProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-const PRESET_COLORS = ["#8b5cf6", "#0284c7", "#10b981", "#a78bfa", "#f43f5e", "#06b6d4", "#dc2626", "#6366f1", "#14b8a6", "#eab308"];
-
 type ActivityFormProps = {
   initialName: string;
   initialColor: string;
-  onSubmit: (name: string, color: string) => void;
+  initialIcon: string;
+  onSubmit: (name: string, color: string, icon: string) => void;
   onCancel: () => void;
   submitLabel: string;
   isPending?: boolean;
 };
 
-function ActivityForm({ initialName, initialColor, onSubmit, onCancel, submitLabel, isPending = false }: ActivityFormProps) {
+function ActivityForm({ initialName, initialColor, initialIcon, onSubmit, onCancel, submitLabel, isPending = false }: ActivityFormProps) {
   const [name, setName] = useState(initialName);
   const [color, setColor] = useState(initialColor);
+  const [icon, setIcon] = useState(initialIcon);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = name.trim();
     if (trimmed) {
-      onSubmit(trimmed, color);
+      onSubmit(trimmed, color, icon);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
       <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Activity name" className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50" autoFocus disabled={isPending} />
+      <EmojiPicker value={icon} onChange={setIcon} presetEmojis={PRESET_EMOJIS} disabled={isPending} />
       <ColorPicker value={color} onChange={setColor} presetColors={PRESET_COLORS} disabled={isPending} />
       <div className="flex gap-2">
         <button type="submit" disabled={isPending} className="flex-1 px-3 py-2 bg-violet-500 hover:bg-violet-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
@@ -69,9 +73,9 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
     }
   }, [isOpen, onClose]);
 
-  const handleAdd = (name: string, color: string) => {
+  const handleAdd = (name: string, color: string, icon: string) => {
     createActivity.mutate(
-      { name, color },
+      { name, color, icon: icon || undefined },
       {
         onSuccess: () => {
           setIsAdding(false);
@@ -80,9 +84,9 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
     );
   };
 
-  const handleUpdate = (uuid: string, name: string, color: string) => {
+  const handleUpdate = (uuid: string, name: string, color: string, icon: string) => {
     updateActivity.mutate(
-      { uuid, data: { name, color } },
+      { uuid, data: { name, color, icon: icon || undefined } },
       {
         onSuccess: () => {
           setEditingUuid(null);
@@ -124,7 +128,7 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
           {isAdding ? (
             <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
               <h3 className="text-sm font-medium text-slate-300 mb-3">Add activity</h3>
-              <ActivityForm initialName="" initialColor={PRESET_COLORS[0]} onSubmit={handleAdd} onCancel={() => setIsAdding(false)} submitLabel="Add" isPending={createActivity.isPending} />
+              <ActivityForm initialName="" initialColor={PRESET_COLORS[0]} initialIcon={PRESET_EMOJIS[0]} onSubmit={handleAdd} onCancel={() => setIsAdding(false)} submitLabel="Add" isPending={createActivity.isPending} />
             </div>
           ) : (
             <button type="button" onClick={() => setIsAdding(true)} className="w-full py-3 border-2 border-dashed border-slate-600 rounded-xl text-slate-400 hover:text-violet-400 hover:border-violet-500/50 transition-colors font-medium">
@@ -150,11 +154,11 @@ export function ActivitiesMenu({ isOpen, onClose }: ActivitiesMenuProps) {
                 <div key={activity.uuid} className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-xl border border-slate-700">
                   {editingUuid === activity.uuid ? (
                     <div className="flex-1">
-                      <ActivityForm initialName={activity.name} initialColor={activity.color} onSubmit={(name, color) => handleUpdate(activity.uuid, name, color)} onCancel={() => setEditingUuid(null)} submitLabel="Save" isPending={updateActivity.isPending} />
+                      <ActivityForm initialName={activity.name} initialColor={activity.color} initialIcon={activity.icon ?? PRESET_EMOJIS[0]} onSubmit={(name, color, icon) => handleUpdate(activity.uuid, name, color, icon)} onCancel={() => setEditingUuid(null)} submitLabel="Save" isPending={updateActivity.isPending} />
                     </div>
                   ) : (
                     <>
-                      <div className="w-8 h-8 rounded-lg shrink-0" style={{ backgroundColor: activity.color }} />
+                      {activity.icon ? <div className="w-8 h-8 rounded-lg shrink-0 flex items-center justify-center text-xl bg-slate-700/50">{activity.icon}</div> : <div className="w-8 h-8 rounded-lg shrink-0" style={{ backgroundColor: activity.color }} />}
                       <span className="flex-1 text-white font-medium capitalize">{activity.name}</span>
 
                       <div className="flex gap-1">

@@ -23,6 +23,8 @@ export const ActivityLogsQuerySchema = z.object({
   to_date: z.coerce.date().optional(),
   completed: stringBool,
   skipped: stringBool,
+  page: z.coerce.number().int().min(1).optional().default(1),
+  page_size: z.coerce.number().int().min(1).max(100).optional().default(20),
 })
 
 export type ActivityLogsQueryType = z.infer<typeof ActivityLogsQuerySchema>

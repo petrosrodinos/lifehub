@@ -18,4 +18,13 @@ export class ActivityLogsController {
   ) {
     return this.activityLogsService.findAll(user_uuid, query)
   }
+
+  @Get('grouped')
+  @HttpCode(HttpStatus.OK)
+  findAllGrouped(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(ActivityLogsQuerySchema)) query: ActivityLogsQueryType,
+  ) {
+    return this.activityLogsService.findAllGrouped(user_uuid, query)
+  }
 }
