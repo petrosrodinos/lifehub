@@ -1,15 +1,20 @@
+import { useState } from "react";
 import { ListChecks, ChevronLeft, ChevronRight, SlidersHorizontal, CalendarDays } from "lucide-react";
+import { useActivityScheduleDetails } from "../../../../features/habbits/activity-schedules/hooks/use-activity-schedules";
+import { Modal } from "../../../../components/ui/Modal";
+import { ScheduleCard } from "../HabitsActivitySchedules/ScheduleCard";
 import { HabitCard } from "./HabitCard/HabitCard";
 import { HabitCompletionActions } from "./HabitCompletionActions/HabitCompletionActions";
 import { HabitsFilters } from "../Filters/habbits";
 import { useHabitsToday } from "./use-habits-today";
-import { ActivityTargetTypes } from "../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface";
 
 function SkeletonCard() {
   return <div className="h-32 rounded-2xl border border-slate-700/60 bg-slate-800/50 animate-pulse" />;
 }
 
 export function HabitsTodaySection() {
+  const [scheduleModalUuid, setScheduleModalUuid] = useState<string | null>(null);
+  const scheduleDetailsQuery = useActivityScheduleDetails(scheduleModalUuid, !!scheduleModalUuid);
   const { todayHabits, tomorrowHabits, showTomorrow, isLoading, hasError, isActionPending, setSelectedActivityUuid, activeActionItem, setActiveActionItem, completeOccurrence, skipOccurrence, activeDateLabel, goToPreviousDay, goToNextDay, isFiltersOpen, setIsFiltersOpen, setFilter } = useHabitsToday();
 
   const emptyStateMessage = hasError ? "Could not load habits right now. Try again in a moment." : todayHabits.length === 0 ? `No occurrences scheduled for ${activeDateLabel.toLowerCase()}.` : null;
@@ -34,7 +39,6 @@ export function HabitsTodaySection() {
           </div>
 
           <div className="flex items-center gap-2">
-            <p className="text-xs text-slate-400 hidden sm:block">Swipe right to complete, left to skip</p>
             <button onClick={() => setIsFiltersOpen(!isFiltersOpen)} className={`p-1.5 rounded-lg transition-colors ${isFiltersOpen ? "text-violet-300 bg-violet-500/20 hover:bg-violet-500/30" : "text-slate-400 hover:text-slate-200 hover:bg-slate-700/60"}`} aria-label="Toggle filters">
               <SlidersHorizontal className="w-4 h-4" />
             </button>
@@ -56,19 +60,7 @@ export function HabitsTodaySection() {
         ) : (
           <div className="space-y-2 max-h-[45vh] overflow-y-auto pr-0.5">
             {todayHabits.map((item) => (
-              <HabitCard
-                key={item.activity.uuid}
-                item={item}
-                isBusy={isActionPending}
-                onSelect={() => setSelectedActivityUuid(item.activity.uuid)}
-                onOpenActions={() => setActiveActionItem(item)}
-                onSwipeComplete={async () => {
-                  await completeOccurrence(item.occurrence_uuid, item.status, item.schedule?.target_type === ActivityTargetTypes.QUANTITY ? (item.quantity_value ?? 0) : undefined, item.activity.uuid);
-                }}
-                onSwipeSkip={async () => {
-                  await skipOccurrence(item.occurrence_uuid, item.status, item.activity.uuid);
-                }}
-              />
+              <HabitCard key={item.occurrence_uuid} item={item} isBusy={isActionPending} onSelect={() => setSelectedActivityUuid(item.activity.uuid)} onOpenActions={() => setActiveActionItem(item)} onViewSchedule={setScheduleModalUuid} />
             ))}
           </div>
         )}
@@ -87,24 +79,18 @@ export function HabitsTodaySection() {
           ) : (
             <div className="space-y-2 max-h-[30vh] overflow-y-auto pr-0.5 opacity-90">
               {tomorrowHabits.map((item) => (
-                <HabitCard
-                  key={item.activity.uuid}
-                  item={item}
-                  isBusy={isActionPending}
-                  onSelect={() => setSelectedActivityUuid(item.activity.uuid)}
-                  onOpenActions={() => setActiveActionItem(item)}
-                  onSwipeComplete={async () => {
-                    await completeOccurrence(item.occurrence_uuid, item.status, item.schedule?.target_type === ActivityTargetTypes.QUANTITY ? (item.quantity_value ?? 0) : undefined, item.activity.uuid);
-                  }}
-                  onSwipeSkip={async () => {
-                    await skipOccurrence(item.occurrence_uuid, item.status, item.activity.uuid);
-                  }}
-                />
+                <HabitCard key={item.occurrence_uuid} item={item} isBusy={isActionPending} onSelect={() => setSelectedActivityUuid(item.activity.uuid)} onOpenActions={() => setActiveActionItem(item)} onViewSchedule={setScheduleModalUuid} />
               ))}
             </div>
           )}
         </section>
       )}
+
+      <Modal isOpen={!!scheduleModalUuid} onClose={() => setScheduleModalUuid(null)} title="Schedule" size="md">
+        {scheduleDetailsQuery.isLoading && <div className="h-32 rounded-xl bg-slate-700/30 animate-pulse" />}
+        {scheduleDetailsQuery.isError && <p className="text-sm text-slate-400">Could not load schedule.</p>}
+        {scheduleDetailsQuery.data && <ScheduleCard schedule={scheduleDetailsQuery.data} isEditOpen={false} onSelectSchedule={() => setScheduleModalUuid(null)} onSave={() => {}} isUpdating={false} />}
+      </Modal>
 
       <HabitCompletionActions
         isOpen={!!activeActionItem}

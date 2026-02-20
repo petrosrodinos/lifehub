@@ -183,6 +183,23 @@ export class ActivitySchedulesService {
     })
   }
 
+  async findOne(user_uuid: string, schedule_uuid: string) {
+    const schedule = await this.prisma.activitySchedule.findFirst({
+      where: { uuid: schedule_uuid, user_uuid },
+      include: {
+        weekdays: true,
+        specific_dates: true,
+        activity: true,
+      },
+    })
+
+    if (!schedule) {
+      throw new NotFoundException('Schedule not found')
+    }
+
+    return schedule
+  }
+
   async findAllForActivity(user_uuid: string, activity_uuid: string) {
     const activity = await this.prisma.activity.findFirst({
       where: { uuid: activity_uuid, user_uuid },

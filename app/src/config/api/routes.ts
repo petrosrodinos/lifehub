@@ -43,6 +43,7 @@ export const ApiRoutes = {
     schedules: {
       listAll: '/schedules',
       list: (activity_uuid: string) => `/activities/${activity_uuid}/schedules`,
+      get: (uuid: string) => `/schedules/${uuid}`,
       createForActivity: (activity_uuid: string) => `/activities/${activity_uuid}/schedules`,
       update: (uuid: string) => `/schedules/${uuid}`,
       delete: (uuid: string) => `/schedules/${uuid}`,

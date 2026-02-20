@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { HabitsHeader } from "./components/HabitsHeader/HabitsHeader";
 import { HabitsTodaySection } from "./components/HabitsTodaySection";
-import { HabitsProgressSection } from "./components/HabitsProgressSection";
-import { HabitsHistorySection } from "./components/HabitsHistorySection/HabitsHistorySection";
+import { HabitsProgressSection } from "./components/HabitsProgress";
+import { HabitsHistorySection } from "./components/HabitsHistory/HabitsHistorySection";
 import { HabitsFilters } from "./components/Filters/habbits";
 import type { ActivityHabbitsQuery } from "../../features/activities/interfaces/activities.interface";
 

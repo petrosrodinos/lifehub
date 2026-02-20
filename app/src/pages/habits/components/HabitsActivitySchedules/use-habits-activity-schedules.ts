@@ -14,6 +14,7 @@ export function useHabitsActivitySchedules() {
   const [isCreateOpen, setIsCreateOpen] = useState(false)
   const [editingScheduleUuid, setEditingScheduleUuid] = useState<string | null>(null)
   const [deletingSchedule, setDeletingSchedule] = useState<ActivitySchedule | null>(null)
+  const [selectedScheduleUuid, setSelectedScheduleUuid] = useState<string | null>(null)
 
   const schedulesQuery = useAllActivitySchedules(isDrawerOpen)
   const updateMutation = useUpdateActivitySchedule()
@@ -26,6 +27,7 @@ export function useHabitsActivitySchedules() {
   function closeDrawer() {
     setIsDrawerOpen(false)
     setEditingScheduleUuid(null)
+    setSelectedScheduleUuid(null)
     setIsCreateOpen(false)
     setDeletingSchedule(null)
   }
@@ -53,6 +55,8 @@ export function useHabitsActivitySchedules() {
     setIsCreateOpen,
     editingScheduleUuid,
     setEditingScheduleUuid,
+    selectedScheduleUuid,
+    setSelectedScheduleUuid,
     deletingSchedule,
     setDeletingSchedule,
     schedules: schedulesQuery.data ?? [],

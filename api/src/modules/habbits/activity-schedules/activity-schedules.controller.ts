@@ -26,6 +26,12 @@ export class ActivitySchedulesController {
     return this.activitySchedulesService.findAll(user_uuid)
   }
 
+  @Get('schedules/:uuid')
+  @HttpCode(HttpStatus.OK)
+  findOne(@CurrentUser('user_uuid') user_uuid: string, @Param('uuid') uuid: string) {
+    return this.activitySchedulesService.findOne(user_uuid, uuid)
+  }
+
   @Get('activities/:activity_uuid/schedules')
   @HttpCode(HttpStatus.OK)
   findAllForActivity(

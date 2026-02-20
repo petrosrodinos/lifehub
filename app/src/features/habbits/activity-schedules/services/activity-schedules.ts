@@ -12,6 +12,11 @@ export const getActivitySchedules = async (activity_uuid: string): Promise<Activ
   return response.data
 }
 
+export const getActivitySchedule = async (schedule_uuid: string): Promise<ActivitySchedule> => {
+  const response = await axiosInstance.get(ApiRoutes.habbits.schedules.get(schedule_uuid))
+  return response.data
+}
+
 export const createActivitySchedule = async (
   activity_uuid: string,
   data: CreateActivityScheduleDto,

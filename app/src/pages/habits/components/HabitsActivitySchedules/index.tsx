@@ -14,6 +14,8 @@ export function HabitsActivitySchedulesSection() {
     setIsCreateOpen,
     editingScheduleUuid,
     setEditingScheduleUuid,
+    selectedScheduleUuid,
+    setSelectedScheduleUuid,
     deletingSchedule,
     setDeletingSchedule,
     schedules,
@@ -55,6 +57,9 @@ export function HabitsActivitySchedulesSection() {
           isLoading={isLoading}
           isUpdating={isUpdating}
           editingScheduleUuid={editingScheduleUuid}
+          selectedScheduleUuid={selectedScheduleUuid}
+          onSelectSchedule={setSelectedScheduleUuid}
+          onBackFromDetail={() => setSelectedScheduleUuid(null)}
           onToggleEdit={(uuid) => setEditingScheduleUuid(editingScheduleUuid === uuid ? null : uuid)}
           onSave={updateSchedule}
           onDelete={setDeletingSchedule}

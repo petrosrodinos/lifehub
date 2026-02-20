@@ -1,11 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import type { CreateActivityScheduleDto } from '../interfaces/activity-schedules.interface'
-import { createActivitySchedule, deleteActivitySchedule, getAllActivitySchedules, getActivitySchedules, updateActivitySchedule } from '../services/activity-schedules'
+import { createActivitySchedule, deleteActivitySchedule, getAllActivitySchedules, getActivitySchedule, getActivitySchedules, updateActivitySchedule } from '../services/activity-schedules'
 
 const QueryKeys = {
   all: ['habbits', 'schedules'],
   byActivity: (activity_uuid: string) => ['habbits', 'schedules', activity_uuid],
+  byUuid: (schedule_uuid: string) => ['habbits', 'schedules', 'detail', schedule_uuid],
 }
 
 export function useAllActivitySchedules(enabled = true) {
@@ -21,6 +22,14 @@ export function useActivitySchedules(activity_uuid: string | null, enabled = tru
     queryKey: QueryKeys.byActivity(activity_uuid ?? ''),
     queryFn: () => getActivitySchedules(activity_uuid as string),
     enabled: !!activity_uuid && enabled,
+  })
+}
+
+export function useActivityScheduleDetails(schedule_uuid: string | null, enabled = true) {
+  return useQuery({
+    queryKey: QueryKeys.byUuid(schedule_uuid ?? ''),
+    queryFn: () => getActivitySchedule(schedule_uuid as string),
+    enabled: !!schedule_uuid && enabled,
   })
 }
 
@@ -58,6 +67,9 @@ export function useUpdateActivitySchedule() {
       queryClient.invalidateQueries({ queryKey: ['habbits', 'activities', 'occurrences'] })
       queryClient.invalidateQueries({ queryKey: ['habbits', 'activity-logs'] })
       queryClient.invalidateQueries({ queryKey: QueryKeys.all })
+      if (variables.uuid) {
+        queryClient.invalidateQueries({ queryKey: QueryKeys.byUuid(variables.uuid) })
+      }
       if (variables.activityUuid) {
         queryClient.invalidateQueries({
           queryKey: ['habbits', 'activities', variables.activityUuid, 'progress-summary'],
@@ -79,6 +91,9 @@ export function useDeleteActivitySchedule() {
       queryClient.invalidateQueries({ queryKey: ['habbits'] })
       queryClient.invalidateQueries({ queryKey: ['activities'] })
       queryClient.invalidateQueries({ queryKey: QueryKeys.all })
+      if (variables.schedule_uuid) {
+        queryClient.invalidateQueries({ queryKey: QueryKeys.byUuid(variables.schedule_uuid) })
+      }
       if (variables.activity_uuid) {
         queryClient.invalidateQueries({ queryKey: QueryKeys.byActivity(variables.activity_uuid) })
       }

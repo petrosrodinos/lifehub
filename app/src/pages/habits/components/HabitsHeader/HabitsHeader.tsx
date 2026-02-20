@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { ActivityScheduleForm } from "../HabitsActivitySchedulesSection/ActivityScheduleForm";
-import { HabitsActivitySchedulesSection } from "../HabitsActivitySchedulesSection";
+import { ActivityScheduleForm } from "../HabitsActivitySchedules/ActivityScheduleForm";
+import { HabitsActivitySchedulesSection } from "../HabitsActivitySchedules";
 import { useHabitsHeader } from "./use-habits-header";
 
 export function HabitsHeader() {
