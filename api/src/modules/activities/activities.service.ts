@@ -5,12 +5,15 @@ import { UpdateActivityDto } from './dto/update-activity.dto'
 import { AnalyticsService } from '@/modules/habbits/analytics/analytics.service'
 import { DateTime } from 'luxon'
 import { ActivityHabbitsQueryType } from './schemas/activity-habbits-query.schema'
+import { generateOccurrencesForSchedule } from '@/modules/habbits/utils/occurrence-generation.utils'
+import { OccurrencesRepository } from '@/modules/habbits/repositories/occurrences.repository'
 
 @Injectable()
 export class ActivitiesService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly analyticsService: AnalyticsService,
+    private readonly occurrencesRepository: OccurrencesRepository,
   ) { }
 
   async create(dto: CreateActivityDto, user_uuid: string) {
@@ -53,6 +56,8 @@ export class ActivitiesService {
     const rangeEnd = query.date_to ? DateTime.fromISO(query.date_to).endOf('day') : rangeStart.endOf('day')
     const dayStart = rangeStart.toJSDate()
     const dayEnd = rangeEnd.toJSDate()
+
+    await this.ensureOccurrencesExist(user_uuid, query.activity_uuid, dayStart, dayEnd)
 
     const activities = await this.prisma.activity.findMany({
       where: {
@@ -105,6 +110,46 @@ export class ActivitiesService {
         }
       })
       .sort((a, b) => parseTimeOfDay(a.schedule?.time_of_day) - parseTimeOfDay(b.schedule?.time_of_day))
+  }
+
+  private async ensureOccurrencesExist(
+    user_uuid: string,
+    activity_uuid: string | undefined,
+    rangeStart: Date,
+    rangeEnd: Date,
+  ): Promise<void> {
+    const schedules = await this.prisma.activitySchedule.findMany({
+      where: {
+        user_uuid,
+        is_active: true,
+        valid_from: { lte: rangeEnd },
+        OR: [{ valid_until: null }, { valid_until: { gt: rangeStart } }],
+        ...(activity_uuid ? { activity_uuid } : {}),
+      },
+      include: {
+        weekdays: true,
+        specific_dates: true,
+      },
+    })
+
+    const entries = schedules.flatMap((schedule) => {
+      const dates = generateOccurrencesForSchedule(schedule, rangeStart, rangeEnd)
+
+      return dates.map((scheduled_for) => ({
+        user_uuid,
+        activity_uuid: schedule.activity_uuid,
+        schedule_uuid: schedule.uuid,
+        scheduled_for,
+      }))
+    })
+
+    if (entries.length === 0) {
+      return
+    }
+
+    await this.prisma.$transaction(async (tx) => {
+      await this.occurrencesRepository.createMany(tx, entries)
+    })
   }
 
   async findOne(uuid: string, user_uuid: string) {

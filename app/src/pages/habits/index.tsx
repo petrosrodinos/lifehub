@@ -21,9 +21,9 @@ export function HabitsPage() {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 space-y-5">
         <HabitsHeader />
 
-        <div className="flex gap-1 p-1 rounded-xl bg-slate-900/60 border border-slate-700/50 w-fit">
+        <div className="flex gap-2 bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/50 p-1 md:w-auto md:inline-flex">
           {TABS.map((tab) => (
-            <button key={tab} type="button" onClick={() => setActiveTab(tab)} className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab ? "bg-slate-700/80 text-white shadow-sm" : "text-slate-400 hover:text-slate-200"}`}>
+            <button key={tab} type="button" onClick={() => setActiveTab(tab)} className={`flex-1 md:flex-initial px-6 py-3 rounded-lg text-sm font-medium transition-all ${activeTab === tab ? "bg-violet-600 text-white shadow-lg shadow-violet-600/30" : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"}`}>
               {tab}
             </button>
           ))}

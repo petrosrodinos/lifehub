@@ -42,16 +42,16 @@ export const GymPage = () => {
           onCreateWorkout={() => setCreateWorkoutModalOpen(true)}
         />
 
-        <div className="flex gap-1 bg-slate-900/60 rounded-xl border border-slate-800/80 p-1">
+        <div className="flex gap-2 bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/50 p-1 md:w-auto md:inline-flex">
           {GYM_TABS.map((tab) => (
             <button
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all ${
+              className={`flex-1 md:flex-initial px-6 py-3 rounded-lg text-sm font-medium transition-all ${
                 activeTab === tab.id
-                  ? "bg-violet-500/20 text-violet-300 border border-violet-500/30"
-                  : "text-slate-400 hover:text-slate-200 border border-transparent"
+                  ? "bg-violet-600 text-white shadow-lg shadow-violet-600/30"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
               }`}
             >
               {tab.label}

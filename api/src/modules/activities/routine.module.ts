@@ -5,11 +5,13 @@ import { AnalyticsModule } from '@/modules/habbits/analytics/analytics.module'
 import { ActivitiesController } from './activities.controller'
 import { ScheduleSlotsController } from '../schedule-slots/schedule-slots.controller'
 import { ScheduleSlotsService } from '../schedule-slots/schedule-slots.service'
+import { OccurrencesRepository } from '@/modules/habbits/repositories/occurrences.repository'
 
 @Module({
   imports: [PrismaModule, AnalyticsModule],
   controllers: [ActivitiesController, ScheduleSlotsController],
-  providers: [ActivitiesService, ScheduleSlotsService],
+  providers: [ActivitiesService, ScheduleSlotsService, OccurrencesRepository],
   exports: [ActivitiesService, ScheduleSlotsService],
 })
 export class RoutineModule { }
+

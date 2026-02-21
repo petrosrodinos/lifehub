@@ -58,7 +58,7 @@ export function HabitsTodaySection() {
             <p className="text-slate-300 text-sm">{emptyStateMessage}</p>
           </div>
         ) : (
-          <div className="space-y-2 max-h-[45vh] overflow-y-auto pr-0.5">
+          <div className="space-y-2">
             {todayHabits.map((item) => (
               <HabitCard key={item.occurrence_uuid} item={item} isBusy={isActionPending} onSelect={() => setSelectedActivityUuid(item.activity.uuid)} onOpenActions={() => setActiveActionItem(item)} onViewSchedule={setScheduleModalUuid} />
             ))}
@@ -77,7 +77,7 @@ export function HabitsTodaySection() {
               <p className="text-slate-400 text-sm">No occurrences scheduled for tomorrow.</p>
             </div>
           ) : (
-            <div className="space-y-2 max-h-[30vh] overflow-y-auto pr-0.5 opacity-90">
+            <div className="space-y-2 opacity-90">
               {tomorrowHabits.map((item) => (
                 <HabitCard key={item.occurrence_uuid} item={item} isBusy={isActionPending} onSelect={() => setSelectedActivityUuid(item.activity.uuid)} onOpenActions={() => setActiveActionItem(item)} onViewSchedule={setScheduleModalUuid} />
               ))}

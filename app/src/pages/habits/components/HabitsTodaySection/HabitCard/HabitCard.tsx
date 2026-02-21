@@ -48,14 +48,23 @@ export function HabitCard({ item, isBusy, onSelect, onOpenActions, onViewSchedul
     <div
       className={`rounded-2xl border transition-all duration-200 border-slate-700/60 bg-slate-900/60 hover:border-slate-500/70 hover:bg-slate-800/60 ${isBusy ? "opacity-60" : ""}`}
     >
-      <button
-        type="button"
+      <div
+        role="button"
+        tabIndex={isBusy ? -1 : 0}
         onClick={() => {
+          if (isBusy) return;
           onSelect();
           onOpenActions();
         }}
-        disabled={isBusy}
-        className="w-full text-left p-4 sm:p-5"
+        onKeyDown={(e) => {
+          if (isBusy) return;
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onSelect();
+            onOpenActions();
+          }
+        }}
+        className={`w-full text-left p-4 sm:p-5 ${isBusy ? "pointer-events-none" : "cursor-pointer"}`}
       >
         <div className="space-y-4">
           <div className="flex items-start justify-between gap-3">
@@ -101,7 +110,7 @@ export function HabitCard({ item, isBusy, onSelect, onOpenActions, onViewSchedul
             </div>
           </div>
         </div>
-      </button>
+      </div>
     </div>
   );
 }
