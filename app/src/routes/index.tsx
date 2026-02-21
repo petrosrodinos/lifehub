@@ -10,6 +10,7 @@ import { ExpenseAccountsPage } from "../pages/expenses";
 import { GymPage } from "../pages/gym";
 import { WorkoutDetailPage } from "../pages/gym/workout-detail";
 import { ExerciseDetailPage } from "../pages/gym/exercise-detail";
+import { LandingPage } from "../pages/landing";
 
 export default function AppRoutes() {
   return (
@@ -49,7 +50,7 @@ export default function AppRoutes() {
         <Route path="gym/workout-entry/:entryUuid" element={<ExerciseDetailPage />} />
       </Route>
 
-      <Route path="/" element={<Navigate to="/auth/sign-in" replace />} />
+      <Route path="/" element={<LandingPage />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

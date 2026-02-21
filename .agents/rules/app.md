@@ -2,7 +2,6 @@
 trigger: always_on
 ---
 
-
 You are a senior React + TypeScript engineer.
 
 Follow these rules strictly:
@@ -138,6 +137,7 @@ Never:
   - user/
     - utils/user.utiles.ts
     - contants/user.constants.ts
+    - interfaces/user.interfaces.ts
     - hooks/use-user.ts
     - components/
       - user-card.tsx
