@@ -341,17 +341,17 @@ model ExpenseEntry {
   description       String?
   from_account_uuid String
   to_account_uuid   String?
-  category_uuid     String
-  subcategory_uuid  String
+  category_uuid     String?
+  subcategory_uuid  String?
   entry_date        DateTime         @default(now())
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
 
-  user         User               @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  from_account ExpenseAccount     @relation("EntryFromAccount", fields: [from_account_uuid], references: [uuid], onDelete: Cascade)
-  to_account   ExpenseAccount?    @relation("EntryToAccount", fields: [to_account_uuid], references: [uuid], onDelete: Cascade)
-  category     ExpenseCategory    @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
-  subcategory  ExpenseSubcategory @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
+  user         User                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  from_account ExpenseAccount      @relation("EntryFromAccount", fields: [from_account_uuid], references: [uuid], onDelete: Cascade)
+  to_account   ExpenseAccount?     @relation("EntryToAccount", fields: [to_account_uuid], references: [uuid], onDelete: Cascade)
+  category     ExpenseCategory?    @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
+  subcategory  ExpenseSubcategory? @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
 
   @@index([user_uuid])
   @@index([category_uuid])

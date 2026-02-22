@@ -221,7 +221,7 @@ export class ExpenseEntriesService {
 
     if (dto.category_uuid) {
       const category = await this.prisma.expenseCategory.findFirst({
-        where: { uuid: dto.category_uuid, user_uuid },
+        where: { uuid: dto.category_uuid, OR: [{ user_uuid }, { user_uuid: null }] },
       });
 
       if (!category) {
@@ -231,7 +231,7 @@ export class ExpenseEntriesService {
 
     if (dto.subcategory_uuid) {
       const subcategory = await this.prisma.expenseSubcategory.findFirst({
-        where: { uuid: dto.subcategory_uuid, user_uuid },
+        where: { uuid: dto.subcategory_uuid, OR: [{ user_uuid }, { user_uuid: null }] },
       });
 
       if (!subcategory) {
@@ -298,28 +298,44 @@ export class ExpenseEntriesService {
     try {
       const accountUuids = query.account_uuids ? query.account_uuids.split(',') : [];
 
-      const where: any = { user_uuid };
+      const accountWhere: Record<string, unknown> = { user_uuid };
 
       if (accountUuids.length > 0) {
-        where.from_account_uuid = { in: accountUuids };
+        accountWhere.uuid = { in: accountUuids };
+      }
+
+      const accountBalances = await this.prisma.expenseAccount.aggregate({
+        where: accountWhere,
+        _sum: { balance: true },
+      });
+
+      const currentTotalBalance = Number(accountBalances._sum.balance || 0);
+
+      const entryWhere: Record<string, unknown> = {
+        user_uuid,
+        type: { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] },
+      };
+
+      if (accountUuids.length > 0) {
+        entryWhere.from_account_uuid = { in: accountUuids };
       }
 
       if (query.from_date || query.to_date) {
-        where.entry_date = {};
+        const dateFilter: Record<string, Date> = {};
 
         if (query.from_date) {
-          where.entry_date.gte = query.from_date;
+          dateFilter.gte = query.from_date;
         }
 
         if (query.to_date) {
-          where.entry_date.lte = query.to_date;
+          dateFilter.lte = query.to_date;
         }
+
+        entryWhere.entry_date = dateFilter;
       }
 
-      where.type = { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] };
-
       const entries = await this.prisma.expenseEntry.findMany({
-        where,
+        where: entryWhere,
         orderBy: { entry_date: 'asc' },
         select: {
           entry_date: true,
@@ -327,6 +343,41 @@ export class ExpenseEntriesService {
           type: true,
         },
       });
+
+      const fromDateEntriesWhere: Record<string, unknown> = {
+        user_uuid,
+        type: { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] },
+      };
+
+      if (accountUuids.length > 0) {
+        fromDateEntriesWhere.from_account_uuid = { in: accountUuids };
+      }
+
+      if (query.from_date) {
+        fromDateEntriesWhere.entry_date = { gte: query.from_date };
+      }
+
+      const entriesFromDateOnward = await this.prisma.expenseEntry.findMany({
+        where: fromDateEntriesWhere,
+        select: {
+          amount: true,
+          type: true,
+        },
+      });
+
+      let netFromDateOnward = 0;
+
+      entriesFromDateOnward.forEach((entry) => {
+        const amount = Number(entry.amount);
+
+        if (entry.type === ExpenseEntryType.INCOME) {
+          netFromDateOnward += amount;
+        } else if (entry.type === ExpenseEntryType.EXPENSE) {
+          netFromDateOnward -= amount;
+        }
+      });
+
+      const startingBalance = currentTotalBalance - netFromDateOnward;
 
       const dateMap = new Map<string, number>();
 
@@ -346,7 +397,7 @@ export class ExpenseEntriesService {
       });
 
       const sortedDates = Array.from(dateMap.keys()).sort();
-      let runningBalance = 0;
+      let runningBalance = startingBalance;
 
       const data = sortedDates.map((date) => {
         runningBalance += dateMap.get(date)!;

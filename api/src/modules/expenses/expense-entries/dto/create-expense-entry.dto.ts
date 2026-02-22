@@ -49,16 +49,20 @@ export class CreateExpenseEntryDto {
   @ApiProperty({
     description: 'Category UUID',
     example: '123e4567-e89b-12d3-a456-426614174000',
+    required: false,
   })
+  @IsOptional()
   @IsString()
-  category_uuid: string;
+  category_uuid?: string;
 
   @ApiProperty({
     description: 'Subcategory UUID',
     example: '123e4567-e89b-12d3-a456-426614174000',
+    required: false,
   })
+  @IsOptional()
   @IsString()
-  subcategory_uuid: string;
+  subcategory_uuid?: string;
 
   @ApiProperty({
     description: 'Entry date',

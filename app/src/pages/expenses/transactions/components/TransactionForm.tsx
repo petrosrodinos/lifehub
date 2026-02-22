@@ -39,6 +39,8 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
     }
   }, [categoryUuid, filteredSubcategories, subcategoryUuid]);
 
+  const isTransfer = type === ExpenseEntryTypes.TRANSFER;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -47,16 +49,16 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
       amount: parseFloat(amount),
       description: description || undefined,
       from_account_uuid: fromAccountUuid,
-      to_account_uuid: type === ExpenseEntryTypes.TRANSFER ? toAccountUuid : undefined,
-      category_uuid: categoryUuid,
-      subcategory_uuid: subcategoryUuid,
+      to_account_uuid: isTransfer ? toAccountUuid : undefined,
+      category_uuid: isTransfer ? undefined : categoryUuid,
+      subcategory_uuid: isTransfer ? undefined : subcategoryUuid,
       entry_date: entryDate,
     };
 
     onSubmit(data);
   };
 
-  const isFormValid = amount && parseFloat(amount) > 0 && fromAccountUuid && categoryUuid && subcategoryUuid && (type !== ExpenseEntryTypes.TRANSFER || toAccountUuid);
+  const isFormValid = amount && parseFloat(amount) > 0 && fromAccountUuid && (isTransfer ? toAccountUuid : categoryUuid && subcategoryUuid);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -171,29 +173,33 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
         </div>
       )}
 
-      <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Category</label>
-        <select value={categoryUuid} onChange={(e) => setCategoryUuid(e.target.value)} className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors" disabled={isPending} required>
-          <option value="">Select category</option>
-          {categories.map((category) => (
-            <option key={category.uuid} value={category.uuid}>
-              {category.icon} {category.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      {!isTransfer && (
+        <>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">Category</label>
+            <select value={categoryUuid} onChange={(e) => setCategoryUuid(e.target.value)} className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors" disabled={isPending} required>
+              <option value="">Select category</option>
+              {categories.map((category) => (
+                <option key={category.uuid} value={category.uuid}>
+                  {category.icon} {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-      <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Subcategory</label>
-        <select value={subcategoryUuid} onChange={(e) => setSubcategoryUuid(e.target.value)} className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors" disabled={isPending || !categoryUuid} required>
-          <option value="">Select subcategory</option>
-          {filteredSubcategories.map((subcategory) => (
-            <option key={subcategory.uuid} value={subcategory.uuid}>
-              {subcategory.name}
-            </option>
-          ))}
-        </select>
-      </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">Subcategory</label>
+            <select value={subcategoryUuid} onChange={(e) => setSubcategoryUuid(e.target.value)} className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors" disabled={isPending || !categoryUuid} required>
+              <option value="">Select subcategory</option>
+              {filteredSubcategories.map((subcategory) => (
+                <option key={subcategory.uuid} value={subcategory.uuid}>
+                  {subcategory.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </>
+      )}
 
       <div>
         <label className="block text-sm font-medium text-slate-300 mb-2">Description</label>

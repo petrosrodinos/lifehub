@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useIsMobile } from "../hooks/use-is-mobile";
 import ProtectedRoute from "./protected-route";
 import { SignIn } from "../pages/auth/sign-in";
 import { SignUp } from "../pages/auth/sign-up";
@@ -13,6 +14,8 @@ import { ExerciseDetailPage } from "../pages/gym/exercise-detail";
 import { LandingPage } from "../pages/landing";
 
 export default function AppRoutes() {
+  const isMobile = useIsMobile();
+
   return (
     <Routes>
       <Route
@@ -50,7 +53,7 @@ export default function AppRoutes() {
         <Route path="gym/workout-entry/:entryUuid" element={<ExerciseDetailPage />} />
       </Route>
 
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={isMobile ? <Navigate to="/dashboard/routine" replace /> : <LandingPage />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

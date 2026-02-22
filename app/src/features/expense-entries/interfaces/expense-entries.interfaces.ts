@@ -12,8 +12,8 @@ export interface ExpenseEntry {
   description?: string
   from_account_uuid: string
   to_account_uuid?: string
-  category_uuid: string
-  subcategory_uuid: string
+  category_uuid?: string
+  subcategory_uuid?: string
   entry_date: string
   created_at: string
   updated_at: string
@@ -29,8 +29,8 @@ export interface CreateExpenseEntryDto {
   description?: string
   from_account_uuid: string
   to_account_uuid?: string
-  category_uuid: string
-  subcategory_uuid: string
+  category_uuid?: string
+  subcategory_uuid?: string
   entry_date?: string
 }
 

@@ -16649,8 +16649,8 @@ export namespace Prisma {
     description: string | null
     from_account_uuid: string
     to_account_uuid: string | null
-    category_uuid: string
-    subcategory_uuid: string
+    category_uuid: string | null
+    subcategory_uuid: string | null
     entry_date: Date
     created_at: Date
     updated_at: Date
@@ -16692,8 +16692,8 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     from_account?: boolean | ExpenseAccountDefaultArgs<ExtArgs>
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
-    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
-    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
   }, ExtArgs["result"]["expenseEntry"]>
 
   export type ExpenseEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16713,8 +16713,8 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     from_account?: boolean | ExpenseAccountDefaultArgs<ExtArgs>
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
-    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
-    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
   }, ExtArgs["result"]["expenseEntry"]>
 
   export type ExpenseEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16734,8 +16734,8 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     from_account?: boolean | ExpenseAccountDefaultArgs<ExtArgs>
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
-    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
-    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
   }, ExtArgs["result"]["expenseEntry"]>
 
   export type ExpenseEntrySelectScalar = {
@@ -16759,22 +16759,22 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     from_account?: boolean | ExpenseAccountDefaultArgs<ExtArgs>
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
-    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
-    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
   }
   export type ExpenseEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     from_account?: boolean | ExpenseAccountDefaultArgs<ExtArgs>
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
-    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
-    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
   }
   export type ExpenseEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     from_account?: boolean | ExpenseAccountDefaultArgs<ExtArgs>
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
-    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
-    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
   }
 
   export type $ExpenseEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16783,8 +16783,8 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
       from_account: Prisma.$ExpenseAccountPayload<ExtArgs>
       to_account: Prisma.$ExpenseAccountPayload<ExtArgs> | null
-      category: Prisma.$ExpenseCategoryPayload<ExtArgs>
-      subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs>
+      category: Prisma.$ExpenseCategoryPayload<ExtArgs> | null
+      subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -16795,8 +16795,8 @@ export namespace Prisma {
       description: string | null
       from_account_uuid: string
       to_account_uuid: string | null
-      category_uuid: string
-      subcategory_uuid: string
+      category_uuid: string | null
+      subcategory_uuid: string | null
       entry_date: Date
       created_at: Date
       updated_at: Date
@@ -17197,8 +17197,8 @@ export namespace Prisma {
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     from_account<T extends ExpenseAccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseAccountDefaultArgs<ExtArgs>>): Prisma__ExpenseAccountClient<$Result.GetResult<Prisma.$ExpenseAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     to_account<T extends ExpenseEntry$to_accountArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$to_accountArgs<ExtArgs>>): Prisma__ExpenseAccountClient<$Result.GetResult<Prisma.$ExpenseAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    category<T extends ExpenseCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategoryDefaultArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    subcategory<T extends ExpenseSubcategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategoryDefaultArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    category<T extends ExpenseEntry$categoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$categoryArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    subcategory<T extends ExpenseEntry$subcategoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$subcategoryArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17653,6 +17653,44 @@ export namespace Prisma {
      */
     include?: ExpenseAccountInclude<ExtArgs> | null
     where?: ExpenseAccountWhereInput
+  }
+
+  /**
+   * ExpenseEntry.category
+   */
+  export type ExpenseEntry$categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseCategory
+     */
+    select?: ExpenseCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseCategory
+     */
+    omit?: ExpenseCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseCategoryInclude<ExtArgs> | null
+    where?: ExpenseCategoryWhereInput
+  }
+
+  /**
+   * ExpenseEntry.subcategory
+   */
+  export type ExpenseEntry$subcategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseSubcategory
+     */
+    select?: ExpenseSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseSubcategory
+     */
+    omit?: ExpenseSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseSubcategoryInclude<ExtArgs> | null
+    where?: ExpenseSubcategoryWhereInput
   }
 
   /**
@@ -25198,16 +25236,16 @@ export namespace Prisma {
     description?: StringNullableFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
-    category_uuid?: StringFilter<"ExpenseEntry"> | string
-    subcategory_uuid?: StringFilter<"ExpenseEntry"> | string
+    category_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
+    subcategory_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     entry_date?: DateTimeFilter<"ExpenseEntry"> | Date | string
     created_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     from_account?: XOR<ExpenseAccountScalarRelationFilter, ExpenseAccountWhereInput>
     to_account?: XOR<ExpenseAccountNullableScalarRelationFilter, ExpenseAccountWhereInput> | null
-    category?: XOR<ExpenseCategoryScalarRelationFilter, ExpenseCategoryWhereInput>
-    subcategory?: XOR<ExpenseSubcategoryScalarRelationFilter, ExpenseSubcategoryWhereInput>
+    category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
+    subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
   }
 
   export type ExpenseEntryOrderByWithRelationInput = {
@@ -25219,8 +25257,8 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrderInput | SortOrder
-    category_uuid?: SortOrder
-    subcategory_uuid?: SortOrder
+    category_uuid?: SortOrderInput | SortOrder
+    subcategory_uuid?: SortOrderInput | SortOrder
     entry_date?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -25243,16 +25281,16 @@ export namespace Prisma {
     description?: StringNullableFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
-    category_uuid?: StringFilter<"ExpenseEntry"> | string
-    subcategory_uuid?: StringFilter<"ExpenseEntry"> | string
+    category_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
+    subcategory_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     entry_date?: DateTimeFilter<"ExpenseEntry"> | Date | string
     created_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     from_account?: XOR<ExpenseAccountScalarRelationFilter, ExpenseAccountWhereInput>
     to_account?: XOR<ExpenseAccountNullableScalarRelationFilter, ExpenseAccountWhereInput> | null
-    category?: XOR<ExpenseCategoryScalarRelationFilter, ExpenseCategoryWhereInput>
-    subcategory?: XOR<ExpenseSubcategoryScalarRelationFilter, ExpenseSubcategoryWhereInput>
+    category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
+    subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
   }, "id" | "uuid">
 
   export type ExpenseEntryOrderByWithAggregationInput = {
@@ -25264,8 +25302,8 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrderInput | SortOrder
-    category_uuid?: SortOrder
-    subcategory_uuid?: SortOrder
+    category_uuid?: SortOrderInput | SortOrder
+    subcategory_uuid?: SortOrderInput | SortOrder
     entry_date?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -25288,8 +25326,8 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringWithAggregatesFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
-    category_uuid?: StringWithAggregatesFilter<"ExpenseEntry"> | string
-    subcategory_uuid?: StringWithAggregatesFilter<"ExpenseEntry"> | string
+    category_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
+    subcategory_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
     entry_date?: DateTimeWithAggregatesFilter<"ExpenseEntry"> | Date | string
     created_at?: DateTimeWithAggregatesFilter<"ExpenseEntry"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ExpenseEntry"> | Date | string
@@ -26751,8 +26789,8 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutExpense_entriesInput
     from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
-    category: ExpenseCategoryCreateNestedOneWithoutEntriesInput
-    subcategory: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateInput = {
@@ -26764,8 +26802,8 @@ export namespace Prisma {
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
-    category_uuid: string
-    subcategory_uuid: string
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -26782,8 +26820,8 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutExpense_entriesNestedInput
     from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
-    category?: ExpenseCategoryUpdateOneRequiredWithoutEntriesNestedInput
-    subcategory?: ExpenseSubcategoryUpdateOneRequiredWithoutEntriesNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateInput = {
@@ -26795,8 +26833,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    category_uuid?: StringFieldUpdateOperationsInput | string
-    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26811,8 +26849,8 @@ export namespace Prisma {
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
-    category_uuid: string
-    subcategory_uuid: string
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -26837,8 +26875,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    category_uuid?: StringFieldUpdateOperationsInput | string
-    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28381,9 +28419,14 @@ export namespace Prisma {
     isNot?: ExpenseAccountWhereInput | null
   }
 
-  export type ExpenseSubcategoryScalarRelationFilter = {
-    is?: ExpenseSubcategoryWhereInput
-    isNot?: ExpenseSubcategoryWhereInput
+  export type ExpenseCategoryNullableScalarRelationFilter = {
+    is?: ExpenseCategoryWhereInput | null
+    isNot?: ExpenseCategoryWhereInput | null
+  }
+
+  export type ExpenseSubcategoryNullableScalarRelationFilter = {
+    is?: ExpenseSubcategoryWhereInput | null
+    isNot?: ExpenseSubcategoryWhereInput | null
   }
 
   export type ExpenseEntryCountOrderByAggregateInput = {
@@ -30268,18 +30311,22 @@ export namespace Prisma {
     update?: XOR<XOR<ExpenseAccountUpdateToOneWithWhereWithoutEntries_toInput, ExpenseAccountUpdateWithoutEntries_toInput>, ExpenseAccountUncheckedUpdateWithoutEntries_toInput>
   }
 
-  export type ExpenseCategoryUpdateOneRequiredWithoutEntriesNestedInput = {
+  export type ExpenseCategoryUpdateOneWithoutEntriesNestedInput = {
     create?: XOR<ExpenseCategoryCreateWithoutEntriesInput, ExpenseCategoryUncheckedCreateWithoutEntriesInput>
     connectOrCreate?: ExpenseCategoryCreateOrConnectWithoutEntriesInput
     upsert?: ExpenseCategoryUpsertWithoutEntriesInput
+    disconnect?: ExpenseCategoryWhereInput | boolean
+    delete?: ExpenseCategoryWhereInput | boolean
     connect?: ExpenseCategoryWhereUniqueInput
     update?: XOR<XOR<ExpenseCategoryUpdateToOneWithWhereWithoutEntriesInput, ExpenseCategoryUpdateWithoutEntriesInput>, ExpenseCategoryUncheckedUpdateWithoutEntriesInput>
   }
 
-  export type ExpenseSubcategoryUpdateOneRequiredWithoutEntriesNestedInput = {
+  export type ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput = {
     create?: XOR<ExpenseSubcategoryCreateWithoutEntriesInput, ExpenseSubcategoryUncheckedCreateWithoutEntriesInput>
     connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutEntriesInput
     upsert?: ExpenseSubcategoryUpsertWithoutEntriesInput
+    disconnect?: ExpenseSubcategoryWhereInput | boolean
+    delete?: ExpenseSubcategoryWhereInput | boolean
     connect?: ExpenseSubcategoryWhereUniqueInput
     update?: XOR<XOR<ExpenseSubcategoryUpdateToOneWithWhereWithoutEntriesInput, ExpenseSubcategoryUpdateWithoutEntriesInput>, ExpenseSubcategoryUncheckedUpdateWithoutEntriesInput>
   }
@@ -31248,8 +31295,8 @@ export namespace Prisma {
     updated_at?: Date | string
     from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
-    category: ExpenseCategoryCreateNestedOneWithoutEntriesInput
-    subcategory: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutUserInput = {
@@ -31260,8 +31307,8 @@ export namespace Prisma {
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
-    category_uuid: string
-    subcategory_uuid: string
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -31667,8 +31714,8 @@ export namespace Prisma {
     description?: StringNullableFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
-    category_uuid?: StringFilter<"ExpenseEntry"> | string
-    subcategory_uuid?: StringFilter<"ExpenseEntry"> | string
+    category_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
+    subcategory_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     entry_date?: DateTimeFilter<"ExpenseEntry"> | Date | string
     created_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
@@ -33780,8 +33827,8 @@ export namespace Prisma {
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_entriesInput
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
-    category: ExpenseCategoryCreateNestedOneWithoutEntriesInput
-    subcategory: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutFrom_accountInput = {
@@ -33792,8 +33839,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
     to_account_uuid?: string | null
-    category_uuid: string
-    subcategory_uuid: string
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -33819,8 +33866,8 @@ export namespace Prisma {
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_entriesInput
     from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
-    category: ExpenseCategoryCreateNestedOneWithoutEntriesInput
-    subcategory: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutTo_accountInput = {
@@ -33831,8 +33878,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
     from_account_uuid: string
-    category_uuid: string
-    subcategory_uuid: string
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -34030,7 +34077,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutExpense_entriesInput
     from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
-    subcategory: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutCategoryInput = {
@@ -34042,7 +34089,7 @@ export namespace Prisma {
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
-    subcategory_uuid: string
+    subcategory_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -34239,7 +34286,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutExpense_entriesInput
     from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
-    category: ExpenseCategoryCreateNestedOneWithoutEntriesInput
+    category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutSubcategoryInput = {
@@ -34251,7 +34298,7 @@ export namespace Prisma {
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
-    category_uuid: string
+    category_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -35632,8 +35679,8 @@ export namespace Prisma {
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
-    category_uuid: string
-    subcategory_uuid: string
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -35970,8 +36017,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
-    category?: ExpenseCategoryUpdateOneRequiredWithoutEntriesNestedInput
-    subcategory?: ExpenseSubcategoryUpdateOneRequiredWithoutEntriesNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutUserInput = {
@@ -35982,8 +36029,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    category_uuid?: StringFieldUpdateOperationsInput | string
-    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35997,8 +36044,8 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    category_uuid?: StringFieldUpdateOperationsInput | string
-    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36585,8 +36632,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
     to_account_uuid?: string | null
-    category_uuid: string
-    subcategory_uuid: string
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -36600,8 +36647,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
     from_account_uuid: string
-    category_uuid: string
-    subcategory_uuid: string
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -36617,8 +36664,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_entriesNestedInput
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
-    category?: ExpenseCategoryUpdateOneRequiredWithoutEntriesNestedInput
-    subcategory?: ExpenseSubcategoryUpdateOneRequiredWithoutEntriesNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutFrom_accountInput = {
@@ -36629,8 +36676,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    category_uuid?: StringFieldUpdateOperationsInput | string
-    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36644,8 +36691,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    category_uuid?: StringFieldUpdateOperationsInput | string
-    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36661,8 +36708,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_entriesNestedInput
     from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
-    category?: ExpenseCategoryUpdateOneRequiredWithoutEntriesNestedInput
-    subcategory?: ExpenseSubcategoryUpdateOneRequiredWithoutEntriesNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutTo_accountInput = {
@@ -36673,8 +36720,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
-    category_uuid?: StringFieldUpdateOperationsInput | string
-    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36688,8 +36735,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
-    category_uuid?: StringFieldUpdateOperationsInput | string
-    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36713,7 +36760,7 @@ export namespace Prisma {
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
-    subcategory_uuid: string
+    subcategory_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -36758,7 +36805,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutExpense_entriesNestedInput
     from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
-    subcategory?: ExpenseSubcategoryUpdateOneRequiredWithoutEntriesNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutCategoryInput = {
@@ -36770,7 +36817,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36785,7 +36832,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36800,7 +36847,7 @@ export namespace Prisma {
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
-    category_uuid: string
+    category_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -36817,7 +36864,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutExpense_entriesNestedInput
     from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
-    category?: ExpenseCategoryUpdateOneRequiredWithoutEntriesNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutSubcategoryInput = {
@@ -36829,7 +36876,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    category_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36844,7 +36891,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    category_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
