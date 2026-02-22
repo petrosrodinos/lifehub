@@ -28,6 +28,7 @@ export function WorkoutCard({ workout }: WorkoutCardProps) {
   };
 
   const duration = calculateDuration();
+  const exercisesCount = workout.entries?.length || 0;
   const setsCount = workout.entries?.reduce((sum, entry) => sum + (entry.sets?.length || 0), 0) || 0;
 
   const handleCardClick = () => {
@@ -57,6 +58,9 @@ export function WorkoutCard({ workout }: WorkoutCardProps) {
                 <span>{duration} min</span>
               </div>
             )}
+            <div className="flex items-center gap-1.5">
+              <span className="text-violet-400 font-medium">{exercisesCount} exercises</span>
+            </div>
             <div className="flex items-center gap-1.5">
               <span className="text-violet-400 font-medium">{setsCount} sets</span>
             </div>
