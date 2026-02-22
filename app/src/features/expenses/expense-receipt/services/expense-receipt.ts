@@ -4,6 +4,7 @@ import type {
     ExpenseReceipt,
     CreateExpenseReceiptDto,
     UpdateExpenseReceiptDto,
+    UploadReceiptPayload,
 } from '../interfaces/expense-receipt.interfaces'
 
 export const getExpenseReceipts = async (): Promise<ExpenseReceipt[]> => {
@@ -33,6 +34,21 @@ export const createExpenseReceipt = async (data: CreateExpenseReceiptDto): Promi
     } catch (error: unknown) {
         const err = error as { response?: { data?: { message?: string } } }
         throw new Error(err.response?.data?.message || 'Failed to create expense receipt')
+    }
+}
+
+export const uploadReceipt = async (payload: UploadReceiptPayload): Promise<ExpenseReceipt> => {
+    try {
+        const formData = new FormData()
+        formData.append('receipt', payload.file)
+        formData.append('from_account_uuid', payload.from_account_uuid)
+        const response = await axiosInstance.post(ApiRoutes.expenses.receipts.upload, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        })
+        return response.data
+    } catch (error: unknown) {
+        const err = error as { response?: { data?: { message?: string } } }
+        throw new Error(err.response?.data?.message || 'Failed to upload receipt')
     }
 }
 

@@ -28,6 +28,7 @@ export function CreateReceiptModal({ isOpen, onClose, storeUuid }: CreateReceipt
         submitLabel="Create"
         isPending={createReceipt.isPending}
         initialData={storeUuid ? { store_uuid: storeUuid } : undefined}
+        onUploadSuccess={onClose}
       />
     </Modal>
   )

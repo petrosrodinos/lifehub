@@ -3,11 +3,13 @@ import toast from 'react-hot-toast'
 import type {
     CreateExpenseReceiptDto,
     UpdateExpenseReceiptDto,
+    UploadReceiptPayload,
 } from '../interfaces/expense-receipt.interfaces'
 import {
     getExpenseReceipts,
     getExpenseReceipt,
     createExpenseReceipt,
+    uploadReceipt,
     updateExpenseReceipt,
     deleteExpenseReceipt,
 } from '../services/expense-receipt'
@@ -46,6 +48,23 @@ export function useCreateExpenseReceipt() {
         },
         onError: (error: Error) => {
             toast.error(error.message || 'Failed to create expense receipt', { duration: 3000 })
+        },
+    })
+}
+
+export function useUploadReceipt() {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: (payload: UploadReceiptPayload) => uploadReceipt(payload),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseReceipts })
+            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseEntries })
+            queryClient.invalidateQueries({ queryKey: ['expense-receipt-items'] })
+            toast.success('Receipt uploaded and expense created', { duration: 2000 })
+        },
+        onError: (error: Error) => {
+            toast.error(error.message || 'Failed to upload receipt', { duration: 3000 })
         },
     })
 }

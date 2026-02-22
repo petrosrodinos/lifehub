@@ -186,57 +186,60 @@ export class ExpenseReceiptService {
       mimeType,
     });
 
-    return await this.prisma.$transaction(async (tx) => {
-      let entry: ExpenseEntry | null = null;
-      if (account) {
-        entry = await tx.expenseEntry.create({
+    return await this.prisma.$transaction(
+      async (tx) => {
+        let entry: ExpenseEntry | null = null;
+        if (account) {
+          entry = await tx.expenseEntry.create({
+            data: {
+              user_uuid,
+              type: ExpenseEntryType.EXPENSE,
+              amount: extracted.total_amount,
+              from_account_uuid,
+              to_account_uuid: null,
+              category_uuid: null,
+              subcategory_uuid: null,
+              entry_date: receiptDate,
+            },
+          });
+        }
+        const store = await this.findOrCreateStore(tx, user_uuid, extracted.store_name);
+        const receipt = await tx.expenseReceipt.create({
           data: {
             user_uuid,
-            type: ExpenseEntryType.EXPENSE,
-            amount: extracted.total_amount,
-            from_account_uuid,
-            to_account_uuid: null,
-            category_uuid: null,
-            subcategory_uuid: null,
-            entry_date: receiptDate,
+            expense_entry_uuid: entry?.uuid ?? null,
+            store_uuid: store.uuid,
+            receipt_date: receiptDate,
+            total_amount: extracted.total_amount,
           },
         });
-      }
-      const store = await this.findOrCreateStore(tx, user_uuid, extracted.store_name);
-      const receipt = await tx.expenseReceipt.create({
-        data: {
-          user_uuid,
-          expense_entry_uuid: entry?.uuid ?? null,
-          store_uuid: store.uuid,
-          receipt_date: receiptDate,
-          total_amount: extracted.total_amount,
-        },
-      });
-      for (const item of extracted.items) {
-        const product = await this.findOrCreateProduct(tx, user_uuid, item);
-        await tx.expenseReceiptItem.create({
-          data: {
-            receipt_uuid: receipt.uuid,
-            product_uuid: product.uuid,
-            quantity: item.quantity,
-            unit_price: item.unit_price,
-            total_price: item.total_price,
+        for (const item of extracted.items) {
+          const product = await this.findOrCreateProduct(tx, user_uuid, item);
+          await tx.expenseReceiptItem.create({
+            data: {
+              receipt_uuid: receipt.uuid,
+              product_uuid: product.uuid,
+              quantity: item.quantity,
+              unit_price: item.unit_price,
+              total_price: item.total_price,
+            },
+          });
+        }
+        await tx.expenseAccount.update({
+          where: { uuid: from_account_uuid },
+          data: { balance: { decrement: extracted.total_amount } },
+        });
+        return tx.expenseReceipt.findUniqueOrThrow({
+          where: { uuid: receipt.uuid },
+          include: {
+            store: true,
+            expense_entry: true,
+            items: { include: { product: true } },
           },
         });
-      }
-      await tx.expenseAccount.update({
-        where: { uuid: from_account_uuid },
-        data: { balance: { decrement: extracted.total_amount } },
-      });
-      return tx.expenseReceipt.findUniqueOrThrow({
-        where: { uuid: receipt.uuid },
-        include: {
-          store: true,
-          expense_entry: true,
-          items: { include: { product: true } },
-        },
-      });
-    });
+      },
+      { timeout: 30000 },
+    );
   }
 
   private async findOrCreateStore(

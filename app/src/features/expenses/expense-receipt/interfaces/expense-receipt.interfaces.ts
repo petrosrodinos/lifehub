@@ -29,3 +29,12 @@ export interface UpdateExpenseReceiptDto {
     receipt_date?: string
     total_amount?: number
 }
+
+export interface UploadReceiptDto {
+    from_account_uuid: string
+}
+
+export interface UploadReceiptPayload {
+    file: File
+    from_account_uuid: string
+}

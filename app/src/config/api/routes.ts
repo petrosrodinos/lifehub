@@ -160,6 +160,7 @@ export const ApiRoutes = {
     receipts: {
       list: "/expense-receipts",
       create: "/expense-receipts",
+      upload: "/expense-receipts/upload",
       get: (uuid: string) => `/expense-receipts/${uuid}`,
       update: (uuid: string) => `/expense-receipts/${uuid}`,
       delete: (uuid: string) => `/expense-receipts/${uuid}`,
