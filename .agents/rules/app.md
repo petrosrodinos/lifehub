@@ -125,7 +125,7 @@ Never:
 - Create god components
 - Mix UI and rules
 
-- features/
+- features/ (used for api connectivity)
 
   - user/
     - hooks/use-user.ts

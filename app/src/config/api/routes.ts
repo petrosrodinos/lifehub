@@ -150,5 +150,26 @@ export const ApiRoutes = {
         transactionTrend: "/expense-entries/analytics/transaction-trend",
       },
     },
+    stores: {
+      list: "/expense-stores",
+      create: "/expense-stores",
+      get: (uuid: string) => `/expense-stores/${uuid}`,
+      update: (uuid: string) => `/expense-stores/${uuid}`,
+      delete: (uuid: string) => `/expense-stores/${uuid}`,
+    },
+    receipts: {
+      list: "/expense-receipts",
+      create: "/expense-receipts",
+      get: (uuid: string) => `/expense-receipts/${uuid}`,
+      update: (uuid: string) => `/expense-receipts/${uuid}`,
+      delete: (uuid: string) => `/expense-receipts/${uuid}`,
+    },
+    receiptItems: {
+      list: (receipt_uuid: string) => `/expense-receipt-items/receipt/${receipt_uuid}`,
+      create: "/expense-receipt-items",
+      get: (uuid: string) => `/expense-receipt-items/${uuid}`,
+      update: (uuid: string) => `/expense-receipt-items/${uuid}`,
+      delete: (uuid: string) => `/expense-receipt-items/${uuid}`,
+    },
   },
 }
