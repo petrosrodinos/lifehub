@@ -2,10 +2,16 @@ import { Injectable, InternalServerErrorException, NotFoundException, BadRequest
 import { CreateExpenseReceiptDto } from './dto/create-expense-receipt.dto';
 import { UpdateExpenseReceiptDto } from './dto/update-expense-receipt.dto';
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
+import { ExpenseAccount, ExpenseEntry, ExpenseEntryType } from '@/generated/prisma';
+import { type ExtractedReceiptItem } from './schemas/extracted-receipt.schema';
+import { AiHelperService } from '@/shared/services/ai/ai.service';
 
 @Injectable()
 export class ExpenseReceiptService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly aiService: AiHelperService,
+  ) { }
 
   async create(user_uuid: string, createExpenseReceiptDto: CreateExpenseReceiptDto) {
     try {
@@ -127,6 +133,197 @@ export class ExpenseReceiptService {
 
       throw new InternalServerErrorException('Failed to delete expense receipt');
     }
+  }
+
+  async upload(
+    user_uuid: string,
+    imageBuffer: Buffer,
+    mimeType: string,
+    from_account_uuid?: string,
+  ) {
+
+    let account: ExpenseAccount | null = null;
+
+    if (from_account_uuid) {
+      account = await this.prisma.expenseAccount.findFirst({
+        where: { uuid: from_account_uuid, user_uuid },
+      });
+    }
+
+    const [categories, subcategories, stores, products] = await Promise.all([
+      this.prisma.expenseCategory.findMany({
+        where: { OR: [{ user_uuid }, { user_uuid: null }] },
+        include: { subcategories: true },
+      }),
+      this.prisma.expenseSubcategory.findMany({
+        where: { OR: [{ user_uuid }, { user_uuid: null }] },
+        include: { category: true },
+      }),
+      this.prisma.expenseStore.findMany({
+        where: { OR: [{ user_uuid }, { user_uuid: null }] },
+      }),
+      this.prisma.expenseProduct.findMany({
+        where: { OR: [{ user_uuid }, { user_uuid: null }] },
+      }),
+    ]);
+    const categoryNames = [...new Set(categories.map((c) => c.name))].join(', ');
+
+    const subcategoriesContext = subcategories.map((s) => ({
+      categoryName: s.category.name,
+      subcategoryName: s.name,
+    })).map((s) => `${s.categoryName} > ${s.subcategoryName}`).join('; ');
+
+    const storeNames = stores.map((s) => s.name).join(', ');
+
+    const productNames = products.map((p) => p.name).join(', ');
+
+    const { receiptDate, extracted } = await this.aiService.getReceiptData({
+      categoryNames,
+      subcategoriesContext,
+      storeNames,
+      productNames,
+      imageBuffer,
+      mimeType,
+    });
+
+    return await this.prisma.$transaction(async (tx) => {
+      let entry: ExpenseEntry | null = null;
+      if (account) {
+        entry = await tx.expenseEntry.create({
+          data: {
+            user_uuid,
+            type: ExpenseEntryType.EXPENSE,
+            amount: extracted.total_amount,
+            from_account_uuid,
+            to_account_uuid: null,
+            category_uuid: null,
+            subcategory_uuid: null,
+            entry_date: receiptDate,
+          },
+        });
+      }
+      const store = await this.findOrCreateStore(tx, user_uuid, extracted.store_name);
+      const receipt = await tx.expenseReceipt.create({
+        data: {
+          user_uuid,
+          expense_entry_uuid: entry?.uuid ?? null,
+          store_uuid: store.uuid,
+          receipt_date: receiptDate,
+          total_amount: extracted.total_amount,
+        },
+      });
+      for (const item of extracted.items) {
+        const product = await this.findOrCreateProduct(tx, user_uuid, item);
+        await tx.expenseReceiptItem.create({
+          data: {
+            receipt_uuid: receipt.uuid,
+            product_uuid: product.uuid,
+            quantity: item.quantity,
+            unit_price: item.unit_price,
+            total_price: item.total_price,
+          },
+        });
+      }
+      await tx.expenseAccount.update({
+        where: { uuid: from_account_uuid },
+        data: { balance: { decrement: extracted.total_amount } },
+      });
+      return tx.expenseReceipt.findUniqueOrThrow({
+        where: { uuid: receipt.uuid },
+        include: {
+          store: true,
+          expense_entry: true,
+          items: { include: { product: true } },
+        },
+      });
+    });
+  }
+
+  private async findOrCreateStore(
+    tx: Omit<PrismaService, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>,
+    user_uuid: string,
+    name: string,
+  ) {
+    const normalized = name.trim();
+    const existing = await tx.expenseStore.findFirst({
+      where: {
+        OR: [{ user_uuid }, { user_uuid: null }],
+        name: { equals: normalized, mode: 'insensitive' },
+      },
+    });
+    if (existing) return existing;
+    return tx.expenseStore.create({
+      data: { user_uuid, name: normalized },
+    });
+  }
+
+  private async findOrCreateProduct(
+    tx: Omit<PrismaService, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>,
+    user_uuid: string,
+    item: ExtractedReceiptItem,
+  ) {
+    const productName = item.product_name.trim();
+    const existing = await tx.expenseProduct.findFirst({
+      where: {
+        OR: [{ user_uuid }, { user_uuid: null }],
+        name: { equals: productName, mode: 'insensitive' },
+      },
+    });
+    if (existing) return existing;
+    let category_uuid: string | null = null;
+    let subcategory_uuid: string | null = null;
+    if (item.category_name?.trim()) {
+      const category = await this.findOrCreateCategory(tx, user_uuid, item.category_name.trim());
+      category_uuid = category.uuid;
+      if (item.subcategory_name?.trim()) {
+        const sub = await this.findOrCreateSubcategory(tx, user_uuid, category.uuid, item.subcategory_name.trim());
+        subcategory_uuid = sub.uuid;
+      }
+    }
+    return tx.expenseProduct.create({
+      data: {
+        user_uuid,
+        name: productName,
+        category_uuid,
+        subcategory_uuid,
+      },
+    });
+  }
+
+  private async findOrCreateCategory(
+    tx: Omit<PrismaService, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>,
+    user_uuid: string,
+    name: string,
+  ) {
+    const existing = await tx.expenseCategory.findFirst({
+      where: {
+        OR: [{ user_uuid }, { user_uuid: null }],
+        name: { equals: name, mode: 'insensitive' },
+      },
+    });
+    if (existing) return existing;
+    return tx.expenseCategory.create({
+      data: { user_uuid, name },
+    });
+  }
+
+  private async findOrCreateSubcategory(
+    tx: Omit<PrismaService, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>,
+    user_uuid: string,
+    category_uuid: string,
+    name: string,
+  ) {
+    const existing = await tx.expenseSubcategory.findFirst({
+      where: {
+        category_uuid,
+        OR: [{ user_uuid }, { user_uuid: null }],
+        name: { equals: name, mode: 'insensitive' },
+      },
+    });
+    if (existing) return existing;
+    return tx.expenseSubcategory.create({
+      data: { user_uuid, category_uuid, name },
+    });
   }
 
   private async validateRelations(user_uuid: string, dto: Partial<CreateExpenseReceiptDto>): Promise<void> {

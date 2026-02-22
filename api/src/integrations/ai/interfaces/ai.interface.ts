@@ -83,4 +83,17 @@ export const AiModels = {
 export type AiProvider = typeof AiProviders[keyof typeof AiProviders];
 export type AiModel = string;
 
+export interface AIExtractObjectFromImageOptions<T = unknown> {
+  image: Buffer | Uint8Array;
+  mimeType: string;
+  system: string;
+  prompt: string;
+  schema: z.ZodSchema<T>;
+  provider?: AiProvider;
+  model?: AiModel;
+}
 
+export interface AIExtractObjectFromImageResponse<T> {
+  response: T;
+  usage?: AICostResponse;
+}

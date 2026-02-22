@@ -5,6 +5,10 @@ import {
     AIGenerateOptions,
     AIGenerateTextResponse,
     AIStreamTextOptions,
+    AIExtractObjectFromImageOptions,
+    AIExtractObjectFromImageResponse,
+    AiProviders,
+    AiModels,
 } from '../interfaces/ai.interface';
 import { AiConfig } from '../utils/ai.config';
 import { z } from 'zod';
@@ -144,5 +148,38 @@ export class AiService {
         return embedding;
     }
 
-
+    async extractObjectFromImage<T>(options: AIExtractObjectFromImageOptions<T>): Promise<AIExtractObjectFromImageResponse<T>> {
+        const provider = options.provider ?? AiProviders.openai;
+        const model = options.model ?? AiModels.openai.gpt4o;
+        const modelAdapter = this.aiConfig.getModelAdapter(provider, model);
+        const imagePart = {
+            type: 'image' as const,
+            image: options.image,
+            mimeType: options.mimeType,
+        };
+        const { object, usage } = await generateObject({
+            model: modelAdapter,
+            schema: options.schema,
+            system: options.system,
+            messages: [
+                {
+                    role: 'user',
+                    content: [
+                        { type: 'text' as const, text: options.prompt },
+                        imagePart,
+                    ],
+                },
+            ],
+        });
+        const cost = calculateAiCost({
+            provider,
+            model,
+            inputTokens: usage.promptTokens,
+            outputTokens: usage.completionTokens,
+        });
+        return {
+            response: object as T,
+            usage: cost,
+        };
+    }
 }
