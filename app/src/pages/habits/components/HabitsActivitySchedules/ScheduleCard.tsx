@@ -50,7 +50,7 @@ export function ScheduleCard({ schedule, isEditOpen, onSelectSchedule, onToggleE
             <span className="inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-700/60 text-slate-400 border border-slate-600/40 shrink-0">Inactive</span>
           )}
           {schedule.activity && (
-            <span className="text-xs text-slate-400 truncate">
+            <span className="text-sm font-medium text-slate-200 truncate">
               {schedule.activity.icon ? `${schedule.activity.icon} ` : ""}
               {schedule.activity.name}
             </span>

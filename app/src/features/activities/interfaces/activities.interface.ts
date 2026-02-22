@@ -109,6 +109,7 @@ export interface ActivityHabbitsQuery {
   date_from?: string
   date_to?: string
   activity_uuid?: string
+  status?: OccurrenceStatus
   page?: number
   page_size?: number
 }

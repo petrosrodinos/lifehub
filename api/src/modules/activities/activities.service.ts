@@ -81,6 +81,7 @@ export class ActivitiesService {
         activity_occurrences: {
           where: {
             scheduled_for: { gte: dayStart, lte: dayEnd },
+            ...(query.status ? { status: query.status } : {}),
           },
           include: { log: true },
           orderBy: { scheduled_for: 'asc' },
