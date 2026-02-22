@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
 import type { Exercise } from "../../../../features/exercises/interfaces/exercises.interface";
@@ -18,6 +18,8 @@ import {
 import { GymEmptyState } from "./GymEmptyState";
 import { MuscleGroupForm } from "./MuscleGroupForm";
 import { MuscleGroupItem } from "./MuscleGroupItem";
+import { useAuthStore } from "../../../../store/auth-store";
+import { AUTH_ROLES } from "../../../../config/constants/auth-roles";
 
 type GymCategoriesMenuProps = {
   isOpen: boolean;
@@ -35,6 +37,20 @@ export function GymCategoriesMenu({ isOpen, onClose }: GymCategoriesMenuProps) {
   const createExercise = useCreateExercise();
   const updateExercise = useUpdateExercise();
   const deleteExercise = useDeleteExercise();
+
+  const userRole = useAuthStore((state) => state.role);
+
+  const isAdmin = userRole === AUTH_ROLES.ADMIN;
+
+  const canEditDeleteMuscleGroup = useCallback(
+    (muscleGroup: MuscleGroup) => !!muscleGroup.user_uuid || isAdmin,
+    [isAdmin]
+  );
+
+  const canEditDeleteExercise = useCallback(
+    (exercise: Exercise) => !!exercise.user_uuid || isAdmin,
+    [isAdmin]
+  );
 
   const [expandedMuscleGroups, setExpandedMuscleGroups] = useState<Set<string>>(new Set());
   const [editingMuscleGroupUuid, setEditingMuscleGroupUuid] = useState<string | null>(null);
@@ -235,6 +251,8 @@ export function GymCategoriesMenu({ isOpen, onClose }: GymCategoriesMenuProps) {
                     onUpdateExercise={handleUpdateExercise}
                     onDeleteExercise={setDeletingExercise}
                     isUpdateExercisePending={updateExercise.isPending}
+                    canEditDelete={canEditDeleteMuscleGroup(muscleGroup)}
+                    canEditDeleteExercise={canEditDeleteExercise}
                   />
                 );
               })

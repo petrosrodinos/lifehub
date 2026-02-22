@@ -27,6 +27,8 @@ type MuscleGroupItemProps = {
   onUpdateExercise: (exerciseUuid: string, name: string, description: string, type: Exercise["type"]) => void;
   onDeleteExercise: (exercise: Exercise) => void;
   isUpdateExercisePending: boolean;
+  canEditDelete: boolean;
+  canEditDeleteExercise: (exercise: Exercise) => boolean;
 };
 
 export function MuscleGroupItem({
@@ -51,6 +53,8 @@ export function MuscleGroupItem({
   onUpdateExercise,
   onDeleteExercise,
   isUpdateExercisePending,
+  canEditDelete,
+  canEditDeleteExercise,
 }: MuscleGroupItemProps) {
   if (isEditing) {
     return (
@@ -91,20 +95,24 @@ export function MuscleGroupItem({
           >
             <Plus className="w-4 h-4" />
           </button>
-          <button
-            type="button"
-            onClick={onStartEdit}
-            className="p-2 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-700 transition-colors"
-          >
-            <Edit2 className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
-            onClick={onDelete}
-            className="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-700 transition-colors"
-          >
-            <Trash2 className="w-4 h-4" />
-          </button>
+          {canEditDelete && (
+            <>
+              <button
+                type="button"
+                onClick={onStartEdit}
+                className="p-2 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-700 transition-colors"
+              >
+                <Edit2 className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={onDelete}
+                className="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-700 transition-colors"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </>
+          )}
         </div>
       </div>
 
@@ -139,6 +147,7 @@ export function MuscleGroupItem({
                 }
                 onDelete={() => onDeleteExercise(exercise)}
                 isUpdatePending={isUpdateExercisePending}
+                canEditDelete={canEditDeleteExercise(exercise)}
               />
             ))
           )}

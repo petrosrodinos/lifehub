@@ -5,6 +5,7 @@ import { CreateExerciseDto } from './dto/create-exercise.dto'
 import { UpdateExerciseDto } from './dto/update-exercise.dto'
 import { JwtGuard } from '@/shared/guards/jwt.guard'
 import { CurrentUser } from '@/shared/decorators/current-user.decorator'
+import { type AuthRole } from '@/modules/auth/interfaces/auth.interface'
 
 @ApiTags('Exercises')
 @ApiBearerAuth()
@@ -56,10 +57,11 @@ export class ExercisesController {
   @ApiResponse({ status: 409, description: 'Exercise with this name already exists' })
   update(
     @CurrentUser('user_uuid') user_uuid: string,
+    @CurrentUser('role') role: AuthRole,
     @Param('uuid') uuid: string,
     @Body() updateExerciseDto: UpdateExerciseDto,
   ) {
-    return this.exercisesService.update(uuid, user_uuid, updateExerciseDto)
+    return this.exercisesService.update(uuid, user_uuid, role, updateExerciseDto)
   }
 
   @Delete(':uuid')
@@ -70,8 +72,9 @@ export class ExercisesController {
   @ApiResponse({ status: 404, description: 'Exercise not found' })
   remove(
     @CurrentUser('user_uuid') user_uuid: string,
+    @CurrentUser('role') role: AuthRole,
     @Param('uuid') uuid: string,
   ) {
-    return this.exercisesService.remove(uuid, user_uuid)
+    return this.exercisesService.remove(uuid, user_uuid, role)
   }
 }

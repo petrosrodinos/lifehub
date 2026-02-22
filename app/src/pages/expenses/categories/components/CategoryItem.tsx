@@ -29,9 +29,10 @@ type CategoryItemProps = {
   onStartEditSubcategory: (uuid: string) => void;
   onCancelEditSubcategory: () => void;
   isUpdateSubcategoryPending: boolean;
+  canEditDelete: boolean;
 };
 
-export function CategoryItem({ category, subcategories, isExpanded, onToggle, onEdit, onDelete, onAddSubcategory, onEditSubcategory, onDeleteSubcategory, isEditing, onStartEdit, onCancelEdit, isUpdatePending, addingSubcategory, onStartAddingSubcategory, onCancelAddingSubcategory, isCreateSubcategoryPending, editingSubcategoryUuid, onStartEditSubcategory, onCancelEditSubcategory, isUpdateSubcategoryPending }: CategoryItemProps) {
+export function CategoryItem({ category, subcategories, isExpanded, onToggle, onEdit, onDelete, onAddSubcategory, onEditSubcategory, onDeleteSubcategory, isEditing, onStartEdit, onCancelEdit, isUpdatePending, addingSubcategory, onStartAddingSubcategory, onCancelAddingSubcategory, isCreateSubcategoryPending, editingSubcategoryUuid, onStartEditSubcategory, onCancelEditSubcategory, isUpdateSubcategoryPending, canEditDelete }: CategoryItemProps) {
   return (
     <div className="bg-slate-800/50 rounded-xl border border-slate-700">
       {isEditing ? (
@@ -54,12 +55,16 @@ export function CategoryItem({ category, subcategories, isExpanded, onToggle, on
             <button type="button" onClick={onStartAddingSubcategory} className="p-2 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-700 transition-colors">
               <Plus className="w-4 h-4" />
             </button>
-            <button type="button" onClick={onStartEdit} className="p-2 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-700 transition-colors">
-              <Edit2 className="w-4 h-4" />
-            </button>
-            <button type="button" onClick={onDelete} className="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-700 transition-colors">
-              <Trash2 className="w-4 h-4" />
-            </button>
+            {canEditDelete && (
+              <>
+                <button type="button" onClick={onStartEdit} className="p-2 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-700 transition-colors">
+                  <Edit2 className="w-4 h-4" />
+                </button>
+                <button type="button" onClick={onDelete} className="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-700 transition-colors">
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}
@@ -71,7 +76,7 @@ export function CategoryItem({ category, subcategories, isExpanded, onToggle, on
               <SubcategoryForm initialName="" onSubmit={onAddSubcategory} onCancel={onCancelAddingSubcategory} submitLabel="Add" isPending={isCreateSubcategoryPending} />
             </div>
           )}
-          {subcategories.length === 0 && !addingSubcategory ? <p className="text-sm text-slate-500 py-2">No subcategories yet</p> : subcategories.map((subcategory) => <SubcategoryItem key={subcategory.uuid} subcategory={subcategory} isEditing={editingSubcategoryUuid === subcategory.uuid} onStartEdit={() => onStartEditSubcategory(subcategory.uuid)} onCancelEdit={onCancelEditSubcategory} onEdit={(name) => onEditSubcategory(subcategory.uuid, name)} onDelete={() => onDeleteSubcategory(subcategory)} isUpdatePending={isUpdateSubcategoryPending} />)}
+          {subcategories.length === 0 && !addingSubcategory ? <p className="text-sm text-slate-500 py-2">No subcategories yet</p> : subcategories.map((subcategory) => <SubcategoryItem key={subcategory.uuid} subcategory={subcategory} isEditing={editingSubcategoryUuid === subcategory.uuid} onStartEdit={() => onStartEditSubcategory(subcategory.uuid)} onCancelEdit={onCancelEditSubcategory} onEdit={(name) => onEditSubcategory(subcategory.uuid, name)} onDelete={() => onDeleteSubcategory(subcategory)} isUpdatePending={isUpdateSubcategoryPending} canEditDelete={canEditDelete} />)}
         </div>
       )}
     </div>

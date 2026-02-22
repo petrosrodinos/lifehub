@@ -10,6 +10,7 @@ type ExerciseItemProps = {
   onSave: (name: string, description: string, type: Exercise["type"]) => void;
   onDelete: () => void;
   isUpdatePending: boolean;
+  canEditDelete: boolean;
 };
 
 export function ExerciseItem({
@@ -20,6 +21,7 @@ export function ExerciseItem({
   onSave,
   onDelete,
   isUpdatePending,
+  canEditDelete,
 }: ExerciseItemProps) {
   if (isEditing) {
     return (
@@ -46,22 +48,24 @@ export function ExerciseItem({
           <p className="mt-2 text-xs text-violet-300">{exercise.type === "REPS" ? "Reps based" : "Time based"}</p>
         </div>
 
-        <div className="flex gap-1 shrink-0">
-          <button
-            type="button"
-            onClick={onStartEdit}
-            className="p-2 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-700 transition-colors"
-          >
-            <Edit2 className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
-            onClick={onDelete}
-            className="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-700 transition-colors"
-          >
-            <Trash2 className="w-4 h-4" />
-          </button>
-        </div>
+        {canEditDelete && (
+          <div className="flex gap-1 shrink-0">
+            <button
+              type="button"
+              onClick={onStartEdit}
+              className="p-2 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-700 transition-colors"
+            >
+              <Edit2 className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={onDelete}
+              className="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-700 transition-colors"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

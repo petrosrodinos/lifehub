@@ -1,4 +1,5 @@
-import { Injectable, NotFoundException, InternalServerErrorException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, InternalServerErrorException, BadRequestException, ForbiddenException } from '@nestjs/common';
+import { AuthRoles, type AuthRole } from '@/modules/auth/interfaces/auth.interface';
 import { CreateExpenseSubcategoryDto } from './dto/create-expense-subcategory.dto';
 import { UpdateExpenseSubcategoryDto } from './dto/update-expense-subcategory.dto';
 import { PrismaService } from '../../../core/databases/prisma/prisma.service';
@@ -82,15 +83,19 @@ export class ExpenseSubcategoriesService {
     }
   }
 
-  async update(user_uuid: string, uuid: string, updateExpenseSubcategoryDto: UpdateExpenseSubcategoryDto) {
+  async update(user_uuid: string, uuid: string, role: AuthRole, updateExpenseSubcategoryDto: UpdateExpenseSubcategoryDto) {
     try {
-      await this.findOne(user_uuid, uuid);
+      const subcategory = await this.findOne(user_uuid, uuid);
+
+      if (!subcategory.user_uuid && role !== AuthRoles.ADMIN) {
+        throw new ForbiddenException('Only admins can edit platform subcategories');
+      }
 
       if (updateExpenseSubcategoryDto.category_uuid) {
         const category = await this.prisma.expenseCategory.findFirst({
           where: {
             uuid: updateExpenseSubcategoryDto.category_uuid,
-            user_uuid,
+            OR: [{ user_uuid }, { user_uuid: null }],
           },
         });
 
@@ -104,22 +109,26 @@ export class ExpenseSubcategoriesService {
         data: updateExpenseSubcategoryDto,
       });
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (error instanceof NotFoundException || error instanceof BadRequestException || error instanceof ForbiddenException) {
         throw error;
       }
       throw new InternalServerErrorException('Failed to update expense subcategory');
     }
   }
 
-  async remove(user_uuid: string, uuid: string) {
+  async remove(user_uuid: string, uuid: string, role: AuthRole) {
     try {
-      await this.findOne(user_uuid, uuid);
+      const subcategory = await this.findOne(user_uuid, uuid);
+
+      if (!subcategory.user_uuid && role !== AuthRoles.ADMIN) {
+        throw new ForbiddenException('Only admins can delete platform subcategories');
+      }
 
       return await this.prisma.expenseSubcategory.delete({
         where: { uuid },
       });
     } catch (error) {
-      if (error instanceof NotFoundException) {
+      if (error instanceof NotFoundException || error instanceof ForbiddenException) {
         throw error;
       }
       throw new InternalServerErrorException('Failed to delete expense subcategory');

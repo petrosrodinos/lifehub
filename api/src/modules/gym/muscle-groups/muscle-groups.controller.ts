@@ -7,7 +7,7 @@ import { JwtGuard } from '@/shared/guards/jwt.guard'
 import { RolesGuard } from '@/shared/guards/roles.guard'
 import { CurrentUser } from '@/shared/decorators/current-user.decorator'
 import { Roles } from '@/shared/decorators/roles.decorator'
-import { AuthRoles } from '@/modules/auth/interfaces/auth.interface'
+import { AuthRoles, type AuthRole } from '@/modules/auth/interfaces/auth.interface'
 
 @ApiTags('Muscle Groups')
 @ApiBearerAuth()
@@ -69,10 +69,11 @@ export class MuscleGroupsController {
   @ApiResponse({ status: 409, description: 'Muscle group with this name already exists' })
   update(
     @CurrentUser('user_uuid') user_uuid: string,
+    @CurrentUser('role') role: AuthRole,
     @Param('uuid') uuid: string,
     @Body() updateMuscleGroupDto: UpdateMuscleGroupDto,
   ) {
-    return this.muscleGroupsService.update(uuid, user_uuid, updateMuscleGroupDto)
+    return this.muscleGroupsService.update(uuid, user_uuid, role, updateMuscleGroupDto)
   }
 
   @Delete(':uuid')
@@ -83,8 +84,9 @@ export class MuscleGroupsController {
   @ApiResponse({ status: 404, description: 'Muscle group not found' })
   remove(
     @CurrentUser('user_uuid') user_uuid: string,
+    @CurrentUser('role') role: AuthRole,
     @Param('uuid') uuid: string,
   ) {
-    return this.muscleGroupsService.remove(uuid, user_uuid)
+    return this.muscleGroupsService.remove(uuid, user_uuid, role)
   }
 }

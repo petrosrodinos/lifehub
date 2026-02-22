@@ -5,6 +5,7 @@ import { CreateExpenseSubcategoryDto } from './dto/create-expense-subcategory.dt
 import { UpdateExpenseSubcategoryDto } from './dto/update-expense-subcategory.dto';
 import { JwtGuard } from '@/shared/guards/jwt.guard';
 import { CurrentUser } from '@/shared/decorators/current-user.decorator';
+import { type AuthRole } from '@/modules/auth/interfaces/auth.interface';
 
 @ApiTags('Expense Subcategories')
 @ApiBearerAuth()
@@ -54,10 +55,11 @@ export class ExpenseSubcategoriesController {
   @ApiResponse({ status: 404, description: 'Expense subcategory not found' })
   update(
     @CurrentUser('user_uuid') user_uuid: string,
+    @CurrentUser('role') role: AuthRole,
     @Param('uuid') uuid: string,
     @Body() updateExpenseSubcategoryDto: UpdateExpenseSubcategoryDto
   ) {
-    return this.expenseSubcategoriesService.update(user_uuid, uuid, updateExpenseSubcategoryDto);
+    return this.expenseSubcategoriesService.update(user_uuid, uuid, role, updateExpenseSubcategoryDto);
   }
 
   @Delete(':uuid')
@@ -68,8 +70,9 @@ export class ExpenseSubcategoriesController {
   @ApiResponse({ status: 404, description: 'Expense subcategory not found' })
   remove(
     @CurrentUser('user_uuid') user_uuid: string,
+    @CurrentUser('role') role: AuthRole,
     @Param('uuid') uuid: string
   ) {
-    return this.expenseSubcategoriesService.remove(user_uuid, uuid);
+    return this.expenseSubcategoriesService.remove(user_uuid, uuid, role);
   }
 }

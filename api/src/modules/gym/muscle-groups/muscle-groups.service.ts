@@ -1,4 +1,5 @@
-import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common'
+import { ConflictException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common'
+import { AuthRoles, type AuthRole } from '@/modules/auth/interfaces/auth.interface'
 import { PrismaService } from '@/core/databases/prisma/prisma.service'
 import { CreateMuscleGroupDto } from './dto/create-muscle-group.dto'
 import { UpdateMuscleGroupDto } from './dto/update-muscle-group.dto'
@@ -126,11 +127,11 @@ export class MuscleGroupsService {
     return muscleGroup
   }
 
-  async update(uuid: string, user_uuid: string, updateMuscleGroupDto: UpdateMuscleGroupDto) {
+  async update(uuid: string, user_uuid: string, role: AuthRole, updateMuscleGroupDto: UpdateMuscleGroupDto) {
     const muscleGroup = await this.prisma.muscleGroup.findFirst({
       where: {
         uuid,
-        user_uuid,
+        OR: [{ user_uuid }, { user_uuid: null }],
       },
     })
 
@@ -138,10 +139,14 @@ export class MuscleGroupsService {
       throw new NotFoundException('Muscle group not found or you do not have permission to update it')
     }
 
+    if (!muscleGroup.user_uuid && role !== AuthRoles.ADMIN) {
+      throw new ForbiddenException('Only admins can edit platform muscle groups')
+    }
+
     if (updateMuscleGroupDto.name) {
       const existing = await this.prisma.muscleGroup.findFirst({
         where: {
-          user_uuid,
+          OR: [{ user_uuid }, { user_uuid: null }],
           name: updateMuscleGroupDto.name,
           uuid: { not: uuid },
         },
@@ -158,16 +163,20 @@ export class MuscleGroupsService {
     })
   }
 
-  async remove(uuid: string, user_uuid: string) {
+  async remove(uuid: string, user_uuid: string, role: AuthRole) {
     const muscleGroup = await this.prisma.muscleGroup.findFirst({
       where: {
         uuid,
-        user_uuid,
+        OR: [{ user_uuid }, { user_uuid: null }],
       },
     })
 
     if (!muscleGroup) {
       throw new NotFoundException('Muscle group not found or you do not have permission to delete it')
+    }
+
+    if (!muscleGroup.user_uuid && role !== AuthRoles.ADMIN) {
+      throw new ForbiddenException('Only admins can delete platform muscle groups')
     }
 
     return this.prisma.muscleGroup.delete({

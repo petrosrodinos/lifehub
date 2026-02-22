@@ -7,7 +7,7 @@ import { JwtGuard } from '@/shared/guards/jwt.guard';
 import { RolesGuard } from '@/shared/guards/roles.guard';
 import { CurrentUser } from '@/shared/decorators/current-user.decorator';
 import { Roles } from '@/shared/decorators/roles.decorator';
-import { AuthRoles } from '@/modules/auth/interfaces/auth.interface';
+import { AuthRoles, type AuthRole } from '@/modules/auth/interfaces/auth.interface';
 
 @ApiTags('Expense Categories')
 @ApiBearerAuth()
@@ -67,10 +67,11 @@ export class ExpenseCategoriesController {
   @ApiResponse({ status: 404, description: 'Expense category not found' })
   update(
     @CurrentUser('user_uuid') user_uuid: string,
+    @CurrentUser('role') role: AuthRole,
     @Param('uuid') uuid: string,
     @Body() updateExpenseCategoryDto: UpdateExpenseCategoryDto
   ) {
-    return this.expenseCategoriesService.update(user_uuid, uuid, updateExpenseCategoryDto);
+    return this.expenseCategoriesService.update(user_uuid, uuid, role, updateExpenseCategoryDto);
   }
 
   @Delete(':uuid')
@@ -81,8 +82,9 @@ export class ExpenseCategoriesController {
   @ApiResponse({ status: 404, description: 'Expense category not found' })
   remove(
     @CurrentUser('user_uuid') user_uuid: string,
+    @CurrentUser('role') role: AuthRole,
     @Param('uuid') uuid: string
   ) {
-    return this.expenseCategoriesService.remove(user_uuid, uuid);
+    return this.expenseCategoriesService.remove(user_uuid, uuid, role);
   }
 }

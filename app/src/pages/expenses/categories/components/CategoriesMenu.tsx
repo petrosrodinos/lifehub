@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { X } from "lucide-react";
 import { useExpenseCategories, useCreateExpenseCategory, useUpdateExpenseCategory, useDeleteExpenseCategory } from "../../../../features/expense-categories/hooks/use-expense-categories";
 import { useExpenseSubcategories, useCreateExpenseSubcategory, useUpdateExpenseSubcategory, useDeleteExpenseSubcategory } from "../../../../features/expense-subcategories/hooks/use-expense-subcategories";
@@ -10,6 +10,8 @@ import { CategoryItem } from "./CategoryItem";
 import { EmptyState } from "./EmptyState";
 import { PRESET_COLORS } from "../../../../config/constants/dropdowns/expenses-colors";
 import { CATEGORY_PRESET_ICONS } from "../../../../config/constants/dropdowns/account-icons";
+import { useAuthStore } from "../../../../store/auth-store";
+import { AUTH_ROLES } from "../../../../config/constants/auth-roles";
 
 type CategoriesMenuProps = {
   isOpen: boolean;
@@ -25,6 +27,15 @@ export function CategoriesMenu({ isOpen, onClose }: CategoriesMenuProps) {
   const createSubcategory = useCreateExpenseSubcategory();
   const updateSubcategory = useUpdateExpenseSubcategory();
   const deleteSubcategory = useDeleteExpenseSubcategory();
+
+  const userRole = useAuthStore((state) => state.role);
+
+  const isAdmin = userRole === AUTH_ROLES.ADMIN;
+
+  const canEditDeleteCategory = useCallback(
+    (category: ExpenseCategory) => !!category.user_uuid || isAdmin,
+    [isAdmin]
+  );
 
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
   const [editingCategoryUuid, setEditingCategoryUuid] = useState<string | null>(null);
@@ -183,6 +194,7 @@ export function CategoriesMenu({ isOpen, onClose }: CategoriesMenuProps) {
                     onStartEditSubcategory={setEditingSubcategoryUuid}
                     onCancelEditSubcategory={() => setEditingSubcategoryUuid(null)}
                     isUpdateSubcategoryPending={updateSubcategory.isPending}
+                    canEditDelete={canEditDeleteCategory(category)}
                   />
                 );
               })

@@ -1,4 +1,5 @@
-import { Injectable, Logger, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, InternalServerErrorException, ForbiddenException } from '@nestjs/common';
+import { AuthRoles, type AuthRole } from '@/modules/auth/interfaces/auth.interface';
 import { CreateExpenseCategoryDto } from './dto/create-expense-category.dto';
 import { UpdateExpenseCategoryDto } from './dto/update-expense-category.dto';
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
@@ -138,31 +139,40 @@ export class ExpenseCategoriesService {
     }
   }
 
-  async update(user_uuid: string, uuid: string, updateExpenseCategoryDto: UpdateExpenseCategoryDto) {
+  async update(user_uuid: string, uuid: string, role: AuthRole, updateExpenseCategoryDto: UpdateExpenseCategoryDto) {
     try {
-      await this.findOne(user_uuid, uuid);
+      const category = await this.findOne(user_uuid, uuid);
+
+      if (!category.user_uuid && role !== AuthRoles.ADMIN) {
+        throw new ForbiddenException('Only admins can edit platform categories');
+      }
 
       return await this.prisma.expenseCategory.update({
         where: { uuid },
         data: updateExpenseCategoryDto,
       });
+
     } catch (error) {
-      if (error instanceof NotFoundException) {
+      if (error instanceof NotFoundException || error instanceof ForbiddenException) {
         throw error;
       }
       throw new InternalServerErrorException('Failed to update expense category');
     }
   }
 
-  async remove(user_uuid: string, uuid: string) {
+  async remove(user_uuid: string, uuid: string, role: AuthRole) {
     try {
-      await this.findOne(user_uuid, uuid);
+      const category = await this.findOne(user_uuid, uuid);
+
+      if (!category.user_uuid && role !== AuthRoles.ADMIN) {
+        throw new ForbiddenException('Only admins can delete platform categories');
+      }
 
       return await this.prisma.expenseCategory.delete({
         where: { uuid },
       });
     } catch (error) {
-      if (error instanceof NotFoundException) {
+      if (error instanceof NotFoundException || error instanceof ForbiddenException) {
         throw error;
       }
       throw new InternalServerErrorException('Failed to delete expense category');

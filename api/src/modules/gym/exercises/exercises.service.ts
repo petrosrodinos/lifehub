@@ -1,4 +1,5 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common'
+import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common'
+import { AuthRoles, type AuthRole } from '@/modules/auth/interfaces/auth.interface'
 import { PrismaService } from '@/core/databases/prisma/prisma.service'
 import { CreateExerciseDto } from './dto/create-exercise.dto'
 import { UpdateExerciseDto } from './dto/update-exercise.dto'
@@ -61,16 +62,20 @@ export class ExercisesService {
     return exercise
   }
 
-  async update(uuid: string, user_uuid: string, updateExerciseDto: UpdateExerciseDto) {
+  async update(uuid: string, user_uuid: string, role: AuthRole, updateExerciseDto: UpdateExerciseDto) {
     const exercise = await this.prisma.exercise.findFirst({
       where: {
         uuid,
-        user_uuid,
+        OR: [{ user_uuid }, { user_uuid: null }],
       },
     })
 
     if (!exercise) {
       throw new NotFoundException('Exercise not found or you do not have permission to update it')
+    }
+
+    if (!exercise.user_uuid && role !== AuthRoles.ADMIN) {
+      throw new ForbiddenException('Only admins can edit platform exercises')
     }
 
     if (updateExerciseDto.muscle_group_uuid) {
@@ -80,7 +85,7 @@ export class ExercisesService {
     if (updateExerciseDto.name) {
       const existing = await this.prisma.exercise.findFirst({
         where: {
-          user_uuid,
+          OR: [{ user_uuid }, { user_uuid: null }],
           name: updateExerciseDto.name,
           uuid: { not: uuid },
         },
@@ -97,16 +102,20 @@ export class ExercisesService {
     })
   }
 
-  async remove(uuid: string, user_uuid: string) {
+  async remove(uuid: string, user_uuid: string, role: AuthRole) {
     const exercise = await this.prisma.exercise.findFirst({
       where: {
         uuid,
-        user_uuid,
+        OR: [{ user_uuid }, { user_uuid: null }],
       },
     })
 
     if (!exercise) {
       throw new NotFoundException('Exercise not found or you do not have permission to delete it')
+    }
+
+    if (!exercise.user_uuid && role !== AuthRoles.ADMIN) {
+      throw new ForbiddenException('Only admins can delete platform exercises')
     }
 
     return this.prisma.exercise.delete({
