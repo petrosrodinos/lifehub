@@ -59,7 +59,7 @@ export function ReceiptCard({ receipt }: ReceiptCardProps) {
                     {parseNumericValue(item.quantity)}x
                   </span>
                   <span className="text-[10px] sm:text-xs text-slate-300 truncate">
-                    {item.name}
+                    {item?.product?.name || "Unknown Product"}
                   </span>
                 </div>
                 <span className="text-[10px] sm:text-xs font-medium text-slate-400 shrink-0">

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import type { CreateExpenseReceiptItemDto } from "../../../../../features/expenses/expense-receipt-item/interfaces/expense-receipt-item.interfaces"
+import { useExpenseProducts } from "../../../../../features/expenses/expense-products/hooks/use-expense-products"
 
 type ReceiptItemFormProps = {
   onSubmit: (data: CreateExpenseReceiptItemDto) => void
@@ -8,7 +9,7 @@ type ReceiptItemFormProps = {
   submitLabel: string
   isPending?: boolean
   initialData?: {
-    name?: string
+    product_uuid?: string
     quantity?: number
     unit_price?: number
     total_price?: number
@@ -23,10 +24,14 @@ export function ReceiptItemForm({
   isPending = false,
   initialData,
 }: ReceiptItemFormProps) {
-  const [name, setName] = useState(initialData?.name || "")
+  const [productUuid, setProductUuid] = useState(initialData?.product_uuid || "")
   const [quantity, setQuantity] = useState(initialData?.quantity?.toString() || "1")
   const [unitPrice, setUnitPrice] = useState(initialData?.unit_price?.toString() || "")
   const [totalPrice, setTotalPrice] = useState(initialData?.total_price?.toString() || "")
+
+  const { data: products = [] } = useExpenseProducts()
+
+  const selectedProduct = products.find((p) => p.uuid === productUuid)
 
   const handleUnitPriceChange = (value: string) => {
     setUnitPrice(value)
@@ -49,13 +54,11 @@ export function ReceiptItemForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const trimmedName = name.trim()
-
-    if (!trimmedName || !unitPrice || !totalPrice) return
+    if (!productUuid || !selectedProduct || !unitPrice || !totalPrice) return
 
     const payload: CreateExpenseReceiptItemDto = {
       receipt_uuid: receiptUuid,
-      name: trimmedName,
+      product_uuid: productUuid,
       quantity: parseFloat(quantity) || 1,
       unit_price: parseFloat(unitPrice),
       total_price: parseFloat(totalPrice),
@@ -67,20 +70,24 @@ export function ReceiptItemForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <label htmlFor="item-name" className="block text-sm font-semibold text-slate-300">
-          Item Name
+        <label htmlFor="item-product" className="block text-sm font-semibold text-slate-300">
+          Product
         </label>
-        <input
-          id="item-name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="e.g., Milk, Bread, Cheese"
-          className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-transparent transition-all"
-          autoFocus
+        <select
+          id="item-product"
+          value={productUuid}
+          onChange={(e) => setProductUuid(e.target.value)}
+          className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-transparent transition-all"
           disabled={isPending}
           required
-        />
+        >
+          <option value="">Select a product</option>
+          {products.map((product) => (
+            <option key={product.uuid} value={product.uuid}>
+              {product.name}{product.brand ? ` – ${product.brand}` : ""}{product.size ? ` (${product.size}${product.unit || ""})` : ""}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -144,7 +151,7 @@ export function ReceiptItemForm({
       <div className="flex gap-3 pt-2">
         <button
           type="submit"
-          disabled={isPending || !name.trim() || !unitPrice || !totalPrice}
+          disabled={isPending || !productUuid || !unitPrice || !totalPrice}
           className="flex-1 px-4 py-3 bg-gradient-to-r from-violet-500 to-blue-500 hover:from-violet-600 hover:to-blue-600 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {isPending && (

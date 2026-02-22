@@ -435,7 +435,6 @@ model ExpenseReceiptItem {
   uuid            String   @unique @default(uuid())
   receipt_uuid    String
   product_uuid    String?
-  name            String
   quantity        Decimal  @default(1)
   unit_price      Decimal
   total_price     Decimal

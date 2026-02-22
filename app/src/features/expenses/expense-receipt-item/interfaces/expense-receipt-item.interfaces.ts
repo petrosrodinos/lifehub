@@ -1,3 +1,4 @@
+import type { ExpenseProduct } from '../../expense-products/interfaces/expense-products.interfaces'
 import type { ExpenseReceipt } from '../../expense-receipt/interfaces/expense-receipt.interfaces'
 
 export interface ExpenseReceiptItem {
@@ -5,18 +6,17 @@ export interface ExpenseReceiptItem {
     uuid: string
     receipt_uuid: string
     product_uuid?: string
-    name: string
     quantity: string | number
     unit_price: string | number
     total_price: string | number
     created_at?: string
     updated_at?: string
     receipt?: ExpenseReceipt
+    product?: ExpenseProduct
 }
 
 export interface CreateExpenseReceiptItemDto {
     receipt_uuid: string
-    name: string
     quantity?: number
     unit_price: number
     total_price: number
@@ -24,7 +24,6 @@ export interface CreateExpenseReceiptItemDto {
 }
 
 export interface UpdateExpenseReceiptItemDto {
-    name?: string
     quantity?: number
     unit_price?: number
     total_price?: number

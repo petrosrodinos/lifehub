@@ -16,7 +16,6 @@ export class ExpenseReceiptItemService {
       return await this.prisma.expenseReceiptItem.create({
         data: {
           receipt_uuid: createExpenseReceiptItemDto.receipt_uuid,
-          name: createExpenseReceiptItemDto.name,
           quantity: createExpenseReceiptItemDto.quantity ?? 1,
           unit_price: createExpenseReceiptItemDto.unit_price,
           total_price: createExpenseReceiptItemDto.total_price,
@@ -92,7 +91,6 @@ export class ExpenseReceiptItemService {
       return await this.prisma.expenseReceiptItem.update({
         where: { uuid },
         data: {
-          name: updateExpenseReceiptItemDto.name,
           quantity: updateExpenseReceiptItemDto.quantity,
           unit_price: updateExpenseReceiptItemDto.unit_price,
           total_price: updateExpenseReceiptItemDto.total_price,

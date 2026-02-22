@@ -9,14 +9,6 @@ export class CreateExpenseReceiptItemDto {
     @IsString()
     receipt_uuid: string;
 
-    @ApiProperty({
-        description: 'Name of the item',
-        example: 'Milk',
-    })
-    @IsString()
-    @MinLength(1)
-    name: string;
-
     @ApiPropertyOptional({
         description: 'Quantity of the item',
         example: 2,

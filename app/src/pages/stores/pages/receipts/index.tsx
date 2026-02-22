@@ -1,16 +1,18 @@
 import { useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { Plus, ArrowLeft } from "lucide-react"
+import { Plus, ArrowLeft, Package } from "lucide-react"
 import { useExpenseReceipts } from "../../../../features/expenses/expense-receipt/hooks/use-expense-receipt"
 import { useExpenseStore } from "../../../../features/expenses/expense-store/hooks/use-expense-store"
 import { ReceiptCard } from "./components/ReceiptCard"
 import { ReceiptsLoading } from "./components/ReceiptsLoading"
 import { CreateReceiptModal } from "./components/CreateReceiptModal"
+import { ProductsModal } from "./components/ProductsModal"
 
 export function ReceiptsPage() {
   const { uuid } = useParams<{ uuid: string }>()
   const navigate = useNavigate()
   const [isCreateOpen, setIsCreateOpen] = useState(false)
+  const [isProductsOpen, setIsProductsOpen] = useState(false)
 
   const { data: store } = useExpenseStore(uuid || "")
   const { data: allReceipts = [], isLoading } = useExpenseReceipts()
@@ -47,14 +49,24 @@ export function ReceiptsPage() {
               </p>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={() => setIsCreateOpen(true)}
-            className="flex items-center gap-2 sm:px-4 px-2 py-2 bg-violet-600 hover:bg-violet-700 text-white font-medium rounded-lg transition-colors shrink-0"
-          >
-            <Plus className="w-4 h-4" />
-            <span className="hidden sm:inline">Add Receipt</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIsProductsOpen(true)}
+              className="flex items-center gap-2 sm:px-4 px-2 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-lg transition-colors shrink-0 border border-slate-700"
+            >
+              <Package className="w-4 h-4" />
+              <span className="hidden sm:inline">Products</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsCreateOpen(true)}
+              className="flex items-center gap-2 sm:px-4 px-2 py-2 bg-violet-600 hover:bg-violet-700 text-white font-medium rounded-lg transition-colors shrink-0"
+            >
+              <Plus className="w-4 h-4" />
+              <span className="hidden sm:inline">Add Receipt</span>
+            </button>
+          </div>
         </header>
 
         {isLoading ? (
@@ -77,6 +89,12 @@ export function ReceiptsPage() {
         onClose={() => setIsCreateOpen(false)}
         storeUuid={uuid}
       />
+
+      <ProductsModal
+        isOpen={isProductsOpen}
+        onClose={() => setIsProductsOpen(false)}
+      />
     </div>
   )
 }
+

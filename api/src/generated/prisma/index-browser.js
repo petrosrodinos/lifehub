@@ -313,7 +313,6 @@ exports.Prisma.ExpenseReceiptItemScalarFieldEnum = {
   uuid: 'uuid',
   receipt_uuid: 'receipt_uuid',
   product_uuid: 'product_uuid',
-  name: 'name',
   quantity: 'quantity',
   unit_price: 'unit_price',
   total_price: 'total_price',

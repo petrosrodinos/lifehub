@@ -171,5 +171,12 @@ export const ApiRoutes = {
       update: (uuid: string) => `/expense-receipt-items/${uuid}`,
       delete: (uuid: string) => `/expense-receipt-items/${uuid}`,
     },
+    products: {
+      list: "/expense-products",
+      create: "/expense-products",
+      get: (uuid: string) => `/expense-products/${uuid}`,
+      update: (uuid: string) => `/expense-products/${uuid}`,
+      delete: (uuid: string) => `/expense-products/${uuid}`,
+    },
   },
 }

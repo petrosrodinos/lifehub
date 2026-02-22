@@ -22052,7 +22052,6 @@ export namespace Prisma {
     uuid: string | null
     receipt_uuid: string | null
     product_uuid: string | null
-    name: string | null
     quantity: Decimal | null
     unit_price: Decimal | null
     total_price: Decimal | null
@@ -22065,7 +22064,6 @@ export namespace Prisma {
     uuid: string | null
     receipt_uuid: string | null
     product_uuid: string | null
-    name: string | null
     quantity: Decimal | null
     unit_price: Decimal | null
     total_price: Decimal | null
@@ -22078,7 +22076,6 @@ export namespace Prisma {
     uuid: number
     receipt_uuid: number
     product_uuid: number
-    name: number
     quantity: number
     unit_price: number
     total_price: number
@@ -22107,7 +22104,6 @@ export namespace Prisma {
     uuid?: true
     receipt_uuid?: true
     product_uuid?: true
-    name?: true
     quantity?: true
     unit_price?: true
     total_price?: true
@@ -22120,7 +22116,6 @@ export namespace Prisma {
     uuid?: true
     receipt_uuid?: true
     product_uuid?: true
-    name?: true
     quantity?: true
     unit_price?: true
     total_price?: true
@@ -22133,7 +22128,6 @@ export namespace Prisma {
     uuid?: true
     receipt_uuid?: true
     product_uuid?: true
-    name?: true
     quantity?: true
     unit_price?: true
     total_price?: true
@@ -22233,7 +22227,6 @@ export namespace Prisma {
     uuid: string
     receipt_uuid: string
     product_uuid: string | null
-    name: string
     quantity: Decimal
     unit_price: Decimal
     total_price: Decimal
@@ -22265,7 +22258,6 @@ export namespace Prisma {
     uuid?: boolean
     receipt_uuid?: boolean
     product_uuid?: boolean
-    name?: boolean
     quantity?: boolean
     unit_price?: boolean
     total_price?: boolean
@@ -22280,7 +22272,6 @@ export namespace Prisma {
     uuid?: boolean
     receipt_uuid?: boolean
     product_uuid?: boolean
-    name?: boolean
     quantity?: boolean
     unit_price?: boolean
     total_price?: boolean
@@ -22295,7 +22286,6 @@ export namespace Prisma {
     uuid?: boolean
     receipt_uuid?: boolean
     product_uuid?: boolean
-    name?: boolean
     quantity?: boolean
     unit_price?: boolean
     total_price?: boolean
@@ -22310,7 +22300,6 @@ export namespace Prisma {
     uuid?: boolean
     receipt_uuid?: boolean
     product_uuid?: boolean
-    name?: boolean
     quantity?: boolean
     unit_price?: boolean
     total_price?: boolean
@@ -22318,7 +22307,7 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type ExpenseReceiptItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "receipt_uuid" | "product_uuid" | "name" | "quantity" | "unit_price" | "total_price" | "created_at" | "updated_at", ExtArgs["result"]["expenseReceiptItem"]>
+  export type ExpenseReceiptItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "receipt_uuid" | "product_uuid" | "quantity" | "unit_price" | "total_price" | "created_at" | "updated_at", ExtArgs["result"]["expenseReceiptItem"]>
   export type ExpenseReceiptItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     receipt?: boolean | ExpenseReceiptDefaultArgs<ExtArgs>
     product?: boolean | ExpenseReceiptItem$productArgs<ExtArgs>
@@ -22343,7 +22332,6 @@ export namespace Prisma {
       uuid: string
       receipt_uuid: string
       product_uuid: string | null
-      name: string
       quantity: Prisma.Decimal
       unit_price: Prisma.Decimal
       total_price: Prisma.Decimal
@@ -22778,7 +22766,6 @@ export namespace Prisma {
     readonly uuid: FieldRef<"ExpenseReceiptItem", 'String'>
     readonly receipt_uuid: FieldRef<"ExpenseReceiptItem", 'String'>
     readonly product_uuid: FieldRef<"ExpenseReceiptItem", 'String'>
-    readonly name: FieldRef<"ExpenseReceiptItem", 'String'>
     readonly quantity: FieldRef<"ExpenseReceiptItem", 'Decimal'>
     readonly unit_price: FieldRef<"ExpenseReceiptItem", 'Decimal'>
     readonly total_price: FieldRef<"ExpenseReceiptItem", 'Decimal'>
@@ -29488,7 +29475,6 @@ export namespace Prisma {
     uuid: 'uuid',
     receipt_uuid: 'receipt_uuid',
     product_uuid: 'product_uuid',
-    name: 'name',
     quantity: 'quantity',
     unit_price: 'unit_price',
     total_price: 'total_price',
@@ -31171,7 +31157,6 @@ export namespace Prisma {
     uuid?: StringFilter<"ExpenseReceiptItem"> | string
     receipt_uuid?: StringFilter<"ExpenseReceiptItem"> | string
     product_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
-    name?: StringFilter<"ExpenseReceiptItem"> | string
     quantity?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
@@ -31186,7 +31171,6 @@ export namespace Prisma {
     uuid?: SortOrder
     receipt_uuid?: SortOrder
     product_uuid?: SortOrderInput | SortOrder
-    name?: SortOrder
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
@@ -31204,7 +31188,6 @@ export namespace Prisma {
     NOT?: ExpenseReceiptItemWhereInput | ExpenseReceiptItemWhereInput[]
     receipt_uuid?: StringFilter<"ExpenseReceiptItem"> | string
     product_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
-    name?: StringFilter<"ExpenseReceiptItem"> | string
     quantity?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
@@ -31219,7 +31202,6 @@ export namespace Prisma {
     uuid?: SortOrder
     receipt_uuid?: SortOrder
     product_uuid?: SortOrderInput | SortOrder
-    name?: SortOrder
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
@@ -31240,7 +31222,6 @@ export namespace Prisma {
     uuid?: StringWithAggregatesFilter<"ExpenseReceiptItem"> | string
     receipt_uuid?: StringWithAggregatesFilter<"ExpenseReceiptItem"> | string
     product_uuid?: StringNullableWithAggregatesFilter<"ExpenseReceiptItem"> | string | null
-    name?: StringWithAggregatesFilter<"ExpenseReceiptItem"> | string
     quantity?: DecimalWithAggregatesFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalWithAggregatesFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     total_price?: DecimalWithAggregatesFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
@@ -33064,7 +33045,6 @@ export namespace Prisma {
 
   export type ExpenseReceiptItemCreateInput = {
     uuid?: string
-    name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
@@ -33079,7 +33059,6 @@ export namespace Prisma {
     uuid?: string
     receipt_uuid: string
     product_uuid?: string | null
-    name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
@@ -33089,7 +33068,6 @@ export namespace Prisma {
 
   export type ExpenseReceiptItemUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -33104,7 +33082,6 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     receipt_uuid?: StringFieldUpdateOperationsInput | string
     product_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -33117,7 +33094,6 @@ export namespace Prisma {
     uuid?: string
     receipt_uuid: string
     product_uuid?: string | null
-    name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
@@ -33127,7 +33103,6 @@ export namespace Prisma {
 
   export type ExpenseReceiptItemUpdateManyMutationInput = {
     uuid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -33140,7 +33115,6 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     receipt_uuid?: StringFieldUpdateOperationsInput | string
     product_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -34993,7 +34967,6 @@ export namespace Prisma {
     uuid?: SortOrder
     receipt_uuid?: SortOrder
     product_uuid?: SortOrder
-    name?: SortOrder
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
@@ -35013,7 +34986,6 @@ export namespace Prisma {
     uuid?: SortOrder
     receipt_uuid?: SortOrder
     product_uuid?: SortOrder
-    name?: SortOrder
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
@@ -35026,7 +34998,6 @@ export namespace Prisma {
     uuid?: SortOrder
     receipt_uuid?: SortOrder
     product_uuid?: SortOrder
-    name?: SortOrder
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
@@ -42585,7 +42556,6 @@ export namespace Prisma {
 
   export type ExpenseReceiptItemCreateWithoutReceiptInput = {
     uuid?: string
-    name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
@@ -42598,7 +42568,6 @@ export namespace Prisma {
     id?: number
     uuid?: string
     product_uuid?: string | null
-    name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
@@ -42774,7 +42743,6 @@ export namespace Prisma {
     uuid?: StringFilter<"ExpenseReceiptItem"> | string
     receipt_uuid?: StringFilter<"ExpenseReceiptItem"> | string
     product_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
-    name?: StringFilter<"ExpenseReceiptItem"> | string
     quantity?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
@@ -42898,7 +42866,6 @@ export namespace Prisma {
 
   export type ExpenseReceiptItemCreateWithoutProductInput = {
     uuid?: string
-    name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
@@ -42911,7 +42878,6 @@ export namespace Prisma {
     id?: number
     uuid?: string
     receipt_uuid: string
-    name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
@@ -45664,7 +45630,6 @@ export namespace Prisma {
     id?: number
     uuid?: string
     product_uuid?: string | null
-    name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
@@ -45674,7 +45639,6 @@ export namespace Prisma {
 
   export type ExpenseReceiptItemUpdateWithoutReceiptInput = {
     uuid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -45687,7 +45651,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     product_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -45699,7 +45662,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     product_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -45711,7 +45673,6 @@ export namespace Prisma {
     id?: number
     uuid?: string
     receipt_uuid: string
-    name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
@@ -45721,7 +45682,6 @@ export namespace Prisma {
 
   export type ExpenseReceiptItemUpdateWithoutProductInput = {
     uuid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -45734,7 +45694,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     receipt_uuid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -45746,7 +45705,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     receipt_uuid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string

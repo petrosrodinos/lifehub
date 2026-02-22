@@ -20,12 +20,12 @@ export function ReceiptItemCard({ item, receiptUuid }: ReceiptItemCardProps) {
   const updateItem = useUpdateExpenseReceiptItem(receiptUuid)
   const deleteItem = useDeleteExpenseReceiptItem(receiptUuid)
 
-  const handleUpdate = (data: { receipt_uuid: string; name: string; quantity?: number; unit_price: number; total_price: number }) => {
+  const handleUpdate = (data: { receipt_uuid: string; quantity?: number; unit_price: number; total_price: number; product_uuid?: string }) => {
     const updateData: UpdateExpenseReceiptItemDto = {
-      name: data.name,
       quantity: data.quantity,
       unit_price: data.unit_price,
       total_price: data.total_price,
+      product_uuid: data.product_uuid,
     }
 
     updateItem.mutate(
@@ -49,7 +49,7 @@ export function ReceiptItemCard({ item, receiptUuid }: ReceiptItemCardProps) {
       <div className="py-2 px-2.5 sm:py-2.5 sm:px-3 bg-slate-800/30 rounded-lg hover:bg-slate-800/50 transition-colors group">
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex-1 min-w-0">
-            <p className="text-xs sm:text-sm font-medium text-white truncate">{item.name}</p>
+            <p className="text-xs sm:text-sm font-medium text-white truncate">{item.product?.name}</p>
             <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-slate-400 mt-0.5">
               <span>{quantity}x {unitPrice}</span>
             </div>
@@ -104,7 +104,7 @@ export function ReceiptItemCard({ item, receiptUuid }: ReceiptItemCardProps) {
           submitLabel="Save"
           isPending={updateItem.isPending}
           initialData={{
-            name: item.name,
+            product_uuid: item.product_uuid || "",
             quantity: parseNumericValue(item.quantity),
             unit_price: parseNumericValue(item.unit_price),
             total_price: parseNumericValue(item.total_price),
@@ -117,7 +117,7 @@ export function ReceiptItemCard({ item, receiptUuid }: ReceiptItemCardProps) {
         onClose={() => setIsDeleteOpen(false)}
         onConfirm={handleDelete}
         title="Delete Item"
-        description={`Are you sure you want to delete "${item.name}"?`}
+        description={`Are you sure you want to delete "${item.product?.name}"?`}
         confirmText="Delete"
         cancelText="Cancel"
         variant="danger"
