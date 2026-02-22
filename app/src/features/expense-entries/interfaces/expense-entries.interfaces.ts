@@ -2,6 +2,7 @@ import type { PaginationMeta } from "../../../interfaces/pagination.interfaces"
 import type { ExpenseAccount } from "../../expense-accounts/interfaces/expense-accounts.interfaces"
 import type { ExpenseCategory } from "../../expense-categories/interfaces/expense-categories.interfaces"
 import type { ExpenseSubcategory } from "../../expense-subcategories/interfaces/expense-subcategories.interfaces"
+import type { ExpenseReceipt } from "../../expenses/expense-receipt/interfaces/expense-receipt.interfaces"
 
 export interface ExpenseEntry {
   id?: number
@@ -21,6 +22,7 @@ export interface ExpenseEntry {
   to_account?: ExpenseAccount
   category?: ExpenseCategory
   subcategory?: ExpenseSubcategory
+  expense_receipt?: ExpenseReceipt
 }
 
 export interface CreateExpenseEntryDto {

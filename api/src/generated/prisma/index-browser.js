@@ -294,16 +294,29 @@ exports.Prisma.ExpenseReceiptScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.ExpenseProductScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  name: 'name',
+  brand: 'brand',
+  unit: 'unit',
+  size: 'size',
+  category_uuid: 'category_uuid',
+  subcategory_uuid: 'subcategory_uuid',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.ExpenseReceiptItemScalarFieldEnum = {
   id: 'id',
   uuid: 'uuid',
   receipt_uuid: 'receipt_uuid',
+  product_uuid: 'product_uuid',
   name: 'name',
   quantity: 'quantity',
   unit_price: 'unit_price',
   total_price: 'total_price',
-  category_uuid: 'category_uuid',
-  subcategory_uuid: 'subcategory_uuid',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -464,6 +477,7 @@ exports.Prisma.ModelName = {
   ExpenseEntry: 'ExpenseEntry',
   ExpenseStore: 'ExpenseStore',
   ExpenseReceipt: 'ExpenseReceipt',
+  ExpenseProduct: 'ExpenseProduct',
   ExpenseReceiptItem: 'ExpenseReceiptItem',
   MuscleGroup: 'MuscleGroup',
   Exercise: 'Exercise',

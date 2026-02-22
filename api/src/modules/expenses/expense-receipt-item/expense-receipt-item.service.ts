@@ -11,7 +11,7 @@ export class ExpenseReceiptItemService {
     try {
       await this.validateReceiptOwnership(user_uuid, createExpenseReceiptItemDto.receipt_uuid);
 
-      await this.validateCategoryRelations(user_uuid, createExpenseReceiptItemDto);
+      await this.validateProductRelation(user_uuid, createExpenseReceiptItemDto);
 
       return await this.prisma.expenseReceiptItem.create({
         data: {
@@ -20,12 +20,10 @@ export class ExpenseReceiptItemService {
           quantity: createExpenseReceiptItemDto.quantity ?? 1,
           unit_price: createExpenseReceiptItemDto.unit_price,
           total_price: createExpenseReceiptItemDto.total_price,
-          category_uuid: createExpenseReceiptItemDto.category_uuid,
-          subcategory_uuid: createExpenseReceiptItemDto.subcategory_uuid,
+          product_uuid: createExpenseReceiptItemDto.product_uuid,
         },
         include: {
-          category: true,
-          subcategory: true,
+          product: true,
         },
       });
     } catch (error) {
@@ -45,8 +43,7 @@ export class ExpenseReceiptItemService {
         where: { receipt_uuid },
         orderBy: { created_at: 'desc' },
         include: {
-          category: true,
-          subcategory: true,
+          product: true,
         },
       });
     } catch (error) {
@@ -64,8 +61,7 @@ export class ExpenseReceiptItemService {
         where: { uuid },
         include: {
           receipt: true,
-          category: true,
-          subcategory: true,
+          product: true,
         },
       });
 
@@ -90,7 +86,7 @@ export class ExpenseReceiptItemService {
       await this.findOne(user_uuid, uuid);
 
       if (Object.keys(updateExpenseReceiptItemDto).length > 0) {
-        await this.validateCategoryRelations(user_uuid, updateExpenseReceiptItemDto);
+        await this.validateProductRelation(user_uuid, updateExpenseReceiptItemDto);
       }
 
       return await this.prisma.expenseReceiptItem.update({
@@ -100,12 +96,10 @@ export class ExpenseReceiptItemService {
           quantity: updateExpenseReceiptItemDto.quantity,
           unit_price: updateExpenseReceiptItemDto.unit_price,
           total_price: updateExpenseReceiptItemDto.total_price,
-          category_uuid: updateExpenseReceiptItemDto.category_uuid,
-          subcategory_uuid: updateExpenseReceiptItemDto.subcategory_uuid,
+          product_uuid: updateExpenseReceiptItemDto.product_uuid,
         },
         include: {
-          category: true,
-          subcategory: true,
+          product: true,
         },
       });
     } catch (error) {
@@ -143,11 +137,11 @@ export class ExpenseReceiptItemService {
     }
   }
 
-  private async validateCategoryRelations(user_uuid: string, dto: Partial<CreateExpenseReceiptItemDto>): Promise<void> {
-    if (dto.category_uuid) {
-      const category = await this.prisma.expenseCategory.findFirst({
+  private async validateProductRelation(user_uuid: string, dto: Partial<CreateExpenseReceiptItemDto>): Promise<void> {
+    if (dto.product_uuid) {
+      const product = await this.prisma.expenseProduct.findFirst({
         where: {
-          uuid: dto.category_uuid,
+          uuid: dto.product_uuid,
           OR: [
             { user_uuid },
             { user_uuid: null },
@@ -155,28 +149,8 @@ export class ExpenseReceiptItemService {
         },
       });
 
-      if (!category) {
-        throw new BadRequestException('Category not found or does not belong to user');
-      }
-    }
-
-    if (dto.subcategory_uuid) {
-      const subcategory = await this.prisma.expenseSubcategory.findFirst({
-        where: {
-          uuid: dto.subcategory_uuid,
-          OR: [
-            { user_uuid },
-            { user_uuid: null },
-          ],
-        },
-      });
-
-      if (!subcategory) {
-        throw new BadRequestException('Subcategory not found or does not belong to user');
-      }
-
-      if (dto.category_uuid && subcategory.category_uuid !== dto.category_uuid) {
-        throw new BadRequestException('Subcategory does not belong to the selected category');
+      if (!product) {
+        throw new BadRequestException('Product not found or does not belong to user');
       }
     }
   }

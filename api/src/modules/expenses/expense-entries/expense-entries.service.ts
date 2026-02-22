@@ -99,6 +99,7 @@ export class ExpenseEntriesService {
             to_account: true,
             category: true,
             subcategory: true,
+            expense_receipt: true,
           },
         }),
         this.prisma.expenseEntry.count({ where }),

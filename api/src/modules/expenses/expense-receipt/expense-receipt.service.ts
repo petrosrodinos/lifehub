@@ -44,8 +44,7 @@ export class ExpenseReceiptService {
           expense_entry: true,
           items: {
             include: {
-              category: true,
-              subcategory: true,
+              product: true,
             },
           },
         },
@@ -64,8 +63,7 @@ export class ExpenseReceiptService {
           expense_entry: true,
           items: {
             include: {
-              category: true,
-              subcategory: true,
+              product: true,
             },
           },
         },

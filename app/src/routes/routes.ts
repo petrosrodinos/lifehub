@@ -13,6 +13,9 @@ export const Routes = {
     expenses: {
         prefix: '/dashboard/expenses',
     },
+    stores: {
+        prefix: '/dashboard/stores',
+    },
     habits: {
         prefix: '/dashboard/habits',
     },

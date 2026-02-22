@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Calendar, DollarSign, CheckCircle, Dumbbell } from "lucide-react";
+import { Calendar, DollarSign, CheckCircle, Dumbbell, Store } from "lucide-react";
 
 export function BottomNavigation() {
   const location = useLocation();
@@ -16,6 +16,12 @@ export function BottomNavigation() {
       label: "Expenses",
       path: "/dashboard/expenses",
       icon: DollarSign,
+    },
+    {
+      id: "stores",
+      label: "Stores",
+      path: "/dashboard/stores",
+      icon: Store,
     },
     {
       id: "habits",

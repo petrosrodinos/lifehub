@@ -84,6 +84,11 @@ export type ExpenseStore = $Result.DefaultSelection<Prisma.$ExpenseStorePayload>
  */
 export type ExpenseReceipt = $Result.DefaultSelection<Prisma.$ExpenseReceiptPayload>
 /**
+ * Model ExpenseProduct
+ * 
+ */
+export type ExpenseProduct = $Result.DefaultSelection<Prisma.$ExpenseProductPayload>
+/**
  * Model ExpenseReceiptItem
  * 
  */
@@ -499,6 +504,16 @@ export class PrismaClient<
     * ```
     */
   get expenseReceipt(): Prisma.ExpenseReceiptDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.expenseProduct`: Exposes CRUD operations for the **ExpenseProduct** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ExpenseProducts
+    * const expenseProducts = await prisma.expenseProduct.findMany()
+    * ```
+    */
+  get expenseProduct(): Prisma.ExpenseProductDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.expenseReceiptItem`: Exposes CRUD operations for the **ExpenseReceiptItem** model.
@@ -1007,6 +1022,7 @@ export namespace Prisma {
     ExpenseEntry: 'ExpenseEntry',
     ExpenseStore: 'ExpenseStore',
     ExpenseReceipt: 'ExpenseReceipt',
+    ExpenseProduct: 'ExpenseProduct',
     ExpenseReceiptItem: 'ExpenseReceiptItem',
     MuscleGroup: 'MuscleGroup',
     Exercise: 'Exercise',
@@ -1028,7 +1044,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet"
+      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2068,6 +2084,80 @@ export namespace Prisma {
           }
         }
       }
+      ExpenseProduct: {
+        payload: Prisma.$ExpenseProductPayload<ExtArgs>
+        fields: Prisma.ExpenseProductFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExpenseProductFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExpenseProductFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload>
+          }
+          findFirst: {
+            args: Prisma.ExpenseProductFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExpenseProductFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload>
+          }
+          findMany: {
+            args: Prisma.ExpenseProductFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload>[]
+          }
+          create: {
+            args: Prisma.ExpenseProductCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload>
+          }
+          createMany: {
+            args: Prisma.ExpenseProductCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExpenseProductCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload>[]
+          }
+          delete: {
+            args: Prisma.ExpenseProductDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload>
+          }
+          update: {
+            args: Prisma.ExpenseProductUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload>
+          }
+          deleteMany: {
+            args: Prisma.ExpenseProductDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExpenseProductUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExpenseProductUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload>[]
+          }
+          upsert: {
+            args: Prisma.ExpenseProductUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseProductPayload>
+          }
+          aggregate: {
+            args: Prisma.ExpenseProductAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExpenseProduct>
+          }
+          groupBy: {
+            args: Prisma.ExpenseProductGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExpenseProductGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExpenseProductCountArgs<ExtArgs>
+            result: $Utils.Optional<ExpenseProductCountAggregateOutputType> | number
+          }
+        }
+      }
       ExpenseReceiptItem: {
         payload: Prisma.$ExpenseReceiptItemPayload<ExtArgs>
         fields: Prisma.ExpenseReceiptItemFieldRefs
@@ -2634,6 +2724,7 @@ export namespace Prisma {
     expenseEntry?: ExpenseEntryOmit
     expenseStore?: ExpenseStoreOmit
     expenseReceipt?: ExpenseReceiptOmit
+    expenseProduct?: ExpenseProductOmit
     expenseReceiptItem?: ExpenseReceiptItemOmit
     muscleGroup?: MuscleGroupOmit
     exercise?: ExerciseOmit
@@ -2731,6 +2822,7 @@ export namespace Prisma {
     subcategories: number
     expense_receipts: number
     expense_stores: number
+    expense_products: number
     muscle_groups: number
     exercises: number
     workouts: number
@@ -2748,6 +2840,7 @@ export namespace Prisma {
     subcategories?: boolean | UserCountOutputTypeCountSubcategoriesArgs
     expense_receipts?: boolean | UserCountOutputTypeCountExpense_receiptsArgs
     expense_stores?: boolean | UserCountOutputTypeCountExpense_storesArgs
+    expense_products?: boolean | UserCountOutputTypeCountExpense_productsArgs
     muscle_groups?: boolean | UserCountOutputTypeCountMuscle_groupsArgs
     exercises?: boolean | UserCountOutputTypeCountExercisesArgs
     workouts?: boolean | UserCountOutputTypeCountWorkoutsArgs
@@ -2839,6 +2932,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountExpense_storesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseStoreWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountExpense_productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseProductWhereInput
   }
 
   /**
@@ -3026,13 +3126,13 @@ export namespace Prisma {
   export type ExpenseCategoryCountOutputType = {
     subcategories: number
     entries: number
-    receipt_items: number
+    products: number
   }
 
   export type ExpenseCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subcategories?: boolean | ExpenseCategoryCountOutputTypeCountSubcategoriesArgs
     entries?: boolean | ExpenseCategoryCountOutputTypeCountEntriesArgs
-    receipt_items?: boolean | ExpenseCategoryCountOutputTypeCountReceipt_itemsArgs
+    products?: boolean | ExpenseCategoryCountOutputTypeCountProductsArgs
   }
 
   // Custom InputTypes
@@ -3063,8 +3163,8 @@ export namespace Prisma {
   /**
    * ExpenseCategoryCountOutputType without action
    */
-  export type ExpenseCategoryCountOutputTypeCountReceipt_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ExpenseReceiptItemWhereInput
+  export type ExpenseCategoryCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseProductWhereInput
   }
 
 
@@ -3074,12 +3174,12 @@ export namespace Prisma {
 
   export type ExpenseSubcategoryCountOutputType = {
     entries: number
-    receipt_items: number
+    products: number
   }
 
   export type ExpenseSubcategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     entries?: boolean | ExpenseSubcategoryCountOutputTypeCountEntriesArgs
-    receipt_items?: boolean | ExpenseSubcategoryCountOutputTypeCountReceipt_itemsArgs
+    products?: boolean | ExpenseSubcategoryCountOutputTypeCountProductsArgs
   }
 
   // Custom InputTypes
@@ -3103,8 +3203,8 @@ export namespace Prisma {
   /**
    * ExpenseSubcategoryCountOutputType without action
    */
-  export type ExpenseSubcategoryCountOutputTypeCountReceipt_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ExpenseReceiptItemWhereInput
+  export type ExpenseSubcategoryCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseProductWhereInput
   }
 
 
@@ -3166,6 +3266,37 @@ export namespace Prisma {
    * ExpenseReceiptCountOutputType without action
    */
   export type ExpenseReceiptCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseReceiptItemWhereInput
+  }
+
+
+  /**
+   * Count Type ExpenseProductCountOutputType
+   */
+
+  export type ExpenseProductCountOutputType = {
+    receipt_items: number
+  }
+
+  export type ExpenseProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    receipt_items?: boolean | ExpenseProductCountOutputTypeCountReceipt_itemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ExpenseProductCountOutputType without action
+   */
+  export type ExpenseProductCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProductCountOutputType
+     */
+    select?: ExpenseProductCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ExpenseProductCountOutputType without action
+   */
+  export type ExpenseProductCountOutputTypeCountReceipt_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseReceiptItemWhereInput
   }
 
@@ -3547,6 +3678,7 @@ export namespace Prisma {
     subcategories?: boolean | User$subcategoriesArgs<ExtArgs>
     expense_receipts?: boolean | User$expense_receiptsArgs<ExtArgs>
     expense_stores?: boolean | User$expense_storesArgs<ExtArgs>
+    expense_products?: boolean | User$expense_productsArgs<ExtArgs>
     muscle_groups?: boolean | User$muscle_groupsArgs<ExtArgs>
     exercises?: boolean | User$exercisesArgs<ExtArgs>
     workouts?: boolean | User$workoutsArgs<ExtArgs>
@@ -3605,6 +3737,7 @@ export namespace Prisma {
     subcategories?: boolean | User$subcategoriesArgs<ExtArgs>
     expense_receipts?: boolean | User$expense_receiptsArgs<ExtArgs>
     expense_stores?: boolean | User$expense_storesArgs<ExtArgs>
+    expense_products?: boolean | User$expense_productsArgs<ExtArgs>
     muscle_groups?: boolean | User$muscle_groupsArgs<ExtArgs>
     exercises?: boolean | User$exercisesArgs<ExtArgs>
     workouts?: boolean | User$workoutsArgs<ExtArgs>
@@ -3627,6 +3760,7 @@ export namespace Prisma {
       subcategories: Prisma.$ExpenseSubcategoryPayload<ExtArgs>[]
       expense_receipts: Prisma.$ExpenseReceiptPayload<ExtArgs>[]
       expense_stores: Prisma.$ExpenseStorePayload<ExtArgs>[]
+      expense_products: Prisma.$ExpenseProductPayload<ExtArgs>[]
       muscle_groups: Prisma.$MuscleGroupPayload<ExtArgs>[]
       exercises: Prisma.$ExercisePayload<ExtArgs>[]
       workouts: Prisma.$WorkoutPayload<ExtArgs>[]
@@ -4047,6 +4181,7 @@ export namespace Prisma {
     subcategories<T extends User$subcategoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$subcategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_receipts<T extends User$expense_receiptsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_receiptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_stores<T extends User$expense_storesArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_storesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseStorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    expense_products<T extends User$expense_productsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     muscle_groups<T extends User$muscle_groupsArgs<ExtArgs> = {}>(args?: Subset<T, User$muscle_groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MuscleGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     exercises<T extends User$exercisesArgs<ExtArgs> = {}>(args?: Subset<T, User$exercisesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     workouts<T extends User$workoutsArgs<ExtArgs> = {}>(args?: Subset<T, User$workoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4738,6 +4873,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExpenseStoreScalarFieldEnum | ExpenseStoreScalarFieldEnum[]
+  }
+
+  /**
+   * User.expense_products
+   */
+  export type User$expense_productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+    where?: ExpenseProductWhereInput
+    orderBy?: ExpenseProductOrderByWithRelationInput | ExpenseProductOrderByWithRelationInput[]
+    cursor?: ExpenseProductWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExpenseProductScalarFieldEnum | ExpenseProductScalarFieldEnum[]
   }
 
   /**
@@ -14692,7 +14851,7 @@ export namespace Prisma {
     user?: boolean | ExpenseCategory$userArgs<ExtArgs>
     subcategories?: boolean | ExpenseCategory$subcategoriesArgs<ExtArgs>
     entries?: boolean | ExpenseCategory$entriesArgs<ExtArgs>
-    receipt_items?: boolean | ExpenseCategory$receipt_itemsArgs<ExtArgs>
+    products?: boolean | ExpenseCategory$productsArgs<ExtArgs>
     _count?: boolean | ExpenseCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expenseCategory"]>
 
@@ -14736,7 +14895,7 @@ export namespace Prisma {
     user?: boolean | ExpenseCategory$userArgs<ExtArgs>
     subcategories?: boolean | ExpenseCategory$subcategoriesArgs<ExtArgs>
     entries?: boolean | ExpenseCategory$entriesArgs<ExtArgs>
-    receipt_items?: boolean | ExpenseCategory$receipt_itemsArgs<ExtArgs>
+    products?: boolean | ExpenseCategory$productsArgs<ExtArgs>
     _count?: boolean | ExpenseCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExpenseCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14752,7 +14911,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs> | null
       subcategories: Prisma.$ExpenseSubcategoryPayload<ExtArgs>[]
       entries: Prisma.$ExpenseEntryPayload<ExtArgs>[]
-      receipt_items: Prisma.$ExpenseReceiptItemPayload<ExtArgs>[]
+      products: Prisma.$ExpenseProductPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -15160,7 +15319,7 @@ export namespace Prisma {
     user<T extends ExpenseCategory$userArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     subcategories<T extends ExpenseCategory$subcategoriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$subcategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     entries<T extends ExpenseCategory$entriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    receipt_items<T extends ExpenseCategory$receipt_itemsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$receipt_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseReceiptItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    products<T extends ExpenseCategory$productsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15661,27 +15820,27 @@ export namespace Prisma {
   }
 
   /**
-   * ExpenseCategory.receipt_items
+   * ExpenseCategory.products
    */
-  export type ExpenseCategory$receipt_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ExpenseCategory$productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ExpenseReceiptItem
+     * Select specific fields to fetch from the ExpenseProduct
      */
-    select?: ExpenseReceiptItemSelect<ExtArgs> | null
+    select?: ExpenseProductSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ExpenseReceiptItem
+     * Omit specific fields from the ExpenseProduct
      */
-    omit?: ExpenseReceiptItemOmit<ExtArgs> | null
+    omit?: ExpenseProductOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ExpenseReceiptItemInclude<ExtArgs> | null
-    where?: ExpenseReceiptItemWhereInput
-    orderBy?: ExpenseReceiptItemOrderByWithRelationInput | ExpenseReceiptItemOrderByWithRelationInput[]
-    cursor?: ExpenseReceiptItemWhereUniqueInput
+    include?: ExpenseProductInclude<ExtArgs> | null
+    where?: ExpenseProductWhereInput
+    orderBy?: ExpenseProductOrderByWithRelationInput | ExpenseProductOrderByWithRelationInput[]
+    cursor?: ExpenseProductWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ExpenseReceiptItemScalarFieldEnum | ExpenseReceiptItemScalarFieldEnum[]
+    distinct?: ExpenseProductScalarFieldEnum | ExpenseProductScalarFieldEnum[]
   }
 
   /**
@@ -15920,7 +16079,7 @@ export namespace Prisma {
     user?: boolean | ExpenseSubcategory$userArgs<ExtArgs>
     category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
     entries?: boolean | ExpenseSubcategory$entriesArgs<ExtArgs>
-    receipt_items?: boolean | ExpenseSubcategory$receipt_itemsArgs<ExtArgs>
+    products?: boolean | ExpenseSubcategory$productsArgs<ExtArgs>
     _count?: boolean | ExpenseSubcategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expenseSubcategory"]>
 
@@ -15963,7 +16122,7 @@ export namespace Prisma {
     user?: boolean | ExpenseSubcategory$userArgs<ExtArgs>
     category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
     entries?: boolean | ExpenseSubcategory$entriesArgs<ExtArgs>
-    receipt_items?: boolean | ExpenseSubcategory$receipt_itemsArgs<ExtArgs>
+    products?: boolean | ExpenseSubcategory$productsArgs<ExtArgs>
     _count?: boolean | ExpenseSubcategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExpenseSubcategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15981,7 +16140,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs> | null
       category: Prisma.$ExpenseCategoryPayload<ExtArgs>
       entries: Prisma.$ExpenseEntryPayload<ExtArgs>[]
-      receipt_items: Prisma.$ExpenseReceiptItemPayload<ExtArgs>[]
+      products: Prisma.$ExpenseProductPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -16388,7 +16547,7 @@ export namespace Prisma {
     user<T extends ExpenseSubcategory$userArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     category<T extends ExpenseCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategoryDefaultArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     entries<T extends ExpenseSubcategory$entriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    receipt_items<T extends ExpenseSubcategory$receipt_itemsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$receipt_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseReceiptItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    products<T extends ExpenseSubcategory$productsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16864,27 +17023,27 @@ export namespace Prisma {
   }
 
   /**
-   * ExpenseSubcategory.receipt_items
+   * ExpenseSubcategory.products
    */
-  export type ExpenseSubcategory$receipt_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ExpenseSubcategory$productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ExpenseReceiptItem
+     * Select specific fields to fetch from the ExpenseProduct
      */
-    select?: ExpenseReceiptItemSelect<ExtArgs> | null
+    select?: ExpenseProductSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ExpenseReceiptItem
+     * Omit specific fields from the ExpenseProduct
      */
-    omit?: ExpenseReceiptItemOmit<ExtArgs> | null
+    omit?: ExpenseProductOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ExpenseReceiptItemInclude<ExtArgs> | null
-    where?: ExpenseReceiptItemWhereInput
-    orderBy?: ExpenseReceiptItemOrderByWithRelationInput | ExpenseReceiptItemOrderByWithRelationInput[]
-    cursor?: ExpenseReceiptItemWhereUniqueInput
+    include?: ExpenseProductInclude<ExtArgs> | null
+    where?: ExpenseProductWhereInput
+    orderBy?: ExpenseProductOrderByWithRelationInput | ExpenseProductOrderByWithRelationInput[]
+    cursor?: ExpenseProductWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ExpenseReceiptItemScalarFieldEnum | ExpenseReceiptItemScalarFieldEnum[]
+    distinct?: ExpenseProductScalarFieldEnum | ExpenseProductScalarFieldEnum[]
   }
 
   /**
@@ -20586,6 +20745,1283 @@ export namespace Prisma {
 
 
   /**
+   * Model ExpenseProduct
+   */
+
+  export type AggregateExpenseProduct = {
+    _count: ExpenseProductCountAggregateOutputType | null
+    _avg: ExpenseProductAvgAggregateOutputType | null
+    _sum: ExpenseProductSumAggregateOutputType | null
+    _min: ExpenseProductMinAggregateOutputType | null
+    _max: ExpenseProductMaxAggregateOutputType | null
+  }
+
+  export type ExpenseProductAvgAggregateOutputType = {
+    id: number | null
+    size: Decimal | null
+  }
+
+  export type ExpenseProductSumAggregateOutputType = {
+    id: number | null
+    size: Decimal | null
+  }
+
+  export type ExpenseProductMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    name: string | null
+    brand: string | null
+    unit: string | null
+    size: Decimal | null
+    category_uuid: string | null
+    subcategory_uuid: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ExpenseProductMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    name: string | null
+    brand: string | null
+    unit: string | null
+    size: Decimal | null
+    category_uuid: string | null
+    subcategory_uuid: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ExpenseProductCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    name: number
+    brand: number
+    unit: number
+    size: number
+    category_uuid: number
+    subcategory_uuid: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type ExpenseProductAvgAggregateInputType = {
+    id?: true
+    size?: true
+  }
+
+  export type ExpenseProductSumAggregateInputType = {
+    id?: true
+    size?: true
+  }
+
+  export type ExpenseProductMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    name?: true
+    brand?: true
+    unit?: true
+    size?: true
+    category_uuid?: true
+    subcategory_uuid?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ExpenseProductMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    name?: true
+    brand?: true
+    unit?: true
+    size?: true
+    category_uuid?: true
+    subcategory_uuid?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ExpenseProductCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    name?: true
+    brand?: true
+    unit?: true
+    size?: true
+    category_uuid?: true
+    subcategory_uuid?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type ExpenseProductAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExpenseProduct to aggregate.
+     */
+    where?: ExpenseProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExpenseProducts to fetch.
+     */
+    orderBy?: ExpenseProductOrderByWithRelationInput | ExpenseProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExpenseProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExpenseProducts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExpenseProducts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ExpenseProducts
+    **/
+    _count?: true | ExpenseProductCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ExpenseProductAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExpenseProductSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExpenseProductMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExpenseProductMaxAggregateInputType
+  }
+
+  export type GetExpenseProductAggregateType<T extends ExpenseProductAggregateArgs> = {
+        [P in keyof T & keyof AggregateExpenseProduct]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExpenseProduct[P]>
+      : GetScalarType<T[P], AggregateExpenseProduct[P]>
+  }
+
+
+
+
+  export type ExpenseProductGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseProductWhereInput
+    orderBy?: ExpenseProductOrderByWithAggregationInput | ExpenseProductOrderByWithAggregationInput[]
+    by: ExpenseProductScalarFieldEnum[] | ExpenseProductScalarFieldEnum
+    having?: ExpenseProductScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExpenseProductCountAggregateInputType | true
+    _avg?: ExpenseProductAvgAggregateInputType
+    _sum?: ExpenseProductSumAggregateInputType
+    _min?: ExpenseProductMinAggregateInputType
+    _max?: ExpenseProductMaxAggregateInputType
+  }
+
+  export type ExpenseProductGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string | null
+    name: string
+    brand: string | null
+    unit: string | null
+    size: Decimal | null
+    category_uuid: string | null
+    subcategory_uuid: string | null
+    created_at: Date
+    updated_at: Date
+    _count: ExpenseProductCountAggregateOutputType | null
+    _avg: ExpenseProductAvgAggregateOutputType | null
+    _sum: ExpenseProductSumAggregateOutputType | null
+    _min: ExpenseProductMinAggregateOutputType | null
+    _max: ExpenseProductMaxAggregateOutputType | null
+  }
+
+  type GetExpenseProductGroupByPayload<T extends ExpenseProductGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExpenseProductGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExpenseProductGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExpenseProductGroupByOutputType[P]>
+            : GetScalarType<T[P], ExpenseProductGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExpenseProductSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    name?: boolean
+    brand?: boolean
+    unit?: boolean
+    size?: boolean
+    category_uuid?: boolean
+    subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | ExpenseProduct$userArgs<ExtArgs>
+    category?: boolean | ExpenseProduct$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseProduct$subcategoryArgs<ExtArgs>
+    receipt_items?: boolean | ExpenseProduct$receipt_itemsArgs<ExtArgs>
+    _count?: boolean | ExpenseProductCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["expenseProduct"]>
+
+  export type ExpenseProductSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    name?: boolean
+    brand?: boolean
+    unit?: boolean
+    size?: boolean
+    category_uuid?: boolean
+    subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | ExpenseProduct$userArgs<ExtArgs>
+    category?: boolean | ExpenseProduct$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseProduct$subcategoryArgs<ExtArgs>
+  }, ExtArgs["result"]["expenseProduct"]>
+
+  export type ExpenseProductSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    name?: boolean
+    brand?: boolean
+    unit?: boolean
+    size?: boolean
+    category_uuid?: boolean
+    subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | ExpenseProduct$userArgs<ExtArgs>
+    category?: boolean | ExpenseProduct$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseProduct$subcategoryArgs<ExtArgs>
+  }, ExtArgs["result"]["expenseProduct"]>
+
+  export type ExpenseProductSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    name?: boolean
+    brand?: boolean
+    unit?: boolean
+    size?: boolean
+    category_uuid?: boolean
+    subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type ExpenseProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "brand" | "unit" | "size" | "category_uuid" | "subcategory_uuid" | "created_at" | "updated_at", ExtArgs["result"]["expenseProduct"]>
+  export type ExpenseProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | ExpenseProduct$userArgs<ExtArgs>
+    category?: boolean | ExpenseProduct$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseProduct$subcategoryArgs<ExtArgs>
+    receipt_items?: boolean | ExpenseProduct$receipt_itemsArgs<ExtArgs>
+    _count?: boolean | ExpenseProductCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ExpenseProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | ExpenseProduct$userArgs<ExtArgs>
+    category?: boolean | ExpenseProduct$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseProduct$subcategoryArgs<ExtArgs>
+  }
+  export type ExpenseProductIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | ExpenseProduct$userArgs<ExtArgs>
+    category?: boolean | ExpenseProduct$categoryArgs<ExtArgs>
+    subcategory?: boolean | ExpenseProduct$subcategoryArgs<ExtArgs>
+  }
+
+  export type $ExpenseProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ExpenseProduct"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs> | null
+      category: Prisma.$ExpenseCategoryPayload<ExtArgs> | null
+      subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs> | null
+      receipt_items: Prisma.$ExpenseReceiptItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string | null
+      name: string
+      brand: string | null
+      unit: string | null
+      size: Prisma.Decimal | null
+      category_uuid: string | null
+      subcategory_uuid: string | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["expenseProduct"]>
+    composites: {}
+  }
+
+  type ExpenseProductGetPayload<S extends boolean | null | undefined | ExpenseProductDefaultArgs> = $Result.GetResult<Prisma.$ExpenseProductPayload, S>
+
+  type ExpenseProductCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExpenseProductFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExpenseProductCountAggregateInputType | true
+    }
+
+  export interface ExpenseProductDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ExpenseProduct'], meta: { name: 'ExpenseProduct' } }
+    /**
+     * Find zero or one ExpenseProduct that matches the filter.
+     * @param {ExpenseProductFindUniqueArgs} args - Arguments to find a ExpenseProduct
+     * @example
+     * // Get one ExpenseProduct
+     * const expenseProduct = await prisma.expenseProduct.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExpenseProductFindUniqueArgs>(args: SelectSubset<T, ExpenseProductFindUniqueArgs<ExtArgs>>): Prisma__ExpenseProductClient<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ExpenseProduct that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExpenseProductFindUniqueOrThrowArgs} args - Arguments to find a ExpenseProduct
+     * @example
+     * // Get one ExpenseProduct
+     * const expenseProduct = await prisma.expenseProduct.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExpenseProductFindUniqueOrThrowArgs>(args: SelectSubset<T, ExpenseProductFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExpenseProductClient<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExpenseProduct that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseProductFindFirstArgs} args - Arguments to find a ExpenseProduct
+     * @example
+     * // Get one ExpenseProduct
+     * const expenseProduct = await prisma.expenseProduct.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExpenseProductFindFirstArgs>(args?: SelectSubset<T, ExpenseProductFindFirstArgs<ExtArgs>>): Prisma__ExpenseProductClient<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExpenseProduct that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseProductFindFirstOrThrowArgs} args - Arguments to find a ExpenseProduct
+     * @example
+     * // Get one ExpenseProduct
+     * const expenseProduct = await prisma.expenseProduct.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExpenseProductFindFirstOrThrowArgs>(args?: SelectSubset<T, ExpenseProductFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExpenseProductClient<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ExpenseProducts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseProductFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ExpenseProducts
+     * const expenseProducts = await prisma.expenseProduct.findMany()
+     * 
+     * // Get first 10 ExpenseProducts
+     * const expenseProducts = await prisma.expenseProduct.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const expenseProductWithIdOnly = await prisma.expenseProduct.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExpenseProductFindManyArgs>(args?: SelectSubset<T, ExpenseProductFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ExpenseProduct.
+     * @param {ExpenseProductCreateArgs} args - Arguments to create a ExpenseProduct.
+     * @example
+     * // Create one ExpenseProduct
+     * const ExpenseProduct = await prisma.expenseProduct.create({
+     *   data: {
+     *     // ... data to create a ExpenseProduct
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExpenseProductCreateArgs>(args: SelectSubset<T, ExpenseProductCreateArgs<ExtArgs>>): Prisma__ExpenseProductClient<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ExpenseProducts.
+     * @param {ExpenseProductCreateManyArgs} args - Arguments to create many ExpenseProducts.
+     * @example
+     * // Create many ExpenseProducts
+     * const expenseProduct = await prisma.expenseProduct.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExpenseProductCreateManyArgs>(args?: SelectSubset<T, ExpenseProductCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ExpenseProducts and returns the data saved in the database.
+     * @param {ExpenseProductCreateManyAndReturnArgs} args - Arguments to create many ExpenseProducts.
+     * @example
+     * // Create many ExpenseProducts
+     * const expenseProduct = await prisma.expenseProduct.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ExpenseProducts and only return the `id`
+     * const expenseProductWithIdOnly = await prisma.expenseProduct.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExpenseProductCreateManyAndReturnArgs>(args?: SelectSubset<T, ExpenseProductCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ExpenseProduct.
+     * @param {ExpenseProductDeleteArgs} args - Arguments to delete one ExpenseProduct.
+     * @example
+     * // Delete one ExpenseProduct
+     * const ExpenseProduct = await prisma.expenseProduct.delete({
+     *   where: {
+     *     // ... filter to delete one ExpenseProduct
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExpenseProductDeleteArgs>(args: SelectSubset<T, ExpenseProductDeleteArgs<ExtArgs>>): Prisma__ExpenseProductClient<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ExpenseProduct.
+     * @param {ExpenseProductUpdateArgs} args - Arguments to update one ExpenseProduct.
+     * @example
+     * // Update one ExpenseProduct
+     * const expenseProduct = await prisma.expenseProduct.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExpenseProductUpdateArgs>(args: SelectSubset<T, ExpenseProductUpdateArgs<ExtArgs>>): Prisma__ExpenseProductClient<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ExpenseProducts.
+     * @param {ExpenseProductDeleteManyArgs} args - Arguments to filter ExpenseProducts to delete.
+     * @example
+     * // Delete a few ExpenseProducts
+     * const { count } = await prisma.expenseProduct.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExpenseProductDeleteManyArgs>(args?: SelectSubset<T, ExpenseProductDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExpenseProducts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseProductUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ExpenseProducts
+     * const expenseProduct = await prisma.expenseProduct.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExpenseProductUpdateManyArgs>(args: SelectSubset<T, ExpenseProductUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExpenseProducts and returns the data updated in the database.
+     * @param {ExpenseProductUpdateManyAndReturnArgs} args - Arguments to update many ExpenseProducts.
+     * @example
+     * // Update many ExpenseProducts
+     * const expenseProduct = await prisma.expenseProduct.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ExpenseProducts and only return the `id`
+     * const expenseProductWithIdOnly = await prisma.expenseProduct.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExpenseProductUpdateManyAndReturnArgs>(args: SelectSubset<T, ExpenseProductUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ExpenseProduct.
+     * @param {ExpenseProductUpsertArgs} args - Arguments to update or create a ExpenseProduct.
+     * @example
+     * // Update or create a ExpenseProduct
+     * const expenseProduct = await prisma.expenseProduct.upsert({
+     *   create: {
+     *     // ... data to create a ExpenseProduct
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ExpenseProduct we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExpenseProductUpsertArgs>(args: SelectSubset<T, ExpenseProductUpsertArgs<ExtArgs>>): Prisma__ExpenseProductClient<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ExpenseProducts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseProductCountArgs} args - Arguments to filter ExpenseProducts to count.
+     * @example
+     * // Count the number of ExpenseProducts
+     * const count = await prisma.expenseProduct.count({
+     *   where: {
+     *     // ... the filter for the ExpenseProducts we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExpenseProductCountArgs>(
+      args?: Subset<T, ExpenseProductCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExpenseProductCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ExpenseProduct.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseProductAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExpenseProductAggregateArgs>(args: Subset<T, ExpenseProductAggregateArgs>): Prisma.PrismaPromise<GetExpenseProductAggregateType<T>>
+
+    /**
+     * Group by ExpenseProduct.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseProductGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExpenseProductGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExpenseProductGroupByArgs['orderBy'] }
+        : { orderBy?: ExpenseProductGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExpenseProductGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExpenseProductGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ExpenseProduct model
+   */
+  readonly fields: ExpenseProductFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ExpenseProduct.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExpenseProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends ExpenseProduct$userArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseProduct$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    category<T extends ExpenseProduct$categoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseProduct$categoryArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    subcategory<T extends ExpenseProduct$subcategoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseProduct$subcategoryArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    receipt_items<T extends ExpenseProduct$receipt_itemsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseProduct$receipt_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseReceiptItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ExpenseProduct model
+   */
+  interface ExpenseProductFieldRefs {
+    readonly id: FieldRef<"ExpenseProduct", 'Int'>
+    readonly uuid: FieldRef<"ExpenseProduct", 'String'>
+    readonly user_uuid: FieldRef<"ExpenseProduct", 'String'>
+    readonly name: FieldRef<"ExpenseProduct", 'String'>
+    readonly brand: FieldRef<"ExpenseProduct", 'String'>
+    readonly unit: FieldRef<"ExpenseProduct", 'String'>
+    readonly size: FieldRef<"ExpenseProduct", 'Decimal'>
+    readonly category_uuid: FieldRef<"ExpenseProduct", 'String'>
+    readonly subcategory_uuid: FieldRef<"ExpenseProduct", 'String'>
+    readonly created_at: FieldRef<"ExpenseProduct", 'DateTime'>
+    readonly updated_at: FieldRef<"ExpenseProduct", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExpenseProduct findUnique
+   */
+  export type ExpenseProductFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+    /**
+     * Filter, which ExpenseProduct to fetch.
+     */
+    where: ExpenseProductWhereUniqueInput
+  }
+
+  /**
+   * ExpenseProduct findUniqueOrThrow
+   */
+  export type ExpenseProductFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+    /**
+     * Filter, which ExpenseProduct to fetch.
+     */
+    where: ExpenseProductWhereUniqueInput
+  }
+
+  /**
+   * ExpenseProduct findFirst
+   */
+  export type ExpenseProductFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+    /**
+     * Filter, which ExpenseProduct to fetch.
+     */
+    where?: ExpenseProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExpenseProducts to fetch.
+     */
+    orderBy?: ExpenseProductOrderByWithRelationInput | ExpenseProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExpenseProducts.
+     */
+    cursor?: ExpenseProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExpenseProducts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExpenseProducts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseProducts.
+     */
+    distinct?: ExpenseProductScalarFieldEnum | ExpenseProductScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseProduct findFirstOrThrow
+   */
+  export type ExpenseProductFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+    /**
+     * Filter, which ExpenseProduct to fetch.
+     */
+    where?: ExpenseProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExpenseProducts to fetch.
+     */
+    orderBy?: ExpenseProductOrderByWithRelationInput | ExpenseProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExpenseProducts.
+     */
+    cursor?: ExpenseProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExpenseProducts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExpenseProducts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseProducts.
+     */
+    distinct?: ExpenseProductScalarFieldEnum | ExpenseProductScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseProduct findMany
+   */
+  export type ExpenseProductFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+    /**
+     * Filter, which ExpenseProducts to fetch.
+     */
+    where?: ExpenseProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExpenseProducts to fetch.
+     */
+    orderBy?: ExpenseProductOrderByWithRelationInput | ExpenseProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ExpenseProducts.
+     */
+    cursor?: ExpenseProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExpenseProducts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExpenseProducts.
+     */
+    skip?: number
+    distinct?: ExpenseProductScalarFieldEnum | ExpenseProductScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseProduct create
+   */
+  export type ExpenseProductCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ExpenseProduct.
+     */
+    data: XOR<ExpenseProductCreateInput, ExpenseProductUncheckedCreateInput>
+  }
+
+  /**
+   * ExpenseProduct createMany
+   */
+  export type ExpenseProductCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ExpenseProducts.
+     */
+    data: ExpenseProductCreateManyInput | ExpenseProductCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExpenseProduct createManyAndReturn
+   */
+  export type ExpenseProductCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * The data used to create many ExpenseProducts.
+     */
+    data: ExpenseProductCreateManyInput | ExpenseProductCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExpenseProduct update
+   */
+  export type ExpenseProductUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ExpenseProduct.
+     */
+    data: XOR<ExpenseProductUpdateInput, ExpenseProductUncheckedUpdateInput>
+    /**
+     * Choose, which ExpenseProduct to update.
+     */
+    where: ExpenseProductWhereUniqueInput
+  }
+
+  /**
+   * ExpenseProduct updateMany
+   */
+  export type ExpenseProductUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ExpenseProducts.
+     */
+    data: XOR<ExpenseProductUpdateManyMutationInput, ExpenseProductUncheckedUpdateManyInput>
+    /**
+     * Filter which ExpenseProducts to update
+     */
+    where?: ExpenseProductWhereInput
+    /**
+     * Limit how many ExpenseProducts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExpenseProduct updateManyAndReturn
+   */
+  export type ExpenseProductUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * The data used to update ExpenseProducts.
+     */
+    data: XOR<ExpenseProductUpdateManyMutationInput, ExpenseProductUncheckedUpdateManyInput>
+    /**
+     * Filter which ExpenseProducts to update
+     */
+    where?: ExpenseProductWhereInput
+    /**
+     * Limit how many ExpenseProducts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExpenseProduct upsert
+   */
+  export type ExpenseProductUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ExpenseProduct to update in case it exists.
+     */
+    where: ExpenseProductWhereUniqueInput
+    /**
+     * In case the ExpenseProduct found by the `where` argument doesn't exist, create a new ExpenseProduct with this data.
+     */
+    create: XOR<ExpenseProductCreateInput, ExpenseProductUncheckedCreateInput>
+    /**
+     * In case the ExpenseProduct was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExpenseProductUpdateInput, ExpenseProductUncheckedUpdateInput>
+  }
+
+  /**
+   * ExpenseProduct delete
+   */
+  export type ExpenseProductDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+    /**
+     * Filter which ExpenseProduct to delete.
+     */
+    where: ExpenseProductWhereUniqueInput
+  }
+
+  /**
+   * ExpenseProduct deleteMany
+   */
+  export type ExpenseProductDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExpenseProducts to delete
+     */
+    where?: ExpenseProductWhereInput
+    /**
+     * Limit how many ExpenseProducts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExpenseProduct.user
+   */
+  export type ExpenseProduct$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ExpenseProduct.category
+   */
+  export type ExpenseProduct$categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseCategory
+     */
+    select?: ExpenseCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseCategory
+     */
+    omit?: ExpenseCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseCategoryInclude<ExtArgs> | null
+    where?: ExpenseCategoryWhereInput
+  }
+
+  /**
+   * ExpenseProduct.subcategory
+   */
+  export type ExpenseProduct$subcategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseSubcategory
+     */
+    select?: ExpenseSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseSubcategory
+     */
+    omit?: ExpenseSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseSubcategoryInclude<ExtArgs> | null
+    where?: ExpenseSubcategoryWhereInput
+  }
+
+  /**
+   * ExpenseProduct.receipt_items
+   */
+  export type ExpenseProduct$receipt_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseReceiptItem
+     */
+    select?: ExpenseReceiptItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseReceiptItem
+     */
+    omit?: ExpenseReceiptItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseReceiptItemInclude<ExtArgs> | null
+    where?: ExpenseReceiptItemWhereInput
+    orderBy?: ExpenseReceiptItemOrderByWithRelationInput | ExpenseReceiptItemOrderByWithRelationInput[]
+    cursor?: ExpenseReceiptItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExpenseReceiptItemScalarFieldEnum | ExpenseReceiptItemScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseProduct without action
+   */
+  export type ExpenseProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseProduct
+     */
+    select?: ExpenseProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseProduct
+     */
+    omit?: ExpenseProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseProductInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model ExpenseReceiptItem
    */
 
@@ -20615,12 +22051,11 @@ export namespace Prisma {
     id: number | null
     uuid: string | null
     receipt_uuid: string | null
+    product_uuid: string | null
     name: string | null
     quantity: Decimal | null
     unit_price: Decimal | null
     total_price: Decimal | null
-    category_uuid: string | null
-    subcategory_uuid: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -20629,12 +22064,11 @@ export namespace Prisma {
     id: number | null
     uuid: string | null
     receipt_uuid: string | null
+    product_uuid: string | null
     name: string | null
     quantity: Decimal | null
     unit_price: Decimal | null
     total_price: Decimal | null
-    category_uuid: string | null
-    subcategory_uuid: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -20643,12 +22077,11 @@ export namespace Prisma {
     id: number
     uuid: number
     receipt_uuid: number
+    product_uuid: number
     name: number
     quantity: number
     unit_price: number
     total_price: number
-    category_uuid: number
-    subcategory_uuid: number
     created_at: number
     updated_at: number
     _all: number
@@ -20673,12 +22106,11 @@ export namespace Prisma {
     id?: true
     uuid?: true
     receipt_uuid?: true
+    product_uuid?: true
     name?: true
     quantity?: true
     unit_price?: true
     total_price?: true
-    category_uuid?: true
-    subcategory_uuid?: true
     created_at?: true
     updated_at?: true
   }
@@ -20687,12 +22119,11 @@ export namespace Prisma {
     id?: true
     uuid?: true
     receipt_uuid?: true
+    product_uuid?: true
     name?: true
     quantity?: true
     unit_price?: true
     total_price?: true
-    category_uuid?: true
-    subcategory_uuid?: true
     created_at?: true
     updated_at?: true
   }
@@ -20701,12 +22132,11 @@ export namespace Prisma {
     id?: true
     uuid?: true
     receipt_uuid?: true
+    product_uuid?: true
     name?: true
     quantity?: true
     unit_price?: true
     total_price?: true
-    category_uuid?: true
-    subcategory_uuid?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -20802,12 +22232,11 @@ export namespace Prisma {
     id: number
     uuid: string
     receipt_uuid: string
+    product_uuid: string | null
     name: string
     quantity: Decimal
     unit_price: Decimal
     total_price: Decimal
-    category_uuid: string | null
-    subcategory_uuid: string | null
     created_at: Date
     updated_at: Date
     _count: ExpenseReceiptItemCountAggregateOutputType | null
@@ -20835,101 +22264,89 @@ export namespace Prisma {
     id?: boolean
     uuid?: boolean
     receipt_uuid?: boolean
+    product_uuid?: boolean
     name?: boolean
     quantity?: boolean
     unit_price?: boolean
     total_price?: boolean
-    category_uuid?: boolean
-    subcategory_uuid?: boolean
     created_at?: boolean
     updated_at?: boolean
     receipt?: boolean | ExpenseReceiptDefaultArgs<ExtArgs>
-    category?: boolean | ExpenseReceiptItem$categoryArgs<ExtArgs>
-    subcategory?: boolean | ExpenseReceiptItem$subcategoryArgs<ExtArgs>
+    product?: boolean | ExpenseReceiptItem$productArgs<ExtArgs>
   }, ExtArgs["result"]["expenseReceiptItem"]>
 
   export type ExpenseReceiptItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     uuid?: boolean
     receipt_uuid?: boolean
+    product_uuid?: boolean
     name?: boolean
     quantity?: boolean
     unit_price?: boolean
     total_price?: boolean
-    category_uuid?: boolean
-    subcategory_uuid?: boolean
     created_at?: boolean
     updated_at?: boolean
     receipt?: boolean | ExpenseReceiptDefaultArgs<ExtArgs>
-    category?: boolean | ExpenseReceiptItem$categoryArgs<ExtArgs>
-    subcategory?: boolean | ExpenseReceiptItem$subcategoryArgs<ExtArgs>
+    product?: boolean | ExpenseReceiptItem$productArgs<ExtArgs>
   }, ExtArgs["result"]["expenseReceiptItem"]>
 
   export type ExpenseReceiptItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     uuid?: boolean
     receipt_uuid?: boolean
+    product_uuid?: boolean
     name?: boolean
     quantity?: boolean
     unit_price?: boolean
     total_price?: boolean
-    category_uuid?: boolean
-    subcategory_uuid?: boolean
     created_at?: boolean
     updated_at?: boolean
     receipt?: boolean | ExpenseReceiptDefaultArgs<ExtArgs>
-    category?: boolean | ExpenseReceiptItem$categoryArgs<ExtArgs>
-    subcategory?: boolean | ExpenseReceiptItem$subcategoryArgs<ExtArgs>
+    product?: boolean | ExpenseReceiptItem$productArgs<ExtArgs>
   }, ExtArgs["result"]["expenseReceiptItem"]>
 
   export type ExpenseReceiptItemSelectScalar = {
     id?: boolean
     uuid?: boolean
     receipt_uuid?: boolean
+    product_uuid?: boolean
     name?: boolean
     quantity?: boolean
     unit_price?: boolean
     total_price?: boolean
-    category_uuid?: boolean
-    subcategory_uuid?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type ExpenseReceiptItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "receipt_uuid" | "name" | "quantity" | "unit_price" | "total_price" | "category_uuid" | "subcategory_uuid" | "created_at" | "updated_at", ExtArgs["result"]["expenseReceiptItem"]>
+  export type ExpenseReceiptItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "receipt_uuid" | "product_uuid" | "name" | "quantity" | "unit_price" | "total_price" | "created_at" | "updated_at", ExtArgs["result"]["expenseReceiptItem"]>
   export type ExpenseReceiptItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     receipt?: boolean | ExpenseReceiptDefaultArgs<ExtArgs>
-    category?: boolean | ExpenseReceiptItem$categoryArgs<ExtArgs>
-    subcategory?: boolean | ExpenseReceiptItem$subcategoryArgs<ExtArgs>
+    product?: boolean | ExpenseReceiptItem$productArgs<ExtArgs>
   }
   export type ExpenseReceiptItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     receipt?: boolean | ExpenseReceiptDefaultArgs<ExtArgs>
-    category?: boolean | ExpenseReceiptItem$categoryArgs<ExtArgs>
-    subcategory?: boolean | ExpenseReceiptItem$subcategoryArgs<ExtArgs>
+    product?: boolean | ExpenseReceiptItem$productArgs<ExtArgs>
   }
   export type ExpenseReceiptItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     receipt?: boolean | ExpenseReceiptDefaultArgs<ExtArgs>
-    category?: boolean | ExpenseReceiptItem$categoryArgs<ExtArgs>
-    subcategory?: boolean | ExpenseReceiptItem$subcategoryArgs<ExtArgs>
+    product?: boolean | ExpenseReceiptItem$productArgs<ExtArgs>
   }
 
   export type $ExpenseReceiptItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ExpenseReceiptItem"
     objects: {
       receipt: Prisma.$ExpenseReceiptPayload<ExtArgs>
-      category: Prisma.$ExpenseCategoryPayload<ExtArgs> | null
-      subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs> | null
+      product: Prisma.$ExpenseProductPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       uuid: string
       receipt_uuid: string
+      product_uuid: string | null
       name: string
       quantity: Prisma.Decimal
       unit_price: Prisma.Decimal
       total_price: Prisma.Decimal
-      category_uuid: string | null
-      subcategory_uuid: string | null
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["expenseReceiptItem"]>
@@ -21327,8 +22744,7 @@ export namespace Prisma {
   export interface Prisma__ExpenseReceiptItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     receipt<T extends ExpenseReceiptDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseReceiptDefaultArgs<ExtArgs>>): Prisma__ExpenseReceiptClient<$Result.GetResult<Prisma.$ExpenseReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    category<T extends ExpenseReceiptItem$categoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseReceiptItem$categoryArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    subcategory<T extends ExpenseReceiptItem$subcategoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseReceiptItem$subcategoryArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    product<T extends ExpenseReceiptItem$productArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseReceiptItem$productArgs<ExtArgs>>): Prisma__ExpenseProductClient<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21361,12 +22777,11 @@ export namespace Prisma {
     readonly id: FieldRef<"ExpenseReceiptItem", 'Int'>
     readonly uuid: FieldRef<"ExpenseReceiptItem", 'String'>
     readonly receipt_uuid: FieldRef<"ExpenseReceiptItem", 'String'>
+    readonly product_uuid: FieldRef<"ExpenseReceiptItem", 'String'>
     readonly name: FieldRef<"ExpenseReceiptItem", 'String'>
     readonly quantity: FieldRef<"ExpenseReceiptItem", 'Decimal'>
     readonly unit_price: FieldRef<"ExpenseReceiptItem", 'Decimal'>
     readonly total_price: FieldRef<"ExpenseReceiptItem", 'Decimal'>
-    readonly category_uuid: FieldRef<"ExpenseReceiptItem", 'String'>
-    readonly subcategory_uuid: FieldRef<"ExpenseReceiptItem", 'String'>
     readonly created_at: FieldRef<"ExpenseReceiptItem", 'DateTime'>
     readonly updated_at: FieldRef<"ExpenseReceiptItem", 'DateTime'>
   }
@@ -21765,41 +23180,22 @@ export namespace Prisma {
   }
 
   /**
-   * ExpenseReceiptItem.category
+   * ExpenseReceiptItem.product
    */
-  export type ExpenseReceiptItem$categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ExpenseReceiptItem$productArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ExpenseCategory
+     * Select specific fields to fetch from the ExpenseProduct
      */
-    select?: ExpenseCategorySelect<ExtArgs> | null
+    select?: ExpenseProductSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ExpenseCategory
+     * Omit specific fields from the ExpenseProduct
      */
-    omit?: ExpenseCategoryOmit<ExtArgs> | null
+    omit?: ExpenseProductOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ExpenseCategoryInclude<ExtArgs> | null
-    where?: ExpenseCategoryWhereInput
-  }
-
-  /**
-   * ExpenseReceiptItem.subcategory
-   */
-  export type ExpenseReceiptItem$subcategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ExpenseSubcategory
-     */
-    select?: ExpenseSubcategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ExpenseSubcategory
-     */
-    omit?: ExpenseSubcategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ExpenseSubcategoryInclude<ExtArgs> | null
-    where?: ExpenseSubcategoryWhereInput
+    include?: ExpenseProductInclude<ExtArgs> | null
+    where?: ExpenseProductWhereInput
   }
 
   /**
@@ -28070,16 +29466,32 @@ export namespace Prisma {
   export type ExpenseReceiptScalarFieldEnum = (typeof ExpenseReceiptScalarFieldEnum)[keyof typeof ExpenseReceiptScalarFieldEnum]
 
 
+  export const ExpenseProductScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    name: 'name',
+    brand: 'brand',
+    unit: 'unit',
+    size: 'size',
+    category_uuid: 'category_uuid',
+    subcategory_uuid: 'subcategory_uuid',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type ExpenseProductScalarFieldEnum = (typeof ExpenseProductScalarFieldEnum)[keyof typeof ExpenseProductScalarFieldEnum]
+
+
   export const ExpenseReceiptItemScalarFieldEnum: {
     id: 'id',
     uuid: 'uuid',
     receipt_uuid: 'receipt_uuid',
+    product_uuid: 'product_uuid',
     name: 'name',
     quantity: 'quantity',
     unit_price: 'unit_price',
     total_price: 'total_price',
-    category_uuid: 'category_uuid',
-    subcategory_uuid: 'subcategory_uuid',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -28428,6 +29840,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryListRelationFilter
     expense_receipts?: ExpenseReceiptListRelationFilter
     expense_stores?: ExpenseStoreListRelationFilter
+    expense_products?: ExpenseProductListRelationFilter
     muscle_groups?: MuscleGroupListRelationFilter
     exercises?: ExerciseListRelationFilter
     workouts?: WorkoutListRelationFilter
@@ -28455,6 +29868,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryOrderByRelationAggregateInput
     expense_receipts?: ExpenseReceiptOrderByRelationAggregateInput
     expense_stores?: ExpenseStoreOrderByRelationAggregateInput
+    expense_products?: ExpenseProductOrderByRelationAggregateInput
     muscle_groups?: MuscleGroupOrderByRelationAggregateInput
     exercises?: ExerciseOrderByRelationAggregateInput
     workouts?: WorkoutOrderByRelationAggregateInput
@@ -28485,6 +29899,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryListRelationFilter
     expense_receipts?: ExpenseReceiptListRelationFilter
     expense_stores?: ExpenseStoreListRelationFilter
+    expense_products?: ExpenseProductListRelationFilter
     muscle_groups?: MuscleGroupListRelationFilter
     exercises?: ExerciseListRelationFilter
     workouts?: WorkoutListRelationFilter
@@ -29247,7 +30662,7 @@ export namespace Prisma {
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     subcategories?: ExpenseSubcategoryListRelationFilter
     entries?: ExpenseEntryListRelationFilter
-    receipt_items?: ExpenseReceiptItemListRelationFilter
+    products?: ExpenseProductListRelationFilter
   }
 
   export type ExpenseCategoryOrderByWithRelationInput = {
@@ -29262,7 +30677,7 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
     subcategories?: ExpenseSubcategoryOrderByRelationAggregateInput
     entries?: ExpenseEntryOrderByRelationAggregateInput
-    receipt_items?: ExpenseReceiptItemOrderByRelationAggregateInput
+    products?: ExpenseProductOrderByRelationAggregateInput
   }
 
   export type ExpenseCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -29280,7 +30695,7 @@ export namespace Prisma {
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     subcategories?: ExpenseSubcategoryListRelationFilter
     entries?: ExpenseEntryListRelationFilter
-    receipt_items?: ExpenseReceiptItemListRelationFilter
+    products?: ExpenseProductListRelationFilter
   }, "id" | "uuid">
 
   export type ExpenseCategoryOrderByWithAggregationInput = {
@@ -29327,7 +30742,7 @@ export namespace Prisma {
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     category?: XOR<ExpenseCategoryScalarRelationFilter, ExpenseCategoryWhereInput>
     entries?: ExpenseEntryListRelationFilter
-    receipt_items?: ExpenseReceiptItemListRelationFilter
+    products?: ExpenseProductListRelationFilter
   }
 
   export type ExpenseSubcategoryOrderByWithRelationInput = {
@@ -29341,7 +30756,7 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
     category?: ExpenseCategoryOrderByWithRelationInput
     entries?: ExpenseEntryOrderByRelationAggregateInput
-    receipt_items?: ExpenseReceiptItemOrderByRelationAggregateInput
+    products?: ExpenseProductOrderByRelationAggregateInput
   }
 
   export type ExpenseSubcategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -29358,7 +30773,7 @@ export namespace Prisma {
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     category?: XOR<ExpenseCategoryScalarRelationFilter, ExpenseCategoryWhereInput>
     entries?: ExpenseEntryListRelationFilter
-    receipt_items?: ExpenseReceiptItemListRelationFilter
+    products?: ExpenseProductListRelationFilter
   }, "id" | "uuid">
 
   export type ExpenseSubcategoryOrderByWithAggregationInput = {
@@ -29652,6 +31067,102 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"ExpenseReceipt"> | Date | string
   }
 
+  export type ExpenseProductWhereInput = {
+    AND?: ExpenseProductWhereInput | ExpenseProductWhereInput[]
+    OR?: ExpenseProductWhereInput[]
+    NOT?: ExpenseProductWhereInput | ExpenseProductWhereInput[]
+    id?: IntFilter<"ExpenseProduct"> | number
+    uuid?: StringFilter<"ExpenseProduct"> | string
+    user_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
+    name?: StringFilter<"ExpenseProduct"> | string
+    brand?: StringNullableFilter<"ExpenseProduct"> | string | null
+    unit?: StringNullableFilter<"ExpenseProduct"> | string | null
+    size?: DecimalNullableFilter<"ExpenseProduct"> | Decimal | DecimalJsLike | number | string | null
+    category_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
+    subcategory_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
+    created_at?: DateTimeFilter<"ExpenseProduct"> | Date | string
+    updated_at?: DateTimeFilter<"ExpenseProduct"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
+    subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
+    receipt_items?: ExpenseReceiptItemListRelationFilter
+  }
+
+  export type ExpenseProductOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrderInput | SortOrder
+    name?: SortOrder
+    brand?: SortOrderInput | SortOrder
+    unit?: SortOrderInput | SortOrder
+    size?: SortOrderInput | SortOrder
+    category_uuid?: SortOrderInput | SortOrder
+    subcategory_uuid?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    category?: ExpenseCategoryOrderByWithRelationInput
+    subcategory?: ExpenseSubcategoryOrderByWithRelationInput
+    receipt_items?: ExpenseReceiptItemOrderByRelationAggregateInput
+  }
+
+  export type ExpenseProductWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: ExpenseProductWhereInput | ExpenseProductWhereInput[]
+    OR?: ExpenseProductWhereInput[]
+    NOT?: ExpenseProductWhereInput | ExpenseProductWhereInput[]
+    user_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
+    name?: StringFilter<"ExpenseProduct"> | string
+    brand?: StringNullableFilter<"ExpenseProduct"> | string | null
+    unit?: StringNullableFilter<"ExpenseProduct"> | string | null
+    size?: DecimalNullableFilter<"ExpenseProduct"> | Decimal | DecimalJsLike | number | string | null
+    category_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
+    subcategory_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
+    created_at?: DateTimeFilter<"ExpenseProduct"> | Date | string
+    updated_at?: DateTimeFilter<"ExpenseProduct"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
+    subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
+    receipt_items?: ExpenseReceiptItemListRelationFilter
+  }, "id" | "uuid">
+
+  export type ExpenseProductOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrderInput | SortOrder
+    name?: SortOrder
+    brand?: SortOrderInput | SortOrder
+    unit?: SortOrderInput | SortOrder
+    size?: SortOrderInput | SortOrder
+    category_uuid?: SortOrderInput | SortOrder
+    subcategory_uuid?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: ExpenseProductCountOrderByAggregateInput
+    _avg?: ExpenseProductAvgOrderByAggregateInput
+    _max?: ExpenseProductMaxOrderByAggregateInput
+    _min?: ExpenseProductMinOrderByAggregateInput
+    _sum?: ExpenseProductSumOrderByAggregateInput
+  }
+
+  export type ExpenseProductScalarWhereWithAggregatesInput = {
+    AND?: ExpenseProductScalarWhereWithAggregatesInput | ExpenseProductScalarWhereWithAggregatesInput[]
+    OR?: ExpenseProductScalarWhereWithAggregatesInput[]
+    NOT?: ExpenseProductScalarWhereWithAggregatesInput | ExpenseProductScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ExpenseProduct"> | number
+    uuid?: StringWithAggregatesFilter<"ExpenseProduct"> | string
+    user_uuid?: StringNullableWithAggregatesFilter<"ExpenseProduct"> | string | null
+    name?: StringWithAggregatesFilter<"ExpenseProduct"> | string
+    brand?: StringNullableWithAggregatesFilter<"ExpenseProduct"> | string | null
+    unit?: StringNullableWithAggregatesFilter<"ExpenseProduct"> | string | null
+    size?: DecimalNullableWithAggregatesFilter<"ExpenseProduct"> | Decimal | DecimalJsLike | number | string | null
+    category_uuid?: StringNullableWithAggregatesFilter<"ExpenseProduct"> | string | null
+    subcategory_uuid?: StringNullableWithAggregatesFilter<"ExpenseProduct"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"ExpenseProduct"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ExpenseProduct"> | Date | string
+  }
+
   export type ExpenseReceiptItemWhereInput = {
     AND?: ExpenseReceiptItemWhereInput | ExpenseReceiptItemWhereInput[]
     OR?: ExpenseReceiptItemWhereInput[]
@@ -29659,34 +31170,30 @@ export namespace Prisma {
     id?: IntFilter<"ExpenseReceiptItem"> | number
     uuid?: StringFilter<"ExpenseReceiptItem"> | string
     receipt_uuid?: StringFilter<"ExpenseReceiptItem"> | string
+    product_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
     name?: StringFilter<"ExpenseReceiptItem"> | string
     quantity?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
-    category_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
-    subcategory_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
     created_at?: DateTimeFilter<"ExpenseReceiptItem"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseReceiptItem"> | Date | string
     receipt?: XOR<ExpenseReceiptScalarRelationFilter, ExpenseReceiptWhereInput>
-    category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
-    subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
+    product?: XOR<ExpenseProductNullableScalarRelationFilter, ExpenseProductWhereInput> | null
   }
 
   export type ExpenseReceiptItemOrderByWithRelationInput = {
     id?: SortOrder
     uuid?: SortOrder
     receipt_uuid?: SortOrder
+    product_uuid?: SortOrderInput | SortOrder
     name?: SortOrder
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
-    category_uuid?: SortOrderInput | SortOrder
-    subcategory_uuid?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     receipt?: ExpenseReceiptOrderByWithRelationInput
-    category?: ExpenseCategoryOrderByWithRelationInput
-    subcategory?: ExpenseSubcategoryOrderByWithRelationInput
+    product?: ExpenseProductOrderByWithRelationInput
   }
 
   export type ExpenseReceiptItemWhereUniqueInput = Prisma.AtLeast<{
@@ -29696,29 +31203,26 @@ export namespace Prisma {
     OR?: ExpenseReceiptItemWhereInput[]
     NOT?: ExpenseReceiptItemWhereInput | ExpenseReceiptItemWhereInput[]
     receipt_uuid?: StringFilter<"ExpenseReceiptItem"> | string
+    product_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
     name?: StringFilter<"ExpenseReceiptItem"> | string
     quantity?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
-    category_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
-    subcategory_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
     created_at?: DateTimeFilter<"ExpenseReceiptItem"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseReceiptItem"> | Date | string
     receipt?: XOR<ExpenseReceiptScalarRelationFilter, ExpenseReceiptWhereInput>
-    category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
-    subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
+    product?: XOR<ExpenseProductNullableScalarRelationFilter, ExpenseProductWhereInput> | null
   }, "id" | "uuid">
 
   export type ExpenseReceiptItemOrderByWithAggregationInput = {
     id?: SortOrder
     uuid?: SortOrder
     receipt_uuid?: SortOrder
+    product_uuid?: SortOrderInput | SortOrder
     name?: SortOrder
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
-    category_uuid?: SortOrderInput | SortOrder
-    subcategory_uuid?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: ExpenseReceiptItemCountOrderByAggregateInput
@@ -29735,12 +31239,11 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"ExpenseReceiptItem"> | number
     uuid?: StringWithAggregatesFilter<"ExpenseReceiptItem"> | string
     receipt_uuid?: StringWithAggregatesFilter<"ExpenseReceiptItem"> | string
+    product_uuid?: StringNullableWithAggregatesFilter<"ExpenseReceiptItem"> | string | null
     name?: StringWithAggregatesFilter<"ExpenseReceiptItem"> | string
     quantity?: DecimalWithAggregatesFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalWithAggregatesFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     total_price?: DecimalWithAggregatesFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
-    category_uuid?: StringNullableWithAggregatesFilter<"ExpenseReceiptItem"> | string | null
-    subcategory_uuid?: StringNullableWithAggregatesFilter<"ExpenseReceiptItem"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"ExpenseReceiptItem"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ExpenseReceiptItem"> | Date | string
   }
@@ -30199,6 +31702,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -30226,6 +31730,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -30252,6 +31757,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -30279,6 +31785,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -31058,7 +32565,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutCategoriesInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
     entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
-    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateInput = {
@@ -31072,7 +32579,7 @@ export namespace Prisma {
     updated_at?: Date | string
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
-    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUpdateInput = {
@@ -31085,7 +32592,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutCategoriesNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
     entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateInput = {
@@ -31099,7 +32606,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
     entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryCreateManyInput = {
@@ -31141,7 +32648,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutSubcategoriesInput
     category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
     entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
-    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateInput = {
@@ -31153,7 +32660,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
-    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUpdateInput = {
@@ -31164,7 +32671,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutSubcategoriesNestedInput
     category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
     entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateInput = {
@@ -31176,7 +32683,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryCreateManyInput = {
@@ -31459,6 +32966,102 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ExpenseProductCreateInput = {
+    uuid?: string
+    name: string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user?: UserCreateNestedOneWithoutExpense_productsInput
+    category?: ExpenseCategoryCreateNestedOneWithoutProductsInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutProductsInput
+    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutProductInput
+  }
+
+  export type ExpenseProductUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid?: string | null
+    name: string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ExpenseProductUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutExpense_productsNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutProductsNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutProductsNestedInput
+    receipt_items?: ExpenseReceiptItemUpdateManyWithoutProductNestedInput
+  }
+
+  export type ExpenseProductUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type ExpenseProductCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid?: string | null
+    name: string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ExpenseProductUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseProductUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ExpenseReceiptItemCreateInput = {
     uuid?: string
     name: string
@@ -31468,20 +33071,18 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     receipt: ExpenseReceiptCreateNestedOneWithoutItemsInput
-    category?: ExpenseCategoryCreateNestedOneWithoutReceipt_itemsInput
-    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutReceipt_itemsInput
+    product?: ExpenseProductCreateNestedOneWithoutReceipt_itemsInput
   }
 
   export type ExpenseReceiptItemUncheckedCreateInput = {
     id?: number
     uuid?: string
     receipt_uuid: string
+    product_uuid?: string | null
     name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
-    category_uuid?: string | null
-    subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -31495,20 +33096,18 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     receipt?: ExpenseReceiptUpdateOneRequiredWithoutItemsNestedInput
-    category?: ExpenseCategoryUpdateOneWithoutReceipt_itemsNestedInput
-    subcategory?: ExpenseSubcategoryUpdateOneWithoutReceipt_itemsNestedInput
+    product?: ExpenseProductUpdateOneWithoutReceipt_itemsNestedInput
   }
 
   export type ExpenseReceiptItemUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     receipt_uuid?: StringFieldUpdateOperationsInput | string
+    product_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31517,12 +33116,11 @@ export namespace Prisma {
     id?: number
     uuid?: string
     receipt_uuid: string
+    product_uuid?: string | null
     name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
-    category_uuid?: string | null
-    subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -31541,12 +33139,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     receipt_uuid?: StringFieldUpdateOperationsInput | string
+    product_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32132,6 +33729,12 @@ export namespace Prisma {
     none?: ExpenseStoreWhereInput
   }
 
+  export type ExpenseProductListRelationFilter = {
+    every?: ExpenseProductWhereInput
+    some?: ExpenseProductWhereInput
+    none?: ExpenseProductWhereInput
+  }
+
   export type MuscleGroupListRelationFilter = {
     every?: MuscleGroupWhereInput
     some?: MuscleGroupWhereInput
@@ -32196,6 +33799,10 @@ export namespace Prisma {
   }
 
   export type ExpenseStoreOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ExpenseProductOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -33007,16 +34614,6 @@ export namespace Prisma {
     isNot?: UserWhereInput | null
   }
 
-  export type ExpenseReceiptItemListRelationFilter = {
-    every?: ExpenseReceiptItemWhereInput
-    some?: ExpenseReceiptItemWhereInput
-    none?: ExpenseReceiptItemWhereInput
-  }
-
-  export type ExpenseReceiptItemOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type ExpenseCategoryCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
@@ -33246,6 +34843,16 @@ export namespace Prisma {
     isNot?: ExpenseEntryWhereInput
   }
 
+  export type ExpenseReceiptItemListRelationFilter = {
+    every?: ExpenseReceiptItemWhereInput
+    some?: ExpenseReceiptItemWhereInput
+    none?: ExpenseReceiptItemWhereInput
+  }
+
+  export type ExpenseReceiptItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ExpenseReceiptCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
@@ -33292,21 +34899,104 @@ export namespace Prisma {
     total_amount?: SortOrder
   }
 
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type ExpenseProductCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    name?: SortOrder
+    brand?: SortOrder
+    unit?: SortOrder
+    size?: SortOrder
+    category_uuid?: SortOrder
+    subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ExpenseProductAvgOrderByAggregateInput = {
+    id?: SortOrder
+    size?: SortOrder
+  }
+
+  export type ExpenseProductMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    name?: SortOrder
+    brand?: SortOrder
+    unit?: SortOrder
+    size?: SortOrder
+    category_uuid?: SortOrder
+    subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ExpenseProductMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    name?: SortOrder
+    brand?: SortOrder
+    unit?: SortOrder
+    size?: SortOrder
+    category_uuid?: SortOrder
+    subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ExpenseProductSumOrderByAggregateInput = {
+    id?: SortOrder
+    size?: SortOrder
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
   export type ExpenseReceiptScalarRelationFilter = {
     is?: ExpenseReceiptWhereInput
     isNot?: ExpenseReceiptWhereInput
+  }
+
+  export type ExpenseProductNullableScalarRelationFilter = {
+    is?: ExpenseProductWhereInput | null
+    isNot?: ExpenseProductWhereInput | null
   }
 
   export type ExpenseReceiptItemCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
     receipt_uuid?: SortOrder
+    product_uuid?: SortOrder
     name?: SortOrder
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
-    category_uuid?: SortOrder
-    subcategory_uuid?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -33322,12 +35012,11 @@ export namespace Prisma {
     id?: SortOrder
     uuid?: SortOrder
     receipt_uuid?: SortOrder
+    product_uuid?: SortOrder
     name?: SortOrder
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
-    category_uuid?: SortOrder
-    subcategory_uuid?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -33336,12 +35025,11 @@ export namespace Prisma {
     id?: SortOrder
     uuid?: SortOrder
     receipt_uuid?: SortOrder
+    product_uuid?: SortOrder
     name?: SortOrder
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
-    category_uuid?: SortOrder
-    subcategory_uuid?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -33571,17 +35259,6 @@ export namespace Prisma {
     order?: SortOrder
   }
 
-  export type DecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
   export type WorkoutEntryScalarRelationFilter = {
     is?: WorkoutEntryWhereInput
     isNot?: WorkoutEntryWhereInput
@@ -33673,22 +35350,6 @@ export namespace Prisma {
     order?: SortOrder
   }
 
-  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
-  }
-
   export type ActivityCreateNestedManyWithoutUserInput = {
     create?: XOR<ActivityCreateWithoutUserInput, ActivityUncheckedCreateWithoutUserInput> | ActivityCreateWithoutUserInput[] | ActivityUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ActivityCreateOrConnectWithoutUserInput | ActivityCreateOrConnectWithoutUserInput[]
@@ -33764,6 +35425,13 @@ export namespace Prisma {
     connectOrCreate?: ExpenseStoreCreateOrConnectWithoutUserInput | ExpenseStoreCreateOrConnectWithoutUserInput[]
     createMany?: ExpenseStoreCreateManyUserInputEnvelope
     connect?: ExpenseStoreWhereUniqueInput | ExpenseStoreWhereUniqueInput[]
+  }
+
+  export type ExpenseProductCreateNestedManyWithoutUserInput = {
+    create?: XOR<ExpenseProductCreateWithoutUserInput, ExpenseProductUncheckedCreateWithoutUserInput> | ExpenseProductCreateWithoutUserInput[] | ExpenseProductUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutUserInput | ExpenseProductCreateOrConnectWithoutUserInput[]
+    createMany?: ExpenseProductCreateManyUserInputEnvelope
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
   }
 
   export type MuscleGroupCreateNestedManyWithoutUserInput = {
@@ -33862,6 +35530,13 @@ export namespace Prisma {
     connectOrCreate?: ExpenseStoreCreateOrConnectWithoutUserInput | ExpenseStoreCreateOrConnectWithoutUserInput[]
     createMany?: ExpenseStoreCreateManyUserInputEnvelope
     connect?: ExpenseStoreWhereUniqueInput | ExpenseStoreWhereUniqueInput[]
+  }
+
+  export type ExpenseProductUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ExpenseProductCreateWithoutUserInput, ExpenseProductUncheckedCreateWithoutUserInput> | ExpenseProductCreateWithoutUserInput[] | ExpenseProductUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutUserInput | ExpenseProductCreateOrConnectWithoutUserInput[]
+    createMany?: ExpenseProductCreateManyUserInputEnvelope
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
   }
 
   export type MuscleGroupUncheckedCreateNestedManyWithoutUserInput = {
@@ -34053,6 +35728,20 @@ export namespace Prisma {
     update?: ExpenseStoreUpdateWithWhereUniqueWithoutUserInput | ExpenseStoreUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ExpenseStoreUpdateManyWithWhereWithoutUserInput | ExpenseStoreUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ExpenseStoreScalarWhereInput | ExpenseStoreScalarWhereInput[]
+  }
+
+  export type ExpenseProductUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ExpenseProductCreateWithoutUserInput, ExpenseProductUncheckedCreateWithoutUserInput> | ExpenseProductCreateWithoutUserInput[] | ExpenseProductUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutUserInput | ExpenseProductCreateOrConnectWithoutUserInput[]
+    upsert?: ExpenseProductUpsertWithWhereUniqueWithoutUserInput | ExpenseProductUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ExpenseProductCreateManyUserInputEnvelope
+    set?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    disconnect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    delete?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    update?: ExpenseProductUpdateWithWhereUniqueWithoutUserInput | ExpenseProductUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ExpenseProductUpdateManyWithWhereWithoutUserInput | ExpenseProductUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
   }
 
   export type MuscleGroupUpdateManyWithoutUserNestedInput = {
@@ -34257,6 +35946,20 @@ export namespace Prisma {
     update?: ExpenseStoreUpdateWithWhereUniqueWithoutUserInput | ExpenseStoreUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ExpenseStoreUpdateManyWithWhereWithoutUserInput | ExpenseStoreUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ExpenseStoreScalarWhereInput | ExpenseStoreScalarWhereInput[]
+  }
+
+  export type ExpenseProductUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ExpenseProductCreateWithoutUserInput, ExpenseProductUncheckedCreateWithoutUserInput> | ExpenseProductCreateWithoutUserInput[] | ExpenseProductUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutUserInput | ExpenseProductCreateOrConnectWithoutUserInput[]
+    upsert?: ExpenseProductUpsertWithWhereUniqueWithoutUserInput | ExpenseProductUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ExpenseProductCreateManyUserInputEnvelope
+    set?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    disconnect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    delete?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    update?: ExpenseProductUpdateWithWhereUniqueWithoutUserInput | ExpenseProductUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ExpenseProductUpdateManyWithWhereWithoutUserInput | ExpenseProductUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
   }
 
   export type MuscleGroupUncheckedUpdateManyWithoutUserNestedInput = {
@@ -35039,11 +36742,11 @@ export namespace Prisma {
     connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
   }
 
-  export type ExpenseReceiptItemCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<ExpenseReceiptItemCreateWithoutCategoryInput, ExpenseReceiptItemUncheckedCreateWithoutCategoryInput> | ExpenseReceiptItemCreateWithoutCategoryInput[] | ExpenseReceiptItemUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutCategoryInput | ExpenseReceiptItemCreateOrConnectWithoutCategoryInput[]
-    createMany?: ExpenseReceiptItemCreateManyCategoryInputEnvelope
-    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+  export type ExpenseProductCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<ExpenseProductCreateWithoutCategoryInput, ExpenseProductUncheckedCreateWithoutCategoryInput> | ExpenseProductCreateWithoutCategoryInput[] | ExpenseProductUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutCategoryInput | ExpenseProductCreateOrConnectWithoutCategoryInput[]
+    createMany?: ExpenseProductCreateManyCategoryInputEnvelope
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
   }
 
   export type ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput = {
@@ -35060,11 +36763,11 @@ export namespace Prisma {
     connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
   }
 
-  export type ExpenseReceiptItemUncheckedCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<ExpenseReceiptItemCreateWithoutCategoryInput, ExpenseReceiptItemUncheckedCreateWithoutCategoryInput> | ExpenseReceiptItemCreateWithoutCategoryInput[] | ExpenseReceiptItemUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutCategoryInput | ExpenseReceiptItemCreateOrConnectWithoutCategoryInput[]
-    createMany?: ExpenseReceiptItemCreateManyCategoryInputEnvelope
-    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+  export type ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<ExpenseProductCreateWithoutCategoryInput, ExpenseProductUncheckedCreateWithoutCategoryInput> | ExpenseProductCreateWithoutCategoryInput[] | ExpenseProductUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutCategoryInput | ExpenseProductCreateOrConnectWithoutCategoryInput[]
+    createMany?: ExpenseProductCreateManyCategoryInputEnvelope
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutCategoriesNestedInput = {
@@ -35105,18 +36808,18 @@ export namespace Prisma {
     deleteMany?: ExpenseEntryScalarWhereInput | ExpenseEntryScalarWhereInput[]
   }
 
-  export type ExpenseReceiptItemUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<ExpenseReceiptItemCreateWithoutCategoryInput, ExpenseReceiptItemUncheckedCreateWithoutCategoryInput> | ExpenseReceiptItemCreateWithoutCategoryInput[] | ExpenseReceiptItemUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutCategoryInput | ExpenseReceiptItemCreateOrConnectWithoutCategoryInput[]
-    upsert?: ExpenseReceiptItemUpsertWithWhereUniqueWithoutCategoryInput | ExpenseReceiptItemUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: ExpenseReceiptItemCreateManyCategoryInputEnvelope
-    set?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    disconnect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    delete?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    update?: ExpenseReceiptItemUpdateWithWhereUniqueWithoutCategoryInput | ExpenseReceiptItemUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: ExpenseReceiptItemUpdateManyWithWhereWithoutCategoryInput | ExpenseReceiptItemUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
+  export type ExpenseProductUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<ExpenseProductCreateWithoutCategoryInput, ExpenseProductUncheckedCreateWithoutCategoryInput> | ExpenseProductCreateWithoutCategoryInput[] | ExpenseProductUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutCategoryInput | ExpenseProductCreateOrConnectWithoutCategoryInput[]
+    upsert?: ExpenseProductUpsertWithWhereUniqueWithoutCategoryInput | ExpenseProductUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: ExpenseProductCreateManyCategoryInputEnvelope
+    set?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    disconnect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    delete?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    update?: ExpenseProductUpdateWithWhereUniqueWithoutCategoryInput | ExpenseProductUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: ExpenseProductUpdateManyWithWhereWithoutCategoryInput | ExpenseProductUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
   }
 
   export type ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput = {
@@ -35147,18 +36850,18 @@ export namespace Prisma {
     deleteMany?: ExpenseEntryScalarWhereInput | ExpenseEntryScalarWhereInput[]
   }
 
-  export type ExpenseReceiptItemUncheckedUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<ExpenseReceiptItemCreateWithoutCategoryInput, ExpenseReceiptItemUncheckedCreateWithoutCategoryInput> | ExpenseReceiptItemCreateWithoutCategoryInput[] | ExpenseReceiptItemUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutCategoryInput | ExpenseReceiptItemCreateOrConnectWithoutCategoryInput[]
-    upsert?: ExpenseReceiptItemUpsertWithWhereUniqueWithoutCategoryInput | ExpenseReceiptItemUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: ExpenseReceiptItemCreateManyCategoryInputEnvelope
-    set?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    disconnect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    delete?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    update?: ExpenseReceiptItemUpdateWithWhereUniqueWithoutCategoryInput | ExpenseReceiptItemUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: ExpenseReceiptItemUpdateManyWithWhereWithoutCategoryInput | ExpenseReceiptItemUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
+  export type ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<ExpenseProductCreateWithoutCategoryInput, ExpenseProductUncheckedCreateWithoutCategoryInput> | ExpenseProductCreateWithoutCategoryInput[] | ExpenseProductUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutCategoryInput | ExpenseProductCreateOrConnectWithoutCategoryInput[]
+    upsert?: ExpenseProductUpsertWithWhereUniqueWithoutCategoryInput | ExpenseProductUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: ExpenseProductCreateManyCategoryInputEnvelope
+    set?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    disconnect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    delete?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    update?: ExpenseProductUpdateWithWhereUniqueWithoutCategoryInput | ExpenseProductUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: ExpenseProductUpdateManyWithWhereWithoutCategoryInput | ExpenseProductUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSubcategoriesInput = {
@@ -35180,11 +36883,11 @@ export namespace Prisma {
     connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
   }
 
-  export type ExpenseReceiptItemCreateNestedManyWithoutSubcategoryInput = {
-    create?: XOR<ExpenseReceiptItemCreateWithoutSubcategoryInput, ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput> | ExpenseReceiptItemCreateWithoutSubcategoryInput[] | ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput[]
-    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutSubcategoryInput | ExpenseReceiptItemCreateOrConnectWithoutSubcategoryInput[]
-    createMany?: ExpenseReceiptItemCreateManySubcategoryInputEnvelope
-    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+  export type ExpenseProductCreateNestedManyWithoutSubcategoryInput = {
+    create?: XOR<ExpenseProductCreateWithoutSubcategoryInput, ExpenseProductUncheckedCreateWithoutSubcategoryInput> | ExpenseProductCreateWithoutSubcategoryInput[] | ExpenseProductUncheckedCreateWithoutSubcategoryInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutSubcategoryInput | ExpenseProductCreateOrConnectWithoutSubcategoryInput[]
+    createMany?: ExpenseProductCreateManySubcategoryInputEnvelope
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
   }
 
   export type ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput = {
@@ -35194,11 +36897,11 @@ export namespace Prisma {
     connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
   }
 
-  export type ExpenseReceiptItemUncheckedCreateNestedManyWithoutSubcategoryInput = {
-    create?: XOR<ExpenseReceiptItemCreateWithoutSubcategoryInput, ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput> | ExpenseReceiptItemCreateWithoutSubcategoryInput[] | ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput[]
-    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutSubcategoryInput | ExpenseReceiptItemCreateOrConnectWithoutSubcategoryInput[]
-    createMany?: ExpenseReceiptItemCreateManySubcategoryInputEnvelope
-    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+  export type ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput = {
+    create?: XOR<ExpenseProductCreateWithoutSubcategoryInput, ExpenseProductUncheckedCreateWithoutSubcategoryInput> | ExpenseProductCreateWithoutSubcategoryInput[] | ExpenseProductUncheckedCreateWithoutSubcategoryInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutSubcategoryInput | ExpenseProductCreateOrConnectWithoutSubcategoryInput[]
+    createMany?: ExpenseProductCreateManySubcategoryInputEnvelope
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutSubcategoriesNestedInput = {
@@ -35233,18 +36936,18 @@ export namespace Prisma {
     deleteMany?: ExpenseEntryScalarWhereInput | ExpenseEntryScalarWhereInput[]
   }
 
-  export type ExpenseReceiptItemUpdateManyWithoutSubcategoryNestedInput = {
-    create?: XOR<ExpenseReceiptItemCreateWithoutSubcategoryInput, ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput> | ExpenseReceiptItemCreateWithoutSubcategoryInput[] | ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput[]
-    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutSubcategoryInput | ExpenseReceiptItemCreateOrConnectWithoutSubcategoryInput[]
-    upsert?: ExpenseReceiptItemUpsertWithWhereUniqueWithoutSubcategoryInput | ExpenseReceiptItemUpsertWithWhereUniqueWithoutSubcategoryInput[]
-    createMany?: ExpenseReceiptItemCreateManySubcategoryInputEnvelope
-    set?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    disconnect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    delete?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    update?: ExpenseReceiptItemUpdateWithWhereUniqueWithoutSubcategoryInput | ExpenseReceiptItemUpdateWithWhereUniqueWithoutSubcategoryInput[]
-    updateMany?: ExpenseReceiptItemUpdateManyWithWhereWithoutSubcategoryInput | ExpenseReceiptItemUpdateManyWithWhereWithoutSubcategoryInput[]
-    deleteMany?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
+  export type ExpenseProductUpdateManyWithoutSubcategoryNestedInput = {
+    create?: XOR<ExpenseProductCreateWithoutSubcategoryInput, ExpenseProductUncheckedCreateWithoutSubcategoryInput> | ExpenseProductCreateWithoutSubcategoryInput[] | ExpenseProductUncheckedCreateWithoutSubcategoryInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutSubcategoryInput | ExpenseProductCreateOrConnectWithoutSubcategoryInput[]
+    upsert?: ExpenseProductUpsertWithWhereUniqueWithoutSubcategoryInput | ExpenseProductUpsertWithWhereUniqueWithoutSubcategoryInput[]
+    createMany?: ExpenseProductCreateManySubcategoryInputEnvelope
+    set?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    disconnect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    delete?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    update?: ExpenseProductUpdateWithWhereUniqueWithoutSubcategoryInput | ExpenseProductUpdateWithWhereUniqueWithoutSubcategoryInput[]
+    updateMany?: ExpenseProductUpdateManyWithWhereWithoutSubcategoryInput | ExpenseProductUpdateManyWithWhereWithoutSubcategoryInput[]
+    deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
   }
 
   export type ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput = {
@@ -35261,18 +36964,18 @@ export namespace Prisma {
     deleteMany?: ExpenseEntryScalarWhereInput | ExpenseEntryScalarWhereInput[]
   }
 
-  export type ExpenseReceiptItemUncheckedUpdateManyWithoutSubcategoryNestedInput = {
-    create?: XOR<ExpenseReceiptItemCreateWithoutSubcategoryInput, ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput> | ExpenseReceiptItemCreateWithoutSubcategoryInput[] | ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput[]
-    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutSubcategoryInput | ExpenseReceiptItemCreateOrConnectWithoutSubcategoryInput[]
-    upsert?: ExpenseReceiptItemUpsertWithWhereUniqueWithoutSubcategoryInput | ExpenseReceiptItemUpsertWithWhereUniqueWithoutSubcategoryInput[]
-    createMany?: ExpenseReceiptItemCreateManySubcategoryInputEnvelope
-    set?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    disconnect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    delete?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-    update?: ExpenseReceiptItemUpdateWithWhereUniqueWithoutSubcategoryInput | ExpenseReceiptItemUpdateWithWhereUniqueWithoutSubcategoryInput[]
-    updateMany?: ExpenseReceiptItemUpdateManyWithWhereWithoutSubcategoryInput | ExpenseReceiptItemUpdateManyWithWhereWithoutSubcategoryInput[]
-    deleteMany?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
+  export type ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput = {
+    create?: XOR<ExpenseProductCreateWithoutSubcategoryInput, ExpenseProductUncheckedCreateWithoutSubcategoryInput> | ExpenseProductCreateWithoutSubcategoryInput[] | ExpenseProductUncheckedCreateWithoutSubcategoryInput[]
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutSubcategoryInput | ExpenseProductCreateOrConnectWithoutSubcategoryInput[]
+    upsert?: ExpenseProductUpsertWithWhereUniqueWithoutSubcategoryInput | ExpenseProductUpsertWithWhereUniqueWithoutSubcategoryInput[]
+    createMany?: ExpenseProductCreateManySubcategoryInputEnvelope
+    set?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    disconnect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    delete?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+    update?: ExpenseProductUpdateWithWhereUniqueWithoutSubcategoryInput | ExpenseProductUpdateWithWhereUniqueWithoutSubcategoryInput[]
+    updateMany?: ExpenseProductUpdateManyWithWhereWithoutSubcategoryInput | ExpenseProductUpdateManyWithWhereWithoutSubcategoryInput[]
+    deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutExpense_entriesInput = {
@@ -35531,22 +37234,114 @@ export namespace Prisma {
     deleteMany?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutExpense_productsInput = {
+    create?: XOR<UserCreateWithoutExpense_productsInput, UserUncheckedCreateWithoutExpense_productsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutExpense_productsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ExpenseCategoryCreateNestedOneWithoutProductsInput = {
+    create?: XOR<ExpenseCategoryCreateWithoutProductsInput, ExpenseCategoryUncheckedCreateWithoutProductsInput>
+    connectOrCreate?: ExpenseCategoryCreateOrConnectWithoutProductsInput
+    connect?: ExpenseCategoryWhereUniqueInput
+  }
+
+  export type ExpenseSubcategoryCreateNestedOneWithoutProductsInput = {
+    create?: XOR<ExpenseSubcategoryCreateWithoutProductsInput, ExpenseSubcategoryUncheckedCreateWithoutProductsInput>
+    connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutProductsInput
+    connect?: ExpenseSubcategoryWhereUniqueInput
+  }
+
+  export type ExpenseReceiptItemCreateNestedManyWithoutProductInput = {
+    create?: XOR<ExpenseReceiptItemCreateWithoutProductInput, ExpenseReceiptItemUncheckedCreateWithoutProductInput> | ExpenseReceiptItemCreateWithoutProductInput[] | ExpenseReceiptItemUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutProductInput | ExpenseReceiptItemCreateOrConnectWithoutProductInput[]
+    createMany?: ExpenseReceiptItemCreateManyProductInputEnvelope
+    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+  }
+
+  export type ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<ExpenseReceiptItemCreateWithoutProductInput, ExpenseReceiptItemUncheckedCreateWithoutProductInput> | ExpenseReceiptItemCreateWithoutProductInput[] | ExpenseReceiptItemUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutProductInput | ExpenseReceiptItemCreateOrConnectWithoutProductInput[]
+    createMany?: ExpenseReceiptItemCreateManyProductInputEnvelope
+    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type UserUpdateOneWithoutExpense_productsNestedInput = {
+    create?: XOR<UserCreateWithoutExpense_productsInput, UserUncheckedCreateWithoutExpense_productsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutExpense_productsInput
+    upsert?: UserUpsertWithoutExpense_productsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutExpense_productsInput, UserUpdateWithoutExpense_productsInput>, UserUncheckedUpdateWithoutExpense_productsInput>
+  }
+
+  export type ExpenseCategoryUpdateOneWithoutProductsNestedInput = {
+    create?: XOR<ExpenseCategoryCreateWithoutProductsInput, ExpenseCategoryUncheckedCreateWithoutProductsInput>
+    connectOrCreate?: ExpenseCategoryCreateOrConnectWithoutProductsInput
+    upsert?: ExpenseCategoryUpsertWithoutProductsInput
+    disconnect?: ExpenseCategoryWhereInput | boolean
+    delete?: ExpenseCategoryWhereInput | boolean
+    connect?: ExpenseCategoryWhereUniqueInput
+    update?: XOR<XOR<ExpenseCategoryUpdateToOneWithWhereWithoutProductsInput, ExpenseCategoryUpdateWithoutProductsInput>, ExpenseCategoryUncheckedUpdateWithoutProductsInput>
+  }
+
+  export type ExpenseSubcategoryUpdateOneWithoutProductsNestedInput = {
+    create?: XOR<ExpenseSubcategoryCreateWithoutProductsInput, ExpenseSubcategoryUncheckedCreateWithoutProductsInput>
+    connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutProductsInput
+    upsert?: ExpenseSubcategoryUpsertWithoutProductsInput
+    disconnect?: ExpenseSubcategoryWhereInput | boolean
+    delete?: ExpenseSubcategoryWhereInput | boolean
+    connect?: ExpenseSubcategoryWhereUniqueInput
+    update?: XOR<XOR<ExpenseSubcategoryUpdateToOneWithWhereWithoutProductsInput, ExpenseSubcategoryUpdateWithoutProductsInput>, ExpenseSubcategoryUncheckedUpdateWithoutProductsInput>
+  }
+
+  export type ExpenseReceiptItemUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ExpenseReceiptItemCreateWithoutProductInput, ExpenseReceiptItemUncheckedCreateWithoutProductInput> | ExpenseReceiptItemCreateWithoutProductInput[] | ExpenseReceiptItemUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutProductInput | ExpenseReceiptItemCreateOrConnectWithoutProductInput[]
+    upsert?: ExpenseReceiptItemUpsertWithWhereUniqueWithoutProductInput | ExpenseReceiptItemUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ExpenseReceiptItemCreateManyProductInputEnvelope
+    set?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+    disconnect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+    delete?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+    update?: ExpenseReceiptItemUpdateWithWhereUniqueWithoutProductInput | ExpenseReceiptItemUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ExpenseReceiptItemUpdateManyWithWhereWithoutProductInput | ExpenseReceiptItemUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
+  }
+
+  export type ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ExpenseReceiptItemCreateWithoutProductInput, ExpenseReceiptItemUncheckedCreateWithoutProductInput> | ExpenseReceiptItemCreateWithoutProductInput[] | ExpenseReceiptItemUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutProductInput | ExpenseReceiptItemCreateOrConnectWithoutProductInput[]
+    upsert?: ExpenseReceiptItemUpsertWithWhereUniqueWithoutProductInput | ExpenseReceiptItemUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ExpenseReceiptItemCreateManyProductInputEnvelope
+    set?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+    disconnect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+    delete?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+    connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+    update?: ExpenseReceiptItemUpdateWithWhereUniqueWithoutProductInput | ExpenseReceiptItemUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ExpenseReceiptItemUpdateManyWithWhereWithoutProductInput | ExpenseReceiptItemUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
+  }
+
   export type ExpenseReceiptCreateNestedOneWithoutItemsInput = {
     create?: XOR<ExpenseReceiptCreateWithoutItemsInput, ExpenseReceiptUncheckedCreateWithoutItemsInput>
     connectOrCreate?: ExpenseReceiptCreateOrConnectWithoutItemsInput
     connect?: ExpenseReceiptWhereUniqueInput
   }
 
-  export type ExpenseCategoryCreateNestedOneWithoutReceipt_itemsInput = {
-    create?: XOR<ExpenseCategoryCreateWithoutReceipt_itemsInput, ExpenseCategoryUncheckedCreateWithoutReceipt_itemsInput>
-    connectOrCreate?: ExpenseCategoryCreateOrConnectWithoutReceipt_itemsInput
-    connect?: ExpenseCategoryWhereUniqueInput
-  }
-
-  export type ExpenseSubcategoryCreateNestedOneWithoutReceipt_itemsInput = {
-    create?: XOR<ExpenseSubcategoryCreateWithoutReceipt_itemsInput, ExpenseSubcategoryUncheckedCreateWithoutReceipt_itemsInput>
-    connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutReceipt_itemsInput
-    connect?: ExpenseSubcategoryWhereUniqueInput
+  export type ExpenseProductCreateNestedOneWithoutReceipt_itemsInput = {
+    create?: XOR<ExpenseProductCreateWithoutReceipt_itemsInput, ExpenseProductUncheckedCreateWithoutReceipt_itemsInput>
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutReceipt_itemsInput
+    connect?: ExpenseProductWhereUniqueInput
   }
 
   export type ExpenseReceiptUpdateOneRequiredWithoutItemsNestedInput = {
@@ -35557,24 +37352,14 @@ export namespace Prisma {
     update?: XOR<XOR<ExpenseReceiptUpdateToOneWithWhereWithoutItemsInput, ExpenseReceiptUpdateWithoutItemsInput>, ExpenseReceiptUncheckedUpdateWithoutItemsInput>
   }
 
-  export type ExpenseCategoryUpdateOneWithoutReceipt_itemsNestedInput = {
-    create?: XOR<ExpenseCategoryCreateWithoutReceipt_itemsInput, ExpenseCategoryUncheckedCreateWithoutReceipt_itemsInput>
-    connectOrCreate?: ExpenseCategoryCreateOrConnectWithoutReceipt_itemsInput
-    upsert?: ExpenseCategoryUpsertWithoutReceipt_itemsInput
-    disconnect?: ExpenseCategoryWhereInput | boolean
-    delete?: ExpenseCategoryWhereInput | boolean
-    connect?: ExpenseCategoryWhereUniqueInput
-    update?: XOR<XOR<ExpenseCategoryUpdateToOneWithWhereWithoutReceipt_itemsInput, ExpenseCategoryUpdateWithoutReceipt_itemsInput>, ExpenseCategoryUncheckedUpdateWithoutReceipt_itemsInput>
-  }
-
-  export type ExpenseSubcategoryUpdateOneWithoutReceipt_itemsNestedInput = {
-    create?: XOR<ExpenseSubcategoryCreateWithoutReceipt_itemsInput, ExpenseSubcategoryUncheckedCreateWithoutReceipt_itemsInput>
-    connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutReceipt_itemsInput
-    upsert?: ExpenseSubcategoryUpsertWithoutReceipt_itemsInput
-    disconnect?: ExpenseSubcategoryWhereInput | boolean
-    delete?: ExpenseSubcategoryWhereInput | boolean
-    connect?: ExpenseSubcategoryWhereUniqueInput
-    update?: XOR<XOR<ExpenseSubcategoryUpdateToOneWithWhereWithoutReceipt_itemsInput, ExpenseSubcategoryUpdateWithoutReceipt_itemsInput>, ExpenseSubcategoryUncheckedUpdateWithoutReceipt_itemsInput>
+  export type ExpenseProductUpdateOneWithoutReceipt_itemsNestedInput = {
+    create?: XOR<ExpenseProductCreateWithoutReceipt_itemsInput, ExpenseProductUncheckedCreateWithoutReceipt_itemsInput>
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutReceipt_itemsInput
+    upsert?: ExpenseProductUpsertWithoutReceipt_itemsInput
+    disconnect?: ExpenseProductWhereInput | boolean
+    delete?: ExpenseProductWhereInput | boolean
+    connect?: ExpenseProductWhereUniqueInput
+    update?: XOR<XOR<ExpenseProductUpdateToOneWithWhereWithoutReceipt_itemsInput, ExpenseProductUpdateWithoutReceipt_itemsInput>, ExpenseProductUncheckedUpdateWithoutReceipt_itemsInput>
   }
 
   export type UserCreateNestedOneWithoutMuscle_groupsInput = {
@@ -35843,14 +37628,6 @@ export namespace Prisma {
     create?: XOR<WorkoutEntryCreateWithoutSetsInput, WorkoutEntryUncheckedCreateWithoutSetsInput>
     connectOrCreate?: WorkoutEntryCreateOrConnectWithoutSetsInput
     connect?: WorkoutEntryWhereUniqueInput
-  }
-
-  export type NullableDecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string | null
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type WorkoutEntryUpdateOneRequiredWithoutSetsNestedInput = {
@@ -36241,23 +38018,6 @@ export namespace Prisma {
     _max?: NestedEnumExpenseEntryTypeFilter<$PrismaModel>
   }
 
-  export type NestedEnumExerciseTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.ExerciseType | EnumExerciseTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.ExerciseType[] | ListEnumExerciseTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ExerciseType[] | ListEnumExerciseTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumExerciseTypeFilter<$PrismaModel> | $Enums.ExerciseType
-  }
-
-  export type NestedEnumExerciseTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ExerciseType | EnumExerciseTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.ExerciseType[] | ListEnumExerciseTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ExerciseType[] | ListEnumExerciseTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumExerciseTypeWithAggregatesFilter<$PrismaModel> | $Enums.ExerciseType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumExerciseTypeFilter<$PrismaModel>
-    _max?: NestedEnumExerciseTypeFilter<$PrismaModel>
-  }
-
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -36283,6 +38043,23 @@ export namespace Prisma {
     _sum?: NestedDecimalNullableFilter<$PrismaModel>
     _min?: NestedDecimalNullableFilter<$PrismaModel>
     _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumExerciseTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExerciseType | EnumExerciseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ExerciseType[] | ListEnumExerciseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExerciseType[] | ListEnumExerciseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumExerciseTypeFilter<$PrismaModel> | $Enums.ExerciseType
+  }
+
+  export type NestedEnumExerciseTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExerciseType | EnumExerciseTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ExerciseType[] | ListEnumExerciseTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ExerciseType[] | ListEnumExerciseTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumExerciseTypeWithAggregatesFilter<$PrismaModel> | $Enums.ExerciseType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumExerciseTypeFilter<$PrismaModel>
+    _max?: NestedEnumExerciseTypeFilter<$PrismaModel>
   }
 
   export type ActivityCreateWithoutUserInput = {
@@ -36581,7 +38358,7 @@ export namespace Prisma {
     updated_at?: Date | string
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
     entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
-    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutUserInput = {
@@ -36594,7 +38371,7 @@ export namespace Prisma {
     updated_at?: Date | string
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
-    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutUserInput = {
@@ -36614,7 +38391,7 @@ export namespace Prisma {
     updated_at?: Date | string
     category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
     entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
-    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutUserInput = {
@@ -36625,7 +38402,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
-    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutUserInput = {
@@ -36695,6 +38472,43 @@ export namespace Prisma {
 
   export type ExpenseStoreCreateManyUserInputEnvelope = {
     data: ExpenseStoreCreateManyUserInput | ExpenseStoreCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExpenseProductCreateWithoutUserInput = {
+    uuid?: string
+    name: string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    category?: ExpenseCategoryCreateNestedOneWithoutProductsInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutProductsInput
+    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutProductInput
+  }
+
+  export type ExpenseProductUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    name: string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ExpenseProductCreateOrConnectWithoutUserInput = {
+    where: ExpenseProductWhereUniqueInput
+    create: XOR<ExpenseProductCreateWithoutUserInput, ExpenseProductUncheckedCreateWithoutUserInput>
+  }
+
+  export type ExpenseProductCreateManyUserInputEnvelope = {
+    data: ExpenseProductCreateManyUserInput | ExpenseProductCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -37151,6 +38965,39 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"ExpenseStore"> | Date | string
   }
 
+  export type ExpenseProductUpsertWithWhereUniqueWithoutUserInput = {
+    where: ExpenseProductWhereUniqueInput
+    update: XOR<ExpenseProductUpdateWithoutUserInput, ExpenseProductUncheckedUpdateWithoutUserInput>
+    create: XOR<ExpenseProductCreateWithoutUserInput, ExpenseProductUncheckedCreateWithoutUserInput>
+  }
+
+  export type ExpenseProductUpdateWithWhereUniqueWithoutUserInput = {
+    where: ExpenseProductWhereUniqueInput
+    data: XOR<ExpenseProductUpdateWithoutUserInput, ExpenseProductUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ExpenseProductUpdateManyWithWhereWithoutUserInput = {
+    where: ExpenseProductScalarWhereInput
+    data: XOR<ExpenseProductUpdateManyMutationInput, ExpenseProductUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ExpenseProductScalarWhereInput = {
+    AND?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
+    OR?: ExpenseProductScalarWhereInput[]
+    NOT?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
+    id?: IntFilter<"ExpenseProduct"> | number
+    uuid?: StringFilter<"ExpenseProduct"> | string
+    user_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
+    name?: StringFilter<"ExpenseProduct"> | string
+    brand?: StringNullableFilter<"ExpenseProduct"> | string | null
+    unit?: StringNullableFilter<"ExpenseProduct"> | string | null
+    size?: DecimalNullableFilter<"ExpenseProduct"> | Decimal | DecimalJsLike | number | string | null
+    category_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
+    subcategory_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
+    created_at?: DateTimeFilter<"ExpenseProduct"> | Date | string
+    updated_at?: DateTimeFilter<"ExpenseProduct"> | Date | string
+  }
+
   export type MuscleGroupUpsertWithWhereUniqueWithoutUserInput = {
     where: MuscleGroupWhereUniqueInput
     update: XOR<MuscleGroupUpdateWithoutUserInput, MuscleGroupUncheckedUpdateWithoutUserInput>
@@ -37262,6 +39109,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -37288,6 +39136,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -37499,6 +39348,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -37525,6 +39375,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -37614,6 +39465,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -37640,6 +39492,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -37717,6 +39570,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -37743,6 +39597,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -37846,6 +39701,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -37872,6 +39728,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -38075,6 +39932,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -38101,6 +39959,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -38516,6 +40375,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -38542,6 +40402,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -38727,6 +40588,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -38753,6 +40615,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -38944,6 +40807,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -38970,6 +40834,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -39145,6 +41010,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -39171,6 +41037,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -39196,6 +41063,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -39222,6 +41090,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -39345,6 +41214,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -39371,6 +41241,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -39428,6 +41299,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -39454,6 +41326,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -39471,7 +41344,7 @@ export namespace Prisma {
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutSubcategoriesInput
     entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
-    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutCategoryInput = {
@@ -39482,7 +41355,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
-    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutCategoryInput = {
@@ -39536,38 +41409,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ExpenseReceiptItemCreateWithoutCategoryInput = {
+  export type ExpenseProductCreateWithoutCategoryInput = {
     uuid?: string
     name: string
-    quantity?: Decimal | DecimalJsLike | number | string
-    unit_price: Decimal | DecimalJsLike | number | string
-    total_price: Decimal | DecimalJsLike | number | string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    receipt: ExpenseReceiptCreateNestedOneWithoutItemsInput
-    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutReceipt_itemsInput
+    user?: UserCreateNestedOneWithoutExpense_productsInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutProductsInput
+    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutProductInput
   }
 
-  export type ExpenseReceiptItemUncheckedCreateWithoutCategoryInput = {
+  export type ExpenseProductUncheckedCreateWithoutCategoryInput = {
     id?: number
     uuid?: string
-    receipt_uuid: string
+    user_uuid?: string | null
     name: string
-    quantity?: Decimal | DecimalJsLike | number | string
-    unit_price: Decimal | DecimalJsLike | number | string
-    total_price: Decimal | DecimalJsLike | number | string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
     subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput
   }
 
-  export type ExpenseReceiptItemCreateOrConnectWithoutCategoryInput = {
-    where: ExpenseReceiptItemWhereUniqueInput
-    create: XOR<ExpenseReceiptItemCreateWithoutCategoryInput, ExpenseReceiptItemUncheckedCreateWithoutCategoryInput>
+  export type ExpenseProductCreateOrConnectWithoutCategoryInput = {
+    where: ExpenseProductWhereUniqueInput
+    create: XOR<ExpenseProductCreateWithoutCategoryInput, ExpenseProductUncheckedCreateWithoutCategoryInput>
   }
 
-  export type ExpenseReceiptItemCreateManyCategoryInputEnvelope = {
-    data: ExpenseReceiptItemCreateManyCategoryInput | ExpenseReceiptItemCreateManyCategoryInput[]
+  export type ExpenseProductCreateManyCategoryInputEnvelope = {
+    data: ExpenseProductCreateManyCategoryInput | ExpenseProductCreateManyCategoryInput[]
     skipDuplicates?: boolean
   }
 
@@ -39602,6 +41477,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -39628,6 +41504,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -39665,37 +41542,20 @@ export namespace Prisma {
     data: XOR<ExpenseEntryUpdateManyMutationInput, ExpenseEntryUncheckedUpdateManyWithoutCategoryInput>
   }
 
-  export type ExpenseReceiptItemUpsertWithWhereUniqueWithoutCategoryInput = {
-    where: ExpenseReceiptItemWhereUniqueInput
-    update: XOR<ExpenseReceiptItemUpdateWithoutCategoryInput, ExpenseReceiptItemUncheckedUpdateWithoutCategoryInput>
-    create: XOR<ExpenseReceiptItemCreateWithoutCategoryInput, ExpenseReceiptItemUncheckedCreateWithoutCategoryInput>
+  export type ExpenseProductUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: ExpenseProductWhereUniqueInput
+    update: XOR<ExpenseProductUpdateWithoutCategoryInput, ExpenseProductUncheckedUpdateWithoutCategoryInput>
+    create: XOR<ExpenseProductCreateWithoutCategoryInput, ExpenseProductUncheckedCreateWithoutCategoryInput>
   }
 
-  export type ExpenseReceiptItemUpdateWithWhereUniqueWithoutCategoryInput = {
-    where: ExpenseReceiptItemWhereUniqueInput
-    data: XOR<ExpenseReceiptItemUpdateWithoutCategoryInput, ExpenseReceiptItemUncheckedUpdateWithoutCategoryInput>
+  export type ExpenseProductUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: ExpenseProductWhereUniqueInput
+    data: XOR<ExpenseProductUpdateWithoutCategoryInput, ExpenseProductUncheckedUpdateWithoutCategoryInput>
   }
 
-  export type ExpenseReceiptItemUpdateManyWithWhereWithoutCategoryInput = {
-    where: ExpenseReceiptItemScalarWhereInput
-    data: XOR<ExpenseReceiptItemUpdateManyMutationInput, ExpenseReceiptItemUncheckedUpdateManyWithoutCategoryInput>
-  }
-
-  export type ExpenseReceiptItemScalarWhereInput = {
-    AND?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
-    OR?: ExpenseReceiptItemScalarWhereInput[]
-    NOT?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
-    id?: IntFilter<"ExpenseReceiptItem"> | number
-    uuid?: StringFilter<"ExpenseReceiptItem"> | string
-    receipt_uuid?: StringFilter<"ExpenseReceiptItem"> | string
-    name?: StringFilter<"ExpenseReceiptItem"> | string
-    quantity?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
-    unit_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
-    total_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
-    category_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
-    subcategory_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
-    created_at?: DateTimeFilter<"ExpenseReceiptItem"> | Date | string
-    updated_at?: DateTimeFilter<"ExpenseReceiptItem"> | Date | string
+  export type ExpenseProductUpdateManyWithWhereWithoutCategoryInput = {
+    where: ExpenseProductScalarWhereInput
+    data: XOR<ExpenseProductUpdateManyMutationInput, ExpenseProductUncheckedUpdateManyWithoutCategoryInput>
   }
 
   export type UserCreateWithoutSubcategoriesInput = {
@@ -39718,6 +41578,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -39744,6 +41605,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -39763,7 +41625,7 @@ export namespace Prisma {
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutCategoriesInput
     entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
-    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutSubcategoriesInput = {
@@ -39776,7 +41638,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
-    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutSubcategoriesInput = {
@@ -39825,38 +41687,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ExpenseReceiptItemCreateWithoutSubcategoryInput = {
+  export type ExpenseProductCreateWithoutSubcategoryInput = {
     uuid?: string
     name: string
-    quantity?: Decimal | DecimalJsLike | number | string
-    unit_price: Decimal | DecimalJsLike | number | string
-    total_price: Decimal | DecimalJsLike | number | string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    receipt: ExpenseReceiptCreateNestedOneWithoutItemsInput
-    category?: ExpenseCategoryCreateNestedOneWithoutReceipt_itemsInput
+    user?: UserCreateNestedOneWithoutExpense_productsInput
+    category?: ExpenseCategoryCreateNestedOneWithoutProductsInput
+    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutProductInput
   }
 
-  export type ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput = {
+  export type ExpenseProductUncheckedCreateWithoutSubcategoryInput = {
     id?: number
     uuid?: string
-    receipt_uuid: string
+    user_uuid?: string | null
     name: string
-    quantity?: Decimal | DecimalJsLike | number | string
-    unit_price: Decimal | DecimalJsLike | number | string
-    total_price: Decimal | DecimalJsLike | number | string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
     category_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput
   }
 
-  export type ExpenseReceiptItemCreateOrConnectWithoutSubcategoryInput = {
-    where: ExpenseReceiptItemWhereUniqueInput
-    create: XOR<ExpenseReceiptItemCreateWithoutSubcategoryInput, ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput>
+  export type ExpenseProductCreateOrConnectWithoutSubcategoryInput = {
+    where: ExpenseProductWhereUniqueInput
+    create: XOR<ExpenseProductCreateWithoutSubcategoryInput, ExpenseProductUncheckedCreateWithoutSubcategoryInput>
   }
 
-  export type ExpenseReceiptItemCreateManySubcategoryInputEnvelope = {
-    data: ExpenseReceiptItemCreateManySubcategoryInput | ExpenseReceiptItemCreateManySubcategoryInput[]
+  export type ExpenseProductCreateManySubcategoryInputEnvelope = {
+    data: ExpenseProductCreateManySubcategoryInput | ExpenseProductCreateManySubcategoryInput[]
     skipDuplicates?: boolean
   }
 
@@ -39891,6 +41755,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -39917,6 +41782,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -39942,7 +41808,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutCategoriesNestedInput
     entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutSubcategoriesInput = {
@@ -39955,7 +41821,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseEntryUpsertWithWhereUniqueWithoutSubcategoryInput = {
@@ -39974,20 +41840,20 @@ export namespace Prisma {
     data: XOR<ExpenseEntryUpdateManyMutationInput, ExpenseEntryUncheckedUpdateManyWithoutSubcategoryInput>
   }
 
-  export type ExpenseReceiptItemUpsertWithWhereUniqueWithoutSubcategoryInput = {
-    where: ExpenseReceiptItemWhereUniqueInput
-    update: XOR<ExpenseReceiptItemUpdateWithoutSubcategoryInput, ExpenseReceiptItemUncheckedUpdateWithoutSubcategoryInput>
-    create: XOR<ExpenseReceiptItemCreateWithoutSubcategoryInput, ExpenseReceiptItemUncheckedCreateWithoutSubcategoryInput>
+  export type ExpenseProductUpsertWithWhereUniqueWithoutSubcategoryInput = {
+    where: ExpenseProductWhereUniqueInput
+    update: XOR<ExpenseProductUpdateWithoutSubcategoryInput, ExpenseProductUncheckedUpdateWithoutSubcategoryInput>
+    create: XOR<ExpenseProductCreateWithoutSubcategoryInput, ExpenseProductUncheckedCreateWithoutSubcategoryInput>
   }
 
-  export type ExpenseReceiptItemUpdateWithWhereUniqueWithoutSubcategoryInput = {
-    where: ExpenseReceiptItemWhereUniqueInput
-    data: XOR<ExpenseReceiptItemUpdateWithoutSubcategoryInput, ExpenseReceiptItemUncheckedUpdateWithoutSubcategoryInput>
+  export type ExpenseProductUpdateWithWhereUniqueWithoutSubcategoryInput = {
+    where: ExpenseProductWhereUniqueInput
+    data: XOR<ExpenseProductUpdateWithoutSubcategoryInput, ExpenseProductUncheckedUpdateWithoutSubcategoryInput>
   }
 
-  export type ExpenseReceiptItemUpdateManyWithWhereWithoutSubcategoryInput = {
-    where: ExpenseReceiptItemScalarWhereInput
-    data: XOR<ExpenseReceiptItemUpdateManyMutationInput, ExpenseReceiptItemUncheckedUpdateManyWithoutSubcategoryInput>
+  export type ExpenseProductUpdateManyWithWhereWithoutSubcategoryInput = {
+    where: ExpenseProductScalarWhereInput
+    data: XOR<ExpenseProductUpdateManyMutationInput, ExpenseProductUncheckedUpdateManyWithoutSubcategoryInput>
   }
 
   export type UserCreateWithoutExpense_entriesInput = {
@@ -40010,6 +41876,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -40036,6 +41903,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -40115,7 +41983,7 @@ export namespace Prisma {
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutCategoriesInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
-    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutEntriesInput = {
@@ -40128,7 +41996,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
-    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutEntriesInput = {
@@ -40143,7 +42011,7 @@ export namespace Prisma {
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutSubcategoriesInput
     category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
-    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutEntriesInput = {
@@ -40154,7 +42022,7 @@ export namespace Prisma {
     name: string
     created_at?: Date | string
     updated_at?: Date | string
-    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutEntriesInput = {
@@ -40221,6 +42089,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -40247,6 +42116,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -40344,7 +42214,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutCategoriesNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutEntriesInput = {
@@ -40357,7 +42227,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseSubcategoryUpsertWithoutEntriesInput = {
@@ -40378,7 +42248,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutSubcategoriesNestedInput
     category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
-    receipt_items?: ExpenseReceiptItemUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutEntriesInput = {
@@ -40389,7 +42259,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseReceiptUpsertWithoutExpense_entryInput = {
@@ -40446,6 +42316,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -40472,6 +42343,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -40546,6 +42418,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -40572,6 +42445,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -40613,6 +42487,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -40639,6 +42514,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -40715,19 +42591,17 @@ export namespace Prisma {
     total_price: Decimal | DecimalJsLike | number | string
     created_at?: Date | string
     updated_at?: Date | string
-    category?: ExpenseCategoryCreateNestedOneWithoutReceipt_itemsInput
-    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutReceipt_itemsInput
+    product?: ExpenseProductCreateNestedOneWithoutReceipt_itemsInput
   }
 
   export type ExpenseReceiptItemUncheckedCreateWithoutReceiptInput = {
     id?: number
     uuid?: string
+    product_uuid?: string | null
     name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
-    category_uuid?: string | null
-    subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -40773,6 +42647,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -40799,6 +42674,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -40890,6 +42766,317 @@ export namespace Prisma {
     data: XOR<ExpenseReceiptItemUpdateManyMutationInput, ExpenseReceiptItemUncheckedUpdateManyWithoutReceiptInput>
   }
 
+  export type ExpenseReceiptItemScalarWhereInput = {
+    AND?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
+    OR?: ExpenseReceiptItemScalarWhereInput[]
+    NOT?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
+    id?: IntFilter<"ExpenseReceiptItem"> | number
+    uuid?: StringFilter<"ExpenseReceiptItem"> | string
+    receipt_uuid?: StringFilter<"ExpenseReceiptItem"> | string
+    product_uuid?: StringNullableFilter<"ExpenseReceiptItem"> | string | null
+    name?: StringFilter<"ExpenseReceiptItem"> | string
+    quantity?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
+    unit_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
+    total_price?: DecimalFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFilter<"ExpenseReceiptItem"> | Date | string
+    updated_at?: DateTimeFilter<"ExpenseReceiptItem"> | Date | string
+  }
+
+  export type UserCreateWithoutExpense_productsInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutExpense_productsInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutExpense_productsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutExpense_productsInput, UserUncheckedCreateWithoutExpense_productsInput>
+  }
+
+  export type ExpenseCategoryCreateWithoutProductsInput = {
+    uuid?: string
+    name: string
+    icon?: string | null
+    color?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user?: UserCreateNestedOneWithoutCategoriesInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
+    entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
+  }
+
+  export type ExpenseCategoryUncheckedCreateWithoutProductsInput = {
+    id?: number
+    uuid?: string
+    user_uuid?: string | null
+    name: string
+    icon?: string | null
+    color?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type ExpenseCategoryCreateOrConnectWithoutProductsInput = {
+    where: ExpenseCategoryWhereUniqueInput
+    create: XOR<ExpenseCategoryCreateWithoutProductsInput, ExpenseCategoryUncheckedCreateWithoutProductsInput>
+  }
+
+  export type ExpenseSubcategoryCreateWithoutProductsInput = {
+    uuid?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user?: UserCreateNestedOneWithoutSubcategoriesInput
+    category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
+    entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
+  }
+
+  export type ExpenseSubcategoryUncheckedCreateWithoutProductsInput = {
+    id?: number
+    uuid?: string
+    user_uuid?: string | null
+    category_uuid: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
+  }
+
+  export type ExpenseSubcategoryCreateOrConnectWithoutProductsInput = {
+    where: ExpenseSubcategoryWhereUniqueInput
+    create: XOR<ExpenseSubcategoryCreateWithoutProductsInput, ExpenseSubcategoryUncheckedCreateWithoutProductsInput>
+  }
+
+  export type ExpenseReceiptItemCreateWithoutProductInput = {
+    uuid?: string
+    name: string
+    quantity?: Decimal | DecimalJsLike | number | string
+    unit_price: Decimal | DecimalJsLike | number | string
+    total_price: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    receipt: ExpenseReceiptCreateNestedOneWithoutItemsInput
+  }
+
+  export type ExpenseReceiptItemUncheckedCreateWithoutProductInput = {
+    id?: number
+    uuid?: string
+    receipt_uuid: string
+    name: string
+    quantity?: Decimal | DecimalJsLike | number | string
+    unit_price: Decimal | DecimalJsLike | number | string
+    total_price: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ExpenseReceiptItemCreateOrConnectWithoutProductInput = {
+    where: ExpenseReceiptItemWhereUniqueInput
+    create: XOR<ExpenseReceiptItemCreateWithoutProductInput, ExpenseReceiptItemUncheckedCreateWithoutProductInput>
+  }
+
+  export type ExpenseReceiptItemCreateManyProductInputEnvelope = {
+    data: ExpenseReceiptItemCreateManyProductInput | ExpenseReceiptItemCreateManyProductInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutExpense_productsInput = {
+    update: XOR<UserUpdateWithoutExpense_productsInput, UserUncheckedUpdateWithoutExpense_productsInput>
+    create: XOR<UserCreateWithoutExpense_productsInput, UserUncheckedCreateWithoutExpense_productsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutExpense_productsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutExpense_productsInput, UserUncheckedUpdateWithoutExpense_productsInput>
+  }
+
+  export type UserUpdateWithoutExpense_productsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutExpense_productsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ExpenseCategoryUpsertWithoutProductsInput = {
+    update: XOR<ExpenseCategoryUpdateWithoutProductsInput, ExpenseCategoryUncheckedUpdateWithoutProductsInput>
+    create: XOR<ExpenseCategoryCreateWithoutProductsInput, ExpenseCategoryUncheckedCreateWithoutProductsInput>
+    where?: ExpenseCategoryWhereInput
+  }
+
+  export type ExpenseCategoryUpdateToOneWithWhereWithoutProductsInput = {
+    where?: ExpenseCategoryWhereInput
+    data: XOR<ExpenseCategoryUpdateWithoutProductsInput, ExpenseCategoryUncheckedUpdateWithoutProductsInput>
+  }
+
+  export type ExpenseCategoryUpdateWithoutProductsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutCategoriesNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type ExpenseCategoryUncheckedUpdateWithoutProductsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type ExpenseSubcategoryUpsertWithoutProductsInput = {
+    update: XOR<ExpenseSubcategoryUpdateWithoutProductsInput, ExpenseSubcategoryUncheckedUpdateWithoutProductsInput>
+    create: XOR<ExpenseSubcategoryCreateWithoutProductsInput, ExpenseSubcategoryUncheckedCreateWithoutProductsInput>
+    where?: ExpenseSubcategoryWhereInput
+  }
+
+  export type ExpenseSubcategoryUpdateToOneWithWhereWithoutProductsInput = {
+    where?: ExpenseSubcategoryWhereInput
+    data: XOR<ExpenseSubcategoryUpdateWithoutProductsInput, ExpenseSubcategoryUncheckedUpdateWithoutProductsInput>
+  }
+
+  export type ExpenseSubcategoryUpdateWithoutProductsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutSubcategoriesNestedInput
+    category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
+  }
+
+  export type ExpenseSubcategoryUncheckedUpdateWithoutProductsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    category_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
+  }
+
+  export type ExpenseReceiptItemUpsertWithWhereUniqueWithoutProductInput = {
+    where: ExpenseReceiptItemWhereUniqueInput
+    update: XOR<ExpenseReceiptItemUpdateWithoutProductInput, ExpenseReceiptItemUncheckedUpdateWithoutProductInput>
+    create: XOR<ExpenseReceiptItemCreateWithoutProductInput, ExpenseReceiptItemUncheckedCreateWithoutProductInput>
+  }
+
+  export type ExpenseReceiptItemUpdateWithWhereUniqueWithoutProductInput = {
+    where: ExpenseReceiptItemWhereUniqueInput
+    data: XOR<ExpenseReceiptItemUpdateWithoutProductInput, ExpenseReceiptItemUncheckedUpdateWithoutProductInput>
+  }
+
+  export type ExpenseReceiptItemUpdateManyWithWhereWithoutProductInput = {
+    where: ExpenseReceiptItemScalarWhereInput
+    data: XOR<ExpenseReceiptItemUpdateManyMutationInput, ExpenseReceiptItemUncheckedUpdateManyWithoutProductInput>
+  }
+
   export type ExpenseReceiptCreateWithoutItemsInput = {
     uuid?: string
     receipt_date?: Date | string
@@ -40918,60 +43105,36 @@ export namespace Prisma {
     create: XOR<ExpenseReceiptCreateWithoutItemsInput, ExpenseReceiptUncheckedCreateWithoutItemsInput>
   }
 
-  export type ExpenseCategoryCreateWithoutReceipt_itemsInput = {
+  export type ExpenseProductCreateWithoutReceipt_itemsInput = {
     uuid?: string
     name: string
-    icon?: string | null
-    color?: string | null
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    user?: UserCreateNestedOneWithoutCategoriesInput
-    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
-    entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
+    user?: UserCreateNestedOneWithoutExpense_productsInput
+    category?: ExpenseCategoryCreateNestedOneWithoutProductsInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutProductsInput
   }
 
-  export type ExpenseCategoryUncheckedCreateWithoutReceipt_itemsInput = {
+  export type ExpenseProductUncheckedCreateWithoutReceipt_itemsInput = {
     id?: number
     uuid?: string
     user_uuid?: string | null
     name: string
-    icon?: string | null
-    color?: string | null
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
-    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
-  export type ExpenseCategoryCreateOrConnectWithoutReceipt_itemsInput = {
-    where: ExpenseCategoryWhereUniqueInput
-    create: XOR<ExpenseCategoryCreateWithoutReceipt_itemsInput, ExpenseCategoryUncheckedCreateWithoutReceipt_itemsInput>
-  }
-
-  export type ExpenseSubcategoryCreateWithoutReceipt_itemsInput = {
-    uuid?: string
-    name: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    user?: UserCreateNestedOneWithoutSubcategoriesInput
-    category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
-    entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
-  }
-
-  export type ExpenseSubcategoryUncheckedCreateWithoutReceipt_itemsInput = {
-    id?: number
-    uuid?: string
-    user_uuid?: string | null
-    category_uuid: string
-    name: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
-  }
-
-  export type ExpenseSubcategoryCreateOrConnectWithoutReceipt_itemsInput = {
-    where: ExpenseSubcategoryWhereUniqueInput
-    create: XOR<ExpenseSubcategoryCreateWithoutReceipt_itemsInput, ExpenseSubcategoryUncheckedCreateWithoutReceipt_itemsInput>
+  export type ExpenseProductCreateOrConnectWithoutReceipt_itemsInput = {
+    where: ExpenseProductWhereUniqueInput
+    create: XOR<ExpenseProductCreateWithoutReceipt_itemsInput, ExpenseProductUncheckedCreateWithoutReceipt_itemsInput>
   }
 
   export type ExpenseReceiptUpsertWithoutItemsInput = {
@@ -41008,72 +43171,42 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ExpenseCategoryUpsertWithoutReceipt_itemsInput = {
-    update: XOR<ExpenseCategoryUpdateWithoutReceipt_itemsInput, ExpenseCategoryUncheckedUpdateWithoutReceipt_itemsInput>
-    create: XOR<ExpenseCategoryCreateWithoutReceipt_itemsInput, ExpenseCategoryUncheckedCreateWithoutReceipt_itemsInput>
-    where?: ExpenseCategoryWhereInput
+  export type ExpenseProductUpsertWithoutReceipt_itemsInput = {
+    update: XOR<ExpenseProductUpdateWithoutReceipt_itemsInput, ExpenseProductUncheckedUpdateWithoutReceipt_itemsInput>
+    create: XOR<ExpenseProductCreateWithoutReceipt_itemsInput, ExpenseProductUncheckedCreateWithoutReceipt_itemsInput>
+    where?: ExpenseProductWhereInput
   }
 
-  export type ExpenseCategoryUpdateToOneWithWhereWithoutReceipt_itemsInput = {
-    where?: ExpenseCategoryWhereInput
-    data: XOR<ExpenseCategoryUpdateWithoutReceipt_itemsInput, ExpenseCategoryUncheckedUpdateWithoutReceipt_itemsInput>
+  export type ExpenseProductUpdateToOneWithWhereWithoutReceipt_itemsInput = {
+    where?: ExpenseProductWhereInput
+    data: XOR<ExpenseProductUpdateWithoutReceipt_itemsInput, ExpenseProductUncheckedUpdateWithoutReceipt_itemsInput>
   }
 
-  export type ExpenseCategoryUpdateWithoutReceipt_itemsInput = {
+  export type ExpenseProductUpdateWithoutReceipt_itemsInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
-    color?: NullableStringFieldUpdateOperationsInput | string | null
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutCategoriesNestedInput
-    subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
-    entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
+    user?: UserUpdateOneWithoutExpense_productsNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutProductsNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutProductsNestedInput
   }
 
-  export type ExpenseCategoryUncheckedUpdateWithoutReceipt_itemsInput = {
+  export type ExpenseProductUncheckedUpdateWithoutReceipt_itemsInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
-    color?: NullableStringFieldUpdateOperationsInput | string | null
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
-    entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
-  }
-
-  export type ExpenseSubcategoryUpsertWithoutReceipt_itemsInput = {
-    update: XOR<ExpenseSubcategoryUpdateWithoutReceipt_itemsInput, ExpenseSubcategoryUncheckedUpdateWithoutReceipt_itemsInput>
-    create: XOR<ExpenseSubcategoryCreateWithoutReceipt_itemsInput, ExpenseSubcategoryUncheckedCreateWithoutReceipt_itemsInput>
-    where?: ExpenseSubcategoryWhereInput
-  }
-
-  export type ExpenseSubcategoryUpdateToOneWithWhereWithoutReceipt_itemsInput = {
-    where?: ExpenseSubcategoryWhereInput
-    data: XOR<ExpenseSubcategoryUpdateWithoutReceipt_itemsInput, ExpenseSubcategoryUncheckedUpdateWithoutReceipt_itemsInput>
-  }
-
-  export type ExpenseSubcategoryUpdateWithoutReceipt_itemsInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutSubcategoriesNestedInput
-    category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
-    entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
-  }
-
-  export type ExpenseSubcategoryUncheckedUpdateWithoutReceipt_itemsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
-    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    category_uuid?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type UserCreateWithoutMuscle_groupsInput = {
@@ -41097,6 +43230,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
   }
@@ -41123,6 +43257,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
   }
@@ -41197,6 +43332,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
   }
@@ -41223,6 +43359,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -41264,6 +43401,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
   }
@@ -41290,6 +43428,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
   }
@@ -41384,6 +43523,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
   }
@@ -41410,6 +43550,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -41494,6 +43635,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
   }
@@ -41520,6 +43662,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
   }
@@ -41590,6 +43733,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
   }
@@ -41616,6 +43760,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -42044,6 +44189,19 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type ExpenseProductCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    name: string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type MuscleGroupCreateManyUserInput = {
     id?: number
     uuid?: string
@@ -42401,7 +44559,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
     entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutUserInput = {
@@ -42414,7 +44572,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
     entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateManyWithoutUserInput = {
@@ -42434,7 +44592,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
     entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutUserInput = {
@@ -42445,7 +44603,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateManyWithoutUserInput = {
@@ -42512,6 +44670,46 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseProductUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: ExpenseCategoryUpdateOneWithoutProductsNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutProductsNestedInput
+    receipt_items?: ExpenseReceiptItemUpdateManyWithoutProductNestedInput
+  }
+
+  export type ExpenseProductUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type ExpenseProductUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -43174,14 +45372,14 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type ExpenseReceiptItemCreateManyCategoryInput = {
+  export type ExpenseProductCreateManyCategoryInput = {
     id?: number
     uuid?: string
-    receipt_uuid: string
+    user_uuid?: string | null
     name: string
-    quantity?: Decimal | DecimalJsLike | number | string
-    unit_price: Decimal | DecimalJsLike | number | string
-    total_price: Decimal | DecimalJsLike | number | string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
     subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -43194,7 +45392,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutSubcategoriesNestedInput
     entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutCategoryInput = {
@@ -43205,7 +45403,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
-    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryInput = {
@@ -43263,39 +45461,41 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ExpenseReceiptItemUpdateWithoutCategoryInput = {
+  export type ExpenseProductUpdateWithoutCategoryInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    receipt?: ExpenseReceiptUpdateOneRequiredWithoutItemsNestedInput
-    subcategory?: ExpenseSubcategoryUpdateOneWithoutReceipt_itemsNestedInput
+    user?: UserUpdateOneWithoutExpense_productsNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutProductsNestedInput
+    receipt_items?: ExpenseReceiptItemUpdateManyWithoutProductNestedInput
   }
 
-  export type ExpenseReceiptItemUncheckedUpdateWithoutCategoryInput = {
+  export type ExpenseProductUncheckedUpdateWithoutCategoryInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
-    receipt_uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput
   }
 
-  export type ExpenseReceiptItemUncheckedUpdateManyWithoutCategoryInput = {
+  export type ExpenseProductUncheckedUpdateManyWithoutCategoryInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
-    receipt_uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43316,14 +45516,14 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type ExpenseReceiptItemCreateManySubcategoryInput = {
+  export type ExpenseProductCreateManySubcategoryInput = {
     id?: number
     uuid?: string
-    receipt_uuid: string
+    user_uuid?: string | null
     name: string
-    quantity?: Decimal | DecimalJsLike | number | string
-    unit_price: Decimal | DecimalJsLike | number | string
-    total_price: Decimal | DecimalJsLike | number | string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
     category_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -43375,39 +45575,41 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ExpenseReceiptItemUpdateWithoutSubcategoryInput = {
+  export type ExpenseProductUpdateWithoutSubcategoryInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    receipt?: ExpenseReceiptUpdateOneRequiredWithoutItemsNestedInput
-    category?: ExpenseCategoryUpdateOneWithoutReceipt_itemsNestedInput
+    user?: UserUpdateOneWithoutExpense_productsNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutProductsNestedInput
+    receipt_items?: ExpenseReceiptItemUpdateManyWithoutProductNestedInput
   }
 
-  export type ExpenseReceiptItemUncheckedUpdateWithoutSubcategoryInput = {
+  export type ExpenseProductUncheckedUpdateWithoutSubcategoryInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
-    receipt_uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput
   }
 
-  export type ExpenseReceiptItemUncheckedUpdateManyWithoutSubcategoryInput = {
+  export type ExpenseProductUncheckedUpdateManyWithoutSubcategoryInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
-    receipt_uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43461,12 +45663,11 @@ export namespace Prisma {
   export type ExpenseReceiptItemCreateManyReceiptInput = {
     id?: number
     uuid?: string
+    product_uuid?: string | null
     name: string
     quantity?: Decimal | DecimalJsLike | number | string
     unit_price: Decimal | DecimalJsLike | number | string
     total_price: Decimal | DecimalJsLike | number | string
-    category_uuid?: string | null
-    subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -43479,19 +45680,17 @@ export namespace Prisma {
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: ExpenseCategoryUpdateOneWithoutReceipt_itemsNestedInput
-    subcategory?: ExpenseSubcategoryUpdateOneWithoutReceipt_itemsNestedInput
+    product?: ExpenseProductUpdateOneWithoutReceipt_itemsNestedInput
   }
 
   export type ExpenseReceiptItemUncheckedUpdateWithoutReceiptInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
+    product_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -43499,12 +45698,58 @@ export namespace Prisma {
   export type ExpenseReceiptItemUncheckedUpdateManyWithoutReceiptInput = {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
+    product_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseReceiptItemCreateManyProductInput = {
+    id?: number
+    uuid?: string
+    receipt_uuid: string
+    name: string
+    quantity?: Decimal | DecimalJsLike | number | string
+    unit_price: Decimal | DecimalJsLike | number | string
+    total_price: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ExpenseReceiptItemUpdateWithoutProductInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    receipt?: ExpenseReceiptUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type ExpenseReceiptItemUncheckedUpdateWithoutProductInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    receipt_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseReceiptItemUncheckedUpdateManyWithoutProductInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    receipt_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

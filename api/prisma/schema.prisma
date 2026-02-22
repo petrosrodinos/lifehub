@@ -98,8 +98,11 @@ model User {
   expense_entries  ExpenseEntry[]
   categories ExpenseCategory[]
   subcategories ExpenseSubcategory[]
+
+  // Receipts
   expense_receipts ExpenseReceipt[]
   expense_stores ExpenseStore[]
+  expense_products ExpenseProduct[]
 
   // Gym
   muscle_groups MuscleGroup[]
@@ -314,7 +317,7 @@ model ExpenseCategory {
   user         User?        @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
   subcategories ExpenseSubcategory[]
   entries ExpenseEntry[]
-  receipt_items ExpenseReceiptItem[]
+  products ExpenseProduct[]
 
   @@index([user_uuid])
   @@map("categories")
@@ -332,7 +335,7 @@ model ExpenseSubcategory {
   user         User?        @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
   category      ExpenseCategory   @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
   entries       ExpenseEntry[]
-  receipt_items ExpenseReceiptItem[]
+  products      ExpenseProduct[]
 
   @@index([category_uuid])
   @@map("subcategories")
@@ -403,26 +406,46 @@ model ExpenseReceipt {
   @@map("expense_receipts")
 }
 
+model ExpenseProduct {
+  id            Int       @id @default(autoincrement())
+  uuid          String    @unique @default(uuid())
+  user_uuid     String?
+  name          String
+  brand         String?
+  unit          String?
+  size          Decimal?
+  category_uuid     String?
+  subcategory_uuid  String?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  user          User?                 @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  category      ExpenseCategory?      @relation(fields: [category_uuid], references: [uuid], onDelete: SetNull)
+  subcategory   ExpenseSubcategory?   @relation(fields: [subcategory_uuid], references: [uuid], onDelete: SetNull)
+  receipt_items ExpenseReceiptItem[]
+
+  @@index([user_uuid])
+  @@index([category_uuid])
+  @@index([subcategory_uuid])
+  @@map("expense_products")
+}
+
 model ExpenseReceiptItem {
   id              Int      @id @default(autoincrement())
   uuid            String   @unique @default(uuid())
   receipt_uuid    String
+  product_uuid    String?
   name            String
   quantity        Decimal  @default(1)
   unit_price      Decimal
   total_price     Decimal
-  category_uuid   String?
-  subcategory_uuid String?
   created_at      DateTime @default(now())
   updated_at      DateTime @updatedAt
 
   receipt         ExpenseReceipt     @relation(fields: [receipt_uuid], references: [uuid], onDelete: Cascade)
-  category        ExpenseCategory?   @relation(fields: [category_uuid], references: [uuid], onDelete: SetNull)
-  subcategory     ExpenseSubcategory? @relation(fields: [subcategory_uuid], references: [uuid], onDelete: SetNull)
+  product         ExpenseProduct?    @relation(fields: [product_uuid], references: [uuid], onDelete: SetNull)
 
   @@index([receipt_uuid])
-  @@index([category_uuid])
-  @@index([subcategory_uuid])
   @@map("expense_receipt_items")
 }
 

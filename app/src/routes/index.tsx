@@ -8,6 +8,8 @@ import { RoutinePage } from "../pages/routine/index";
 import { HabitsPage } from "../pages/habits";
 import { SettingsPage } from "../pages/settings/settings-page";
 import { ExpenseAccountsPage } from "../pages/expenses";
+import { StoresPage } from "../pages/stores";
+import { ReceiptsPage } from "../pages/stores/pages/receipts";
 import { GymPage } from "../pages/gym";
 import { WorkoutDetailPage } from "../pages/gym/workout-detail";
 import { ExerciseDetailPage } from "../pages/gym/exercise-detail";
@@ -46,6 +48,8 @@ export default function AppRoutes() {
         <Route index element={<Navigate to="/dashboard/routine" replace />} />
         <Route path="routine" element={<RoutinePage />} />
         <Route path="expenses" element={<ExpenseAccountsPage />} />
+        <Route path="stores" element={<StoresPage />} />
+        <Route path="stores/:uuid" element={<ReceiptsPage />} />
         <Route path="habits" element={<HabitsPage />} />
         <Route path="settings/security" element={<SettingsPage />} />
         <Route path="gym" element={<GymPage />} />

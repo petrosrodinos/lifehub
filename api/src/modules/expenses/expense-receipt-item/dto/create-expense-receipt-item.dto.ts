@@ -1,5 +1,5 @@
-import { IsString, MinLength, IsOptional, IsNumber } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { IsString, MinLength, IsOptional, IsNumber, IsUUID } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateExpenseReceiptItemDto {
     @ApiProperty({
@@ -17,10 +17,9 @@ export class CreateExpenseReceiptItemDto {
     @MinLength(1)
     name: string;
 
-    @ApiProperty({
+    @ApiPropertyOptional({
         description: 'Quantity of the item',
         example: 2,
-        required: false,
     })
     @IsOptional()
     @IsNumber()
@@ -40,21 +39,10 @@ export class CreateExpenseReceiptItemDto {
     @IsNumber()
     total_price: number;
 
-    @ApiProperty({
-        description: 'UUID of the category',
-        example: '550e8400-e29b-41d4-a716-446655440001',
-        required: false,
+    @ApiPropertyOptional({
+        description: 'UUID of the product',
     })
     @IsOptional()
-    @IsString()
-    category_uuid?: string;
-
-    @ApiProperty({
-        description: 'UUID of the subcategory',
-        example: '550e8400-e29b-41d4-a716-446655440002',
-        required: false,
-    })
-    @IsOptional()
-    @IsString()
-    subcategory_uuid?: string;
+    @IsUUID()
+    product_uuid?: string;
 }
