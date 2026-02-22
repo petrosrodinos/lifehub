@@ -7,6 +7,8 @@ export interface ActivityLog {
   activity_uuid: string
   schedule_uuid: string
   occurrence_uuid: string
+  occurrence_status?: string
+  scheduled_for?: string
   snapshot_target_type: ActivityTargetType
   snapshot_target_value?: number | null
   snapshot_target_unit?: ActivityTargetUnit | null

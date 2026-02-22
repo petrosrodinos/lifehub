@@ -3,12 +3,17 @@ import { CalendarClock, CheckCircle2, CircleX, FileText, MinusCircle } from "luc
 import { DateTime } from "luxon";
 import type { ActivityLog } from "../../../../features/habbits/activity-logs/interfaces/activity-logs.interface";
 import type { ActivityHabbitsQuery } from "../../../../features/activities/interfaces/activities.interface";
+import { OccurrenceStatuses } from "../../../../features/habbits/activity-occurrences/interfaces/activity-occurrences.interface";
 import { Pagination } from "../../../../components/ui/Pagination";
 import { useHabitsHistory } from "./use-habits-history";
 
 type LogStatus = "completed" | "skipped" | "failed";
 
 function resolveStatus(log: ActivityLog): LogStatus {
+  if (log.occurrence_status === OccurrenceStatuses.COMPLETED) return "completed";
+  if (log.occurrence_status === OccurrenceStatuses.SKIPPED) return "skipped";
+  if (log.occurrence_status === OccurrenceStatuses.FAILED) return "failed";
+
   if (log.completed) return "completed";
   if (log.skipped) return "skipped";
   return "failed";
@@ -39,11 +44,10 @@ function formatQuantity(value?: number | null) {
 
 interface HabitsHistorySectionProps {
   filter: ActivityHabbitsQuery;
-  onPageChange?: (page: number) => void;
 }
 
-export function HabitsHistorySection({ filter, onPageChange }: HabitsHistorySectionProps) {
-  const { groupedSelectedLogs, total, page, pageSize, totalPages } = useHabitsHistory(filter);
+export function HabitsHistorySection({ filter }: HabitsHistorySectionProps) {
+  const { groupedSelectedLogs, total, page, pageSize, totalPages, setPage } = useHabitsHistory(filter);
 
   const flattenedLogs = useMemo(
     () => groupedSelectedLogs.flatMap((group) => group.logs.map((log) => ({ date: group.date, log }))),
@@ -91,11 +95,11 @@ export function HabitsHistorySection({ filter, onPageChange }: HabitsHistorySect
             })}
           </div>
 
-          {totalPages > 1 && onPageChange ? (
+          {totalPages > 1 ? (
             <Pagination
               currentPage={page}
               totalPages={totalPages}
-              onPageChange={onPageChange}
+              onPageChange={setPage}
               totalItems={total}
               pageSize={pageSize}
             />
