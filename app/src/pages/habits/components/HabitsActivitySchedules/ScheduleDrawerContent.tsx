@@ -1,23 +1,16 @@
 import { CalendarDays, Plus } from "lucide-react";
-import type { ActivitySchedule, UpdateActivityScheduleDto } from "../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface";
+import type { ActivitySchedule } from "../../../../features/habbits/activity-schedules/interfaces/activity-schedules.interface";
 import { ScheduleCard } from "./ScheduleCard";
 import { ScheduleCardSkeleton } from "./ScheduleCardSkeleton";
 
 type ScheduleDrawerContentProps = {
   schedules: ActivitySchedule[];
   isLoading: boolean;
-  isUpdating: boolean;
-  editingScheduleUuid: string | null;
-  selectedScheduleUuid: string | null;
   onSelectSchedule: (uuid: string) => void;
-  onBackFromDetail: () => void;
-  onToggleEdit: (uuid: string) => void;
-  onSave: (schedule: ActivitySchedule, data: UpdateActivityScheduleDto) => void;
-  onDelete: (schedule: ActivitySchedule) => void;
   onCreateOpen: () => void;
 };
 
-export function ScheduleDrawerContent({ schedules, isLoading, isUpdating, editingScheduleUuid, onSelectSchedule, onToggleEdit, onSave, onDelete, onCreateOpen }: ScheduleDrawerContentProps) {
+export function ScheduleDrawerContent({ schedules, isLoading, onSelectSchedule, onCreateOpen }: ScheduleDrawerContentProps) {
   if (isLoading) {
     return <ScheduleCardSkeleton count={4} />;
   }
@@ -38,7 +31,7 @@ export function ScheduleDrawerContent({ schedules, isLoading, isUpdating, editin
   return (
     <>
       {schedules.map((schedule) => (
-        <ScheduleCard key={schedule.uuid} schedule={schedule} isEditOpen={editingScheduleUuid === schedule.uuid} onSelectSchedule={() => onSelectSchedule(schedule.uuid)} onToggleEdit={() => onToggleEdit(schedule.uuid)} onSave={(data) => onSave(schedule, data)} onDelete={() => onDelete(schedule)} isUpdating={isUpdating} />
+        <ScheduleCard key={schedule.uuid} schedule={schedule} onSelect={onSelectSchedule} />
       ))}
     </>
   );

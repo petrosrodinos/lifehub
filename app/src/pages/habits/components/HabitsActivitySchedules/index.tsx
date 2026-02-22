@@ -1,6 +1,5 @@
 import { CalendarRange, Plus } from 'lucide-react'
 import { Drawer } from '../../../../components/ui/Drawer'
-import { ConfirmationModal } from '../../../../components/ui/ConfirmationModal'
 import { ActivityScheduleForm } from './ActivityScheduleForm'
 import { ScheduleDrawerContent } from './ScheduleDrawerContent'
 import { useHabitsActivitySchedules } from './use-habits-activity-schedules'
@@ -12,18 +11,9 @@ export function HabitsActivitySchedulesSection() {
     closeDrawer,
     isCreateOpen,
     setIsCreateOpen,
-    editingScheduleUuid,
-    setEditingScheduleUuid,
-    selectedScheduleUuid,
     setSelectedScheduleUuid,
-    deletingSchedule,
-    setDeletingSchedule,
     schedules,
     isLoading,
-    isUpdating,
-    isDeleting,
-    updateSchedule,
-    confirmDelete,
   } = useHabitsActivitySchedules()
 
   return (
@@ -55,14 +45,7 @@ export function HabitsActivitySchedulesSection() {
         <ScheduleDrawerContent
           schedules={schedules}
           isLoading={isLoading}
-          isUpdating={isUpdating}
-          editingScheduleUuid={editingScheduleUuid}
-          selectedScheduleUuid={selectedScheduleUuid}
           onSelectSchedule={setSelectedScheduleUuid}
-          onBackFromDetail={() => setSelectedScheduleUuid(null)}
-          onToggleEdit={(uuid) => setEditingScheduleUuid(editingScheduleUuid === uuid ? null : uuid)}
-          onSave={updateSchedule}
-          onDelete={setDeletingSchedule}
           onCreateOpen={() => setIsCreateOpen(true)}
         />
       </Drawer>
@@ -70,16 +53,6 @@ export function HabitsActivitySchedulesSection() {
       <ActivityScheduleForm
         isOpen={isCreateOpen}
         onClose={() => setIsCreateOpen(false)}
-      />
-
-      <ConfirmationModal
-        isOpen={!!deletingSchedule}
-        onClose={() => setDeletingSchedule(null)}
-        onConfirm={confirmDelete}
-        title="Deactivate schedule"
-        description="This will deactivate the schedule and remove all pending future occurrences. Completed logs will not be affected."
-        confirmText="Deactivate"
-        isPending={isDeleting}
       />
     </>
   )
