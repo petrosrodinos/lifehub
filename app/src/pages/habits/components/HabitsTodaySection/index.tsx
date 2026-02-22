@@ -89,7 +89,7 @@ export function HabitsTodaySection() {
       <Modal isOpen={!!scheduleModalUuid} onClose={() => setScheduleModalUuid(null)} title="Schedule" size="md">
         {scheduleDetailsQuery.isLoading && <div className="h-32 rounded-xl bg-slate-700/30 animate-pulse" />}
         {scheduleDetailsQuery.isError && <p className="text-sm text-slate-400">Could not load schedule.</p>}
-        {scheduleDetailsQuery.data && <ScheduleCard schedule={scheduleDetailsQuery.data} isEditOpen={false} onSelectSchedule={() => setScheduleModalUuid(null)} onSave={() => {}} isUpdating={false} />}
+        {scheduleDetailsQuery.data && <ScheduleCard schedule={scheduleDetailsQuery.data} onSelect={() => setScheduleModalUuid(null)} />}
       </Modal>
 
       <HabitCompletionActions
