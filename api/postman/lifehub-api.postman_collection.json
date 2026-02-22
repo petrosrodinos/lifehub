@@ -1,0 +1,1362 @@
+{
+  "info": {
+    "name": "LifeHub API",
+    "description": "Complete API collection for LifeHub - Activity Tracker, Expense Manager, and Gym Tracker",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "uuid",
+      "value": "00000000-0000-0000-0000-000000000000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"phone\": \"1234567890\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/email/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "email", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.access_token) {",
+                  "    pm.collectionVariables.set('token', jsonData.access_token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/email/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "email", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activities",
+      "item": [
+        {
+          "name": "Create Activity",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Read Book\",\n  \"description\": \"Read 10 pages each session\",\n  \"icon\": \"book-open\",\n  \"color\": \"#f59e0b\",\n  \"visible\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/activities",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities"]
+            }
+          }
+        },
+        {
+          "name": "Get All Activities",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/activities",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities"]
+            }
+          }
+        },
+        {
+          "name": "Get Activity Habits",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/activities/habbits?date=2026-02-22",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities", "habbits"],
+              "query": [
+                { "key": "date", "value": "2026-02-22" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Progress Summary",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/activities/progress-summary?date=2026-02-22",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities", "progress-summary"],
+              "query": [
+                { "key": "date", "value": "2026-02-22" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Completion Heatmaps",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/activities/heatmaps",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities", "heatmaps"]
+            }
+          }
+        },
+        {
+          "name": "Get Activity by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/activities/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Activity",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Read Book Updated\",\n  \"color\": \"#3b82f6\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/activities/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Activity",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/activities/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities", "{{uuid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activity Schedules",
+      "item": [
+        {
+          "name": "Create Schedule for Activity",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"repeat_type\": \"WEEKDAYS\",\n  \"time_of_day\": \"07:30\",\n  \"target_type\": \"QUANTITY\",\n  \"target_value\": 10,\n  \"target_unit\": \"PAGES\",\n  \"weekdays\": [1, 3, 5]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/activities/{{uuid}}/schedules",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities", "{{uuid}}", "schedules"]
+            }
+          }
+        },
+        {
+          "name": "Get All Schedules",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/schedules",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedules"]
+            }
+          }
+        },
+        {
+          "name": "Get Schedule by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/schedules/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedules", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Schedules for Activity",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/activities/{{uuid}}/schedules",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities", "{{uuid}}", "schedules"]
+            }
+          }
+        },
+        {
+          "name": "Update Schedule",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"time_of_day\": \"08:00\",\n  \"target_value\": 15\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/schedules/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedules", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Schedule",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/schedules/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedules", "{{uuid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activity Occurrences",
+      "item": [
+        {
+          "name": "Complete Occurrence",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": 10,\n  \"notes\": \"Felt great today\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/occurrences/{{uuid}}/complete",
+              "host": ["{{baseUrl}}"],
+              "path": ["occurrences", "{{uuid}}", "complete"]
+            }
+          }
+        },
+        {
+          "name": "Skip Occurrence",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"skip_reason\": \"Travel day\",\n  \"notes\": \"Will continue tomorrow\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/occurrences/{{uuid}}/skip",
+              "host": ["{{baseUrl}}"],
+              "path": ["occurrences", "{{uuid}}", "skip"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activity Logs",
+      "item": [
+        {
+          "name": "Get All Logs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/logs",
+              "host": ["{{baseUrl}}"],
+              "path": ["logs"]
+            }
+          }
+        },
+        {
+          "name": "Get Grouped Logs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/logs/grouped",
+              "host": ["{{baseUrl}}"],
+              "path": ["logs", "grouped"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Schedule Slots",
+      "item": [
+        {
+          "name": "Create Schedule Slot",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"day\": \"MONDAY\",\n  \"start_time\": \"05:00\",\n  \"end_time\": \"07:00\",\n  \"activity_uuid\": \"{{uuid}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/schedule-slots",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedule-slots"]
+            }
+          }
+        },
+        {
+          "name": "Get All Schedule Slots",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/schedule-slots",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedule-slots"]
+            }
+          }
+        },
+        {
+          "name": "Get Slots by Day",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/schedule-slots/by-day/MONDAY",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedule-slots", "by-day", "MONDAY"]
+            }
+          }
+        },
+        {
+          "name": "Get Schedule Slot by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/schedule-slots/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedule-slots", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Schedule Slot",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start_time\": \"06:00\",\n  \"end_time\": \"08:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/schedule-slots/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedule-slots", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Schedule Slot",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/schedule-slots/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedule-slots", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Duplicate Day",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_day\": \"MONDAY\",\n  \"target_day\": \"TUESDAY\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/schedule-slots/duplicate-day",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedule-slots", "duplicate-day"]
+            }
+          }
+        },
+        {
+          "name": "Duplicate Slot",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slot_uuid\": \"{{uuid}}\",\n  \"target_days\": [\"TUESDAY\", \"WEDNESDAY\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/schedule-slots/duplicate-slot",
+              "host": ["{{baseUrl}}"],
+              "path": ["schedule-slots", "duplicate-slot"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Expense Accounts",
+      "item": [
+        {
+          "name": "Create Expense Account",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cash Wallet\",\n  \"icon\": \"💰\",\n  \"color\": \"#000000\",\n  \"balance\": 1000.00\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/expense-accounts",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-accounts"]
+            }
+          }
+        },
+        {
+          "name": "Get All Expense Accounts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-accounts",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-accounts"]
+            }
+          }
+        },
+        {
+          "name": "Get Expense Account by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-accounts/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-accounts", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Expense Account",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Wallet\",\n  \"color\": \"#3b82f6\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/expense-accounts/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-accounts", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Expense Account",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/expense-accounts/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-accounts", "{{uuid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Expense Categories",
+      "item": [
+        {
+          "name": "Seed Default Categories (Admin)",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/expense-categories/seed",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-categories", "seed"]
+            }
+          }
+        },
+        {
+          "name": "Create Expense Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Food & Dining\",\n  \"icon\": \"🍔\",\n  \"color\": \"#FF5733\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/expense-categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-categories"]
+            }
+          }
+        },
+        {
+          "name": "Get All Expense Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-categories"]
+            }
+          }
+        },
+        {
+          "name": "Get Expense Category by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-categories/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-categories", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Expense Category",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Food & Drinks\",\n  \"icon\": \"🍕\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/expense-categories/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-categories", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Expense Category",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/expense-categories/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-categories", "{{uuid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Expense Subcategories",
+      "item": [
+        {
+          "name": "Create Expense Subcategory",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category_uuid\": \"{{uuid}}\",\n  \"name\": \"Groceries\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/expense-subcategories",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-subcategories"]
+            }
+          }
+        },
+        {
+          "name": "Get All Expense Subcategories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-subcategories",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-subcategories"]
+            }
+          }
+        },
+        {
+          "name": "Get Expense Subcategory by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-subcategories/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-subcategories", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Expense Subcategory",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Online Groceries\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/expense-subcategories/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-subcategories", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Expense Subcategory",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/expense-subcategories/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-subcategories", "{{uuid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Expense Entries",
+      "item": [
+        {
+          "name": "Create Expense Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"EXPENSE\",\n  \"amount\": 150.50,\n  \"description\": \"Grocery shopping at Walmart\",\n  \"from_account_uuid\": \"{{uuid}}\",\n  \"category_uuid\": \"{{uuid}}\",\n  \"subcategory_uuid\": \"{{uuid}}\",\n  \"entry_date\": \"2026-02-22T10:30:00Z\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/expense-entries",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-entries"]
+            }
+          }
+        },
+        {
+          "name": "Get All Expense Entries",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-entries",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-entries"]
+            }
+          }
+        },
+        {
+          "name": "Get Expense Entry by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-entries/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-entries", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Expense Entry",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 175.00,\n  \"description\": \"Updated grocery trip\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/expense-entries/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-entries", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Expense Entry",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/expense-entries/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-entries", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Analytics - Balance Trend",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-entries/analytics/balance-trend?period=month",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-entries", "analytics", "balance-trend"],
+              "query": [
+                { "key": "period", "value": "month" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Analytics - Income vs Expense",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-entries/analytics/income-expense?period=month",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-entries", "analytics", "income-expense"],
+              "query": [
+                { "key": "period", "value": "month" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Analytics - Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-entries/analytics/stats?period=month",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-entries", "analytics", "stats"],
+              "query": [
+                { "key": "period", "value": "month" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Analytics - Expenses by Subcategory",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-entries/analytics/expenses-by-subcategory?category_uuid={{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-entries", "analytics", "expenses-by-subcategory"],
+              "query": [
+                { "key": "category_uuid", "value": "{{uuid}}" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Analytics - Transaction Trend",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expense-entries/analytics/transaction-trend?period=month",
+              "host": ["{{baseUrl}}"],
+              "path": ["expense-entries", "analytics", "transaction-trend"],
+              "query": [
+                { "key": "period", "value": "month" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Muscle Groups",
+      "item": [
+        {
+          "name": "Seed Default Muscle Groups (Admin)",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/muscle-groups/seed",
+              "host": ["{{baseUrl}}"],
+              "path": ["muscle-groups", "seed"]
+            }
+          }
+        },
+        {
+          "name": "Create Muscle Group",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Chest\",\n  \"color\": \"#ef4444\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/muscle-groups",
+              "host": ["{{baseUrl}}"],
+              "path": ["muscle-groups"]
+            }
+          }
+        },
+        {
+          "name": "Get All Muscle Groups",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/muscle-groups",
+              "host": ["{{baseUrl}}"],
+              "path": ["muscle-groups"]
+            }
+          }
+        },
+        {
+          "name": "Get Muscle Group by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/muscle-groups/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["muscle-groups", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Muscle Group",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Upper Chest\",\n  \"color\": \"#f97316\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/muscle-groups/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["muscle-groups", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Muscle Group",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/muscle-groups/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["muscle-groups", "{{uuid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Exercises",
+      "item": [
+        {
+          "name": "Create Exercise",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"muscle_group_uuid\": \"{{uuid}}\",\n  \"name\": \"Bench Press\",\n  \"description\": \"Flat barbell press\",\n  \"type\": \"REPS\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/exercises",
+              "host": ["{{baseUrl}}"],
+              "path": ["exercises"]
+            }
+          }
+        },
+        {
+          "name": "Get All Exercises",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/exercises",
+              "host": ["{{baseUrl}}"],
+              "path": ["exercises"]
+            }
+          }
+        },
+        {
+          "name": "Get Exercise by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/exercises/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["exercises", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Exercise",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Incline Bench Press\",\n  \"description\": \"30 degree incline\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/exercises/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["exercises", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Exercise",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/exercises/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["exercises", "{{uuid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workouts",
+      "item": [
+        {
+          "name": "Create Workout",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Push Day\",\n  \"notes\": \"Focus on controlled negatives\",\n  \"started_at\": \"2026-02-22T07:00:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/workouts",
+              "host": ["{{baseUrl}}"],
+              "path": ["workouts"]
+            }
+          }
+        },
+        {
+          "name": "Get All Workouts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/workouts",
+              "host": ["{{baseUrl}}"],
+              "path": ["workouts"]
+            }
+          }
+        },
+        {
+          "name": "Get Workout by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/workouts/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["workouts", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Workout",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Push Day - Heavy\",\n  \"finished_at\": \"2026-02-22T08:15:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/workouts/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["workouts", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Workout",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/workouts/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["workouts", "{{uuid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workout Entries",
+      "item": [
+        {
+          "name": "Create Workout Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workout_uuid\": \"{{uuid}}\",\n  \"exercise_uuid\": \"{{uuid}}\",\n  \"order\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/workout-entries",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-entries"]
+            }
+          }
+        },
+        {
+          "name": "Get All Workout Entries",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/workout-entries",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-entries"]
+            }
+          }
+        },
+        {
+          "name": "Get Workout Entry Analytics",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/workout-entries/analytics/progress?exercise_uuid={{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-entries", "analytics", "progress"],
+              "query": [
+                { "key": "exercise_uuid", "value": "{{uuid}}" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Workout Entry by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/workout-entries/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-entries", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Workout Entry",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/workout-entries/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-entries", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Workout Entry",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/workout-entries/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-entries", "{{uuid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workout Sets",
+      "item": [
+        {
+          "name": "Create Workout Set",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workout_entry_uuid\": \"{{uuid}}\",\n  \"type\": \"REPS\",\n  \"reps\": 12,\n  \"weight\": 60,\n  \"rest_seconds\": 120,\n  \"order\": 1,\n  \"is_dropset\": false,\n  \"is_amrap\": false,\n  \"is_rest\": false,\n  \"is_warmup\": false,\n  \"is_cooldown\": false,\n  \"is_super_set\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/workout-sets",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-sets"]
+            }
+          }
+        },
+        {
+          "name": "Get All Workout Sets",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/workout-sets",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-sets"]
+            }
+          }
+        },
+        {
+          "name": "Get Workout Set by UUID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/workout-sets/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-sets", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Workout Set",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reps\": 15,\n  \"weight\": 65,\n  \"notes\": \"Increased weight\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/workout-sets/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-sets", "{{uuid}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Workout Set",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/workout-sets/{{uuid}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["workout-sets", "{{uuid}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Internal - Admin",
+      "item": [
+        {
+          "name": "AI - Create Prompt",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"Hello AI\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ai",
+              "host": ["{{baseUrl}}"],
+              "path": ["ai"]
+            }
+          }
+        },
+        {
+          "name": "Mail - Send Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"to\": \"user@example.com\",\n  \"subject\": \"Test Email\",\n  \"body\": \"Hello from LifeHub\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/mail/send-email",
+              "host": ["{{baseUrl}}"],
+              "path": ["mail", "send-email"]
+            }
+          }
+        },
+        {
+          "name": "Redis - Set Cache",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"test-key\",\n  \"value\": \"test-value\",\n  \"ttl\": 3600\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/redis-cache",
+              "host": ["{{baseUrl}}"],
+              "path": ["redis-cache"]
+            }
+          }
+        },
+        {
+          "name": "Redis - Get Cache",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/redis-cache/test-key",
+              "host": ["{{baseUrl}}"],
+              "path": ["redis-cache", "test-key"]
+            }
+          }
+        },
+        {
+          "name": "Redis - Delete Cache",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/redis-cache/test-key",
+              "host": ["{{baseUrl}}"],
+              "path": ["redis-cache", "test-key"]
+            }
+          }
+        },
+        {
+          "name": "SMS - Send",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"to\": \"+1234567890\",\n  \"message\": \"Test SMS\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sms",
+              "host": ["{{baseUrl}}"],
+              "path": ["sms"]
+            }
+          }
+        },
+        {
+          "name": "SMS - Get All",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/sms",
+              "host": ["{{baseUrl}}"],
+              "path": ["sms"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

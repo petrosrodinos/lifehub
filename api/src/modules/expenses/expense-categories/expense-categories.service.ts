@@ -1,11 +1,80 @@
-import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { CreateExpenseCategoryDto } from './dto/create-expense-category.dto';
 import { UpdateExpenseCategoryDto } from './dto/update-expense-category.dto';
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
+import { EXPENSE_CATEGORIES_SEED } from './constants/expense-categories-seed.constants';
 
 @Injectable()
 export class ExpenseCategoriesService {
+  private readonly logger = new Logger(ExpenseCategoriesService.name);
+
   constructor(private readonly prisma: PrismaService) { }
+
+  async seedDefaults(): Promise<{ categoriesCreated: number; subcategoriesCreated: number }> {
+    const existingCategories = await this.prisma.expenseCategory.findMany({
+      where: { user_uuid: null },
+      include: { subcategories: true },
+    });
+
+    const existingCategoryNames = new Set(existingCategories.map((c) => c.name));
+
+    const existingSubcategoryNames = new Map<string, Set<string>>();
+
+    for (const category of existingCategories) {
+      const subcatNames = new Set(category.subcategories.map((s) => s.name));
+
+      existingSubcategoryNames.set(category.name, subcatNames);
+    }
+
+    let categoriesCreated = 0;
+    let subcategoriesCreated = 0;
+
+    await this.prisma.$transaction(async (tx) => {
+      for (const seed of EXPENSE_CATEGORIES_SEED) {
+        let categoryUuid: string;
+
+        if (existingCategoryNames.has(seed.name)) {
+          const existing = existingCategories.find((c) => c.name === seed.name);
+
+          categoryUuid = existing!.uuid;
+        } else {
+          const created = await tx.expenseCategory.create({
+            data: {
+              name: seed.name,
+              icon: seed.icon,
+              color: seed.color,
+              user_uuid: null,
+            },
+          });
+
+          categoryUuid = created.uuid;
+          categoriesCreated++;
+        }
+
+        const existingSubcats = existingSubcategoryNames.get(seed.name) ?? new Set<string>();
+
+        for (const subcategoryName of seed.subcategories) {
+          if (existingSubcats.has(subcategoryName)) {
+            continue;
+          }
+
+          await tx.expenseSubcategory.create({
+            data: {
+              name: subcategoryName,
+              category_uuid: categoryUuid,
+              user_uuid: null,
+            },
+          });
+
+          subcategoriesCreated++;
+        }
+      }
+    }, { timeout: 30000 });
+
+    this.logger.log(`Seeded ${categoriesCreated} categories and ${subcategoriesCreated} subcategories`);
+
+    return { categoriesCreated, subcategoriesCreated };
+  }
 
   async create(user_uuid: string, createExpenseCategoryDto: CreateExpenseCategoryDto) {
     try {
@@ -25,7 +94,12 @@ export class ExpenseCategoriesService {
   async findAll(user_uuid: string) {
     try {
       return await this.prisma.expenseCategory.findMany({
-        where: { user_uuid },
+        where: {
+          OR: [
+            { user_uuid },
+            { user_uuid: null }
+          ]
+        },
         orderBy: { created_at: 'desc' },
         include: {
           subcategories: true,
@@ -39,7 +113,13 @@ export class ExpenseCategoriesService {
   async findOne(user_uuid: string, uuid: string) {
     try {
       const category = await this.prisma.expenseCategory.findFirst({
-        where: { uuid, user_uuid },
+        where: {
+          uuid,
+          OR: [
+            { user_uuid },
+            { user_uuid: null },
+          ],
+        },
         include: {
           subcategories: true,
         },

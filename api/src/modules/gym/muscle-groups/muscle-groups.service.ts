@@ -1,11 +1,81 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common'
+import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common'
 import { PrismaService } from '@/core/databases/prisma/prisma.service'
 import { CreateMuscleGroupDto } from './dto/create-muscle-group.dto'
 import { UpdateMuscleGroupDto } from './dto/update-muscle-group.dto'
+import { MUSCLE_GROUPS_SEED } from './constants/muscle-groups-seed.constants'
 
 @Injectable()
 export class MuscleGroupsService {
+  private readonly logger = new Logger(MuscleGroupsService.name)
+
   constructor(private readonly prisma: PrismaService) { }
+
+  async seedDefaults(): Promise<{ muscleGroupsCreated: number; exercisesCreated: number }> {
+
+    const existingGroups = await this.prisma.muscleGroup.findMany({
+      where: { user_uuid: null },
+      include: { exercises: true },
+    })
+
+    const existingGroupNames = new Set(existingGroups.map((g) => g.name))
+
+    const existingExerciseNames = new Map<string, Set<string>>()
+
+    for (const group of existingGroups) {
+      const exerciseNames = new Set(group.exercises.map((e) => e.name))
+
+      existingExerciseNames.set(group.name, exerciseNames)
+    }
+
+    let muscleGroupsCreated = 0
+    let exercisesCreated = 0
+
+    await this.prisma.$transaction(async (tx) => {
+      for (const seed of MUSCLE_GROUPS_SEED) {
+        let groupUuid: string
+
+        if (existingGroupNames.has(seed.name)) {
+          const existing = existingGroups.find((g) => g.name === seed.name)
+
+          groupUuid = existing!.uuid
+        } else {
+          const created = await tx.muscleGroup.create({
+            data: {
+              name: seed.name,
+              color: seed.color,
+              user_uuid: null,
+            },
+          })
+
+          groupUuid = created.uuid
+          muscleGroupsCreated++
+        }
+
+        const existingExercises = existingExerciseNames.get(seed.name) ?? new Set<string>()
+
+        for (const exercise of seed.exercises) {
+          if (existingExercises.has(exercise.name)) {
+            continue
+          }
+
+          await tx.exercise.create({
+            data: {
+              name: exercise.name,
+              type: exercise.type,
+              muscle_group_uuid: groupUuid,
+              user_uuid: null,
+            },
+          })
+
+          exercisesCreated++
+        }
+      }
+    }, { timeout: 30000 })
+
+    this.logger.log(`Seeded ${muscleGroupsCreated} muscle groups and ${exercisesCreated} exercises`)
+
+    return { muscleGroupsCreated, exercisesCreated }
+  }
 
   async create(user_uuid: string, createMuscleGroupDto: CreateMuscleGroupDto) {
     const existing = await this.prisma.muscleGroup.findFirst({

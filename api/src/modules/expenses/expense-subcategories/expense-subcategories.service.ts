@@ -38,7 +38,12 @@ export class ExpenseSubcategoriesService {
   async findAll(user_uuid: string) {
     try {
       return await this.prisma.expenseSubcategory.findMany({
-        where: { user_uuid },
+        where: {
+          OR: [
+            { user_uuid },
+            { user_uuid: null },
+          ],
+        },
         orderBy: { created_at: 'desc' },
         include: {
           category: true,
@@ -52,7 +57,13 @@ export class ExpenseSubcategoriesService {
   async findOne(user_uuid: string, uuid: string) {
     try {
       const subcategory = await this.prisma.expenseSubcategory.findFirst({
-        where: { uuid, user_uuid },
+        where: {
+          uuid,
+          OR: [
+            { user_uuid },
+            { user_uuid: null },
+          ],
+        },
         include: {
           category: true,
         },
