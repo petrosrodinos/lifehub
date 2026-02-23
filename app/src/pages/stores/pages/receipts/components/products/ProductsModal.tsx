@@ -24,7 +24,7 @@ export function ProductsModal({ isOpen, onClose }: ProductsModalProps) {
   const [deletingProduct, setDeletingProduct] = useState<ExpenseProduct | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
 
-  const { data: products = [], isLoading } = useExpenseProducts()
+  const { data: products = [], isLoading } = useExpenseProducts(isOpen)
   const createProduct = useCreateExpenseProduct()
   const updateProduct = useUpdateExpenseProduct()
   const deleteProduct = useDeleteExpenseProduct()

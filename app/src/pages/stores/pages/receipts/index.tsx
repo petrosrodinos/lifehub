@@ -18,11 +18,9 @@ export function ReceiptsPage() {
   const highlightedReceiptUuid = searchParams.get("receipt") || undefined
 
   const { data: store } = useExpenseStore(uuid || "")
-  const { data: allReceipts = [], isLoading } = useExpenseReceipts()
-
-  const receipts = uuid
-    ? allReceipts.filter((r) => r.store_uuid === uuid)
-    : allReceipts
+  const { data: receipts = [], isLoading } = useExpenseReceipts(
+    uuid ? { store_uuid: uuid } : undefined
+  )
 
   const handleBack = () => {
     navigate("/dashboard/stores")

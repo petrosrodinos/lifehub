@@ -38,3 +38,7 @@ export interface UploadReceiptPayload {
     file: File
     from_account_uuid: string
 }
+
+export interface ExpenseReceiptsQueryParams {
+    store_uuid?: string
+}

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus, UseInterceptors, UploadedFile, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus, UseInterceptors, UploadedFile, BadRequestException, Query } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiParam, ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { ExpenseReceiptService } from './expense-receipt.service';
@@ -7,6 +7,8 @@ import { UpdateExpenseReceiptDto } from './dto/update-expense-receipt.dto';
 import { UploadReceiptDto } from './dto/upload-receipt.dto';
 import { JwtGuard } from '@/shared/guards/jwt.guard';
 import { CurrentUser } from '@/shared/decorators/current-user.decorator';
+import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe';
+import { ExpenseReceiptsQuerySchema, type ExpenseReceiptsQueryType } from './schemas/expense-receipts-query.schema';
 
 const RECEIPT_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 
@@ -63,8 +65,11 @@ export class ExpenseReceiptController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Get all expense receipts for the current user' })
   @ApiResponse({ status: 200, description: 'Expense receipts retrieved successfully' })
-  findAll(@CurrentUser('user_uuid') user_uuid: string) {
-    return this.expenseReceiptService.findAll(user_uuid);
+  findAll(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(ExpenseReceiptsQuerySchema)) query: ExpenseReceiptsQueryType,
+  ) {
+    return this.expenseReceiptService.findAll(user_uuid, query);
   }
 
   @Get(':uuid')

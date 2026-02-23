@@ -5,6 +5,7 @@ import { PrismaService } from '@/core/databases/prisma/prisma.service';
 import { ExpenseAccount, ExpenseEntry, ExpenseEntryType } from '@/generated/prisma';
 import { type ExtractedReceiptItem } from './schemas/extracted-receipt.schema';
 import { AiHelperService } from '@/shared/services/ai/ai.service';
+import type { ExpenseReceiptsQueryType } from './schemas/expense-receipts-query.schema';
 
 @Injectable()
 export class ExpenseReceiptService {
@@ -40,10 +41,16 @@ export class ExpenseReceiptService {
     }
   }
 
-  async findAll(user_uuid: string) {
+  async findAll(user_uuid: string, query: ExpenseReceiptsQueryType) {
     try {
+      const where: Record<string, unknown> = { user_uuid };
+
+      if (query.store_uuid) {
+        where.store_uuid = query.store_uuid;
+      }
+
       return await this.prisma.expenseReceipt.findMany({
-        where: { user_uuid },
+        where,
         orderBy: { receipt_date: 'desc' },
         include: {
           store: true,

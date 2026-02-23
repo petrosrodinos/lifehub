@@ -23,7 +23,7 @@ export function ReceiptDetailModal({ isOpen, onClose, receipt }: ReceiptDetailMo
   const [isAddItemOpen, setIsAddItemOpen] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
 
-  const { data: items = [], isLoading: itemsLoading } = useExpenseReceiptItems(receipt.uuid)
+  const { data: items = [], isLoading: itemsLoading } = useExpenseReceiptItems(isOpen ? receipt.uuid : "")
   const createItem = useCreateExpenseReceiptItem()
   const updateReceipt = useUpdateExpenseReceipt()
 

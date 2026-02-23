@@ -4,6 +4,7 @@ import type {
     CreateExpenseReceiptDto,
     UpdateExpenseReceiptDto,
     UploadReceiptPayload,
+    ExpenseReceiptsQueryParams,
 } from '../interfaces/expense-receipt.interfaces'
 import {
     getExpenseReceipts,
@@ -14,17 +15,19 @@ import {
     deleteExpenseReceipt,
 } from '../services/expense-receipt'
 
+const EXPENSE_RECEIPTS_BASE_KEY = ['expense-receipts'] as const
+
 const QUERY_KEYS = {
-    expenseReceipts: ['expense-receipts'],
+    expenseReceipts: (params?: ExpenseReceiptsQueryParams) => [...EXPENSE_RECEIPTS_BASE_KEY, params] as const,
     expenseReceipt: (uuid: string) => ['expense-receipts', uuid],
     expenseReceiptItems: (receipt_uuid: string) => ['expense-receipt-items', receipt_uuid],
     expenseEntries: ['expense-entries'],
 }
 
-export function useExpenseReceipts() {
+export function useExpenseReceipts(params?: ExpenseReceiptsQueryParams) {
     return useQuery({
-        queryKey: QUERY_KEYS.expenseReceipts,
-        queryFn: getExpenseReceipts,
+        queryKey: QUERY_KEYS.expenseReceipts(params),
+        queryFn: () => getExpenseReceipts(params),
     })
 }
 
@@ -42,7 +45,7 @@ export function useCreateExpenseReceipt() {
     return useMutation({
         mutationFn: (data: CreateExpenseReceiptDto) => createExpenseReceipt(data),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseReceipts })
+            queryClient.invalidateQueries({ queryKey: EXPENSE_RECEIPTS_BASE_KEY })
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseEntries })
             toast.success('Expense receipt created successfully', { duration: 2000 })
         },
@@ -58,7 +61,7 @@ export function useUploadReceipt() {
     return useMutation({
         mutationFn: (payload: UploadReceiptPayload) => uploadReceipt(payload),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseReceipts })
+            queryClient.invalidateQueries({ queryKey: EXPENSE_RECEIPTS_BASE_KEY })
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseEntries })
             queryClient.invalidateQueries({ queryKey: ['expense-receipt-items'] })
             toast.success('Receipt uploaded and expense created', { duration: 2000 })
@@ -76,7 +79,7 @@ export function useUpdateExpenseReceipt() {
         mutationFn: ({ uuid, data }: { uuid: string; data: UpdateExpenseReceiptDto }) =>
             updateExpenseReceipt(uuid, data),
         onSuccess: (_, variables) => {
-            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseReceipts })
+            queryClient.invalidateQueries({ queryKey: EXPENSE_RECEIPTS_BASE_KEY })
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseReceipt(variables.uuid) })
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseEntries })
             toast.success('Expense receipt updated successfully', { duration: 2000 })
@@ -93,7 +96,7 @@ export function useDeleteExpenseReceipt() {
     return useMutation({
         mutationFn: (uuid: string) => deleteExpenseReceipt(uuid),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseReceipts })
+            queryClient.invalidateQueries({ queryKey: EXPENSE_RECEIPTS_BASE_KEY })
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseEntries })
             toast.success('Expense receipt deleted successfully', { duration: 2000 })
         },
