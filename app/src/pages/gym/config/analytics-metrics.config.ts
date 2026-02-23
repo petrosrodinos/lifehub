@@ -1,4 +1,4 @@
-import type { ExerciseType } from '../../../features/exercises/interfaces/exercises.interface'
+import type { ExerciseType } from '../../../features/gym/exercises/interfaces/exercises.interface'
 
 export const ANALYTICS_METRICS = [
   { id: 'max_weight', label: 'Max Weight (kg)', color: '#8b5cf6', exerciseTypes: ['REPS'] as ExerciseType[] },

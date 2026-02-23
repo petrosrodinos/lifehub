@@ -1,5 +1,5 @@
 import { GripVertical } from "lucide-react";
-import type { WorkoutSet } from "../../../features/workout-sets/interfaces/workout-sets.interface";
+import type { WorkoutSet } from "../../../features/gym/workout-sets/interfaces/workout-sets.interface";
 import type { SortableItemRenderProps } from "../../../components/ui/ReorderableList";
 import { SetCard } from "../workout-detail/components/SetCard";
 

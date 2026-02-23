@@ -1,5 +1,5 @@
-import type { ExpenseCategory } from '../../../expense-categories/interfaces/expense-categories.interfaces'
-import type { ExpenseSubcategory } from '../../../expense-subcategories/interfaces/expense-subcategories.interfaces'
+import type { ExpenseCategory } from '../../../expenses/expense-categories/interfaces/expense-categories.interfaces'
+import type { ExpenseSubcategory } from '../../../expenses/expense-subcategories/interfaces/expense-subcategories.interfaces'
 
 export interface ExpenseProduct {
     id?: number

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Calendar, Clock, ChevronRight } from "lucide-react";
 import { DateTime } from "luxon";
-import type { Workout } from "../../../../features/workout/interfaces/workout.interface";
+import type { Workout } from "../../../../features/gym/workout/interfaces/workout.interface";
 
 type WorkoutCardProps = {
   workout: Workout;

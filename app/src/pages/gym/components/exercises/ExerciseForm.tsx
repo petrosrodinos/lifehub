@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import type { ExerciseType } from "../../../../features/exercises/interfaces/exercises.interface";
+import type { ExerciseType } from "../../../../features/gym/exercises/interfaces/exercises.interface";
 
 type ExerciseFormProps = {
   initialName: string;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { DateTime } from "luxon";
-import type { CreateWorkoutDto, UpdateWorkoutDto } from "../../../../features/workout/interfaces/workout.interface";
+import type { CreateWorkoutDto, UpdateWorkoutDto } from "../../../../features/gym/workout/interfaces/workout.interface";
 
 type WorkoutFormProps = {
   onSubmit: (data: CreateWorkoutDto | UpdateWorkoutDto) => void;

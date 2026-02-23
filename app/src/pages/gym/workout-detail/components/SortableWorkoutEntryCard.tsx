@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronRight, GripVertical } from "lucide-react";
-import type { WorkoutEntry } from "../../../../features/workout-entries/interfaces/workout-entries.interface";
+import type { WorkoutEntry } from "../../../../features/gym/workout-entries/interfaces/workout-entries.interface";
 import type { SortableItemRenderProps } from "../../../../components/ui/ReorderableList";
 import { SetCard } from "./SetCard";
+import type { WorkoutSet } from "../../../../features/gym/workout-sets/interfaces/workout-sets.interface";
 
 interface SortableWorkoutEntryCardProps {
   entry: WorkoutEntry;
@@ -52,7 +53,7 @@ export function SortableWorkoutEntryCard({ entry, sortableProps }: SortableWorko
       </div>
 
       <div className="space-y-3">
-        {entry.sets?.map((set, index) => (
+        {entry.sets?.map((set: WorkoutSet, index: number) => (
           <SetCard key={set.uuid} set={set} setNumber={index + 1} />
         ))}
       </div>

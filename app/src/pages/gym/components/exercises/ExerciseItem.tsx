@@ -1,5 +1,5 @@
 import { Edit2, Trash2 } from "lucide-react";
-import type { Exercise } from "../../../../features/exercises/interfaces/exercises.interface";
+import type { Exercise } from "../../../../features/gym/exercises/interfaces/exercises.interface";
 import { ExerciseForm } from "./ExerciseForm";
 
 type ExerciseItemProps = {

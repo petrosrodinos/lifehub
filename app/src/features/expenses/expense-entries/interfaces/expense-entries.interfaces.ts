@@ -1,8 +1,8 @@
-import type { PaginationMeta } from "../../../interfaces/pagination.interfaces"
 import type { ExpenseAccount } from "../../expense-accounts/interfaces/expense-accounts.interfaces"
 import type { ExpenseCategory } from "../../expense-categories/interfaces/expense-categories.interfaces"
 import type { ExpenseSubcategory } from "../../expense-subcategories/interfaces/expense-subcategories.interfaces"
-import type { ExpenseReceipt } from "../../receipts/expense-receipt/interfaces/expense-receipt.interfaces"
+import type { ExpenseReceipt } from "../../../receipts/expense-receipt/interfaces/expense-receipt.interfaces"
+import type { PaginationMeta } from "../../../../interfaces/pagination.interfaces"
 
 export interface ExpenseEntry {
   id?: number

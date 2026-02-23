@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronRight, Edit2, Plus, Trash2 } from "lucide-react";
-import type { Exercise } from "../../../../features/exercises/interfaces/exercises.interface";
-import type { MuscleGroup } from "../../../../features/muscle-groups/interfaces/muscle-groups.interface";
+import type { Exercise } from "../../../../features/gym/exercises/interfaces/exercises.interface";
+import type { MuscleGroup } from "../../../../features/gym/muscle-groups/interfaces/muscle-groups.interface";
 import { ExerciseForm } from "./ExerciseForm";
 import { ExerciseItem } from "./ExerciseItem";
 import { MuscleGroupForm } from "./MuscleGroupForm";

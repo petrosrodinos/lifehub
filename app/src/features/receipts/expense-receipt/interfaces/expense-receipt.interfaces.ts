@@ -1,6 +1,6 @@
 import type { ExpenseStore } from '../../expense-store/interfaces/expense-store.interfaces'
-import type { ExpenseEntry } from '../../../expense-entries/interfaces/expense-entries.interfaces'
 import type { ExpenseReceiptItem } from '../../expense-receipt-item/interfaces/expense-receipt-item.interfaces'
+import type { ExpenseEntry } from '../../../expenses/expense-entries/interfaces/expense-entries.interfaces'
 
 export interface ExpenseReceipt {
     id?: number
