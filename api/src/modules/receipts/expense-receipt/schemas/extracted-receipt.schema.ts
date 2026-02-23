@@ -13,7 +13,7 @@ export const ExtractedReceiptSchema = z.object({
   store_name: z.string().min(1),
   total_amount: z.number().nonnegative(),
   items: z.array(ExtractedReceiptItemSchema).min(1),
-  receipt_date: z.string().optional(),
+  receipt_date: z.string().nullable().optional(),
 });
 
 export type ExtractedReceiptItem = z.infer<typeof ExtractedReceiptItemSchema>;
