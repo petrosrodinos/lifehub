@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Store, Globe, Pencil } from "lucide-react"
-import type { ExpenseStore } from "../../../features/receipts/expense-store/interfaces/expense-store.interfaces"
+import type { ExpenseStore } from "../../../../features/receipts/expense-store/interfaces/expense-store.interfaces"
 import { EditStoreModal } from "./EditStoreModal"
 
 type StoreCardProps = {

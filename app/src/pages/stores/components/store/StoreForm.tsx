@@ -2,7 +2,7 @@ import { useState } from "react"
 import type {
   CreateExpenseStoreDto,
   UpdateExpenseStoreDto,
-} from "../../../features/receipts/expense-store/interfaces/expense-store.interfaces"
+} from "../../../../features/receipts/expense-store/interfaces/expense-store.interfaces"
 
 type StoreFormProps<T extends CreateExpenseStoreDto | UpdateExpenseStoreDto> = {
   onSubmit: (data: T) => void

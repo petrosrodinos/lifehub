@@ -1,6 +1,6 @@
-import { StoresHeader } from "./components/StoresHeader"
-import { StoresList } from "./components/StoresList"
-import { CreateStoreModal } from "./components/CreateStoreModal"
+import { StoresHeader } from "./components/store/StoresHeader"
+import { StoresList } from "./components/store/StoresList"
+import { CreateStoreModal } from "./components/store/CreateStoreModal"
 import { useStoresPage } from "./hooks/use-stores-page"
 
 export function StoresPage() {

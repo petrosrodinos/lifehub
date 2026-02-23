@@ -1,13 +1,13 @@
 import { useState } from "react"
 import { Trash2 } from "lucide-react"
-import { useUpdateExpenseStore } from "../../../features/receipts/expense-store/hooks/use-expense-store"
+import { useUpdateExpenseStore } from "../../../../features/receipts/expense-store/hooks/use-expense-store"
 import type {
   ExpenseStore,
   UpdateExpenseStoreDto,
-} from "../../../features/receipts/expense-store/interfaces/expense-store.interfaces"
+} from "../../../../features/receipts/expense-store/interfaces/expense-store.interfaces"
 import { StoreForm } from "./StoreForm"
 import { DeleteStoreModal } from "./DeleteStoreModal"
-import { Modal } from "../../../components/ui/Modal"
+import { Modal } from "../../../../components/ui/Modal"
 
 type EditStoreModalProps = {
   isOpen: boolean
