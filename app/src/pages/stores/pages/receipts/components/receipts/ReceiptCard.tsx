@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Receipt } from "lucide-react"
 import type { ExpenseReceipt } from "../../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces"
 import { formatReceiptDate, formatReceiptAmount, parseNumericValue } from "../../utils/receipt.utils"
@@ -8,22 +8,37 @@ const MAX_VISIBLE_ITEMS = 4
 
 type ReceiptCardProps = {
   receipt: ExpenseReceipt
+  highlightedReceiptUuid?: string
 }
 
-export function ReceiptCard({ receipt }: ReceiptCardProps) {
+export function ReceiptCard({ receipt, highlightedReceiptUuid }: ReceiptCardProps) {
   const [isDetailOpen, setIsDetailOpen] = useState(false)
+  const cardRef = useRef<HTMLButtonElement>(null)
+
+  const isHighlighted = highlightedReceiptUuid === receipt.uuid
 
   const items = receipt.items || []
   const itemCount = items.length
   const visibleItems = items.slice(0, MAX_VISIBLE_ITEMS)
   const remainingCount = itemCount - MAX_VISIBLE_ITEMS
 
+  useEffect(() => {
+    if (isHighlighted && cardRef.current) {
+      cardRef.current.scrollIntoView({ behavior: "smooth", block: "center" })
+    }
+  }, [isHighlighted])
+
   return (
     <>
       <button
+        ref={cardRef}
         type="button"
         onClick={() => setIsDetailOpen(true)}
-        className="w-full text-left bg-slate-900/40 hover:bg-slate-900/60 border border-slate-800/50 hover:border-violet-500/40 rounded-lg p-3 sm:p-4 transition-all duration-200"
+        className={`w-full text-left bg-slate-900/40 hover:bg-slate-900/60 border rounded-lg p-3 sm:p-4 transition-all duration-200 ${
+          isHighlighted
+            ? "border-violet-500 ring-2 ring-violet-500/30 bg-violet-500/10"
+            : "border-slate-800/50 hover:border-violet-500/40"
+        }`}
       >
         <div className="flex items-start sm:items-center gap-2 sm:gap-3">
           <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-violet-500/15 rounded-lg shrink-0 mt-0.5 sm:mt-0">

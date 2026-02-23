@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { ArrowUpRight, ArrowDownLeft, ArrowRightLeft } from "lucide-react";
+import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowUpRight, ArrowDownLeft, ArrowRightLeft, Receipt } from "lucide-react";
 import type { ExpenseEntry } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { EditTransactionModal } from "./EditTransactionModal";
 import { formatAmount, formatDate } from "../../utils/transaction";
+import { Routes } from "../../../../routes/routes";
 
 type TransactionCardProps = {
   transaction: ExpenseEntry;
@@ -11,9 +13,29 @@ type TransactionCardProps = {
 
 export function TransactionCard({ transaction }: TransactionCardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const formattedDate = formatDate(transaction.entry_date);
   const formattedAmount = formatAmount(transaction.amount);
+
+  const hasReceipt = !!transaction.expense_receipt;
+
+  const handleReceiptClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+
+      const receipt = transaction.expense_receipt;
+
+      if (!receipt?.store_uuid) {
+        return;
+      }
+
+      navigate(
+        `${Routes.stores.prefix}/${receipt.store_uuid}?receipt=${receipt.uuid}`
+      );
+    },
+    [transaction.expense_receipt, navigate]
+  );
 
   const getTypeIcon = () => {
     switch (transaction.type) {
@@ -77,7 +99,19 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
             </div>
           </div>
 
-          <div className={`text-sm sm:text-base font-semibold ${getTypeColor()} shrink-0`}>{getAmountDisplay()}</div>
+          <div className="flex items-center gap-2 shrink-0">
+            {hasReceipt && (
+              <button
+                type="button"
+                onClick={handleReceiptClick}
+                className="p-1.5 text-violet-400 hover:text-violet-300 hover:bg-violet-500/15 rounded-md transition-colors"
+              >
+                <Receipt className="w-4 h-4" />
+              </button>
+            )}
+
+            <span className={`text-sm sm:text-base font-semibold ${getTypeColor()}`}>{getAmountDisplay()}</span>
+          </div>
         </div>
       </button>
 

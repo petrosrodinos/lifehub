@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, useSearchParams } from "react-router-dom"
 import { Plus, ArrowLeft, Package } from "lucide-react"
 import { useExpenseReceipts } from "../../../../features/receipts/expense-receipt/hooks/use-expense-receipt"
 import { useExpenseStore } from "../../../../features/receipts/expense-store/hooks/use-expense-store"
@@ -13,6 +13,9 @@ export function ReceiptsPage() {
   const navigate = useNavigate()
   const [isCreateOpen, setIsCreateOpen] = useState(false)
   const [isProductsOpen, setIsProductsOpen] = useState(false)
+  const [searchParams] = useSearchParams()
+
+  const highlightedReceiptUuid = searchParams.get("receipt") || undefined
 
   const { data: store } = useExpenseStore(uuid || "")
   const { data: allReceipts = [], isLoading } = useExpenseReceipts()
@@ -78,7 +81,7 @@ export function ReceiptsPage() {
         ) : (
           <div className="space-y-2">
             {receipts.map((receipt) => (
-              <ReceiptCard key={receipt.uuid} receipt={receipt} />
+              <ReceiptCard key={receipt.uuid} receipt={receipt} highlightedReceiptUuid={highlightedReceiptUuid} />
             ))}
           </div>
         )}
