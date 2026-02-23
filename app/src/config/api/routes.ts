@@ -171,6 +171,9 @@ export const ApiRoutes = {
       get: (uuid: string) => `/expense-receipt-items/${uuid}`,
       update: (uuid: string) => `/expense-receipt-items/${uuid}`,
       delete: (uuid: string) => `/expense-receipt-items/${uuid}`,
+      analytics: {
+        priceEvolution: "/expense-receipt-items/analytics/price-evolution",
+      },
     },
     products: {
       list: "/expense-products",

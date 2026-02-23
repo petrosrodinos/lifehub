@@ -2,6 +2,7 @@ import { Injectable, InternalServerErrorException, NotFoundException, BadRequest
 import { CreateExpenseReceiptItemDto } from './dto/create-expense-receipt-item.dto';
 import { UpdateExpenseReceiptItemDto } from './dto/update-expense-receipt-item.dto';
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
+import type { PriceEvolutionQueryType } from './schemas/price-evolution-query.schema';
 
 @Injectable()
 export class ExpenseReceiptItemService {
@@ -150,6 +151,54 @@ export class ExpenseReceiptItemService {
       if (!product) {
         throw new BadRequestException('Product not found or does not belong to user');
       }
+    }
+  }
+
+  async priceEvolution(user_uuid: string, query: PriceEvolutionQueryType) {
+    try {
+      const dateFilter: Record<string, Date> = {};
+
+      if (query.from_date) {
+        dateFilter.gte = new Date(query.from_date);
+      }
+
+      if (query.to_date) {
+        dateFilter.lte = new Date(query.to_date);
+      }
+
+      const items = await this.prisma.expenseReceiptItem.findMany({
+        where: {
+          product_uuid: query.product_uuid,
+          receipt: {
+            user_uuid,
+            ...(Object.keys(dateFilter).length > 0 && { receipt_date: dateFilter }),
+          },
+        },
+        include: {
+          receipt: {
+            include: {
+              store: true,
+            },
+          },
+        },
+        orderBy: {
+          receipt: {
+            receipt_date: 'asc',
+          },
+        },
+      });
+
+      return items.map((item) => ({
+        date: item.receipt.receipt_date.toISOString(),
+        unit_price: Number(item.unit_price),
+        store_name: item.receipt.store?.name ?? null,
+      }));
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+
+      throw new InternalServerErrorException('Failed to fetch price evolution data');
     }
   }
 }

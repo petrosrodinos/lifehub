@@ -4,18 +4,21 @@ import type {
     CreateExpenseReceiptItemDto,
     UpdateExpenseReceiptItemDto,
 } from '../interfaces/expense-receipt-item.interfaces'
+import type { PriceEvolutionQuery } from '../interfaces/price-evolution.interfaces'
 import {
     getExpenseReceiptItems,
     getExpenseReceiptItem,
     createExpenseReceiptItem,
     updateExpenseReceiptItem,
     deleteExpenseReceiptItem,
+    getPriceEvolution,
 } from '../services/expense-receipt-item'
 
 const QUERY_KEYS = {
     expenseReceiptItems: (receipt_uuid: string) => ['expense-receipt-items', receipt_uuid],
     expenseReceiptItem: (uuid: string) => ['expense-receipt-items', 'item', uuid],
     expenseReceipts: ['expense-receipts'],
+    priceEvolution: (params: PriceEvolutionQuery) => ['price-evolution', params],
 }
 
 export function useExpenseReceiptItems(receipt_uuid: string) {
@@ -81,5 +84,13 @@ export function useDeleteExpenseReceiptItem(receipt_uuid: string) {
         onError: (error: Error) => {
             toast.error(error.message || 'Failed to delete receipt item', { duration: 3000 })
         },
+    })
+}
+
+export function usePriceEvolution(params: PriceEvolutionQuery) {
+    return useQuery({
+        queryKey: QUERY_KEYS.priceEvolution(params),
+        queryFn: () => getPriceEvolution(params),
+        enabled: !!params.product_uuid,
     })
 }

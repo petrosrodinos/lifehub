@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { ExpenseReceiptItemService } from './expense-receipt-item.service';
 import { CreateExpenseReceiptItemDto } from './dto/create-expense-receipt-item.dto';
 import { UpdateExpenseReceiptItemDto } from './dto/update-expense-receipt-item.dto';
 import { JwtGuard } from '@/shared/guards/jwt.guard';
 import { CurrentUser } from '@/shared/decorators/current-user.decorator';
+import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe';
+import { PriceEvolutionQuerySchema, type PriceEvolutionQueryType } from './schemas/price-evolution-query.schema';
 
 @ApiTags('Expense Receipt Items')
 @ApiBearerAuth()
@@ -22,6 +24,17 @@ export class ExpenseReceiptItemController {
     @Body() createExpenseReceiptItemDto: CreateExpenseReceiptItemDto
   ) {
     return this.expenseReceiptItemService.create(user_uuid, createExpenseReceiptItemDto);
+  }
+
+  @Get('analytics/price-evolution')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Get price evolution data for a specific product' })
+  @ApiResponse({ status: 200, description: 'Price evolution data retrieved successfully' })
+  priceEvolution(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(PriceEvolutionQuerySchema)) query: PriceEvolutionQueryType,
+  ) {
+    return this.expenseReceiptItemService.priceEvolution(user_uuid, query);
   }
 
   @Get('receipt/:receipt_uuid')

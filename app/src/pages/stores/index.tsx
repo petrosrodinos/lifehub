@@ -1,10 +1,20 @@
+import { useState } from "react"
 import { StoresHeader } from "./components/store/StoresHeader"
 import { StoresList } from "./components/store/StoresList"
 import { CreateStoreModal } from "./components/store/CreateStoreModal"
+import { AnalyticsSection } from "./components/analytics/price-evolution/AnalyticsSection"
 import { useStoresPage } from "./hooks/use-stores-page"
+
+const TAB_OPTIONS = {
+  STORES: "stores",
+  ANALYTICS: "analytics",
+} as const
+
+type TabOption = (typeof TAB_OPTIONS)[keyof typeof TAB_OPTIONS]
 
 export function StoresPage() {
   const { isCreateModalOpen, openCreateModal, closeCreateModal } = useStoresPage()
+  const [activeTab, setActiveTab] = useState<TabOption>(TAB_OPTIONS.STORES)
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
@@ -14,7 +24,36 @@ export function StoresPage() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 space-y-8">
         <StoresHeader onCreateClick={openCreateModal} />
 
-        <StoresList />
+        <div className="space-y-6">
+          <div className="flex gap-2 bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/50 p-1 md:w-auto md:inline-flex">
+            <button
+              type="button"
+              onClick={() => setActiveTab(TAB_OPTIONS.STORES)}
+              className={`flex-1 md:flex-initial px-6 py-3 rounded-lg text-sm font-medium transition-all ${
+                activeTab === TAB_OPTIONS.STORES
+                  ? "bg-violet-600 text-white shadow-lg shadow-violet-600/30"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+              }`}
+            >
+              Stores
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab(TAB_OPTIONS.ANALYTICS)}
+              className={`flex-1 md:flex-initial px-6 py-3 rounded-lg text-sm font-medium transition-all ${
+                activeTab === TAB_OPTIONS.ANALYTICS
+                  ? "bg-violet-600 text-white shadow-lg shadow-violet-600/30"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+              }`}
+            >
+              Analytics
+            </button>
+          </div>
+
+          {activeTab === TAB_OPTIONS.STORES && <StoresList />}
+          {activeTab === TAB_OPTIONS.ANALYTICS && <AnalyticsSection />}
+        </div>
       </div>
 
       <CreateStoreModal isOpen={isCreateModalOpen} onClose={closeCreateModal} />

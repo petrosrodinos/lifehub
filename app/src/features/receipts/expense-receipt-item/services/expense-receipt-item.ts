@@ -5,6 +5,10 @@ import type {
     CreateExpenseReceiptItemDto,
     UpdateExpenseReceiptItemDto,
 } from '../interfaces/expense-receipt-item.interfaces'
+import type {
+    PriceEvolutionPoint,
+    PriceEvolutionQuery,
+} from '../interfaces/price-evolution.interfaces'
 
 export const getExpenseReceiptItems = async (receipt_uuid: string): Promise<ExpenseReceiptItem[]> => {
     try {
@@ -58,5 +62,20 @@ export const deleteExpenseReceiptItem = async (uuid: string): Promise<void> => {
     } catch (error: unknown) {
         const err = error as { response?: { data?: { message?: string } } }
         throw new Error(err.response?.data?.message || 'Failed to delete expense receipt item')
+    }
+}
+
+export const getPriceEvolution = async (
+    params: PriceEvolutionQuery
+): Promise<PriceEvolutionPoint[]> => {
+    try {
+        const response = await axiosInstance.get(
+            ApiRoutes.expenses.receiptItems.analytics.priceEvolution,
+            { params }
+        )
+        return response.data
+    } catch (error: unknown) {
+        const err = error as { response?: { data?: { message?: string } } }
+        throw new Error(err.response?.data?.message || 'Failed to fetch price evolution data')
     }
 }
