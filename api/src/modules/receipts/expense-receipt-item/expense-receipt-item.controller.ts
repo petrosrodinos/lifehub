@@ -7,6 +7,7 @@ import { JwtGuard } from '@/shared/guards/jwt.guard';
 import { CurrentUser } from '@/shared/decorators/current-user.decorator';
 import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe';
 import { PriceEvolutionQuerySchema, type PriceEvolutionQueryType } from './schemas/price-evolution-query.schema';
+import { PurchasedProductsQuerySchema, type PurchasedProductsQueryType } from './schemas/purchased-products-query.schema';
 
 @ApiTags('Expense Receipt Items')
 @ApiBearerAuth()
@@ -35,6 +36,17 @@ export class ExpenseReceiptItemController {
     @Query(new ZodValidationPipe(PriceEvolutionQuerySchema)) query: PriceEvolutionQueryType,
   ) {
     return this.expenseReceiptItemService.priceEvolution(user_uuid, query);
+  }
+
+  @Get('analytics/purchased-products')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Get purchased products distribution data' })
+  @ApiResponse({ status: 200, description: 'Purchased products data retrieved successfully' })
+  purchasedProducts(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(PurchasedProductsQuerySchema)) query: PurchasedProductsQueryType,
+  ) {
+    return this.expenseReceiptItemService.purchasedProducts(user_uuid, query);
   }
 
   @Get('receipt/:receipt_uuid')

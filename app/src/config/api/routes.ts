@@ -173,6 +173,7 @@ export const ApiRoutes = {
       delete: (uuid: string) => `/expense-receipt-items/${uuid}`,
       analytics: {
         priceEvolution: "/expense-receipt-items/analytics/price-evolution",
+        purchasedProducts: "/expense-receipt-items/analytics/purchased-products",
       },
     },
     products: {

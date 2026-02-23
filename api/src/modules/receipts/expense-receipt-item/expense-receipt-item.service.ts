@@ -3,6 +3,7 @@ import { CreateExpenseReceiptItemDto } from './dto/create-expense-receipt-item.d
 import { UpdateExpenseReceiptItemDto } from './dto/update-expense-receipt-item.dto';
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
 import type { PriceEvolutionQueryType } from './schemas/price-evolution-query.schema';
+import type { PurchasedProductsQueryType } from './schemas/purchased-products-query.schema';
 
 @Injectable()
 export class ExpenseReceiptItemService {
@@ -201,4 +202,63 @@ export class ExpenseReceiptItemService {
       throw new InternalServerErrorException('Failed to fetch price evolution data');
     }
   }
+
+  async purchasedProducts(user_uuid: string, query: PurchasedProductsQueryType) {
+    try {
+      const dateFilter: Record<string, Date> = {};
+
+      if (query.from_date) {
+        dateFilter.gte = new Date(query.from_date);
+      }
+
+      if (query.to_date) {
+        dateFilter.lte = new Date(query.to_date);
+      }
+
+      const items = await this.prisma.expenseReceiptItem.findMany({
+        where: {
+          product_uuid: { not: null },
+          receipt: {
+            user_uuid,
+            ...(query.store_uuid && { store_uuid: query.store_uuid }),
+            ...(Object.keys(dateFilter).length > 0 && { receipt_date: dateFilter }),
+          },
+        },
+        include: {
+          product: true,
+        },
+      });
+
+      const productMap = new Map<string, { name: string; total_quantity: number; total_amount: number }>();
+
+      for (const item of items) {
+        const productName = item.product?.name ?? 'Unknown';
+        const productUuid = item.product_uuid as string;
+
+        const existing = productMap.get(productUuid);
+
+        if (existing) {
+          existing.total_quantity += Number(item.quantity);
+          existing.total_amount += Number(item.total_price);
+        } else {
+          productMap.set(productUuid, {
+            name: productName,
+            total_quantity: Number(item.quantity),
+            total_amount: Number(item.total_price),
+          });
+        }
+      }
+
+      return Array.from(productMap.values()).sort(
+        (a, b) => b.total_quantity - a.total_quantity,
+      );
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+
+      throw new InternalServerErrorException('Failed to fetch purchased products data');
+    }
+  }
 }
+

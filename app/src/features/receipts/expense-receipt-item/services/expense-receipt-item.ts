@@ -9,6 +9,10 @@ import type {
     PriceEvolutionPoint,
     PriceEvolutionQuery,
 } from '../interfaces/price-evolution.interfaces'
+import type {
+    PurchasedProductPoint,
+    PurchasedProductsQuery,
+} from '../interfaces/purchased-products.interfaces'
 
 export const getExpenseReceiptItems = async (receipt_uuid: string): Promise<ExpenseReceiptItem[]> => {
     try {
@@ -77,5 +81,20 @@ export const getPriceEvolution = async (
     } catch (error: unknown) {
         const err = error as { response?: { data?: { message?: string } } }
         throw new Error(err.response?.data?.message || 'Failed to fetch price evolution data')
+    }
+}
+
+export const getPurchasedProducts = async (
+    params: PurchasedProductsQuery
+): Promise<PurchasedProductPoint[]> => {
+    try {
+        const response = await axiosInstance.get(
+            ApiRoutes.expenses.receiptItems.analytics.purchasedProducts,
+            { params }
+        )
+        return response.data
+    } catch (error: unknown) {
+        const err = error as { response?: { data?: { message?: string } } }
+        throw new Error(err.response?.data?.message || 'Failed to fetch purchased products data')
     }
 }

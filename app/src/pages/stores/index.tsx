@@ -2,7 +2,7 @@ import { useState } from "react"
 import { StoresHeader } from "./components/store/StoresHeader"
 import { StoresList } from "./components/store/StoresList"
 import { CreateStoreModal } from "./components/store/CreateStoreModal"
-import { AnalyticsSection } from "./components/analytics/price-evolution/AnalyticsSection"
+import { AnalyticsSection } from "./components/analytics/AnalyticsSection"
 import { useStoresPage } from "./hooks/use-stores-page"
 
 const TAB_OPTIONS = {

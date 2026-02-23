@@ -3,7 +3,7 @@ import { PriceEvolutionChart } from "./PriceEvolutionChart"
 import { PriceEvolutionFilters } from "./PriceEvolutionFilters"
 import { PriceEvolutionLoading } from "./PriceEvolutionLoading"
 
-export function AnalyticsSection() {
+export function PriceEvolutionSection() {
   const {
     selectedProductUuid,
     fromDate,
@@ -56,3 +56,4 @@ export function AnalyticsSection() {
     </div>
   )
 }
+

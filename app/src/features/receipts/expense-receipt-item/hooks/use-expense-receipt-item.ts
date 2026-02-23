@@ -5,6 +5,7 @@ import type {
     UpdateExpenseReceiptItemDto,
 } from '../interfaces/expense-receipt-item.interfaces'
 import type { PriceEvolutionQuery } from '../interfaces/price-evolution.interfaces'
+import type { PurchasedProductsQuery } from '../interfaces/purchased-products.interfaces'
 import {
     getExpenseReceiptItems,
     getExpenseReceiptItem,
@@ -12,6 +13,7 @@ import {
     updateExpenseReceiptItem,
     deleteExpenseReceiptItem,
     getPriceEvolution,
+    getPurchasedProducts,
 } from '../services/expense-receipt-item'
 
 const QUERY_KEYS = {
@@ -19,6 +21,7 @@ const QUERY_KEYS = {
     expenseReceiptItem: (uuid: string) => ['expense-receipt-items', 'item', uuid],
     expenseReceipts: ['expense-receipts'],
     priceEvolution: (params: PriceEvolutionQuery) => ['price-evolution', params],
+    purchasedProducts: (params: PurchasedProductsQuery) => ['purchased-products', params],
 }
 
 export function useExpenseReceiptItems(receipt_uuid: string) {
@@ -94,3 +97,11 @@ export function usePriceEvolution(params: PriceEvolutionQuery) {
         enabled: !!params.product_uuid,
     })
 }
+
+export function usePurchasedProducts(params: PurchasedProductsQuery) {
+    return useQuery({
+        queryKey: QUERY_KEYS.purchasedProducts(params),
+        queryFn: () => getPurchasedProducts(params),
+    })
+}
+
