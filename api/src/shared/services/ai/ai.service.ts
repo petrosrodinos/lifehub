@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { GetReceiptDataOptions } from "./ai.interfaces";
-import { ExtractedReceipt, ExtractedReceiptSchema } from "@/modules/expenses/expense-receipt/schemas/extracted-receipt.schema";
+import { ExtractedReceipt, ExtractedReceiptSchema } from "@/modules/receipts/expense-receipt/schemas/extracted-receipt.schema";
 import { AiService } from "@/integrations/ai/services/ai.service";
 
 @Injectable()

@@ -26,10 +26,10 @@ import { ActivityOccurrencesModule } from './modules/habbits/activity-occurrence
 import { ActivityLogsModule } from './modules/habbits/activity-logs/activity-logs.module';
 import { AnalyticsModule } from './modules/habbits/analytics/analytics.module';
 import { ScheduleSlotsModule } from './modules/schedule-slots/schedule-slots.module';
-import { ExpenseStoreModule } from './modules/expenses/expense-store/expense-store.module';
-import { ExpenseReceiptModule } from './modules/expenses/expense-receipt/expense-receipt.module';
-import { ExpenseReceiptItemModule } from './modules/expenses/expense-receipt-item/expense-receipt-item.module';
-import { ExpenseProductsModule } from './modules/expenses/expense-products/expense-products.module';
+import { ExpenseStoreModule } from './modules/receipts/expense-store/expense-store.module';
+import { ExpenseReceiptModule } from './modules/receipts/expense-receipt/expense-receipt.module';
+import { ExpenseReceiptItemModule } from './modules/receipts/expense-receipt-item/expense-receipt-item.module';
+import { ExpenseProductsModule } from './modules/receipts/expense-products/expense-products.module';
 
 @Module({
   imports: [
