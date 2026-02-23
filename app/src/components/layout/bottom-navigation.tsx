@@ -12,6 +12,12 @@ export function BottomNavigation() {
       icon: Calendar,
     },
     {
+      id: "habits",
+      label: "Habits",
+      path: "/dashboard/habits",
+      icon: CheckCircle,
+    },
+    {
       id: "expenses",
       label: "Expenses",
       path: "/dashboard/expenses",
@@ -22,12 +28,6 @@ export function BottomNavigation() {
       label: "Receipts",
       path: "/dashboard/receipts",
       icon: Receipt,
-    },
-    {
-      id: "habits",
-      label: "Habits",
-      path: "/dashboard/habits",
-      icon: CheckCircle,
     },
     {
       id: "gym",

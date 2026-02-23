@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Trash2, Pencil } from "lucide-react";
-import type { ExpenseReceiptItem } from "../../../../../../features/receipts/expense-receipt-item/interfaces/expense-receipt-item.interfaces";
-import { useUpdateExpenseReceiptItem, useDeleteExpenseReceiptItem } from "../../../../../../features/receipts/expense-receipt-item/hooks/use-expense-receipt-item";
-import type { UpdateExpenseReceiptItemDto } from "../../../../../../features/receipts/expense-receipt-item/interfaces/expense-receipt-item.interfaces";
-import { Modal } from "../../../../../../components/ui/Modal";
-import { ConfirmationModal } from "../../../../../../components/ui/ConfirmationModal";
+import type { ExpenseReceiptItem } from "../../../../features/receipts/expense-receipt-item/interfaces/expense-receipt-item.interfaces";
+import { useUpdateExpenseReceiptItem, useDeleteExpenseReceiptItem } from "../../../../features/receipts/expense-receipt-item/hooks/use-expense-receipt-item";
+import type { UpdateExpenseReceiptItemDto } from "../../../../features/receipts/expense-receipt-item/interfaces/expense-receipt-item.interfaces";
+import { Modal } from "../../../../components/ui/Modal";
+import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
 import { ReceiptItemForm } from "./ReceiptItemForm";
-import { formatReceiptAmount, parseNumericValue } from "../../../../utils/receipt.utils";
+import { formatReceiptAmount, parseNumericValue } from "../../utils/receipt.utils";
 
 type ReceiptItemCardProps = {
   item: ExpenseReceiptItem;

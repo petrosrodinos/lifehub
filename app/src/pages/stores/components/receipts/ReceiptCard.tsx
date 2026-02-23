@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Receipt } from "lucide-react";
-import type { ExpenseReceipt } from "../../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces";
-import { formatReceiptDate, formatReceiptAmount, parseNumericValue } from "../../../../utils/receipt.utils";
+import type { ExpenseReceipt } from "../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces";
+import { formatReceiptDate, formatReceiptAmount, parseNumericValue } from "../../utils/receipt.utils";
 import { ReceiptDetailModal } from "./ReceiptDetailModal";
 
 const MAX_VISIBLE_ITEMS = 4;

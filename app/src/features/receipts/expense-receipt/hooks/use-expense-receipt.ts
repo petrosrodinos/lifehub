@@ -24,10 +24,11 @@ const QUERY_KEYS = {
     expenseEntries: ['expense-entries'],
 }
 
-export function useExpenseReceipts(params?: ExpenseReceiptsQueryParams) {
+export function useExpenseReceipts(params?: ExpenseReceiptsQueryParams, options?: { enabled?: boolean }) {
     return useQuery({
         queryKey: QUERY_KEYS.expenseReceipts(params),
         queryFn: () => getExpenseReceipts(params),
+        enabled: options?.enabled ?? true,
     })
 }
 

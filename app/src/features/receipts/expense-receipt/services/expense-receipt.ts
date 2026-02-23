@@ -6,9 +6,10 @@ import type {
     UpdateExpenseReceiptDto,
     UploadReceiptPayload,
     ExpenseReceiptsQueryParams,
+    ExpenseReceiptsResponse,
 } from '../interfaces/expense-receipt.interfaces'
 
-export const getExpenseReceipts = async (params?: ExpenseReceiptsQueryParams): Promise<ExpenseReceipt[]> => {
+export const getExpenseReceipts = async (params?: ExpenseReceiptsQueryParams): Promise<ExpenseReceiptsResponse> => {
     try {
         const response = await axiosInstance.get(ApiRoutes.expenses.receipts.list, { params })
         return response.data

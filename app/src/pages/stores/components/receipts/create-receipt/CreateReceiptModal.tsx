@@ -1,8 +1,8 @@
-import { useCreateExpenseReceipt } from "../../../../../../../features/receipts/expense-receipt/hooks/use-expense-receipt";
-import type { CreateExpenseReceiptDto, ExpenseReceipt } from "../../../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces";
-import { Modal } from "../../../../../../../components/ui/Modal";
+import { useCreateExpenseReceipt } from "../../../../../features/receipts/expense-receipt/hooks/use-expense-receipt";
+import type { CreateExpenseReceiptDto, ExpenseReceipt } from "../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces";
+import { Modal } from "../../../../../components/ui/Modal";
 import { ReceiptForm } from "./ReceiptForm";
-import { Routes } from "../../../../../../../routes/routes";
+import { Routes } from "../../../../../routes/routes";
 import { useNavigate } from "react-router-dom";
 
 type CreateReceiptModalProps = {
@@ -19,14 +19,14 @@ export function CreateReceiptModal({ isOpen, onClose, storeUuid }: CreateReceipt
     createReceipt.mutate(data, {
       onSuccess: (receipt: ExpenseReceipt) => {
         onClose();
-        navigate(`${Routes.stores.prefix}/${receipt.store_uuid}?receipt=${receipt.uuid}`);
+        navigate(`${Routes.receipts.prefix}?receipt=${receipt.uuid}`);
       },
     });
   };
 
   const handleUploadSuccess = (receipt: ExpenseReceipt) => {
     onClose();
-    navigate(`${Routes.stores.prefix}/${receipt.store_uuid}?receipt=${receipt.uuid}`);
+    navigate(`${Routes.receipts.prefix}?receipt=${receipt.uuid}`);
   };
 
   return (

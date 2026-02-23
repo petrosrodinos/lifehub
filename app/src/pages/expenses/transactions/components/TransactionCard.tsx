@@ -30,11 +30,9 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
         return;
       }
 
-      navigate(
-        `${Routes.stores.prefix}/${receipt.store_uuid}?receipt=${receipt.uuid}`
-      );
+      navigate(`${Routes.receipts.prefix}?receipt=${receipt.uuid}`);
     },
-    [transaction.expense_receipt, navigate]
+    [transaction.expense_receipt, navigate],
   );
 
   const getTypeIcon = () => {
@@ -78,7 +76,18 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
 
   return (
     <>
-      <button type="button" onClick={() => setIsEditModalOpen(true)} className="w-full text-left bg-slate-900/40 hover:bg-slate-900/60 border border-slate-800/50 hover:border-violet-500/40 rounded-lg p-3 sm:p-4 transition-all duration-200">
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() => setIsEditModalOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsEditModalOpen(true);
+          }
+        }}
+        className="w-full text-left bg-slate-900/40 hover:bg-slate-900/60 border border-slate-800/50 hover:border-violet-500/40 rounded-lg p-3 sm:p-4 transition-all duration-200 cursor-pointer"
+      >
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-slate-800/50 rounded-lg shrink-0">{getTypeIcon()}</div>
 
@@ -101,11 +110,7 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
 
           <div className="flex items-center gap-2 shrink-0">
             {hasReceipt && (
-              <button
-                type="button"
-                onClick={handleReceiptClick}
-                className="p-1.5 text-violet-400 hover:text-violet-300 hover:bg-violet-500/15 rounded-md transition-colors"
-              >
+              <button type="button" onClick={handleReceiptClick} className="p-1.5 text-violet-400 hover:text-violet-300 hover:bg-violet-500/15 rounded-md transition-colors">
                 <Receipt className="w-4 h-4" />
               </button>
             )}
@@ -113,7 +118,7 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
             <span className={`text-sm sm:text-base font-semibold ${getTypeColor()}`}>{getAmountDisplay()}</span>
           </div>
         </div>
-      </button>
+      </div>
 
       <EditTransactionModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} transaction={transaction} />
     </>

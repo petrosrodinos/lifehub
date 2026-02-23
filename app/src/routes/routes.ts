@@ -13,8 +13,8 @@ export const Routes = {
     expenses: {
         prefix: '/dashboard/expenses',
     },
-    stores: {
-        prefix: '/dashboard/stores',
+    receipts: {
+        prefix: '/dashboard/receipts',
     },
     habits: {
         prefix: '/dashboard/habits',

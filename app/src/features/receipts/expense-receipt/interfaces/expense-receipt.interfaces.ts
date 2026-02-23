@@ -1,6 +1,7 @@
 import type { ExpenseStore } from '../../expense-store/interfaces/expense-store.interfaces'
 import type { ExpenseReceiptItem } from '../../expense-receipt-item/interfaces/expense-receipt-item.interfaces'
 import type { ExpenseEntry } from '../../../expenses/expense-entries/interfaces/expense-entries.interfaces'
+import type { PaginationMeta } from '../../../../interfaces/pagination.interfaces'
 
 export interface ExpenseReceipt {
     id?: number
@@ -41,4 +42,13 @@ export interface UploadReceiptPayload {
 
 export interface ExpenseReceiptsQueryParams {
     store_uuid?: string
+    date_from?: string
+    date_to?: string
+    page?: number
+    limit?: number
+}
+
+export interface ExpenseReceiptsResponse {
+    data: ExpenseReceipt[]
+    pagination: PaginationMeta
 }

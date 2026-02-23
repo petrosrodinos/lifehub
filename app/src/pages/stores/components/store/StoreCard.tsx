@@ -19,7 +19,7 @@ export function StoreCard({ store }: StoreCardProps) {
 
   return (
     <>
-      <button type="button" className="w-full text-left bg-slate-900/40 hover:bg-slate-900/60 border border-slate-800/50 hover:border-violet-500/40 rounded-lg p-3 transition-all duration-200 group">
+      <div className="w-full text-left bg-slate-900/40 hover:bg-slate-900/60 border border-slate-800/50 hover:border-violet-500/40 rounded-lg p-3 transition-all duration-200 group">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-violet-500/15 flex items-center justify-center shrink-0 group-hover:bg-violet-500/25 transition-colors">
             <Store className="w-4 h-4 text-violet-400" />
@@ -36,7 +36,7 @@ export function StoreCard({ store }: StoreCardProps) {
             <Pencil className="w-3.5 h-3.5" />
           </button>
         </div>
-      </button>
+      </div>
 
       <EditStoreModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} store={store} />
     </>

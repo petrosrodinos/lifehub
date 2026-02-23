@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CreateStoreModal } from "./components/store/CreateStoreModal";
 import { AnalyticsSection } from "./components/analytics/AnalyticsSection";
+import { ReceiptsSection } from "./components/receipts";
 import { useStoresPage } from "./hooks/use-stores-page";
 import { ReceiptsHeader } from "./components/ReceiptsHeader";
 
@@ -33,6 +34,8 @@ export function ReceiptsPage() {
               Analytics
             </button>
           </div>
+
+          {activeTab === TAB_OPTIONS.RECEIPTS && <ReceiptsSection />}
 
           {activeTab === TAB_OPTIONS.ANALYTICS && <AnalyticsSection />}
         </div>

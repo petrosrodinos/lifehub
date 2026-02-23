@@ -49,19 +49,52 @@ export class ExpenseReceiptService {
         where.store_uuid = query.store_uuid;
       }
 
-      return await this.prisma.expenseReceipt.findMany({
-        where,
-        orderBy: { receipt_date: 'desc' },
-        include: {
-          store: true,
-          expense_entry: true,
-          items: {
-            include: {
-              product: true,
+      if (query.date_from || query.date_to) {
+        where.receipt_date = {};
+        if (query.date_from) {
+          (where.receipt_date as Record<string, Date>).gte = query.date_from;
+        }
+        if (query.date_to) {
+          const endOfDay = new Date(query.date_to);
+          endOfDay.setHours(23, 59, 59, 999);
+          (where.receipt_date as Record<string, Date>).lte = endOfDay;
+        }
+      }
+
+      const skip = (query.page - 1) * query.limit;
+
+      const [data, total] = await Promise.all([
+        this.prisma.expenseReceipt.findMany({
+          where,
+          skip,
+          take: query.limit,
+          orderBy: { receipt_date: 'desc' },
+          include: {
+            store: true,
+            expense_entry: true,
+            items: {
+              include: {
+                product: true,
+              },
             },
           },
+        }),
+        this.prisma.expenseReceipt.count({ where }),
+      ]);
+
+      const totalPages = Math.ceil(total / query.limit);
+
+      return {
+        data,
+        pagination: {
+          total,
+          page: query.page,
+          limit: query.limit,
+          totalPages,
+          hasNextPage: query.page < totalPages,
+          hasPreviousPage: query.page > 1,
         },
-      });
+      };
     } catch (error) {
       throw new InternalServerErrorException('Failed to fetch expense receipts');
     }
