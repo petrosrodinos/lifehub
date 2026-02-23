@@ -5,7 +5,7 @@ import { useExpenseReceipts } from "../../../../features/receipts/expense-receip
 import { useExpenseStore } from "../../../../features/receipts/expense-store/hooks/use-expense-store"
 import { ReceiptCard } from "./components/receipts/ReceiptCard"
 import { ReceiptsLoading } from "./components/receipts/ReceiptsLoading"
-import { CreateReceiptModal } from "./components/receipts/CreateReceiptModal"
+import { CreateReceiptModal } from "./components/receipts/create-receipt/CreateReceiptModal"
 import { ProductsModal } from "./components/products/ProductsModal"
 
 export function ReceiptsPage() {

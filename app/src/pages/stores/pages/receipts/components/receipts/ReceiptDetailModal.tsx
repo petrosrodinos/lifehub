@@ -7,7 +7,7 @@ import { useCreateExpenseReceiptItem } from "../../../../../../features/receipts
 import type { CreateExpenseReceiptItemDto } from "../../../../../../features/receipts/expense-receipt-item/interfaces/expense-receipt-item.interfaces"
 import { Modal } from "../../../../../../components/ui/Modal"
 import { DeleteReceiptModal } from "./DeleteReceiptModal"
-import { ReceiptForm } from "./ReceiptForm"
+import { ReceiptForm } from "./create-receipt/ReceiptForm"
 import { formatReceiptDate, formatReceiptAmount, parseNumericValue } from "../../utils/receipt.utils"
 import { ReceiptItemCard } from "./ReceiptItemCard"
 import { ReceiptItemForm } from "./ReceiptItemForm"
