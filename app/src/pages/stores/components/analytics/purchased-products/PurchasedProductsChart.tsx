@@ -1,5 +1,18 @@
+import { useSyncExternalStore } from "react"
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts"
 import type { PurchasedProductPoint } from "../../../../../features/receipts/expense-receipt-item/interfaces/purchased-products.interfaces"
+
+const SMALL_SCREEN_BREAKPOINT = 640
+
+function subscribeToResize(callback: () => void) {
+  window.addEventListener("resize", callback)
+  return () => window.removeEventListener("resize", callback)
+}
+
+function getIsSmallScreen() {
+  if (typeof window === "undefined") return false
+  return window.innerWidth < SMALL_SCREEN_BREAKPOINT
+}
 
 const CHART_COLORS = [
   "#8b5cf6",
@@ -19,6 +32,12 @@ type PurchasedProductsChartProps = {
 }
 
 export function PurchasedProductsChart({ data }: PurchasedProductsChartProps) {
+  const isSmallScreen = useSyncExternalStore(
+    subscribeToResize,
+    getIsSmallScreen,
+    getIsSmallScreen
+  )
+
   if (data.length === 0) {
     return (
       <div className="flex items-center justify-center h-64 text-slate-400">
@@ -27,8 +46,34 @@ export function PurchasedProductsChart({ data }: PurchasedProductsChartProps) {
     )
   }
 
+  const tooltipWrapperStyle = isSmallScreen
+    ? {
+        position: "absolute" as const,
+        top: "auto",
+        left: "50%",
+        bottom: 16,
+        transform: "translateX(-50%)",
+        zIndex: 10,
+      }
+    : undefined
+
+  const legendWrapperStyle =
+    isSmallScreen || data.length > 8
+      ? {
+          color: "#cbd5e1",
+          paddingTop: 16,
+          maxHeight: 100,
+          overflowY: "auto" as const,
+          overflowX: "hidden" as const,
+        }
+      : { color: "#cbd5e1", paddingTop: 16 }
+
+  const outerRadius = isSmallScreen ? 90 : 130
+  const innerRadius = isSmallScreen ? 40 : 60
+
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <div className="relative w-full min-h-[400px] overflow-hidden">
+      <ResponsiveContainer width="100%" height={400}>
       <PieChart>
         <Pie
           data={data}
@@ -36,8 +81,8 @@ export function PurchasedProductsChart({ data }: PurchasedProductsChartProps) {
           nameKey="name"
           cx="50%"
           cy="50%"
-          outerRadius={130}
-          innerRadius={60}
+          outerRadius={outerRadius}
+          innerRadius={innerRadius}
           paddingAngle={2}
           strokeWidth={0}
         >
@@ -50,33 +95,37 @@ export function PurchasedProductsChart({ data }: PurchasedProductsChartProps) {
         </Pie>
 
         <Tooltip
-  contentStyle={{
-    backgroundColor: "#1e293b",
-    border: "1px solid #334155",
-    borderRadius: "8px",
-    color: "#f1f5f9",
-  }}
-  formatter={(value?: number, name?: string) => {
-    const safeValue = value ?? 0;
-    const safeName = name ?? "";
+          wrapperStyle={tooltipWrapperStyle}
+          contentStyle={{
+            backgroundColor: "#1e293b",
+            border: "1px solid #334155",
+            borderRadius: "8px",
+            color: "#f1f5f9",
+            maxHeight: isSmallScreen ? 160 : undefined,
+            overflowY: isSmallScreen ? "auto" : undefined,
+          }}
+          formatter={(value?: number, name?: string) => {
+            const safeValue = value ?? 0
+            const safeName = name ?? ""
 
-    const total =
-      data.find((d) => d.name === safeName)?.total_amount ?? 0;
+            const total =
+              data.find((d) => d.name === safeName)?.total_amount ?? 0
 
-    return [
-      `${safeValue} units · €${total.toFixed(2)}`,
-      safeName,
-    ] as [string, string];
-  }}
-  labelStyle={{ color: "#cbd5e1" }}
-/>
+            return [
+              `${safeValue} units · €${total.toFixed(2)}`,
+              safeName,
+            ] as [string, string]
+          }}
+          labelStyle={{ color: "#cbd5e1" }}
+        />
 
         <Legend
-          wrapperStyle={{ color: "#cbd5e1", paddingTop: 16 }}
+          wrapperStyle={legendWrapperStyle}
           iconType="circle"
           iconSize={8}
         />
       </PieChart>
     </ResponsiveContainer>
+    </div>
   )
 }

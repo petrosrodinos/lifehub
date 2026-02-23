@@ -1,51 +1,48 @@
-import { useState } from "react"
-import { Trash2, Pencil, Plus, Receipt, Store, Calendar, ShoppingBag } from "lucide-react"
-import type { ExpenseReceipt, CreateExpenseReceiptDto } from "../../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces"
-import { useUpdateExpenseReceipt } from "../../../../../../features/receipts/expense-receipt/hooks/use-expense-receipt"
-import { useExpenseReceiptItems } from "../../../../../../features/receipts/expense-receipt-item/hooks/use-expense-receipt-item"
-import { useCreateExpenseReceiptItem } from "../../../../../../features/receipts/expense-receipt-item/hooks/use-expense-receipt-item"
-import type { CreateExpenseReceiptItemDto } from "../../../../../../features/receipts/expense-receipt-item/interfaces/expense-receipt-item.interfaces"
-import { Modal } from "../../../../../../components/ui/Modal"
-import { DeleteReceiptModal } from "./DeleteReceiptModal"
-import { ReceiptForm } from "./create-receipt/ReceiptForm"
-import { formatReceiptDate, formatReceiptAmount, parseNumericValue } from "../../utils/receipt.utils"
-import { ReceiptItemCard } from "./ReceiptItemCard"
-import { ReceiptItemForm } from "./ReceiptItemForm"
+import { useState } from "react";
+import { Trash2, Pencil, Plus, Receipt, Store, Calendar, ShoppingBag } from "lucide-react";
+import type { ExpenseReceipt, CreateExpenseReceiptDto } from "../../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces";
+import { useUpdateExpenseReceipt } from "../../../../../../features/receipts/expense-receipt/hooks/use-expense-receipt";
+import { useExpenseReceiptItems } from "../../../../../../features/receipts/expense-receipt-item/hooks/use-expense-receipt-item";
+import { useCreateExpenseReceiptItem } from "../../../../../../features/receipts/expense-receipt-item/hooks/use-expense-receipt-item";
+import type { CreateExpenseReceiptItemDto } from "../../../../../../features/receipts/expense-receipt-item/interfaces/expense-receipt-item.interfaces";
+import { Modal } from "../../../../../../components/ui/Modal";
+import { ReceiptForm } from "./create-receipt/ReceiptForm";
+import { formatReceiptDate, formatReceiptAmount, parseNumericValue } from "../../utils/receipt.utils";
+import { ReceiptItemCard } from "./ReceiptItemCard";
+import { ReceiptItemForm } from "./ReceiptItemForm";
+import { DeleteReceiptModal } from "./DeleteReceiptModal";
 
 type ReceiptDetailModalProps = {
-  isOpen: boolean
-  onClose: () => void
-  receipt: ExpenseReceipt
-}
+  isOpen: boolean;
+  onClose: () => void;
+  receipt: ExpenseReceipt;
+};
 
 export function ReceiptDetailModal({ isOpen, onClose, receipt }: ReceiptDetailModalProps) {
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
-  const [isAddItemOpen, setIsAddItemOpen] = useState(false)
-  const [isEditing, setIsEditing] = useState(false)
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isAddItemOpen, setIsAddItemOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
-  const { data: items = [], isLoading: itemsLoading } = useExpenseReceiptItems(isOpen ? receipt.uuid : "")
-  const createItem = useCreateExpenseReceiptItem()
-  const updateReceipt = useUpdateExpenseReceipt()
+  const { data: items = [], isLoading: itemsLoading } = useExpenseReceiptItems(isOpen ? receipt.uuid : "");
+  const createItem = useCreateExpenseReceiptItem();
+  const updateReceipt = useUpdateExpenseReceipt();
 
   const handleAddItem = (data: CreateExpenseReceiptItemDto) => {
     createItem.mutate(data, {
       onSuccess: () => setIsAddItemOpen(false),
-    })
-  }
+    });
+  };
 
   const handleUpdateReceipt = (data: CreateExpenseReceiptDto) => {
-    const { expense_entry_uuid: _, ...updateData } = data
+    const { expense_entry_uuid: _, ...updateData } = data;
 
-    updateReceipt.mutate(
-      { uuid: receipt.uuid, data: updateData },
-      { onSuccess: () => setIsEditing(false) },
-    )
-  }
+    updateReceipt.mutate({ uuid: receipt.uuid, data: updateData }, { onSuccess: () => setIsEditing(false) });
+  };
 
   const handleDeleteSuccess = () => {
-    setIsDeleteOpen(false)
-    onClose()
-  }
+    setIsDeleteOpen(false);
+    onClose();
+  };
 
   return (
     <>
@@ -58,19 +55,11 @@ export function ReceiptDetailModal({ isOpen, onClose, receipt }: ReceiptDetailMo
         headerActions={
           <div className="flex items-center gap-1">
             {!isEditing && (
-              <button
-                type="button"
-                onClick={() => setIsEditing(true)}
-                className="p-2 text-slate-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-lg transition-colors"
-              >
+              <button type="button" onClick={() => setIsEditing(true)} className="p-2 text-slate-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-lg transition-colors">
                 <Pencil className="w-5 h-5" />
               </button>
             )}
-            <button
-              type="button"
-              onClick={() => setIsDeleteOpen(true)}
-              className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
-            >
+            <button type="button" onClick={() => setIsDeleteOpen(true)} className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors">
               <Trash2 className="w-5 h-5" />
             </button>
           </div>
@@ -128,11 +117,7 @@ export function ReceiptDetailModal({ isOpen, onClose, receipt }: ReceiptDetailMo
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h3 className="text-base font-semibold text-white">Items</h3>
-                <button
-                  type="button"
-                  onClick={() => setIsAddItemOpen(true)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-medium rounded-lg transition-colors"
-                >
+                <button type="button" onClick={() => setIsAddItemOpen(true)} className="flex items-center gap-1.5 px-3 py-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-medium rounded-lg transition-colors">
                   <Plus className="w-3.5 h-3.5" />
                   Add Item
                 </button>
@@ -161,21 +146,10 @@ export function ReceiptDetailModal({ isOpen, onClose, receipt }: ReceiptDetailMo
       </Modal>
 
       <Modal isOpen={isAddItemOpen} onClose={() => setIsAddItemOpen(false)} title="Add Item">
-        <ReceiptItemForm
-          onSubmit={handleAddItem}
-          onCancel={() => setIsAddItemOpen(false)}
-          receiptUuid={receipt.uuid}
-          submitLabel="Add"
-          isPending={createItem.isPending}
-        />
+        <ReceiptItemForm onSubmit={handleAddItem} onCancel={() => setIsAddItemOpen(false)} receiptUuid={receipt.uuid} submitLabel="Add" isPending={createItem.isPending} />
       </Modal>
 
-      <DeleteReceiptModal
-        isOpen={isDeleteOpen}
-        onClose={() => setIsDeleteOpen(false)}
-        onSuccess={handleDeleteSuccess}
-        receipt={receipt}
-      />
+      <DeleteReceiptModal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)} onSuccess={handleDeleteSuccess} receipt={receipt} />
     </>
-  )
+  );
 }
