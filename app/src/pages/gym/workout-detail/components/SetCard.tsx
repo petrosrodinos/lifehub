@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Edit2, Trash2 } from "lucide-react";
 import { DateTime } from "luxon";
-import type { WorkoutSet } from "../../../../features/workout-sets/interfaces/workout-sets.interface";
+import type { WorkoutSet } from "../../../../features/gym/workout-sets/interfaces/workout-sets.interface";
 import { DeleteSetModal } from "./DeleteSetModal";
 import { EditSetModal } from "./EditSetModal";
-import { ExerciseTypes } from "../../../../features/exercises/interfaces/exercises.interface";
+import { ExerciseTypes } from "../../../../features/gym/exercises/interfaces/exercises.interface";
 
 type SetCardProps = {
   set: WorkoutSet;

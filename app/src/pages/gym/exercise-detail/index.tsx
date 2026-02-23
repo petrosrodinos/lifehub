@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Dumbbell } from "lucide-react";
-import { useWorkoutEntry } from "../../../features/workout-entries/hooks/use-workout-entries";
+import { useWorkoutEntry } from "../../../features/gym/workout-entries/hooks/use-workout-entries";
 import { ExerciseDetailSkeleton } from "./ExerciseDetailSkeleton";
 import { TrackTab } from "./TrackTab";
 import { HistoryTab } from "./HistoryTab";

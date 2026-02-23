@@ -1,5 +1,5 @@
-import axiosInstance from '../../../config/api/axios'
-import { ApiRoutes } from '../../../config/api/routes'
+import axiosInstance from '../../../../config/api/axios'
+import { ApiRoutes } from '../../../../config/api/routes'
 import type { CreateWorkoutDto, UpdateWorkoutDto, Workout } from '../interfaces/workout.interface'
 
 export type WorkoutsQueryParams = {

@@ -2,11 +2,11 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Loader2, Search } from "lucide-react";
 import { Modal } from "../../../../components/ui/Modal";
-import { useExercises } from "../../../../features/exercises/hooks/use-exercises";
-import { useMuscleGroups } from "../../../../features/muscle-groups/hooks/use-muscle-groups";
-import { useCreateWorkoutEntry } from "../../../../features/workout-entries/hooks/use-workout-entries";
-import { useWorkout } from "../../../../features/workout/hooks/use-workout";
-import type { Exercise } from "../../../../features/exercises/interfaces/exercises.interface";
+import { useExercises } from "../../../../features/gym/exercises/hooks/use-exercises";
+import { useMuscleGroups } from "../../../../features/gym/muscle-groups/hooks/use-muscle-groups";
+import { useCreateWorkoutEntry } from "../../../../features/gym/workout-entries/hooks/use-workout-entries";
+import { useWorkout } from "../../../../features/gym/workout/hooks/use-workout";
+import type { Exercise } from "../../../../features/gym/exercises/interfaces/exercises.interface";
 
 type AddExerciseModalProps = {
   isOpen: boolean;

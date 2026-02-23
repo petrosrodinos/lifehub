@@ -1,6 +1,6 @@
-import { useDeleteWorkoutSet } from "../../../../features/workout-sets/hooks/use-workout-sets";
+import { useDeleteWorkoutSet } from "../../../../features/gym/workout-sets/hooks/use-workout-sets";
 import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
-import type { WorkoutSet } from "../../../../features/workout-sets/interfaces/workout-sets.interface";
+import type { WorkoutSet } from "../../../../features/gym/workout-sets/interfaces/workout-sets.interface";
 
 type DeleteSetModalProps = {
   isOpen: boolean;

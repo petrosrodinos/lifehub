@@ -1,9 +1,9 @@
 import { Dumbbell } from "lucide-react";
-import type { WorkoutEntry } from "../../../features/workout-entries/interfaces/workout-entries.interface";
-import { useCreateWorkoutSet, useReorderWorkoutSets } from "../../../features/workout-sets/hooks/use-workout-sets";
-import { ExerciseTypes } from "../../../features/exercises/interfaces/exercises.interface";
-import type { CreateWorkoutSetDto } from "../../../features/workout-sets/interfaces/workout-sets.interface";
-import type { WorkoutSet } from "../../../features/workout-sets/interfaces/workout-sets.interface";
+import type { WorkoutEntry } from "../../../features/gym/workout-entries/interfaces/workout-entries.interface";
+import { useCreateWorkoutSet, useReorderWorkoutSets } from "../../../features/gym/workout-sets/hooks/use-workout-sets";
+import { ExerciseTypes } from "../../../features/gym/exercises/interfaces/exercises.interface";
+import type { CreateWorkoutSetDto } from "../../../features/gym/workout-sets/interfaces/workout-sets.interface";
+import type { WorkoutSet } from "../../../features/gym/workout-sets/interfaces/workout-sets.interface";
 import { SetForm } from "../workout-detail/components/SetForm";
 import type { SetFormValues } from "../workout-detail/components/SetForm";
 import { SortableSetCard } from "./SortableSetCard";

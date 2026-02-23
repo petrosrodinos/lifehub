@@ -2,9 +2,9 @@ import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DateTime } from "luxon";
-import { useWorkouts } from "../../../../features/workout/hooks/use-workout";
+import { useWorkouts } from "../../../../features/gym/workout/hooks/use-workout";
 import { WorkoutsLoading } from "./WorkoutsLoading";
-import type { Workout } from "../../../../features/workout/interfaces/workout.interface";
+import type { Workout } from "../../../../features/gym/workout/interfaces/workout.interface";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

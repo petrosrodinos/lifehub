@@ -1,7 +1,7 @@
 import { Trash2 } from "lucide-react";
-import { useCreateWorkout, useUpdateWorkout, useDeleteWorkout } from "../../../../features/workout/hooks/use-workout";
+import { useCreateWorkout, useUpdateWorkout, useDeleteWorkout } from "../../../../features/gym/workout/hooks/use-workout";
 import { Modal } from "../../../../components/ui/Modal";
-import type { CreateWorkoutDto, UpdateWorkoutDto, Workout } from "../../../../features/workout/interfaces/workout.interface";
+import type { CreateWorkoutDto, UpdateWorkoutDto, Workout } from "../../../../features/gym/workout/interfaces/workout.interface";
 import { WorkoutForm } from "./WorkoutForm";
 import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
 import { useState } from "react";

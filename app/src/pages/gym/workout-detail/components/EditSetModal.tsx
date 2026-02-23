@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Modal } from "../../../../components/ui/Modal";
-import { useUpdateWorkoutSet } from "../../../../features/workout-sets/hooks/use-workout-sets";
-import type { WorkoutSet, UpdateWorkoutSetDto } from "../../../../features/workout-sets/interfaces/workout-sets.interface";
-import { ExerciseTypes } from "../../../../features/exercises/interfaces/exercises.interface";
-import type { ExerciseType } from "../../../../features/exercises/interfaces/exercises.interface";
+import { useUpdateWorkoutSet } from "../../../../features/gym/workout-sets/hooks/use-workout-sets";
+import type { WorkoutSet, UpdateWorkoutSetDto } from "../../../../features/gym/workout-sets/interfaces/workout-sets.interface";
+import { ExerciseTypes } from "../../../../features/gym/exercises/interfaces/exercises.interface";
+import type { ExerciseType } from "../../../../features/gym/exercises/interfaces/exercises.interface";
 import { SetForm } from "./SetForm";
 import type { SetFormValues } from "./SetForm";
 

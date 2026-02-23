@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Filter } from "lucide-react";
-import { useWorkouts } from "../../../../features/workout/hooks/use-workout";
+import { useWorkouts } from "../../../../features/gym/workout/hooks/use-workout";
 import { WorkoutCard } from "./WorkoutCard";
 import { WorkoutsLoading } from "./WorkoutsLoading";
 import { WorkoutFilters } from "./WorkoutFilters";
-import type { Workout } from "../../../../features/workout/interfaces/workout.interface";
+import type { Workout } from "../../../../features/gym/workout/interfaces/workout.interface";
 
 type PaginatedResponse = {
   data: Workout[];

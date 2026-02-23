@@ -1,20 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
-import type { Exercise } from "../../../../features/exercises/interfaces/exercises.interface";
-import type { MuscleGroup } from "../../../../features/muscle-groups/interfaces/muscle-groups.interface";
+import type { Exercise } from "../../../../features/gym/exercises/interfaces/exercises.interface";
+import type { MuscleGroup } from "../../../../features/gym/muscle-groups/interfaces/muscle-groups.interface";
 import {
   useCreateExercise,
   useDeleteExercise,
   useExercises,
   useUpdateExercise,
-} from "../../../../features/exercises/hooks/use-exercises";
+} from "../../../../features/gym/exercises/hooks/use-exercises";
 import {
   useCreateMuscleGroup,
   useDeleteMuscleGroup,
   useMuscleGroups,
   useUpdateMuscleGroup,
-} from "../../../../features/muscle-groups/hooks/use-muscle-groups";
+} from "../../../../features/gym/muscle-groups/hooks/use-muscle-groups";
 import { GymEmptyState } from "./GymEmptyState";
 import { MuscleGroupForm } from "./MuscleGroupForm";
 import { MuscleGroupItem } from "./MuscleGroupItem";

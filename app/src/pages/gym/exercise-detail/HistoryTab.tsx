@@ -1,9 +1,9 @@
 import { Loader2, Dumbbell, Calendar, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DateTime } from "luxon";
-import { useWorkoutEntries } from "../../../features/workout-entries/hooks/use-workout-entries";
-import { ExerciseTypes } from "../../../features/exercises/interfaces/exercises.interface";
-import type { WorkoutSet } from "../../../features/workout-sets/interfaces/workout-sets.interface";
+import { useWorkoutEntries } from "../../../features/gym/workout-entries/hooks/use-workout-entries";
+import { ExerciseTypes } from "../../../features/gym/exercises/interfaces/exercises.interface";
+import type { WorkoutSet } from "../../../features/gym/workout-sets/interfaces/workout-sets.interface";
 
 type HistoryTabProps = {
   exerciseUuid: string;

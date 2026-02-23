@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Plus, Edit2, Calendar, Clock, Dumbbell, Check } from "lucide-react";
-import { useWorkout, useUpdateWorkout } from "../../../features/workout/hooks/use-workout";
-import { useReorderWorkoutEntries } from "../../../features/workout-entries/hooks/use-workout-entries";
+import { useWorkout, useUpdateWorkout } from "../../../features/gym/workout/hooks/use-workout";
+import { useReorderWorkoutEntries } from "../../../features/gym/workout-entries/hooks/use-workout-entries";
 import { CreateWorkoutModal } from "../components/workouts/CreateWorkoutModal";
 import { AddExerciseModal } from "./components/AddExerciseModal";
 import { WorkoutDetailLoading } from "./components/WorkoutDetailLoading";
 import { SortableWorkoutEntryCard } from "./components/SortableWorkoutEntryCard";
 import { ReorderableList } from "../../../components/ui/ReorderableList";
 import { DateTime } from "luxon";
-import type { WorkoutEntry } from "../../../features/workout-entries/interfaces/workout-entries.interface";
+import type { WorkoutEntry } from "../../../features/gym/workout-entries/interfaces/workout-entries.interface";
 
 export function WorkoutDetailPage() {
   const { uuid } = useParams<{ uuid: string }>();

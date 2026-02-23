@@ -10,9 +10,9 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useExercises } from "../../../../features/exercises/hooks/use-exercises";
-import { useWorkoutEntryAnalytics } from "../../../../features/workout-entries/hooks/use-workout-entries";
-import type { WorkoutEntryAnalyticsParams } from "../../../../features/workout-entries/interfaces/workout-entries.interface";
+import { useExercises } from "../../../../features/gym/exercises/hooks/use-exercises";
+import { useWorkoutEntryAnalytics } from "../../../../features/gym/workout-entries/hooks/use-workout-entries";
+import type { WorkoutEntryAnalyticsParams } from "../../../../features/gym/workout-entries/interfaces/workout-entries.interface";
 import {
   ANALYTICS_METRICS,
   type AnalyticsMetricId,

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Minus, Plus, Loader2 } from "lucide-react";
-import { ExerciseTypes } from "../../../../features/exercises/interfaces/exercises.interface";
-import type { ExerciseType } from "../../../../features/exercises/interfaces/exercises.interface";
+import { ExerciseTypes } from "../../../../features/gym/exercises/interfaces/exercises.interface";
+import type { ExerciseType } from "../../../../features/gym/exercises/interfaces/exercises.interface";
 
 const REPS_STEP = 1;
 const REPS_MIN = 0;
