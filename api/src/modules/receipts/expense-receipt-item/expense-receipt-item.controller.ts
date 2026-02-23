@@ -8,6 +8,7 @@ import { CurrentUser } from '@/shared/decorators/current-user.decorator';
 import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe';
 import { PriceEvolutionQuerySchema, type PriceEvolutionQueryType } from './schemas/price-evolution-query.schema';
 import { PurchasedProductsQuerySchema, type PurchasedProductsQueryType } from './schemas/purchased-products-query.schema';
+import { SpendingPerStoreQuerySchema, type SpendingPerStoreQueryType } from './schemas/spending-per-store-query.schema';
 
 @ApiTags('Expense Receipt Items')
 @ApiBearerAuth()
@@ -47,6 +48,17 @@ export class ExpenseReceiptItemController {
     @Query(new ZodValidationPipe(PurchasedProductsQuerySchema)) query: PurchasedProductsQueryType,
   ) {
     return this.expenseReceiptItemService.purchasedProducts(user_uuid, query);
+  }
+
+  @Get('analytics/spending-per-store')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Get total spending per store' })
+  @ApiResponse({ status: 200, description: 'Spending per store data retrieved successfully' })
+  spendingPerStore(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(SpendingPerStoreQuerySchema)) query: SpendingPerStoreQueryType,
+  ) {
+    return this.expenseReceiptItemService.spendingPerStore(user_uuid, query);
   }
 
   @Get('receipt/:receipt_uuid')

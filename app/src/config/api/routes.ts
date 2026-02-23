@@ -174,6 +174,7 @@ export const ApiRoutes = {
       analytics: {
         priceEvolution: "/expense-receipt-items/analytics/price-evolution",
         purchasedProducts: "/expense-receipt-items/analytics/purchased-products",
+        spendingPerStore: "/expense-receipt-items/analytics/spending-per-store",
       },
     },
     products: {

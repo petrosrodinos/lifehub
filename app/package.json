@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:android": "tsc -b && vite build && npx cap copy android && npx cap sync android && npx cap open android"
+    "build:android": "tsc -b && vite build && npx cap copy android && npx cap sync android"
   },
   "dependencies": {
     "@capacitor/android": "^8.1.0",

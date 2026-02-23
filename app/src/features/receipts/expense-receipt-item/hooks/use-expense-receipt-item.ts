@@ -6,6 +6,7 @@ import type {
 } from '../interfaces/expense-receipt-item.interfaces'
 import type { PriceEvolutionQuery } from '../interfaces/price-evolution.interfaces'
 import type { PurchasedProductsQuery } from '../interfaces/purchased-products.interfaces'
+import type { SpendingPerStoreQuery } from '../interfaces/spending-per-store.interfaces'
 import {
     getExpenseReceiptItems,
     getExpenseReceiptItem,
@@ -14,6 +15,7 @@ import {
     deleteExpenseReceiptItem,
     getPriceEvolution,
     getPurchasedProducts,
+    getSpendingPerStore,
 } from '../services/expense-receipt-item'
 
 const QUERY_KEYS = {
@@ -22,6 +24,7 @@ const QUERY_KEYS = {
     expenseReceipts: ['expense-receipts'],
     priceEvolution: (params: PriceEvolutionQuery) => ['price-evolution', params],
     purchasedProducts: (params: PurchasedProductsQuery) => ['purchased-products', params],
+    spendingPerStore: (params: SpendingPerStoreQuery) => ['spending-per-store', params],
 }
 
 export function useExpenseReceiptItems(receipt_uuid: string) {
@@ -102,6 +105,13 @@ export function usePurchasedProducts(params: PurchasedProductsQuery) {
     return useQuery({
         queryKey: QUERY_KEYS.purchasedProducts(params),
         queryFn: () => getPurchasedProducts(params),
+    })
+}
+
+export function useSpendingPerStore(params: SpendingPerStoreQuery) {
+    return useQuery({
+        queryKey: QUERY_KEYS.spendingPerStore(params),
+        queryFn: () => getSpendingPerStore(params),
     })
 }
 

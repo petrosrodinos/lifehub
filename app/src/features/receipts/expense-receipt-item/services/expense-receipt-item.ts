@@ -13,6 +13,10 @@ import type {
     PurchasedProductPoint,
     PurchasedProductsQuery,
 } from '../interfaces/purchased-products.interfaces'
+import type {
+    SpendingPerStorePoint,
+    SpendingPerStoreQuery,
+} from '../interfaces/spending-per-store.interfaces'
 
 export const getExpenseReceiptItems = async (receipt_uuid: string): Promise<ExpenseReceiptItem[]> => {
     try {
@@ -96,5 +100,20 @@ export const getPurchasedProducts = async (
     } catch (error: unknown) {
         const err = error as { response?: { data?: { message?: string } } }
         throw new Error(err.response?.data?.message || 'Failed to fetch purchased products data')
+    }
+}
+
+export const getSpendingPerStore = async (
+    params: SpendingPerStoreQuery
+): Promise<SpendingPerStorePoint[]> => {
+    try {
+        const response = await axiosInstance.get(
+            ApiRoutes.expenses.receiptItems.analytics.spendingPerStore,
+            { params }
+        )
+        return response.data
+    } catch (error: unknown) {
+        const err = error as { response?: { data?: { message?: string } } }
+        throw new Error(err.response?.data?.message || 'Failed to fetch spending per store data')
     }
 }

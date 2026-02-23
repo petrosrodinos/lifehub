@@ -4,6 +4,7 @@ import { UpdateExpenseReceiptItemDto } from './dto/update-expense-receipt-item.d
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
 import type { PriceEvolutionQueryType } from './schemas/price-evolution-query.schema';
 import type { PurchasedProductsQueryType } from './schemas/purchased-products-query.schema';
+import type { SpendingPerStoreQueryType } from './schemas/spending-per-store-query.schema';
 
 @Injectable()
 export class ExpenseReceiptItemService {
@@ -258,6 +259,52 @@ export class ExpenseReceiptItemService {
       }
 
       throw new InternalServerErrorException('Failed to fetch purchased products data');
+    }
+  }
+
+  async spendingPerStore(user_uuid: string, query: SpendingPerStoreQueryType) {
+    try {
+      const dateFilter: Record<string, Date> = {};
+
+      if (query.from_date) {
+        dateFilter.gte = new Date(query.from_date);
+      }
+
+      if (query.to_date) {
+        dateFilter.lte = new Date(query.to_date);
+      }
+
+      const receipts = await this.prisma.expenseReceipt.findMany({
+        where: {
+          user_uuid,
+          store_uuid: { not: null },
+          ...(Object.keys(dateFilter).length > 0 && { receipt_date: dateFilter }),
+        },
+        include: { store: true },
+      });
+
+      const storeMap = new Map<string, { name: string; total_amount: number }>();
+
+      for (const r of receipts) {
+        const storeUuid = r.store_uuid as string;
+        const name = r.store?.name ?? 'Unknown';
+        const amount = Number(r.total_amount);
+        const existing = storeMap.get(storeUuid);
+        if (existing) {
+          existing.total_amount += amount;
+        } else {
+          storeMap.set(storeUuid, { name, total_amount: amount });
+        }
+      }
+
+      return Array.from(storeMap.values())
+        .map(({ name, total_amount }) => ({ name, total_amount }))
+        .sort((a, b) => b.total_amount - a.total_amount);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw new InternalServerErrorException('Failed to fetch spending per store data');
     }
   }
 }
