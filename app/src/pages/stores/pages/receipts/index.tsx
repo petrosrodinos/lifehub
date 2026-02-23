@@ -3,10 +3,10 @@ import { useParams, useNavigate } from "react-router-dom"
 import { Plus, ArrowLeft, Package } from "lucide-react"
 import { useExpenseReceipts } from "../../../../features/receipts/expense-receipt/hooks/use-expense-receipt"
 import { useExpenseStore } from "../../../../features/receipts/expense-store/hooks/use-expense-store"
-import { ReceiptCard } from "./components/ReceiptCard"
-import { ReceiptsLoading } from "./components/ReceiptsLoading"
-import { CreateReceiptModal } from "./components/CreateReceiptModal"
-import { ProductsModal } from "./components/ProductsModal"
+import { ReceiptCard } from "./components/receipts/ReceiptCard"
+import { ReceiptsLoading } from "./components/receipts/ReceiptsLoading"
+import { CreateReceiptModal } from "./components/receipts/CreateReceiptModal"
+import { ProductsModal } from "./components/products/ProductsModal"
 
 export function ReceiptsPage() {
   const { uuid } = useParams<{ uuid: string }>()

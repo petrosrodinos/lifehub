@@ -1,6 +1,6 @@
-import { useDeleteExpenseReceipt } from "../../../../../features/receipts/expense-receipt/hooks/use-expense-receipt"
-import type { ExpenseReceipt } from "../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces"
-import { ConfirmationModal } from "../../../../../components/ui/ConfirmationModal"
+import { useDeleteExpenseReceipt } from "../../../../../../features/receipts/expense-receipt/hooks/use-expense-receipt"
+import type { ExpenseReceipt } from "../../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces"
+import { ConfirmationModal } from "../../../../../../components/ui/ConfirmationModal"
 
 type DeleteReceiptModalProps = {
   isOpen: boolean

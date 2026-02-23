@@ -2,9 +2,9 @@ import { useState } from "react"
 import type {
   CreateExpenseProductDto,
   UpdateExpenseProductDto,
-} from "../../../../../features/receipts/expense-products/interfaces/expense-products.interfaces"
-import { useExpenseCategories } from "../../../../../features/expenses/expense-categories/hooks/use-expense-categories"
-import { useExpenseSubcategories } from "../../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories"
+} from "../../../../../../features/receipts/expense-products/interfaces/expense-products.interfaces"
+import { useExpenseCategories } from "../../../../../../features/expenses/expense-categories/hooks/use-expense-categories"
+import { useExpenseSubcategories } from "../../../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories"
 
 type ProductFormProps = {
   onSubmit: (data: CreateExpenseProductDto | UpdateExpenseProductDto) => void
