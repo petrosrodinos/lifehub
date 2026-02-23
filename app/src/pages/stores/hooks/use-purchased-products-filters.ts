@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from "react"
 import { useExpenseStores } from "../../../features/receipts/expense-store/hooks/use-expense-store"
 import { usePurchasedProducts } from "../../../features/receipts/expense-receipt-item/hooks/use-expense-receipt-item"
-import { formatDateForQuery } from "../components/utils/analytics.utils"
+import { formatDateForQuery } from "../utils/analytics.utils"
 
 export function usePurchasedProductsFilters() {
     const [selectedStoreUuid, setSelectedStoreUuid] = useState("")

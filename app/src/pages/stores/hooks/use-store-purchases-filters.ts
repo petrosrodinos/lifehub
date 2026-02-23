@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react"
 import { useSpendingPerStore } from "../../../features/receipts/expense-receipt-item/hooks/use-expense-receipt-item"
-import { formatDateForQuery } from "../components/utils/analytics.utils"
+import { formatDateForQuery } from "../utils/analytics.utils"
 
 export function useStorePurchasesFilters() {
   const [fromDate, setFromDate] = useState("")

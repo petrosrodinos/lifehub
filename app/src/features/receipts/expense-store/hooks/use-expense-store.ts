@@ -17,10 +17,11 @@ const QUERY_KEYS = {
     expenseStore: (uuid: string) => ['expense-stores', uuid],
 }
 
-export function useExpenseStores() {
+export function useExpenseStores(options?: { enabled?: boolean }) {
     return useQuery({
         queryKey: QUERY_KEYS.expenseStores,
         queryFn: getExpenseStores,
+        enabled: options?.enabled ?? true,
     })
 }
 
