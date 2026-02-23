@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { useExpenseStores } from "../../../../../features/expenses/expense-store/hooks/use-expense-store"
-import { useExpenseEntries } from "../../../../../features/expense-entries/hooks/use-expense-entries"
-import { useExpenseAccounts } from "../../../../../features/expense-accounts/hooks/use-expense-accounts"
-import { useUploadReceipt } from "../../../../../features/expenses/expense-receipt/hooks/use-expense-receipt"
-import type { CreateExpenseReceiptDto } from "../../../../../features/expenses/expense-receipt/interfaces/expense-receipt.interfaces"
+import { useExpenseStores } from "../../../../../features/receipts/expense-store/hooks/use-expense-store"
+import { useExpenseEntries } from "../../../../../features/expenses/expense-entries/hooks/use-expense-entries"
+import { useExpenseAccounts } from "../../../../../features/expenses/expense-accounts/hooks/use-expense-accounts"
+import { useUploadReceipt } from "../../../../../features/receipts/expense-receipt/hooks/use-expense-receipt"
+import type { CreateExpenseReceiptDto } from "../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces"
 
 const RECEIPT_TABS = {
   MANUAL: "manual",

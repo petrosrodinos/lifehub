@@ -1,5 +1,5 @@
 import { Edit2, Trash2 } from "lucide-react";
-import type { ExpenseSubcategory } from "../../../../features/expense-subcategories/interfaces/expense-subcategories.interfaces";
+import type { ExpenseSubcategory } from "../../../../features/expenses/expense-subcategories/interfaces/expense-subcategories.interfaces";
 import { SubcategoryForm } from "./SubcategoryForm";
 
 type SubcategoryItemProps = {

@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronRight, Edit2, Trash2, Plus } from "lucide-react";
-import type { ExpenseCategory } from "../../../../features/expense-categories/interfaces/expense-categories.interfaces";
-import type { ExpenseSubcategory } from "../../../../features/expense-subcategories/interfaces/expense-subcategories.interfaces";
+import type { ExpenseCategory } from "../../../../features/expenses/expense-categories/interfaces/expense-categories.interfaces";
+import type { ExpenseSubcategory } from "../../../../features/expenses/expense-subcategories/interfaces/expense-subcategories.interfaces";
 import { CategoryForm } from "./CategoryForm";
 import { SubcategoryForm } from "./SubcategoryForm";
 import { SubcategoryItem } from "./SubcategoryItem";

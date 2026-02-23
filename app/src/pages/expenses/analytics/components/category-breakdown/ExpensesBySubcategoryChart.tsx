@@ -1,5 +1,5 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import type { ExpenseBySubcategoryData } from "../../../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import type { ExpenseBySubcategoryData } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 
 type ExpensesBySubcategoryChartProps = {
   data: ExpenseBySubcategoryData[];

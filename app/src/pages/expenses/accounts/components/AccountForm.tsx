@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import type { CreateExpenseAccountDto, UpdateExpenseAccountDto } from "../../../../features/expense-accounts/interfaces/expense-accounts.interfaces";
+import type { CreateExpenseAccountDto, UpdateExpenseAccountDto } from "../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 import { PRESET_COLORS } from "../../../../config/constants/dropdowns/expenses-colors";
 import { ACCOUNT_PRESET_ICONS } from "../../../../config/constants/dropdowns/account-icons";
 import { EmojiPicker } from "../../../../components/ui/EmojiPicker";

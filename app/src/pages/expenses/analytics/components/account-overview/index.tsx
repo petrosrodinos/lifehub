@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useBalanceTrend, useIncomeExpense } from "../../../../../features/expense-entries/hooks/use-expense-entries";
+import { useBalanceTrend, useIncomeExpense } from "../../../../../features/expenses/expense-entries/hooks/use-expense-entries";
 import { AccountFilters } from "./AccountFilters";
 import { AccountStatsCards } from "./AccountStatsCards";
 import { BalanceTrendChart } from "./BalanceTrendChart";

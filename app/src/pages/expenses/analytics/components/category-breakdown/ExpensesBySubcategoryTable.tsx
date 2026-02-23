@@ -1,4 +1,4 @@
-import type { ExpenseBySubcategoryData } from "../../../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import type { ExpenseBySubcategoryData } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 
 type ExpensesBySubcategoryTableProps = {
   data: ExpenseBySubcategoryData[];

@@ -1,5 +1,5 @@
-import { useCreateExpenseEntry } from "../../../../features/expense-entries/hooks/use-expense-entries";
-import type { CreateExpenseEntryDto } from "../../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import { useCreateExpenseEntry } from "../../../../features/expenses/expense-entries/hooks/use-expense-entries";
+import type { CreateExpenseEntryDto } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { TransactionForm } from "./TransactionForm";
 import { Modal } from "../../../../components/ui/Modal";
 

@@ -1,4 +1,4 @@
-import { ExpenseEntryTypes } from "../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import { ExpenseEntryTypes } from "../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 
 export const ExpenseEntryTypeOptions = [
     {

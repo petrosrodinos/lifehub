@@ -1,5 +1,5 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import type { TransactionTrendData } from "../../../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import type { TransactionTrendData } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 
 type TransactionTrendChartProps = {
   data: TransactionTrendData[];

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, ArrowDownLeft, ArrowRightLeft } from "lucide-react";
-import type { ExpenseEntry } from "../../../../features/expense-entries/interfaces/expense-entries.interfaces";
-import { ExpenseEntryTypes } from "../../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import type { ExpenseEntry } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { EditTransactionModal } from "./EditTransactionModal";
 import { formatAmount, formatDate } from "../../utils/transaction";
 

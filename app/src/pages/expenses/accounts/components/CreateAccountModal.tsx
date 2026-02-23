@@ -1,5 +1,5 @@
-import { useCreateExpenseAccount } from "../../../../features/expense-accounts/hooks/use-expense-accounts";
-import type { CreateExpenseAccountDto } from "../../../../features/expense-accounts/interfaces/expense-accounts.interfaces";
+import { useCreateExpenseAccount } from "../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
+import type { CreateExpenseAccountDto } from "../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 import { AccountForm } from "./AccountForm";
 import { Modal } from "../../../../components/ui/Modal";
 

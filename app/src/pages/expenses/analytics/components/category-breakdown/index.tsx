@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useExpensesBySubcategory, useTransactionTrend } from "../../../../../features/expense-entries/hooks/use-expense-entries";
-import { useExpenseCategories } from "../../../../../features/expense-categories/hooks/use-expense-categories";
-import { useExpenseSubcategories } from "../../../../../features/expense-subcategories/hooks/use-expense-subcategories";
-import { ExpenseEntryTypes, type ExpenseEntryType } from "../../../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import { useExpensesBySubcategory, useTransactionTrend } from "../../../../../features/expenses/expense-entries/hooks/use-expense-entries";
+import { useExpenseCategories } from "../../../../../features/expenses/expense-categories/hooks/use-expense-categories";
+import { useExpenseSubcategories } from "../../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories";
+import { ExpenseEntryTypes, type ExpenseEntryType } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { BreakdownChart } from "./BreakdownChart";
 import { BreakdownTable } from "./BreakdownTable";
 import { TransactionTrendChart } from "./TransactionTrendChart";

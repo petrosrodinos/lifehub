@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import type { CreateExpenseEntryDto, ExpenseEntryType } from "../../../../features/expense-entries/interfaces/expense-entries.interfaces";
-import { ExpenseEntryTypes } from "../../../../features/expense-entries/interfaces/expense-entries.interfaces";
-import { useExpenseAccounts } from "../../../../features/expense-accounts/hooks/use-expense-accounts";
-import { useExpenseCategories } from "../../../../features/expense-categories/hooks/use-expense-categories";
-import { useExpenseSubcategories } from "../../../../features/expense-subcategories/hooks/use-expense-subcategories";
+import type { CreateExpenseEntryDto, ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { useExpenseAccounts } from "../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
+import { useExpenseCategories } from "../../../../features/expenses/expense-categories/hooks/use-expense-categories";
+import { useExpenseSubcategories } from "../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories";
 
 type TransactionFormProps = {
   onSubmit: (data: CreateExpenseEntryDto) => void;

@@ -1,5 +1,5 @@
-import { useCreateExpenseReceipt } from "../../../../../features/expenses/expense-receipt/hooks/use-expense-receipt"
-import type { CreateExpenseReceiptDto } from "../../../../../features/expenses/expense-receipt/interfaces/expense-receipt.interfaces"
+import { useCreateExpenseReceipt } from "../../../../../features/receipts/expense-receipt/hooks/use-expense-receipt"
+import type { CreateExpenseReceiptDto } from "../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces"
 import { ReceiptForm } from "./ReceiptForm"
 import { Modal } from "../../../../../components/ui/Modal"
 

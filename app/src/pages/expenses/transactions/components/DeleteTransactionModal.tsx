@@ -1,5 +1,5 @@
-import { useDeleteExpenseEntry } from "../../../../features/expense-entries/hooks/use-expense-entries";
-import type { ExpenseEntry } from "../../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import { useDeleteExpenseEntry } from "../../../../features/expenses/expense-entries/hooks/use-expense-entries";
+import type { ExpenseEntry } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
 
 type DeleteTransactionModalProps = {

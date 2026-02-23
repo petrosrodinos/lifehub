@@ -1,5 +1,5 @@
-import { useDeleteExpenseStore } from "../../../features/expenses/expense-store/hooks/use-expense-store"
-import type { ExpenseStore } from "../../../features/expenses/expense-store/interfaces/expense-store.interfaces"
+import { useDeleteExpenseStore } from "../../../features/receipts/expense-store/hooks/use-expense-store"
+import type { ExpenseStore } from "../../../features/receipts/expense-store/interfaces/expense-store.interfaces"
 import { ConfirmationModal } from "../../../components/ui/ConfirmationModal"
 
 type DeleteStoreModalProps = {

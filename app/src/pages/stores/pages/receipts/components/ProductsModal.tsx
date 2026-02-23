@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { Plus, Pencil, Trash2, Package, Search } from "lucide-react"
-import type { ExpenseProduct, CreateExpenseProductDto, UpdateExpenseProductDto } from "../../../../../features/expenses/expense-products/interfaces/expense-products.interfaces"
+import type { ExpenseProduct, CreateExpenseProductDto, UpdateExpenseProductDto } from "../../../../../features/receipts/expense-products/interfaces/expense-products.interfaces"
 import {
   useExpenseProducts,
   useCreateExpenseProduct,
   useUpdateExpenseProduct,
   useDeleteExpenseProduct,
-} from "../../../../../features/expenses/expense-products/hooks/use-expense-products"
+} from "../../../../../features/receipts/expense-products/hooks/use-expense-products"
 import { Modal } from "../../../../../components/ui/Modal"
 import { ConfirmationModal } from "../../../../../components/ui/ConfirmationModal"
 import { ProductForm } from "./ProductForm"

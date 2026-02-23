@@ -1,4 +1,4 @@
-import { useExpenseStores } from "../../../features/expenses/expense-store/hooks/use-expense-store"
+import { useExpenseStores } from "../../../features/receipts/expense-store/hooks/use-expense-store"
 import { StoreCard } from "./StoreCard"
 import { StoresLoading } from "./StoresLoading"
 

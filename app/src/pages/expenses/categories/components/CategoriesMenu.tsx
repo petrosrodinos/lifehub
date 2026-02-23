@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { X } from "lucide-react";
-import { useExpenseCategories, useCreateExpenseCategory, useUpdateExpenseCategory, useDeleteExpenseCategory } from "../../../../features/expense-categories/hooks/use-expense-categories";
-import { useExpenseSubcategories, useCreateExpenseSubcategory, useUpdateExpenseSubcategory, useDeleteExpenseSubcategory } from "../../../../features/expense-subcategories/hooks/use-expense-subcategories";
-import type { ExpenseCategory } from "../../../../features/expense-categories/interfaces/expense-categories.interfaces";
-import type { ExpenseSubcategory } from "../../../../features/expense-subcategories/interfaces/expense-subcategories.interfaces";
+import { useExpenseCategories, useCreateExpenseCategory, useUpdateExpenseCategory, useDeleteExpenseCategory } from "../../../../features/expenses/expense-categories/hooks/use-expense-categories";
+import { useExpenseSubcategories, useCreateExpenseSubcategory, useUpdateExpenseSubcategory, useDeleteExpenseSubcategory } from "../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories";
+import type { ExpenseCategory } from "../../../../features/expenses/expense-categories/interfaces/expense-categories.interfaces";
+import type { ExpenseSubcategory } from "../../../../features/expenses/expense-subcategories/interfaces/expense-subcategories.interfaces";
 import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
 import { CategoryForm } from "./CategoryForm";
 import { CategoryItem } from "./CategoryItem";

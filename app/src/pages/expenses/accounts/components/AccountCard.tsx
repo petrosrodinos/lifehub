@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ExpenseAccount } from "../../../../features/expense-accounts/interfaces/expense-accounts.interfaces";
+import type { ExpenseAccount } from "../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 import { formatAccountBalance } from "../../utils/format-account-balance";
 import { EditAccountModal } from "./EditAccountModal";
 

@@ -1,6 +1,6 @@
 import { useState } from "react"
-import type { CreateExpenseReceiptItemDto } from "../../../../../features/expenses/expense-receipt-item/interfaces/expense-receipt-item.interfaces"
-import { useExpenseProducts } from "../../../../../features/expenses/expense-products/hooks/use-expense-products"
+import type { CreateExpenseReceiptItemDto } from "../../../../../features/receipts/expense-receipt-item/interfaces/expense-receipt-item.interfaces"
+import { useExpenseProducts } from "../../../../../features/receipts/expense-products/hooks/use-expense-products"
 
 type ReceiptItemFormProps = {
   onSubmit: (data: CreateExpenseReceiptItemDto) => void

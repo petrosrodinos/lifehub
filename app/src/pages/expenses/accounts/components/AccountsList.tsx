@@ -1,4 +1,4 @@
-import { useExpenseAccounts } from '../../../../features/expense-accounts/hooks/use-expense-accounts'
+import { useExpenseAccounts } from '../../../../features/expenses/expense-accounts/hooks/use-expense-accounts'
 import { AccountCard } from './AccountCard'
 import { AccountsLoading } from './AccountsLoading'
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useExpenseAccounts } from "../../../../../features/expense-accounts/hooks/use-expense-accounts";
-import { useStats } from "../../../../../features/expense-entries/hooks/use-expense-entries";
+import { useExpenseAccounts } from "../../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
+import { useStats } from "../../../../../features/expenses/expense-entries/hooks/use-expense-entries";
 import { StatsCard } from "./StatsCard";
 import { StatsCardSkeleton } from "./StatsCardSkeleton";
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
-import { useUpdateExpenseAccount } from "../../../../features/expense-accounts/hooks/use-expense-accounts";
-import type { ExpenseAccount, UpdateExpenseAccountDto } from "../../../../features/expense-accounts/interfaces/expense-accounts.interfaces";
+import { useUpdateExpenseAccount } from "../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
+import type { ExpenseAccount, UpdateExpenseAccountDto } from "../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 import { AccountForm } from "./AccountForm";
 import { DeleteAccountModal } from "./DeleteAccountModal";
 import { Modal } from "../../../../components/ui/Modal";

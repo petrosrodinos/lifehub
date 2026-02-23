@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react'
-import { useExpenseEntries } from '../../../../features/expense-entries/hooks/use-expense-entries'
+import { useExpenseEntries } from '../../../../features/expenses/expense-entries/hooks/use-expense-entries'
 import { useTransactionsPage } from '../hooks/use-transactions-page'
 import { CreateTransactionModal } from './CreateTransactionModal'
 import { TransactionCard } from './TransactionCard'

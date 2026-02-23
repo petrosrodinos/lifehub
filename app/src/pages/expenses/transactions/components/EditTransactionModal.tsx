@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
-import { useUpdateExpenseEntry } from "../../../../features/expense-entries/hooks/use-expense-entries";
-import type { ExpenseEntry, UpdateExpenseEntryDto, CreateExpenseEntryDto } from "../../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import { useUpdateExpenseEntry } from "../../../../features/expenses/expense-entries/hooks/use-expense-entries";
+import type { ExpenseEntry, UpdateExpenseEntryDto, CreateExpenseEntryDto } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { TransactionForm } from "./TransactionForm";
 import { DeleteTransactionModal } from "./DeleteTransactionModal";
 import { Modal } from "../../../../components/ui/Modal";

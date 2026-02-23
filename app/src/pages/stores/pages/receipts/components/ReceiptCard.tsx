@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Receipt } from "lucide-react"
-import type { ExpenseReceipt } from "../../../../../features/expenses/expense-receipt/interfaces/expense-receipt.interfaces"
+import type { ExpenseReceipt } from "../../../../../features/receipts/expense-receipt/interfaces/expense-receipt.interfaces"
 import { ReceiptDetailModal } from "./ReceiptDetailModal"
 import { formatReceiptDate, formatReceiptAmount, parseNumericValue } from "../utils/receipt.utils"
 

@@ -1,4 +1,4 @@
-import type { BreakdownData } from "../../../../../features/expense-entries/interfaces/expense-entries.interfaces";
+import type { BreakdownData } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 
 type BreakdownTableProps = {
   data: BreakdownData[];

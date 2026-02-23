@@ -1,5 +1,5 @@
-import { useCreateExpenseStore } from "../../../features/expenses/expense-store/hooks/use-expense-store"
-import type { CreateExpenseStoreDto } from "../../../features/expenses/expense-store/interfaces/expense-store.interfaces"
+import { useCreateExpenseStore } from "../../../features/receipts/expense-store/hooks/use-expense-store"
+import type { CreateExpenseStoreDto } from "../../../features/receipts/expense-store/interfaces/expense-store.interfaces"
 import { StoreForm } from "./StoreForm"
 import { Modal } from "../../../components/ui/Modal"
 
