@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { ExpenseAccount } from "../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
+import { useAuthStore } from "../../../../store/auth-store";
 import { formatAccountBalance } from "../../utils/format-account-balance";
 import { EditAccountModal } from "./EditAccountModal";
 
@@ -9,6 +10,7 @@ type AccountCardProps = {
 
 export function AccountCard({ account }: AccountCardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const showAccountBalances = useAuthStore((state) => state.showAccountBalances);
 
   const balance = formatAccountBalance(account.balance);
 
@@ -21,7 +23,11 @@ export function AccountCard({ account }: AccountCardProps) {
           </div>
           <h3 className="text-sm font-medium text-white truncate flex-1">{account.name}</h3>
         </div>
-        <p className={`text-lg font-semibold ${balance.isNegative ? "text-red-400" : "text-emerald-400"}`}>{balance.formatted}</p>
+        {showAccountBalances ? (
+          <p className={`text-lg font-semibold ${balance.isNegative ? "text-red-400" : "text-emerald-400"}`}>{balance.formatted}</p>
+        ) : (
+          <p className="text-lg font-semibold text-slate-500">••••••</p>
+        )}
       </button>
 
       <EditAccountModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} account={account} />

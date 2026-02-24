@@ -5,15 +5,17 @@ import type { LoggedInUser } from "../features/auth/interfaces/auth.interface";
 interface UserStore extends LoggedInUser {
     pinHash: string | null;
     isAppLocked: boolean;
+    showAccountBalances: boolean;
     login(user: any): void;
     logout(): void;
     updateUser(user: any): void;
     setPinHash(hash: string): void;
     lockApp(): void;
     unlockApp(): void;
+    setShowAccountBalances(show: boolean): void;
 }
 
-const initialValues: Omit<UserStore, 'login' | 'logout' | 'updateUser' | 'setPinHash' | 'lockApp' | 'unlockApp'> = {
+const initialValues: Omit<UserStore, 'login' | 'logout' | 'updateUser' | 'setPinHash' | 'lockApp' | 'unlockApp' | 'setShowAccountBalances'> = {
     isLoggedIn: false,
     user_uuid: null,
     role: null,
@@ -24,6 +26,7 @@ const initialValues: Omit<UserStore, 'login' | 'logout' | 'updateUser' | 'setPin
     avatar: null,
     pinHash: null,
     isAppLocked: false,
+    showAccountBalances: true,
 };
 
 const STORE_KEY = `lifehub-auth`;
@@ -56,6 +59,9 @@ export const useAuthStore = create<UserStore>()(
                 },
                 unlockApp: () => {
                     set((state) => ({ ...state, isAppLocked: false }));
+                },
+                setShowAccountBalances: (show: boolean) => {
+                    set((state) => ({ ...state, showAccountBalances: show }));
                 },
             }),
             {

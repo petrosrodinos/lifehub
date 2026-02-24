@@ -118,6 +118,21 @@ export type WorkoutEntry = $Result.DefaultSelection<Prisma.$WorkoutEntryPayload>
  * 
  */
 export type WorkoutSet = $Result.DefaultSelection<Prisma.$WorkoutSetPayload>
+/**
+ * Model HiddenActivity
+ * 
+ */
+export type HiddenActivity = $Result.DefaultSelection<Prisma.$HiddenActivityPayload>
+/**
+ * Model HiddenCategory
+ * 
+ */
+export type HiddenCategory = $Result.DefaultSelection<Prisma.$HiddenCategoryPayload>
+/**
+ * Model HiddenSubcategory
+ * 
+ */
+export type HiddenSubcategory = $Result.DefaultSelection<Prisma.$HiddenSubcategoryPayload>
 
 /**
  * Enums
@@ -574,6 +589,36 @@ export class PrismaClient<
     * ```
     */
   get workoutSet(): Prisma.WorkoutSetDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.hiddenActivity`: Exposes CRUD operations for the **HiddenActivity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HiddenActivities
+    * const hiddenActivities = await prisma.hiddenActivity.findMany()
+    * ```
+    */
+  get hiddenActivity(): Prisma.HiddenActivityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.hiddenCategory`: Exposes CRUD operations for the **HiddenCategory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HiddenCategories
+    * const hiddenCategories = await prisma.hiddenCategory.findMany()
+    * ```
+    */
+  get hiddenCategory(): Prisma.HiddenCategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.hiddenSubcategory`: Exposes CRUD operations for the **HiddenSubcategory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HiddenSubcategories
+    * const hiddenSubcategories = await prisma.hiddenSubcategory.findMany()
+    * ```
+    */
+  get hiddenSubcategory(): Prisma.HiddenSubcategoryDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1028,7 +1073,10 @@ export namespace Prisma {
     Exercise: 'Exercise',
     Workout: 'Workout',
     WorkoutEntry: 'WorkoutEntry',
-    WorkoutSet: 'WorkoutSet'
+    WorkoutSet: 'WorkoutSet',
+    HiddenActivity: 'HiddenActivity',
+    HiddenCategory: 'HiddenCategory',
+    HiddenSubcategory: 'HiddenSubcategory'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1044,7 +1092,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet"
+      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2602,6 +2650,228 @@ export namespace Prisma {
           }
         }
       }
+      HiddenActivity: {
+        payload: Prisma.$HiddenActivityPayload<ExtArgs>
+        fields: Prisma.HiddenActivityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HiddenActivityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HiddenActivityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload>
+          }
+          findFirst: {
+            args: Prisma.HiddenActivityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HiddenActivityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload>
+          }
+          findMany: {
+            args: Prisma.HiddenActivityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload>[]
+          }
+          create: {
+            args: Prisma.HiddenActivityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload>
+          }
+          createMany: {
+            args: Prisma.HiddenActivityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HiddenActivityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload>[]
+          }
+          delete: {
+            args: Prisma.HiddenActivityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload>
+          }
+          update: {
+            args: Prisma.HiddenActivityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload>
+          }
+          deleteMany: {
+            args: Prisma.HiddenActivityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HiddenActivityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.HiddenActivityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload>[]
+          }
+          upsert: {
+            args: Prisma.HiddenActivityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenActivityPayload>
+          }
+          aggregate: {
+            args: Prisma.HiddenActivityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHiddenActivity>
+          }
+          groupBy: {
+            args: Prisma.HiddenActivityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HiddenActivityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HiddenActivityCountArgs<ExtArgs>
+            result: $Utils.Optional<HiddenActivityCountAggregateOutputType> | number
+          }
+        }
+      }
+      HiddenCategory: {
+        payload: Prisma.$HiddenCategoryPayload<ExtArgs>
+        fields: Prisma.HiddenCategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HiddenCategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HiddenCategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.HiddenCategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HiddenCategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload>
+          }
+          findMany: {
+            args: Prisma.HiddenCategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload>[]
+          }
+          create: {
+            args: Prisma.HiddenCategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload>
+          }
+          createMany: {
+            args: Prisma.HiddenCategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HiddenCategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.HiddenCategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload>
+          }
+          update: {
+            args: Prisma.HiddenCategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.HiddenCategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HiddenCategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.HiddenCategoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.HiddenCategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenCategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.HiddenCategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHiddenCategory>
+          }
+          groupBy: {
+            args: Prisma.HiddenCategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HiddenCategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HiddenCategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<HiddenCategoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      HiddenSubcategory: {
+        payload: Prisma.$HiddenSubcategoryPayload<ExtArgs>
+        fields: Prisma.HiddenSubcategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HiddenSubcategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HiddenSubcategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.HiddenSubcategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HiddenSubcategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload>
+          }
+          findMany: {
+            args: Prisma.HiddenSubcategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload>[]
+          }
+          create: {
+            args: Prisma.HiddenSubcategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload>
+          }
+          createMany: {
+            args: Prisma.HiddenSubcategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HiddenSubcategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.HiddenSubcategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload>
+          }
+          update: {
+            args: Prisma.HiddenSubcategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.HiddenSubcategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HiddenSubcategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.HiddenSubcategoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.HiddenSubcategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HiddenSubcategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.HiddenSubcategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHiddenSubcategory>
+          }
+          groupBy: {
+            args: Prisma.HiddenSubcategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HiddenSubcategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HiddenSubcategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<HiddenSubcategoryCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2731,6 +3001,9 @@ export namespace Prisma {
     workout?: WorkoutOmit
     workoutEntry?: WorkoutEntryOmit
     workoutSet?: WorkoutSetOmit
+    hiddenActivity?: HiddenActivityOmit
+    hiddenCategory?: HiddenCategoryOmit
+    hiddenSubcategory?: HiddenSubcategoryOmit
   }
 
   /* Types for Logging */
@@ -2816,10 +3089,13 @@ export namespace Prisma {
     activity_schedules: number
     activity_logs: number
     activity_occurrences: number
+    hidden_activities: number
     expense_accounts: number
     expense_entries: number
     categories: number
     subcategories: number
+    hidden_categories: number
+    hidden_subcategories: number
     expense_receipts: number
     expense_stores: number
     expense_products: number
@@ -2834,10 +3110,13 @@ export namespace Prisma {
     activity_schedules?: boolean | UserCountOutputTypeCountActivity_schedulesArgs
     activity_logs?: boolean | UserCountOutputTypeCountActivity_logsArgs
     activity_occurrences?: boolean | UserCountOutputTypeCountActivity_occurrencesArgs
+    hidden_activities?: boolean | UserCountOutputTypeCountHidden_activitiesArgs
     expense_accounts?: boolean | UserCountOutputTypeCountExpense_accountsArgs
     expense_entries?: boolean | UserCountOutputTypeCountExpense_entriesArgs
     categories?: boolean | UserCountOutputTypeCountCategoriesArgs
     subcategories?: boolean | UserCountOutputTypeCountSubcategoriesArgs
+    hidden_categories?: boolean | UserCountOutputTypeCountHidden_categoriesArgs
+    hidden_subcategories?: boolean | UserCountOutputTypeCountHidden_subcategoriesArgs
     expense_receipts?: boolean | UserCountOutputTypeCountExpense_receiptsArgs
     expense_stores?: boolean | UserCountOutputTypeCountExpense_storesArgs
     expense_products?: boolean | UserCountOutputTypeCountExpense_productsArgs
@@ -2895,6 +3174,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountHidden_activitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HiddenActivityWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountExpense_accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseAccountWhereInput
   }
@@ -2918,6 +3204,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSubcategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseSubcategoryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountHidden_categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HiddenCategoryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountHidden_subcategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HiddenSubcategoryWhereInput
   }
 
   /**
@@ -2972,6 +3272,7 @@ export namespace Prisma {
     activity_schedules: number
     activity_logs: number
     activity_occurrences: number
+    hidden_activities: number
   }
 
   export type ActivityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2979,6 +3280,7 @@ export namespace Prisma {
     activity_schedules?: boolean | ActivityCountOutputTypeCountActivity_schedulesArgs
     activity_logs?: boolean | ActivityCountOutputTypeCountActivity_logsArgs
     activity_occurrences?: boolean | ActivityCountOutputTypeCountActivity_occurrencesArgs
+    hidden_activities?: boolean | ActivityCountOutputTypeCountHidden_activitiesArgs
   }
 
   // Custom InputTypes
@@ -3018,6 +3320,13 @@ export namespace Prisma {
    */
   export type ActivityCountOutputTypeCountActivity_occurrencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ActivityOccurrenceWhereInput
+  }
+
+  /**
+   * ActivityCountOutputType without action
+   */
+  export type ActivityCountOutputTypeCountHidden_activitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HiddenActivityWhereInput
   }
 
 
@@ -3127,12 +3436,14 @@ export namespace Prisma {
     subcategories: number
     entries: number
     products: number
+    hidden_categories: number
   }
 
   export type ExpenseCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subcategories?: boolean | ExpenseCategoryCountOutputTypeCountSubcategoriesArgs
     entries?: boolean | ExpenseCategoryCountOutputTypeCountEntriesArgs
     products?: boolean | ExpenseCategoryCountOutputTypeCountProductsArgs
+    hidden_categories?: boolean | ExpenseCategoryCountOutputTypeCountHidden_categoriesArgs
   }
 
   // Custom InputTypes
@@ -3167,6 +3478,13 @@ export namespace Prisma {
     where?: ExpenseProductWhereInput
   }
 
+  /**
+   * ExpenseCategoryCountOutputType without action
+   */
+  export type ExpenseCategoryCountOutputTypeCountHidden_categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HiddenCategoryWhereInput
+  }
+
 
   /**
    * Count Type ExpenseSubcategoryCountOutputType
@@ -3175,11 +3493,13 @@ export namespace Prisma {
   export type ExpenseSubcategoryCountOutputType = {
     entries: number
     products: number
+    hidden_subcategories: number
   }
 
   export type ExpenseSubcategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     entries?: boolean | ExpenseSubcategoryCountOutputTypeCountEntriesArgs
     products?: boolean | ExpenseSubcategoryCountOutputTypeCountProductsArgs
+    hidden_subcategories?: boolean | ExpenseSubcategoryCountOutputTypeCountHidden_subcategoriesArgs
   }
 
   // Custom InputTypes
@@ -3205,6 +3525,13 @@ export namespace Prisma {
    */
   export type ExpenseSubcategoryCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseProductWhereInput
+  }
+
+  /**
+   * ExpenseSubcategoryCountOutputType without action
+   */
+  export type ExpenseSubcategoryCountOutputTypeCountHidden_subcategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HiddenSubcategoryWhereInput
   }
 
 
@@ -3672,10 +3999,13 @@ export namespace Prisma {
     activity_schedules?: boolean | User$activity_schedulesArgs<ExtArgs>
     activity_logs?: boolean | User$activity_logsArgs<ExtArgs>
     activity_occurrences?: boolean | User$activity_occurrencesArgs<ExtArgs>
+    hidden_activities?: boolean | User$hidden_activitiesArgs<ExtArgs>
     expense_accounts?: boolean | User$expense_accountsArgs<ExtArgs>
     expense_entries?: boolean | User$expense_entriesArgs<ExtArgs>
     categories?: boolean | User$categoriesArgs<ExtArgs>
     subcategories?: boolean | User$subcategoriesArgs<ExtArgs>
+    hidden_categories?: boolean | User$hidden_categoriesArgs<ExtArgs>
+    hidden_subcategories?: boolean | User$hidden_subcategoriesArgs<ExtArgs>
     expense_receipts?: boolean | User$expense_receiptsArgs<ExtArgs>
     expense_stores?: boolean | User$expense_storesArgs<ExtArgs>
     expense_products?: boolean | User$expense_productsArgs<ExtArgs>
@@ -3731,10 +4061,13 @@ export namespace Prisma {
     activity_schedules?: boolean | User$activity_schedulesArgs<ExtArgs>
     activity_logs?: boolean | User$activity_logsArgs<ExtArgs>
     activity_occurrences?: boolean | User$activity_occurrencesArgs<ExtArgs>
+    hidden_activities?: boolean | User$hidden_activitiesArgs<ExtArgs>
     expense_accounts?: boolean | User$expense_accountsArgs<ExtArgs>
     expense_entries?: boolean | User$expense_entriesArgs<ExtArgs>
     categories?: boolean | User$categoriesArgs<ExtArgs>
     subcategories?: boolean | User$subcategoriesArgs<ExtArgs>
+    hidden_categories?: boolean | User$hidden_categoriesArgs<ExtArgs>
+    hidden_subcategories?: boolean | User$hidden_subcategoriesArgs<ExtArgs>
     expense_receipts?: boolean | User$expense_receiptsArgs<ExtArgs>
     expense_stores?: boolean | User$expense_storesArgs<ExtArgs>
     expense_products?: boolean | User$expense_productsArgs<ExtArgs>
@@ -3754,10 +4087,13 @@ export namespace Prisma {
       activity_schedules: Prisma.$ActivitySchedulePayload<ExtArgs>[]
       activity_logs: Prisma.$ActivityLogPayload<ExtArgs>[]
       activity_occurrences: Prisma.$ActivityOccurrencePayload<ExtArgs>[]
+      hidden_activities: Prisma.$HiddenActivityPayload<ExtArgs>[]
       expense_accounts: Prisma.$ExpenseAccountPayload<ExtArgs>[]
       expense_entries: Prisma.$ExpenseEntryPayload<ExtArgs>[]
       categories: Prisma.$ExpenseCategoryPayload<ExtArgs>[]
       subcategories: Prisma.$ExpenseSubcategoryPayload<ExtArgs>[]
+      hidden_categories: Prisma.$HiddenCategoryPayload<ExtArgs>[]
+      hidden_subcategories: Prisma.$HiddenSubcategoryPayload<ExtArgs>[]
       expense_receipts: Prisma.$ExpenseReceiptPayload<ExtArgs>[]
       expense_stores: Prisma.$ExpenseStorePayload<ExtArgs>[]
       expense_products: Prisma.$ExpenseProductPayload<ExtArgs>[]
@@ -4175,10 +4511,13 @@ export namespace Prisma {
     activity_schedules<T extends User$activity_schedulesArgs<ExtArgs> = {}>(args?: Subset<T, User$activity_schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activity_logs<T extends User$activity_logsArgs<ExtArgs> = {}>(args?: Subset<T, User$activity_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activity_occurrences<T extends User$activity_occurrencesArgs<ExtArgs> = {}>(args?: Subset<T, User$activity_occurrencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    hidden_activities<T extends User$hidden_activitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$hidden_activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_accounts<T extends User$expense_accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_entries<T extends User$expense_entriesArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categories<T extends User$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     subcategories<T extends User$subcategoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$subcategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    hidden_categories<T extends User$hidden_categoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$hidden_categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    hidden_subcategories<T extends User$hidden_subcategoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$hidden_subcategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_receipts<T extends User$expense_receiptsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_receiptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_stores<T extends User$expense_storesArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_storesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseStorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_products<T extends User$expense_productsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4732,6 +5071,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.hidden_activities
+   */
+  export type User$hidden_activitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    where?: HiddenActivityWhereInput
+    orderBy?: HiddenActivityOrderByWithRelationInput | HiddenActivityOrderByWithRelationInput[]
+    cursor?: HiddenActivityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HiddenActivityScalarFieldEnum | HiddenActivityScalarFieldEnum[]
+  }
+
+  /**
    * User.expense_accounts
    */
   export type User$expense_accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4825,6 +5188,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExpenseSubcategoryScalarFieldEnum | ExpenseSubcategoryScalarFieldEnum[]
+  }
+
+  /**
+   * User.hidden_categories
+   */
+  export type User$hidden_categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    where?: HiddenCategoryWhereInput
+    orderBy?: HiddenCategoryOrderByWithRelationInput | HiddenCategoryOrderByWithRelationInput[]
+    cursor?: HiddenCategoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HiddenCategoryScalarFieldEnum | HiddenCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * User.hidden_subcategories
+   */
+  export type User$hidden_subcategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    where?: HiddenSubcategoryWhereInput
+    orderBy?: HiddenSubcategoryOrderByWithRelationInput | HiddenSubcategoryOrderByWithRelationInput[]
+    cursor?: HiddenSubcategoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HiddenSubcategoryScalarFieldEnum | HiddenSubcategoryScalarFieldEnum[]
   }
 
   /**
@@ -5233,6 +5644,7 @@ export namespace Prisma {
     activity_schedules?: boolean | Activity$activity_schedulesArgs<ExtArgs>
     activity_logs?: boolean | Activity$activity_logsArgs<ExtArgs>
     activity_occurrences?: boolean | Activity$activity_occurrencesArgs<ExtArgs>
+    hidden_activities?: boolean | Activity$hidden_activitiesArgs<ExtArgs>
     _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["activity"]>
 
@@ -5284,6 +5696,7 @@ export namespace Prisma {
     activity_schedules?: boolean | Activity$activity_schedulesArgs<ExtArgs>
     activity_logs?: boolean | Activity$activity_logsArgs<ExtArgs>
     activity_occurrences?: boolean | Activity$activity_occurrencesArgs<ExtArgs>
+    hidden_activities?: boolean | Activity$hidden_activitiesArgs<ExtArgs>
     _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ActivityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5301,6 +5714,7 @@ export namespace Prisma {
       activity_schedules: Prisma.$ActivitySchedulePayload<ExtArgs>[]
       activity_logs: Prisma.$ActivityLogPayload<ExtArgs>[]
       activity_occurrences: Prisma.$ActivityOccurrencePayload<ExtArgs>[]
+      hidden_activities: Prisma.$HiddenActivityPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5712,6 +6126,7 @@ export namespace Prisma {
     activity_schedules<T extends Activity$activity_schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Activity$activity_schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivitySchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activity_logs<T extends Activity$activity_logsArgs<ExtArgs> = {}>(args?: Subset<T, Activity$activity_logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activity_occurrences<T extends Activity$activity_occurrencesArgs<ExtArgs> = {}>(args?: Subset<T, Activity$activity_occurrencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityOccurrencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    hidden_activities<T extends Activity$hidden_activitiesArgs<ExtArgs> = {}>(args?: Subset<T, Activity$hidden_activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6240,6 +6655,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ActivityOccurrenceScalarFieldEnum | ActivityOccurrenceScalarFieldEnum[]
+  }
+
+  /**
+   * Activity.hidden_activities
+   */
+  export type Activity$hidden_activitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    where?: HiddenActivityWhereInput
+    orderBy?: HiddenActivityOrderByWithRelationInput | HiddenActivityOrderByWithRelationInput[]
+    cursor?: HiddenActivityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HiddenActivityScalarFieldEnum | HiddenActivityScalarFieldEnum[]
   }
 
   /**
@@ -14852,6 +15291,7 @@ export namespace Prisma {
     subcategories?: boolean | ExpenseCategory$subcategoriesArgs<ExtArgs>
     entries?: boolean | ExpenseCategory$entriesArgs<ExtArgs>
     products?: boolean | ExpenseCategory$productsArgs<ExtArgs>
+    hidden_categories?: boolean | ExpenseCategory$hidden_categoriesArgs<ExtArgs>
     _count?: boolean | ExpenseCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expenseCategory"]>
 
@@ -14896,6 +15336,7 @@ export namespace Prisma {
     subcategories?: boolean | ExpenseCategory$subcategoriesArgs<ExtArgs>
     entries?: boolean | ExpenseCategory$entriesArgs<ExtArgs>
     products?: boolean | ExpenseCategory$productsArgs<ExtArgs>
+    hidden_categories?: boolean | ExpenseCategory$hidden_categoriesArgs<ExtArgs>
     _count?: boolean | ExpenseCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExpenseCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14912,6 +15353,7 @@ export namespace Prisma {
       subcategories: Prisma.$ExpenseSubcategoryPayload<ExtArgs>[]
       entries: Prisma.$ExpenseEntryPayload<ExtArgs>[]
       products: Prisma.$ExpenseProductPayload<ExtArgs>[]
+      hidden_categories: Prisma.$HiddenCategoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -15320,6 +15762,7 @@ export namespace Prisma {
     subcategories<T extends ExpenseCategory$subcategoriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$subcategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     entries<T extends ExpenseCategory$entriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     products<T extends ExpenseCategory$productsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    hidden_categories<T extends ExpenseCategory$hidden_categoriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$hidden_categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15844,6 +16287,30 @@ export namespace Prisma {
   }
 
   /**
+   * ExpenseCategory.hidden_categories
+   */
+  export type ExpenseCategory$hidden_categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    where?: HiddenCategoryWhereInput
+    orderBy?: HiddenCategoryOrderByWithRelationInput | HiddenCategoryOrderByWithRelationInput[]
+    cursor?: HiddenCategoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HiddenCategoryScalarFieldEnum | HiddenCategoryScalarFieldEnum[]
+  }
+
+  /**
    * ExpenseCategory without action
    */
   export type ExpenseCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16080,6 +16547,7 @@ export namespace Prisma {
     category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
     entries?: boolean | ExpenseSubcategory$entriesArgs<ExtArgs>
     products?: boolean | ExpenseSubcategory$productsArgs<ExtArgs>
+    hidden_subcategories?: boolean | ExpenseSubcategory$hidden_subcategoriesArgs<ExtArgs>
     _count?: boolean | ExpenseSubcategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expenseSubcategory"]>
 
@@ -16123,6 +16591,7 @@ export namespace Prisma {
     category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
     entries?: boolean | ExpenseSubcategory$entriesArgs<ExtArgs>
     products?: boolean | ExpenseSubcategory$productsArgs<ExtArgs>
+    hidden_subcategories?: boolean | ExpenseSubcategory$hidden_subcategoriesArgs<ExtArgs>
     _count?: boolean | ExpenseSubcategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExpenseSubcategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16141,6 +16610,7 @@ export namespace Prisma {
       category: Prisma.$ExpenseCategoryPayload<ExtArgs>
       entries: Prisma.$ExpenseEntryPayload<ExtArgs>[]
       products: Prisma.$ExpenseProductPayload<ExtArgs>[]
+      hidden_subcategories: Prisma.$HiddenSubcategoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -16548,6 +17018,7 @@ export namespace Prisma {
     category<T extends ExpenseCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategoryDefaultArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     entries<T extends ExpenseSubcategory$entriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     products<T extends ExpenseSubcategory$productsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    hidden_subcategories<T extends ExpenseSubcategory$hidden_subcategoriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$hidden_subcategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17044,6 +17515,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExpenseProductScalarFieldEnum | ExpenseProductScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseSubcategory.hidden_subcategories
+   */
+  export type ExpenseSubcategory$hidden_subcategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    where?: HiddenSubcategoryWhereInput
+    orderBy?: HiddenSubcategoryOrderByWithRelationInput | HiddenSubcategoryOrderByWithRelationInput[]
+    cursor?: HiddenSubcategoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HiddenSubcategoryScalarFieldEnum | HiddenSubcategoryScalarFieldEnum[]
   }
 
   /**
@@ -29224,6 +29719,3345 @@ export namespace Prisma {
 
 
   /**
+   * Model HiddenActivity
+   */
+
+  export type AggregateHiddenActivity = {
+    _count: HiddenActivityCountAggregateOutputType | null
+    _avg: HiddenActivityAvgAggregateOutputType | null
+    _sum: HiddenActivitySumAggregateOutputType | null
+    _min: HiddenActivityMinAggregateOutputType | null
+    _max: HiddenActivityMaxAggregateOutputType | null
+  }
+
+  export type HiddenActivityAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type HiddenActivitySumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type HiddenActivityMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    activity_uuid: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type HiddenActivityMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    activity_uuid: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type HiddenActivityCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    activity_uuid: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type HiddenActivityAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type HiddenActivitySumAggregateInputType = {
+    id?: true
+  }
+
+  export type HiddenActivityMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type HiddenActivityMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type HiddenActivityCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    activity_uuid?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type HiddenActivityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HiddenActivity to aggregate.
+     */
+    where?: HiddenActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenActivities to fetch.
+     */
+    orderBy?: HiddenActivityOrderByWithRelationInput | HiddenActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HiddenActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HiddenActivities
+    **/
+    _count?: true | HiddenActivityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HiddenActivityAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HiddenActivitySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HiddenActivityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HiddenActivityMaxAggregateInputType
+  }
+
+  export type GetHiddenActivityAggregateType<T extends HiddenActivityAggregateArgs> = {
+        [P in keyof T & keyof AggregateHiddenActivity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHiddenActivity[P]>
+      : GetScalarType<T[P], AggregateHiddenActivity[P]>
+  }
+
+
+
+
+  export type HiddenActivityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HiddenActivityWhereInput
+    orderBy?: HiddenActivityOrderByWithAggregationInput | HiddenActivityOrderByWithAggregationInput[]
+    by: HiddenActivityScalarFieldEnum[] | HiddenActivityScalarFieldEnum
+    having?: HiddenActivityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HiddenActivityCountAggregateInputType | true
+    _avg?: HiddenActivityAvgAggregateInputType
+    _sum?: HiddenActivitySumAggregateInputType
+    _min?: HiddenActivityMinAggregateInputType
+    _max?: HiddenActivityMaxAggregateInputType
+  }
+
+  export type HiddenActivityGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    activity_uuid: string
+    created_at: Date
+    updated_at: Date
+    _count: HiddenActivityCountAggregateOutputType | null
+    _avg: HiddenActivityAvgAggregateOutputType | null
+    _sum: HiddenActivitySumAggregateOutputType | null
+    _min: HiddenActivityMinAggregateOutputType | null
+    _max: HiddenActivityMaxAggregateOutputType | null
+  }
+
+  type GetHiddenActivityGroupByPayload<T extends HiddenActivityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HiddenActivityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HiddenActivityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HiddenActivityGroupByOutputType[P]>
+            : GetScalarType<T[P], HiddenActivityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HiddenActivitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hiddenActivity"]>
+
+  export type HiddenActivitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hiddenActivity"]>
+
+  export type HiddenActivitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hiddenActivity"]>
+
+  export type HiddenActivitySelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    activity_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type HiddenActivityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "activity_uuid" | "created_at" | "updated_at", ExtArgs["result"]["hiddenActivity"]>
+  export type HiddenActivityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }
+  export type HiddenActivityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }
+  export type HiddenActivityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    activity?: boolean | ActivityDefaultArgs<ExtArgs>
+  }
+
+  export type $HiddenActivityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HiddenActivity"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      activity: Prisma.$ActivityPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      activity_uuid: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["hiddenActivity"]>
+    composites: {}
+  }
+
+  type HiddenActivityGetPayload<S extends boolean | null | undefined | HiddenActivityDefaultArgs> = $Result.GetResult<Prisma.$HiddenActivityPayload, S>
+
+  type HiddenActivityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HiddenActivityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HiddenActivityCountAggregateInputType | true
+    }
+
+  export interface HiddenActivityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HiddenActivity'], meta: { name: 'HiddenActivity' } }
+    /**
+     * Find zero or one HiddenActivity that matches the filter.
+     * @param {HiddenActivityFindUniqueArgs} args - Arguments to find a HiddenActivity
+     * @example
+     * // Get one HiddenActivity
+     * const hiddenActivity = await prisma.hiddenActivity.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HiddenActivityFindUniqueArgs>(args: SelectSubset<T, HiddenActivityFindUniqueArgs<ExtArgs>>): Prisma__HiddenActivityClient<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one HiddenActivity that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {HiddenActivityFindUniqueOrThrowArgs} args - Arguments to find a HiddenActivity
+     * @example
+     * // Get one HiddenActivity
+     * const hiddenActivity = await prisma.hiddenActivity.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HiddenActivityFindUniqueOrThrowArgs>(args: SelectSubset<T, HiddenActivityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HiddenActivityClient<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HiddenActivity that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenActivityFindFirstArgs} args - Arguments to find a HiddenActivity
+     * @example
+     * // Get one HiddenActivity
+     * const hiddenActivity = await prisma.hiddenActivity.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HiddenActivityFindFirstArgs>(args?: SelectSubset<T, HiddenActivityFindFirstArgs<ExtArgs>>): Prisma__HiddenActivityClient<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HiddenActivity that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenActivityFindFirstOrThrowArgs} args - Arguments to find a HiddenActivity
+     * @example
+     * // Get one HiddenActivity
+     * const hiddenActivity = await prisma.hiddenActivity.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HiddenActivityFindFirstOrThrowArgs>(args?: SelectSubset<T, HiddenActivityFindFirstOrThrowArgs<ExtArgs>>): Prisma__HiddenActivityClient<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more HiddenActivities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenActivityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HiddenActivities
+     * const hiddenActivities = await prisma.hiddenActivity.findMany()
+     * 
+     * // Get first 10 HiddenActivities
+     * const hiddenActivities = await prisma.hiddenActivity.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const hiddenActivityWithIdOnly = await prisma.hiddenActivity.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HiddenActivityFindManyArgs>(args?: SelectSubset<T, HiddenActivityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a HiddenActivity.
+     * @param {HiddenActivityCreateArgs} args - Arguments to create a HiddenActivity.
+     * @example
+     * // Create one HiddenActivity
+     * const HiddenActivity = await prisma.hiddenActivity.create({
+     *   data: {
+     *     // ... data to create a HiddenActivity
+     *   }
+     * })
+     * 
+     */
+    create<T extends HiddenActivityCreateArgs>(args: SelectSubset<T, HiddenActivityCreateArgs<ExtArgs>>): Prisma__HiddenActivityClient<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many HiddenActivities.
+     * @param {HiddenActivityCreateManyArgs} args - Arguments to create many HiddenActivities.
+     * @example
+     * // Create many HiddenActivities
+     * const hiddenActivity = await prisma.hiddenActivity.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HiddenActivityCreateManyArgs>(args?: SelectSubset<T, HiddenActivityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many HiddenActivities and returns the data saved in the database.
+     * @param {HiddenActivityCreateManyAndReturnArgs} args - Arguments to create many HiddenActivities.
+     * @example
+     * // Create many HiddenActivities
+     * const hiddenActivity = await prisma.hiddenActivity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many HiddenActivities and only return the `id`
+     * const hiddenActivityWithIdOnly = await prisma.hiddenActivity.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HiddenActivityCreateManyAndReturnArgs>(args?: SelectSubset<T, HiddenActivityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a HiddenActivity.
+     * @param {HiddenActivityDeleteArgs} args - Arguments to delete one HiddenActivity.
+     * @example
+     * // Delete one HiddenActivity
+     * const HiddenActivity = await prisma.hiddenActivity.delete({
+     *   where: {
+     *     // ... filter to delete one HiddenActivity
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HiddenActivityDeleteArgs>(args: SelectSubset<T, HiddenActivityDeleteArgs<ExtArgs>>): Prisma__HiddenActivityClient<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one HiddenActivity.
+     * @param {HiddenActivityUpdateArgs} args - Arguments to update one HiddenActivity.
+     * @example
+     * // Update one HiddenActivity
+     * const hiddenActivity = await prisma.hiddenActivity.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HiddenActivityUpdateArgs>(args: SelectSubset<T, HiddenActivityUpdateArgs<ExtArgs>>): Prisma__HiddenActivityClient<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more HiddenActivities.
+     * @param {HiddenActivityDeleteManyArgs} args - Arguments to filter HiddenActivities to delete.
+     * @example
+     * // Delete a few HiddenActivities
+     * const { count } = await prisma.hiddenActivity.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HiddenActivityDeleteManyArgs>(args?: SelectSubset<T, HiddenActivityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HiddenActivities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenActivityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HiddenActivities
+     * const hiddenActivity = await prisma.hiddenActivity.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HiddenActivityUpdateManyArgs>(args: SelectSubset<T, HiddenActivityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HiddenActivities and returns the data updated in the database.
+     * @param {HiddenActivityUpdateManyAndReturnArgs} args - Arguments to update many HiddenActivities.
+     * @example
+     * // Update many HiddenActivities
+     * const hiddenActivity = await prisma.hiddenActivity.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more HiddenActivities and only return the `id`
+     * const hiddenActivityWithIdOnly = await prisma.hiddenActivity.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends HiddenActivityUpdateManyAndReturnArgs>(args: SelectSubset<T, HiddenActivityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one HiddenActivity.
+     * @param {HiddenActivityUpsertArgs} args - Arguments to update or create a HiddenActivity.
+     * @example
+     * // Update or create a HiddenActivity
+     * const hiddenActivity = await prisma.hiddenActivity.upsert({
+     *   create: {
+     *     // ... data to create a HiddenActivity
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HiddenActivity we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HiddenActivityUpsertArgs>(args: SelectSubset<T, HiddenActivityUpsertArgs<ExtArgs>>): Prisma__HiddenActivityClient<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of HiddenActivities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenActivityCountArgs} args - Arguments to filter HiddenActivities to count.
+     * @example
+     * // Count the number of HiddenActivities
+     * const count = await prisma.hiddenActivity.count({
+     *   where: {
+     *     // ... the filter for the HiddenActivities we want to count
+     *   }
+     * })
+    **/
+    count<T extends HiddenActivityCountArgs>(
+      args?: Subset<T, HiddenActivityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HiddenActivityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HiddenActivity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenActivityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HiddenActivityAggregateArgs>(args: Subset<T, HiddenActivityAggregateArgs>): Prisma.PrismaPromise<GetHiddenActivityAggregateType<T>>
+
+    /**
+     * Group by HiddenActivity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenActivityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HiddenActivityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HiddenActivityGroupByArgs['orderBy'] }
+        : { orderBy?: HiddenActivityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HiddenActivityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHiddenActivityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HiddenActivity model
+   */
+  readonly fields: HiddenActivityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HiddenActivity.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HiddenActivityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    activity<T extends ActivityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActivityDefaultArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HiddenActivity model
+   */
+  interface HiddenActivityFieldRefs {
+    readonly id: FieldRef<"HiddenActivity", 'Int'>
+    readonly uuid: FieldRef<"HiddenActivity", 'String'>
+    readonly user_uuid: FieldRef<"HiddenActivity", 'String'>
+    readonly activity_uuid: FieldRef<"HiddenActivity", 'String'>
+    readonly created_at: FieldRef<"HiddenActivity", 'DateTime'>
+    readonly updated_at: FieldRef<"HiddenActivity", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HiddenActivity findUnique
+   */
+  export type HiddenActivityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenActivity to fetch.
+     */
+    where: HiddenActivityWhereUniqueInput
+  }
+
+  /**
+   * HiddenActivity findUniqueOrThrow
+   */
+  export type HiddenActivityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenActivity to fetch.
+     */
+    where: HiddenActivityWhereUniqueInput
+  }
+
+  /**
+   * HiddenActivity findFirst
+   */
+  export type HiddenActivityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenActivity to fetch.
+     */
+    where?: HiddenActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenActivities to fetch.
+     */
+    orderBy?: HiddenActivityOrderByWithRelationInput | HiddenActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HiddenActivities.
+     */
+    cursor?: HiddenActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HiddenActivities.
+     */
+    distinct?: HiddenActivityScalarFieldEnum | HiddenActivityScalarFieldEnum[]
+  }
+
+  /**
+   * HiddenActivity findFirstOrThrow
+   */
+  export type HiddenActivityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenActivity to fetch.
+     */
+    where?: HiddenActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenActivities to fetch.
+     */
+    orderBy?: HiddenActivityOrderByWithRelationInput | HiddenActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HiddenActivities.
+     */
+    cursor?: HiddenActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HiddenActivities.
+     */
+    distinct?: HiddenActivityScalarFieldEnum | HiddenActivityScalarFieldEnum[]
+  }
+
+  /**
+   * HiddenActivity findMany
+   */
+  export type HiddenActivityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenActivities to fetch.
+     */
+    where?: HiddenActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenActivities to fetch.
+     */
+    orderBy?: HiddenActivityOrderByWithRelationInput | HiddenActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HiddenActivities.
+     */
+    cursor?: HiddenActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenActivities.
+     */
+    skip?: number
+    distinct?: HiddenActivityScalarFieldEnum | HiddenActivityScalarFieldEnum[]
+  }
+
+  /**
+   * HiddenActivity create
+   */
+  export type HiddenActivityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a HiddenActivity.
+     */
+    data: XOR<HiddenActivityCreateInput, HiddenActivityUncheckedCreateInput>
+  }
+
+  /**
+   * HiddenActivity createMany
+   */
+  export type HiddenActivityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HiddenActivities.
+     */
+    data: HiddenActivityCreateManyInput | HiddenActivityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HiddenActivity createManyAndReturn
+   */
+  export type HiddenActivityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * The data used to create many HiddenActivities.
+     */
+    data: HiddenActivityCreateManyInput | HiddenActivityCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HiddenActivity update
+   */
+  export type HiddenActivityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a HiddenActivity.
+     */
+    data: XOR<HiddenActivityUpdateInput, HiddenActivityUncheckedUpdateInput>
+    /**
+     * Choose, which HiddenActivity to update.
+     */
+    where: HiddenActivityWhereUniqueInput
+  }
+
+  /**
+   * HiddenActivity updateMany
+   */
+  export type HiddenActivityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HiddenActivities.
+     */
+    data: XOR<HiddenActivityUpdateManyMutationInput, HiddenActivityUncheckedUpdateManyInput>
+    /**
+     * Filter which HiddenActivities to update
+     */
+    where?: HiddenActivityWhereInput
+    /**
+     * Limit how many HiddenActivities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * HiddenActivity updateManyAndReturn
+   */
+  export type HiddenActivityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * The data used to update HiddenActivities.
+     */
+    data: XOR<HiddenActivityUpdateManyMutationInput, HiddenActivityUncheckedUpdateManyInput>
+    /**
+     * Filter which HiddenActivities to update
+     */
+    where?: HiddenActivityWhereInput
+    /**
+     * Limit how many HiddenActivities to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HiddenActivity upsert
+   */
+  export type HiddenActivityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the HiddenActivity to update in case it exists.
+     */
+    where: HiddenActivityWhereUniqueInput
+    /**
+     * In case the HiddenActivity found by the `where` argument doesn't exist, create a new HiddenActivity with this data.
+     */
+    create: XOR<HiddenActivityCreateInput, HiddenActivityUncheckedCreateInput>
+    /**
+     * In case the HiddenActivity was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HiddenActivityUpdateInput, HiddenActivityUncheckedUpdateInput>
+  }
+
+  /**
+   * HiddenActivity delete
+   */
+  export type HiddenActivityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+    /**
+     * Filter which HiddenActivity to delete.
+     */
+    where: HiddenActivityWhereUniqueInput
+  }
+
+  /**
+   * HiddenActivity deleteMany
+   */
+  export type HiddenActivityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HiddenActivities to delete
+     */
+    where?: HiddenActivityWhereInput
+    /**
+     * Limit how many HiddenActivities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * HiddenActivity without action
+   */
+  export type HiddenActivityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenActivity
+     */
+    select?: HiddenActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenActivity
+     */
+    omit?: HiddenActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenActivityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model HiddenCategory
+   */
+
+  export type AggregateHiddenCategory = {
+    _count: HiddenCategoryCountAggregateOutputType | null
+    _avg: HiddenCategoryAvgAggregateOutputType | null
+    _sum: HiddenCategorySumAggregateOutputType | null
+    _min: HiddenCategoryMinAggregateOutputType | null
+    _max: HiddenCategoryMaxAggregateOutputType | null
+  }
+
+  export type HiddenCategoryAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type HiddenCategorySumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type HiddenCategoryMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    category_uuid: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type HiddenCategoryMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    category_uuid: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type HiddenCategoryCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    category_uuid: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type HiddenCategoryAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type HiddenCategorySumAggregateInputType = {
+    id?: true
+  }
+
+  export type HiddenCategoryMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    category_uuid?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type HiddenCategoryMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    category_uuid?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type HiddenCategoryCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    category_uuid?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type HiddenCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HiddenCategory to aggregate.
+     */
+    where?: HiddenCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenCategories to fetch.
+     */
+    orderBy?: HiddenCategoryOrderByWithRelationInput | HiddenCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HiddenCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HiddenCategories
+    **/
+    _count?: true | HiddenCategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HiddenCategoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HiddenCategorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HiddenCategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HiddenCategoryMaxAggregateInputType
+  }
+
+  export type GetHiddenCategoryAggregateType<T extends HiddenCategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateHiddenCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHiddenCategory[P]>
+      : GetScalarType<T[P], AggregateHiddenCategory[P]>
+  }
+
+
+
+
+  export type HiddenCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HiddenCategoryWhereInput
+    orderBy?: HiddenCategoryOrderByWithAggregationInput | HiddenCategoryOrderByWithAggregationInput[]
+    by: HiddenCategoryScalarFieldEnum[] | HiddenCategoryScalarFieldEnum
+    having?: HiddenCategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HiddenCategoryCountAggregateInputType | true
+    _avg?: HiddenCategoryAvgAggregateInputType
+    _sum?: HiddenCategorySumAggregateInputType
+    _min?: HiddenCategoryMinAggregateInputType
+    _max?: HiddenCategoryMaxAggregateInputType
+  }
+
+  export type HiddenCategoryGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    category_uuid: string
+    created_at: Date
+    updated_at: Date
+    _count: HiddenCategoryCountAggregateOutputType | null
+    _avg: HiddenCategoryAvgAggregateOutputType | null
+    _sum: HiddenCategorySumAggregateOutputType | null
+    _min: HiddenCategoryMinAggregateOutputType | null
+    _max: HiddenCategoryMaxAggregateOutputType | null
+  }
+
+  type GetHiddenCategoryGroupByPayload<T extends HiddenCategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HiddenCategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HiddenCategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HiddenCategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], HiddenCategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HiddenCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    category_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hiddenCategory"]>
+
+  export type HiddenCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    category_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hiddenCategory"]>
+
+  export type HiddenCategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    category_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hiddenCategory"]>
+
+  export type HiddenCategorySelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    category_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type HiddenCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "category_uuid" | "created_at" | "updated_at", ExtArgs["result"]["hiddenCategory"]>
+  export type HiddenCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
+  }
+  export type HiddenCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
+  }
+  export type HiddenCategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | ExpenseCategoryDefaultArgs<ExtArgs>
+  }
+
+  export type $HiddenCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HiddenCategory"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      category: Prisma.$ExpenseCategoryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      category_uuid: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["hiddenCategory"]>
+    composites: {}
+  }
+
+  type HiddenCategoryGetPayload<S extends boolean | null | undefined | HiddenCategoryDefaultArgs> = $Result.GetResult<Prisma.$HiddenCategoryPayload, S>
+
+  type HiddenCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HiddenCategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HiddenCategoryCountAggregateInputType | true
+    }
+
+  export interface HiddenCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HiddenCategory'], meta: { name: 'HiddenCategory' } }
+    /**
+     * Find zero or one HiddenCategory that matches the filter.
+     * @param {HiddenCategoryFindUniqueArgs} args - Arguments to find a HiddenCategory
+     * @example
+     * // Get one HiddenCategory
+     * const hiddenCategory = await prisma.hiddenCategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HiddenCategoryFindUniqueArgs>(args: SelectSubset<T, HiddenCategoryFindUniqueArgs<ExtArgs>>): Prisma__HiddenCategoryClient<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one HiddenCategory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {HiddenCategoryFindUniqueOrThrowArgs} args - Arguments to find a HiddenCategory
+     * @example
+     * // Get one HiddenCategory
+     * const hiddenCategory = await prisma.hiddenCategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HiddenCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, HiddenCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HiddenCategoryClient<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HiddenCategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenCategoryFindFirstArgs} args - Arguments to find a HiddenCategory
+     * @example
+     * // Get one HiddenCategory
+     * const hiddenCategory = await prisma.hiddenCategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HiddenCategoryFindFirstArgs>(args?: SelectSubset<T, HiddenCategoryFindFirstArgs<ExtArgs>>): Prisma__HiddenCategoryClient<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HiddenCategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenCategoryFindFirstOrThrowArgs} args - Arguments to find a HiddenCategory
+     * @example
+     * // Get one HiddenCategory
+     * const hiddenCategory = await prisma.hiddenCategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HiddenCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, HiddenCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__HiddenCategoryClient<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more HiddenCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HiddenCategories
+     * const hiddenCategories = await prisma.hiddenCategory.findMany()
+     * 
+     * // Get first 10 HiddenCategories
+     * const hiddenCategories = await prisma.hiddenCategory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const hiddenCategoryWithIdOnly = await prisma.hiddenCategory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HiddenCategoryFindManyArgs>(args?: SelectSubset<T, HiddenCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a HiddenCategory.
+     * @param {HiddenCategoryCreateArgs} args - Arguments to create a HiddenCategory.
+     * @example
+     * // Create one HiddenCategory
+     * const HiddenCategory = await prisma.hiddenCategory.create({
+     *   data: {
+     *     // ... data to create a HiddenCategory
+     *   }
+     * })
+     * 
+     */
+    create<T extends HiddenCategoryCreateArgs>(args: SelectSubset<T, HiddenCategoryCreateArgs<ExtArgs>>): Prisma__HiddenCategoryClient<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many HiddenCategories.
+     * @param {HiddenCategoryCreateManyArgs} args - Arguments to create many HiddenCategories.
+     * @example
+     * // Create many HiddenCategories
+     * const hiddenCategory = await prisma.hiddenCategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HiddenCategoryCreateManyArgs>(args?: SelectSubset<T, HiddenCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many HiddenCategories and returns the data saved in the database.
+     * @param {HiddenCategoryCreateManyAndReturnArgs} args - Arguments to create many HiddenCategories.
+     * @example
+     * // Create many HiddenCategories
+     * const hiddenCategory = await prisma.hiddenCategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many HiddenCategories and only return the `id`
+     * const hiddenCategoryWithIdOnly = await prisma.hiddenCategory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HiddenCategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, HiddenCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a HiddenCategory.
+     * @param {HiddenCategoryDeleteArgs} args - Arguments to delete one HiddenCategory.
+     * @example
+     * // Delete one HiddenCategory
+     * const HiddenCategory = await prisma.hiddenCategory.delete({
+     *   where: {
+     *     // ... filter to delete one HiddenCategory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HiddenCategoryDeleteArgs>(args: SelectSubset<T, HiddenCategoryDeleteArgs<ExtArgs>>): Prisma__HiddenCategoryClient<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one HiddenCategory.
+     * @param {HiddenCategoryUpdateArgs} args - Arguments to update one HiddenCategory.
+     * @example
+     * // Update one HiddenCategory
+     * const hiddenCategory = await prisma.hiddenCategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HiddenCategoryUpdateArgs>(args: SelectSubset<T, HiddenCategoryUpdateArgs<ExtArgs>>): Prisma__HiddenCategoryClient<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more HiddenCategories.
+     * @param {HiddenCategoryDeleteManyArgs} args - Arguments to filter HiddenCategories to delete.
+     * @example
+     * // Delete a few HiddenCategories
+     * const { count } = await prisma.hiddenCategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HiddenCategoryDeleteManyArgs>(args?: SelectSubset<T, HiddenCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HiddenCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenCategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HiddenCategories
+     * const hiddenCategory = await prisma.hiddenCategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HiddenCategoryUpdateManyArgs>(args: SelectSubset<T, HiddenCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HiddenCategories and returns the data updated in the database.
+     * @param {HiddenCategoryUpdateManyAndReturnArgs} args - Arguments to update many HiddenCategories.
+     * @example
+     * // Update many HiddenCategories
+     * const hiddenCategory = await prisma.hiddenCategory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more HiddenCategories and only return the `id`
+     * const hiddenCategoryWithIdOnly = await prisma.hiddenCategory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends HiddenCategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, HiddenCategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one HiddenCategory.
+     * @param {HiddenCategoryUpsertArgs} args - Arguments to update or create a HiddenCategory.
+     * @example
+     * // Update or create a HiddenCategory
+     * const hiddenCategory = await prisma.hiddenCategory.upsert({
+     *   create: {
+     *     // ... data to create a HiddenCategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HiddenCategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HiddenCategoryUpsertArgs>(args: SelectSubset<T, HiddenCategoryUpsertArgs<ExtArgs>>): Prisma__HiddenCategoryClient<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of HiddenCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenCategoryCountArgs} args - Arguments to filter HiddenCategories to count.
+     * @example
+     * // Count the number of HiddenCategories
+     * const count = await prisma.hiddenCategory.count({
+     *   where: {
+     *     // ... the filter for the HiddenCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends HiddenCategoryCountArgs>(
+      args?: Subset<T, HiddenCategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HiddenCategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HiddenCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HiddenCategoryAggregateArgs>(args: Subset<T, HiddenCategoryAggregateArgs>): Prisma.PrismaPromise<GetHiddenCategoryAggregateType<T>>
+
+    /**
+     * Group by HiddenCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenCategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HiddenCategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HiddenCategoryGroupByArgs['orderBy'] }
+        : { orderBy?: HiddenCategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HiddenCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHiddenCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HiddenCategory model
+   */
+  readonly fields: HiddenCategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HiddenCategory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HiddenCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    category<T extends ExpenseCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategoryDefaultArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HiddenCategory model
+   */
+  interface HiddenCategoryFieldRefs {
+    readonly id: FieldRef<"HiddenCategory", 'Int'>
+    readonly uuid: FieldRef<"HiddenCategory", 'String'>
+    readonly user_uuid: FieldRef<"HiddenCategory", 'String'>
+    readonly category_uuid: FieldRef<"HiddenCategory", 'String'>
+    readonly created_at: FieldRef<"HiddenCategory", 'DateTime'>
+    readonly updated_at: FieldRef<"HiddenCategory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HiddenCategory findUnique
+   */
+  export type HiddenCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenCategory to fetch.
+     */
+    where: HiddenCategoryWhereUniqueInput
+  }
+
+  /**
+   * HiddenCategory findUniqueOrThrow
+   */
+  export type HiddenCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenCategory to fetch.
+     */
+    where: HiddenCategoryWhereUniqueInput
+  }
+
+  /**
+   * HiddenCategory findFirst
+   */
+  export type HiddenCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenCategory to fetch.
+     */
+    where?: HiddenCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenCategories to fetch.
+     */
+    orderBy?: HiddenCategoryOrderByWithRelationInput | HiddenCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HiddenCategories.
+     */
+    cursor?: HiddenCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HiddenCategories.
+     */
+    distinct?: HiddenCategoryScalarFieldEnum | HiddenCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * HiddenCategory findFirstOrThrow
+   */
+  export type HiddenCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenCategory to fetch.
+     */
+    where?: HiddenCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenCategories to fetch.
+     */
+    orderBy?: HiddenCategoryOrderByWithRelationInput | HiddenCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HiddenCategories.
+     */
+    cursor?: HiddenCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HiddenCategories.
+     */
+    distinct?: HiddenCategoryScalarFieldEnum | HiddenCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * HiddenCategory findMany
+   */
+  export type HiddenCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenCategories to fetch.
+     */
+    where?: HiddenCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenCategories to fetch.
+     */
+    orderBy?: HiddenCategoryOrderByWithRelationInput | HiddenCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HiddenCategories.
+     */
+    cursor?: HiddenCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenCategories.
+     */
+    skip?: number
+    distinct?: HiddenCategoryScalarFieldEnum | HiddenCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * HiddenCategory create
+   */
+  export type HiddenCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a HiddenCategory.
+     */
+    data: XOR<HiddenCategoryCreateInput, HiddenCategoryUncheckedCreateInput>
+  }
+
+  /**
+   * HiddenCategory createMany
+   */
+  export type HiddenCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HiddenCategories.
+     */
+    data: HiddenCategoryCreateManyInput | HiddenCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HiddenCategory createManyAndReturn
+   */
+  export type HiddenCategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many HiddenCategories.
+     */
+    data: HiddenCategoryCreateManyInput | HiddenCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HiddenCategory update
+   */
+  export type HiddenCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a HiddenCategory.
+     */
+    data: XOR<HiddenCategoryUpdateInput, HiddenCategoryUncheckedUpdateInput>
+    /**
+     * Choose, which HiddenCategory to update.
+     */
+    where: HiddenCategoryWhereUniqueInput
+  }
+
+  /**
+   * HiddenCategory updateMany
+   */
+  export type HiddenCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HiddenCategories.
+     */
+    data: XOR<HiddenCategoryUpdateManyMutationInput, HiddenCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which HiddenCategories to update
+     */
+    where?: HiddenCategoryWhereInput
+    /**
+     * Limit how many HiddenCategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * HiddenCategory updateManyAndReturn
+   */
+  export type HiddenCategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to update HiddenCategories.
+     */
+    data: XOR<HiddenCategoryUpdateManyMutationInput, HiddenCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which HiddenCategories to update
+     */
+    where?: HiddenCategoryWhereInput
+    /**
+     * Limit how many HiddenCategories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HiddenCategory upsert
+   */
+  export type HiddenCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the HiddenCategory to update in case it exists.
+     */
+    where: HiddenCategoryWhereUniqueInput
+    /**
+     * In case the HiddenCategory found by the `where` argument doesn't exist, create a new HiddenCategory with this data.
+     */
+    create: XOR<HiddenCategoryCreateInput, HiddenCategoryUncheckedCreateInput>
+    /**
+     * In case the HiddenCategory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HiddenCategoryUpdateInput, HiddenCategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * HiddenCategory delete
+   */
+  export type HiddenCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+    /**
+     * Filter which HiddenCategory to delete.
+     */
+    where: HiddenCategoryWhereUniqueInput
+  }
+
+  /**
+   * HiddenCategory deleteMany
+   */
+  export type HiddenCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HiddenCategories to delete
+     */
+    where?: HiddenCategoryWhereInput
+    /**
+     * Limit how many HiddenCategories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * HiddenCategory without action
+   */
+  export type HiddenCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenCategory
+     */
+    select?: HiddenCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenCategory
+     */
+    omit?: HiddenCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenCategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model HiddenSubcategory
+   */
+
+  export type AggregateHiddenSubcategory = {
+    _count: HiddenSubcategoryCountAggregateOutputType | null
+    _avg: HiddenSubcategoryAvgAggregateOutputType | null
+    _sum: HiddenSubcategorySumAggregateOutputType | null
+    _min: HiddenSubcategoryMinAggregateOutputType | null
+    _max: HiddenSubcategoryMaxAggregateOutputType | null
+  }
+
+  export type HiddenSubcategoryAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type HiddenSubcategorySumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type HiddenSubcategoryMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    subcategory_uuid: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type HiddenSubcategoryMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    subcategory_uuid: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type HiddenSubcategoryCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    subcategory_uuid: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type HiddenSubcategoryAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type HiddenSubcategorySumAggregateInputType = {
+    id?: true
+  }
+
+  export type HiddenSubcategoryMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    subcategory_uuid?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type HiddenSubcategoryMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    subcategory_uuid?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type HiddenSubcategoryCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    subcategory_uuid?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type HiddenSubcategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HiddenSubcategory to aggregate.
+     */
+    where?: HiddenSubcategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenSubcategories to fetch.
+     */
+    orderBy?: HiddenSubcategoryOrderByWithRelationInput | HiddenSubcategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HiddenSubcategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenSubcategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenSubcategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HiddenSubcategories
+    **/
+    _count?: true | HiddenSubcategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HiddenSubcategoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HiddenSubcategorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HiddenSubcategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HiddenSubcategoryMaxAggregateInputType
+  }
+
+  export type GetHiddenSubcategoryAggregateType<T extends HiddenSubcategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateHiddenSubcategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHiddenSubcategory[P]>
+      : GetScalarType<T[P], AggregateHiddenSubcategory[P]>
+  }
+
+
+
+
+  export type HiddenSubcategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HiddenSubcategoryWhereInput
+    orderBy?: HiddenSubcategoryOrderByWithAggregationInput | HiddenSubcategoryOrderByWithAggregationInput[]
+    by: HiddenSubcategoryScalarFieldEnum[] | HiddenSubcategoryScalarFieldEnum
+    having?: HiddenSubcategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HiddenSubcategoryCountAggregateInputType | true
+    _avg?: HiddenSubcategoryAvgAggregateInputType
+    _sum?: HiddenSubcategorySumAggregateInputType
+    _min?: HiddenSubcategoryMinAggregateInputType
+    _max?: HiddenSubcategoryMaxAggregateInputType
+  }
+
+  export type HiddenSubcategoryGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    subcategory_uuid: string
+    created_at: Date
+    updated_at: Date
+    _count: HiddenSubcategoryCountAggregateOutputType | null
+    _avg: HiddenSubcategoryAvgAggregateOutputType | null
+    _sum: HiddenSubcategorySumAggregateOutputType | null
+    _min: HiddenSubcategoryMinAggregateOutputType | null
+    _max: HiddenSubcategoryMaxAggregateOutputType | null
+  }
+
+  type GetHiddenSubcategoryGroupByPayload<T extends HiddenSubcategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HiddenSubcategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HiddenSubcategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HiddenSubcategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], HiddenSubcategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HiddenSubcategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hiddenSubcategory"]>
+
+  export type HiddenSubcategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hiddenSubcategory"]>
+
+  export type HiddenSubcategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hiddenSubcategory"]>
+
+  export type HiddenSubcategorySelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type HiddenSubcategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "subcategory_uuid" | "created_at" | "updated_at", ExtArgs["result"]["hiddenSubcategory"]>
+  export type HiddenSubcategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+  }
+  export type HiddenSubcategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+  }
+  export type HiddenSubcategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    subcategory?: boolean | ExpenseSubcategoryDefaultArgs<ExtArgs>
+  }
+
+  export type $HiddenSubcategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HiddenSubcategory"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      subcategory_uuid: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["hiddenSubcategory"]>
+    composites: {}
+  }
+
+  type HiddenSubcategoryGetPayload<S extends boolean | null | undefined | HiddenSubcategoryDefaultArgs> = $Result.GetResult<Prisma.$HiddenSubcategoryPayload, S>
+
+  type HiddenSubcategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HiddenSubcategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HiddenSubcategoryCountAggregateInputType | true
+    }
+
+  export interface HiddenSubcategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HiddenSubcategory'], meta: { name: 'HiddenSubcategory' } }
+    /**
+     * Find zero or one HiddenSubcategory that matches the filter.
+     * @param {HiddenSubcategoryFindUniqueArgs} args - Arguments to find a HiddenSubcategory
+     * @example
+     * // Get one HiddenSubcategory
+     * const hiddenSubcategory = await prisma.hiddenSubcategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HiddenSubcategoryFindUniqueArgs>(args: SelectSubset<T, HiddenSubcategoryFindUniqueArgs<ExtArgs>>): Prisma__HiddenSubcategoryClient<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one HiddenSubcategory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {HiddenSubcategoryFindUniqueOrThrowArgs} args - Arguments to find a HiddenSubcategory
+     * @example
+     * // Get one HiddenSubcategory
+     * const hiddenSubcategory = await prisma.hiddenSubcategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HiddenSubcategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, HiddenSubcategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HiddenSubcategoryClient<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HiddenSubcategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenSubcategoryFindFirstArgs} args - Arguments to find a HiddenSubcategory
+     * @example
+     * // Get one HiddenSubcategory
+     * const hiddenSubcategory = await prisma.hiddenSubcategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HiddenSubcategoryFindFirstArgs>(args?: SelectSubset<T, HiddenSubcategoryFindFirstArgs<ExtArgs>>): Prisma__HiddenSubcategoryClient<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HiddenSubcategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenSubcategoryFindFirstOrThrowArgs} args - Arguments to find a HiddenSubcategory
+     * @example
+     * // Get one HiddenSubcategory
+     * const hiddenSubcategory = await prisma.hiddenSubcategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HiddenSubcategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, HiddenSubcategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__HiddenSubcategoryClient<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more HiddenSubcategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenSubcategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HiddenSubcategories
+     * const hiddenSubcategories = await prisma.hiddenSubcategory.findMany()
+     * 
+     * // Get first 10 HiddenSubcategories
+     * const hiddenSubcategories = await prisma.hiddenSubcategory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const hiddenSubcategoryWithIdOnly = await prisma.hiddenSubcategory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HiddenSubcategoryFindManyArgs>(args?: SelectSubset<T, HiddenSubcategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a HiddenSubcategory.
+     * @param {HiddenSubcategoryCreateArgs} args - Arguments to create a HiddenSubcategory.
+     * @example
+     * // Create one HiddenSubcategory
+     * const HiddenSubcategory = await prisma.hiddenSubcategory.create({
+     *   data: {
+     *     // ... data to create a HiddenSubcategory
+     *   }
+     * })
+     * 
+     */
+    create<T extends HiddenSubcategoryCreateArgs>(args: SelectSubset<T, HiddenSubcategoryCreateArgs<ExtArgs>>): Prisma__HiddenSubcategoryClient<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many HiddenSubcategories.
+     * @param {HiddenSubcategoryCreateManyArgs} args - Arguments to create many HiddenSubcategories.
+     * @example
+     * // Create many HiddenSubcategories
+     * const hiddenSubcategory = await prisma.hiddenSubcategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HiddenSubcategoryCreateManyArgs>(args?: SelectSubset<T, HiddenSubcategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many HiddenSubcategories and returns the data saved in the database.
+     * @param {HiddenSubcategoryCreateManyAndReturnArgs} args - Arguments to create many HiddenSubcategories.
+     * @example
+     * // Create many HiddenSubcategories
+     * const hiddenSubcategory = await prisma.hiddenSubcategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many HiddenSubcategories and only return the `id`
+     * const hiddenSubcategoryWithIdOnly = await prisma.hiddenSubcategory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HiddenSubcategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, HiddenSubcategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a HiddenSubcategory.
+     * @param {HiddenSubcategoryDeleteArgs} args - Arguments to delete one HiddenSubcategory.
+     * @example
+     * // Delete one HiddenSubcategory
+     * const HiddenSubcategory = await prisma.hiddenSubcategory.delete({
+     *   where: {
+     *     // ... filter to delete one HiddenSubcategory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HiddenSubcategoryDeleteArgs>(args: SelectSubset<T, HiddenSubcategoryDeleteArgs<ExtArgs>>): Prisma__HiddenSubcategoryClient<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one HiddenSubcategory.
+     * @param {HiddenSubcategoryUpdateArgs} args - Arguments to update one HiddenSubcategory.
+     * @example
+     * // Update one HiddenSubcategory
+     * const hiddenSubcategory = await prisma.hiddenSubcategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HiddenSubcategoryUpdateArgs>(args: SelectSubset<T, HiddenSubcategoryUpdateArgs<ExtArgs>>): Prisma__HiddenSubcategoryClient<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more HiddenSubcategories.
+     * @param {HiddenSubcategoryDeleteManyArgs} args - Arguments to filter HiddenSubcategories to delete.
+     * @example
+     * // Delete a few HiddenSubcategories
+     * const { count } = await prisma.hiddenSubcategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HiddenSubcategoryDeleteManyArgs>(args?: SelectSubset<T, HiddenSubcategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HiddenSubcategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenSubcategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HiddenSubcategories
+     * const hiddenSubcategory = await prisma.hiddenSubcategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HiddenSubcategoryUpdateManyArgs>(args: SelectSubset<T, HiddenSubcategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HiddenSubcategories and returns the data updated in the database.
+     * @param {HiddenSubcategoryUpdateManyAndReturnArgs} args - Arguments to update many HiddenSubcategories.
+     * @example
+     * // Update many HiddenSubcategories
+     * const hiddenSubcategory = await prisma.hiddenSubcategory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more HiddenSubcategories and only return the `id`
+     * const hiddenSubcategoryWithIdOnly = await prisma.hiddenSubcategory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends HiddenSubcategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, HiddenSubcategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one HiddenSubcategory.
+     * @param {HiddenSubcategoryUpsertArgs} args - Arguments to update or create a HiddenSubcategory.
+     * @example
+     * // Update or create a HiddenSubcategory
+     * const hiddenSubcategory = await prisma.hiddenSubcategory.upsert({
+     *   create: {
+     *     // ... data to create a HiddenSubcategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HiddenSubcategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HiddenSubcategoryUpsertArgs>(args: SelectSubset<T, HiddenSubcategoryUpsertArgs<ExtArgs>>): Prisma__HiddenSubcategoryClient<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of HiddenSubcategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenSubcategoryCountArgs} args - Arguments to filter HiddenSubcategories to count.
+     * @example
+     * // Count the number of HiddenSubcategories
+     * const count = await prisma.hiddenSubcategory.count({
+     *   where: {
+     *     // ... the filter for the HiddenSubcategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends HiddenSubcategoryCountArgs>(
+      args?: Subset<T, HiddenSubcategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HiddenSubcategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HiddenSubcategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenSubcategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HiddenSubcategoryAggregateArgs>(args: Subset<T, HiddenSubcategoryAggregateArgs>): Prisma.PrismaPromise<GetHiddenSubcategoryAggregateType<T>>
+
+    /**
+     * Group by HiddenSubcategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HiddenSubcategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HiddenSubcategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HiddenSubcategoryGroupByArgs['orderBy'] }
+        : { orderBy?: HiddenSubcategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HiddenSubcategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHiddenSubcategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HiddenSubcategory model
+   */
+  readonly fields: HiddenSubcategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HiddenSubcategory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HiddenSubcategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    subcategory<T extends ExpenseSubcategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategoryDefaultArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HiddenSubcategory model
+   */
+  interface HiddenSubcategoryFieldRefs {
+    readonly id: FieldRef<"HiddenSubcategory", 'Int'>
+    readonly uuid: FieldRef<"HiddenSubcategory", 'String'>
+    readonly user_uuid: FieldRef<"HiddenSubcategory", 'String'>
+    readonly subcategory_uuid: FieldRef<"HiddenSubcategory", 'String'>
+    readonly created_at: FieldRef<"HiddenSubcategory", 'DateTime'>
+    readonly updated_at: FieldRef<"HiddenSubcategory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HiddenSubcategory findUnique
+   */
+  export type HiddenSubcategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenSubcategory to fetch.
+     */
+    where: HiddenSubcategoryWhereUniqueInput
+  }
+
+  /**
+   * HiddenSubcategory findUniqueOrThrow
+   */
+  export type HiddenSubcategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenSubcategory to fetch.
+     */
+    where: HiddenSubcategoryWhereUniqueInput
+  }
+
+  /**
+   * HiddenSubcategory findFirst
+   */
+  export type HiddenSubcategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenSubcategory to fetch.
+     */
+    where?: HiddenSubcategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenSubcategories to fetch.
+     */
+    orderBy?: HiddenSubcategoryOrderByWithRelationInput | HiddenSubcategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HiddenSubcategories.
+     */
+    cursor?: HiddenSubcategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenSubcategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenSubcategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HiddenSubcategories.
+     */
+    distinct?: HiddenSubcategoryScalarFieldEnum | HiddenSubcategoryScalarFieldEnum[]
+  }
+
+  /**
+   * HiddenSubcategory findFirstOrThrow
+   */
+  export type HiddenSubcategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenSubcategory to fetch.
+     */
+    where?: HiddenSubcategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenSubcategories to fetch.
+     */
+    orderBy?: HiddenSubcategoryOrderByWithRelationInput | HiddenSubcategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HiddenSubcategories.
+     */
+    cursor?: HiddenSubcategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenSubcategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenSubcategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HiddenSubcategories.
+     */
+    distinct?: HiddenSubcategoryScalarFieldEnum | HiddenSubcategoryScalarFieldEnum[]
+  }
+
+  /**
+   * HiddenSubcategory findMany
+   */
+  export type HiddenSubcategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which HiddenSubcategories to fetch.
+     */
+    where?: HiddenSubcategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HiddenSubcategories to fetch.
+     */
+    orderBy?: HiddenSubcategoryOrderByWithRelationInput | HiddenSubcategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HiddenSubcategories.
+     */
+    cursor?: HiddenSubcategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HiddenSubcategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HiddenSubcategories.
+     */
+    skip?: number
+    distinct?: HiddenSubcategoryScalarFieldEnum | HiddenSubcategoryScalarFieldEnum[]
+  }
+
+  /**
+   * HiddenSubcategory create
+   */
+  export type HiddenSubcategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a HiddenSubcategory.
+     */
+    data: XOR<HiddenSubcategoryCreateInput, HiddenSubcategoryUncheckedCreateInput>
+  }
+
+  /**
+   * HiddenSubcategory createMany
+   */
+  export type HiddenSubcategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HiddenSubcategories.
+     */
+    data: HiddenSubcategoryCreateManyInput | HiddenSubcategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HiddenSubcategory createManyAndReturn
+   */
+  export type HiddenSubcategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many HiddenSubcategories.
+     */
+    data: HiddenSubcategoryCreateManyInput | HiddenSubcategoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HiddenSubcategory update
+   */
+  export type HiddenSubcategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a HiddenSubcategory.
+     */
+    data: XOR<HiddenSubcategoryUpdateInput, HiddenSubcategoryUncheckedUpdateInput>
+    /**
+     * Choose, which HiddenSubcategory to update.
+     */
+    where: HiddenSubcategoryWhereUniqueInput
+  }
+
+  /**
+   * HiddenSubcategory updateMany
+   */
+  export type HiddenSubcategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HiddenSubcategories.
+     */
+    data: XOR<HiddenSubcategoryUpdateManyMutationInput, HiddenSubcategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which HiddenSubcategories to update
+     */
+    where?: HiddenSubcategoryWhereInput
+    /**
+     * Limit how many HiddenSubcategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * HiddenSubcategory updateManyAndReturn
+   */
+  export type HiddenSubcategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * The data used to update HiddenSubcategories.
+     */
+    data: XOR<HiddenSubcategoryUpdateManyMutationInput, HiddenSubcategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which HiddenSubcategories to update
+     */
+    where?: HiddenSubcategoryWhereInput
+    /**
+     * Limit how many HiddenSubcategories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HiddenSubcategory upsert
+   */
+  export type HiddenSubcategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the HiddenSubcategory to update in case it exists.
+     */
+    where: HiddenSubcategoryWhereUniqueInput
+    /**
+     * In case the HiddenSubcategory found by the `where` argument doesn't exist, create a new HiddenSubcategory with this data.
+     */
+    create: XOR<HiddenSubcategoryCreateInput, HiddenSubcategoryUncheckedCreateInput>
+    /**
+     * In case the HiddenSubcategory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HiddenSubcategoryUpdateInput, HiddenSubcategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * HiddenSubcategory delete
+   */
+  export type HiddenSubcategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+    /**
+     * Filter which HiddenSubcategory to delete.
+     */
+    where: HiddenSubcategoryWhereUniqueInput
+  }
+
+  /**
+   * HiddenSubcategory deleteMany
+   */
+  export type HiddenSubcategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HiddenSubcategories to delete
+     */
+    where?: HiddenSubcategoryWhereInput
+    /**
+     * Limit how many HiddenSubcategories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * HiddenSubcategory without action
+   */
+  export type HiddenSubcategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HiddenSubcategory
+     */
+    select?: HiddenSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HiddenSubcategory
+     */
+    omit?: HiddenSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HiddenSubcategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -29566,6 +33400,42 @@ export namespace Prisma {
   export type WorkoutSetScalarFieldEnum = (typeof WorkoutSetScalarFieldEnum)[keyof typeof WorkoutSetScalarFieldEnum]
 
 
+  export const HiddenActivityScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    activity_uuid: 'activity_uuid',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type HiddenActivityScalarFieldEnum = (typeof HiddenActivityScalarFieldEnum)[keyof typeof HiddenActivityScalarFieldEnum]
+
+
+  export const HiddenCategoryScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    category_uuid: 'category_uuid',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type HiddenCategoryScalarFieldEnum = (typeof HiddenCategoryScalarFieldEnum)[keyof typeof HiddenCategoryScalarFieldEnum]
+
+
+  export const HiddenSubcategoryScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    subcategory_uuid: 'subcategory_uuid',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type HiddenSubcategoryScalarFieldEnum = (typeof HiddenSubcategoryScalarFieldEnum)[keyof typeof HiddenSubcategoryScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -29820,10 +33690,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleListRelationFilter
     activity_logs?: ActivityLogListRelationFilter
     activity_occurrences?: ActivityOccurrenceListRelationFilter
+    hidden_activities?: HiddenActivityListRelationFilter
     expense_accounts?: ExpenseAccountListRelationFilter
     expense_entries?: ExpenseEntryListRelationFilter
     categories?: ExpenseCategoryListRelationFilter
     subcategories?: ExpenseSubcategoryListRelationFilter
+    hidden_categories?: HiddenCategoryListRelationFilter
+    hidden_subcategories?: HiddenSubcategoryListRelationFilter
     expense_receipts?: ExpenseReceiptListRelationFilter
     expense_stores?: ExpenseStoreListRelationFilter
     expense_products?: ExpenseProductListRelationFilter
@@ -29848,10 +33721,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleOrderByRelationAggregateInput
     activity_logs?: ActivityLogOrderByRelationAggregateInput
     activity_occurrences?: ActivityOccurrenceOrderByRelationAggregateInput
+    hidden_activities?: HiddenActivityOrderByRelationAggregateInput
     expense_accounts?: ExpenseAccountOrderByRelationAggregateInput
     expense_entries?: ExpenseEntryOrderByRelationAggregateInput
     categories?: ExpenseCategoryOrderByRelationAggregateInput
     subcategories?: ExpenseSubcategoryOrderByRelationAggregateInput
+    hidden_categories?: HiddenCategoryOrderByRelationAggregateInput
+    hidden_subcategories?: HiddenSubcategoryOrderByRelationAggregateInput
     expense_receipts?: ExpenseReceiptOrderByRelationAggregateInput
     expense_stores?: ExpenseStoreOrderByRelationAggregateInput
     expense_products?: ExpenseProductOrderByRelationAggregateInput
@@ -29879,10 +33755,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleListRelationFilter
     activity_logs?: ActivityLogListRelationFilter
     activity_occurrences?: ActivityOccurrenceListRelationFilter
+    hidden_activities?: HiddenActivityListRelationFilter
     expense_accounts?: ExpenseAccountListRelationFilter
     expense_entries?: ExpenseEntryListRelationFilter
     categories?: ExpenseCategoryListRelationFilter
     subcategories?: ExpenseSubcategoryListRelationFilter
+    hidden_categories?: HiddenCategoryListRelationFilter
+    hidden_subcategories?: HiddenSubcategoryListRelationFilter
     expense_receipts?: ExpenseReceiptListRelationFilter
     expense_stores?: ExpenseStoreListRelationFilter
     expense_products?: ExpenseProductListRelationFilter
@@ -29944,6 +33823,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleListRelationFilter
     activity_logs?: ActivityLogListRelationFilter
     activity_occurrences?: ActivityOccurrenceListRelationFilter
+    hidden_activities?: HiddenActivityListRelationFilter
   }
 
   export type ActivityOrderByWithRelationInput = {
@@ -29962,6 +33842,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleOrderByRelationAggregateInput
     activity_logs?: ActivityLogOrderByRelationAggregateInput
     activity_occurrences?: ActivityOccurrenceOrderByRelationAggregateInput
+    hidden_activities?: HiddenActivityOrderByRelationAggregateInput
   }
 
   export type ActivityWhereUniqueInput = Prisma.AtLeast<{
@@ -29983,6 +33864,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleListRelationFilter
     activity_logs?: ActivityLogListRelationFilter
     activity_occurrences?: ActivityOccurrenceListRelationFilter
+    hidden_activities?: HiddenActivityListRelationFilter
   }, "id" | "uuid">
 
   export type ActivityOrderByWithAggregationInput = {
@@ -30649,6 +34531,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryListRelationFilter
     entries?: ExpenseEntryListRelationFilter
     products?: ExpenseProductListRelationFilter
+    hidden_categories?: HiddenCategoryListRelationFilter
   }
 
   export type ExpenseCategoryOrderByWithRelationInput = {
@@ -30664,6 +34547,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryOrderByRelationAggregateInput
     entries?: ExpenseEntryOrderByRelationAggregateInput
     products?: ExpenseProductOrderByRelationAggregateInput
+    hidden_categories?: HiddenCategoryOrderByRelationAggregateInput
   }
 
   export type ExpenseCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -30682,6 +34566,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryListRelationFilter
     entries?: ExpenseEntryListRelationFilter
     products?: ExpenseProductListRelationFilter
+    hidden_categories?: HiddenCategoryListRelationFilter
   }, "id" | "uuid">
 
   export type ExpenseCategoryOrderByWithAggregationInput = {
@@ -30729,6 +34614,7 @@ export namespace Prisma {
     category?: XOR<ExpenseCategoryScalarRelationFilter, ExpenseCategoryWhereInput>
     entries?: ExpenseEntryListRelationFilter
     products?: ExpenseProductListRelationFilter
+    hidden_subcategories?: HiddenSubcategoryListRelationFilter
   }
 
   export type ExpenseSubcategoryOrderByWithRelationInput = {
@@ -30743,6 +34629,7 @@ export namespace Prisma {
     category?: ExpenseCategoryOrderByWithRelationInput
     entries?: ExpenseEntryOrderByRelationAggregateInput
     products?: ExpenseProductOrderByRelationAggregateInput
+    hidden_subcategories?: HiddenSubcategoryOrderByRelationAggregateInput
   }
 
   export type ExpenseSubcategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -30760,6 +34647,7 @@ export namespace Prisma {
     category?: XOR<ExpenseCategoryScalarRelationFilter, ExpenseCategoryWhereInput>
     entries?: ExpenseEntryListRelationFilter
     products?: ExpenseProductListRelationFilter
+    hidden_subcategories?: HiddenSubcategoryListRelationFilter
   }, "id" | "uuid">
 
   export type ExpenseSubcategoryOrderByWithAggregationInput = {
@@ -31662,6 +35550,201 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"WorkoutSet"> | Date | string
   }
 
+  export type HiddenActivityWhereInput = {
+    AND?: HiddenActivityWhereInput | HiddenActivityWhereInput[]
+    OR?: HiddenActivityWhereInput[]
+    NOT?: HiddenActivityWhereInput | HiddenActivityWhereInput[]
+    id?: IntFilter<"HiddenActivity"> | number
+    uuid?: StringFilter<"HiddenActivity"> | string
+    user_uuid?: StringFilter<"HiddenActivity"> | string
+    activity_uuid?: StringFilter<"HiddenActivity"> | string
+    created_at?: DateTimeFilter<"HiddenActivity"> | Date | string
+    updated_at?: DateTimeFilter<"HiddenActivity"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    activity?: XOR<ActivityScalarRelationFilter, ActivityWhereInput>
+  }
+
+  export type HiddenActivityOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    activity?: ActivityOrderByWithRelationInput
+  }
+
+  export type HiddenActivityWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: HiddenActivityWhereInput | HiddenActivityWhereInput[]
+    OR?: HiddenActivityWhereInput[]
+    NOT?: HiddenActivityWhereInput | HiddenActivityWhereInput[]
+    user_uuid?: StringFilter<"HiddenActivity"> | string
+    activity_uuid?: StringFilter<"HiddenActivity"> | string
+    created_at?: DateTimeFilter<"HiddenActivity"> | Date | string
+    updated_at?: DateTimeFilter<"HiddenActivity"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    activity?: XOR<ActivityScalarRelationFilter, ActivityWhereInput>
+  }, "id" | "uuid">
+
+  export type HiddenActivityOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: HiddenActivityCountOrderByAggregateInput
+    _avg?: HiddenActivityAvgOrderByAggregateInput
+    _max?: HiddenActivityMaxOrderByAggregateInput
+    _min?: HiddenActivityMinOrderByAggregateInput
+    _sum?: HiddenActivitySumOrderByAggregateInput
+  }
+
+  export type HiddenActivityScalarWhereWithAggregatesInput = {
+    AND?: HiddenActivityScalarWhereWithAggregatesInput | HiddenActivityScalarWhereWithAggregatesInput[]
+    OR?: HiddenActivityScalarWhereWithAggregatesInput[]
+    NOT?: HiddenActivityScalarWhereWithAggregatesInput | HiddenActivityScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"HiddenActivity"> | number
+    uuid?: StringWithAggregatesFilter<"HiddenActivity"> | string
+    user_uuid?: StringWithAggregatesFilter<"HiddenActivity"> | string
+    activity_uuid?: StringWithAggregatesFilter<"HiddenActivity"> | string
+    created_at?: DateTimeWithAggregatesFilter<"HiddenActivity"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"HiddenActivity"> | Date | string
+  }
+
+  export type HiddenCategoryWhereInput = {
+    AND?: HiddenCategoryWhereInput | HiddenCategoryWhereInput[]
+    OR?: HiddenCategoryWhereInput[]
+    NOT?: HiddenCategoryWhereInput | HiddenCategoryWhereInput[]
+    id?: IntFilter<"HiddenCategory"> | number
+    uuid?: StringFilter<"HiddenCategory"> | string
+    user_uuid?: StringFilter<"HiddenCategory"> | string
+    category_uuid?: StringFilter<"HiddenCategory"> | string
+    created_at?: DateTimeFilter<"HiddenCategory"> | Date | string
+    updated_at?: DateTimeFilter<"HiddenCategory"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    category?: XOR<ExpenseCategoryScalarRelationFilter, ExpenseCategoryWhereInput>
+  }
+
+  export type HiddenCategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    category_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    category?: ExpenseCategoryOrderByWithRelationInput
+  }
+
+  export type HiddenCategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: HiddenCategoryWhereInput | HiddenCategoryWhereInput[]
+    OR?: HiddenCategoryWhereInput[]
+    NOT?: HiddenCategoryWhereInput | HiddenCategoryWhereInput[]
+    user_uuid?: StringFilter<"HiddenCategory"> | string
+    category_uuid?: StringFilter<"HiddenCategory"> | string
+    created_at?: DateTimeFilter<"HiddenCategory"> | Date | string
+    updated_at?: DateTimeFilter<"HiddenCategory"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    category?: XOR<ExpenseCategoryScalarRelationFilter, ExpenseCategoryWhereInput>
+  }, "id" | "uuid">
+
+  export type HiddenCategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    category_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: HiddenCategoryCountOrderByAggregateInput
+    _avg?: HiddenCategoryAvgOrderByAggregateInput
+    _max?: HiddenCategoryMaxOrderByAggregateInput
+    _min?: HiddenCategoryMinOrderByAggregateInput
+    _sum?: HiddenCategorySumOrderByAggregateInput
+  }
+
+  export type HiddenCategoryScalarWhereWithAggregatesInput = {
+    AND?: HiddenCategoryScalarWhereWithAggregatesInput | HiddenCategoryScalarWhereWithAggregatesInput[]
+    OR?: HiddenCategoryScalarWhereWithAggregatesInput[]
+    NOT?: HiddenCategoryScalarWhereWithAggregatesInput | HiddenCategoryScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"HiddenCategory"> | number
+    uuid?: StringWithAggregatesFilter<"HiddenCategory"> | string
+    user_uuid?: StringWithAggregatesFilter<"HiddenCategory"> | string
+    category_uuid?: StringWithAggregatesFilter<"HiddenCategory"> | string
+    created_at?: DateTimeWithAggregatesFilter<"HiddenCategory"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"HiddenCategory"> | Date | string
+  }
+
+  export type HiddenSubcategoryWhereInput = {
+    AND?: HiddenSubcategoryWhereInput | HiddenSubcategoryWhereInput[]
+    OR?: HiddenSubcategoryWhereInput[]
+    NOT?: HiddenSubcategoryWhereInput | HiddenSubcategoryWhereInput[]
+    id?: IntFilter<"HiddenSubcategory"> | number
+    uuid?: StringFilter<"HiddenSubcategory"> | string
+    user_uuid?: StringFilter<"HiddenSubcategory"> | string
+    subcategory_uuid?: StringFilter<"HiddenSubcategory"> | string
+    created_at?: DateTimeFilter<"HiddenSubcategory"> | Date | string
+    updated_at?: DateTimeFilter<"HiddenSubcategory"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    subcategory?: XOR<ExpenseSubcategoryScalarRelationFilter, ExpenseSubcategoryWhereInput>
+  }
+
+  export type HiddenSubcategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    subcategory?: ExpenseSubcategoryOrderByWithRelationInput
+  }
+
+  export type HiddenSubcategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: HiddenSubcategoryWhereInput | HiddenSubcategoryWhereInput[]
+    OR?: HiddenSubcategoryWhereInput[]
+    NOT?: HiddenSubcategoryWhereInput | HiddenSubcategoryWhereInput[]
+    user_uuid?: StringFilter<"HiddenSubcategory"> | string
+    subcategory_uuid?: StringFilter<"HiddenSubcategory"> | string
+    created_at?: DateTimeFilter<"HiddenSubcategory"> | Date | string
+    updated_at?: DateTimeFilter<"HiddenSubcategory"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    subcategory?: XOR<ExpenseSubcategoryScalarRelationFilter, ExpenseSubcategoryWhereInput>
+  }, "id" | "uuid">
+
+  export type HiddenSubcategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: HiddenSubcategoryCountOrderByAggregateInput
+    _avg?: HiddenSubcategoryAvgOrderByAggregateInput
+    _max?: HiddenSubcategoryMaxOrderByAggregateInput
+    _min?: HiddenSubcategoryMinOrderByAggregateInput
+    _sum?: HiddenSubcategorySumOrderByAggregateInput
+  }
+
+  export type HiddenSubcategoryScalarWhereWithAggregatesInput = {
+    AND?: HiddenSubcategoryScalarWhereWithAggregatesInput | HiddenSubcategoryScalarWhereWithAggregatesInput[]
+    OR?: HiddenSubcategoryScalarWhereWithAggregatesInput[]
+    NOT?: HiddenSubcategoryScalarWhereWithAggregatesInput | HiddenSubcategoryScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"HiddenSubcategory"> | number
+    uuid?: StringWithAggregatesFilter<"HiddenSubcategory"> | string
+    user_uuid?: StringWithAggregatesFilter<"HiddenSubcategory"> | string
+    subcategory_uuid?: StringWithAggregatesFilter<"HiddenSubcategory"> | string
+    created_at?: DateTimeWithAggregatesFilter<"HiddenSubcategory"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"HiddenSubcategory"> | Date | string
+  }
+
   export type UserCreateInput = {
     uuid?: string
     email: string
@@ -31677,10 +35760,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -31705,10 +35791,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -31732,10 +35821,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -31760,10 +35852,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -31824,6 +35919,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
     activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateInput = {
@@ -31841,6 +35937,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUpdateInput = {
@@ -31857,6 +35954,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateInput = {
@@ -31874,6 +35972,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityCreateManyInput = {
@@ -32547,6 +36646,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
     entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateInput = {
@@ -32561,6 +36661,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUpdateInput = {
@@ -32574,6 +36675,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
     entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateInput = {
@@ -32588,6 +36690,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
     entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryCreateManyInput = {
@@ -32630,6 +36733,7 @@ export namespace Prisma {
     category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
     entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateInput = {
@@ -32642,6 +36746,7 @@ export namespace Prisma {
     updated_at?: Date | string
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUpdateInput = {
@@ -32653,6 +36758,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
     entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateInput = {
@@ -32665,6 +36771,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryCreateManyInput = {
@@ -33578,6 +37685,180 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HiddenActivityCreateInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutHidden_activitiesInput
+    activity: ActivityCreateNestedOneWithoutHidden_activitiesInput
+  }
+
+  export type HiddenActivityUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenActivityUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutHidden_activitiesNestedInput
+    activity?: ActivityUpdateOneRequiredWithoutHidden_activitiesNestedInput
+  }
+
+  export type HiddenActivityUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenActivityCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    activity_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenActivityUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenActivityUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenCategoryCreateInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutHidden_categoriesInput
+    category: ExpenseCategoryCreateNestedOneWithoutHidden_categoriesInput
+  }
+
+  export type HiddenCategoryUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    category_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenCategoryUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutHidden_categoriesNestedInput
+    category?: ExpenseCategoryUpdateOneRequiredWithoutHidden_categoriesNestedInput
+  }
+
+  export type HiddenCategoryUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenCategoryCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    category_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenCategoryUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenCategoryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenSubcategoryCreateInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutHidden_subcategoriesInput
+    subcategory: ExpenseSubcategoryCreateNestedOneWithoutHidden_subcategoriesInput
+  }
+
+  export type HiddenSubcategoryUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    subcategory_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenSubcategoryUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutHidden_subcategoriesNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneRequiredWithoutHidden_subcategoriesNestedInput
+  }
+
+  export type HiddenSubcategoryUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenSubcategoryCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    subcategory_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenSubcategoryUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenSubcategoryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -33667,6 +37948,12 @@ export namespace Prisma {
     none?: ActivityOccurrenceWhereInput
   }
 
+  export type HiddenActivityListRelationFilter = {
+    every?: HiddenActivityWhereInput
+    some?: HiddenActivityWhereInput
+    none?: HiddenActivityWhereInput
+  }
+
   export type ExpenseAccountListRelationFilter = {
     every?: ExpenseAccountWhereInput
     some?: ExpenseAccountWhereInput
@@ -33689,6 +37976,18 @@ export namespace Prisma {
     every?: ExpenseSubcategoryWhereInput
     some?: ExpenseSubcategoryWhereInput
     none?: ExpenseSubcategoryWhereInput
+  }
+
+  export type HiddenCategoryListRelationFilter = {
+    every?: HiddenCategoryWhereInput
+    some?: HiddenCategoryWhereInput
+    none?: HiddenCategoryWhereInput
+  }
+
+  export type HiddenSubcategoryListRelationFilter = {
+    every?: HiddenSubcategoryWhereInput
+    some?: HiddenSubcategoryWhereInput
+    none?: HiddenSubcategoryWhereInput
   }
 
   export type ExpenseReceiptListRelationFilter = {
@@ -33752,6 +38051,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type HiddenActivityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ExpenseAccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -33765,6 +38068,14 @@ export namespace Prisma {
   }
 
   export type ExpenseSubcategoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type HiddenCategoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type HiddenSubcategoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -35321,6 +39632,116 @@ export namespace Prisma {
     order?: SortOrder
   }
 
+  export type HiddenActivityCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HiddenActivityAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type HiddenActivityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HiddenActivityMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    activity_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HiddenActivitySumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type HiddenCategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    category_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HiddenCategoryAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type HiddenCategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    category_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HiddenCategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    category_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HiddenCategorySumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ExpenseSubcategoryScalarRelationFilter = {
+    is?: ExpenseSubcategoryWhereInput
+    isNot?: ExpenseSubcategoryWhereInput
+  }
+
+  export type HiddenSubcategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HiddenSubcategoryAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type HiddenSubcategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HiddenSubcategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type HiddenSubcategorySumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type ActivityCreateNestedManyWithoutUserInput = {
     create?: XOR<ActivityCreateWithoutUserInput, ActivityUncheckedCreateWithoutUserInput> | ActivityCreateWithoutUserInput[] | ActivityUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ActivityCreateOrConnectWithoutUserInput | ActivityCreateOrConnectWithoutUserInput[]
@@ -35356,6 +39777,13 @@ export namespace Prisma {
     connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
   }
 
+  export type HiddenActivityCreateNestedManyWithoutUserInput = {
+    create?: XOR<HiddenActivityCreateWithoutUserInput, HiddenActivityUncheckedCreateWithoutUserInput> | HiddenActivityCreateWithoutUserInput[] | HiddenActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenActivityCreateOrConnectWithoutUserInput | HiddenActivityCreateOrConnectWithoutUserInput[]
+    createMany?: HiddenActivityCreateManyUserInputEnvelope
+    connect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+  }
+
   export type ExpenseAccountCreateNestedManyWithoutUserInput = {
     create?: XOR<ExpenseAccountCreateWithoutUserInput, ExpenseAccountUncheckedCreateWithoutUserInput> | ExpenseAccountCreateWithoutUserInput[] | ExpenseAccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ExpenseAccountCreateOrConnectWithoutUserInput | ExpenseAccountCreateOrConnectWithoutUserInput[]
@@ -35382,6 +39810,20 @@ export namespace Prisma {
     connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutUserInput | ExpenseSubcategoryCreateOrConnectWithoutUserInput[]
     createMany?: ExpenseSubcategoryCreateManyUserInputEnvelope
     connect?: ExpenseSubcategoryWhereUniqueInput | ExpenseSubcategoryWhereUniqueInput[]
+  }
+
+  export type HiddenCategoryCreateNestedManyWithoutUserInput = {
+    create?: XOR<HiddenCategoryCreateWithoutUserInput, HiddenCategoryUncheckedCreateWithoutUserInput> | HiddenCategoryCreateWithoutUserInput[] | HiddenCategoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenCategoryCreateOrConnectWithoutUserInput | HiddenCategoryCreateOrConnectWithoutUserInput[]
+    createMany?: HiddenCategoryCreateManyUserInputEnvelope
+    connect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+  }
+
+  export type HiddenSubcategoryCreateNestedManyWithoutUserInput = {
+    create?: XOR<HiddenSubcategoryCreateWithoutUserInput, HiddenSubcategoryUncheckedCreateWithoutUserInput> | HiddenSubcategoryCreateWithoutUserInput[] | HiddenSubcategoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenSubcategoryCreateOrConnectWithoutUserInput | HiddenSubcategoryCreateOrConnectWithoutUserInput[]
+    createMany?: HiddenSubcategoryCreateManyUserInputEnvelope
+    connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
   }
 
   export type ExpenseReceiptCreateNestedManyWithoutUserInput = {
@@ -35461,6 +39903,13 @@ export namespace Prisma {
     connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
   }
 
+  export type HiddenActivityUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<HiddenActivityCreateWithoutUserInput, HiddenActivityUncheckedCreateWithoutUserInput> | HiddenActivityCreateWithoutUserInput[] | HiddenActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenActivityCreateOrConnectWithoutUserInput | HiddenActivityCreateOrConnectWithoutUserInput[]
+    createMany?: HiddenActivityCreateManyUserInputEnvelope
+    connect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+  }
+
   export type ExpenseAccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ExpenseAccountCreateWithoutUserInput, ExpenseAccountUncheckedCreateWithoutUserInput> | ExpenseAccountCreateWithoutUserInput[] | ExpenseAccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ExpenseAccountCreateOrConnectWithoutUserInput | ExpenseAccountCreateOrConnectWithoutUserInput[]
@@ -35487,6 +39936,20 @@ export namespace Prisma {
     connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutUserInput | ExpenseSubcategoryCreateOrConnectWithoutUserInput[]
     createMany?: ExpenseSubcategoryCreateManyUserInputEnvelope
     connect?: ExpenseSubcategoryWhereUniqueInput | ExpenseSubcategoryWhereUniqueInput[]
+  }
+
+  export type HiddenCategoryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<HiddenCategoryCreateWithoutUserInput, HiddenCategoryUncheckedCreateWithoutUserInput> | HiddenCategoryCreateWithoutUserInput[] | HiddenCategoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenCategoryCreateOrConnectWithoutUserInput | HiddenCategoryCreateOrConnectWithoutUserInput[]
+    createMany?: HiddenCategoryCreateManyUserInputEnvelope
+    connect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+  }
+
+  export type HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<HiddenSubcategoryCreateWithoutUserInput, HiddenSubcategoryUncheckedCreateWithoutUserInput> | HiddenSubcategoryCreateWithoutUserInput[] | HiddenSubcategoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenSubcategoryCreateOrConnectWithoutUserInput | HiddenSubcategoryCreateOrConnectWithoutUserInput[]
+    createMany?: HiddenSubcategoryCreateManyUserInputEnvelope
+    connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
   }
 
   export type ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput = {
@@ -35617,6 +40080,20 @@ export namespace Prisma {
     deleteMany?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
   }
 
+  export type HiddenActivityUpdateManyWithoutUserNestedInput = {
+    create?: XOR<HiddenActivityCreateWithoutUserInput, HiddenActivityUncheckedCreateWithoutUserInput> | HiddenActivityCreateWithoutUserInput[] | HiddenActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenActivityCreateOrConnectWithoutUserInput | HiddenActivityCreateOrConnectWithoutUserInput[]
+    upsert?: HiddenActivityUpsertWithWhereUniqueWithoutUserInput | HiddenActivityUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: HiddenActivityCreateManyUserInputEnvelope
+    set?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    disconnect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    delete?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    connect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    update?: HiddenActivityUpdateWithWhereUniqueWithoutUserInput | HiddenActivityUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: HiddenActivityUpdateManyWithWhereWithoutUserInput | HiddenActivityUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: HiddenActivityScalarWhereInput | HiddenActivityScalarWhereInput[]
+  }
+
   export type ExpenseAccountUpdateManyWithoutUserNestedInput = {
     create?: XOR<ExpenseAccountCreateWithoutUserInput, ExpenseAccountUncheckedCreateWithoutUserInput> | ExpenseAccountCreateWithoutUserInput[] | ExpenseAccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ExpenseAccountCreateOrConnectWithoutUserInput | ExpenseAccountCreateOrConnectWithoutUserInput[]
@@ -35671,6 +40148,34 @@ export namespace Prisma {
     update?: ExpenseSubcategoryUpdateWithWhereUniqueWithoutUserInput | ExpenseSubcategoryUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ExpenseSubcategoryUpdateManyWithWhereWithoutUserInput | ExpenseSubcategoryUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ExpenseSubcategoryScalarWhereInput | ExpenseSubcategoryScalarWhereInput[]
+  }
+
+  export type HiddenCategoryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<HiddenCategoryCreateWithoutUserInput, HiddenCategoryUncheckedCreateWithoutUserInput> | HiddenCategoryCreateWithoutUserInput[] | HiddenCategoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenCategoryCreateOrConnectWithoutUserInput | HiddenCategoryCreateOrConnectWithoutUserInput[]
+    upsert?: HiddenCategoryUpsertWithWhereUniqueWithoutUserInput | HiddenCategoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: HiddenCategoryCreateManyUserInputEnvelope
+    set?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    disconnect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    delete?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    connect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    update?: HiddenCategoryUpdateWithWhereUniqueWithoutUserInput | HiddenCategoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: HiddenCategoryUpdateManyWithWhereWithoutUserInput | HiddenCategoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: HiddenCategoryScalarWhereInput | HiddenCategoryScalarWhereInput[]
+  }
+
+  export type HiddenSubcategoryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<HiddenSubcategoryCreateWithoutUserInput, HiddenSubcategoryUncheckedCreateWithoutUserInput> | HiddenSubcategoryCreateWithoutUserInput[] | HiddenSubcategoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenSubcategoryCreateOrConnectWithoutUserInput | HiddenSubcategoryCreateOrConnectWithoutUserInput[]
+    upsert?: HiddenSubcategoryUpsertWithWhereUniqueWithoutUserInput | HiddenSubcategoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: HiddenSubcategoryCreateManyUserInputEnvelope
+    set?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    disconnect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    delete?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    update?: HiddenSubcategoryUpdateWithWhereUniqueWithoutUserInput | HiddenSubcategoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: HiddenSubcategoryUpdateManyWithWhereWithoutUserInput | HiddenSubcategoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: HiddenSubcategoryScalarWhereInput | HiddenSubcategoryScalarWhereInput[]
   }
 
   export type ExpenseReceiptUpdateManyWithoutUserNestedInput = {
@@ -35835,6 +40340,20 @@ export namespace Prisma {
     deleteMany?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
   }
 
+  export type HiddenActivityUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<HiddenActivityCreateWithoutUserInput, HiddenActivityUncheckedCreateWithoutUserInput> | HiddenActivityCreateWithoutUserInput[] | HiddenActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenActivityCreateOrConnectWithoutUserInput | HiddenActivityCreateOrConnectWithoutUserInput[]
+    upsert?: HiddenActivityUpsertWithWhereUniqueWithoutUserInput | HiddenActivityUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: HiddenActivityCreateManyUserInputEnvelope
+    set?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    disconnect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    delete?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    connect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    update?: HiddenActivityUpdateWithWhereUniqueWithoutUserInput | HiddenActivityUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: HiddenActivityUpdateManyWithWhereWithoutUserInput | HiddenActivityUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: HiddenActivityScalarWhereInput | HiddenActivityScalarWhereInput[]
+  }
+
   export type ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ExpenseAccountCreateWithoutUserInput, ExpenseAccountUncheckedCreateWithoutUserInput> | ExpenseAccountCreateWithoutUserInput[] | ExpenseAccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ExpenseAccountCreateOrConnectWithoutUserInput | ExpenseAccountCreateOrConnectWithoutUserInput[]
@@ -35889,6 +40408,34 @@ export namespace Prisma {
     update?: ExpenseSubcategoryUpdateWithWhereUniqueWithoutUserInput | ExpenseSubcategoryUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ExpenseSubcategoryUpdateManyWithWhereWithoutUserInput | ExpenseSubcategoryUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ExpenseSubcategoryScalarWhereInput | ExpenseSubcategoryScalarWhereInput[]
+  }
+
+  export type HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<HiddenCategoryCreateWithoutUserInput, HiddenCategoryUncheckedCreateWithoutUserInput> | HiddenCategoryCreateWithoutUserInput[] | HiddenCategoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenCategoryCreateOrConnectWithoutUserInput | HiddenCategoryCreateOrConnectWithoutUserInput[]
+    upsert?: HiddenCategoryUpsertWithWhereUniqueWithoutUserInput | HiddenCategoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: HiddenCategoryCreateManyUserInputEnvelope
+    set?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    disconnect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    delete?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    connect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    update?: HiddenCategoryUpdateWithWhereUniqueWithoutUserInput | HiddenCategoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: HiddenCategoryUpdateManyWithWhereWithoutUserInput | HiddenCategoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: HiddenCategoryScalarWhereInput | HiddenCategoryScalarWhereInput[]
+  }
+
+  export type HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<HiddenSubcategoryCreateWithoutUserInput, HiddenSubcategoryUncheckedCreateWithoutUserInput> | HiddenSubcategoryCreateWithoutUserInput[] | HiddenSubcategoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: HiddenSubcategoryCreateOrConnectWithoutUserInput | HiddenSubcategoryCreateOrConnectWithoutUserInput[]
+    upsert?: HiddenSubcategoryUpsertWithWhereUniqueWithoutUserInput | HiddenSubcategoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: HiddenSubcategoryCreateManyUserInputEnvelope
+    set?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    disconnect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    delete?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    update?: HiddenSubcategoryUpdateWithWhereUniqueWithoutUserInput | HiddenSubcategoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: HiddenSubcategoryUpdateManyWithWhereWithoutUserInput | HiddenSubcategoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: HiddenSubcategoryScalarWhereInput | HiddenSubcategoryScalarWhereInput[]
   }
 
   export type ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput = {
@@ -36009,6 +40556,13 @@ export namespace Prisma {
     connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
   }
 
+  export type HiddenActivityCreateNestedManyWithoutActivityInput = {
+    create?: XOR<HiddenActivityCreateWithoutActivityInput, HiddenActivityUncheckedCreateWithoutActivityInput> | HiddenActivityCreateWithoutActivityInput[] | HiddenActivityUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: HiddenActivityCreateOrConnectWithoutActivityInput | HiddenActivityCreateOrConnectWithoutActivityInput[]
+    createMany?: HiddenActivityCreateManyActivityInputEnvelope
+    connect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+  }
+
   export type ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput = {
     create?: XOR<ScheduleSlotCreateWithoutActivityInput, ScheduleSlotUncheckedCreateWithoutActivityInput> | ScheduleSlotCreateWithoutActivityInput[] | ScheduleSlotUncheckedCreateWithoutActivityInput[]
     connectOrCreate?: ScheduleSlotCreateOrConnectWithoutActivityInput | ScheduleSlotCreateOrConnectWithoutActivityInput[]
@@ -36035,6 +40589,13 @@ export namespace Prisma {
     connectOrCreate?: ActivityOccurrenceCreateOrConnectWithoutActivityInput | ActivityOccurrenceCreateOrConnectWithoutActivityInput[]
     createMany?: ActivityOccurrenceCreateManyActivityInputEnvelope
     connect?: ActivityOccurrenceWhereUniqueInput | ActivityOccurrenceWhereUniqueInput[]
+  }
+
+  export type HiddenActivityUncheckedCreateNestedManyWithoutActivityInput = {
+    create?: XOR<HiddenActivityCreateWithoutActivityInput, HiddenActivityUncheckedCreateWithoutActivityInput> | HiddenActivityCreateWithoutActivityInput[] | HiddenActivityUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: HiddenActivityCreateOrConnectWithoutActivityInput | HiddenActivityCreateOrConnectWithoutActivityInput[]
+    createMany?: HiddenActivityCreateManyActivityInputEnvelope
+    connect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -36105,6 +40666,20 @@ export namespace Prisma {
     deleteMany?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
   }
 
+  export type HiddenActivityUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<HiddenActivityCreateWithoutActivityInput, HiddenActivityUncheckedCreateWithoutActivityInput> | HiddenActivityCreateWithoutActivityInput[] | HiddenActivityUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: HiddenActivityCreateOrConnectWithoutActivityInput | HiddenActivityCreateOrConnectWithoutActivityInput[]
+    upsert?: HiddenActivityUpsertWithWhereUniqueWithoutActivityInput | HiddenActivityUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: HiddenActivityCreateManyActivityInputEnvelope
+    set?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    disconnect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    delete?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    connect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    update?: HiddenActivityUpdateWithWhereUniqueWithoutActivityInput | HiddenActivityUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: HiddenActivityUpdateManyWithWhereWithoutActivityInput | HiddenActivityUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: HiddenActivityScalarWhereInput | HiddenActivityScalarWhereInput[]
+  }
+
   export type ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput = {
     create?: XOR<ScheduleSlotCreateWithoutActivityInput, ScheduleSlotUncheckedCreateWithoutActivityInput> | ScheduleSlotCreateWithoutActivityInput[] | ScheduleSlotUncheckedCreateWithoutActivityInput[]
     connectOrCreate?: ScheduleSlotCreateOrConnectWithoutActivityInput | ScheduleSlotCreateOrConnectWithoutActivityInput[]
@@ -36159,6 +40734,20 @@ export namespace Prisma {
     update?: ActivityOccurrenceUpdateWithWhereUniqueWithoutActivityInput | ActivityOccurrenceUpdateWithWhereUniqueWithoutActivityInput[]
     updateMany?: ActivityOccurrenceUpdateManyWithWhereWithoutActivityInput | ActivityOccurrenceUpdateManyWithWhereWithoutActivityInput[]
     deleteMany?: ActivityOccurrenceScalarWhereInput | ActivityOccurrenceScalarWhereInput[]
+  }
+
+  export type HiddenActivityUncheckedUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<HiddenActivityCreateWithoutActivityInput, HiddenActivityUncheckedCreateWithoutActivityInput> | HiddenActivityCreateWithoutActivityInput[] | HiddenActivityUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: HiddenActivityCreateOrConnectWithoutActivityInput | HiddenActivityCreateOrConnectWithoutActivityInput[]
+    upsert?: HiddenActivityUpsertWithWhereUniqueWithoutActivityInput | HiddenActivityUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: HiddenActivityCreateManyActivityInputEnvelope
+    set?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    disconnect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    delete?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    connect?: HiddenActivityWhereUniqueInput | HiddenActivityWhereUniqueInput[]
+    update?: HiddenActivityUpdateWithWhereUniqueWithoutActivityInput | HiddenActivityUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: HiddenActivityUpdateManyWithWhereWithoutActivityInput | HiddenActivityUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: HiddenActivityScalarWhereInput | HiddenActivityScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSchedule_slotsInput = {
@@ -36720,6 +41309,13 @@ export namespace Prisma {
     connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
   }
 
+  export type HiddenCategoryCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<HiddenCategoryCreateWithoutCategoryInput, HiddenCategoryUncheckedCreateWithoutCategoryInput> | HiddenCategoryCreateWithoutCategoryInput[] | HiddenCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: HiddenCategoryCreateOrConnectWithoutCategoryInput | HiddenCategoryCreateOrConnectWithoutCategoryInput[]
+    createMany?: HiddenCategoryCreateManyCategoryInputEnvelope
+    connect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+  }
+
   export type ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput = {
     create?: XOR<ExpenseSubcategoryCreateWithoutCategoryInput, ExpenseSubcategoryUncheckedCreateWithoutCategoryInput> | ExpenseSubcategoryCreateWithoutCategoryInput[] | ExpenseSubcategoryUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutCategoryInput | ExpenseSubcategoryCreateOrConnectWithoutCategoryInput[]
@@ -36739,6 +41335,13 @@ export namespace Prisma {
     connectOrCreate?: ExpenseProductCreateOrConnectWithoutCategoryInput | ExpenseProductCreateOrConnectWithoutCategoryInput[]
     createMany?: ExpenseProductCreateManyCategoryInputEnvelope
     connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+  }
+
+  export type HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<HiddenCategoryCreateWithoutCategoryInput, HiddenCategoryUncheckedCreateWithoutCategoryInput> | HiddenCategoryCreateWithoutCategoryInput[] | HiddenCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: HiddenCategoryCreateOrConnectWithoutCategoryInput | HiddenCategoryCreateOrConnectWithoutCategoryInput[]
+    createMany?: HiddenCategoryCreateManyCategoryInputEnvelope
+    connect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutCategoriesNestedInput = {
@@ -36793,6 +41396,20 @@ export namespace Prisma {
     deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
   }
 
+  export type HiddenCategoryUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<HiddenCategoryCreateWithoutCategoryInput, HiddenCategoryUncheckedCreateWithoutCategoryInput> | HiddenCategoryCreateWithoutCategoryInput[] | HiddenCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: HiddenCategoryCreateOrConnectWithoutCategoryInput | HiddenCategoryCreateOrConnectWithoutCategoryInput[]
+    upsert?: HiddenCategoryUpsertWithWhereUniqueWithoutCategoryInput | HiddenCategoryUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: HiddenCategoryCreateManyCategoryInputEnvelope
+    set?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    disconnect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    delete?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    connect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    update?: HiddenCategoryUpdateWithWhereUniqueWithoutCategoryInput | HiddenCategoryUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: HiddenCategoryUpdateManyWithWhereWithoutCategoryInput | HiddenCategoryUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: HiddenCategoryScalarWhereInput | HiddenCategoryScalarWhereInput[]
+  }
+
   export type ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput = {
     create?: XOR<ExpenseSubcategoryCreateWithoutCategoryInput, ExpenseSubcategoryUncheckedCreateWithoutCategoryInput> | ExpenseSubcategoryCreateWithoutCategoryInput[] | ExpenseSubcategoryUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutCategoryInput | ExpenseSubcategoryCreateOrConnectWithoutCategoryInput[]
@@ -36835,6 +41452,20 @@ export namespace Prisma {
     deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
   }
 
+  export type HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<HiddenCategoryCreateWithoutCategoryInput, HiddenCategoryUncheckedCreateWithoutCategoryInput> | HiddenCategoryCreateWithoutCategoryInput[] | HiddenCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: HiddenCategoryCreateOrConnectWithoutCategoryInput | HiddenCategoryCreateOrConnectWithoutCategoryInput[]
+    upsert?: HiddenCategoryUpsertWithWhereUniqueWithoutCategoryInput | HiddenCategoryUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: HiddenCategoryCreateManyCategoryInputEnvelope
+    set?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    disconnect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    delete?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    connect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+    update?: HiddenCategoryUpdateWithWhereUniqueWithoutCategoryInput | HiddenCategoryUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: HiddenCategoryUpdateManyWithWhereWithoutCategoryInput | HiddenCategoryUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: HiddenCategoryScalarWhereInput | HiddenCategoryScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutSubcategoriesInput = {
     create?: XOR<UserCreateWithoutSubcategoriesInput, UserUncheckedCreateWithoutSubcategoriesInput>
     connectOrCreate?: UserCreateOrConnectWithoutSubcategoriesInput
@@ -36861,6 +41492,13 @@ export namespace Prisma {
     connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
   }
 
+  export type HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput = {
+    create?: XOR<HiddenSubcategoryCreateWithoutSubcategoryInput, HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput> | HiddenSubcategoryCreateWithoutSubcategoryInput[] | HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput[]
+    connectOrCreate?: HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput | HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput[]
+    createMany?: HiddenSubcategoryCreateManySubcategoryInputEnvelope
+    connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+  }
+
   export type ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput = {
     create?: XOR<ExpenseEntryCreateWithoutSubcategoryInput, ExpenseEntryUncheckedCreateWithoutSubcategoryInput> | ExpenseEntryCreateWithoutSubcategoryInput[] | ExpenseEntryUncheckedCreateWithoutSubcategoryInput[]
     connectOrCreate?: ExpenseEntryCreateOrConnectWithoutSubcategoryInput | ExpenseEntryCreateOrConnectWithoutSubcategoryInput[]
@@ -36873,6 +41511,13 @@ export namespace Prisma {
     connectOrCreate?: ExpenseProductCreateOrConnectWithoutSubcategoryInput | ExpenseProductCreateOrConnectWithoutSubcategoryInput[]
     createMany?: ExpenseProductCreateManySubcategoryInputEnvelope
     connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+  }
+
+  export type HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput = {
+    create?: XOR<HiddenSubcategoryCreateWithoutSubcategoryInput, HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput> | HiddenSubcategoryCreateWithoutSubcategoryInput[] | HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput[]
+    connectOrCreate?: HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput | HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput[]
+    createMany?: HiddenSubcategoryCreateManySubcategoryInputEnvelope
+    connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutSubcategoriesNestedInput = {
@@ -36921,6 +41566,20 @@ export namespace Prisma {
     deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
   }
 
+  export type HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput = {
+    create?: XOR<HiddenSubcategoryCreateWithoutSubcategoryInput, HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput> | HiddenSubcategoryCreateWithoutSubcategoryInput[] | HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput[]
+    connectOrCreate?: HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput | HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput[]
+    upsert?: HiddenSubcategoryUpsertWithWhereUniqueWithoutSubcategoryInput | HiddenSubcategoryUpsertWithWhereUniqueWithoutSubcategoryInput[]
+    createMany?: HiddenSubcategoryCreateManySubcategoryInputEnvelope
+    set?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    disconnect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    delete?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    update?: HiddenSubcategoryUpdateWithWhereUniqueWithoutSubcategoryInput | HiddenSubcategoryUpdateWithWhereUniqueWithoutSubcategoryInput[]
+    updateMany?: HiddenSubcategoryUpdateManyWithWhereWithoutSubcategoryInput | HiddenSubcategoryUpdateManyWithWhereWithoutSubcategoryInput[]
+    deleteMany?: HiddenSubcategoryScalarWhereInput | HiddenSubcategoryScalarWhereInput[]
+  }
+
   export type ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput = {
     create?: XOR<ExpenseEntryCreateWithoutSubcategoryInput, ExpenseEntryUncheckedCreateWithoutSubcategoryInput> | ExpenseEntryCreateWithoutSubcategoryInput[] | ExpenseEntryUncheckedCreateWithoutSubcategoryInput[]
     connectOrCreate?: ExpenseEntryCreateOrConnectWithoutSubcategoryInput | ExpenseEntryCreateOrConnectWithoutSubcategoryInput[]
@@ -36947,6 +41606,20 @@ export namespace Prisma {
     update?: ExpenseProductUpdateWithWhereUniqueWithoutSubcategoryInput | ExpenseProductUpdateWithWhereUniqueWithoutSubcategoryInput[]
     updateMany?: ExpenseProductUpdateManyWithWhereWithoutSubcategoryInput | ExpenseProductUpdateManyWithWhereWithoutSubcategoryInput[]
     deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
+  }
+
+  export type HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput = {
+    create?: XOR<HiddenSubcategoryCreateWithoutSubcategoryInput, HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput> | HiddenSubcategoryCreateWithoutSubcategoryInput[] | HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput[]
+    connectOrCreate?: HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput | HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput[]
+    upsert?: HiddenSubcategoryUpsertWithWhereUniqueWithoutSubcategoryInput | HiddenSubcategoryUpsertWithWhereUniqueWithoutSubcategoryInput[]
+    createMany?: HiddenSubcategoryCreateManySubcategoryInputEnvelope
+    set?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    disconnect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    delete?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+    update?: HiddenSubcategoryUpdateWithWhereUniqueWithoutSubcategoryInput | HiddenSubcategoryUpdateWithWhereUniqueWithoutSubcategoryInput[]
+    updateMany?: HiddenSubcategoryUpdateManyWithWhereWithoutSubcategoryInput | HiddenSubcategoryUpdateManyWithWhereWithoutSubcategoryInput[]
+    deleteMany?: HiddenSubcategoryScalarWhereInput | HiddenSubcategoryScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutExpense_entriesInput = {
@@ -37609,6 +42282,90 @@ export namespace Prisma {
     update?: XOR<XOR<WorkoutEntryUpdateToOneWithWhereWithoutSetsInput, WorkoutEntryUpdateWithoutSetsInput>, WorkoutEntryUncheckedUpdateWithoutSetsInput>
   }
 
+  export type UserCreateNestedOneWithoutHidden_activitiesInput = {
+    create?: XOR<UserCreateWithoutHidden_activitiesInput, UserUncheckedCreateWithoutHidden_activitiesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHidden_activitiesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ActivityCreateNestedOneWithoutHidden_activitiesInput = {
+    create?: XOR<ActivityCreateWithoutHidden_activitiesInput, ActivityUncheckedCreateWithoutHidden_activitiesInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutHidden_activitiesInput
+    connect?: ActivityWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutHidden_activitiesNestedInput = {
+    create?: XOR<UserCreateWithoutHidden_activitiesInput, UserUncheckedCreateWithoutHidden_activitiesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHidden_activitiesInput
+    upsert?: UserUpsertWithoutHidden_activitiesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutHidden_activitiesInput, UserUpdateWithoutHidden_activitiesInput>, UserUncheckedUpdateWithoutHidden_activitiesInput>
+  }
+
+  export type ActivityUpdateOneRequiredWithoutHidden_activitiesNestedInput = {
+    create?: XOR<ActivityCreateWithoutHidden_activitiesInput, ActivityUncheckedCreateWithoutHidden_activitiesInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutHidden_activitiesInput
+    upsert?: ActivityUpsertWithoutHidden_activitiesInput
+    connect?: ActivityWhereUniqueInput
+    update?: XOR<XOR<ActivityUpdateToOneWithWhereWithoutHidden_activitiesInput, ActivityUpdateWithoutHidden_activitiesInput>, ActivityUncheckedUpdateWithoutHidden_activitiesInput>
+  }
+
+  export type UserCreateNestedOneWithoutHidden_categoriesInput = {
+    create?: XOR<UserCreateWithoutHidden_categoriesInput, UserUncheckedCreateWithoutHidden_categoriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHidden_categoriesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ExpenseCategoryCreateNestedOneWithoutHidden_categoriesInput = {
+    create?: XOR<ExpenseCategoryCreateWithoutHidden_categoriesInput, ExpenseCategoryUncheckedCreateWithoutHidden_categoriesInput>
+    connectOrCreate?: ExpenseCategoryCreateOrConnectWithoutHidden_categoriesInput
+    connect?: ExpenseCategoryWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutHidden_categoriesNestedInput = {
+    create?: XOR<UserCreateWithoutHidden_categoriesInput, UserUncheckedCreateWithoutHidden_categoriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHidden_categoriesInput
+    upsert?: UserUpsertWithoutHidden_categoriesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutHidden_categoriesInput, UserUpdateWithoutHidden_categoriesInput>, UserUncheckedUpdateWithoutHidden_categoriesInput>
+  }
+
+  export type ExpenseCategoryUpdateOneRequiredWithoutHidden_categoriesNestedInput = {
+    create?: XOR<ExpenseCategoryCreateWithoutHidden_categoriesInput, ExpenseCategoryUncheckedCreateWithoutHidden_categoriesInput>
+    connectOrCreate?: ExpenseCategoryCreateOrConnectWithoutHidden_categoriesInput
+    upsert?: ExpenseCategoryUpsertWithoutHidden_categoriesInput
+    connect?: ExpenseCategoryWhereUniqueInput
+    update?: XOR<XOR<ExpenseCategoryUpdateToOneWithWhereWithoutHidden_categoriesInput, ExpenseCategoryUpdateWithoutHidden_categoriesInput>, ExpenseCategoryUncheckedUpdateWithoutHidden_categoriesInput>
+  }
+
+  export type UserCreateNestedOneWithoutHidden_subcategoriesInput = {
+    create?: XOR<UserCreateWithoutHidden_subcategoriesInput, UserUncheckedCreateWithoutHidden_subcategoriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHidden_subcategoriesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ExpenseSubcategoryCreateNestedOneWithoutHidden_subcategoriesInput = {
+    create?: XOR<ExpenseSubcategoryCreateWithoutHidden_subcategoriesInput, ExpenseSubcategoryUncheckedCreateWithoutHidden_subcategoriesInput>
+    connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutHidden_subcategoriesInput
+    connect?: ExpenseSubcategoryWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutHidden_subcategoriesNestedInput = {
+    create?: XOR<UserCreateWithoutHidden_subcategoriesInput, UserUncheckedCreateWithoutHidden_subcategoriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHidden_subcategoriesInput
+    upsert?: UserUpsertWithoutHidden_subcategoriesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutHidden_subcategoriesInput, UserUpdateWithoutHidden_subcategoriesInput>, UserUncheckedUpdateWithoutHidden_subcategoriesInput>
+  }
+
+  export type ExpenseSubcategoryUpdateOneRequiredWithoutHidden_subcategoriesNestedInput = {
+    create?: XOR<ExpenseSubcategoryCreateWithoutHidden_subcategoriesInput, ExpenseSubcategoryUncheckedCreateWithoutHidden_subcategoriesInput>
+    connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutHidden_subcategoriesInput
+    upsert?: ExpenseSubcategoryUpsertWithoutHidden_subcategoriesInput
+    connect?: ExpenseSubcategoryWhereUniqueInput
+    update?: XOR<XOR<ExpenseSubcategoryUpdateToOneWithWhereWithoutHidden_subcategoriesInput, ExpenseSubcategoryUpdateWithoutHidden_subcategoriesInput>, ExpenseSubcategoryUncheckedUpdateWithoutHidden_subcategoriesInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -38046,6 +42803,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
     activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutUserInput = {
@@ -38062,6 +42820,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutUserInput = {
@@ -38244,6 +43003,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type HiddenActivityCreateWithoutUserInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    activity: ActivityCreateNestedOneWithoutHidden_activitiesInput
+  }
+
+  export type HiddenActivityUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    activity_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenActivityCreateOrConnectWithoutUserInput = {
+    where: HiddenActivityWhereUniqueInput
+    create: XOR<HiddenActivityCreateWithoutUserInput, HiddenActivityUncheckedCreateWithoutUserInput>
+  }
+
+  export type HiddenActivityCreateManyUserInputEnvelope = {
+    data: HiddenActivityCreateManyUserInput | HiddenActivityCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ExpenseAccountCreateWithoutUserInput = {
     uuid?: string
     name: string
@@ -38330,6 +43114,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
     entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutUserInput = {
@@ -38343,6 +43128,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutUserInput = {
@@ -38363,6 +43149,7 @@ export namespace Prisma {
     category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
     entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutUserInput = {
@@ -38374,6 +43161,7 @@ export namespace Prisma {
     updated_at?: Date | string
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutUserInput = {
@@ -38383,6 +43171,56 @@ export namespace Prisma {
 
   export type ExpenseSubcategoryCreateManyUserInputEnvelope = {
     data: ExpenseSubcategoryCreateManyUserInput | ExpenseSubcategoryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type HiddenCategoryCreateWithoutUserInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    category: ExpenseCategoryCreateNestedOneWithoutHidden_categoriesInput
+  }
+
+  export type HiddenCategoryUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    category_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenCategoryCreateOrConnectWithoutUserInput = {
+    where: HiddenCategoryWhereUniqueInput
+    create: XOR<HiddenCategoryCreateWithoutUserInput, HiddenCategoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type HiddenCategoryCreateManyUserInputEnvelope = {
+    data: HiddenCategoryCreateManyUserInput | HiddenCategoryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type HiddenSubcategoryCreateWithoutUserInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    subcategory: ExpenseSubcategoryCreateNestedOneWithoutHidden_subcategoriesInput
+  }
+
+  export type HiddenSubcategoryUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    subcategory_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenSubcategoryCreateOrConnectWithoutUserInput = {
+    where: HiddenSubcategoryWhereUniqueInput
+    create: XOR<HiddenSubcategoryCreateWithoutUserInput, HiddenSubcategoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type HiddenSubcategoryCreateManyUserInputEnvelope = {
+    data: HiddenSubcategoryCreateManyUserInput | HiddenSubcategoryCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -38752,6 +43590,34 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"ActivityOccurrence"> | Date | string
   }
 
+  export type HiddenActivityUpsertWithWhereUniqueWithoutUserInput = {
+    where: HiddenActivityWhereUniqueInput
+    update: XOR<HiddenActivityUpdateWithoutUserInput, HiddenActivityUncheckedUpdateWithoutUserInput>
+    create: XOR<HiddenActivityCreateWithoutUserInput, HiddenActivityUncheckedCreateWithoutUserInput>
+  }
+
+  export type HiddenActivityUpdateWithWhereUniqueWithoutUserInput = {
+    where: HiddenActivityWhereUniqueInput
+    data: XOR<HiddenActivityUpdateWithoutUserInput, HiddenActivityUncheckedUpdateWithoutUserInput>
+  }
+
+  export type HiddenActivityUpdateManyWithWhereWithoutUserInput = {
+    where: HiddenActivityScalarWhereInput
+    data: XOR<HiddenActivityUpdateManyMutationInput, HiddenActivityUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type HiddenActivityScalarWhereInput = {
+    AND?: HiddenActivityScalarWhereInput | HiddenActivityScalarWhereInput[]
+    OR?: HiddenActivityScalarWhereInput[]
+    NOT?: HiddenActivityScalarWhereInput | HiddenActivityScalarWhereInput[]
+    id?: IntFilter<"HiddenActivity"> | number
+    uuid?: StringFilter<"HiddenActivity"> | string
+    user_uuid?: StringFilter<"HiddenActivity"> | string
+    activity_uuid?: StringFilter<"HiddenActivity"> | string
+    created_at?: DateTimeFilter<"HiddenActivity"> | Date | string
+    updated_at?: DateTimeFilter<"HiddenActivity"> | Date | string
+  }
+
   export type ExpenseAccountUpsertWithWhereUniqueWithoutUserInput = {
     where: ExpenseAccountWhereUniqueInput
     update: XOR<ExpenseAccountUpdateWithoutUserInput, ExpenseAccountUncheckedUpdateWithoutUserInput>
@@ -38875,6 +43741,62 @@ export namespace Prisma {
     name?: StringFilter<"ExpenseSubcategory"> | string
     created_at?: DateTimeFilter<"ExpenseSubcategory"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseSubcategory"> | Date | string
+  }
+
+  export type HiddenCategoryUpsertWithWhereUniqueWithoutUserInput = {
+    where: HiddenCategoryWhereUniqueInput
+    update: XOR<HiddenCategoryUpdateWithoutUserInput, HiddenCategoryUncheckedUpdateWithoutUserInput>
+    create: XOR<HiddenCategoryCreateWithoutUserInput, HiddenCategoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type HiddenCategoryUpdateWithWhereUniqueWithoutUserInput = {
+    where: HiddenCategoryWhereUniqueInput
+    data: XOR<HiddenCategoryUpdateWithoutUserInput, HiddenCategoryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type HiddenCategoryUpdateManyWithWhereWithoutUserInput = {
+    where: HiddenCategoryScalarWhereInput
+    data: XOR<HiddenCategoryUpdateManyMutationInput, HiddenCategoryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type HiddenCategoryScalarWhereInput = {
+    AND?: HiddenCategoryScalarWhereInput | HiddenCategoryScalarWhereInput[]
+    OR?: HiddenCategoryScalarWhereInput[]
+    NOT?: HiddenCategoryScalarWhereInput | HiddenCategoryScalarWhereInput[]
+    id?: IntFilter<"HiddenCategory"> | number
+    uuid?: StringFilter<"HiddenCategory"> | string
+    user_uuid?: StringFilter<"HiddenCategory"> | string
+    category_uuid?: StringFilter<"HiddenCategory"> | string
+    created_at?: DateTimeFilter<"HiddenCategory"> | Date | string
+    updated_at?: DateTimeFilter<"HiddenCategory"> | Date | string
+  }
+
+  export type HiddenSubcategoryUpsertWithWhereUniqueWithoutUserInput = {
+    where: HiddenSubcategoryWhereUniqueInput
+    update: XOR<HiddenSubcategoryUpdateWithoutUserInput, HiddenSubcategoryUncheckedUpdateWithoutUserInput>
+    create: XOR<HiddenSubcategoryCreateWithoutUserInput, HiddenSubcategoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type HiddenSubcategoryUpdateWithWhereUniqueWithoutUserInput = {
+    where: HiddenSubcategoryWhereUniqueInput
+    data: XOR<HiddenSubcategoryUpdateWithoutUserInput, HiddenSubcategoryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type HiddenSubcategoryUpdateManyWithWhereWithoutUserInput = {
+    where: HiddenSubcategoryScalarWhereInput
+    data: XOR<HiddenSubcategoryUpdateManyMutationInput, HiddenSubcategoryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type HiddenSubcategoryScalarWhereInput = {
+    AND?: HiddenSubcategoryScalarWhereInput | HiddenSubcategoryScalarWhereInput[]
+    OR?: HiddenSubcategoryScalarWhereInput[]
+    NOT?: HiddenSubcategoryScalarWhereInput | HiddenSubcategoryScalarWhereInput[]
+    id?: IntFilter<"HiddenSubcategory"> | number
+    uuid?: StringFilter<"HiddenSubcategory"> | string
+    user_uuid?: StringFilter<"HiddenSubcategory"> | string
+    subcategory_uuid?: StringFilter<"HiddenSubcategory"> | string
+    created_at?: DateTimeFilter<"HiddenSubcategory"> | Date | string
+    updated_at?: DateTimeFilter<"HiddenSubcategory"> | Date | string
   }
 
   export type ExpenseReceiptUpsertWithWhereUniqueWithoutUserInput = {
@@ -39074,10 +43996,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -39101,10 +44026,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -39288,6 +44216,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type HiddenActivityCreateWithoutActivityInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutHidden_activitiesInput
+  }
+
+  export type HiddenActivityUncheckedCreateWithoutActivityInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenActivityCreateOrConnectWithoutActivityInput = {
+    where: HiddenActivityWhereUniqueInput
+    create: XOR<HiddenActivityCreateWithoutActivityInput, HiddenActivityUncheckedCreateWithoutActivityInput>
+  }
+
+  export type HiddenActivityCreateManyActivityInputEnvelope = {
+    data: HiddenActivityCreateManyActivityInput | HiddenActivityCreateManyActivityInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutActivitiesInput = {
     update: XOR<UserUpdateWithoutActivitiesInput, UserUncheckedUpdateWithoutActivitiesInput>
     create: XOR<UserCreateWithoutActivitiesInput, UserUncheckedCreateWithoutActivitiesInput>
@@ -39313,10 +44266,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -39340,10 +44296,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -39416,6 +44375,22 @@ export namespace Prisma {
     data: XOR<ActivityOccurrenceUpdateManyMutationInput, ActivityOccurrenceUncheckedUpdateManyWithoutActivityInput>
   }
 
+  export type HiddenActivityUpsertWithWhereUniqueWithoutActivityInput = {
+    where: HiddenActivityWhereUniqueInput
+    update: XOR<HiddenActivityUpdateWithoutActivityInput, HiddenActivityUncheckedUpdateWithoutActivityInput>
+    create: XOR<HiddenActivityCreateWithoutActivityInput, HiddenActivityUncheckedCreateWithoutActivityInput>
+  }
+
+  export type HiddenActivityUpdateWithWhereUniqueWithoutActivityInput = {
+    where: HiddenActivityWhereUniqueInput
+    data: XOR<HiddenActivityUpdateWithoutActivityInput, HiddenActivityUncheckedUpdateWithoutActivityInput>
+  }
+
+  export type HiddenActivityUpdateManyWithWhereWithoutActivityInput = {
+    where: HiddenActivityScalarWhereInput
+    data: XOR<HiddenActivityUpdateManyMutationInput, HiddenActivityUncheckedUpdateManyWithoutActivityInput>
+  }
+
   export type UserCreateWithoutSchedule_slotsInput = {
     uuid?: string
     email: string
@@ -39430,10 +44405,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -39457,10 +44435,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -39487,6 +44468,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
     activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutSchedule_slotsInput = {
@@ -39503,6 +44485,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutSchedule_slotsInput = {
@@ -39535,10 +44518,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -39562,10 +44548,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -39598,6 +44587,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutSchedule_slotsInput = {
@@ -39614,6 +44604,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityCreateWithoutActivity_schedulesInput = {
@@ -39629,6 +44620,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
     activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutActivity_schedulesInput = {
@@ -39645,6 +44637,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutActivity_schedulesInput = {
@@ -39666,10 +44659,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -39693,10 +44689,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -39854,6 +44853,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutActivity_schedulesInput = {
@@ -39870,6 +44870,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type UserUpsertWithoutActivity_schedulesInput = {
@@ -39897,10 +44898,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -39924,10 +44928,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -40251,6 +45258,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
     activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutActivity_occurrencesInput = {
@@ -40267,6 +45275,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutActivity_occurrencesInput = {
@@ -40340,10 +45349,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -40367,10 +45379,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -40452,6 +45467,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
     activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutActivity_occurrencesInput = {
@@ -40468,6 +45484,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityScheduleUpsertWithoutOccurrencesInput = {
@@ -40553,10 +45570,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -40580,10 +45600,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -40655,6 +45678,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutActivity_logsInput = {
@@ -40671,6 +45695,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutActivity_logsInput = {
@@ -40772,10 +45797,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -40799,10 +45827,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -40840,6 +45871,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
     activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutActivity_logsInput = {
@@ -40856,6 +45888,7 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityScheduleUpsertWithoutLogsInput = {
@@ -40975,10 +46008,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -41002,10 +46038,13 @@ export namespace Prisma {
     schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -41029,9 +46068,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -41056,9 +46098,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -41180,9 +46225,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -41207,9 +46255,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -41265,9 +46316,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -41292,9 +46346,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -41316,6 +46373,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutSubcategoriesInput
     entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutCategoryInput = {
@@ -41327,6 +46385,7 @@ export namespace Prisma {
     updated_at?: Date | string
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutCategoryInput = {
@@ -41417,6 +46476,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type HiddenCategoryCreateWithoutCategoryInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutHidden_categoriesInput
+  }
+
+  export type HiddenCategoryUncheckedCreateWithoutCategoryInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenCategoryCreateOrConnectWithoutCategoryInput = {
+    where: HiddenCategoryWhereUniqueInput
+    create: XOR<HiddenCategoryCreateWithoutCategoryInput, HiddenCategoryUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type HiddenCategoryCreateManyCategoryInputEnvelope = {
+    data: HiddenCategoryCreateManyCategoryInput | HiddenCategoryCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutCategoriesInput = {
     update: XOR<UserUpdateWithoutCategoriesInput, UserUncheckedUpdateWithoutCategoriesInput>
     create: XOR<UserCreateWithoutCategoriesInput, UserUncheckedCreateWithoutCategoriesInput>
@@ -41443,9 +46527,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -41470,9 +46557,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -41529,6 +46619,22 @@ export namespace Prisma {
     data: XOR<ExpenseProductUpdateManyMutationInput, ExpenseProductUncheckedUpdateManyWithoutCategoryInput>
   }
 
+  export type HiddenCategoryUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: HiddenCategoryWhereUniqueInput
+    update: XOR<HiddenCategoryUpdateWithoutCategoryInput, HiddenCategoryUncheckedUpdateWithoutCategoryInput>
+    create: XOR<HiddenCategoryCreateWithoutCategoryInput, HiddenCategoryUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type HiddenCategoryUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: HiddenCategoryWhereUniqueInput
+    data: XOR<HiddenCategoryUpdateWithoutCategoryInput, HiddenCategoryUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type HiddenCategoryUpdateManyWithWhereWithoutCategoryInput = {
+    where: HiddenCategoryScalarWhereInput
+    data: XOR<HiddenCategoryUpdateManyMutationInput, HiddenCategoryUncheckedUpdateManyWithoutCategoryInput>
+  }
+
   export type UserCreateWithoutSubcategoriesInput = {
     uuid?: string
     email: string
@@ -41544,9 +46650,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -41571,9 +46680,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -41597,6 +46709,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutCategoriesInput
     entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutSubcategoriesInput = {
@@ -41610,6 +46723,7 @@ export namespace Prisma {
     updated_at?: Date | string
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutSubcategoriesInput = {
@@ -41695,6 +46809,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type HiddenSubcategoryCreateWithoutSubcategoryInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutHidden_subcategoriesInput
+  }
+
+  export type HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput = {
+    where: HiddenSubcategoryWhereUniqueInput
+    create: XOR<HiddenSubcategoryCreateWithoutSubcategoryInput, HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput>
+  }
+
+  export type HiddenSubcategoryCreateManySubcategoryInputEnvelope = {
+    data: HiddenSubcategoryCreateManySubcategoryInput | HiddenSubcategoryCreateManySubcategoryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutSubcategoriesInput = {
     update: XOR<UserUpdateWithoutSubcategoriesInput, UserUncheckedUpdateWithoutSubcategoriesInput>
     create: XOR<UserCreateWithoutSubcategoriesInput, UserUncheckedCreateWithoutSubcategoriesInput>
@@ -41721,9 +46860,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -41748,9 +46890,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -41780,6 +46925,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutCategoriesNestedInput
     entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutSubcategoriesInput = {
@@ -41793,6 +46939,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseEntryUpsertWithWhereUniqueWithoutSubcategoryInput = {
@@ -41827,6 +46974,22 @@ export namespace Prisma {
     data: XOR<ExpenseProductUpdateManyMutationInput, ExpenseProductUncheckedUpdateManyWithoutSubcategoryInput>
   }
 
+  export type HiddenSubcategoryUpsertWithWhereUniqueWithoutSubcategoryInput = {
+    where: HiddenSubcategoryWhereUniqueInput
+    update: XOR<HiddenSubcategoryUpdateWithoutSubcategoryInput, HiddenSubcategoryUncheckedUpdateWithoutSubcategoryInput>
+    create: XOR<HiddenSubcategoryCreateWithoutSubcategoryInput, HiddenSubcategoryUncheckedCreateWithoutSubcategoryInput>
+  }
+
+  export type HiddenSubcategoryUpdateWithWhereUniqueWithoutSubcategoryInput = {
+    where: HiddenSubcategoryWhereUniqueInput
+    data: XOR<HiddenSubcategoryUpdateWithoutSubcategoryInput, HiddenSubcategoryUncheckedUpdateWithoutSubcategoryInput>
+  }
+
+  export type HiddenSubcategoryUpdateManyWithWhereWithoutSubcategoryInput = {
+    where: HiddenSubcategoryScalarWhereInput
+    data: XOR<HiddenSubcategoryUpdateManyMutationInput, HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryInput>
+  }
+
   export type UserCreateWithoutExpense_entriesInput = {
     uuid?: string
     email: string
@@ -41842,9 +47005,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -41869,9 +47035,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -41955,6 +47124,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutCategoriesInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutEntriesInput = {
@@ -41968,6 +47138,7 @@ export namespace Prisma {
     updated_at?: Date | string
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutEntriesInput = {
@@ -41983,6 +47154,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutSubcategoriesInput
     category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
     products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutEntriesInput = {
@@ -41994,6 +47166,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutEntriesInput = {
@@ -42055,9 +47228,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -42082,9 +47258,12 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -42186,6 +47365,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutCategoriesNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutEntriesInput = {
@@ -42199,6 +47379,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseSubcategoryUpsertWithoutEntriesInput = {
@@ -42220,6 +47401,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutSubcategoriesNestedInput
     category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
     products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutEntriesInput = {
@@ -42231,6 +47413,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseReceiptUpsertWithoutExpense_entryInput = {
@@ -42282,10 +47465,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
@@ -42309,10 +47495,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
@@ -42384,10 +47573,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
@@ -42411,10 +47603,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
@@ -42453,10 +47648,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
@@ -42480,10 +47678,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
@@ -42611,10 +47812,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
@@ -42638,10 +47842,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
@@ -42765,10 +47972,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
@@ -42792,10 +48002,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
@@ -42818,6 +48031,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutCategoriesInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
     entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutProductsInput = {
@@ -42831,6 +48045,7 @@ export namespace Prisma {
     updated_at?: Date | string
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutProductsInput = {
@@ -42846,6 +48061,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutSubcategoriesInput
     category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
     entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutProductsInput = {
@@ -42857,6 +48073,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutProductsInput = {
@@ -42921,10 +48138,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
@@ -42948,10 +48168,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
@@ -42980,6 +48203,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutCategoriesNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
     entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutProductsInput = {
@@ -42993,6 +48217,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
     entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseSubcategoryUpsertWithoutProductsInput = {
@@ -43014,6 +48239,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutSubcategoriesNestedInput
     category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
     entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutProductsInput = {
@@ -43025,6 +48251,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseReceiptItemUpsertWithWhereUniqueWithoutProductInput = {
@@ -43190,10 +48417,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -43217,10 +48447,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -43292,10 +48525,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -43319,10 +48555,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -43361,10 +48600,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -43388,10 +48630,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -43483,10 +48728,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -43510,10 +48758,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -43595,10 +48846,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -43622,10 +48876,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
     activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -43693,10 +48950,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -43720,10 +48980,13 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -44017,6 +49280,622 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserCreateWithoutHidden_activitiesInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutHidden_activitiesInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutHidden_activitiesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutHidden_activitiesInput, UserUncheckedCreateWithoutHidden_activitiesInput>
+  }
+
+  export type ActivityCreateWithoutHidden_activitiesInput = {
+    uuid?: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutActivitiesInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutActivityInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateWithoutHidden_activitiesInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    name: string
+    description?: string | null
+    icon?: string | null
+    color?: string | null
+    visible?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutActivityInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutActivityInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutActivityInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityCreateOrConnectWithoutHidden_activitiesInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutHidden_activitiesInput, ActivityUncheckedCreateWithoutHidden_activitiesInput>
+  }
+
+  export type UserUpsertWithoutHidden_activitiesInput = {
+    update: XOR<UserUpdateWithoutHidden_activitiesInput, UserUncheckedUpdateWithoutHidden_activitiesInput>
+    create: XOR<UserCreateWithoutHidden_activitiesInput, UserUncheckedCreateWithoutHidden_activitiesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutHidden_activitiesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutHidden_activitiesInput, UserUncheckedUpdateWithoutHidden_activitiesInput>
+  }
+
+  export type UserUpdateWithoutHidden_activitiesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutHidden_activitiesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ActivityUpsertWithoutHidden_activitiesInput = {
+    update: XOR<ActivityUpdateWithoutHidden_activitiesInput, ActivityUncheckedUpdateWithoutHidden_activitiesInput>
+    create: XOR<ActivityCreateWithoutHidden_activitiesInput, ActivityUncheckedCreateWithoutHidden_activitiesInput>
+    where?: ActivityWhereInput
+  }
+
+  export type ActivityUpdateToOneWithWhereWithoutHidden_activitiesInput = {
+    where?: ActivityWhereInput
+    data: XOR<ActivityUpdateWithoutHidden_activitiesInput, ActivityUncheckedUpdateWithoutHidden_activitiesInput>
+  }
+
+  export type ActivityUpdateWithoutHidden_activitiesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutActivitiesNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutActivityNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutHidden_activitiesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    visible?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutActivityNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
+  export type UserCreateWithoutHidden_categoriesInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutHidden_categoriesInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutHidden_categoriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutHidden_categoriesInput, UserUncheckedCreateWithoutHidden_categoriesInput>
+  }
+
+  export type ExpenseCategoryCreateWithoutHidden_categoriesInput = {
+    uuid?: string
+    name: string
+    icon?: string | null
+    color?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user?: UserCreateNestedOneWithoutCategoriesInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
+    entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutCategoryInput
+  }
+
+  export type ExpenseCategoryUncheckedCreateWithoutHidden_categoriesInput = {
+    id?: number
+    uuid?: string
+    user_uuid?: string | null
+    name: string
+    icon?: string | null
+    color?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type ExpenseCategoryCreateOrConnectWithoutHidden_categoriesInput = {
+    where: ExpenseCategoryWhereUniqueInput
+    create: XOR<ExpenseCategoryCreateWithoutHidden_categoriesInput, ExpenseCategoryUncheckedCreateWithoutHidden_categoriesInput>
+  }
+
+  export type UserUpsertWithoutHidden_categoriesInput = {
+    update: XOR<UserUpdateWithoutHidden_categoriesInput, UserUncheckedUpdateWithoutHidden_categoriesInput>
+    create: XOR<UserCreateWithoutHidden_categoriesInput, UserUncheckedCreateWithoutHidden_categoriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutHidden_categoriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutHidden_categoriesInput, UserUncheckedUpdateWithoutHidden_categoriesInput>
+  }
+
+  export type UserUpdateWithoutHidden_categoriesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutHidden_categoriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ExpenseCategoryUpsertWithoutHidden_categoriesInput = {
+    update: XOR<ExpenseCategoryUpdateWithoutHidden_categoriesInput, ExpenseCategoryUncheckedUpdateWithoutHidden_categoriesInput>
+    create: XOR<ExpenseCategoryCreateWithoutHidden_categoriesInput, ExpenseCategoryUncheckedCreateWithoutHidden_categoriesInput>
+    where?: ExpenseCategoryWhereInput
+  }
+
+  export type ExpenseCategoryUpdateToOneWithWhereWithoutHidden_categoriesInput = {
+    where?: ExpenseCategoryWhereInput
+    data: XOR<ExpenseCategoryUpdateWithoutHidden_categoriesInput, ExpenseCategoryUncheckedUpdateWithoutHidden_categoriesInput>
+  }
+
+  export type ExpenseCategoryUpdateWithoutHidden_categoriesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutCategoriesNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type ExpenseCategoryUncheckedUpdateWithoutHidden_categoriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type UserCreateWithoutHidden_subcategoriesInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutHidden_subcategoriesInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutHidden_subcategoriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutHidden_subcategoriesInput, UserUncheckedCreateWithoutHidden_subcategoriesInput>
+  }
+
+  export type ExpenseSubcategoryCreateWithoutHidden_subcategoriesInput = {
+    uuid?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user?: UserCreateNestedOneWithoutSubcategoriesInput
+    category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
+    entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
+  }
+
+  export type ExpenseSubcategoryUncheckedCreateWithoutHidden_subcategoriesInput = {
+    id?: number
+    uuid?: string
+    user_uuid?: string | null
+    category_uuid: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
+  }
+
+  export type ExpenseSubcategoryCreateOrConnectWithoutHidden_subcategoriesInput = {
+    where: ExpenseSubcategoryWhereUniqueInput
+    create: XOR<ExpenseSubcategoryCreateWithoutHidden_subcategoriesInput, ExpenseSubcategoryUncheckedCreateWithoutHidden_subcategoriesInput>
+  }
+
+  export type UserUpsertWithoutHidden_subcategoriesInput = {
+    update: XOR<UserUpdateWithoutHidden_subcategoriesInput, UserUncheckedUpdateWithoutHidden_subcategoriesInput>
+    create: XOR<UserCreateWithoutHidden_subcategoriesInput, UserUncheckedCreateWithoutHidden_subcategoriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutHidden_subcategoriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutHidden_subcategoriesInput, UserUncheckedUpdateWithoutHidden_subcategoriesInput>
+  }
+
+  export type UserUpdateWithoutHidden_subcategoriesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutHidden_subcategoriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ExpenseSubcategoryUpsertWithoutHidden_subcategoriesInput = {
+    update: XOR<ExpenseSubcategoryUpdateWithoutHidden_subcategoriesInput, ExpenseSubcategoryUncheckedUpdateWithoutHidden_subcategoriesInput>
+    create: XOR<ExpenseSubcategoryCreateWithoutHidden_subcategoriesInput, ExpenseSubcategoryUncheckedCreateWithoutHidden_subcategoriesInput>
+    where?: ExpenseSubcategoryWhereInput
+  }
+
+  export type ExpenseSubcategoryUpdateToOneWithWhereWithoutHidden_subcategoriesInput = {
+    where?: ExpenseSubcategoryWhereInput
+    data: XOR<ExpenseSubcategoryUpdateWithoutHidden_subcategoriesInput, ExpenseSubcategoryUncheckedUpdateWithoutHidden_subcategoriesInput>
+  }
+
+  export type ExpenseSubcategoryUpdateWithoutHidden_subcategoriesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutSubcategoriesNestedInput
+    category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
+  }
+
+  export type ExpenseSubcategoryUncheckedUpdateWithoutHidden_subcategoriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    category_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
+  }
+
   export type ActivityCreateManyUserInput = {
     id?: number
     uuid?: string
@@ -44091,6 +49970,14 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type HiddenActivityCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    activity_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type ExpenseAccountCreateManyUserInput = {
     id?: number
     uuid?: string
@@ -44132,6 +50019,22 @@ export namespace Prisma {
     uuid?: string
     category_uuid: string
     name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenCategoryCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    category_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenSubcategoryCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    subcategory_uuid: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -44212,6 +50115,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUpdateManyWithoutActivityNestedInput
     activity_logs?: ActivityLogUpdateManyWithoutActivityNestedInput
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutUserInput = {
@@ -44228,6 +50132,7 @@ export namespace Prisma {
     activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutActivityNestedInput
     activity_logs?: ActivityLogUncheckedUpdateManyWithoutActivityNestedInput
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutActivityNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateManyWithoutUserInput = {
@@ -44434,6 +50339,29 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HiddenActivityUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activity?: ActivityUpdateOneRequiredWithoutHidden_activitiesNestedInput
+  }
+
+  export type HiddenActivityUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenActivityUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    activity_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ExpenseAccountUpdateWithoutUserInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -44526,6 +50454,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
     entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutUserInput = {
@@ -44539,6 +50468,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
     entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateManyWithoutUserInput = {
@@ -44559,6 +50489,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
     entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutUserInput = {
@@ -44570,6 +50501,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateManyWithoutUserInput = {
@@ -44577,6 +50509,52 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     category_uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenCategoryUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: ExpenseCategoryUpdateOneRequiredWithoutHidden_categoriesNestedInput
+  }
+
+  export type HiddenCategoryUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenCategoryUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    category_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenSubcategoryUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    subcategory?: ExpenseSubcategoryUpdateOneRequiredWithoutHidden_subcategoriesNestedInput
+  }
+
+  export type HiddenSubcategoryUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    subcategory_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenSubcategoryUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    subcategory_uuid?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44838,6 +50816,14 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type HiddenActivityCreateManyActivityInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type ScheduleSlotUpdateWithoutActivityInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     day?: EnumScheduleDayFieldUpdateOperationsInput | $Enums.ScheduleDay
@@ -45026,6 +51012,29 @@ export namespace Prisma {
     schedule_uuid?: StringFieldUpdateOperationsInput | string
     scheduled_for?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOccurrenceStatusFieldUpdateOperationsInput | $Enums.OccurrenceStatus
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenActivityUpdateWithoutActivityInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutHidden_activitiesNestedInput
+  }
+
+  export type HiddenActivityUncheckedUpdateWithoutActivityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenActivityUncheckedUpdateManyWithoutActivityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45351,6 +51360,14 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type HiddenCategoryCreateManyCategoryInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type ExpenseSubcategoryUpdateWithoutCategoryInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -45359,6 +51376,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutSubcategoriesNestedInput
     entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutCategoryInput = {
@@ -45370,6 +51388,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryInput = {
@@ -45467,6 +51486,29 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type HiddenCategoryUpdateWithoutCategoryInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutHidden_categoriesNestedInput
+  }
+
+  export type HiddenCategoryUncheckedUpdateWithoutCategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenCategoryUncheckedUpdateManyWithoutCategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ExpenseEntryCreateManySubcategoryInput = {
     id?: number
     uuid?: string
@@ -45491,6 +51533,14 @@ export namespace Prisma {
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
     category_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type HiddenSubcategoryCreateManySubcategoryInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -45577,6 +51627,29 @@ export namespace Prisma {
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenSubcategoryUpdateWithoutSubcategoryInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutHidden_subcategoriesNestedInput
+  }
+
+  export type HiddenSubcategoryUncheckedUpdateWithoutSubcategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

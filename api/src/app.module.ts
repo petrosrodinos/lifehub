@@ -30,6 +30,9 @@ import { ExpenseStoreModule } from './modules/receipts/expense-store/expense-sto
 import { ExpenseReceiptModule } from './modules/receipts/expense-receipt/expense-receipt.module';
 import { ExpenseReceiptItemModule } from './modules/receipts/expense-receipt-item/expense-receipt-item.module';
 import { ExpenseProductsModule } from './modules/receipts/expense-products/expense-products.module';
+import { HiddenCategoriesModule } from './modules/expenses/hidden-categories/hidden-categories.module';
+import { HiddenSubcategoriesModule } from './modules/expenses/hidden-subcategories/hidden-subcategories.module';
+import { HiddenActivitiesModule } from './modules/habbits/hidden-activities/hidden-activities.module';
 
 @Module({
   imports: [
@@ -62,6 +65,9 @@ import { ExpenseProductsModule } from './modules/receipts/expense-products/expen
     ExpenseReceiptModule,
     ExpenseReceiptItemModule,
     ExpenseProductsModule,
+    HiddenCategoriesModule,
+    HiddenSubcategoriesModule,
+    HiddenActivitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

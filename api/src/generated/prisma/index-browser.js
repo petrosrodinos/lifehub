@@ -386,6 +386,33 @@ exports.Prisma.WorkoutSetScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.HiddenActivityScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  activity_uuid: 'activity_uuid',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.HiddenCategoryScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  category_uuid: 'category_uuid',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.HiddenSubcategoryScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  subcategory_uuid: 'subcategory_uuid',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -482,7 +509,10 @@ exports.Prisma.ModelName = {
   Exercise: 'Exercise',
   Workout: 'Workout',
   WorkoutEntry: 'WorkoutEntry',
-  WorkoutSet: 'WorkoutSet'
+  WorkoutSet: 'WorkoutSet',
+  HiddenActivity: 'HiddenActivity',
+  HiddenCategory: 'HiddenCategory',
+  HiddenSubcategory: 'HiddenSubcategory'
 };
 
 /**
