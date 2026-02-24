@@ -21,6 +21,8 @@ export const Routes = {
     },
     settings: {
         security: '/dashboard/settings/security',
+        activities: '/dashboard/settings/activities',
+        expenses: '/dashboard/settings/expenses',
     },
     gym: {
         prefix: '/dashboard/gym',

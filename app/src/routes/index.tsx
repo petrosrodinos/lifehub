@@ -6,13 +6,15 @@ import { SignUp } from "../pages/auth/sign-up";
 import { MainLayout } from "../components/layout/main-layout";
 import { RoutinePage } from "../pages/routine/index";
 import { HabitsPage } from "../pages/habits";
-import { SettingsPage } from "../pages/settings/settings-page";
+import { SettingsPage } from "../pages/settings";
 import { ExpenseAccountsPage } from "../pages/expenses";
 import { ReceiptsPage } from "../pages/stores";
 import { GymPage } from "../pages/gym";
 import { WorkoutDetailPage } from "../pages/gym/workout-detail";
 import { ExerciseDetailPage } from "../pages/gym/exercise-detail";
 import { LandingPage } from "../pages/landing";
+import { ActivitiesSettingsPage } from "../pages/settings/pages/activities";
+import { ExpensesSettingsPage } from "../pages/settings/pages/expenses";
 
 export default function AppRoutes() {
   const isMobile = useIsMobile();
@@ -50,6 +52,8 @@ export default function AppRoutes() {
         <Route path="receipts" element={<ReceiptsPage />} />
         <Route path="habits" element={<HabitsPage />} />
         <Route path="settings/security" element={<SettingsPage />} />
+        <Route path="settings/activities" element={<ActivitiesSettingsPage />} />
+        <Route path="settings/expenses" element={<ExpensesSettingsPage />} />
         <Route path="gym" element={<GymPage />} />
         <Route path="gym/workout/:uuid" element={<WorkoutDetailPage />} />
         <Route path="gym/workout-entry/:entryUuid" element={<ExerciseDetailPage />} />

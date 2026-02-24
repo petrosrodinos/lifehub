@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PinSettings } from "./components/PinSettings";
-import { Settings as SettingsIcon, ShieldCheck, LogOut, User, ArrowLeft } from "lucide-react";
+import { VisibilitySettingsNav } from "./components/VisibilitySettingsNav";
+import { Settings as SettingsIcon, ShieldCheck, LogOut, User, ArrowLeft, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth-store";
 import { ConfirmationModal } from "../../components/ui/ConfirmationModal";
@@ -61,6 +62,14 @@ export function SettingsPage() {
               </div>
               <p className="text-xs text-slate-500 mt-4">Profile editing will be available soon</p>
             </div>
+          </section>
+
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+              <EyeOff className="w-5 h-5 text-violet-400" />
+              <h2 className="text-xl font-semibold text-white">Visibility</h2>
+            </div>
+            <VisibilitySettingsNav />
           </section>
 
           <section>
