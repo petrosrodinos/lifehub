@@ -73,6 +73,13 @@ export const ApiRoutes = {
     analytics: {
       overview: "/analytics/overview",
     },
+    hiddenActivities: {
+      list: "/hidden-activities",
+      create: "/hidden-activities",
+      get: (uuid: string) => `/hidden-activities/${uuid}`,
+      update: (uuid: string) => `/hidden-activities/${uuid}`,
+      delete: (uuid: string) => `/hidden-activities/${uuid}`,
+    },
   },
   fitness: {
     muscleGroups: {
@@ -135,6 +142,20 @@ export const ApiRoutes = {
       get: (uuid: string) => `/expense-subcategories/${uuid}`,
       update: (uuid: string) => `/expense-subcategories/${uuid}`,
       delete: (uuid: string) => `/expense-subcategories/${uuid}`,
+    },
+    hiddenCategories: {
+      list: "/hidden-categories",
+      create: "/hidden-categories",
+      get: (uuid: string) => `/hidden-categories/${uuid}`,
+      update: (uuid: string) => `/hidden-categories/${uuid}`,
+      delete: (uuid: string) => `/hidden-categories/${uuid}`,
+    },
+    hiddenSubcategories: {
+      list: "/hidden-subcategories",
+      create: "/hidden-subcategories",
+      get: (uuid: string) => `/hidden-subcategories/${uuid}`,
+      update: (uuid: string) => `/hidden-subcategories/${uuid}`,
+      delete: (uuid: string) => `/hidden-subcategories/${uuid}`,
     },
     entries: {
       list: "/expense-entries",
