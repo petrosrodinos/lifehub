@@ -13,7 +13,7 @@ export class ExpenseSubcategoriesService {
       const category = await this.prisma.expenseCategory.findFirst({
         where: {
           uuid: createExpenseSubcategoryDto.category_uuid,
-          user_uuid,
+          OR: [{ user_uuid }, { user_uuid: null }],
         },
       });
 
