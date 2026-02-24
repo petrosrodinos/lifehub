@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronRight, GripVertical } from "lucide-react";
+import { ChevronRight, ChevronDown, ChevronUp, GripVertical } from "lucide-react";
 import type { WorkoutEntry } from "../../../../features/gym/workout-entries/interfaces/workout-entries.interface";
 import type { SortableItemRenderProps } from "../../../../components/ui/ReorderableList";
 import { SetCard } from "./SetCard";
@@ -13,6 +14,9 @@ interface SortableWorkoutEntryCardProps {
 export function SortableWorkoutEntryCard({ entry, sortableProps }: SortableWorkoutEntryCardProps) {
   const navigate = useNavigate();
   const { setNodeRef, attributes, listeners, style, isDragging } = sortableProps;
+  const [showSets, setShowSets] = useState(true);
+
+  const setCount = entry.sets?.length ?? 0;
 
   return (
     <div
@@ -44,19 +48,32 @@ export function SortableWorkoutEntryCard({ entry, sortableProps }: SortableWorko
             )}
           </div>
           <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowSets((prev) => !prev);
+              }}
+              className="p-1 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors"
+              aria-label={showSets ? "Hide sets" : "Show sets"}
+            >
+              {showSets ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+            </button>
             <span className="text-sm text-slate-500 bg-slate-800 px-3 py-1 rounded-lg">
-              {entry.sets?.length || 0} {(entry.sets?.length || 0) === 1 ? "set" : "sets"}
+              {setCount} {setCount === 1 ? "set" : "sets"}
             </span>
             <ChevronRight className="w-5 h-5 text-slate-600 group-hover/header:text-violet-400 transition-colors" />
           </div>
         </button>
       </div>
 
-      <div className="space-y-3">
-        {entry.sets?.map((set: WorkoutSet, index: number) => (
-          <SetCard key={set.uuid} set={set} setNumber={index + 1} />
-        ))}
-      </div>
+      {showSets && (
+        <div className="space-y-3">
+          {entry.sets?.map((set: WorkoutSet, index: number) => (
+            <SetCard key={set.uuid} set={set} setNumber={index + 1} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
