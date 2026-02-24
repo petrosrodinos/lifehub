@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import { Dumbbell } from "lucide-react";
 import type { WorkoutEntry } from "../../../features/gym/workout-entries/interfaces/workout-entries.interface";
 import { useCreateWorkoutSet, useReorderWorkoutSets } from "../../../features/gym/workout-sets/hooks/use-workout-sets";
@@ -9,6 +10,15 @@ import type { SetFormValues } from "../workout-detail/components/SetForm";
 import { SortableSetCard } from "./SortableSetCard";
 import { ReorderableList } from "../../../components/ui/ReorderableList";
 
+function workoutSetToFormValues(set: WorkoutSet): SetFormValues {
+  return {
+    reps: set.reps ?? 10,
+    weight: set.weight ?? 20,
+    durationSeconds: set.duration_seconds ?? 60,
+    distanceMeters: set.distance_meters ?? 100,
+  };
+}
+
 type TrackTabProps = {
   entry: WorkoutEntry;
 };
@@ -16,10 +26,18 @@ type TrackTabProps = {
 export function TrackTab({ entry }: TrackTabProps) {
   const createSet = useCreateWorkoutSet();
   const reorderSets = useReorderWorkoutSets();
+  const [selectedSetUuid, setSelectedSetUuid] = useState<string | null>(null);
 
   const exercise = entry.exercise;
   const exerciseSets = entry.sets || [];
   const exerciseType = exercise?.type || ExerciseTypes.REPS;
+
+  const formInitialValues = useMemo((): Partial<SetFormValues> | undefined => {
+    const set = selectedSetUuid
+      ? exerciseSets.find((s) => s.uuid === selectedSetUuid)
+      : exerciseSets[exerciseSets.length - 1];
+    return set ? workoutSetToFormValues(set) : undefined;
+  }, [exerciseSets, selectedSetUuid]);
 
   const handleReorderSets = (reordered: WorkoutSet[]) => {
     reorderSets.mutate(reordered.map((s, i) => ({ uuid: s.uuid, order: i })));
@@ -43,6 +61,7 @@ export function TrackTab({ entry }: TrackTabProps) {
     }
 
     createSet.mutate(data);
+    setSelectedSetUuid(null);
   };
 
   return (
@@ -53,7 +72,7 @@ export function TrackTab({ entry }: TrackTabProps) {
           <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-300">Add Set</h2>
         </div>
 
-        <SetForm exerciseType={exerciseType} onSave={handleSave} isPending={createSet.isPending} />
+        <SetForm exerciseType={exerciseType} initialValues={formInitialValues} onSave={handleSave} isPending={createSet.isPending} />
       </div>
 
       <div className="space-y-3">
@@ -76,7 +95,7 @@ export function TrackTab({ entry }: TrackTabProps) {
             gapClass="space-y-3"
           >
             {(set, index, sortableProps) => (
-              <SortableSetCard set={set} setNumber={index + 1} sortableProps={sortableProps} />
+              <SortableSetCard set={set} setNumber={index + 1} sortableProps={sortableProps} onSelect={() => setSelectedSetUuid(set.uuid)} />
             )}
           </ReorderableList>
         )}

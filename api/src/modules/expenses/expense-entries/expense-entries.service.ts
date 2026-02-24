@@ -731,7 +731,6 @@ export class ExpenseEntriesService {
     ]);
     const hiddenCategoryUuids = hiddenCategories.map((h) => h.category_uuid);
     const hiddenSubcategoryUuids = hiddenSubcategories.map((h) => h.subcategory_uuid);
-    console.log('hiddenSubcategoryUuids', hiddenSubcategoryUuids);
     const and: Record<string, unknown>[] = [];
     if (hiddenCategoryUuids.length > 0) {
       and.push({

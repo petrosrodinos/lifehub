@@ -52,12 +52,28 @@ export function SetForm({ exerciseType, initialValues, onSave, isPending, submit
 
   const handleDecrementReps = () => setReps((prev) => clamp(prev - REPS_STEP, REPS_MIN, REPS_MAX));
   const handleIncrementReps = () => setReps((prev) => clamp(prev + REPS_STEP, REPS_MIN, REPS_MAX));
+  const handleRepsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const parsed = parseInt(e.target.value, 10);
+    if (!Number.isNaN(parsed)) setReps(clamp(parsed, REPS_MIN, REPS_MAX));
+  };
   const handleDecrementWeight = () => setWeight((prev) => clamp(prev - WEIGHT_STEP, WEIGHT_MIN, WEIGHT_MAX));
   const handleIncrementWeight = () => setWeight((prev) => clamp(prev + WEIGHT_STEP, WEIGHT_MIN, WEIGHT_MAX));
+  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const parsed = parseFloat(e.target.value);
+    if (!Number.isNaN(parsed)) setWeight(clamp(parsed, WEIGHT_MIN, WEIGHT_MAX));
+  };
   const handleDecrementDuration = () => setDurationSeconds((prev) => clamp(prev - DURATION_STEP, DURATION_MIN, DURATION_MAX));
   const handleIncrementDuration = () => setDurationSeconds((prev) => clamp(prev + DURATION_STEP, DURATION_MIN, DURATION_MAX));
+  const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const parsed = parseInt(e.target.value, 10);
+    if (!Number.isNaN(parsed)) setDurationSeconds(clamp(parsed, DURATION_MIN, DURATION_MAX));
+  };
   const handleDecrementDistance = () => setDistanceMeters((prev) => clamp(prev - DISTANCE_STEP, DISTANCE_MIN, DISTANCE_MAX));
   const handleIncrementDistance = () => setDistanceMeters((prev) => clamp(prev + DISTANCE_STEP, DISTANCE_MIN, DISTANCE_MAX));
+  const handleDistanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const parsed = parseInt(e.target.value, 10);
+    if (!Number.isNaN(parsed)) setDistanceMeters(clamp(parsed, DISTANCE_MIN, DISTANCE_MAX));
+  };
 
   const handleSave = () => {
     onSave({ reps, weight, durationSeconds, distanceMeters });
@@ -73,9 +89,15 @@ export function SetForm({ exerciseType, initialValues, onSave, isPending, submit
               <button type="button" onClick={handleDecrementReps} disabled={reps <= REPS_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Minus className="w-4 h-4 text-slate-300" />
               </button>
-              <div className="flex-1 text-center">
-                <span className="text-3xl font-bold text-white tabular-nums">{reps}</span>
-              </div>
+              <input
+                type="number"
+                min={REPS_MIN}
+                max={REPS_MAX}
+                step={REPS_STEP}
+                value={reps}
+                onChange={handleRepsChange}
+                className="flex-1 min-w-0 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 text-3xl font-bold text-white tabular-nums text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              />
               <button type="button" onClick={handleIncrementReps} disabled={reps >= REPS_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Plus className="w-4 h-4 text-slate-300" />
               </button>
@@ -88,9 +110,15 @@ export function SetForm({ exerciseType, initialValues, onSave, isPending, submit
               <button type="button" onClick={handleDecrementWeight} disabled={weight <= WEIGHT_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Minus className="w-4 h-4 text-slate-300" />
               </button>
-              <div className="flex-1 text-center">
-                <span className="text-3xl font-bold text-white tabular-nums">{weight}</span>
-              </div>
+              <input
+                type="number"
+                min={WEIGHT_MIN}
+                max={WEIGHT_MAX}
+                step={WEIGHT_STEP}
+                value={weight}
+                onChange={handleWeightChange}
+                className="flex-1 min-w-0 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 text-3xl font-bold text-white tabular-nums text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              />
               <button type="button" onClick={handleIncrementWeight} disabled={weight >= WEIGHT_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Plus className="w-4 h-4 text-slate-300" />
               </button>
@@ -107,9 +135,15 @@ export function SetForm({ exerciseType, initialValues, onSave, isPending, submit
               <button type="button" onClick={handleDecrementDuration} disabled={durationSeconds <= DURATION_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Minus className="w-4 h-4 text-slate-300" />
               </button>
-              <div className="flex-1 text-center">
-                <span className="text-3xl font-bold text-white tabular-nums">{durationSeconds}</span>
-              </div>
+              <input
+                type="number"
+                min={DURATION_MIN}
+                max={DURATION_MAX}
+                step={DURATION_STEP}
+                value={durationSeconds}
+                onChange={handleDurationChange}
+                className="flex-1 min-w-0 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 text-3xl font-bold text-white tabular-nums text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              />
               <button type="button" onClick={handleIncrementDuration} disabled={durationSeconds >= DURATION_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Plus className="w-4 h-4 text-slate-300" />
               </button>
@@ -122,9 +156,15 @@ export function SetForm({ exerciseType, initialValues, onSave, isPending, submit
               <button type="button" onClick={handleDecrementDistance} disabled={distanceMeters <= DISTANCE_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Minus className="w-4 h-4 text-slate-300" />
               </button>
-              <div className="flex-1 text-center">
-                <span className="text-3xl font-bold text-white tabular-nums">{distanceMeters}</span>
-              </div>
+              <input
+                type="number"
+                min={DISTANCE_MIN}
+                max={DISTANCE_MAX}
+                step={DISTANCE_STEP}
+                value={distanceMeters}
+                onChange={handleDistanceChange}
+                className="flex-1 min-w-0 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 text-3xl font-bold text-white tabular-nums text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              />
               <button type="button" onClick={handleIncrementDistance} disabled={distanceMeters >= DISTANCE_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Plus className="w-4 h-4 text-slate-300" />
               </button>

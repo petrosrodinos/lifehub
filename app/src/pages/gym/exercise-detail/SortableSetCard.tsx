@@ -3,13 +3,15 @@ import type { WorkoutSet } from "../../../features/gym/workout-sets/interfaces/w
 import type { SortableItemRenderProps } from "../../../components/ui/ReorderableList";
 import { SetCard } from "../workout-detail/components/SetCard";
 
-type SortableSetCardProps = {
+interface SortableSetCardProps {
   set: WorkoutSet;
   setNumber: number;
   sortableProps: SortableItemRenderProps;
-};
+  onSelect?: () => void;
+}
 
-export function SortableSetCard({ set, setNumber, sortableProps }: SortableSetCardProps) {
+export function SortableSetCard(props: SortableSetCardProps) {
+  const { set, setNumber, sortableProps, onSelect } = props;
   const { setNodeRef, attributes, listeners, style, isDragging } = sortableProps;
 
   return (
@@ -27,9 +29,17 @@ export function SortableSetCard({ set, setNumber, sortableProps }: SortableSetCa
       >
         <GripVertical className="w-4 h-4" />
       </button>
-      <div className="flex-1 min-w-0">
+      <button
+        type="button"
+        onClick={(e) => {
+          const clickedButton = (e.target as HTMLElement).closest("button");
+          if (clickedButton && clickedButton !== e.currentTarget) return;
+          onSelect?.();
+        }}
+        className="flex-1 min-w-0 text-left rounded-lg border border-transparent hover:border-slate-700 focus:outline-none focus:ring-1 focus:ring-violet-500/50 transition-colors"
+      >
         <SetCard set={set} setNumber={setNumber} />
-      </div>
+      </button>
     </div>
   );
 }
