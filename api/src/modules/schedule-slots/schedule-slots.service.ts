@@ -10,6 +10,15 @@ import { DuplicateSlotDto } from './dto/duplicate-slot.dto'
 export class ScheduleSlotsService {
   constructor(private readonly prisma: PrismaService) { }
 
+  private async getExcludeHiddenActivitiesWhere(user_uuid: string): Promise<Record<string, unknown>> {
+    const hidden = await this.prisma.hiddenActivity.findMany({
+      where: { user_uuid },
+      select: { activity_uuid: true },
+    })
+    const hiddenActivityUuids = hidden.map((h) => h.activity_uuid)
+    return hiddenActivityUuids.length > 0 ? { activity_uuid: { notIn: hiddenActivityUuids } } : {}
+  }
+
   async create(dto: CreateScheduleSlotDto, user_uuid: string) {
     const activity = await this.prisma.activity.findUnique({
       where: { uuid: dto.activity_uuid },
@@ -41,10 +50,12 @@ export class ScheduleSlotsService {
   }
 
   async findAll(user_uuid: string, day: ScheduleDay) {
+    const excludeHidden = await this.getExcludeHiddenActivitiesWhere(user_uuid)
     return this.prisma.scheduleSlot.findMany({
       where: {
         user_uuid: user_uuid,
         ...(day && { day }),
+        ...excludeHidden,
       },
       include: {
         activity: true,
@@ -57,10 +68,12 @@ export class ScheduleSlotsService {
   }
 
   async findByDay(day: ScheduleDay, user_uuid: string) {
+    const excludeHidden = await this.getExcludeHiddenActivitiesWhere(user_uuid)
     return this.prisma.scheduleSlot.findMany({
       where: {
         day,
         user_uuid: user_uuid,
+        ...excludeHidden,
       },
       include: {
         activity: true,
@@ -72,10 +85,12 @@ export class ScheduleSlotsService {
   }
 
   async findOne(uuid: string, user_uuid: string) {
+    const excludeHidden = await this.getExcludeHiddenActivitiesWhere(user_uuid)
     const slot = await this.prisma.scheduleSlot.findFirst({
       where: {
         uuid,
         user_uuid: user_uuid,
+        ...excludeHidden,
       },
       include: {
         activity: true,
@@ -153,10 +168,12 @@ export class ScheduleSlotsService {
       throw new BadRequestException('Source day cannot be in target days')
     }
 
+    const excludeHidden = await this.getExcludeHiddenActivitiesWhere(user_uuid)
     const sourceSlots = await this.prisma.scheduleSlot.findMany({
       where: {
         day: dto.source_day,
         user_uuid: user_uuid,
+        ...excludeHidden,
       },
       include: {
         activity: true,
@@ -197,10 +214,12 @@ export class ScheduleSlotsService {
   }
 
   async duplicateSlot(dto: DuplicateSlotDto, user_uuid: string) {
+    const excludeHidden = await this.getExcludeHiddenActivitiesWhere(user_uuid)
     const sourceSlot = await this.prisma.scheduleSlot.findFirst({
       where: {
         uuid: dto.slot_uuid,
         user_uuid: user_uuid,
+        ...excludeHidden,
       },
       include: {
         activity: true,

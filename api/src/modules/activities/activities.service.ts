@@ -16,6 +16,14 @@ export class ActivitiesService {
     private readonly occurrencesRepository: OccurrencesRepository,
   ) { }
 
+  private async getHiddenActivityUuids(user_uuid: string): Promise<string[]> {
+    const hidden = await this.prisma.hiddenActivity.findMany({
+      where: { user_uuid },
+      select: { activity_uuid: true },
+    })
+    return hidden.map((h) => h.activity_uuid)
+  }
+
   async create(dto: CreateActivityDto, user_uuid: string) {
     const existingActivity = await this.prisma.activity.findFirst({
       where: {
@@ -41,9 +49,11 @@ export class ActivitiesService {
   }
 
   async findAll(user_uuid: string) {
+    const hiddenUuids = await this.getHiddenActivityUuids(user_uuid)
     const activities = await this.prisma.activity.findMany({
       where: {
         user_uuid: user_uuid,
+        ...(hiddenUuids.length > 0 ? { uuid: { notIn: hiddenUuids } } : {}),
       }
     })
 
@@ -59,12 +69,23 @@ export class ActivitiesService {
 
     await this.ensureOccurrencesExist(user_uuid, query.activity_uuid, dayStart, dayEnd)
 
+    const hiddenUuids = await this.getHiddenActivityUuids(user_uuid)
+    const habbitsWhere: Record<string, unknown> = {
+      user_uuid,
+      visible: true,
+    }
+    if (query.activity_uuid && hiddenUuids.length > 0) {
+      habbitsWhere.AND = [
+        { uuid: query.activity_uuid },
+        { uuid: { notIn: hiddenUuids } },
+      ]
+    } else if (query.activity_uuid) {
+      habbitsWhere.uuid = query.activity_uuid
+    } else if (hiddenUuids.length > 0) {
+      habbitsWhere.uuid = { notIn: hiddenUuids }
+    }
     const activities = await this.prisma.activity.findMany({
-      where: {
-        user_uuid,
-        visible: true,
-        ...(query.activity_uuid ? { uuid: query.activity_uuid } : {}),
-      },
+      where: habbitsWhere,
       include: {
         activity_schedules: {
           where: {
@@ -119,14 +140,25 @@ export class ActivitiesService {
     rangeStart: Date,
     rangeEnd: Date,
   ): Promise<void> {
+    const hiddenUuids = await this.getHiddenActivityUuids(user_uuid)
+    const scheduleWhere: Record<string, unknown> = {
+      user_uuid,
+      is_active: true,
+      valid_from: { lte: rangeEnd },
+      OR: [{ valid_until: null }, { valid_until: { gt: rangeStart } }],
+    }
+    if (activity_uuid && hiddenUuids.length > 0) {
+      scheduleWhere.AND = [
+        { activity_uuid },
+        { activity_uuid: { notIn: hiddenUuids } },
+      ]
+    } else if (activity_uuid) {
+      scheduleWhere.activity_uuid = activity_uuid
+    } else if (hiddenUuids.length > 0) {
+      scheduleWhere.activity_uuid = { notIn: hiddenUuids }
+    }
     const schedules = await this.prisma.activitySchedule.findMany({
-      where: {
-        user_uuid,
-        is_active: true,
-        valid_from: { lte: rangeEnd },
-        OR: [{ valid_until: null }, { valid_until: { gt: rangeStart } }],
-        ...(activity_uuid ? { activity_uuid } : {}),
-      },
+      where: scheduleWhere,
       include: {
         weekdays: true,
         specific_dates: true,
@@ -154,10 +186,12 @@ export class ActivitiesService {
   }
 
   async findOne(uuid: string, user_uuid: string) {
+    const hiddenUuids = await this.getHiddenActivityUuids(user_uuid)
     const activity = await this.prisma.activity.findFirst({
       where: {
         uuid,
         user_uuid: user_uuid,
+        ...(hiddenUuids.length > 0 ? { uuid: { notIn: hiddenUuids } } : {}),
       }
     })
 

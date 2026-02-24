@@ -88,6 +88,9 @@ export class ExpenseEntriesService {
         };
       }
 
+      const excludeHidden = await this.getExcludeHiddenWhere(user_uuid);
+      Object.assign(where, excludeHidden);
+
       const [data, total] = await Promise.all([
         this.prisma.expenseEntry.findMany({
           where,
@@ -125,8 +128,10 @@ export class ExpenseEntriesService {
 
   async findOne(user_uuid: string, uuid: string) {
     try {
+      const excludeHidden = await this.getExcludeHiddenWhere(user_uuid);
+      const where = { uuid, user_uuid, ...excludeHidden };
       const entry = await this.prisma.expenseEntry.findFirst({
-        where: { uuid, user_uuid },
+        where,
         include: {
           from_account: true,
           to_account: true,
@@ -298,6 +303,7 @@ export class ExpenseEntriesService {
   async getBalanceTrend(user_uuid: string, query: AnalyticsQueryType) {
     try {
       const accountUuids = query.account_uuids ? query.account_uuids.split(',') : [];
+      const excludeHidden = await this.getExcludeHiddenWhere(user_uuid);
 
       const accountWhere: Record<string, unknown> = { user_uuid };
 
@@ -315,6 +321,7 @@ export class ExpenseEntriesService {
       const entryWhere: Record<string, unknown> = {
         user_uuid,
         type: { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] },
+        ...excludeHidden,
       };
 
       if (accountUuids.length > 0) {
@@ -348,6 +355,7 @@ export class ExpenseEntriesService {
       const fromDateEntriesWhere: Record<string, unknown> = {
         user_uuid,
         type: { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] },
+        ...excludeHidden,
       };
 
       if (accountUuids.length > 0) {
@@ -417,8 +425,9 @@ export class ExpenseEntriesService {
   async getIncomeExpense(user_uuid: string, query: AnalyticsQueryType) {
     try {
       const accountUuids = query.account_uuids ? query.account_uuids.split(',') : [];
+      const excludeHidden = await this.getExcludeHiddenWhere(user_uuid);
 
-      const where: any = { user_uuid };
+      const where: any = { user_uuid, ...excludeHidden };
 
       if (accountUuids.length > 0) {
         where.from_account_uuid = { in: accountUuids };
@@ -483,8 +492,9 @@ export class ExpenseEntriesService {
   async getStats(user_uuid: string, query: AnalyticsQueryType) {
     try {
       const accountUuids = query.account_uuids ? query.account_uuids.split(',') : [];
+      const excludeHidden = await this.getExcludeHiddenWhere(user_uuid);
 
-      const where: any = { user_uuid };
+      const where: any = { user_uuid, ...excludeHidden };
 
       if (accountUuids.length > 0) {
         where.from_account_uuid = { in: accountUuids };
@@ -537,9 +547,11 @@ export class ExpenseEntriesService {
 
   async getExpensesBySubcategory(user_uuid: string, query: CategoryAnalyticsQueryType) {
     try {
+      const excludeHidden = await this.getExcludeHiddenWhere(user_uuid);
       const where: any = {
         user_uuid,
         type: query.type || ExpenseEntryType.EXPENSE,
+        ...excludeHidden,
       };
 
       if (query.from_date || query.to_date) {
@@ -655,10 +667,12 @@ export class ExpenseEntriesService {
 
   async getTransactionTrend(user_uuid: string, query: TransactionTrendQueryType) {
     try {
+      const excludeHidden = await this.getExcludeHiddenWhere(user_uuid);
       const where: any = {
         user_uuid,
         type: query.type,
         category_uuid: query.category_uuid,
+        ...excludeHidden,
       };
 
       if (query.subcategory_uuid) {
@@ -709,4 +723,34 @@ export class ExpenseEntriesService {
       throw new InternalServerErrorException('Failed to fetch transaction trend');
     }
   }
+
+  private async getExcludeHiddenWhere(user_uuid: string): Promise<Record<string, unknown>> {
+    const [hiddenCategories, hiddenSubcategories] = await Promise.all([
+      this.prisma.hiddenCategory.findMany({ where: { user_uuid }, select: { category_uuid: true } }),
+      this.prisma.hiddenSubcategory.findMany({ where: { user_uuid }, select: { subcategory_uuid: true } }),
+    ]);
+    const hiddenCategoryUuids = hiddenCategories.map((h) => h.category_uuid);
+    const hiddenSubcategoryUuids = hiddenSubcategories.map((h) => h.subcategory_uuid);
+    console.log('hiddenSubcategoryUuids', hiddenSubcategoryUuids);
+    const and: Record<string, unknown>[] = [];
+    if (hiddenCategoryUuids.length > 0) {
+      and.push({
+        OR: [
+          { category_uuid: null },
+          { category_uuid: { notIn: hiddenCategoryUuids } },
+        ],
+      });
+    }
+    if (hiddenSubcategoryUuids.length > 0) {
+      and.push({
+        OR: [
+          { subcategory_uuid: null },
+          { subcategory_uuid: { notIn: hiddenSubcategoryUuids } },
+        ],
+      });
+    }
+    return and.length > 0 ? { AND: and } : {};
+  }
+
+
 }
