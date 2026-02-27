@@ -494,6 +494,19 @@ export class ExpenseEntriesService {
       const accountUuids = query.account_uuids ? query.account_uuids.split(',') : [];
       const excludeHidden = await this.getExcludeHiddenWhere(user_uuid);
 
+      const accountWhere: Record<string, unknown> = { user_uuid };
+
+      if (accountUuids.length > 0) {
+        accountWhere.uuid = { in: accountUuids };
+      }
+
+      const accountBalances = await this.prisma.expenseAccount.aggregate({
+        where: accountWhere,
+        _sum: { balance: true },
+      });
+
+      const accountsBalance = Number(accountBalances._sum.balance || 0);
+
       const where: any = { user_uuid, ...excludeHidden };
 
       if (accountUuids.length > 0) {
@@ -538,6 +551,7 @@ export class ExpenseEntriesService {
       return {
         totalIncome,
         totalExpense,
+        accountsBalance,
         netBalance: totalIncome - totalExpense,
       };
     } catch (error) {

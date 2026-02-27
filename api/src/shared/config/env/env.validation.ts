@@ -8,7 +8,7 @@ const EnvSchema = z.object({
     API_URL: z.string().url().optional(),
     DATABASE_URL: z.string().url().optional(),
     JWT_SECRET: z.string().default('secret'),
-    JWT_EXPIRATION_TIME: z.string().optional().default('24h'),
+    JWT_EXPIRATION_TIME: z.string().optional().default('1m'),
     GCS_PROJECT_ID: z.string().optional(),
     GCS_BUCKET_NAME: z.string().optional(),
     GCS_FOLDER_NAME: z.string().optional(),
