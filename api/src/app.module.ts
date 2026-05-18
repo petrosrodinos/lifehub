@@ -33,6 +33,7 @@ import { ExpenseProductsModule } from './modules/receipts/expense-products/expen
 import { HiddenCategoriesModule } from './modules/expenses/hidden-categories/hidden-categories.module';
 import { HiddenSubcategoriesModule } from './modules/expenses/hidden-subcategories/hidden-subcategories.module';
 import { HiddenActivitiesModule } from './modules/habbits/hidden-activities/hidden-activities.module';
+import { NotesModule } from './modules/notes/notes.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { HiddenActivitiesModule } from './modules/habbits/hidden-activities/hidd
     HiddenCategoriesModule,
     HiddenSubcategoriesModule,
     HiddenActivitiesModule,
+    NotesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

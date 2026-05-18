@@ -119,6 +119,11 @@ export type WorkoutEntry = $Result.DefaultSelection<Prisma.$WorkoutEntryPayload>
  */
 export type WorkoutSet = $Result.DefaultSelection<Prisma.$WorkoutSetPayload>
 /**
+ * Model Note
+ * 
+ */
+export type Note = $Result.DefaultSelection<Prisma.$NotePayload>
+/**
  * Model HiddenActivity
  * 
  */
@@ -225,6 +230,17 @@ export const OccurrenceStatus: {
 
 export type OccurrenceStatus = (typeof OccurrenceStatus)[keyof typeof OccurrenceStatus]
 
+
+export const NoteType: {
+  BOOK: 'BOOK',
+  IDEA: 'IDEA',
+  NOTE: 'NOTE',
+  VIDEO: 'VIDEO',
+  ARTICLE: 'ARTICLE'
+};
+
+export type NoteType = (typeof NoteType)[keyof typeof NoteType]
+
 }
 
 export type AuthRole = $Enums.AuthRole
@@ -262,6 +278,10 @@ export const FrequencyPeriod: typeof $Enums.FrequencyPeriod
 export type OccurrenceStatus = $Enums.OccurrenceStatus
 
 export const OccurrenceStatus: typeof $Enums.OccurrenceStatus
+
+export type NoteType = $Enums.NoteType
+
+export const NoteType: typeof $Enums.NoteType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -589,6 +609,16 @@ export class PrismaClient<
     * ```
     */
   get workoutSet(): Prisma.WorkoutSetDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.note`: Exposes CRUD operations for the **Note** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Notes
+    * const notes = await prisma.note.findMany()
+    * ```
+    */
+  get note(): Prisma.NoteDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.hiddenActivity`: Exposes CRUD operations for the **HiddenActivity** model.
@@ -1074,6 +1104,7 @@ export namespace Prisma {
     Workout: 'Workout',
     WorkoutEntry: 'WorkoutEntry',
     WorkoutSet: 'WorkoutSet',
+    Note: 'Note',
     HiddenActivity: 'HiddenActivity',
     HiddenCategory: 'HiddenCategory',
     HiddenSubcategory: 'HiddenSubcategory'
@@ -1092,7 +1123,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory"
+      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2650,6 +2681,80 @@ export namespace Prisma {
           }
         }
       }
+      Note: {
+        payload: Prisma.$NotePayload<ExtArgs>
+        fields: Prisma.NoteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NoteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NoteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload>
+          }
+          findFirst: {
+            args: Prisma.NoteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NoteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload>
+          }
+          findMany: {
+            args: Prisma.NoteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload>[]
+          }
+          create: {
+            args: Prisma.NoteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload>
+          }
+          createMany: {
+            args: Prisma.NoteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NoteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload>[]
+          }
+          delete: {
+            args: Prisma.NoteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload>
+          }
+          update: {
+            args: Prisma.NoteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload>
+          }
+          deleteMany: {
+            args: Prisma.NoteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NoteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NoteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload>[]
+          }
+          upsert: {
+            args: Prisma.NoteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotePayload>
+          }
+          aggregate: {
+            args: Prisma.NoteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNote>
+          }
+          groupBy: {
+            args: Prisma.NoteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NoteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NoteCountArgs<ExtArgs>
+            result: $Utils.Optional<NoteCountAggregateOutputType> | number
+          }
+        }
+      }
       HiddenActivity: {
         payload: Prisma.$HiddenActivityPayload<ExtArgs>
         fields: Prisma.HiddenActivityFieldRefs
@@ -3001,6 +3106,7 @@ export namespace Prisma {
     workout?: WorkoutOmit
     workoutEntry?: WorkoutEntryOmit
     workoutSet?: WorkoutSetOmit
+    note?: NoteOmit
     hiddenActivity?: HiddenActivityOmit
     hiddenCategory?: HiddenCategoryOmit
     hiddenSubcategory?: HiddenSubcategoryOmit
@@ -3102,6 +3208,7 @@ export namespace Prisma {
     muscle_groups: number
     exercises: number
     workouts: number
+    notes: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3123,6 +3230,7 @@ export namespace Prisma {
     muscle_groups?: boolean | UserCountOutputTypeCountMuscle_groupsArgs
     exercises?: boolean | UserCountOutputTypeCountExercisesArgs
     workouts?: boolean | UserCountOutputTypeCountWorkoutsArgs
+    notes?: boolean | UserCountOutputTypeCountNotesArgs
   }
 
   // Custom InputTypes
@@ -3260,6 +3368,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountWorkoutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WorkoutWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NoteWhereInput
   }
 
 
@@ -4012,6 +4127,7 @@ export namespace Prisma {
     muscle_groups?: boolean | User$muscle_groupsArgs<ExtArgs>
     exercises?: boolean | User$exercisesArgs<ExtArgs>
     workouts?: boolean | User$workoutsArgs<ExtArgs>
+    notes?: boolean | User$notesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4074,6 +4190,7 @@ export namespace Prisma {
     muscle_groups?: boolean | User$muscle_groupsArgs<ExtArgs>
     exercises?: boolean | User$exercisesArgs<ExtArgs>
     workouts?: boolean | User$workoutsArgs<ExtArgs>
+    notes?: boolean | User$notesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4100,6 +4217,7 @@ export namespace Prisma {
       muscle_groups: Prisma.$MuscleGroupPayload<ExtArgs>[]
       exercises: Prisma.$ExercisePayload<ExtArgs>[]
       workouts: Prisma.$WorkoutPayload<ExtArgs>[]
+      notes: Prisma.$NotePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4524,6 +4642,7 @@ export namespace Prisma {
     muscle_groups<T extends User$muscle_groupsArgs<ExtArgs> = {}>(args?: Subset<T, User$muscle_groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MuscleGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     exercises<T extends User$exercisesArgs<ExtArgs> = {}>(args?: Subset<T, User$exercisesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     workouts<T extends User$workoutsArgs<ExtArgs> = {}>(args?: Subset<T, User$workoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    notes<T extends User$notesArgs<ExtArgs> = {}>(args?: Subset<T, User$notesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5380,6 +5499,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WorkoutScalarFieldEnum | WorkoutScalarFieldEnum[]
+  }
+
+  /**
+   * User.notes
+   */
+  export type User$notesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    where?: NoteWhereInput
+    orderBy?: NoteOrderByWithRelationInput | NoteOrderByWithRelationInput[]
+    cursor?: NoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NoteScalarFieldEnum | NoteScalarFieldEnum[]
   }
 
   /**
@@ -29719,6 +29862,1163 @@ export namespace Prisma {
 
 
   /**
+   * Model Note
+   */
+
+  export type AggregateNote = {
+    _count: NoteCountAggregateOutputType | null
+    _avg: NoteAvgAggregateOutputType | null
+    _sum: NoteSumAggregateOutputType | null
+    _min: NoteMinAggregateOutputType | null
+    _max: NoteMaxAggregateOutputType | null
+  }
+
+  export type NoteAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type NoteSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type NoteMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    type: $Enums.NoteType | null
+    title: string | null
+    content: string | null
+    summary: string | null
+    vector_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type NoteMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    type: $Enums.NoteType | null
+    title: string | null
+    content: string | null
+    summary: string | null
+    vector_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type NoteCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    type: number
+    title: number
+    content: number
+    summary: number
+    vector_id: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type NoteAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type NoteSumAggregateInputType = {
+    id?: true
+  }
+
+  export type NoteMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    type?: true
+    title?: true
+    content?: true
+    summary?: true
+    vector_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type NoteMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    type?: true
+    title?: true
+    content?: true
+    summary?: true
+    vector_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type NoteCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    type?: true
+    title?: true
+    content?: true
+    summary?: true
+    vector_id?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type NoteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Note to aggregate.
+     */
+    where?: NoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notes to fetch.
+     */
+    orderBy?: NoteOrderByWithRelationInput | NoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Notes
+    **/
+    _count?: true | NoteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NoteAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NoteSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NoteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NoteMaxAggregateInputType
+  }
+
+  export type GetNoteAggregateType<T extends NoteAggregateArgs> = {
+        [P in keyof T & keyof AggregateNote]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNote[P]>
+      : GetScalarType<T[P], AggregateNote[P]>
+  }
+
+
+
+
+  export type NoteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NoteWhereInput
+    orderBy?: NoteOrderByWithAggregationInput | NoteOrderByWithAggregationInput[]
+    by: NoteScalarFieldEnum[] | NoteScalarFieldEnum
+    having?: NoteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NoteCountAggregateInputType | true
+    _avg?: NoteAvgAggregateInputType
+    _sum?: NoteSumAggregateInputType
+    _min?: NoteMinAggregateInputType
+    _max?: NoteMaxAggregateInputType
+  }
+
+  export type NoteGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary: string | null
+    vector_id: string | null
+    created_at: Date
+    updated_at: Date
+    _count: NoteCountAggregateOutputType | null
+    _avg: NoteAvgAggregateOutputType | null
+    _sum: NoteSumAggregateOutputType | null
+    _min: NoteMinAggregateOutputType | null
+    _max: NoteMaxAggregateOutputType | null
+  }
+
+  type GetNoteGroupByPayload<T extends NoteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NoteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NoteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NoteGroupByOutputType[P]>
+            : GetScalarType<T[P], NoteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    type?: boolean
+    title?: boolean
+    content?: boolean
+    summary?: boolean
+    vector_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["note"]>
+
+  export type NoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    type?: boolean
+    title?: boolean
+    content?: boolean
+    summary?: boolean
+    vector_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["note"]>
+
+  export type NoteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    type?: boolean
+    title?: boolean
+    content?: boolean
+    summary?: boolean
+    vector_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["note"]>
+
+  export type NoteSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    type?: boolean
+    title?: boolean
+    content?: boolean
+    summary?: boolean
+    vector_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "type" | "title" | "content" | "summary" | "vector_id" | "created_at" | "updated_at", ExtArgs["result"]["note"]>
+  export type NoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NoteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $NotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Note"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      type: $Enums.NoteType
+      title: string
+      content: string
+      summary: string | null
+      vector_id: string | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["note"]>
+    composites: {}
+  }
+
+  type NoteGetPayload<S extends boolean | null | undefined | NoteDefaultArgs> = $Result.GetResult<Prisma.$NotePayload, S>
+
+  type NoteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NoteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NoteCountAggregateInputType | true
+    }
+
+  export interface NoteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Note'], meta: { name: 'Note' } }
+    /**
+     * Find zero or one Note that matches the filter.
+     * @param {NoteFindUniqueArgs} args - Arguments to find a Note
+     * @example
+     * // Get one Note
+     * const note = await prisma.note.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NoteFindUniqueArgs>(args: SelectSubset<T, NoteFindUniqueArgs<ExtArgs>>): Prisma__NoteClient<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Note that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NoteFindUniqueOrThrowArgs} args - Arguments to find a Note
+     * @example
+     * // Get one Note
+     * const note = await prisma.note.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NoteFindUniqueOrThrowArgs>(args: SelectSubset<T, NoteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NoteClient<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Note that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteFindFirstArgs} args - Arguments to find a Note
+     * @example
+     * // Get one Note
+     * const note = await prisma.note.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NoteFindFirstArgs>(args?: SelectSubset<T, NoteFindFirstArgs<ExtArgs>>): Prisma__NoteClient<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Note that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteFindFirstOrThrowArgs} args - Arguments to find a Note
+     * @example
+     * // Get one Note
+     * const note = await prisma.note.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NoteFindFirstOrThrowArgs>(args?: SelectSubset<T, NoteFindFirstOrThrowArgs<ExtArgs>>): Prisma__NoteClient<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Notes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Notes
+     * const notes = await prisma.note.findMany()
+     * 
+     * // Get first 10 Notes
+     * const notes = await prisma.note.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const noteWithIdOnly = await prisma.note.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NoteFindManyArgs>(args?: SelectSubset<T, NoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Note.
+     * @param {NoteCreateArgs} args - Arguments to create a Note.
+     * @example
+     * // Create one Note
+     * const Note = await prisma.note.create({
+     *   data: {
+     *     // ... data to create a Note
+     *   }
+     * })
+     * 
+     */
+    create<T extends NoteCreateArgs>(args: SelectSubset<T, NoteCreateArgs<ExtArgs>>): Prisma__NoteClient<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Notes.
+     * @param {NoteCreateManyArgs} args - Arguments to create many Notes.
+     * @example
+     * // Create many Notes
+     * const note = await prisma.note.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NoteCreateManyArgs>(args?: SelectSubset<T, NoteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Notes and returns the data saved in the database.
+     * @param {NoteCreateManyAndReturnArgs} args - Arguments to create many Notes.
+     * @example
+     * // Create many Notes
+     * const note = await prisma.note.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Notes and only return the `id`
+     * const noteWithIdOnly = await prisma.note.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NoteCreateManyAndReturnArgs>(args?: SelectSubset<T, NoteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Note.
+     * @param {NoteDeleteArgs} args - Arguments to delete one Note.
+     * @example
+     * // Delete one Note
+     * const Note = await prisma.note.delete({
+     *   where: {
+     *     // ... filter to delete one Note
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NoteDeleteArgs>(args: SelectSubset<T, NoteDeleteArgs<ExtArgs>>): Prisma__NoteClient<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Note.
+     * @param {NoteUpdateArgs} args - Arguments to update one Note.
+     * @example
+     * // Update one Note
+     * const note = await prisma.note.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NoteUpdateArgs>(args: SelectSubset<T, NoteUpdateArgs<ExtArgs>>): Prisma__NoteClient<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Notes.
+     * @param {NoteDeleteManyArgs} args - Arguments to filter Notes to delete.
+     * @example
+     * // Delete a few Notes
+     * const { count } = await prisma.note.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NoteDeleteManyArgs>(args?: SelectSubset<T, NoteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Notes
+     * const note = await prisma.note.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NoteUpdateManyArgs>(args: SelectSubset<T, NoteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notes and returns the data updated in the database.
+     * @param {NoteUpdateManyAndReturnArgs} args - Arguments to update many Notes.
+     * @example
+     * // Update many Notes
+     * const note = await prisma.note.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Notes and only return the `id`
+     * const noteWithIdOnly = await prisma.note.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NoteUpdateManyAndReturnArgs>(args: SelectSubset<T, NoteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Note.
+     * @param {NoteUpsertArgs} args - Arguments to update or create a Note.
+     * @example
+     * // Update or create a Note
+     * const note = await prisma.note.upsert({
+     *   create: {
+     *     // ... data to create a Note
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Note we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NoteUpsertArgs>(args: SelectSubset<T, NoteUpsertArgs<ExtArgs>>): Prisma__NoteClient<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Notes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteCountArgs} args - Arguments to filter Notes to count.
+     * @example
+     * // Count the number of Notes
+     * const count = await prisma.note.count({
+     *   where: {
+     *     // ... the filter for the Notes we want to count
+     *   }
+     * })
+    **/
+    count<T extends NoteCountArgs>(
+      args?: Subset<T, NoteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NoteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Note.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NoteAggregateArgs>(args: Subset<T, NoteAggregateArgs>): Prisma.PrismaPromise<GetNoteAggregateType<T>>
+
+    /**
+     * Group by Note.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NoteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NoteGroupByArgs['orderBy'] }
+        : { orderBy?: NoteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NoteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNoteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Note model
+   */
+  readonly fields: NoteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Note.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Note model
+   */
+  interface NoteFieldRefs {
+    readonly id: FieldRef<"Note", 'Int'>
+    readonly uuid: FieldRef<"Note", 'String'>
+    readonly user_uuid: FieldRef<"Note", 'String'>
+    readonly type: FieldRef<"Note", 'NoteType'>
+    readonly title: FieldRef<"Note", 'String'>
+    readonly content: FieldRef<"Note", 'String'>
+    readonly summary: FieldRef<"Note", 'String'>
+    readonly vector_id: FieldRef<"Note", 'String'>
+    readonly created_at: FieldRef<"Note", 'DateTime'>
+    readonly updated_at: FieldRef<"Note", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Note findUnique
+   */
+  export type NoteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Note to fetch.
+     */
+    where: NoteWhereUniqueInput
+  }
+
+  /**
+   * Note findUniqueOrThrow
+   */
+  export type NoteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Note to fetch.
+     */
+    where: NoteWhereUniqueInput
+  }
+
+  /**
+   * Note findFirst
+   */
+  export type NoteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Note to fetch.
+     */
+    where?: NoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notes to fetch.
+     */
+    orderBy?: NoteOrderByWithRelationInput | NoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notes.
+     */
+    cursor?: NoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notes.
+     */
+    distinct?: NoteScalarFieldEnum | NoteScalarFieldEnum[]
+  }
+
+  /**
+   * Note findFirstOrThrow
+   */
+  export type NoteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Note to fetch.
+     */
+    where?: NoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notes to fetch.
+     */
+    orderBy?: NoteOrderByWithRelationInput | NoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notes.
+     */
+    cursor?: NoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notes.
+     */
+    distinct?: NoteScalarFieldEnum | NoteScalarFieldEnum[]
+  }
+
+  /**
+   * Note findMany
+   */
+  export type NoteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Notes to fetch.
+     */
+    where?: NoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notes to fetch.
+     */
+    orderBy?: NoteOrderByWithRelationInput | NoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Notes.
+     */
+    cursor?: NoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notes.
+     */
+    skip?: number
+    distinct?: NoteScalarFieldEnum | NoteScalarFieldEnum[]
+  }
+
+  /**
+   * Note create
+   */
+  export type NoteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Note.
+     */
+    data: XOR<NoteCreateInput, NoteUncheckedCreateInput>
+  }
+
+  /**
+   * Note createMany
+   */
+  export type NoteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Notes.
+     */
+    data: NoteCreateManyInput | NoteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Note createManyAndReturn
+   */
+  export type NoteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * The data used to create many Notes.
+     */
+    data: NoteCreateManyInput | NoteCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Note update
+   */
+  export type NoteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Note.
+     */
+    data: XOR<NoteUpdateInput, NoteUncheckedUpdateInput>
+    /**
+     * Choose, which Note to update.
+     */
+    where: NoteWhereUniqueInput
+  }
+
+  /**
+   * Note updateMany
+   */
+  export type NoteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Notes.
+     */
+    data: XOR<NoteUpdateManyMutationInput, NoteUncheckedUpdateManyInput>
+    /**
+     * Filter which Notes to update
+     */
+    where?: NoteWhereInput
+    /**
+     * Limit how many Notes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Note updateManyAndReturn
+   */
+  export type NoteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * The data used to update Notes.
+     */
+    data: XOR<NoteUpdateManyMutationInput, NoteUncheckedUpdateManyInput>
+    /**
+     * Filter which Notes to update
+     */
+    where?: NoteWhereInput
+    /**
+     * Limit how many Notes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Note upsert
+   */
+  export type NoteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Note to update in case it exists.
+     */
+    where: NoteWhereUniqueInput
+    /**
+     * In case the Note found by the `where` argument doesn't exist, create a new Note with this data.
+     */
+    create: XOR<NoteCreateInput, NoteUncheckedCreateInput>
+    /**
+     * In case the Note was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NoteUpdateInput, NoteUncheckedUpdateInput>
+  }
+
+  /**
+   * Note delete
+   */
+  export type NoteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    /**
+     * Filter which Note to delete.
+     */
+    where: NoteWhereUniqueInput
+  }
+
+  /**
+   * Note deleteMany
+   */
+  export type NoteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notes to delete
+     */
+    where?: NoteWhereInput
+    /**
+     * Limit how many Notes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Note without action
+   */
+  export type NoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model HiddenActivity
    */
 
@@ -33400,6 +34700,22 @@ export namespace Prisma {
   export type WorkoutSetScalarFieldEnum = (typeof WorkoutSetScalarFieldEnum)[keyof typeof WorkoutSetScalarFieldEnum]
 
 
+  export const NoteScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    type: 'type',
+    title: 'title',
+    content: 'content',
+    summary: 'summary',
+    vector_id: 'vector_id',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type NoteScalarFieldEnum = (typeof NoteScalarFieldEnum)[keyof typeof NoteScalarFieldEnum]
+
+
   export const HiddenActivityScalarFieldEnum: {
     id: 'id',
     uuid: 'uuid',
@@ -33666,6 +34982,20 @@ export namespace Prisma {
    */
   export type ListEnumExerciseTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExerciseType[]'>
     
+
+
+  /**
+   * Reference to a field of type 'NoteType'
+   */
+  export type EnumNoteTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NoteType'>
+    
+
+
+  /**
+   * Reference to a field of type 'NoteType[]'
+   */
+  export type ListEnumNoteTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NoteType[]'>
+    
   /**
    * Deep Input Types
    */
@@ -33703,6 +35033,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupListRelationFilter
     exercises?: ExerciseListRelationFilter
     workouts?: WorkoutListRelationFilter
+    notes?: NoteListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -33734,6 +35065,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupOrderByRelationAggregateInput
     exercises?: ExerciseOrderByRelationAggregateInput
     workouts?: WorkoutOrderByRelationAggregateInput
+    notes?: NoteOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -33768,6 +35100,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupListRelationFilter
     exercises?: ExerciseListRelationFilter
     workouts?: WorkoutListRelationFilter
+    notes?: NoteListRelationFilter
   }, "id" | "uuid" | "email" | "phone">
 
   export type UserOrderByWithAggregationInput = {
@@ -35550,6 +36883,88 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"WorkoutSet"> | Date | string
   }
 
+  export type NoteWhereInput = {
+    AND?: NoteWhereInput | NoteWhereInput[]
+    OR?: NoteWhereInput[]
+    NOT?: NoteWhereInput | NoteWhereInput[]
+    id?: IntFilter<"Note"> | number
+    uuid?: StringFilter<"Note"> | string
+    user_uuid?: StringFilter<"Note"> | string
+    type?: EnumNoteTypeFilter<"Note"> | $Enums.NoteType
+    title?: StringFilter<"Note"> | string
+    content?: StringFilter<"Note"> | string
+    summary?: StringNullableFilter<"Note"> | string | null
+    vector_id?: StringNullableFilter<"Note"> | string | null
+    created_at?: DateTimeFilter<"Note"> | Date | string
+    updated_at?: DateTimeFilter<"Note"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type NoteOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    vector_id?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type NoteWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: NoteWhereInput | NoteWhereInput[]
+    OR?: NoteWhereInput[]
+    NOT?: NoteWhereInput | NoteWhereInput[]
+    user_uuid?: StringFilter<"Note"> | string
+    type?: EnumNoteTypeFilter<"Note"> | $Enums.NoteType
+    title?: StringFilter<"Note"> | string
+    content?: StringFilter<"Note"> | string
+    summary?: StringNullableFilter<"Note"> | string | null
+    vector_id?: StringNullableFilter<"Note"> | string | null
+    created_at?: DateTimeFilter<"Note"> | Date | string
+    updated_at?: DateTimeFilter<"Note"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "uuid">
+
+  export type NoteOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    vector_id?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: NoteCountOrderByAggregateInput
+    _avg?: NoteAvgOrderByAggregateInput
+    _max?: NoteMaxOrderByAggregateInput
+    _min?: NoteMinOrderByAggregateInput
+    _sum?: NoteSumOrderByAggregateInput
+  }
+
+  export type NoteScalarWhereWithAggregatesInput = {
+    AND?: NoteScalarWhereWithAggregatesInput | NoteScalarWhereWithAggregatesInput[]
+    OR?: NoteScalarWhereWithAggregatesInput[]
+    NOT?: NoteScalarWhereWithAggregatesInput | NoteScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Note"> | number
+    uuid?: StringWithAggregatesFilter<"Note"> | string
+    user_uuid?: StringWithAggregatesFilter<"Note"> | string
+    type?: EnumNoteTypeWithAggregatesFilter<"Note"> | $Enums.NoteType
+    title?: StringWithAggregatesFilter<"Note"> | string
+    content?: StringWithAggregatesFilter<"Note"> | string
+    summary?: StringNullableWithAggregatesFilter<"Note"> | string | null
+    vector_id?: StringNullableWithAggregatesFilter<"Note"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"Note"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Note"> | Date | string
+  }
+
   export type HiddenActivityWhereInput = {
     AND?: HiddenActivityWhereInput | HiddenActivityWhereInput[]
     OR?: HiddenActivityWhereInput[]
@@ -35773,6 +37188,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -35804,6 +37220,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -35834,6 +37251,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -35865,6 +37283,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -37685,6 +39104,93 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NoteCreateInput = {
+    uuid?: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary?: string | null
+    vector_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutNotesInput
+  }
+
+  export type NoteUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary?: string | null
+    vector_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type NoteUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNotesNestedInput
+  }
+
+  export type NoteUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary?: string | null
+    vector_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type NoteUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type HiddenActivityCreateInput = {
     uuid?: string
     created_at?: Date | string
@@ -38026,6 +39532,12 @@ export namespace Prisma {
     none?: WorkoutWhereInput
   }
 
+  export type NoteListRelationFilter = {
+    every?: NoteWhereInput
+    some?: NoteWhereInput
+    none?: NoteWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -38100,6 +39612,10 @@ export namespace Prisma {
   }
 
   export type WorkoutOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NoteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -39632,6 +41148,70 @@ export namespace Prisma {
     order?: SortOrder
   }
 
+  export type EnumNoteTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNoteTypeFilter<$PrismaModel> | $Enums.NoteType
+  }
+
+  export type NoteCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    summary?: SortOrder
+    vector_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type NoteAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type NoteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    summary?: SortOrder
+    vector_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type NoteMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    type?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    summary?: SortOrder
+    vector_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type NoteSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumNoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.NoteType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNoteTypeFilter<$PrismaModel>
+    _max?: NestedEnumNoteTypeFilter<$PrismaModel>
+  }
+
   export type HiddenActivityCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
@@ -39868,6 +41448,13 @@ export namespace Prisma {
     connect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
   }
 
+  export type NoteCreateNestedManyWithoutUserInput = {
+    create?: XOR<NoteCreateWithoutUserInput, NoteUncheckedCreateWithoutUserInput> | NoteCreateWithoutUserInput[] | NoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutUserInput | NoteCreateOrConnectWithoutUserInput[]
+    createMany?: NoteCreateManyUserInputEnvelope
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+  }
+
   export type ActivityUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ActivityCreateWithoutUserInput, ActivityUncheckedCreateWithoutUserInput> | ActivityCreateWithoutUserInput[] | ActivityUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ActivityCreateOrConnectWithoutUserInput | ActivityCreateOrConnectWithoutUserInput[]
@@ -39992,6 +41579,13 @@ export namespace Prisma {
     connectOrCreate?: WorkoutCreateOrConnectWithoutUserInput | WorkoutCreateOrConnectWithoutUserInput[]
     createMany?: WorkoutCreateManyUserInputEnvelope
     connect?: WorkoutWhereUniqueInput | WorkoutWhereUniqueInput[]
+  }
+
+  export type NoteUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<NoteCreateWithoutUserInput, NoteUncheckedCreateWithoutUserInput> | NoteCreateWithoutUserInput[] | NoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutUserInput | NoteCreateOrConnectWithoutUserInput[]
+    createMany?: NoteCreateManyUserInputEnvelope
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -40262,6 +41856,20 @@ export namespace Prisma {
     deleteMany?: WorkoutScalarWhereInput | WorkoutScalarWhereInput[]
   }
 
+  export type NoteUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NoteCreateWithoutUserInput, NoteUncheckedCreateWithoutUserInput> | NoteCreateWithoutUserInput[] | NoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutUserInput | NoteCreateOrConnectWithoutUserInput[]
+    upsert?: NoteUpsertWithWhereUniqueWithoutUserInput | NoteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NoteCreateManyUserInputEnvelope
+    set?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    disconnect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    delete?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    update?: NoteUpdateWithWhereUniqueWithoutUserInput | NoteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NoteUpdateManyWithWhereWithoutUserInput | NoteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NoteScalarWhereInput | NoteScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -40520,6 +42128,20 @@ export namespace Prisma {
     update?: WorkoutUpdateWithWhereUniqueWithoutUserInput | WorkoutUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: WorkoutUpdateManyWithWhereWithoutUserInput | WorkoutUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: WorkoutScalarWhereInput | WorkoutScalarWhereInput[]
+  }
+
+  export type NoteUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NoteCreateWithoutUserInput, NoteUncheckedCreateWithoutUserInput> | NoteCreateWithoutUserInput[] | NoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutUserInput | NoteCreateOrConnectWithoutUserInput[]
+    upsert?: NoteUpsertWithWhereUniqueWithoutUserInput | NoteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NoteCreateManyUserInputEnvelope
+    set?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    disconnect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    delete?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    update?: NoteUpdateWithWhereUniqueWithoutUserInput | NoteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NoteUpdateManyWithWhereWithoutUserInput | NoteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NoteScalarWhereInput | NoteScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutActivitiesInput = {
@@ -42282,6 +43904,24 @@ export namespace Prisma {
     update?: XOR<XOR<WorkoutEntryUpdateToOneWithWhereWithoutSetsInput, WorkoutEntryUpdateWithoutSetsInput>, WorkoutEntryUncheckedUpdateWithoutSetsInput>
   }
 
+  export type UserCreateNestedOneWithoutNotesInput = {
+    create?: XOR<UserCreateWithoutNotesInput, UserUncheckedCreateWithoutNotesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumNoteTypeFieldUpdateOperationsInput = {
+    set?: $Enums.NoteType
+  }
+
+  export type UserUpdateOneRequiredWithoutNotesNestedInput = {
+    create?: XOR<UserCreateWithoutNotesInput, UserUncheckedCreateWithoutNotesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNotesInput
+    upsert?: UserUpsertWithoutNotesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotesInput, UserUpdateWithoutNotesInput>, UserUncheckedUpdateWithoutNotesInput>
+  }
+
   export type UserCreateNestedOneWithoutHidden_activitiesInput = {
     create?: XOR<UserCreateWithoutHidden_activitiesInput, UserUncheckedCreateWithoutHidden_activitiesInput>
     connectOrCreate?: UserCreateOrConnectWithoutHidden_activitiesInput
@@ -42788,6 +44428,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumExerciseTypeFilter<$PrismaModel>
     _max?: NestedEnumExerciseTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNoteTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNoteTypeFilter<$PrismaModel> | $Enums.NoteType
+  }
+
+  export type NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NoteType | EnumNoteTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NoteType[] | ListEnumNoteTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumNoteTypeWithAggregatesFilter<$PrismaModel> | $Enums.NoteType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNoteTypeFilter<$PrismaModel>
+    _max?: NestedEnumNoteTypeFilter<$PrismaModel>
   }
 
   export type ActivityCreateWithoutUserInput = {
@@ -43416,6 +45073,39 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type NoteCreateWithoutUserInput = {
+    uuid?: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary?: string | null
+    vector_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type NoteUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary?: string | null
+    vector_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type NoteCreateOrConnectWithoutUserInput = {
+    where: NoteWhereUniqueInput
+    create: XOR<NoteCreateWithoutUserInput, NoteUncheckedCreateWithoutUserInput>
+  }
+
+  export type NoteCreateManyUserInputEnvelope = {
+    data: NoteCreateManyUserInput | NoteCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ActivityUpsertWithWhereUniqueWithoutUserInput = {
     where: ActivityWhereUniqueInput
     update: XOR<ActivityUpdateWithoutUserInput, ActivityUncheckedUpdateWithoutUserInput>
@@ -43982,6 +45672,38 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Workout"> | Date | string
   }
 
+  export type NoteUpsertWithWhereUniqueWithoutUserInput = {
+    where: NoteWhereUniqueInput
+    update: XOR<NoteUpdateWithoutUserInput, NoteUncheckedUpdateWithoutUserInput>
+    create: XOR<NoteCreateWithoutUserInput, NoteUncheckedCreateWithoutUserInput>
+  }
+
+  export type NoteUpdateWithWhereUniqueWithoutUserInput = {
+    where: NoteWhereUniqueInput
+    data: XOR<NoteUpdateWithoutUserInput, NoteUncheckedUpdateWithoutUserInput>
+  }
+
+  export type NoteUpdateManyWithWhereWithoutUserInput = {
+    where: NoteScalarWhereInput
+    data: XOR<NoteUpdateManyMutationInput, NoteUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type NoteScalarWhereInput = {
+    AND?: NoteScalarWhereInput | NoteScalarWhereInput[]
+    OR?: NoteScalarWhereInput[]
+    NOT?: NoteScalarWhereInput | NoteScalarWhereInput[]
+    id?: IntFilter<"Note"> | number
+    uuid?: StringFilter<"Note"> | string
+    user_uuid?: StringFilter<"Note"> | string
+    type?: EnumNoteTypeFilter<"Note"> | $Enums.NoteType
+    title?: StringFilter<"Note"> | string
+    content?: StringFilter<"Note"> | string
+    summary?: StringNullableFilter<"Note"> | string | null
+    vector_id?: StringNullableFilter<"Note"> | string | null
+    created_at?: DateTimeFilter<"Note"> | Date | string
+    updated_at?: DateTimeFilter<"Note"> | Date | string
+  }
+
   export type UserCreateWithoutActivitiesInput = {
     uuid?: string
     email: string
@@ -44009,6 +45731,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutActivitiesInput = {
@@ -44039,6 +45762,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -44279,6 +46003,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -44309,6 +46034,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ScheduleSlotUpsertWithWhereUniqueWithoutActivityInput = {
@@ -44418,6 +46144,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSchedule_slotsInput = {
@@ -44448,6 +46175,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSchedule_slotsInput = {
@@ -44531,6 +46259,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSchedule_slotsInput = {
@@ -44561,6 +46290,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ActivityUpsertWithoutSchedule_slotsInput = {
@@ -44672,6 +46402,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutActivity_schedulesInput = {
@@ -44702,6 +46433,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutActivity_schedulesInput = {
@@ -44911,6 +46643,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutActivity_schedulesInput = {
@@ -44941,6 +46674,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ActivityScheduleWeekdayUpsertWithWhereUniqueWithoutScheduleInput = {
@@ -45362,6 +47096,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutActivity_occurrencesInput = {
@@ -45392,6 +47127,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutActivity_occurrencesInput = {
@@ -45583,6 +47319,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutActivity_occurrencesInput = {
@@ -45613,6 +47350,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ActivityLogUpsertWithoutOccurrenceInput = {
@@ -45810,6 +47548,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutActivity_logsInput = {
@@ -45840,6 +47579,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutActivity_logsInput = {
@@ -46021,6 +47761,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutActivity_logsInput = {
@@ -46051,6 +47792,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutExpense_accountsInput = {
@@ -46080,6 +47822,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutExpense_accountsInput = {
@@ -46110,6 +47853,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutExpense_accountsInput = {
@@ -46237,6 +47981,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExpense_accountsInput = {
@@ -46267,6 +48012,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseEntryUpsertWithWhereUniqueWithoutFrom_accountInput = {
@@ -46328,6 +48074,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCategoriesInput = {
@@ -46358,6 +48105,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCategoriesInput = {
@@ -46539,6 +48287,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCategoriesInput = {
@@ -46569,6 +48318,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseSubcategoryUpsertWithWhereUniqueWithoutCategoryInput = {
@@ -46662,6 +48412,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubcategoriesInput = {
@@ -46692,6 +48443,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubcategoriesInput = {
@@ -46872,6 +48624,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubcategoriesInput = {
@@ -46902,6 +48655,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseCategoryUpsertWithoutSubcategoriesInput = {
@@ -47017,6 +48771,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutExpense_entriesInput = {
@@ -47047,6 +48802,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutExpense_entriesInput = {
@@ -47240,6 +48996,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExpense_entriesInput = {
@@ -47270,6 +49027,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseAccountUpsertWithoutEntries_fromInput = {
@@ -47477,6 +49235,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutExpense_storesInput = {
@@ -47507,6 +49266,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutExpense_storesInput = {
@@ -47585,6 +49345,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExpense_storesInput = {
@@ -47615,6 +49376,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseReceiptUpsertWithWhereUniqueWithoutStoreInput = {
@@ -47660,6 +49422,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutExpense_receiptsInput = {
@@ -47690,6 +49453,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutExpense_receiptsInput = {
@@ -47824,6 +49588,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExpense_receiptsInput = {
@@ -47854,6 +49619,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseStoreUpsertWithoutReceiptsInput = {
@@ -47984,6 +49750,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutExpense_productsInput = {
@@ -48014,6 +49781,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutExpense_productsInput = {
@@ -48150,6 +49918,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExpense_productsInput = {
@@ -48180,6 +49949,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseCategoryUpsertWithoutProductsInput = {
@@ -48429,6 +50199,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMuscle_groupsInput = {
@@ -48459,6 +50230,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMuscle_groupsInput = {
@@ -48537,6 +50309,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMuscle_groupsInput = {
@@ -48567,6 +50340,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExerciseUpsertWithWhereUniqueWithoutMuscle_groupInput = {
@@ -48612,6 +50386,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutExercisesInput = {
@@ -48642,6 +50417,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutExercisesInput = {
@@ -48740,6 +50516,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExercisesInput = {
@@ -48770,6 +50547,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MuscleGroupUpsertWithoutExercisesInput = {
@@ -48858,6 +50636,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWorkoutsInput = {
@@ -48888,6 +50667,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWorkoutsInput = {
@@ -48962,6 +50742,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWorkoutsInput = {
@@ -48992,6 +50773,7 @@ export namespace Prisma {
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type WorkoutEntryUpsertWithWhereUniqueWithoutWorkoutInput = {
@@ -49280,6 +51062,144 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserCreateWithoutNotesInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNotesInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNotesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNotesInput, UserUncheckedCreateWithoutNotesInput>
+  }
+
+  export type UserUpsertWithoutNotesInput = {
+    update: XOR<UserUpdateWithoutNotesInput, UserUncheckedUpdateWithoutNotesInput>
+    create: XOR<UserCreateWithoutNotesInput, UserUncheckedCreateWithoutNotesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNotesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNotesInput, UserUncheckedUpdateWithoutNotesInput>
+  }
+
+  export type UserUpdateWithoutNotesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNotesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutHidden_activitiesInput = {
     uuid?: string
     email: string
@@ -49307,6 +51227,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHidden_activitiesInput = {
@@ -49337,6 +51258,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHidden_activitiesInput = {
@@ -49420,6 +51342,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHidden_activitiesInput = {
@@ -49450,6 +51373,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ActivityUpsertWithoutHidden_activitiesInput = {
@@ -49523,6 +51447,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHidden_categoriesInput = {
@@ -49553,6 +51478,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHidden_categoriesInput = {
@@ -49630,6 +51556,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHidden_categoriesInput = {
@@ -49660,6 +51587,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseCategoryUpsertWithoutHidden_categoriesInput = {
@@ -49727,6 +51655,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutHidden_subcategoriesInput = {
@@ -49757,6 +51686,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutHidden_subcategoriesInput = {
@@ -49830,6 +51760,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutHidden_subcategoriesInput = {
@@ -49860,6 +51791,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ExpenseSubcategoryUpsertWithoutHidden_subcategoriesInput = {
@@ -50098,6 +52030,18 @@ export namespace Prisma {
     notes?: string | null
     started_at?: Date | string
     finished_at?: Date | string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type NoteCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary?: string | null
+    vector_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -50750,6 +52694,41 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     started_at?: DateTimeFieldUpdateOperationsInput | Date | string
     finished_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

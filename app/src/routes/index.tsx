@@ -13,6 +13,8 @@ import { GymPage } from "../pages/gym";
 import { WorkoutDetailPage } from "../pages/gym/workout-detail";
 import { ExerciseDetailPage } from "../pages/gym/exercise-detail";
 import { LandingPage } from "../pages/landing";
+import { NotesPage } from "../pages/notes";
+import { NoteDetailPage } from "../pages/notes/note-detail";
 import { ActivitiesSettingsPage } from "../pages/settings/pages/activities";
 import { ExpensesSettingsPage } from "../pages/settings/pages/expenses";
 
@@ -57,6 +59,8 @@ export default function AppRoutes() {
         <Route path="gym" element={<GymPage />} />
         <Route path="gym/workout/:uuid" element={<WorkoutDetailPage />} />
         <Route path="gym/workout-entry/:entryUuid" element={<ExerciseDetailPage />} />
+        <Route path="notes" element={<NotesPage />} />
+        <Route path="notes/:uuid" element={<NoteDetailPage />} />
       </Route>
 
       <Route path="/" element={isMobile ? <Navigate to="/dashboard/routine" replace /> : <LandingPage />} />

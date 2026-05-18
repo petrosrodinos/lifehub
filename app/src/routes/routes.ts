@@ -29,4 +29,8 @@ export const Routes = {
         workoutExercise: (workoutUuid: string, exerciseUuid: string) =>
             `/dashboard/gym/workout/${workoutUuid}/exercise/${exerciseUuid}`,
     },
+    notes: {
+        prefix: '/dashboard/notes',
+        detail: (uuid: string) => `/dashboard/notes/${uuid}`,
+    },
 };

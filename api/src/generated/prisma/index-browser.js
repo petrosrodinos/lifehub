@@ -386,6 +386,19 @@ exports.Prisma.WorkoutSetScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.NoteScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  type: 'type',
+  title: 'title',
+  content: 'content',
+  summary: 'summary',
+  vector_id: 'vector_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.HiddenActivityScalarFieldEnum = {
   id: 'id',
   uuid: 'uuid',
@@ -488,6 +501,14 @@ exports.ExerciseType = exports.$Enums.ExerciseType = {
   TIME: 'TIME'
 };
 
+exports.NoteType = exports.$Enums.NoteType = {
+  BOOK: 'BOOK',
+  IDEA: 'IDEA',
+  NOTE: 'NOTE',
+  VIDEO: 'VIDEO',
+  ARTICLE: 'ARTICLE'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Activity: 'Activity',
@@ -510,6 +531,7 @@ exports.Prisma.ModelName = {
   Workout: 'Workout',
   WorkoutEntry: 'WorkoutEntry',
   WorkoutSet: 'WorkoutSet',
+  Note: 'Note',
   HiddenActivity: 'HiddenActivity',
   HiddenCategory: 'HiddenCategory',
   HiddenSubcategory: 'HiddenSubcategory'

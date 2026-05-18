@@ -112,6 +112,9 @@ model User {
   exercises Exercise[]
   workouts Workout[]
 
+  // Notes
+  notes Note[]
+
   @@index([email])
   @@index([phone])
   @@index([uuid])
@@ -558,6 +561,31 @@ model WorkoutSet {
   @@map("workout_sets")
 }
 
+
+enum NoteType {
+  BOOK
+  IDEA
+  NOTE
+  VIDEO
+  ARTICLE
+}
+
+model Note {
+  id         Int      @id @default(autoincrement())
+  uuid       String   @unique @default(uuid())
+  user_uuid  String
+  user       User     @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  type       NoteType
+  title      String
+  content    String   @db.Text
+  summary    String?  @db.Text
+  vector_id  String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([user_uuid])
+  @@map("notes")
+}
 
 model HiddenActivity {
   id           Int          @id @default(autoincrement())
