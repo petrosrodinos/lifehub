@@ -1,5 +1,11 @@
+import ReactMarkdown from 'react-markdown'
+import type { Components } from 'react-markdown'
 import type { DisplayMessage } from '../../../features/assistant/interfaces/chat.interface'
 import { stripMarkdownImages } from '../../../features/assistant/utils/strip-markdown-images.utils'
+
+const assistantMarkdownComponents: Components = {
+    img: () => null,
+}
 
 interface ChatMessageBubbleProps {
     message: DisplayMessage
@@ -34,8 +40,14 @@ export function ChatMessageBubble({ message }: ChatMessageBubbleProps) {
                         <span className="w-2 h-2 rounded-full bg-slate-400 animate-bounce [animation-delay:150ms]" />
                         <span className="w-2 h-2 rounded-full bg-slate-400 animate-bounce [animation-delay:300ms]" />
                     </div>
-                ) : (
+                ) : isUser ? (
                     <p className="text-sm whitespace-pre-wrap break-words leading-relaxed">{displayContent}</p>
+                ) : (
+                    <div className="prose-notes">
+                        <ReactMarkdown components={assistantMarkdownComponents}>
+                            {displayContent}
+                        </ReactMarkdown>
+                    </div>
                 )}
                 {!isUser && images.length > 0 && !isPending && (
                     <div className="mt-3 space-y-3">
