@@ -35,6 +35,7 @@ import { HiddenSubcategoriesModule } from './modules/expenses/hidden-subcategori
 import { HiddenActivitiesModule } from './modules/habbits/hidden-activities/hidden-activities.module';
 import { NotesModule } from './modules/notes/notes.module';
 import { ChatModule } from './modules/chat/chat.module';
+import { InternalYoutubeScraperModule } from './modules/internal/youtube-scraper/youtube-scraper.module';
 
 @Module({
   imports: [
@@ -72,6 +73,7 @@ import { ChatModule } from './modules/chat/chat.module';
     HiddenActivitiesModule,
     NotesModule,
     ChatModule,
+    InternalYoutubeScraperModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -214,6 +214,9 @@ export const ApiRoutes = {
     delete: (uuid: string) => `/notes/${uuid}`,
     summarize: (uuid: string) => `/notes/${uuid}/summarize`,
   },
+  youtubeScraper: {
+    transcript: '/youtube-scraper/transcript',
+  },
   assistant: {
     conversations: {
       list: '/chat/conversations',

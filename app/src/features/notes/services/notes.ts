@@ -31,3 +31,8 @@ export const summarizeNote = async (uuid: string): Promise<{ summary: string }> 
     const response = await axiosInstance.post(ApiRoutes.notes.summarize(uuid))
     return response.data
 }
+
+export const fetchYoutubeTranscript = async (youtube_url: string): Promise<{ title: string; transcript: string }> => {
+    const response = await axiosInstance.post(ApiRoutes.youtubeScraper.transcript, { youtube_url })
+    return response.data
+}

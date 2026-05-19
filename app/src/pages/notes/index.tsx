@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { BookOpen, Lightbulb, FileText, Video, Newspaper, Plus, Loader2, StickyNote, ChevronDown, ChevronUp } from 'lucide-react'
+import { BookOpen, Lightbulb, FileText, Video, Newspaper, Plus, Loader2, StickyNote, ChevronDown, ChevronUp, Youtube, AlertCircle } from 'lucide-react'
 import { useNotes, useCreateNote } from '../../features/notes/hooks/use-notes'
+import { fetchYoutubeTranscript } from '../../features/notes/services/notes'
 import type { NoteType } from '../../features/notes/interfaces/note.interface'
 import { Routes } from '../../routes/routes'
 
@@ -87,6 +88,34 @@ export function NotesPage() {
     const [content, setContent] = useState('')
     const [showForm, setShowForm] = useState(false)
 
+    const [youtubeUrl, setYoutubeUrl] = useState('')
+    const [isFetchingTranscript, setIsFetchingTranscript] = useState(false)
+    const [fetchError, setFetchError] = useState('')
+
+    function handleTypeChange(type: NoteType) {
+        setSelectedType(type)
+        if (type !== 'VIDEO') {
+            setYoutubeUrl('')
+            setFetchError('')
+        }
+    }
+
+    async function handleFetchTranscript() {
+        if (!youtubeUrl.trim()) return
+        setIsFetchingTranscript(true)
+        setFetchError('')
+        try {
+            const result = await fetchYoutubeTranscript(youtubeUrl.trim())
+            setContent(result.transcript)
+            if (!title.trim() && result.title) setTitle(result.title)
+            setYoutubeUrl('')
+        } catch (err) {
+            setFetchError(err instanceof Error ? err.message : 'Failed to fetch transcript')
+        } finally {
+            setIsFetchingTranscript(false)
+        }
+    }
+
     async function handleCreate(e: React.FormEvent) {
         e.preventDefault()
         if (!title.trim() || !content.trim()) return
@@ -94,6 +123,8 @@ export function NotesPage() {
         setTitle('')
         setContent('')
         setSelectedType('NOTE')
+        setYoutubeUrl('')
+        setFetchError('')
         setShowForm(false)
     }
 
@@ -132,7 +163,7 @@ export function NotesPage() {
                                 <button
                                     key={type}
                                     type="button"
-                                    onClick={() => setSelectedType(type)}
+                                    onClick={() => handleTypeChange(type)}
                                     className={`flex flex-col items-center gap-1.5 py-3 rounded-xl border transition-all ${
                                         selectedType === type
                                             ? `${bg} ${border} ${color}`
@@ -145,12 +176,50 @@ export function NotesPage() {
                             ))}
                         </div>
 
+                        {selectedType === 'VIDEO' && (
+                            <div className="mb-4">
+                                <div className="flex gap-2">
+                                    <div className="relative flex-1">
+                                        <Youtube className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-rose-400/50" />
+                                        <input
+                                            type="url"
+                                            placeholder="https://youtube.com/watch?v=..."
+                                            value={youtubeUrl}
+                                            onChange={(e) => { setYoutubeUrl(e.target.value); setFetchError('') }}
+                                            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleFetchTranscript() } }}
+                                            disabled={isFetchingTranscript}
+                                            className="w-full bg-slate-800/60 border border-rose-400/20 focus:border-rose-400/40 rounded-xl pl-10 pr-4 py-2.5 text-white placeholder-slate-500 text-sm focus:outline-none transition-colors disabled:opacity-50"
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={handleFetchTranscript}
+                                        disabled={!youtubeUrl.trim() || isFetchingTranscript}
+                                        className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-rose-500/10 border border-rose-400/20 text-rose-400 text-sm font-medium hover:bg-rose-500/20 hover:border-rose-400/35 disabled:opacity-35 disabled:cursor-not-allowed transition-all"
+                                    >
+                                        {isFetchingTranscript
+                                            ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                            : <Youtube className="w-3.5 h-3.5" />
+                                        }
+                                        Fetch
+                                    </button>
+                                </div>
+                                {fetchError && (
+                                    <div className="flex items-center gap-1.5 mt-2 text-rose-400 text-xs">
+                                        <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                                        {fetchError}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
                         <textarea
-                            placeholder="Write your note here..."
+                            placeholder={selectedType === 'VIDEO' ? 'Transcript will appear here, or write your own notes…' : 'Write your note here...'}
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                             rows={5}
-                            className="w-full bg-slate-800/60 border border-slate-700/60 rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-violet-500/60 transition-colors resize-none mb-4"
+                            disabled={isFetchingTranscript}
+                            className={`w-full bg-slate-800/60 border border-slate-700/60 rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-violet-500/60 transition-colors resize-none mb-4 ${isFetchingTranscript ? 'animate-pulse opacity-50' : ''}`}
                             required
                         />
 
