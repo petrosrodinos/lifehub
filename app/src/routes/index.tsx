@@ -15,6 +15,7 @@ import { ExerciseDetailPage } from "../pages/gym/exercise-detail";
 import { LandingPage } from "../pages/landing";
 import { NotesPage } from "../pages/notes";
 import { NoteDetailPage } from "../pages/notes/note-detail";
+import { AssistantPage } from "../pages/assistant";
 import { ActivitiesSettingsPage } from "../pages/settings/pages/activities";
 import { ExpensesSettingsPage } from "../pages/settings/pages/expenses";
 
@@ -48,7 +49,7 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<Navigate to="/dashboard/routine" replace />} />
+        <Route index element={<Navigate to="/dashboard/expenses" replace />} />
         <Route path="routine" element={<RoutinePage />} />
         <Route path="expenses" element={<ExpenseAccountsPage />} />
         <Route path="receipts" element={<ReceiptsPage />} />
@@ -61,9 +62,10 @@ export default function AppRoutes() {
         <Route path="gym/workout-entry/:entryUuid" element={<ExerciseDetailPage />} />
         <Route path="notes" element={<NotesPage />} />
         <Route path="notes/:uuid" element={<NoteDetailPage />} />
+        <Route path="assistant" element={<AssistantPage />} />
       </Route>
 
-      <Route path="/" element={isMobile ? <Navigate to="/dashboard/routine" replace /> : <LandingPage />} />
+      <Route path="/" element={isMobile ? <Navigate to="/dashboard/expenses" replace /> : <LandingPage />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

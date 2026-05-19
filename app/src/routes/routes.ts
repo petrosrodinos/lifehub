@@ -33,4 +33,7 @@ export const Routes = {
         prefix: '/dashboard/notes',
         detail: (uuid: string) => `/dashboard/notes/${uuid}`,
     },
+    assistant: {
+        prefix: '/dashboard/assistant',
+    },
 };

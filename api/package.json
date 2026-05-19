@@ -31,7 +31,7 @@
     "debug:dev": "npx dotenv -e .env.development -- node --inspect-brk -r tsconfig-paths/register -r ts-node/register ./node_modules/@nestjs/cli/bin/nest.js start --watch"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^1.3.23",
+    "@ai-sdk/openai": "^2.0.106",
     "@bull-board/api": "^6.16.2",
     "@bull-board/express": "^6.16.2",
     "@google-cloud/storage": "^7.18.0",
@@ -50,13 +50,14 @@
     "@nestjs/platform-express": "^11.1.6",
     "@nestjs/schedule": "^6.0.0",
     "@nestjs/swagger": "^11.2.0",
+    "@openai/agents": "^0.11.4",
     "@pinecone-database/pinecone": "^7.2.0",
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
     "@sendgrid/client": "^8.1.5",
     "@sendgrid/mail": "^8.1.5",
     "@types/node-telegram-bot-api": "^0.64.9",
-    "ai": "^4.3.17",
+    "ai": "^5.0.188",
     "apollo-server-express": "^3.13.0",
     "axios": "^1.10.0",
     "bcrypt": "^6.0.0",
@@ -83,7 +84,7 @@
     "twilio": "^5.7.2",
     "twitter-api-v2": "^1.23.2",
     "uuid": "^11.1.0",
-    "zod": "^3.25.67"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.10",

@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { PineconeService } from './pinecone.service';
+import { PineconeConfig } from './pinecone.config';
 
 @Module({
-    providers: [PineconeService],
+    providers: [PineconeConfig, PineconeService],
     exports: [PineconeService],
 })
-export class PineconeModule { }
+export class PineconeModule {}

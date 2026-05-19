@@ -8,10 +8,11 @@ export function MainLayout() {
   const location = useLocation();
 
   const isSettingsPage = location.pathname.startsWith("/dashboard/settings");
+  const isAssistantPage = location.pathname.startsWith("/dashboard/assistant");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pb-16">
-      <header className="bg-slate-950/80 backdrop-blur-sm shadow-2xl border-b border-slate-700/50 sticky top-0 z-40">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pb-16">
+      <header className="shrink-0 bg-slate-950/80 backdrop-blur-sm shadow-2xl border-b border-slate-700/50 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <img src="/icon.png" alt="LifeHub" className="h-10 w-auto object-contain shrink-0" />
@@ -28,7 +29,7 @@ export function MainLayout() {
           </Link>
         </div>
       </header>
-      <main className="max-w-7xl mx-auto">
+      <main className={`flex-1 flex flex-col min-h-0 w-full max-w-7xl mx-auto ${isAssistantPage ? "overflow-hidden" : ""}`}>
         <Outlet />
       </main>
       <BottomNavigation />

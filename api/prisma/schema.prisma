@@ -115,6 +115,9 @@ model User {
   // Notes
   notes Note[]
 
+  // Assistant
+  chat_conversations ChatConversation[]
+
   @@index([email])
   @@index([phone])
   @@index([uuid])
@@ -630,4 +633,38 @@ model HiddenSubcategory {
   @@index([user_uuid])
   @@index([subcategory_uuid])
   @@map("expense_hidden_subcategories")
+}
+
+enum ChatMessageRole {
+  USER
+  ASSISTANT
+  TOOL
+}
+
+model ChatConversation {
+  id         Int           @id @default(autoincrement())
+  uuid       String        @unique @default(uuid())
+  user_uuid  String
+  user       User          @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  title      String        @default("New chat")
+  created_at DateTime      @default(now())
+  updated_at DateTime      @updatedAt
+  messages   ChatMessage[]
+
+  @@index([user_uuid, updated_at])
+  @@map("chat_conversations")
+}
+
+model ChatMessage {
+  id                Int              @id @default(autoincrement())
+  uuid              String           @unique @default(uuid())
+  conversation_uuid String
+  conversation      ChatConversation @relation(fields: [conversation_uuid], references: [uuid], onDelete: Cascade)
+  role              ChatMessageRole
+  content           String           @db.Text
+  metadata          Json?
+  created_at        DateTime         @default(now())
+
+  @@index([conversation_uuid, created_at])
+  @@map("chat_messages")
 }

@@ -15,32 +15,34 @@ export class GcsConfig {
 
     private initGcs() {
         try {
-            const projectId = this.configService.get('GCS_PROJECT_ID');
-            const bucketName = this.configService.get('GCS_BUCKET_NAME');
-            const credentialsPath = this.configService.get('GCS_CREDENTIALS_PATH');
-            const credentials = this.configService.get('GCS_CREDENTIALS');
-            const folderName = this.configService.get('GCS_FOLDER_NAME');
+            const projectId = this.configService.get<string>('GCS_PROJECT_ID');
+            const bucketName =
+                this.configService.get<string>('GCS_BUCKET_NAME') ||
+                this.configService.get<string>('GCS_BUCKET');
+            const credentialsBase64 = this.configService.get<string>('GCS_CREDENTIALS_JSON_BASE64');
+            const folderName = this.configService.get<string>('GCS_FOLDER_NAME') ?? 'documents';
 
             if (!projectId || !bucketName) {
-                this.logger.error('GCS_PROJECT_ID and GCS_BUCKET_NAME are required');
+                this.logger.error('GCS_PROJECT_ID and GCS_BUCKET_NAME (or GCS_BUCKET) are required');
                 return;
             }
+
+            const credentials = credentialsBase64
+                ? this.parseCredentialsFromBase64(credentialsBase64)
+                : undefined;
 
             this.config = {
                 project_id: projectId,
                 bucket_name: bucketName,
-                credentials_path: credentialsPath,
-                credentials: credentials ? JSON.parse(credentials) : undefined,
-                folder_name: folderName || 'documents'
+                credentials,
+                folder_name: folderName,
             };
 
-            const storageOptions: any = {
-                projectId: this.config.project_id
+            const storageOptions: { projectId: string; credentials?: object } = {
+                projectId: this.config.project_id,
             };
 
-            if (this.config.credentials_path) {
-                storageOptions.keyFilename = this.config.credentials_path;
-            } else if (this.config.credentials) {
+            if (this.config.credentials) {
                 storageOptions.credentials = this.config.credentials;
             }
 
@@ -48,6 +50,16 @@ export class GcsConfig {
             this.logger.debug('Google Cloud Storage initialized');
         } catch (error) {
             this.logger.error('Error initializing Google Cloud Storage', error);
+        }
+    }
+
+    private parseCredentialsFromBase64(base64: string): object {
+        try {
+            const normalized = base64.trim().replace(/^["']|["']$/g, '');
+            const json = Buffer.from(normalized, 'base64').toString('utf-8');
+            return JSON.parse(json) as object;
+        } catch {
+            throw new Error('Invalid GCS_CREDENTIALS_JSON_BASE64');
         }
     }
 

@@ -1,9 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { embed, generateObject, generateText, streamText } from 'ai';
+import { embed, experimental_generateImage as generateImage, generateObject, generateText, streamText } from 'ai';
 import {
     AIGenerateObjectResponse,
     AIGenerateOptions,
     AIGenerateTextResponse,
+    AIGenerateImageOptions,
+    AIGenerateImageResponse,
     AIStreamTextOptions,
     AIExtractObjectFromImageOptions,
     AIExtractObjectFromImageResponse,
@@ -34,7 +36,7 @@ export class AiService {
                 model: modelAdapter,
                 system: options?.system || 'You are a helpful assistant.',
                 temperature: options.temperature,
-                maxTokens: options.maxTokens,
+                maxOutputTokens: options.maxTokens,
                 topP: options.topP,
                 frequencyPenalty: options.frequencyPenalty,
                 presencePenalty: options.presencePenalty,
@@ -43,8 +45,8 @@ export class AiService {
             const cost = calculateAiCost({
                 provider: options.provider,
                 model: options.model,
-                inputTokens: usage.promptTokens,
-                outputTokens: usage.completionTokens,
+                inputTokens: usage.inputTokens ?? 0,
+                outputTokens: usage.outputTokens ?? 0,
             });
 
             return {
@@ -77,8 +79,8 @@ export class AiService {
                 const cost = calculateAiCost({
                     provider: options.provider,
                     model: options.model,
-                    inputTokens: usage.promptTokens,
-                    outputTokens: usage.completionTokens,
+                    inputTokens: usage.inputTokens ?? 0,
+                    outputTokens: usage.outputTokens ?? 0,
                 });
 
                 return {
@@ -114,7 +116,7 @@ export class AiService {
                 system: options.system,
                 prompt: options.prompt,
                 temperature: options.temperature,
-                maxTokens: options.maxTokens,
+                maxOutputTokens: options.maxTokens,
                 topP: options.topP,
                 frequencyPenalty: options.frequencyPenalty,
                 presencePenalty: options.presencePenalty,
@@ -139,6 +141,25 @@ export class AiService {
         }
     }
 
+    async generateImage(options: AIGenerateImageOptions): Promise<AIGenerateImageResponse> {
+        try {
+            const modelId = options.model ?? 'gpt-image-1';
+            const { image } = await generateImage({
+                model: openai.image(modelId),
+                prompt: options.prompt,
+                size: options.size,
+            });
+
+            return {
+                imageBuffer: Buffer.from(image.uint8Array),
+                mediaType: image.mediaType,
+            };
+        } catch (error) {
+            this.logger.error(`Error generating image: ${error.message}`);
+            throw new Error(`Failed to generate image: ${error.message}`);
+        }
+    }
+
     async embedText(text: string): Promise<number[]> {
         const embeddingModel = openai.embedding('text-embedding-3-small');
         const { embedding } = await embed({
@@ -160,6 +181,7 @@ export class AiService {
         const { object, usage } = await generateObject({
             model: modelAdapter,
             schema: options.schema,
+            output: 'object',
             system: options.system,
             messages: [
                 {
@@ -174,8 +196,8 @@ export class AiService {
         const cost = calculateAiCost({
             provider,
             model,
-            inputTokens: usage.promptTokens,
-            outputTokens: usage.completionTokens,
+            inputTokens: usage.inputTokens ?? 0,
+            outputTokens: usage.outputTokens ?? 0,
         });
         return {
             response: object as T,

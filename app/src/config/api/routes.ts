@@ -214,4 +214,15 @@ export const ApiRoutes = {
     delete: (uuid: string) => `/notes/${uuid}`,
     summarize: (uuid: string) => `/notes/${uuid}/summarize`,
   },
+  assistant: {
+    conversations: {
+      list: '/chat/conversations',
+      create: '/chat/conversations',
+      get: (uuid: string) => `/chat/conversations/${uuid}`,
+      update: (uuid: string) => `/chat/conversations/${uuid}`,
+      delete: (uuid: string) => `/chat/conversations/${uuid}`,
+      messages: (uuid: string) => `/chat/conversations/${uuid}/messages`,
+      sendMessage: (uuid: string) => `/chat/conversations/${uuid}/messages`,
+    },
+  },
 }

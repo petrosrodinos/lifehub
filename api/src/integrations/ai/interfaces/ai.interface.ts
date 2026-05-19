@@ -5,7 +5,7 @@ export interface AIGenerateOptions {
     model?: AiModel;
     system?: string;
     prompt: string;
-    schema?: z.ZodSchema;
+    schema?: z.ZodType;
     output?: 'json' | 'no-schema';
     temperature?: number;
     maxTokens?: number;
@@ -20,7 +20,7 @@ export interface AIGenerateTextResponse {
 }
 
 export interface AIGenerateObjectResponse {
-    response: z.ZodSchema[] | null;
+    response: unknown;
     usage?: AICostResponse
 }
 
@@ -88,7 +88,7 @@ export interface AIExtractObjectFromImageOptions<T = unknown> {
   mimeType: string;
   system: string;
   prompt: string;
-  schema: z.ZodSchema<T>;
+  schema: z.ZodType<T>;
   provider?: AiProvider;
   model?: AiModel;
 }
@@ -96,4 +96,15 @@ export interface AIExtractObjectFromImageOptions<T = unknown> {
 export interface AIExtractObjectFromImageResponse<T> {
   response: T;
   usage?: AICostResponse;
+}
+
+export interface AIGenerateImageOptions {
+  prompt: string;
+  model?: string;
+  size?: `${number}x${number}`;
+}
+
+export interface AIGenerateImageResponse {
+  imageBuffer: Buffer;
+  mediaType: string;
 }

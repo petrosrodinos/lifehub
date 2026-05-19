@@ -426,9 +426,33 @@ exports.Prisma.HiddenSubcategoryScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.ChatConversationScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  title: 'title',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.ChatMessageScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  conversation_uuid: 'conversation_uuid',
+  role: 'role',
+  content: 'content',
+  metadata: 'metadata',
+  created_at: 'created_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -439,6 +463,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.AuthRole = exports.$Enums.AuthRole = {
   USER: 'USER',
@@ -509,6 +539,12 @@ exports.NoteType = exports.$Enums.NoteType = {
   ARTICLE: 'ARTICLE'
 };
 
+exports.ChatMessageRole = exports.$Enums.ChatMessageRole = {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT',
+  TOOL: 'TOOL'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Activity: 'Activity',
@@ -534,7 +570,9 @@ exports.Prisma.ModelName = {
   Note: 'Note',
   HiddenActivity: 'HiddenActivity',
   HiddenCategory: 'HiddenCategory',
-  HiddenSubcategory: 'HiddenSubcategory'
+  HiddenSubcategory: 'HiddenSubcategory',
+  ChatConversation: 'ChatConversation',
+  ChatMessage: 'ChatMessage'
 };
 
 /**

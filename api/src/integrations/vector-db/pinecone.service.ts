@@ -1,7 +1,14 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { Pinecone } from '@pinecone-database/pinecone';
+import { PineconeConfig } from './pinecone.config';
 
-const EMBEDDING_DIMENSION = 1536; // text-embedding-3-small
+const EMBEDDING_DIMENSION = 1536;
+
+export interface PineconeQueryMatch {
+    id: string;
+    score: number;
+    metadata: Record<string, string>;
+}
 
 @Injectable()
 export class PineconeService implements OnModuleInit {
@@ -9,9 +16,11 @@ export class PineconeService implements OnModuleInit {
     private client: Pinecone;
     private indexName: string;
 
+    constructor(private readonly pineconeConfig: PineconeConfig) {}
+
     async onModuleInit() {
-        this.indexName = process.env.PINECONE_INDEX ?? 'lifehub-notes';
-        const apiKey = process.env.PINECONE_API_KEY ?? '';
+        this.indexName = this.pineconeConfig.indexName;
+        const apiKey = this.pineconeConfig.apiKey;
         this.logger.log(`Initializing Pinecone — index: "${this.indexName}", apiKey set: ${!!apiKey}`);
         this.client = new Pinecone({ apiKey });
         await this.ensureIndexExists();
@@ -65,6 +74,31 @@ export class PineconeService implements OnModuleInit {
             await index.deleteOne({ id });
         } catch (error) {
             this.logger.warn(`Failed to delete vector ${id}: ${error.message}`);
+        }
+    }
+
+    async queryVectors(
+        vector: number[],
+        user_uuid: string,
+        topK: number,
+    ): Promise<PineconeQueryMatch[]> {
+        try {
+            const index = this.client.index(this.indexName);
+            const response = await index.query({
+                vector,
+                topK,
+                includeMetadata: true,
+                filter: { user_uuid: { $eq: user_uuid } },
+            });
+
+            return (response.matches ?? []).map((match) => ({
+                id: match.id ?? '',
+                score: match.score ?? 0,
+                metadata: (match.metadata ?? {}) as Record<string, string>,
+            }));
+        } catch (error) {
+            this.logger.error(`Failed to query vectors for user ${user_uuid}: ${error.message}`);
+            throw error;
         }
     }
 }

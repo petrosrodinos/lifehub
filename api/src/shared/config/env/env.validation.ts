@@ -12,9 +12,16 @@ const EnvSchema = z.object({
     GCS_PROJECT_ID: z.string().optional(),
     GCS_BUCKET_NAME: z.string().optional(),
     GCS_FOLDER_NAME: z.string().optional(),
-    GCS_CREDENTIALS_PATH: z.string().optional(),
-    GCS_CREDENTIALS: z.string().optional(),
+    GCS_CREDENTIALS_JSON_BASE64: z.string().optional(),
     OPENAI_API_KEY: z.string().optional(),
+    PINECONE_API_KEY: z.string().optional(),
+    PINECONE_INDEX: z.string().optional(),
+    ASSISTANT_MODEL: z.string().optional(),
+    CHAT_MAX_HISTORY_MESSAGES: z.string().optional(),
+    NOTES_RETRIEVAL_TOP_K: z.string().optional(),
+    NOTE_SNIPPET_MAX_CHARS: z.string().optional(),
+    ASSISTANT_TOOL_TIMEOUT_MS: z.string().optional(),
+    ASSISTANT_IMAGE_TOOL_TIMEOUT_MS: z.string().optional(),
 });
 
 export function validateEnv(config: Record<string, unknown>) {

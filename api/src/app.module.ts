@@ -34,6 +34,7 @@ import { HiddenCategoriesModule } from './modules/expenses/hidden-categories/hid
 import { HiddenSubcategoriesModule } from './modules/expenses/hidden-subcategories/hidden-subcategories.module';
 import { HiddenActivitiesModule } from './modules/habbits/hidden-activities/hidden-activities.module';
 import { NotesModule } from './modules/notes/notes.module';
+import { ChatModule } from './modules/chat/chat.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { NotesModule } from './modules/notes/notes.module';
     HiddenSubcategoriesModule,
     HiddenActivitiesModule,
     NotesModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
