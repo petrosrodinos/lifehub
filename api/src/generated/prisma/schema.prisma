@@ -113,7 +113,8 @@ model User {
   workouts      Workout[]
 
   // Notes
-  notes Note[]
+  notes     Note[]
+  note_tags NoteTag[]
 
   // Assistant
   chat_conversations ChatConversation[]
@@ -568,20 +569,36 @@ enum NoteType {
 }
 
 model Note {
+  id         Int       @id @default(autoincrement())
+  uuid       String    @unique @default(uuid())
+  user_uuid  String
+  user       User      @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  type       NoteType
+  title      String
+  content    String    @db.Text
+  summary    String?   @db.Text
+  vector_id  String?
+  tags       NoteTag[]
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+
+  @@index([user_uuid])
+  @@map("notes")
+}
+
+model NoteTag {
   id         Int      @id @default(autoincrement())
   uuid       String   @unique @default(uuid())
   user_uuid  String
   user       User     @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  type       NoteType
   title      String
-  content    String   @db.Text
-  summary    String?  @db.Text
-  vector_id  String?
+  color      String   @default("#8b5cf6")
+  notes      Note[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@index([user_uuid])
-  @@map("notes")
+  @@map("note_tags")
 }
 
 model HiddenActivity {

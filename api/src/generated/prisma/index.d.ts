@@ -124,6 +124,11 @@ export type WorkoutSet = $Result.DefaultSelection<Prisma.$WorkoutSetPayload>
  */
 export type Note = $Result.DefaultSelection<Prisma.$NotePayload>
 /**
+ * Model NoteTag
+ * 
+ */
+export type NoteTag = $Result.DefaultSelection<Prisma.$NoteTagPayload>
+/**
  * Model HiddenActivity
  * 
  */
@@ -312,7 +317,9 @@ export const ChatMessageRole: typeof $Enums.ChatMessageRole
  * Type-safe database client for TypeScript & Node.js
  * @example
  * ```
- * const prisma = new PrismaClient()
+ * const prisma = new PrismaClient({
+ *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+ * })
  * // Fetch zero or more Users
  * const users = await prisma.user.findMany()
  * ```
@@ -333,7 +340,9 @@ export class PrismaClient<
    * Type-safe database client for TypeScript & Node.js
    * @example
    * ```
-   * const prisma = new PrismaClient()
+   * const prisma = new PrismaClient({
+   *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+   * })
    * // Fetch zero or more Users
    * const users = await prisma.user.findMany()
    * ```
@@ -413,9 +422,9 @@ export class PrismaClient<
    * ])
    * ```
    * 
-   * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
+   * Read more in our [docs](https://www.prisma.io/docs/orm/prisma-client/queries/transactions).
    */
-  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
   $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
 
@@ -644,6 +653,16 @@ export class PrismaClient<
   get note(): Prisma.NoteDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.noteTag`: Exposes CRUD operations for the **NoteTag** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NoteTags
+    * const noteTags = await prisma.noteTag.findMany()
+    * ```
+    */
+  get noteTag(): Prisma.NoteTagDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.hiddenActivity`: Exposes CRUD operations for the **HiddenActivity** model.
     * Example usage:
     * ```ts
@@ -742,8 +761,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 7.2.0
-   * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
+   * Prisma Client JS version: 7.8.0
+   * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
    */
   export type PrismaVersion = {
     client: string
@@ -1148,6 +1167,7 @@ export namespace Prisma {
     WorkoutEntry: 'WorkoutEntry',
     WorkoutSet: 'WorkoutSet',
     Note: 'Note',
+    NoteTag: 'NoteTag',
     HiddenActivity: 'HiddenActivity',
     HiddenCategory: 'HiddenCategory',
     HiddenSubcategory: 'HiddenSubcategory',
@@ -1168,7 +1188,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory" | "chatConversation" | "chatMessage"
+      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "noteTag" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory" | "chatConversation" | "chatMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2800,6 +2820,80 @@ export namespace Prisma {
           }
         }
       }
+      NoteTag: {
+        payload: Prisma.$NoteTagPayload<ExtArgs>
+        fields: Prisma.NoteTagFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NoteTagFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NoteTagFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload>
+          }
+          findFirst: {
+            args: Prisma.NoteTagFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NoteTagFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload>
+          }
+          findMany: {
+            args: Prisma.NoteTagFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload>[]
+          }
+          create: {
+            args: Prisma.NoteTagCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload>
+          }
+          createMany: {
+            args: Prisma.NoteTagCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NoteTagCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload>[]
+          }
+          delete: {
+            args: Prisma.NoteTagDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload>
+          }
+          update: {
+            args: Prisma.NoteTagUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload>
+          }
+          deleteMany: {
+            args: Prisma.NoteTagDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NoteTagUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NoteTagUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload>[]
+          }
+          upsert: {
+            args: Prisma.NoteTagUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoteTagPayload>
+          }
+          aggregate: {
+            args: Prisma.NoteTagAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNoteTag>
+          }
+          groupBy: {
+            args: Prisma.NoteTagGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NoteTagGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NoteTagCountArgs<ExtArgs>
+            result: $Utils.Optional<NoteTagCountAggregateOutputType> | number
+          }
+        }
+      }
       HiddenActivity: {
         payload: Prisma.$HiddenActivityPayload<ExtArgs>
         fields: Prisma.HiddenActivityFieldRefs
@@ -3300,6 +3394,7 @@ export namespace Prisma {
     workoutEntry?: WorkoutEntryOmit
     workoutSet?: WorkoutSetOmit
     note?: NoteOmit
+    noteTag?: NoteTagOmit
     hiddenActivity?: HiddenActivityOmit
     hiddenCategory?: HiddenCategoryOmit
     hiddenSubcategory?: HiddenSubcategoryOmit
@@ -3404,6 +3499,7 @@ export namespace Prisma {
     exercises: number
     workouts: number
     notes: number
+    note_tags: number
     chat_conversations: number
   }
 
@@ -3427,6 +3523,7 @@ export namespace Prisma {
     exercises?: boolean | UserCountOutputTypeCountExercisesArgs
     workouts?: boolean | UserCountOutputTypeCountWorkoutsArgs
     notes?: boolean | UserCountOutputTypeCountNotesArgs
+    note_tags?: boolean | UserCountOutputTypeCountNote_tagsArgs
     chat_conversations?: boolean | UserCountOutputTypeCountChat_conversationsArgs
   }
 
@@ -3572,6 +3669,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountNotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NoteWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountNote_tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NoteTagWhereInput
   }
 
   /**
@@ -4072,6 +4176,68 @@ export namespace Prisma {
 
 
   /**
+   * Count Type NoteCountOutputType
+   */
+
+  export type NoteCountOutputType = {
+    tags: number
+  }
+
+  export type NoteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tags?: boolean | NoteCountOutputTypeCountTagsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * NoteCountOutputType without action
+   */
+  export type NoteCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteCountOutputType
+     */
+    select?: NoteCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * NoteCountOutputType without action
+   */
+  export type NoteCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NoteTagWhereInput
+  }
+
+
+  /**
+   * Count Type NoteTagCountOutputType
+   */
+
+  export type NoteTagCountOutputType = {
+    notes: number
+  }
+
+  export type NoteTagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    notes?: boolean | NoteTagCountOutputTypeCountNotesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * NoteTagCountOutputType without action
+   */
+  export type NoteTagCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTagCountOutputType
+     */
+    select?: NoteTagCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * NoteTagCountOutputType without action
+   */
+  export type NoteTagCountOutputTypeCountNotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NoteWhereInput
+  }
+
+
+  /**
    * Count Type ChatConversationCountOutputType
    */
 
@@ -4363,6 +4529,7 @@ export namespace Prisma {
     exercises?: boolean | User$exercisesArgs<ExtArgs>
     workouts?: boolean | User$workoutsArgs<ExtArgs>
     notes?: boolean | User$notesArgs<ExtArgs>
+    note_tags?: boolean | User$note_tagsArgs<ExtArgs>
     chat_conversations?: boolean | User$chat_conversationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -4427,6 +4594,7 @@ export namespace Prisma {
     exercises?: boolean | User$exercisesArgs<ExtArgs>
     workouts?: boolean | User$workoutsArgs<ExtArgs>
     notes?: boolean | User$notesArgs<ExtArgs>
+    note_tags?: boolean | User$note_tagsArgs<ExtArgs>
     chat_conversations?: boolean | User$chat_conversationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -4455,6 +4623,7 @@ export namespace Prisma {
       exercises: Prisma.$ExercisePayload<ExtArgs>[]
       workouts: Prisma.$WorkoutPayload<ExtArgs>[]
       notes: Prisma.$NotePayload<ExtArgs>[]
+      note_tags: Prisma.$NoteTagPayload<ExtArgs>[]
       chat_conversations: Prisma.$ChatConversationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -4881,6 +5050,7 @@ export namespace Prisma {
     exercises<T extends User$exercisesArgs<ExtArgs> = {}>(args?: Subset<T, User$exercisesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     workouts<T extends User$workoutsArgs<ExtArgs> = {}>(args?: Subset<T, User$workoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notes<T extends User$notesArgs<ExtArgs> = {}>(args?: Subset<T, User$notesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    note_tags<T extends User$note_tagsArgs<ExtArgs> = {}>(args?: Subset<T, User$note_tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     chat_conversations<T extends User$chat_conversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$chat_conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5117,6 +5287,11 @@ export namespace Prisma {
      * Skip the first `n` Users.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
@@ -5762,6 +5937,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NoteScalarFieldEnum | NoteScalarFieldEnum[]
+  }
+
+  /**
+   * User.note_tags
+   */
+  export type User$note_tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    where?: NoteTagWhereInput
+    orderBy?: NoteTagOrderByWithRelationInput | NoteTagOrderByWithRelationInput[]
+    cursor?: NoteTagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NoteTagScalarFieldEnum | NoteTagScalarFieldEnum[]
   }
 
   /**
@@ -6768,6 +6967,11 @@ export namespace Prisma {
      * Skip the first `n` Activities.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Activities.
+     */
     distinct?: ActivityScalarFieldEnum | ActivityScalarFieldEnum[]
   }
 
@@ -8040,6 +8244,11 @@ export namespace Prisma {
      * Skip the first `n` ScheduleSlots.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ScheduleSlots.
+     */
     distinct?: ScheduleSlotScalarFieldEnum | ScheduleSlotScalarFieldEnum[]
   }
 
@@ -9339,6 +9548,11 @@ export namespace Prisma {
      * Skip the first `n` ActivitySchedules.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivitySchedules.
+     */
     distinct?: ActivityScheduleScalarFieldEnum | ActivityScheduleScalarFieldEnum[]
   }
 
@@ -10505,6 +10719,11 @@ export namespace Prisma {
      * Skip the first `n` ActivityScheduleWeekdays.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityScheduleWeekdays.
+     */
     distinct?: ActivityScheduleWeekdayScalarFieldEnum | ActivityScheduleWeekdayScalarFieldEnum[]
   }
 
@@ -11571,6 +11790,11 @@ export namespace Prisma {
      * Skip the first `n` ActivityScheduleDates.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityScheduleDates.
+     */
     distinct?: ActivityScheduleDateScalarFieldEnum | ActivityScheduleDateScalarFieldEnum[]
   }
 
@@ -12735,6 +12959,11 @@ export namespace Prisma {
      * Skip the first `n` ActivityOccurrences.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityOccurrences.
+     */
     distinct?: ActivityOccurrenceScalarFieldEnum | ActivityOccurrenceScalarFieldEnum[]
   }
 
@@ -14047,6 +14276,11 @@ export namespace Prisma {
      * Skip the first `n` ActivityLogs.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActivityLogs.
+     */
     distinct?: ActivityLogScalarFieldEnum | ActivityLogScalarFieldEnum[]
   }
 
@@ -15205,6 +15439,11 @@ export namespace Prisma {
      * Skip the first `n` ExpenseAccounts.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseAccounts.
+     */
     distinct?: ExpenseAccountScalarFieldEnum | ExpenseAccountScalarFieldEnum[]
   }
 
@@ -16402,6 +16641,11 @@ export namespace Prisma {
      * Skip the first `n` ExpenseCategories.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseCategories.
+     */
     distinct?: ExpenseCategoryScalarFieldEnum | ExpenseCategoryScalarFieldEnum[]
   }
 
@@ -17657,6 +17901,11 @@ export namespace Prisma {
      * Skip the first `n` ExpenseSubcategories.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseSubcategories.
+     */
     distinct?: ExpenseSubcategoryScalarFieldEnum | ExpenseSubcategoryScalarFieldEnum[]
   }
 
@@ -18984,6 +19233,11 @@ export namespace Prisma {
      * Skip the first `n` ExpenseEntries.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseEntries.
+     */
     distinct?: ExpenseEntryScalarFieldEnum | ExpenseEntryScalarFieldEnum[]
   }
 
@@ -20171,6 +20425,11 @@ export namespace Prisma {
      * Skip the first `n` ExpenseStores.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseStores.
+     */
     distinct?: ExpenseStoreScalarFieldEnum | ExpenseStoreScalarFieldEnum[]
   }
 
@@ -21384,6 +21643,11 @@ export namespace Prisma {
      * Skip the first `n` ExpenseReceipts.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseReceipts.
+     */
     distinct?: ExpenseReceiptScalarFieldEnum | ExpenseReceiptScalarFieldEnum[]
   }
 
@@ -22623,6 +22887,11 @@ export namespace Prisma {
      * Skip the first `n` ExpenseProducts.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseProducts.
+     */
     distinct?: ExpenseProductScalarFieldEnum | ExpenseProductScalarFieldEnum[]
   }
 
@@ -23868,6 +24137,11 @@ export namespace Prisma {
      * Skip the first `n` ExpenseReceiptItems.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseReceiptItems.
+     */
     distinct?: ExpenseReceiptItemScalarFieldEnum | ExpenseReceiptItemScalarFieldEnum[]
   }
 
@@ -25011,6 +25285,11 @@ export namespace Prisma {
      * Skip the first `n` MuscleGroups.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MuscleGroups.
+     */
     distinct?: MuscleGroupScalarFieldEnum | MuscleGroupScalarFieldEnum[]
   }
 
@@ -26212,6 +26491,11 @@ export namespace Prisma {
      * Skip the first `n` Exercises.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Exercises.
+     */
     distinct?: ExerciseScalarFieldEnum | ExerciseScalarFieldEnum[]
   }
 
@@ -27405,6 +27689,11 @@ export namespace Prisma {
      * Skip the first `n` Workouts.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Workouts.
+     */
     distinct?: WorkoutScalarFieldEnum | WorkoutScalarFieldEnum[]
   }
 
@@ -28584,6 +28873,11 @@ export namespace Prisma {
      * Skip the first `n` WorkoutEntries.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WorkoutEntries.
+     */
     distinct?: WorkoutEntryScalarFieldEnum | WorkoutEntryScalarFieldEnum[]
   }
 
@@ -29906,6 +30200,11 @@ export namespace Prisma {
      * Skip the first `n` WorkoutSets.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WorkoutSets.
+     */
     distinct?: WorkoutSetScalarFieldEnum | WorkoutSetScalarFieldEnum[]
   }
 
@@ -30363,6 +30662,8 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    tags?: boolean | Note$tagsArgs<ExtArgs>
+    _count?: boolean | NoteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["note"]>
 
   export type NoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -30409,6 +30710,8 @@ export namespace Prisma {
   export type NoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "type" | "title" | "content" | "summary" | "vector_id" | "created_at" | "updated_at", ExtArgs["result"]["note"]>
   export type NoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    tags?: boolean | Note$tagsArgs<ExtArgs>
+    _count?: boolean | NoteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type NoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -30421,6 +30724,7 @@ export namespace Prisma {
     name: "Note"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      tags: Prisma.$NoteTagPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -30828,6 +31132,7 @@ export namespace Prisma {
   export interface Prisma__NoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    tags<T extends Note$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Note$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -31063,6 +31368,11 @@ export namespace Prisma {
      * Skip the first `n` Notes.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notes.
+     */
     distinct?: NoteScalarFieldEnum | NoteScalarFieldEnum[]
   }
 
@@ -31263,6 +31573,30 @@ export namespace Prisma {
   }
 
   /**
+   * Note.tags
+   */
+  export type Note$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    where?: NoteTagWhereInput
+    orderBy?: NoteTagOrderByWithRelationInput | NoteTagOrderByWithRelationInput[]
+    cursor?: NoteTagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NoteTagScalarFieldEnum | NoteTagScalarFieldEnum[]
+  }
+
+  /**
    * Note without action
    */
   export type NoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -31278,6 +31612,1159 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: NoteInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NoteTag
+   */
+
+  export type AggregateNoteTag = {
+    _count: NoteTagCountAggregateOutputType | null
+    _avg: NoteTagAvgAggregateOutputType | null
+    _sum: NoteTagSumAggregateOutputType | null
+    _min: NoteTagMinAggregateOutputType | null
+    _max: NoteTagMaxAggregateOutputType | null
+  }
+
+  export type NoteTagAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type NoteTagSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type NoteTagMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    title: string | null
+    color: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type NoteTagMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    title: string | null
+    color: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type NoteTagCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    title: number
+    color: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type NoteTagAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type NoteTagSumAggregateInputType = {
+    id?: true
+  }
+
+  export type NoteTagMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    title?: true
+    color?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type NoteTagMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    title?: true
+    color?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type NoteTagCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    title?: true
+    color?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type NoteTagAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NoteTag to aggregate.
+     */
+    where?: NoteTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NoteTags to fetch.
+     */
+    orderBy?: NoteTagOrderByWithRelationInput | NoteTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NoteTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NoteTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NoteTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NoteTags
+    **/
+    _count?: true | NoteTagCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NoteTagAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NoteTagSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NoteTagMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NoteTagMaxAggregateInputType
+  }
+
+  export type GetNoteTagAggregateType<T extends NoteTagAggregateArgs> = {
+        [P in keyof T & keyof AggregateNoteTag]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNoteTag[P]>
+      : GetScalarType<T[P], AggregateNoteTag[P]>
+  }
+
+
+
+
+  export type NoteTagGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NoteTagWhereInput
+    orderBy?: NoteTagOrderByWithAggregationInput | NoteTagOrderByWithAggregationInput[]
+    by: NoteTagScalarFieldEnum[] | NoteTagScalarFieldEnum
+    having?: NoteTagScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NoteTagCountAggregateInputType | true
+    _avg?: NoteTagAvgAggregateInputType
+    _sum?: NoteTagSumAggregateInputType
+    _min?: NoteTagMinAggregateInputType
+    _max?: NoteTagMaxAggregateInputType
+  }
+
+  export type NoteTagGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    title: string
+    color: string
+    created_at: Date
+    updated_at: Date
+    _count: NoteTagCountAggregateOutputType | null
+    _avg: NoteTagAvgAggregateOutputType | null
+    _sum: NoteTagSumAggregateOutputType | null
+    _min: NoteTagMinAggregateOutputType | null
+    _max: NoteTagMaxAggregateOutputType | null
+  }
+
+  type GetNoteTagGroupByPayload<T extends NoteTagGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NoteTagGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NoteTagGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NoteTagGroupByOutputType[P]>
+            : GetScalarType<T[P], NoteTagGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NoteTagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    title?: boolean
+    color?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    notes?: boolean | NoteTag$notesArgs<ExtArgs>
+    _count?: boolean | NoteTagCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["noteTag"]>
+
+  export type NoteTagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    title?: boolean
+    color?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["noteTag"]>
+
+  export type NoteTagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    title?: boolean
+    color?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["noteTag"]>
+
+  export type NoteTagSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    title?: boolean
+    color?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type NoteTagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "title" | "color" | "created_at" | "updated_at", ExtArgs["result"]["noteTag"]>
+  export type NoteTagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    notes?: boolean | NoteTag$notesArgs<ExtArgs>
+    _count?: boolean | NoteTagCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type NoteTagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NoteTagIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $NoteTagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NoteTag"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      notes: Prisma.$NotePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      title: string
+      color: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["noteTag"]>
+    composites: {}
+  }
+
+  type NoteTagGetPayload<S extends boolean | null | undefined | NoteTagDefaultArgs> = $Result.GetResult<Prisma.$NoteTagPayload, S>
+
+  type NoteTagCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NoteTagFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NoteTagCountAggregateInputType | true
+    }
+
+  export interface NoteTagDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NoteTag'], meta: { name: 'NoteTag' } }
+    /**
+     * Find zero or one NoteTag that matches the filter.
+     * @param {NoteTagFindUniqueArgs} args - Arguments to find a NoteTag
+     * @example
+     * // Get one NoteTag
+     * const noteTag = await prisma.noteTag.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NoteTagFindUniqueArgs>(args: SelectSubset<T, NoteTagFindUniqueArgs<ExtArgs>>): Prisma__NoteTagClient<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NoteTag that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NoteTagFindUniqueOrThrowArgs} args - Arguments to find a NoteTag
+     * @example
+     * // Get one NoteTag
+     * const noteTag = await prisma.noteTag.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NoteTagFindUniqueOrThrowArgs>(args: SelectSubset<T, NoteTagFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NoteTagClient<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NoteTag that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteTagFindFirstArgs} args - Arguments to find a NoteTag
+     * @example
+     * // Get one NoteTag
+     * const noteTag = await prisma.noteTag.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NoteTagFindFirstArgs>(args?: SelectSubset<T, NoteTagFindFirstArgs<ExtArgs>>): Prisma__NoteTagClient<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NoteTag that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteTagFindFirstOrThrowArgs} args - Arguments to find a NoteTag
+     * @example
+     * // Get one NoteTag
+     * const noteTag = await prisma.noteTag.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NoteTagFindFirstOrThrowArgs>(args?: SelectSubset<T, NoteTagFindFirstOrThrowArgs<ExtArgs>>): Prisma__NoteTagClient<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NoteTags that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteTagFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NoteTags
+     * const noteTags = await prisma.noteTag.findMany()
+     * 
+     * // Get first 10 NoteTags
+     * const noteTags = await prisma.noteTag.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const noteTagWithIdOnly = await prisma.noteTag.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NoteTagFindManyArgs>(args?: SelectSubset<T, NoteTagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NoteTag.
+     * @param {NoteTagCreateArgs} args - Arguments to create a NoteTag.
+     * @example
+     * // Create one NoteTag
+     * const NoteTag = await prisma.noteTag.create({
+     *   data: {
+     *     // ... data to create a NoteTag
+     *   }
+     * })
+     * 
+     */
+    create<T extends NoteTagCreateArgs>(args: SelectSubset<T, NoteTagCreateArgs<ExtArgs>>): Prisma__NoteTagClient<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NoteTags.
+     * @param {NoteTagCreateManyArgs} args - Arguments to create many NoteTags.
+     * @example
+     * // Create many NoteTags
+     * const noteTag = await prisma.noteTag.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NoteTagCreateManyArgs>(args?: SelectSubset<T, NoteTagCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NoteTags and returns the data saved in the database.
+     * @param {NoteTagCreateManyAndReturnArgs} args - Arguments to create many NoteTags.
+     * @example
+     * // Create many NoteTags
+     * const noteTag = await prisma.noteTag.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NoteTags and only return the `id`
+     * const noteTagWithIdOnly = await prisma.noteTag.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NoteTagCreateManyAndReturnArgs>(args?: SelectSubset<T, NoteTagCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NoteTag.
+     * @param {NoteTagDeleteArgs} args - Arguments to delete one NoteTag.
+     * @example
+     * // Delete one NoteTag
+     * const NoteTag = await prisma.noteTag.delete({
+     *   where: {
+     *     // ... filter to delete one NoteTag
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NoteTagDeleteArgs>(args: SelectSubset<T, NoteTagDeleteArgs<ExtArgs>>): Prisma__NoteTagClient<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NoteTag.
+     * @param {NoteTagUpdateArgs} args - Arguments to update one NoteTag.
+     * @example
+     * // Update one NoteTag
+     * const noteTag = await prisma.noteTag.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NoteTagUpdateArgs>(args: SelectSubset<T, NoteTagUpdateArgs<ExtArgs>>): Prisma__NoteTagClient<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NoteTags.
+     * @param {NoteTagDeleteManyArgs} args - Arguments to filter NoteTags to delete.
+     * @example
+     * // Delete a few NoteTags
+     * const { count } = await prisma.noteTag.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NoteTagDeleteManyArgs>(args?: SelectSubset<T, NoteTagDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NoteTags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteTagUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NoteTags
+     * const noteTag = await prisma.noteTag.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NoteTagUpdateManyArgs>(args: SelectSubset<T, NoteTagUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NoteTags and returns the data updated in the database.
+     * @param {NoteTagUpdateManyAndReturnArgs} args - Arguments to update many NoteTags.
+     * @example
+     * // Update many NoteTags
+     * const noteTag = await prisma.noteTag.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NoteTags and only return the `id`
+     * const noteTagWithIdOnly = await prisma.noteTag.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NoteTagUpdateManyAndReturnArgs>(args: SelectSubset<T, NoteTagUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NoteTag.
+     * @param {NoteTagUpsertArgs} args - Arguments to update or create a NoteTag.
+     * @example
+     * // Update or create a NoteTag
+     * const noteTag = await prisma.noteTag.upsert({
+     *   create: {
+     *     // ... data to create a NoteTag
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NoteTag we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NoteTagUpsertArgs>(args: SelectSubset<T, NoteTagUpsertArgs<ExtArgs>>): Prisma__NoteTagClient<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NoteTags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteTagCountArgs} args - Arguments to filter NoteTags to count.
+     * @example
+     * // Count the number of NoteTags
+     * const count = await prisma.noteTag.count({
+     *   where: {
+     *     // ... the filter for the NoteTags we want to count
+     *   }
+     * })
+    **/
+    count<T extends NoteTagCountArgs>(
+      args?: Subset<T, NoteTagCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NoteTagCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NoteTag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteTagAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NoteTagAggregateArgs>(args: Subset<T, NoteTagAggregateArgs>): Prisma.PrismaPromise<GetNoteTagAggregateType<T>>
+
+    /**
+     * Group by NoteTag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NoteTagGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NoteTagGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NoteTagGroupByArgs['orderBy'] }
+        : { orderBy?: NoteTagGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NoteTagGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNoteTagGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NoteTag model
+   */
+  readonly fields: NoteTagFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NoteTag.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NoteTagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    notes<T extends NoteTag$notesArgs<ExtArgs> = {}>(args?: Subset<T, NoteTag$notesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NoteTag model
+   */
+  interface NoteTagFieldRefs {
+    readonly id: FieldRef<"NoteTag", 'Int'>
+    readonly uuid: FieldRef<"NoteTag", 'String'>
+    readonly user_uuid: FieldRef<"NoteTag", 'String'>
+    readonly title: FieldRef<"NoteTag", 'String'>
+    readonly color: FieldRef<"NoteTag", 'String'>
+    readonly created_at: FieldRef<"NoteTag", 'DateTime'>
+    readonly updated_at: FieldRef<"NoteTag", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NoteTag findUnique
+   */
+  export type NoteTagFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    /**
+     * Filter, which NoteTag to fetch.
+     */
+    where: NoteTagWhereUniqueInput
+  }
+
+  /**
+   * NoteTag findUniqueOrThrow
+   */
+  export type NoteTagFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    /**
+     * Filter, which NoteTag to fetch.
+     */
+    where: NoteTagWhereUniqueInput
+  }
+
+  /**
+   * NoteTag findFirst
+   */
+  export type NoteTagFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    /**
+     * Filter, which NoteTag to fetch.
+     */
+    where?: NoteTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NoteTags to fetch.
+     */
+    orderBy?: NoteTagOrderByWithRelationInput | NoteTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NoteTags.
+     */
+    cursor?: NoteTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NoteTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NoteTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NoteTags.
+     */
+    distinct?: NoteTagScalarFieldEnum | NoteTagScalarFieldEnum[]
+  }
+
+  /**
+   * NoteTag findFirstOrThrow
+   */
+  export type NoteTagFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    /**
+     * Filter, which NoteTag to fetch.
+     */
+    where?: NoteTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NoteTags to fetch.
+     */
+    orderBy?: NoteTagOrderByWithRelationInput | NoteTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NoteTags.
+     */
+    cursor?: NoteTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NoteTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NoteTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NoteTags.
+     */
+    distinct?: NoteTagScalarFieldEnum | NoteTagScalarFieldEnum[]
+  }
+
+  /**
+   * NoteTag findMany
+   */
+  export type NoteTagFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    /**
+     * Filter, which NoteTags to fetch.
+     */
+    where?: NoteTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NoteTags to fetch.
+     */
+    orderBy?: NoteTagOrderByWithRelationInput | NoteTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NoteTags.
+     */
+    cursor?: NoteTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NoteTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NoteTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NoteTags.
+     */
+    distinct?: NoteTagScalarFieldEnum | NoteTagScalarFieldEnum[]
+  }
+
+  /**
+   * NoteTag create
+   */
+  export type NoteTagCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NoteTag.
+     */
+    data: XOR<NoteTagCreateInput, NoteTagUncheckedCreateInput>
+  }
+
+  /**
+   * NoteTag createMany
+   */
+  export type NoteTagCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NoteTags.
+     */
+    data: NoteTagCreateManyInput | NoteTagCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NoteTag createManyAndReturn
+   */
+  export type NoteTagCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * The data used to create many NoteTags.
+     */
+    data: NoteTagCreateManyInput | NoteTagCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NoteTag update
+   */
+  export type NoteTagUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NoteTag.
+     */
+    data: XOR<NoteTagUpdateInput, NoteTagUncheckedUpdateInput>
+    /**
+     * Choose, which NoteTag to update.
+     */
+    where: NoteTagWhereUniqueInput
+  }
+
+  /**
+   * NoteTag updateMany
+   */
+  export type NoteTagUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NoteTags.
+     */
+    data: XOR<NoteTagUpdateManyMutationInput, NoteTagUncheckedUpdateManyInput>
+    /**
+     * Filter which NoteTags to update
+     */
+    where?: NoteTagWhereInput
+    /**
+     * Limit how many NoteTags to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NoteTag updateManyAndReturn
+   */
+  export type NoteTagUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * The data used to update NoteTags.
+     */
+    data: XOR<NoteTagUpdateManyMutationInput, NoteTagUncheckedUpdateManyInput>
+    /**
+     * Filter which NoteTags to update
+     */
+    where?: NoteTagWhereInput
+    /**
+     * Limit how many NoteTags to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * NoteTag upsert
+   */
+  export type NoteTagUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NoteTag to update in case it exists.
+     */
+    where: NoteTagWhereUniqueInput
+    /**
+     * In case the NoteTag found by the `where` argument doesn't exist, create a new NoteTag with this data.
+     */
+    create: XOR<NoteTagCreateInput, NoteTagUncheckedCreateInput>
+    /**
+     * In case the NoteTag was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NoteTagUpdateInput, NoteTagUncheckedUpdateInput>
+  }
+
+  /**
+   * NoteTag delete
+   */
+  export type NoteTagDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
+    /**
+     * Filter which NoteTag to delete.
+     */
+    where: NoteTagWhereUniqueInput
+  }
+
+  /**
+   * NoteTag deleteMany
+   */
+  export type NoteTagDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NoteTags to delete
+     */
+    where?: NoteTagWhereInput
+    /**
+     * Limit how many NoteTags to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NoteTag.notes
+   */
+  export type NoteTag$notesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    where?: NoteWhereInput
+    orderBy?: NoteOrderByWithRelationInput | NoteOrderByWithRelationInput[]
+    cursor?: NoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NoteScalarFieldEnum | NoteScalarFieldEnum[]
+  }
+
+  /**
+   * NoteTag without action
+   */
+  export type NoteTagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NoteTag
+     */
+    select?: NoteTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NoteTag
+     */
+    omit?: NoteTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteTagInclude<ExtArgs> | null
   }
 
 
@@ -32176,6 +33663,11 @@ export namespace Prisma {
      * Skip the first `n` HiddenActivities.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HiddenActivities.
+     */
     distinct?: HiddenActivityScalarFieldEnum | HiddenActivityScalarFieldEnum[]
   }
 
@@ -33289,6 +34781,11 @@ export namespace Prisma {
      * Skip the first `n` HiddenCategories.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HiddenCategories.
+     */
     distinct?: HiddenCategoryScalarFieldEnum | HiddenCategoryScalarFieldEnum[]
   }
 
@@ -34402,6 +35899,11 @@ export namespace Prisma {
      * Skip the first `n` HiddenSubcategories.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HiddenSubcategories.
+     */
     distinct?: HiddenSubcategoryScalarFieldEnum | HiddenSubcategoryScalarFieldEnum[]
   }
 
@@ -35513,6 +37015,11 @@ export namespace Prisma {
      * Skip the first `n` ChatConversations.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChatConversations.
+     */
     distinct?: ChatConversationScalarFieldEnum | ChatConversationScalarFieldEnum[]
   }
 
@@ -36651,6 +38158,11 @@ export namespace Prisma {
      * Skip the first `n` ChatMessages.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChatMessages.
+     */
     distinct?: ChatMessageScalarFieldEnum | ChatMessageScalarFieldEnum[]
   }
 
@@ -37228,6 +38740,19 @@ export namespace Prisma {
   export type NoteScalarFieldEnum = (typeof NoteScalarFieldEnum)[keyof typeof NoteScalarFieldEnum]
 
 
+  export const NoteTagScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    title: 'title',
+    color: 'color',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type NoteTagScalarFieldEnum = (typeof NoteTagScalarFieldEnum)[keyof typeof NoteTagScalarFieldEnum]
+
+
   export const HiddenActivityScalarFieldEnum: {
     id: 'id',
     uuid: 'uuid',
@@ -37616,6 +39141,7 @@ export namespace Prisma {
     exercises?: ExerciseListRelationFilter
     workouts?: WorkoutListRelationFilter
     notes?: NoteListRelationFilter
+    note_tags?: NoteTagListRelationFilter
     chat_conversations?: ChatConversationListRelationFilter
   }
 
@@ -37649,6 +39175,7 @@ export namespace Prisma {
     exercises?: ExerciseOrderByRelationAggregateInput
     workouts?: WorkoutOrderByRelationAggregateInput
     notes?: NoteOrderByRelationAggregateInput
+    note_tags?: NoteTagOrderByRelationAggregateInput
     chat_conversations?: ChatConversationOrderByRelationAggregateInput
   }
 
@@ -37685,6 +39212,7 @@ export namespace Prisma {
     exercises?: ExerciseListRelationFilter
     workouts?: WorkoutListRelationFilter
     notes?: NoteListRelationFilter
+    note_tags?: NoteTagListRelationFilter
     chat_conversations?: ChatConversationListRelationFilter
   }, "id" | "uuid" | "email" | "phone">
 
@@ -39483,6 +41011,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Note"> | Date | string
     updated_at?: DateTimeFilter<"Note"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    tags?: NoteTagListRelationFilter
   }
 
   export type NoteOrderByWithRelationInput = {
@@ -39497,6 +41026,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
+    tags?: NoteTagOrderByRelationAggregateInput
   }
 
   export type NoteWhereUniqueInput = Prisma.AtLeast<{
@@ -39514,6 +41044,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Note"> | Date | string
     updated_at?: DateTimeFilter<"Note"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    tags?: NoteTagListRelationFilter
   }, "id" | "uuid">
 
   export type NoteOrderByWithAggregationInput = {
@@ -39548,6 +41079,76 @@ export namespace Prisma {
     vector_id?: StringNullableWithAggregatesFilter<"Note"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Note"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Note"> | Date | string
+  }
+
+  export type NoteTagWhereInput = {
+    AND?: NoteTagWhereInput | NoteTagWhereInput[]
+    OR?: NoteTagWhereInput[]
+    NOT?: NoteTagWhereInput | NoteTagWhereInput[]
+    id?: IntFilter<"NoteTag"> | number
+    uuid?: StringFilter<"NoteTag"> | string
+    user_uuid?: StringFilter<"NoteTag"> | string
+    title?: StringFilter<"NoteTag"> | string
+    color?: StringFilter<"NoteTag"> | string
+    created_at?: DateTimeFilter<"NoteTag"> | Date | string
+    updated_at?: DateTimeFilter<"NoteTag"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    notes?: NoteListRelationFilter
+  }
+
+  export type NoteTagOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    title?: SortOrder
+    color?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    notes?: NoteOrderByRelationAggregateInput
+  }
+
+  export type NoteTagWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: NoteTagWhereInput | NoteTagWhereInput[]
+    OR?: NoteTagWhereInput[]
+    NOT?: NoteTagWhereInput | NoteTagWhereInput[]
+    user_uuid?: StringFilter<"NoteTag"> | string
+    title?: StringFilter<"NoteTag"> | string
+    color?: StringFilter<"NoteTag"> | string
+    created_at?: DateTimeFilter<"NoteTag"> | Date | string
+    updated_at?: DateTimeFilter<"NoteTag"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    notes?: NoteListRelationFilter
+  }, "id" | "uuid">
+
+  export type NoteTagOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    title?: SortOrder
+    color?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: NoteTagCountOrderByAggregateInput
+    _avg?: NoteTagAvgOrderByAggregateInput
+    _max?: NoteTagMaxOrderByAggregateInput
+    _min?: NoteTagMinOrderByAggregateInput
+    _sum?: NoteTagSumOrderByAggregateInput
+  }
+
+  export type NoteTagScalarWhereWithAggregatesInput = {
+    AND?: NoteTagScalarWhereWithAggregatesInput | NoteTagScalarWhereWithAggregatesInput[]
+    OR?: NoteTagScalarWhereWithAggregatesInput[]
+    NOT?: NoteTagScalarWhereWithAggregatesInput | NoteTagScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"NoteTag"> | number
+    uuid?: StringWithAggregatesFilter<"NoteTag"> | string
+    user_uuid?: StringWithAggregatesFilter<"NoteTag"> | string
+    title?: StringWithAggregatesFilter<"NoteTag"> | string
+    color?: StringWithAggregatesFilter<"NoteTag"> | string
+    created_at?: DateTimeWithAggregatesFilter<"NoteTag"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"NoteTag"> | Date | string
   }
 
   export type HiddenActivityWhereInput = {
@@ -39906,6 +41507,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -39939,6 +41541,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -39971,6 +41574,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -40004,6 +41608,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -41835,6 +43440,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutNotesInput
+    tags?: NoteTagCreateNestedManyWithoutNotesInput
   }
 
   export type NoteUncheckedCreateInput = {
@@ -41848,6 +43454,7 @@ export namespace Prisma {
     vector_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    tags?: NoteTagUncheckedCreateNestedManyWithoutNotesInput
   }
 
   export type NoteUpdateInput = {
@@ -41860,6 +43467,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutNotesNestedInput
+    tags?: NoteTagUpdateManyWithoutNotesNestedInput
   }
 
   export type NoteUncheckedUpdateInput = {
@@ -41873,6 +43481,7 @@ export namespace Prisma {
     vector_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: NoteTagUncheckedUpdateManyWithoutNotesNestedInput
   }
 
   export type NoteCreateManyInput = {
@@ -41908,6 +43517,76 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteTagCreateInput = {
+    uuid?: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutNote_tagsInput
+    notes?: NoteCreateNestedManyWithoutTagsInput
+  }
+
+  export type NoteTagUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    notes?: NoteUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type NoteTagUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNote_tagsNestedInput
+    notes?: NoteUpdateManyWithoutTagsNestedInput
+  }
+
+  export type NoteTagUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NoteUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type NoteTagCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type NoteTagUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteTagUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42388,6 +44067,12 @@ export namespace Prisma {
     none?: NoteWhereInput
   }
 
+  export type NoteTagListRelationFilter = {
+    every?: NoteTagWhereInput
+    some?: NoteTagWhereInput
+    none?: NoteTagWhereInput
+  }
+
   export type ChatConversationListRelationFilter = {
     every?: ChatConversationWhereInput
     some?: ChatConversationWhereInput
@@ -42472,6 +44157,10 @@ export namespace Prisma {
   }
 
   export type NoteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NoteTagOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -44072,6 +45761,44 @@ export namespace Prisma {
     _max?: NestedEnumNoteTypeFilter<$PrismaModel>
   }
 
+  export type NoteTagCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    title?: SortOrder
+    color?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type NoteTagAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type NoteTagMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    title?: SortOrder
+    color?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type NoteTagMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    title?: SortOrder
+    color?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type NoteTagSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type HiddenActivityCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
@@ -44467,6 +46194,13 @@ export namespace Prisma {
     connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
   }
 
+  export type NoteTagCreateNestedManyWithoutUserInput = {
+    create?: XOR<NoteTagCreateWithoutUserInput, NoteTagUncheckedCreateWithoutUserInput> | NoteTagCreateWithoutUserInput[] | NoteTagUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NoteTagCreateOrConnectWithoutUserInput | NoteTagCreateOrConnectWithoutUserInput[]
+    createMany?: NoteTagCreateManyUserInputEnvelope
+    connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+  }
+
   export type ChatConversationCreateNestedManyWithoutUserInput = {
     create?: XOR<ChatConversationCreateWithoutUserInput, ChatConversationUncheckedCreateWithoutUserInput> | ChatConversationCreateWithoutUserInput[] | ChatConversationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatConversationCreateOrConnectWithoutUserInput | ChatConversationCreateOrConnectWithoutUserInput[]
@@ -44605,6 +46339,13 @@ export namespace Prisma {
     connectOrCreate?: NoteCreateOrConnectWithoutUserInput | NoteCreateOrConnectWithoutUserInput[]
     createMany?: NoteCreateManyUserInputEnvelope
     connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+  }
+
+  export type NoteTagUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<NoteTagCreateWithoutUserInput, NoteTagUncheckedCreateWithoutUserInput> | NoteTagCreateWithoutUserInput[] | NoteTagUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NoteTagCreateOrConnectWithoutUserInput | NoteTagCreateOrConnectWithoutUserInput[]
+    createMany?: NoteTagCreateManyUserInputEnvelope
+    connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
   }
 
   export type ChatConversationUncheckedCreateNestedManyWithoutUserInput = {
@@ -44896,6 +46637,20 @@ export namespace Prisma {
     deleteMany?: NoteScalarWhereInput | NoteScalarWhereInput[]
   }
 
+  export type NoteTagUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NoteTagCreateWithoutUserInput, NoteTagUncheckedCreateWithoutUserInput> | NoteTagCreateWithoutUserInput[] | NoteTagUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NoteTagCreateOrConnectWithoutUserInput | NoteTagCreateOrConnectWithoutUserInput[]
+    upsert?: NoteTagUpsertWithWhereUniqueWithoutUserInput | NoteTagUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NoteTagCreateManyUserInputEnvelope
+    set?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    disconnect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    delete?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    update?: NoteTagUpdateWithWhereUniqueWithoutUserInput | NoteTagUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NoteTagUpdateManyWithWhereWithoutUserInput | NoteTagUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NoteTagScalarWhereInput | NoteTagScalarWhereInput[]
+  }
+
   export type ChatConversationUpdateManyWithoutUserNestedInput = {
     create?: XOR<ChatConversationCreateWithoutUserInput, ChatConversationUncheckedCreateWithoutUserInput> | ChatConversationCreateWithoutUserInput[] | ChatConversationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatConversationCreateOrConnectWithoutUserInput | ChatConversationCreateOrConnectWithoutUserInput[]
@@ -45182,6 +46937,20 @@ export namespace Prisma {
     update?: NoteUpdateWithWhereUniqueWithoutUserInput | NoteUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: NoteUpdateManyWithWhereWithoutUserInput | NoteUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: NoteScalarWhereInput | NoteScalarWhereInput[]
+  }
+
+  export type NoteTagUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NoteTagCreateWithoutUserInput, NoteTagUncheckedCreateWithoutUserInput> | NoteTagCreateWithoutUserInput[] | NoteTagUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NoteTagCreateOrConnectWithoutUserInput | NoteTagCreateOrConnectWithoutUserInput[]
+    upsert?: NoteTagUpsertWithWhereUniqueWithoutUserInput | NoteTagUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NoteTagCreateManyUserInputEnvelope
+    set?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    disconnect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    delete?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    update?: NoteTagUpdateWithWhereUniqueWithoutUserInput | NoteTagUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NoteTagUpdateManyWithWhereWithoutUserInput | NoteTagUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NoteTagScalarWhereInput | NoteTagScalarWhereInput[]
   }
 
   export type ChatConversationUncheckedUpdateManyWithoutUserNestedInput = {
@@ -46964,6 +48733,18 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type NoteTagCreateNestedManyWithoutNotesInput = {
+    create?: XOR<NoteTagCreateWithoutNotesInput, NoteTagUncheckedCreateWithoutNotesInput> | NoteTagCreateWithoutNotesInput[] | NoteTagUncheckedCreateWithoutNotesInput[]
+    connectOrCreate?: NoteTagCreateOrConnectWithoutNotesInput | NoteTagCreateOrConnectWithoutNotesInput[]
+    connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+  }
+
+  export type NoteTagUncheckedCreateNestedManyWithoutNotesInput = {
+    create?: XOR<NoteTagCreateWithoutNotesInput, NoteTagUncheckedCreateWithoutNotesInput> | NoteTagCreateWithoutNotesInput[] | NoteTagUncheckedCreateWithoutNotesInput[]
+    connectOrCreate?: NoteTagCreateOrConnectWithoutNotesInput | NoteTagCreateOrConnectWithoutNotesInput[]
+    connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+  }
+
   export type EnumNoteTypeFieldUpdateOperationsInput = {
     set?: $Enums.NoteType
   }
@@ -46974,6 +48755,84 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutNotesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotesInput, UserUpdateWithoutNotesInput>, UserUncheckedUpdateWithoutNotesInput>
+  }
+
+  export type NoteTagUpdateManyWithoutNotesNestedInput = {
+    create?: XOR<NoteTagCreateWithoutNotesInput, NoteTagUncheckedCreateWithoutNotesInput> | NoteTagCreateWithoutNotesInput[] | NoteTagUncheckedCreateWithoutNotesInput[]
+    connectOrCreate?: NoteTagCreateOrConnectWithoutNotesInput | NoteTagCreateOrConnectWithoutNotesInput[]
+    upsert?: NoteTagUpsertWithWhereUniqueWithoutNotesInput | NoteTagUpsertWithWhereUniqueWithoutNotesInput[]
+    set?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    disconnect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    delete?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    update?: NoteTagUpdateWithWhereUniqueWithoutNotesInput | NoteTagUpdateWithWhereUniqueWithoutNotesInput[]
+    updateMany?: NoteTagUpdateManyWithWhereWithoutNotesInput | NoteTagUpdateManyWithWhereWithoutNotesInput[]
+    deleteMany?: NoteTagScalarWhereInput | NoteTagScalarWhereInput[]
+  }
+
+  export type NoteTagUncheckedUpdateManyWithoutNotesNestedInput = {
+    create?: XOR<NoteTagCreateWithoutNotesInput, NoteTagUncheckedCreateWithoutNotesInput> | NoteTagCreateWithoutNotesInput[] | NoteTagUncheckedCreateWithoutNotesInput[]
+    connectOrCreate?: NoteTagCreateOrConnectWithoutNotesInput | NoteTagCreateOrConnectWithoutNotesInput[]
+    upsert?: NoteTagUpsertWithWhereUniqueWithoutNotesInput | NoteTagUpsertWithWhereUniqueWithoutNotesInput[]
+    set?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    disconnect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    delete?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+    update?: NoteTagUpdateWithWhereUniqueWithoutNotesInput | NoteTagUpdateWithWhereUniqueWithoutNotesInput[]
+    updateMany?: NoteTagUpdateManyWithWhereWithoutNotesInput | NoteTagUpdateManyWithWhereWithoutNotesInput[]
+    deleteMany?: NoteTagScalarWhereInput | NoteTagScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutNote_tagsInput = {
+    create?: XOR<UserCreateWithoutNote_tagsInput, UserUncheckedCreateWithoutNote_tagsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNote_tagsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type NoteCreateNestedManyWithoutTagsInput = {
+    create?: XOR<NoteCreateWithoutTagsInput, NoteUncheckedCreateWithoutTagsInput> | NoteCreateWithoutTagsInput[] | NoteUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutTagsInput | NoteCreateOrConnectWithoutTagsInput[]
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+  }
+
+  export type NoteUncheckedCreateNestedManyWithoutTagsInput = {
+    create?: XOR<NoteCreateWithoutTagsInput, NoteUncheckedCreateWithoutTagsInput> | NoteCreateWithoutTagsInput[] | NoteUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutTagsInput | NoteCreateOrConnectWithoutTagsInput[]
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutNote_tagsNestedInput = {
+    create?: XOR<UserCreateWithoutNote_tagsInput, UserUncheckedCreateWithoutNote_tagsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNote_tagsInput
+    upsert?: UserUpsertWithoutNote_tagsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNote_tagsInput, UserUpdateWithoutNote_tagsInput>, UserUncheckedUpdateWithoutNote_tagsInput>
+  }
+
+  export type NoteUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<NoteCreateWithoutTagsInput, NoteUncheckedCreateWithoutTagsInput> | NoteCreateWithoutTagsInput[] | NoteUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutTagsInput | NoteCreateOrConnectWithoutTagsInput[]
+    upsert?: NoteUpsertWithWhereUniqueWithoutTagsInput | NoteUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    disconnect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    delete?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    update?: NoteUpdateWithWhereUniqueWithoutTagsInput | NoteUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: NoteUpdateManyWithWhereWithoutTagsInput | NoteUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: NoteScalarWhereInput | NoteScalarWhereInput[]
+  }
+
+  export type NoteUncheckedUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<NoteCreateWithoutTagsInput, NoteUncheckedCreateWithoutTagsInput> | NoteCreateWithoutTagsInput[] | NoteUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: NoteCreateOrConnectWithoutTagsInput | NoteCreateOrConnectWithoutTagsInput[]
+    upsert?: NoteUpsertWithWhereUniqueWithoutTagsInput | NoteUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    disconnect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    delete?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    connect?: NoteWhereUniqueInput | NoteWhereUniqueInput[]
+    update?: NoteUpdateWithWhereUniqueWithoutTagsInput | NoteUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: NoteUpdateManyWithWhereWithoutTagsInput | NoteUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: NoteScalarWhereInput | NoteScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutHidden_activitiesInput = {
@@ -48250,6 +50109,7 @@ export namespace Prisma {
     vector_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    tags?: NoteTagCreateNestedManyWithoutNotesInput
   }
 
   export type NoteUncheckedCreateWithoutUserInput = {
@@ -48262,6 +50122,7 @@ export namespace Prisma {
     vector_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    tags?: NoteTagUncheckedCreateNestedManyWithoutNotesInput
   }
 
   export type NoteCreateOrConnectWithoutUserInput = {
@@ -48271,6 +50132,35 @@ export namespace Prisma {
 
   export type NoteCreateManyUserInputEnvelope = {
     data: NoteCreateManyUserInput | NoteCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NoteTagCreateWithoutUserInput = {
+    uuid?: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    notes?: NoteCreateNestedManyWithoutTagsInput
+  }
+
+  export type NoteTagUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    notes?: NoteUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type NoteTagCreateOrConnectWithoutUserInput = {
+    where: NoteTagWhereUniqueInput
+    create: XOR<NoteTagCreateWithoutUserInput, NoteTagUncheckedCreateWithoutUserInput>
+  }
+
+  export type NoteTagCreateManyUserInputEnvelope = {
+    data: NoteTagCreateManyUserInput | NoteTagCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -48899,6 +50789,35 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Note"> | Date | string
   }
 
+  export type NoteTagUpsertWithWhereUniqueWithoutUserInput = {
+    where: NoteTagWhereUniqueInput
+    update: XOR<NoteTagUpdateWithoutUserInput, NoteTagUncheckedUpdateWithoutUserInput>
+    create: XOR<NoteTagCreateWithoutUserInput, NoteTagUncheckedCreateWithoutUserInput>
+  }
+
+  export type NoteTagUpdateWithWhereUniqueWithoutUserInput = {
+    where: NoteTagWhereUniqueInput
+    data: XOR<NoteTagUpdateWithoutUserInput, NoteTagUncheckedUpdateWithoutUserInput>
+  }
+
+  export type NoteTagUpdateManyWithWhereWithoutUserInput = {
+    where: NoteTagScalarWhereInput
+    data: XOR<NoteTagUpdateManyMutationInput, NoteTagUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type NoteTagScalarWhereInput = {
+    AND?: NoteTagScalarWhereInput | NoteTagScalarWhereInput[]
+    OR?: NoteTagScalarWhereInput[]
+    NOT?: NoteTagScalarWhereInput | NoteTagScalarWhereInput[]
+    id?: IntFilter<"NoteTag"> | number
+    uuid?: StringFilter<"NoteTag"> | string
+    user_uuid?: StringFilter<"NoteTag"> | string
+    title?: StringFilter<"NoteTag"> | string
+    color?: StringFilter<"NoteTag"> | string
+    created_at?: DateTimeFilter<"NoteTag"> | Date | string
+    updated_at?: DateTimeFilter<"NoteTag"> | Date | string
+  }
+
   export type ChatConversationUpsertWithWhereUniqueWithoutUserInput = {
     where: ChatConversationWhereUniqueInput
     update: XOR<ChatConversationUpdateWithoutUserInput, ChatConversationUncheckedUpdateWithoutUserInput>
@@ -48955,6 +50874,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -48987,6 +50907,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -49229,6 +51150,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -49261,6 +51183,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -49372,6 +51295,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -49404,6 +51328,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -49489,6 +51414,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -49521,6 +51447,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -49634,6 +51561,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -49666,6 +51594,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -49877,6 +51806,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -49909,6 +51839,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -50332,6 +52263,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -50364,6 +52296,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -50557,6 +52490,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -50589,6 +52523,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -50788,6 +52723,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -50820,6 +52756,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -51003,6 +52940,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -51035,6 +52973,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -51066,6 +53005,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -51098,6 +53038,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -51227,6 +53168,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -51259,6 +53201,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -51322,6 +53265,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -51354,6 +53298,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -51537,6 +53482,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -51569,6 +53515,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -51664,6 +53611,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -51696,6 +53644,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -51878,6 +53827,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -51910,6 +53860,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -52027,6 +53978,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -52059,6 +54011,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -52254,6 +54207,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -52286,6 +54240,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -52495,6 +54450,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -52527,6 +54483,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -52607,6 +54564,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -52639,6 +54597,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -52686,6 +54645,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -52718,6 +54678,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -52854,6 +54815,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -52886,6 +54848,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -53018,6 +54981,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -53050,6 +55014,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -53188,6 +55153,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -53220,6 +55186,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -53471,6 +55438,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -53503,6 +55471,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -53583,6 +55552,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -53615,6 +55585,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -53662,6 +55633,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -53694,6 +55666,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -53794,6 +55767,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -53826,6 +55800,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -53916,6 +55891,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -53948,6 +55924,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -54024,6 +56001,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -54056,6 +56034,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -54373,6 +56352,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -54405,12 +56385,37 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotesInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutNotesInput, UserUncheckedCreateWithoutNotesInput>
+  }
+
+  export type NoteTagCreateWithoutNotesInput = {
+    uuid?: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutNote_tagsInput
+  }
+
+  export type NoteTagUncheckedCreateWithoutNotesInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type NoteTagCreateOrConnectWithoutNotesInput = {
+    where: NoteTagWhereUniqueInput
+    create: XOR<NoteTagCreateWithoutNotesInput, NoteTagUncheckedCreateWithoutNotesInput>
   }
 
   export type UserUpsertWithoutNotesInput = {
@@ -54452,6 +56457,7 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -54484,7 +56490,216 @@ export namespace Prisma {
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type NoteTagUpsertWithWhereUniqueWithoutNotesInput = {
+    where: NoteTagWhereUniqueInput
+    update: XOR<NoteTagUpdateWithoutNotesInput, NoteTagUncheckedUpdateWithoutNotesInput>
+    create: XOR<NoteTagCreateWithoutNotesInput, NoteTagUncheckedCreateWithoutNotesInput>
+  }
+
+  export type NoteTagUpdateWithWhereUniqueWithoutNotesInput = {
+    where: NoteTagWhereUniqueInput
+    data: XOR<NoteTagUpdateWithoutNotesInput, NoteTagUncheckedUpdateWithoutNotesInput>
+  }
+
+  export type NoteTagUpdateManyWithWhereWithoutNotesInput = {
+    where: NoteTagScalarWhereInput
+    data: XOR<NoteTagUpdateManyMutationInput, NoteTagUncheckedUpdateManyWithoutNotesInput>
+  }
+
+  export type UserCreateWithoutNote_tagsInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
+    chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNote_tagsInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNote_tagsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutNote_tagsInput, UserUncheckedCreateWithoutNote_tagsInput>
+  }
+
+  export type NoteCreateWithoutTagsInput = {
+    uuid?: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary?: string | null
+    vector_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutNotesInput
+  }
+
+  export type NoteUncheckedCreateWithoutTagsInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary?: string | null
+    vector_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type NoteCreateOrConnectWithoutTagsInput = {
+    where: NoteWhereUniqueInput
+    create: XOR<NoteCreateWithoutTagsInput, NoteUncheckedCreateWithoutTagsInput>
+  }
+
+  export type UserUpsertWithoutNote_tagsInput = {
+    update: XOR<UserUpdateWithoutNote_tagsInput, UserUncheckedUpdateWithoutNote_tagsInput>
+    create: XOR<UserCreateWithoutNote_tagsInput, UserUncheckedCreateWithoutNote_tagsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNote_tagsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNote_tagsInput, UserUncheckedUpdateWithoutNote_tagsInput>
+  }
+
+  export type UserUpdateWithoutNote_tagsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
+    chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNote_tagsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type NoteUpsertWithWhereUniqueWithoutTagsInput = {
+    where: NoteWhereUniqueInput
+    update: XOR<NoteUpdateWithoutTagsInput, NoteUncheckedUpdateWithoutTagsInput>
+    create: XOR<NoteCreateWithoutTagsInput, NoteUncheckedCreateWithoutTagsInput>
+  }
+
+  export type NoteUpdateWithWhereUniqueWithoutTagsInput = {
+    where: NoteWhereUniqueInput
+    data: XOR<NoteUpdateWithoutTagsInput, NoteUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type NoteUpdateManyWithWhereWithoutTagsInput = {
+    where: NoteScalarWhereInput
+    data: XOR<NoteUpdateManyMutationInput, NoteUncheckedUpdateManyWithoutTagsInput>
   }
 
   export type UserCreateWithoutHidden_activitiesInput = {
@@ -54515,6 +56730,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -54547,6 +56763,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -54632,6 +56849,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -54664,6 +56882,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -54739,6 +56958,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -54771,6 +56991,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -54850,6 +57071,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -54882,6 +57104,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -54951,6 +57174,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -54983,6 +57207,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -55058,6 +57283,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -55090,6 +57316,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -55156,6 +57383,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChat_conversationsInput = {
@@ -55188,6 +57416,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChat_conversationsInput = {
@@ -55262,6 +57491,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChat_conversationsInput = {
@@ -55294,6 +57524,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChatMessageUpsertWithWhereUniqueWithoutConversationInput = {
@@ -55589,6 +57820,15 @@ export namespace Prisma {
     content: string
     summary?: string | null
     vector_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type NoteTagCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    title: string
+    color?: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -56262,6 +58502,7 @@ export namespace Prisma {
     vector_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: NoteTagUpdateManyWithoutNotesNestedInput
   }
 
   export type NoteUncheckedUpdateWithoutUserInput = {
@@ -56274,6 +58515,7 @@ export namespace Prisma {
     vector_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: NoteTagUncheckedUpdateManyWithoutNotesNestedInput
   }
 
   export type NoteUncheckedUpdateManyWithoutUserInput = {
@@ -56284,6 +58526,34 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteTagUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NoteUpdateManyWithoutTagsNestedInput
+  }
+
+  export type NoteTagUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NoteUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type NoteTagUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -57542,6 +59812,73 @@ export namespace Prisma {
     is_cooldown?: BoolFieldUpdateOperationsInput | boolean
     is_super_set?: BoolFieldUpdateOperationsInput | boolean
     order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteTagUpdateWithoutNotesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNote_tagsNestedInput
+  }
+
+  export type NoteTagUncheckedUpdateWithoutNotesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteTagUncheckedUpdateManyWithoutNotesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteUpdateWithoutTagsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNotesNestedInput
+  }
+
+  export type NoteUncheckedUpdateWithoutTagsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NoteUncheckedUpdateManyWithoutTagsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import { getNotes, getNote, createNote, updateNote, deleteNote, summarizeNote } from '../services/notes'
+import { getNotes, getNote, createNote, updateNote, deleteNote, summarizeNote, autoTagNote, bulkAutoTagNotes } from '../services/notes'
 import type { CreateNoteDto, Note, UpdateNoteDto } from '../interfaces/note.interface'
 import { Routes } from '../../../routes/routes'
 
@@ -83,6 +83,44 @@ export function useSummarizeNote() {
         },
         onError: (error: Error) => {
             toast.error(error.message || 'Failed to summarize note', { duration: 3000 })
+        },
+    })
+}
+
+export function useAutoTagNote() {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: (uuid: string) => autoTagNote(uuid),
+        onSuccess: (updatedNote) => {
+            queryClient.setQueryData([...NOTES_KEY, updatedNote.uuid], updatedNote)
+            queryClient.invalidateQueries({ queryKey: NOTES_KEY })
+            queryClient.invalidateQueries({ queryKey: ['note-tags'] })
+        },
+        onError: () => {
+            // Silent — auto-tagging is a background enhancement, not user-initiated
+        },
+    })
+}
+
+export function useBulkAutoTagNotes() {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: bulkAutoTagNotes,
+        onSuccess: (result) => {
+            queryClient.invalidateQueries({ queryKey: NOTES_KEY })
+            queryClient.invalidateQueries({ queryKey: ['note-tags'] })
+            const { successfully_tagged, new_tags_created } = result
+            if (successfully_tagged === 0) {
+                toast.success('All notes already have tags', { duration: 3000 })
+            } else {
+                const tagMsg = new_tags_created > 0 ? ` · ${new_tags_created} new tag${new_tags_created > 1 ? 's' : ''} created` : ''
+                toast.success(`Tagged ${successfully_tagged} note${successfully_tagged > 1 ? 's' : ''} with AI${tagMsg}`, { duration: 4000 })
+            }
+        },
+        onError: (error: Error) => {
+            toast.error(error.message || 'Failed to auto-tag notes', { duration: 3000 })
         },
     })
 }

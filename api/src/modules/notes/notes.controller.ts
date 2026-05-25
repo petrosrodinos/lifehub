@@ -65,6 +65,14 @@ export class NotesController {
         return this.notesService.remove(user_uuid, uuid);
     }
 
+    @Post('bulk-auto-tag')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Auto-assign or create tags for all untagged notes using AI' })
+    @ApiResponse({ status: 200, description: 'Returns counts of processed notes and created tags' })
+    bulkAutoTag(@CurrentUser('user_uuid') user_uuid: string) {
+        return this.notesService.bulkAutoTag(user_uuid);
+    }
+
     @Post(':uuid/summarize')
     @HttpCode(HttpStatus.OK)
     @ApiOperation({ summary: 'Summarize a note with AI' })
@@ -75,5 +83,17 @@ export class NotesController {
         @Param('uuid') uuid: string,
     ) {
         return this.notesService.summarize(user_uuid, uuid);
+    }
+
+    @Post(':uuid/auto-tag')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Auto-assign or create a tag for a note using AI' })
+    @ApiParam({ name: 'uuid', description: 'Note UUID' })
+    @ApiResponse({ status: 200, description: 'Returns updated note with assigned tag' })
+    autoTag(
+        @CurrentUser('user_uuid') user_uuid: string,
+        @Param('uuid') uuid: string,
+    ) {
+        return this.notesService.autoTag(user_uuid, uuid);
     }
 }

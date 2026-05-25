@@ -20,22 +20,16 @@ export class PineconeService implements OnModuleInit {
 
     async onModuleInit() {
         this.indexName = this.pineconeConfig.indexName;
-        const apiKey = this.pineconeConfig.apiKey;
-        this.logger.log(`Initializing Pinecone — index: "${this.indexName}", apiKey set: ${!!apiKey}`);
-        this.client = new Pinecone({ apiKey });
+        this.client = new Pinecone({ apiKey: this.pineconeConfig.apiKey });
         await this.ensureIndexExists();
     }
 
     private async ensureIndexExists() {
         try {
-            this.logger.log(`Listing existing Pinecone indexes...`);
             const { indexes } = await this.client.listIndexes();
-            this.logger.log(`Found indexes: ${JSON.stringify(indexes?.map(i => ({ name: i.name, dimension: i.dimension, metric: i.metric })))}`);
-
             const exists = indexes?.some((i) => i.name === this.indexName);
 
             if (exists) {
-                this.logger.log(`Index "${this.indexName}" already exists — skipping creation`);
                 return;
             }
 

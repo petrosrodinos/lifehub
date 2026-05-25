@@ -34,6 +34,7 @@ import { HiddenCategoriesModule } from './modules/expenses/hidden-categories/hid
 import { HiddenSubcategoriesModule } from './modules/expenses/hidden-subcategories/hidden-subcategories.module';
 import { HiddenActivitiesModule } from './modules/habbits/hidden-activities/hidden-activities.module';
 import { NotesModule } from './modules/notes/notes.module';
+import { NoteTagsModule } from './modules/notes/note-tags/note-tags.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { InternalYoutubeScraperModule } from './modules/internal/youtube-scraper/youtube-scraper.module';
 
@@ -72,6 +73,7 @@ import { InternalYoutubeScraperModule } from './modules/internal/youtube-scraper
     HiddenSubcategoriesModule,
     HiddenActivitiesModule,
     NotesModule,
+    NoteTagsModule,
     ChatModule,
     InternalYoutubeScraperModule,
   ],

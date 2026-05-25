@@ -24,12 +24,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.2.0
- * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
+ * Prisma Client JS version: 7.8.0
+ * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
  */
 Prisma.prismaVersion = {
-  client: "7.2.0",
-  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
+  client: "7.8.0",
+  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -399,6 +399,16 @@ exports.Prisma.NoteScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.NoteTagScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  title: 'title',
+  color: 'color',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.HiddenActivityScalarFieldEnum = {
   id: 'id',
   uuid: 'uuid',
@@ -568,6 +578,7 @@ exports.Prisma.ModelName = {
   WorkoutEntry: 'WorkoutEntry',
   WorkoutSet: 'WorkoutSet',
   Note: 'Note',
+  NoteTag: 'NoteTag',
   HiddenActivity: 'HiddenActivity',
   HiddenCategory: 'HiddenCategory',
   HiddenSubcategory: 'HiddenSubcategory',

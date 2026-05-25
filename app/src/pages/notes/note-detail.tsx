@@ -6,8 +6,10 @@ import {
     BookOpen, Lightbulb, StickyNote, Video, Newspaper,
 } from 'lucide-react'
 import { useNote, useUpdateNote, useDeleteNote, useSummarizeNote } from '../../features/notes/hooks/use-notes'
+import { useNoteTags, useCreateNoteTag } from '../../features/notes/hooks/use-note-tags'
 import type { NoteType } from '../../features/notes/interfaces/note.interface'
 import { ConfirmationModal } from '../../components/ui/ConfirmationModal'
+import { TagSelector } from '../../components/ui/TagSelector'
 import { Routes } from '../../routes/routes'
 
 const NOTE_TYPES: { type: NoteType; label: string; Icon: typeof BookOpen; color: string; bg: string; border: string }[] = [
@@ -53,14 +55,17 @@ export function NoteDetailPage() {
     const { uuid = '' } = useParams<{ uuid: string }>()
     const navigate = useNavigate()
     const { data: note, isLoading } = useNote(uuid)
+    const { data: allTags = [] } = useNoteTags()
     const updateMutation = useUpdateNote()
     const deleteMutation = useDeleteNote()
     const summarizeMutation = useSummarizeNote()
+    const createTagMutation = useCreateNoteTag()
 
     const [isEditing, setIsEditing] = useState(false)
     const [editTitle, setEditTitle] = useState('')
     const [editType, setEditType] = useState<NoteType>('NOTE')
     const [editContent, setEditContent] = useState('')
+    const [editTagUuids, setEditTagUuids] = useState<string[]>([])
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
     function startEditing() {
@@ -68,6 +73,7 @@ export function NoteDetailPage() {
         setEditTitle(note.title)
         setEditType(note.type)
         setEditContent(note.content)
+        setEditTagUuids(note.tags.map((t) => t.uuid))
         setIsEditing(true)
     }
 
@@ -79,7 +85,12 @@ export function NoteDetailPage() {
         if (!note) return
         await updateMutation.mutateAsync({
             uuid: note.uuid,
-            data: { title: editTitle.trim(), type: editType, content: editContent.trim() },
+            data: {
+                title: editTitle.trim(),
+                type: editType,
+                content: editContent.trim(),
+                tag_uuids: editTagUuids,
+            },
         })
         setIsEditing(false)
     }
@@ -178,6 +189,59 @@ export function NoteDetailPage() {
             </div>
 
             <div className="px-4 pt-5">
+                {/* Type + tags (view) / type grid + TagSelector (edit) */}
+                {isEditing ? (
+                    <>
+                        <div className="grid grid-cols-5 gap-2 mb-4">
+                            {NOTE_TYPES.map(({ type, label, Icon, color, bg, border }) => (
+                                <button
+                                    key={type}
+                                    type="button"
+                                    onClick={() => setEditType(type)}
+                                    className={`flex flex-col items-center gap-1.5 py-3 rounded-xl border transition-all ${
+                                        editType === type
+                                            ? `${bg} ${border} ${color}`
+                                            : 'bg-slate-800/40 border-slate-700/40 text-slate-500 hover:border-slate-600/60 hover:text-slate-300'
+                                    }`}
+                                >
+                                    <Icon className="w-4 h-4" />
+                                    <span className="text-xs font-medium">{label}</span>
+                                </button>
+                            ))}
+                        </div>
+                        <div className="mb-4">
+                            <TagSelector
+                                selectedTagUuids={editTagUuids}
+                                onChange={setEditTagUuids}
+                                allTags={allTags}
+                                onCreateTag={(data) => createTagMutation.mutateAsync(data)}
+                                isCreating={createTagMutation.isPending}
+                            />
+                        </div>
+                    </>
+                ) : (
+                    <div className="flex flex-wrap items-center gap-1.5 mb-4">
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${typeInfo.color} ${typeInfo.bg} border ${typeInfo.border}`}>
+                            <TypeIcon className="w-3.5 h-3.5" />
+                            {typeInfo.label}
+                        </span>
+                        {note.tags.map((tag) => (
+                            <span
+                                key={tag.uuid}
+                                className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border"
+                                style={{
+                                    backgroundColor: tag.color + '20',
+                                    borderColor: tag.color + '50',
+                                    color: tag.color,
+                                }}
+                            >
+                                {tag.title}
+                            </span>
+                        ))}
+                    </div>
+                )}
+
+                {/* AI summary — view mode only */}
                 {!isEditing && (
                     <div className="mb-5">
                         {!note.summary && (
@@ -206,32 +270,6 @@ export function NoteDetailPage() {
                                 </div>
                             </div>
                         )}
-                    </div>
-                )}
-
-                {/* Type indicator / selector */}
-                {isEditing ? (
-                    <div className="grid grid-cols-5 gap-2 mb-5">
-                        {NOTE_TYPES.map(({ type, label, Icon, color, bg, border }) => (
-                            <button
-                                key={type}
-                                type="button"
-                                onClick={() => setEditType(type)}
-                                className={`flex flex-col items-center gap-1.5 py-3 rounded-xl border transition-all ${
-                                    editType === type
-                                        ? `${bg} ${border} ${color}`
-                                        : 'bg-slate-800/40 border-slate-700/40 text-slate-500 hover:border-slate-600/60 hover:text-slate-300'
-                                }`}
-                            >
-                                <Icon className="w-4 h-4" />
-                                <span className="text-xs font-medium">{label}</span>
-                            </button>
-                        ))}
-                    </div>
-                ) : (
-                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium mb-4 ${typeInfo.color} ${typeInfo.bg} border ${typeInfo.border}`}>
-                        <TypeIcon className="w-3.5 h-3.5" />
-                        {typeInfo.label}
                     </div>
                 )}
 

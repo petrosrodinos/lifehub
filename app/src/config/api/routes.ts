@@ -213,6 +213,15 @@ export const ApiRoutes = {
     update: (uuid: string) => `/notes/${uuid}`,
     delete: (uuid: string) => `/notes/${uuid}`,
     summarize: (uuid: string) => `/notes/${uuid}/summarize`,
+    autoTag: (uuid: string) => `/notes/${uuid}/auto-tag`,
+    bulkAutoTag: '/notes/bulk-auto-tag',
+    tags: {
+      list: '/note-tags',
+      create: '/note-tags',
+      get: (uuid: string) => `/note-tags/${uuid}`,
+      update: (uuid: string) => `/note-tags/${uuid}`,
+      delete: (uuid: string) => `/note-tags/${uuid}`,
+    },
   },
   youtubeScraper: {
     transcript: '/youtube-scraper/transcript',

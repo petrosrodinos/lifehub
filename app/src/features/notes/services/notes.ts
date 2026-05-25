@@ -32,6 +32,16 @@ export const summarizeNote = async (uuid: string): Promise<{ summary: string }> 
     return response.data
 }
 
+export const autoTagNote = async (uuid: string): Promise<Note> => {
+    const response = await axiosInstance.post(ApiRoutes.notes.autoTag(uuid))
+    return response.data
+}
+
+export const bulkAutoTagNotes = async (): Promise<{ untagged_processed: number; successfully_tagged: number; new_tags_created: number }> => {
+    const response = await axiosInstance.post(ApiRoutes.notes.bulkAutoTag)
+    return response.data
+}
+
 export const fetchYoutubeTranscript = async (youtube_url: string): Promise<{ title: string; transcript: string }> => {
     const response = await axiosInstance.post(ApiRoutes.youtubeScraper.transcript, { youtube_url })
     return response.data

@@ -15,7 +15,7 @@ export function ChatMessageList({ messages, isLoading }: ChatMessageListProps) {
     }, [messages, isLoading])
 
     return (
-        <div className="absolute inset-x-0 top-16 bottom-36 overflow-y-auto">
+        <div className="absolute inset-x-0 top-16 bottom-20 overflow-y-auto">
             <style>{`
                 .prose-notes h1,.prose-notes h2,.prose-notes h3{color:#f1f5f9;font-weight:600;margin-top:1.2em;margin-bottom:.5em}
                 .prose-notes h1{font-size:1.1rem}

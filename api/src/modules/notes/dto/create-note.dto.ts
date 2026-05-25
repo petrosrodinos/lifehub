@@ -1,4 +1,4 @@
-import { IsString, MinLength, IsEnum } from 'class-validator';
+import { IsString, MinLength, IsEnum, IsOptional, IsArray } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export enum NoteType {
@@ -23,4 +23,10 @@ export class CreateNoteDto {
     @IsString()
     @MinLength(1)
     content: string;
+
+    @ApiProperty({ description: 'UUIDs of tags to attach to the note', required: false, type: [String] })
+    @IsOptional()
+    @IsArray()
+    @IsString({ each: true })
+    tag_uuids?: string[];
 }
