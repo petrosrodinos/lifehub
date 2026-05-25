@@ -6,7 +6,7 @@ import {
     getConversations,
     updateConversation,
 } from '../services/assistant-chat'
-import type { CreateConversationDto, UpdateConversationDto } from '../interfaces/chat.interface'
+import type { ChatConversation, CreateConversationDto, UpdateConversationDto } from '../interfaces/chat.interface'
 
 export const CONVERSATIONS_KEY = ['assistant', 'conversations'] as const
 
@@ -22,7 +22,13 @@ export function useCreateConversation() {
 
     return useMutation({
         mutationFn: (dto?: CreateConversationDto) => createConversation(dto),
-        onSuccess: () => {
+        onSuccess: (created) => {
+            queryClient.setQueryData<ChatConversation[]>(CONVERSATIONS_KEY, (old) => {
+                const list = old ?? []
+                if (list.some((c) => c.uuid === created.uuid)) return list
+                return [created, ...list]
+            })
+            queryClient.setQueryData(['assistant', 'messages', created.uuid], [])
             queryClient.invalidateQueries({ queryKey: CONVERSATIONS_KEY })
         },
         onError: (error: Error) => {

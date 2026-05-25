@@ -32,8 +32,7 @@ export function AssistantPage() {
             return
         }
 
-        const stillExists = conversations.some((c) => c.uuid === selectedUuid)
-        if (!selectedUuid || !stillExists) {
+        if (!selectedUuid) {
             setSelectedUuid(conversations[0].uuid)
         }
     }, [conversations, selectedUuid])
