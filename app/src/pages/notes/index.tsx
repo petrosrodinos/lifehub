@@ -1,26 +1,21 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { BookOpen, Lightbulb, FileText, Video, Newspaper, Plus, Loader2, StickyNote, ChevronDown, ChevronUp, Youtube, AlertCircle, Sparkles, Wand2, Tags, Pencil, Trash2, Check, X } from 'lucide-react'
+import { FileText, Plus, Loader2, ChevronDown, ChevronUp, Youtube, AlertCircle, Sparkles, Wand2, Tags, Pencil, Trash2, Check, X, Search, SlidersHorizontal } from 'lucide-react'
 import { useNotes, useCreateNote, useSummarizeNote, useBulkAutoTagNotes } from '../../features/notes/hooks/use-notes'
 import { useNoteTags, useCreateNoteTag, useUpdateNoteTag, useDeleteNoteTag } from '../../features/notes/hooks/use-note-tags'
 import { fetchYoutubeTranscript } from '../../features/notes/services/notes'
+import { NOTE_TYPES, NOTE_TYPE_MAP } from '../../features/notes/constants'
 import { TagSelector } from '../../components/ui/TagSelector'
 import { Drawer } from '../../components/ui/Drawer'
 import { ConfirmationModal } from '../../components/ui/ConfirmationModal'
+import { useNotesFilter } from './hooks/use-notes-filter'
+import { NotesFilterPanel } from './components/NotesFilterPanel'
 import type { NoteType, NoteTag } from '../../features/notes/interfaces/note.interface'
 import { Routes } from '../../routes/routes'
 
 const TAG_COLORS = ['#8b5cf6', '#ec4899', '#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#06b6d4', '#f97316'] as const
 
-const NOTE_TYPES: { type: NoteType; label: string; Icon: typeof BookOpen; color: string; bg: string; border: string }[] = [
-    { type: 'BOOK', label: 'Book', Icon: BookOpen, color: 'text-amber-400', bg: 'bg-amber-400/10', border: 'border-amber-400/30' },
-    { type: 'IDEA', label: 'Idea', Icon: Lightbulb, color: 'text-yellow-400', bg: 'bg-yellow-400/10', border: 'border-yellow-400/30' },
-    { type: 'NOTE', label: 'Note', Icon: StickyNote, color: 'text-violet-400', bg: 'bg-violet-400/10', border: 'border-violet-400/30' },
-    { type: 'VIDEO', label: 'Video', Icon: Video, color: 'text-rose-400', bg: 'bg-rose-400/10', border: 'border-rose-400/30' },
-    { type: 'ARTICLE', label: 'Article', Icon: Newspaper, color: 'text-cyan-400', bg: 'bg-cyan-400/10', border: 'border-cyan-400/30' },
-]
-
-const TYPE_MAP = Object.fromEntries(NOTE_TYPES.map((t) => [t.type, t]))
+const TYPE_MAP = NOTE_TYPE_MAP
 const PREVIEW_LENGTH = 120
 const MAX_VISIBLE_TAGS = 3
 
@@ -128,14 +123,25 @@ export function NotesPage() {
     const [summarizeAfterCreate, setSummarizeAfterCreate] = useState(true)
     const [showForm, setShowForm] = useState(false)
 
+    // Filters
+    const {
+        showFilters, setShowFilters,
+        searchText, setSearchText,
+        filterTypes, filterTagUuids,
+        hasActiveFilters,
+        toggleTypeFilter, toggleTagFilter,
+        clearFilters, closeFilters,
+        filteredNotes,
+    } = useNotesFilter(notes, allTags)
+
     // Tags panel
     const [showTagsPanel, setShowTagsPanel] = useState(false)
     const [editingTagUuid, setEditingTagUuid] = useState<string | null>(null)
     const [tagToDelete, setTagToDelete] = useState<NoteTag | null>(null)
     const [editTagTitle, setEditTagTitle] = useState('')
-    const [editTagColor, setEditTagColor] = useState(TAG_COLORS[0])
+    const [editTagColor, setEditTagColor] = useState<string>(TAG_COLORS[0])
     const [newTagTitle, setNewTagTitle] = useState('')
-    const [newTagColor, setNewTagColor] = useState(TAG_COLORS[0])
+    const [newTagColor, setNewTagColor] = useState<string>(TAG_COLORS[0])
     const [showNewTagForm, setShowNewTagForm] = useState(false)
 
     function startEditTag(tag: NoteTag) {
@@ -213,7 +219,7 @@ export function NotesPage() {
                         <h1 className="text-2xl font-bold text-white">Notes</h1>
                         <p className="text-slate-400 text-sm mt-0.5">{notes.length} saved {notes.length === 1 ? 'note' : 'notes'}</p>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 w-full sm:flex sm:w-auto sm:items-center">
+                    <div className="grid grid-cols-4 gap-2 w-full sm:flex sm:w-auto sm:items-center">
                         <button
                             onClick={() => bulkAutoTagMutation.mutate()}
                             disabled={bulkAutoTagMutation.isPending || notes.length === 0}
@@ -224,8 +230,8 @@ export function NotesPage() {
                                 ? <Loader2 className="w-4 h-4 shrink-0 animate-spin" />
                                 : <Wand2 className="w-4 h-4 shrink-0" />
                             }
-                            <span className="truncate">
-                                {bulkAutoTagMutation.isPending ? 'Tagging…' : 'Auto-tag all'}
+                            <span className="truncate hidden sm:inline">
+                                {bulkAutoTagMutation.isPending ? 'Tagging…' : 'Auto-tag'}
                             </span>
                         </button>
                         <button
@@ -233,9 +239,24 @@ export function NotesPage() {
                             className="flex min-w-0 items-center justify-center gap-1 h-9 px-2 sm:px-3 sm:shrink-0 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs sm:text-sm font-medium transition-all"
                         >
                             <Tags className="w-4 h-4 shrink-0" />
-                            <span className="truncate">Tags</span>
+                            <span className="truncate hidden sm:inline">Tags</span>
                             {allTags.length > 0 && (
                                 <span className="shrink-0 text-xs text-slate-500 tabular-nums">{allTags.length}</span>
+                            )}
+                        </button>
+                        <button
+                            onClick={() => setShowFilters((v) => !v)}
+                            title="Toggle filters"
+                            className={`relative flex min-w-0 items-center justify-center gap-1 h-9 px-2 sm:px-3 sm:shrink-0 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+                                showFilters
+                                    ? 'bg-violet-600/20 border border-violet-500/40 text-violet-400'
+                                    : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+                            }`}
+                        >
+                            <SlidersHorizontal className="w-4 h-4 shrink-0" />
+                            <span className="truncate hidden sm:inline">Filter</span>
+                            {hasActiveFilters && (
+                                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-violet-400 sm:hidden" />
                             )}
                         </button>
                         <button
@@ -243,10 +264,28 @@ export function NotesPage() {
                             className="flex min-w-0 items-center justify-center gap-1 h-9 px-2 sm:px-4 sm:shrink-0 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs sm:text-sm font-medium transition-all shadow-lg shadow-violet-600/25"
                         >
                             <Plus className="w-4 h-4 shrink-0" />
-                            <span className="truncate">New note</span>
+                            <span className="truncate hidden sm:inline">New note</span>
                         </button>
                     </div>
                 </div>
+
+                {/* Filters panel — hidden by default */}
+                {showFilters && (
+                    <NotesFilterPanel
+                        allTags={allTags}
+                        searchText={searchText}
+                        onSearchChange={setSearchText}
+                        filterTypes={filterTypes}
+                        onToggleType={toggleTypeFilter}
+                        filterTagUuids={filterTagUuids}
+                        onToggleTag={toggleTagFilter}
+                        hasActiveFilters={hasActiveFilters}
+                        totalCount={notes.length}
+                        filteredCount={filteredNotes.length}
+                        onClear={clearFilters}
+                        onClose={closeFilters}
+                    />
+                )}
 
                 {showForm && (
                     <form onSubmit={handleCreate} className="mb-6 bg-slate-900/80 backdrop-blur-sm border border-slate-700/60 rounded-2xl p-5">
@@ -391,9 +430,19 @@ export function NotesPage() {
                         <p className="text-slate-400 font-medium">No notes yet</p>
                         <p className="text-slate-600 text-sm mt-1">Create your first note above</p>
                     </div>
+                ) : filteredNotes.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-20 text-center">
+                        <div className="w-16 h-16 rounded-2xl bg-slate-800/60 flex items-center justify-center mb-4">
+                            <Search className="w-7 h-7 text-slate-600" />
+                        </div>
+                        <p className="text-slate-400 font-medium">No notes match your filters</p>
+                        <button onClick={clearFilters} className="text-violet-400 hover:text-violet-300 text-sm mt-2 transition-colors">
+                            Clear filters
+                        </button>
+                    </div>
                 ) : (
                     <div className="grid gap-3">
-                        {notes.map((note) => (
+                        {filteredNotes.map((note) => (
                             <NoteCard
                                 key={note.uuid}
                                 note={note}

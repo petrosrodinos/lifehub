@@ -25,7 +25,7 @@ export function TagSelector({ selectedTagUuids, onChange, allTags, onCreateTag, 
     const [isOpen, setIsOpen] = useState(false)
     const [showCreate, setShowCreate] = useState(false)
     const [newTagTitle, setNewTagTitle] = useState('')
-    const [newTagColor, setNewTagColor] = useState(PRESET_COLORS[0])
+    const [newTagColor, setNewTagColor] = useState<string>(PRESET_COLORS[0])
     const [isSubmitting, setIsSubmitting] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
 
