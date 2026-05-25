@@ -10,10 +10,10 @@ export enum NoteType {
 }
 
 export class CreateNoteDto {
-    @ApiProperty({ description: 'Note title', example: 'Atomic Habits summary' })
+    @ApiProperty({ description: 'Note title (generated from content by AI when omitted)', example: 'Atomic Habits summary', required: false })
+    @IsOptional()
     @IsString()
-    @MinLength(1)
-    title: string;
+    title?: string;
 
     @ApiProperty({ description: 'Note type', enum: NoteType, example: NoteType.BOOK })
     @IsEnum(NoteType)

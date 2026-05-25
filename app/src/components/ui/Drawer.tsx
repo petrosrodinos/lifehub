@@ -9,9 +9,11 @@ type DrawerProps = {
   title: ReactNode
   children: ReactNode
   headerActions?: ReactNode
+  /** When true, the content area renders without overflow/padding so children can manage their own layout */
+  rawContent?: boolean
 }
 
-export function Drawer({ isOpen, onClose, title, children, headerActions }: DrawerProps) {
+export function Drawer({ isOpen, onClose, title, children, headerActions, rawContent }: DrawerProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -49,7 +51,7 @@ export function Drawer({ isOpen, onClose, title, children, headerActions }: Draw
             </button>
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-3 sm:space-y-4">
+        <div className={rawContent ? 'flex-1 flex flex-col overflow-hidden' : 'flex-1 overflow-y-auto p-3 sm:p-6 space-y-3 sm:space-y-4'}>
           {children}
         </div>
       </div>

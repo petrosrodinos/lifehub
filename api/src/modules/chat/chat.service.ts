@@ -5,7 +5,7 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
-import { ChatMessageRole, Prisma } from '@/generated/prisma';
+import { ChatMessage, ChatMessageRole, Prisma } from '@/generated/prisma';
 import { AssistantOrchestratorService } from '@/integrations/assistant/assistant-orchestrator.service';
 import { AssistantConfig } from '@/integrations/assistant/config/assistant.config';
 import { stripMarkdownImages } from '@/integrations/assistant/utils/strip-markdown-images.utils';
@@ -100,8 +100,51 @@ export class ChatService {
         }
     }
 
+    async findNoteConversation(user_uuid: string, note_uuid: string) {
+        const conversation = await this.prisma.chatConversation.findFirst({
+            where: { user_uuid, note_uuid },
+        });
+
+        if (!conversation) return null;
+
+        const messages = await this.prisma.chatMessage.findMany({
+            where: { conversation_uuid: conversation.uuid },
+            orderBy: { created_at: 'asc' },
+        });
+
+        return { conversation, messages };
+    }
+
+    async sendNoteMessage(user_uuid: string, note_uuid: string, content: string) {
+        let conversation = await this.prisma.chatConversation.findFirst({
+            where: { user_uuid, note_uuid },
+        });
+
+        if (!conversation) {
+            const note = await this.prisma.note.findFirst({
+                where: { uuid: note_uuid, user_uuid },
+            });
+            if (!note) throw new NotFoundException('Note not found');
+
+            const context = `${note.title}\n\n${note.content}`;
+            const title = note.title.length <= TITLE_MAX_LENGTH ? note.title : `${note.title.slice(0, TITLE_MAX_LENGTH)}…`;
+
+            conversation = await this.prisma.chatConversation.create({
+                data: {
+                    user_uuid,
+                    note_uuid,
+                    context,
+                    title,
+                },
+            });
+        }
+
+        const result = await this.sendMessage(user_uuid, conversation.uuid, content);
+        return { ...result, conversationUuid: conversation.uuid };
+    }
+
     async sendMessage(user_uuid: string, conversation_uuid: string, content: string) {
-        await this.findOneConversation(user_uuid, conversation_uuid);
+        const conversation = await this.findOneConversation(user_uuid, conversation_uuid);
 
         const priorHistory = await this.prisma.chatMessage.findMany({
             where: { conversation_uuid },
@@ -109,7 +152,31 @@ export class ChatService {
             take: this.assistantConfig.maxHistoryMessages,
         });
 
-        const history = priorHistory.reverse();
+        let history: ChatMessage[] = priorHistory.reverse();
+
+        // If conversation has note context, inject synthetic context messages before real history
+        if (conversation.context) {
+            const now = new Date();
+            const syntheticUser: ChatMessage = {
+                id: -1,
+                uuid: 'ctx-user',
+                conversation_uuid,
+                role: ChatMessageRole.USER,
+                content: `Note context:\n${conversation.context}`,
+                metadata: null,
+                created_at: now,
+            };
+            const syntheticAssistant: ChatMessage = {
+                id: -2,
+                uuid: 'ctx-assistant',
+                conversation_uuid,
+                role: ChatMessageRole.ASSISTANT,
+                content: "Got it! I'll help you discuss this note.",
+                metadata: null,
+                created_at: now,
+            };
+            history = [syntheticUser, syntheticAssistant, ...history];
+        }
 
         const userMessage = await this.prisma.chatMessage.create({
             data: {
@@ -149,12 +216,8 @@ export class ChatService {
                 },
             });
 
-            const conversation = await this.prisma.chatConversation.findFirst({
-                where: { uuid: conversation_uuid },
-            });
-
             const titleUpdate =
-                conversation?.title === DEFAULT_TITLE
+                conversation.title === DEFAULT_TITLE
                     ? { title: this.truncateTitle(content) }
                     : {};
 

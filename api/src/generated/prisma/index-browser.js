@@ -441,6 +441,8 @@ exports.Prisma.ChatConversationScalarFieldEnum = {
   uuid: 'uuid',
   user_uuid: 'user_uuid',
   title: 'title',
+  note_uuid: 'note_uuid',
+  context: 'context',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };

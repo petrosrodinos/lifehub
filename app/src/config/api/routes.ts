@@ -236,5 +236,9 @@ export const ApiRoutes = {
       messages: (uuid: string) => `/chat/conversations/${uuid}/messages`,
       sendMessage: (uuid: string) => `/chat/conversations/${uuid}/messages`,
     },
+    noteConversations: {
+      get: (noteUuid: string) => `/chat/note-conversations/${noteUuid}`,
+      sendMessage: (noteUuid: string) => `/chat/note-conversations/${noteUuid}/messages`,
+    },
   },
 }

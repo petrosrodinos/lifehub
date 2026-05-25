@@ -4181,10 +4181,12 @@ export namespace Prisma {
 
   export type NoteCountOutputType = {
     tags: number
+    chatConversations: number
   }
 
   export type NoteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tags?: boolean | NoteCountOutputTypeCountTagsArgs
+    chatConversations?: boolean | NoteCountOutputTypeCountChatConversationsArgs
   }
 
   // Custom InputTypes
@@ -4203,6 +4205,13 @@ export namespace Prisma {
    */
   export type NoteCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NoteTagWhereInput
+  }
+
+  /**
+   * NoteCountOutputType without action
+   */
+  export type NoteCountOutputTypeCountChatConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChatConversationWhereInput
   }
 
 
@@ -30663,6 +30672,7 @@ export namespace Prisma {
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     tags?: boolean | Note$tagsArgs<ExtArgs>
+    chatConversations?: boolean | Note$chatConversationsArgs<ExtArgs>
     _count?: boolean | NoteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["note"]>
 
@@ -30711,6 +30721,7 @@ export namespace Prisma {
   export type NoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     tags?: boolean | Note$tagsArgs<ExtArgs>
+    chatConversations?: boolean | Note$chatConversationsArgs<ExtArgs>
     _count?: boolean | NoteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type NoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -30725,6 +30736,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       tags: Prisma.$NoteTagPayload<ExtArgs>[]
+      chatConversations: Prisma.$ChatConversationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -31133,6 +31145,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     tags<T extends Note$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Note$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    chatConversations<T extends Note$chatConversationsArgs<ExtArgs> = {}>(args?: Subset<T, Note$chatConversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -31594,6 +31607,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NoteTagScalarFieldEnum | NoteTagScalarFieldEnum[]
+  }
+
+  /**
+   * Note.chatConversations
+   */
+  export type Note$chatConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatConversation
+     */
+    select?: ChatConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatConversation
+     */
+    omit?: ChatConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatConversationInclude<ExtArgs> | null
+    where?: ChatConversationWhereInput
+    orderBy?: ChatConversationOrderByWithRelationInput | ChatConversationOrderByWithRelationInput[]
+    cursor?: ChatConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChatConversationScalarFieldEnum | ChatConversationScalarFieldEnum[]
   }
 
   /**
@@ -36147,6 +36184,8 @@ export namespace Prisma {
     uuid: string | null
     user_uuid: string | null
     title: string | null
+    note_uuid: string | null
+    context: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -36156,6 +36195,8 @@ export namespace Prisma {
     uuid: string | null
     user_uuid: string | null
     title: string | null
+    note_uuid: string | null
+    context: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -36165,6 +36206,8 @@ export namespace Prisma {
     uuid: number
     user_uuid: number
     title: number
+    note_uuid: number
+    context: number
     created_at: number
     updated_at: number
     _all: number
@@ -36184,6 +36227,8 @@ export namespace Prisma {
     uuid?: true
     user_uuid?: true
     title?: true
+    note_uuid?: true
+    context?: true
     created_at?: true
     updated_at?: true
   }
@@ -36193,6 +36238,8 @@ export namespace Prisma {
     uuid?: true
     user_uuid?: true
     title?: true
+    note_uuid?: true
+    context?: true
     created_at?: true
     updated_at?: true
   }
@@ -36202,6 +36249,8 @@ export namespace Prisma {
     uuid?: true
     user_uuid?: true
     title?: true
+    note_uuid?: true
+    context?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -36298,6 +36347,8 @@ export namespace Prisma {
     uuid: string
     user_uuid: string
     title: string
+    note_uuid: string | null
+    context: string | null
     created_at: Date
     updated_at: Date
     _count: ChatConversationCountAggregateOutputType | null
@@ -36326,9 +36377,12 @@ export namespace Prisma {
     uuid?: boolean
     user_uuid?: boolean
     title?: boolean
+    note_uuid?: boolean
+    context?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    note?: boolean | ChatConversation$noteArgs<ExtArgs>
     messages?: boolean | ChatConversation$messagesArgs<ExtArgs>
     _count?: boolean | ChatConversationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["chatConversation"]>
@@ -36338,9 +36392,12 @@ export namespace Prisma {
     uuid?: boolean
     user_uuid?: boolean
     title?: boolean
+    note_uuid?: boolean
+    context?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    note?: boolean | ChatConversation$noteArgs<ExtArgs>
   }, ExtArgs["result"]["chatConversation"]>
 
   export type ChatConversationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -36348,9 +36405,12 @@ export namespace Prisma {
     uuid?: boolean
     user_uuid?: boolean
     title?: boolean
+    note_uuid?: boolean
+    context?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    note?: boolean | ChatConversation$noteArgs<ExtArgs>
   }, ExtArgs["result"]["chatConversation"]>
 
   export type ChatConversationSelectScalar = {
@@ -36358,27 +36418,33 @@ export namespace Prisma {
     uuid?: boolean
     user_uuid?: boolean
     title?: boolean
+    note_uuid?: boolean
+    context?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type ChatConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "title" | "created_at" | "updated_at", ExtArgs["result"]["chatConversation"]>
+  export type ChatConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "title" | "note_uuid" | "context" | "created_at" | "updated_at", ExtArgs["result"]["chatConversation"]>
   export type ChatConversationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    note?: boolean | ChatConversation$noteArgs<ExtArgs>
     messages?: boolean | ChatConversation$messagesArgs<ExtArgs>
     _count?: boolean | ChatConversationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ChatConversationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    note?: boolean | ChatConversation$noteArgs<ExtArgs>
   }
   export type ChatConversationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    note?: boolean | ChatConversation$noteArgs<ExtArgs>
   }
 
   export type $ChatConversationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ChatConversation"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      note: Prisma.$NotePayload<ExtArgs> | null
       messages: Prisma.$ChatMessagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -36386,6 +36452,8 @@ export namespace Prisma {
       uuid: string
       user_uuid: string
       title: string
+      note_uuid: string | null
+      context: string | null
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["chatConversation"]>
@@ -36783,6 +36851,7 @@ export namespace Prisma {
   export interface Prisma__ChatConversationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    note<T extends ChatConversation$noteArgs<ExtArgs> = {}>(args?: Subset<T, ChatConversation$noteArgs<ExtArgs>>): Prisma__NoteClient<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     messages<T extends ChatConversation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, ChatConversation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -36817,6 +36886,8 @@ export namespace Prisma {
     readonly uuid: FieldRef<"ChatConversation", 'String'>
     readonly user_uuid: FieldRef<"ChatConversation", 'String'>
     readonly title: FieldRef<"ChatConversation", 'String'>
+    readonly note_uuid: FieldRef<"ChatConversation", 'String'>
+    readonly context: FieldRef<"ChatConversation", 'String'>
     readonly created_at: FieldRef<"ChatConversation", 'DateTime'>
     readonly updated_at: FieldRef<"ChatConversation", 'DateTime'>
   }
@@ -37217,6 +37288,25 @@ export namespace Prisma {
      * Limit how many ChatConversations to delete.
      */
     limit?: number
+  }
+
+  /**
+   * ChatConversation.note
+   */
+  export type ChatConversation$noteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Note
+     */
+    select?: NoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Note
+     */
+    omit?: NoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NoteInclude<ExtArgs> | null
+    where?: NoteWhereInput
   }
 
   /**
@@ -38794,6 +38884,8 @@ export namespace Prisma {
     uuid: 'uuid',
     user_uuid: 'user_uuid',
     title: 'title',
+    note_uuid: 'note_uuid',
+    context: 'context',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -41012,6 +41104,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Note"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     tags?: NoteTagListRelationFilter
+    chatConversations?: ChatConversationListRelationFilter
   }
 
   export type NoteOrderByWithRelationInput = {
@@ -41027,6 +41120,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
     tags?: NoteTagOrderByRelationAggregateInput
+    chatConversations?: ChatConversationOrderByRelationAggregateInput
   }
 
   export type NoteWhereUniqueInput = Prisma.AtLeast<{
@@ -41045,6 +41139,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Note"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     tags?: NoteTagListRelationFilter
+    chatConversations?: ChatConversationListRelationFilter
   }, "id" | "uuid">
 
   export type NoteOrderByWithAggregationInput = {
@@ -41354,9 +41449,12 @@ export namespace Prisma {
     uuid?: StringFilter<"ChatConversation"> | string
     user_uuid?: StringFilter<"ChatConversation"> | string
     title?: StringFilter<"ChatConversation"> | string
+    note_uuid?: StringNullableFilter<"ChatConversation"> | string | null
+    context?: StringNullableFilter<"ChatConversation"> | string | null
     created_at?: DateTimeFilter<"ChatConversation"> | Date | string
     updated_at?: DateTimeFilter<"ChatConversation"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    note?: XOR<NoteNullableScalarRelationFilter, NoteWhereInput> | null
     messages?: ChatMessageListRelationFilter
   }
 
@@ -41365,9 +41463,12 @@ export namespace Prisma {
     uuid?: SortOrder
     user_uuid?: SortOrder
     title?: SortOrder
+    note_uuid?: SortOrderInput | SortOrder
+    context?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
+    note?: NoteOrderByWithRelationInput
     messages?: ChatMessageOrderByRelationAggregateInput
   }
 
@@ -41379,9 +41480,12 @@ export namespace Prisma {
     NOT?: ChatConversationWhereInput | ChatConversationWhereInput[]
     user_uuid?: StringFilter<"ChatConversation"> | string
     title?: StringFilter<"ChatConversation"> | string
+    note_uuid?: StringNullableFilter<"ChatConversation"> | string | null
+    context?: StringNullableFilter<"ChatConversation"> | string | null
     created_at?: DateTimeFilter<"ChatConversation"> | Date | string
     updated_at?: DateTimeFilter<"ChatConversation"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    note?: XOR<NoteNullableScalarRelationFilter, NoteWhereInput> | null
     messages?: ChatMessageListRelationFilter
   }, "id" | "uuid">
 
@@ -41390,6 +41494,8 @@ export namespace Prisma {
     uuid?: SortOrder
     user_uuid?: SortOrder
     title?: SortOrder
+    note_uuid?: SortOrderInput | SortOrder
+    context?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: ChatConversationCountOrderByAggregateInput
@@ -41407,6 +41513,8 @@ export namespace Prisma {
     uuid?: StringWithAggregatesFilter<"ChatConversation"> | string
     user_uuid?: StringWithAggregatesFilter<"ChatConversation"> | string
     title?: StringWithAggregatesFilter<"ChatConversation"> | string
+    note_uuid?: StringNullableWithAggregatesFilter<"ChatConversation"> | string | null
+    context?: StringNullableWithAggregatesFilter<"ChatConversation"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"ChatConversation"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ChatConversation"> | Date | string
   }
@@ -43441,6 +43549,7 @@ export namespace Prisma {
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutNotesInput
     tags?: NoteTagCreateNestedManyWithoutNotesInput
+    chatConversations?: ChatConversationCreateNestedManyWithoutNoteInput
   }
 
   export type NoteUncheckedCreateInput = {
@@ -43455,6 +43564,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     tags?: NoteTagUncheckedCreateNestedManyWithoutNotesInput
+    chatConversations?: ChatConversationUncheckedCreateNestedManyWithoutNoteInput
   }
 
   export type NoteUpdateInput = {
@@ -43468,6 +43578,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutNotesNestedInput
     tags?: NoteTagUpdateManyWithoutNotesNestedInput
+    chatConversations?: ChatConversationUpdateManyWithoutNoteNestedInput
   }
 
   export type NoteUncheckedUpdateInput = {
@@ -43482,6 +43593,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: NoteTagUncheckedUpdateManyWithoutNotesNestedInput
+    chatConversations?: ChatConversationUncheckedUpdateManyWithoutNoteNestedInput
   }
 
   export type NoteCreateManyInput = {
@@ -43768,9 +43880,11 @@ export namespace Prisma {
   export type ChatConversationCreateInput = {
     uuid?: string
     title?: string
+    context?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutChat_conversationsInput
+    note?: NoteCreateNestedOneWithoutChatConversationsInput
     messages?: ChatMessageCreateNestedManyWithoutConversationInput
   }
 
@@ -43779,6 +43893,8 @@ export namespace Prisma {
     uuid?: string
     user_uuid: string
     title?: string
+    note_uuid?: string | null
+    context?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     messages?: ChatMessageUncheckedCreateNestedManyWithoutConversationInput
@@ -43787,9 +43903,11 @@ export namespace Prisma {
   export type ChatConversationUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutChat_conversationsNestedInput
+    note?: NoteUpdateOneWithoutChatConversationsNestedInput
     messages?: ChatMessageUpdateManyWithoutConversationNestedInput
   }
 
@@ -43798,6 +43916,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     user_uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    note_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: ChatMessageUncheckedUpdateManyWithoutConversationNestedInput
@@ -43808,6 +43928,8 @@ export namespace Prisma {
     uuid?: string
     user_uuid: string
     title?: string
+    note_uuid?: string | null
+    context?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -43815,6 +43937,7 @@ export namespace Prisma {
   export type ChatConversationUpdateManyMutationInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -43824,6 +43947,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     user_uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    note_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45909,6 +46034,11 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type NoteNullableScalarRelationFilter = {
+    is?: NoteWhereInput | null
+    isNot?: NoteWhereInput | null
+  }
+
   export type ChatMessageListRelationFilter = {
     every?: ChatMessageWhereInput
     some?: ChatMessageWhereInput
@@ -45924,6 +46054,8 @@ export namespace Prisma {
     uuid?: SortOrder
     user_uuid?: SortOrder
     title?: SortOrder
+    note_uuid?: SortOrder
+    context?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -45937,6 +46069,8 @@ export namespace Prisma {
     uuid?: SortOrder
     user_uuid?: SortOrder
     title?: SortOrder
+    note_uuid?: SortOrder
+    context?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -45946,6 +46080,8 @@ export namespace Prisma {
     uuid?: SortOrder
     user_uuid?: SortOrder
     title?: SortOrder
+    note_uuid?: SortOrder
+    context?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -48739,10 +48875,24 @@ export namespace Prisma {
     connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
   }
 
+  export type ChatConversationCreateNestedManyWithoutNoteInput = {
+    create?: XOR<ChatConversationCreateWithoutNoteInput, ChatConversationUncheckedCreateWithoutNoteInput> | ChatConversationCreateWithoutNoteInput[] | ChatConversationUncheckedCreateWithoutNoteInput[]
+    connectOrCreate?: ChatConversationCreateOrConnectWithoutNoteInput | ChatConversationCreateOrConnectWithoutNoteInput[]
+    createMany?: ChatConversationCreateManyNoteInputEnvelope
+    connect?: ChatConversationWhereUniqueInput | ChatConversationWhereUniqueInput[]
+  }
+
   export type NoteTagUncheckedCreateNestedManyWithoutNotesInput = {
     create?: XOR<NoteTagCreateWithoutNotesInput, NoteTagUncheckedCreateWithoutNotesInput> | NoteTagCreateWithoutNotesInput[] | NoteTagUncheckedCreateWithoutNotesInput[]
     connectOrCreate?: NoteTagCreateOrConnectWithoutNotesInput | NoteTagCreateOrConnectWithoutNotesInput[]
     connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+  }
+
+  export type ChatConversationUncheckedCreateNestedManyWithoutNoteInput = {
+    create?: XOR<ChatConversationCreateWithoutNoteInput, ChatConversationUncheckedCreateWithoutNoteInput> | ChatConversationCreateWithoutNoteInput[] | ChatConversationUncheckedCreateWithoutNoteInput[]
+    connectOrCreate?: ChatConversationCreateOrConnectWithoutNoteInput | ChatConversationCreateOrConnectWithoutNoteInput[]
+    createMany?: ChatConversationCreateManyNoteInputEnvelope
+    connect?: ChatConversationWhereUniqueInput | ChatConversationWhereUniqueInput[]
   }
 
   export type EnumNoteTypeFieldUpdateOperationsInput = {
@@ -48770,6 +48920,20 @@ export namespace Prisma {
     deleteMany?: NoteTagScalarWhereInput | NoteTagScalarWhereInput[]
   }
 
+  export type ChatConversationUpdateManyWithoutNoteNestedInput = {
+    create?: XOR<ChatConversationCreateWithoutNoteInput, ChatConversationUncheckedCreateWithoutNoteInput> | ChatConversationCreateWithoutNoteInput[] | ChatConversationUncheckedCreateWithoutNoteInput[]
+    connectOrCreate?: ChatConversationCreateOrConnectWithoutNoteInput | ChatConversationCreateOrConnectWithoutNoteInput[]
+    upsert?: ChatConversationUpsertWithWhereUniqueWithoutNoteInput | ChatConversationUpsertWithWhereUniqueWithoutNoteInput[]
+    createMany?: ChatConversationCreateManyNoteInputEnvelope
+    set?: ChatConversationWhereUniqueInput | ChatConversationWhereUniqueInput[]
+    disconnect?: ChatConversationWhereUniqueInput | ChatConversationWhereUniqueInput[]
+    delete?: ChatConversationWhereUniqueInput | ChatConversationWhereUniqueInput[]
+    connect?: ChatConversationWhereUniqueInput | ChatConversationWhereUniqueInput[]
+    update?: ChatConversationUpdateWithWhereUniqueWithoutNoteInput | ChatConversationUpdateWithWhereUniqueWithoutNoteInput[]
+    updateMany?: ChatConversationUpdateManyWithWhereWithoutNoteInput | ChatConversationUpdateManyWithWhereWithoutNoteInput[]
+    deleteMany?: ChatConversationScalarWhereInput | ChatConversationScalarWhereInput[]
+  }
+
   export type NoteTagUncheckedUpdateManyWithoutNotesNestedInput = {
     create?: XOR<NoteTagCreateWithoutNotesInput, NoteTagUncheckedCreateWithoutNotesInput> | NoteTagCreateWithoutNotesInput[] | NoteTagUncheckedCreateWithoutNotesInput[]
     connectOrCreate?: NoteTagCreateOrConnectWithoutNotesInput | NoteTagCreateOrConnectWithoutNotesInput[]
@@ -48781,6 +48945,20 @@ export namespace Prisma {
     update?: NoteTagUpdateWithWhereUniqueWithoutNotesInput | NoteTagUpdateWithWhereUniqueWithoutNotesInput[]
     updateMany?: NoteTagUpdateManyWithWhereWithoutNotesInput | NoteTagUpdateManyWithWhereWithoutNotesInput[]
     deleteMany?: NoteTagScalarWhereInput | NoteTagScalarWhereInput[]
+  }
+
+  export type ChatConversationUncheckedUpdateManyWithoutNoteNestedInput = {
+    create?: XOR<ChatConversationCreateWithoutNoteInput, ChatConversationUncheckedCreateWithoutNoteInput> | ChatConversationCreateWithoutNoteInput[] | ChatConversationUncheckedCreateWithoutNoteInput[]
+    connectOrCreate?: ChatConversationCreateOrConnectWithoutNoteInput | ChatConversationCreateOrConnectWithoutNoteInput[]
+    upsert?: ChatConversationUpsertWithWhereUniqueWithoutNoteInput | ChatConversationUpsertWithWhereUniqueWithoutNoteInput[]
+    createMany?: ChatConversationCreateManyNoteInputEnvelope
+    set?: ChatConversationWhereUniqueInput | ChatConversationWhereUniqueInput[]
+    disconnect?: ChatConversationWhereUniqueInput | ChatConversationWhereUniqueInput[]
+    delete?: ChatConversationWhereUniqueInput | ChatConversationWhereUniqueInput[]
+    connect?: ChatConversationWhereUniqueInput | ChatConversationWhereUniqueInput[]
+    update?: ChatConversationUpdateWithWhereUniqueWithoutNoteInput | ChatConversationUpdateWithWhereUniqueWithoutNoteInput[]
+    updateMany?: ChatConversationUpdateManyWithWhereWithoutNoteInput | ChatConversationUpdateManyWithWhereWithoutNoteInput[]
+    deleteMany?: ChatConversationScalarWhereInput | ChatConversationScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutNote_tagsInput = {
@@ -48925,6 +49103,12 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type NoteCreateNestedOneWithoutChatConversationsInput = {
+    create?: XOR<NoteCreateWithoutChatConversationsInput, NoteUncheckedCreateWithoutChatConversationsInput>
+    connectOrCreate?: NoteCreateOrConnectWithoutChatConversationsInput
+    connect?: NoteWhereUniqueInput
+  }
+
   export type ChatMessageCreateNestedManyWithoutConversationInput = {
     create?: XOR<ChatMessageCreateWithoutConversationInput, ChatMessageUncheckedCreateWithoutConversationInput> | ChatMessageCreateWithoutConversationInput[] | ChatMessageUncheckedCreateWithoutConversationInput[]
     connectOrCreate?: ChatMessageCreateOrConnectWithoutConversationInput | ChatMessageCreateOrConnectWithoutConversationInput[]
@@ -48945,6 +49129,16 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutChat_conversationsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChat_conversationsInput, UserUpdateWithoutChat_conversationsInput>, UserUncheckedUpdateWithoutChat_conversationsInput>
+  }
+
+  export type NoteUpdateOneWithoutChatConversationsNestedInput = {
+    create?: XOR<NoteCreateWithoutChatConversationsInput, NoteUncheckedCreateWithoutChatConversationsInput>
+    connectOrCreate?: NoteCreateOrConnectWithoutChatConversationsInput
+    upsert?: NoteUpsertWithoutChatConversationsInput
+    disconnect?: NoteWhereInput | boolean
+    delete?: NoteWhereInput | boolean
+    connect?: NoteWhereUniqueInput
+    update?: XOR<XOR<NoteUpdateToOneWithWhereWithoutChatConversationsInput, NoteUpdateWithoutChatConversationsInput>, NoteUncheckedUpdateWithoutChatConversationsInput>
   }
 
   export type ChatMessageUpdateManyWithoutConversationNestedInput = {
@@ -50110,6 +50304,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     tags?: NoteTagCreateNestedManyWithoutNotesInput
+    chatConversations?: ChatConversationCreateNestedManyWithoutNoteInput
   }
 
   export type NoteUncheckedCreateWithoutUserInput = {
@@ -50123,6 +50318,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     tags?: NoteTagUncheckedCreateNestedManyWithoutNotesInput
+    chatConversations?: ChatConversationUncheckedCreateNestedManyWithoutNoteInput
   }
 
   export type NoteCreateOrConnectWithoutUserInput = {
@@ -50167,8 +50363,10 @@ export namespace Prisma {
   export type ChatConversationCreateWithoutUserInput = {
     uuid?: string
     title?: string
+    context?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    note?: NoteCreateNestedOneWithoutChatConversationsInput
     messages?: ChatMessageCreateNestedManyWithoutConversationInput
   }
 
@@ -50176,6 +50374,8 @@ export namespace Prisma {
     id?: number
     uuid?: string
     title?: string
+    note_uuid?: string | null
+    context?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     messages?: ChatMessageUncheckedCreateNestedManyWithoutConversationInput
@@ -50842,6 +51042,8 @@ export namespace Prisma {
     uuid?: StringFilter<"ChatConversation"> | string
     user_uuid?: StringFilter<"ChatConversation"> | string
     title?: StringFilter<"ChatConversation"> | string
+    note_uuid?: StringNullableFilter<"ChatConversation"> | string | null
+    context?: StringNullableFilter<"ChatConversation"> | string | null
     created_at?: DateTimeFilter<"ChatConversation"> | Date | string
     updated_at?: DateTimeFilter<"ChatConversation"> | Date | string
   }
@@ -56418,6 +56620,37 @@ export namespace Prisma {
     create: XOR<NoteTagCreateWithoutNotesInput, NoteTagUncheckedCreateWithoutNotesInput>
   }
 
+  export type ChatConversationCreateWithoutNoteInput = {
+    uuid?: string
+    title?: string
+    context?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutChat_conversationsInput
+    messages?: ChatMessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ChatConversationUncheckedCreateWithoutNoteInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    title?: string
+    context?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    messages?: ChatMessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ChatConversationCreateOrConnectWithoutNoteInput = {
+    where: ChatConversationWhereUniqueInput
+    create: XOR<ChatConversationCreateWithoutNoteInput, ChatConversationUncheckedCreateWithoutNoteInput>
+  }
+
+  export type ChatConversationCreateManyNoteInputEnvelope = {
+    data: ChatConversationCreateManyNoteInput | ChatConversationCreateManyNoteInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutNotesInput = {
     update: XOR<UserUpdateWithoutNotesInput, UserUncheckedUpdateWithoutNotesInput>
     create: XOR<UserCreateWithoutNotesInput, UserUncheckedCreateWithoutNotesInput>
@@ -56510,6 +56743,22 @@ export namespace Prisma {
     data: XOR<NoteTagUpdateManyMutationInput, NoteTagUncheckedUpdateManyWithoutNotesInput>
   }
 
+  export type ChatConversationUpsertWithWhereUniqueWithoutNoteInput = {
+    where: ChatConversationWhereUniqueInput
+    update: XOR<ChatConversationUpdateWithoutNoteInput, ChatConversationUncheckedUpdateWithoutNoteInput>
+    create: XOR<ChatConversationCreateWithoutNoteInput, ChatConversationUncheckedCreateWithoutNoteInput>
+  }
+
+  export type ChatConversationUpdateWithWhereUniqueWithoutNoteInput = {
+    where: ChatConversationWhereUniqueInput
+    data: XOR<ChatConversationUpdateWithoutNoteInput, ChatConversationUncheckedUpdateWithoutNoteInput>
+  }
+
+  export type ChatConversationUpdateManyWithWhereWithoutNoteInput = {
+    where: ChatConversationScalarWhereInput
+    data: XOR<ChatConversationUpdateManyMutationInput, ChatConversationUncheckedUpdateManyWithoutNoteInput>
+  }
+
   export type UserCreateWithoutNote_tagsInput = {
     uuid?: string
     email: string
@@ -56590,6 +56839,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutNotesInput
+    chatConversations?: ChatConversationCreateNestedManyWithoutNoteInput
   }
 
   export type NoteUncheckedCreateWithoutTagsInput = {
@@ -56603,6 +56853,7 @@ export namespace Prisma {
     vector_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    chatConversations?: ChatConversationUncheckedCreateNestedManyWithoutNoteInput
   }
 
   export type NoteCreateOrConnectWithoutTagsInput = {
@@ -57424,6 +57675,38 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutChat_conversationsInput, UserUncheckedCreateWithoutChat_conversationsInput>
   }
 
+  export type NoteCreateWithoutChatConversationsInput = {
+    uuid?: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary?: string | null
+    vector_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutNotesInput
+    tags?: NoteTagCreateNestedManyWithoutNotesInput
+  }
+
+  export type NoteUncheckedCreateWithoutChatConversationsInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    type: $Enums.NoteType
+    title: string
+    content: string
+    summary?: string | null
+    vector_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    tags?: NoteTagUncheckedCreateNestedManyWithoutNotesInput
+  }
+
+  export type NoteCreateOrConnectWithoutChatConversationsInput = {
+    where: NoteWhereUniqueInput
+    create: XOR<NoteCreateWithoutChatConversationsInput, NoteUncheckedCreateWithoutChatConversationsInput>
+  }
+
   export type ChatMessageCreateWithoutConversationInput = {
     uuid?: string
     role: $Enums.ChatMessageRole
@@ -57527,6 +57810,44 @@ export namespace Prisma {
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type NoteUpsertWithoutChatConversationsInput = {
+    update: XOR<NoteUpdateWithoutChatConversationsInput, NoteUncheckedUpdateWithoutChatConversationsInput>
+    create: XOR<NoteCreateWithoutChatConversationsInput, NoteUncheckedCreateWithoutChatConversationsInput>
+    where?: NoteWhereInput
+  }
+
+  export type NoteUpdateToOneWithWhereWithoutChatConversationsInput = {
+    where?: NoteWhereInput
+    data: XOR<NoteUpdateWithoutChatConversationsInput, NoteUncheckedUpdateWithoutChatConversationsInput>
+  }
+
+  export type NoteUpdateWithoutChatConversationsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutNotesNestedInput
+    tags?: NoteTagUpdateManyWithoutNotesNestedInput
+  }
+
+  export type NoteUncheckedUpdateWithoutChatConversationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    vector_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: NoteTagUncheckedUpdateManyWithoutNotesNestedInput
+  }
+
   export type ChatMessageUpsertWithWhereUniqueWithoutConversationInput = {
     where: ChatMessageWhereUniqueInput
     update: XOR<ChatMessageUpdateWithoutConversationInput, ChatMessageUncheckedUpdateWithoutConversationInput>
@@ -57559,9 +57880,11 @@ export namespace Prisma {
   export type ChatConversationCreateWithoutMessagesInput = {
     uuid?: string
     title?: string
+    context?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutChat_conversationsInput
+    note?: NoteCreateNestedOneWithoutChatConversationsInput
   }
 
   export type ChatConversationUncheckedCreateWithoutMessagesInput = {
@@ -57569,6 +57892,8 @@ export namespace Prisma {
     uuid?: string
     user_uuid: string
     title?: string
+    note_uuid?: string | null
+    context?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -57592,9 +57917,11 @@ export namespace Prisma {
   export type ChatConversationUpdateWithoutMessagesInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutChat_conversationsNestedInput
+    note?: NoteUpdateOneWithoutChatConversationsNestedInput
   }
 
   export type ChatConversationUncheckedUpdateWithoutMessagesInput = {
@@ -57602,6 +57929,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     user_uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    note_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -57837,6 +58166,8 @@ export namespace Prisma {
     id?: number
     uuid?: string
     title?: string
+    note_uuid?: string | null
+    context?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -58503,6 +58834,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: NoteTagUpdateManyWithoutNotesNestedInput
+    chatConversations?: ChatConversationUpdateManyWithoutNoteNestedInput
   }
 
   export type NoteUncheckedUpdateWithoutUserInput = {
@@ -58516,6 +58848,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: NoteTagUncheckedUpdateManyWithoutNotesNestedInput
+    chatConversations?: ChatConversationUncheckedUpdateManyWithoutNoteNestedInput
   }
 
   export type NoteUncheckedUpdateManyWithoutUserInput = {
@@ -58561,8 +58894,10 @@ export namespace Prisma {
   export type ChatConversationUpdateWithoutUserInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    note?: NoteUpdateOneWithoutChatConversationsNestedInput
     messages?: ChatMessageUpdateManyWithoutConversationNestedInput
   }
 
@@ -58570,6 +58905,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    note_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: ChatMessageUncheckedUpdateManyWithoutConversationNestedInput
@@ -58579,6 +58916,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    note_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    context?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -59816,6 +60155,16 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ChatConversationCreateManyNoteInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    title?: string
+    context?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type NoteTagUpdateWithoutNotesInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -59845,6 +60194,37 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ChatConversationUpdateWithoutNoteInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutChat_conversationsNestedInput
+    messages?: ChatMessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ChatConversationUncheckedUpdateWithoutNoteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: ChatMessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ChatConversationUncheckedUpdateManyWithoutNoteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    context?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type NoteUpdateWithoutTagsInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumNoteTypeFieldUpdateOperationsInput | $Enums.NoteType
@@ -59855,6 +60235,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutNotesNestedInput
+    chatConversations?: ChatConversationUpdateManyWithoutNoteNestedInput
   }
 
   export type NoteUncheckedUpdateWithoutTagsInput = {
@@ -59868,6 +60249,7 @@ export namespace Prisma {
     vector_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    chatConversations?: ChatConversationUncheckedUpdateManyWithoutNoteNestedInput
   }
 
   export type NoteUncheckedUpdateManyWithoutTagsInput = {

@@ -50,8 +50,6 @@ export class AssistantOrchestratorService {
 
         const input = [...historyToAgentInput(history), user(userMessage)];
 
-        this.logger.log(`Running assistant for conversation ${conversationUuid}, history: ${history.length} messages`);
-
         const result = await run(agent, input, {
             context: { user_uuid },
             maxTurns: 10,
@@ -60,8 +58,6 @@ export class AssistantOrchestratorService {
         const assistantText = this.resolveFinalOutput(result.finalOutput);
         const toolTrace = extractToolTrace(result.newItems);
         const images = extractGeneratedImages(result.newItems);
-
-        this.logger.log(`Assistant completed for ${conversationUuid}, tools: ${toolTrace.map((t) => t.name).join(', ') || 'none'}`);
 
         return { assistantText, toolTrace, images };
     }

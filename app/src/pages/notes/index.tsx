@@ -71,28 +71,26 @@ function NoteCard({
                                 {new Date(note.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                             </span>
                         </div>
-                        <div className="flex flex-wrap items-center gap-1.5">
-                            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium flex-shrink-0 ${t.color} ${t.bg} border ${t.border}`}>
-                                <Icon className="w-3 h-3" />
-                                {t.label}
-                            </span>
-                            {visibleTags.map((tag) => (
-                                <span
-                                    key={tag.uuid}
-                                    className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border max-w-[120px] truncate"
-                                    style={{
-                                        backgroundColor: tag.color + '20',
-                                        borderColor: tag.color + '50',
-                                        color: tag.color,
-                                    }}
-                                >
-                                    {tag.title}
-                                </span>
-                            ))}
-                            {hiddenCount > 0 && (
-                                <span className="text-slate-500 text-xs flex-shrink-0">+{hiddenCount}</span>
-                            )}
-                        </div>
+                        {note.tags.length > 0 && (
+                            <div className="flex flex-wrap items-center gap-1.5 min-w-0">
+                                {visibleTags.map((tag) => (
+                                    <span
+                                        key={tag.uuid}
+                                        className="inline-block max-w-full px-2 py-0.5 rounded-full text-xs font-medium border break-words"
+                                        style={{
+                                            backgroundColor: tag.color + '20',
+                                            borderColor: tag.color + '50',
+                                            color: tag.color,
+                                        }}
+                                    >
+                                        {tag.title}
+                                    </span>
+                                ))}
+                                {hiddenCount > 0 && (
+                                    <span className="text-slate-500 text-xs flex-shrink-0">+{hiddenCount}</span>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </button>
@@ -194,9 +192,9 @@ export function NotesPage() {
 
     async function handleCreate(e: React.FormEvent) {
         e.preventDefault()
-        if (!title.trim() || !content.trim()) return
+        if (!content.trim()) return
         const note = await createMutation.mutateAsync({
-            title: title.trim(),
+            ...(title.trim() ? { title: title.trim() } : {}),
             type: selectedType,
             content: content.trim(),
             tag_uuids: selectedTagUuids.length ? selectedTagUuids : undefined,
@@ -256,11 +254,10 @@ export function NotesPage() {
 
                         <input
                             type="text"
-                            placeholder="Title"
+                            placeholder="Title (optional — AI will generate from content)"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             className="w-full bg-slate-800/60 border border-slate-700/60 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-violet-500/60 transition-colors mb-4"
-                            required
                         />
 
                         <div className="grid grid-cols-5 gap-2 mb-4">

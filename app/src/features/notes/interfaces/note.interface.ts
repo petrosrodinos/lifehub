@@ -21,7 +21,7 @@ export interface Note {
 }
 
 export interface CreateNoteDto {
-    title: string
+    title?: string
     type: NoteType
     content: string
     tag_uuids?: string[]

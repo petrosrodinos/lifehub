@@ -1,15 +1,20 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import {
     ArrowLeft, Pencil, Trash2, Save, X, Loader2, Sparkles,
-    BookOpen, Lightbulb, StickyNote, Video, Newspaper,
+    BookOpen, Lightbulb, StickyNote, Video, Newspaper, MessageSquare,
 } from 'lucide-react'
 import { useNote, useUpdateNote, useDeleteNote, useSummarizeNote } from '../../features/notes/hooks/use-notes'
 import { useNoteTags, useCreateNoteTag } from '../../features/notes/hooks/use-note-tags'
+import { useNoteConversation, useSendNoteMessage } from '../../features/notes/hooks/use-note-chat'
 import type { NoteType } from '../../features/notes/interfaces/note.interface'
+import type { DisplayMessage } from '../../features/assistant/interfaces/chat.interface'
 import { ConfirmationModal } from '../../components/ui/ConfirmationModal'
 import { TagSelector } from '../../components/ui/TagSelector'
+import { Drawer } from '../../components/ui/Drawer'
+import { ChatMessageList } from '../../components/chat/ChatMessageList'
+import { ChatComposer } from '../../components/chat/ChatComposer'
 import { Routes } from '../../routes/routes'
 
 const NOTE_TYPES: { type: NoteType; label: string; Icon: typeof BookOpen; color: string; bg: string; border: string }[] = [
@@ -61,6 +66,13 @@ export function NoteDetailPage() {
     const summarizeMutation = useSummarizeNote()
     const createTagMutation = useCreateNoteTag()
 
+    // Note chat
+    const { data: noteConversationData } = useNoteConversation(uuid)
+    const sendNoteMessage = useSendNoteMessage(uuid)
+    const hasConversation = !!noteConversationData?.conversation
+    const [showComposer, setShowComposer] = useState(false)
+    const [drawerOpen, setDrawerOpen] = useState(false)
+
     const [isEditing, setIsEditing] = useState(false)
     const [editTitle, setEditTitle] = useState('')
     const [editType, setEditType] = useState<NoteType>('NOTE')
@@ -103,6 +115,25 @@ export function NoteDetailPage() {
     async function handleSummarize() {
         await summarizeMutation.mutateAsync(uuid)
     }
+
+    async function handleSendNoteMessage(content: string) {
+        await sendNoteMessage.mutateAsync(content)
+        // After the first send, hide the inline composer and open the drawer
+        setShowComposer(false)
+        setDrawerOpen(true)
+    }
+
+    async function handleContinueDiscussion(content: string) {
+        await sendNoteMessage.mutateAsync(content)
+    }
+
+    const drawerDisplayMessages: DisplayMessage[] = useMemo(() => {
+        const messages = noteConversationData?.messages ?? []
+        return messages.map((m) => ({
+            ...m,
+            status: m.uuid.startsWith('pending-assistant-') ? ('pending' as const) : ('complete' as const),
+        }))
+    }, [noteConversationData])
 
     if (isLoading) return <NoteDetailSkeleton />
 
@@ -169,6 +200,24 @@ export function NoteDetailPage() {
                             </>
                         ) : (
                             <>
+                                {/* AI discussion button */}
+                                {hasConversation ? (
+                                    <button
+                                        onClick={() => setDrawerOpen(true)}
+                                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-600/20 hover:bg-violet-600/30 text-violet-400 text-sm transition-colors border border-violet-500/30"
+                                    >
+                                        <MessageSquare className="w-3.5 h-3.5" />
+                                        Discussion
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={() => setShowComposer((prev) => !prev)}
+                                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm transition-colors"
+                                    >
+                                        <Sparkles className="w-3.5 h-3.5" />
+                                        Discuss
+                                    </button>
+                                )}
                                 <button
                                     onClick={startEditing}
                                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm transition-colors"
@@ -186,6 +235,19 @@ export function NoteDetailPage() {
                         )}
                     </div>
                 </div>
+
+                {/* Inline AI composer – shown when "Discuss" is clicked and no chat exists yet */}
+                {showComposer && !hasConversation && (
+                    <div className="mt-3">
+                        <ChatComposer
+                            onSend={handleSendNoteMessage}
+                            disabled={false}
+                            isPending={sendNoteMessage.isPending}
+                            placeholder="Ask something about this note…"
+                            variant="inline"
+                        />
+                    </div>
+                )}
             </div>
 
             <div className="px-4 pt-5">
@@ -316,6 +378,32 @@ export function NoteDetailPage() {
                 variant="danger"
                 isPending={deleteMutation.isPending}
             />
+
+            {/* Note Discussion Drawer */}
+            <Drawer
+                isOpen={drawerOpen}
+                onClose={() => setDrawerOpen(false)}
+                title={
+                    <span className="flex items-center gap-2">
+                        <MessageSquare className="w-4 h-4 text-violet-400" />
+                        Note Discussion
+                    </span>
+                }
+                rawContent
+            >
+                <ChatMessageList
+                    messages={drawerDisplayMessages}
+                    isLoading={sendNoteMessage.isPending && drawerDisplayMessages.length === 0}
+                    emptySubtitle="Ask a question or share your thoughts about this note."
+                />
+                <ChatComposer
+                    onSend={handleContinueDiscussion}
+                    disabled={false}
+                    isPending={sendNoteMessage.isPending}
+                    placeholder="Continue the discussion…"
+                    variant="inline"
+                />
+            </Drawer>
         </div>
     )
 }

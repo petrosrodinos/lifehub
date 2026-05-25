@@ -585,6 +585,7 @@ model Note {
   summary    String?   @db.Text
   vector_id  String?
   tags       NoteTag[]
+  chatConversations ChatConversation[]
   created_at DateTime  @default(now())
   updated_at DateTime  @updatedAt
 
@@ -664,11 +665,15 @@ model ChatConversation {
   user_uuid  String
   user       User          @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
   title      String        @default("New chat")
+  note_uuid  String?
+  context    String?       @db.Text
+  note       Note?         @relation(fields: [note_uuid], references: [uuid], onDelete: SetNull)
   created_at DateTime      @default(now())
   updated_at DateTime      @updatedAt
   messages   ChatMessage[]
 
   @@index([user_uuid, updated_at])
+  @@index([user_uuid, note_uuid])
   @@map("chat_conversations")
 }
 

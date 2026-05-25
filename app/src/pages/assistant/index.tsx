@@ -126,10 +126,13 @@ export function AssistantPage() {
                     </div>
                 </header>
 
-                <ChatMessageList
-                    messages={displayMessages}
-                    isLoading={!!selectedUuid && messagesLoading}
-                />
+                {/* Scrollable message area positioned between header and composer */}
+                <div className="absolute inset-x-0 top-16 bottom-20 flex flex-col">
+                    <ChatMessageList
+                        messages={displayMessages}
+                        isLoading={!!selectedUuid && messagesLoading}
+                    />
+                </div>
             </div>
 
             <ChatComposer
