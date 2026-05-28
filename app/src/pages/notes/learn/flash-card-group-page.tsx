@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Play, Loader2, AlertTriangle, Image, Pencil, Check, X, Trash2 } from 'lucide-react';
+import { ArrowLeft, Play, Loader2, AlertTriangle, Image, Pencil, Check, X, Trash2, FileText } from 'lucide-react';
 import {
     useFlashCardGroup,
     useUpdateFlashCardGroup,
     useDeleteFlashCard,
 } from '../../../features/flash-cards/hooks/use-flash-cards';
+import { useNotes } from '../../../features/notes/hooks/use-notes';
 import { FlashCardPlayer } from './components/FlashCardPlayer';
 import { ConfirmationModal } from '../../../components/ui/ConfirmationModal';
 import { Routes } from '../../../routes/routes';
@@ -24,6 +25,8 @@ export function FlashCardGroupPage() {
     const [titleDraft, setTitleDraft] = useState('');
 
     const { data: group, isLoading } = useFlashCardGroup(uuid!);
+    const { data: allNotes = [] } = useNotes();
+    const sourceNotes = allNotes.filter((n) => group?.source_note_uuids.includes(n.uuid));
 
     useEffect(() => {
         if (group && searchParams.get('play') === '1' && group.cards.length > 0 && !playingCards) {
@@ -122,9 +125,23 @@ export function FlashCardGroupPage() {
                                 </button>
                             </div>
                         )}
-                        <p className="text-xs text-slate-500 mt-0.5">
-                            {group.cards.length} cards · {group.source_note_uuids.length} notes
+                        <p className="text-xs text-slate-500 mt-0.5 mb-2">
+                            {group.cards.length} cards
                         </p>
+                        {sourceNotes.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5">
+                                {sourceNotes.map((note) => (
+                                    <button
+                                        key={note.uuid}
+                                        onClick={() => navigate(Routes.notes.detail(note.uuid))}
+                                        className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700/50 hover:border-slate-600 text-slate-300 hover:text-white transition-colors"
+                                    >
+                                        <FileText className="w-3 h-3 text-slate-500" />
+                                        {note.title}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
                     {canPlay && (
                         <button
@@ -170,6 +187,7 @@ export function FlashCardGroupPage() {
                                     card={card}
                                     index={i}
                                     groupUuid={group.uuid}
+                                    sourceNotes={sourceNotes}
                                 />
                             ))}
                         </div>
@@ -187,7 +205,10 @@ export function FlashCardGroupPage() {
     );
 }
 
-function FlashCardTile({ card, index, groupUuid }: { card: FlashCard; index: number; groupUuid: string }) {
+interface SourceNote { uuid: string; title: string }
+
+function FlashCardTile({ card, index, groupUuid, sourceNotes }: { card: FlashCard; index: number; groupUuid: string; sourceNotes: SourceNote[] }) {
+    const navigate = useNavigate();
     const [showConfirm, setShowConfirm] = useState(false);
     const deleteCard = useDeleteFlashCard(groupUuid);
 
@@ -231,7 +252,7 @@ function FlashCardTile({ card, index, groupUuid }: { card: FlashCard; index: num
                     <p className="text-xs text-slate-400 leading-relaxed line-clamp-2 mb-2">{card.back}</p>
 
                     {card.keywords.length > 0 && (
-                        <div className="flex flex-wrap gap-1">
+                        <div className="flex flex-wrap gap-1 mb-2">
                             {card.keywords.slice(0, 3).map((kw) => (
                                 <span
                                     key={kw}
@@ -239,6 +260,21 @@ function FlashCardTile({ card, index, groupUuid }: { card: FlashCard; index: num
                                 >
                                     {kw}
                                 </span>
+                            ))}
+                        </div>
+                    )}
+
+                    {sourceNotes.length > 0 && (
+                        <div className="flex flex-wrap gap-1">
+                            {sourceNotes.map((note) => (
+                                <button
+                                    key={note.uuid}
+                                    onClick={() => navigate(Routes.notes.detail(note.uuid))}
+                                    className="inline-flex items-center gap-1 text-[10px] text-slate-500 hover:text-violet-400 transition-colors"
+                                >
+                                    <FileText className="w-2.5 h-2.5" />
+                                    {note.title}
+                                </button>
                             ))}
                         </div>
                     )}
