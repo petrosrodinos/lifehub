@@ -35,6 +35,7 @@ export const Routes = {
         learn: {
             prefix: '/dashboard/notes/learn',
             cards: (uuid: string) => `/dashboard/notes/learn/cards/${uuid}`,
+            quiz: (uuid: string) => `/dashboard/notes/learn/quizzes/${uuid}`,
         },
     },
     assistant: {

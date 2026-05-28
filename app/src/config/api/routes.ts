@@ -235,6 +235,26 @@ export const ApiRoutes = {
       delete: (groupUuid: string, cardUuid: string) => `/flash-card-groups/${groupUuid}/cards/${cardUuid}`,
     },
   },
+  quizzes: {
+    groups: {
+      list: '/quiz-groups',
+      create: '/quiz-groups',
+      get: (uuid: string) => `/quiz-groups/${uuid}`,
+      update: (uuid: string) => `/quiz-groups/${uuid}`,
+      delete: (uuid: string) => `/quiz-groups/${uuid}`,
+    },
+    questions: {
+      delete: (groupUuid: string, questionUuid: string) =>
+        `/quiz-groups/${groupUuid}/questions/${questionUuid}`,
+    },
+    attempts: {
+      start: (groupUuid: string) => `/quiz-groups/${groupUuid}/attempts`,
+      list: (groupUuid: string) => `/quiz-groups/${groupUuid}/attempts`,
+      get: (uuid: string) => `/quiz-attempts/${uuid}`,
+      submitAnswer: (uuid: string) => `/quiz-attempts/${uuid}/answers`,
+      complete: (uuid: string) => `/quiz-attempts/${uuid}/complete`,
+    },
+  },
   youtubeScraper: {
     transcript: '/youtube-scraper/transcript',
   },

@@ -17,6 +17,7 @@ import { NotesPage } from "../pages/notes";
 import { NoteDetailPage } from "../pages/notes/note-detail";
 import { LearnPage } from "../pages/notes/learn";
 import { FlashCardGroupPage } from "../pages/notes/learn/flash-card-group-page";
+import { QuizGroupPage } from "../pages/notes/learn/quiz-group-page";
 import { AssistantPage } from "../pages/assistant";
 import { ActivitiesSettingsPage } from "../pages/settings/pages/activities";
 import { ExpensesSettingsPage } from "../pages/settings/pages/expenses";
@@ -63,9 +64,10 @@ export default function AppRoutes() {
         <Route path="gym/workout/:uuid" element={<WorkoutDetailPage />} />
         <Route path="gym/workout-entry/:entryUuid" element={<ExerciseDetailPage />} />
         <Route path="notes" element={<NotesPage />} />
-        <Route path="notes/:uuid" element={<NoteDetailPage />} />
         <Route path="notes/learn" element={<LearnPage />} />
         <Route path="notes/learn/cards/:uuid" element={<FlashCardGroupPage />} />
+        <Route path="notes/learn/quizzes/:uuid" element={<QuizGroupPage />} />
+        <Route path="notes/:uuid" element={<NoteDetailPage />} />
         <Route path="assistant" element={<AssistantPage />} />
       </Route>
 

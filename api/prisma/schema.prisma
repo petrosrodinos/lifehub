@@ -116,6 +116,7 @@ model User {
   notes Note[]
   note_tags NoteTag[]
   flash_card_groups FlashCardGroup[]
+  quiz_groups QuizGroup[]
 
   // Assistant
   chat_conversations ChatConversation[]
@@ -745,6 +746,151 @@ model FlashCardImage {
   updated_at   DateTime  @updatedAt
 
   @@map("flash_card_images")
+}
+
+enum QuizDifficulty {
+  EASY
+  MEDIUM
+  HARD
+  MIXED
+}
+
+enum QuizQuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  SHORT_ANSWER
+}
+
+enum QuizGroupStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  PARTIAL
+}
+
+enum QuizAttemptStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
+model QuizGroup {
+  id                    Int             @id @default(autoincrement())
+  uuid                  String          @unique @default(uuid())
+  user_uuid             String
+  user                  User            @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  user_title            String?
+  ai_title              String?
+  ai_description        String?         @db.Text
+  status                QuizGroupStatus @default(PENDING)
+  difficulty            QuizDifficulty  @default(MIXED)
+  question_count_target Int             @default(10)
+  question_types        String[]
+  total_questions       Int             @default(0)
+  source_note_uuids     String[]
+  input_tokens          Int             @default(0)
+  output_tokens         Int             @default(0)
+  total_cost_usd        Decimal         @default(0) @db.Decimal(10, 6)
+  error_message         String?
+  ai_provider           String?
+  ai_model              String?
+  created_at            DateTime        @default(now())
+  updated_at            DateTime        @updatedAt
+
+  questions             QuizQuestion[]
+  attempts              QuizAttempt[]
+
+  @@index([user_uuid])
+  @@index([user_uuid, status])
+  @@map("quiz_groups")
+}
+
+model QuizQuestion {
+  id                 Int              @id @default(autoincrement())
+  uuid               String           @unique @default(uuid())
+  group_uuid         String
+  group              QuizGroup        @relation(fields: [group_uuid], references: [uuid], onDelete: Cascade)
+  question_text      String           @db.Text
+  question_type      QuizQuestionType
+  difficulty         QuizDifficulty
+  correct_answer     String           @db.Text
+  explanation        String?          @db.Text
+  hint               String?
+  source_note_uuid   String?
+  order_index        Int              @default(0)
+  points             Int              @default(1)
+  acceptable_answers String[]
+  grading_guidance   String?          @db.Text
+  created_at         DateTime         @default(now())
+  updated_at         DateTime         @updatedAt
+
+  options            QuizQuestionOption[]
+  attempt_answers    QuizAttemptAnswer[]
+
+  @@index([group_uuid])
+  @@index([group_uuid, order_index])
+  @@map("quiz_questions")
+}
+
+model QuizQuestionOption {
+  id            Int          @id @default(autoincrement())
+  uuid          String       @unique @default(uuid())
+  question_uuid String
+  question      QuizQuestion @relation(fields: [question_uuid], references: [uuid], onDelete: Cascade)
+  text          String
+  is_correct    Boolean      @default(false)
+  order_index   Int          @default(0)
+  created_at    DateTime     @default(now())
+
+  @@index([question_uuid])
+  @@map("quiz_question_options")
+}
+
+model QuizAttempt {
+  id                 Int               @id @default(autoincrement())
+  uuid               String            @unique @default(uuid())
+  user_uuid          String
+  group_uuid         String
+  group              QuizGroup         @relation(fields: [group_uuid], references: [uuid], onDelete: Cascade)
+  status             QuizAttemptStatus @default(IN_PROGRESS)
+  score              Int               @default(0)
+  max_score          Int               @default(0)
+  correct_answers    Int               @default(0)
+  incorrect_answers  Int               @default(0)
+  total_questions    Int               @default(0)
+  time_spent_seconds Int               @default(0)
+  started_at         DateTime          @default(now())
+  completed_at       DateTime?
+  created_at         DateTime          @default(now())
+  updated_at         DateTime          @updatedAt
+
+  answers            QuizAttemptAnswer[]
+
+  @@index([user_uuid])
+  @@index([group_uuid])
+  @@index([user_uuid, group_uuid])
+  @@map("quiz_attempts")
+}
+
+model QuizAttemptAnswer {
+  id                   Int          @id @default(autoincrement())
+  uuid                 String       @unique @default(uuid())
+  attempt_uuid         String
+  attempt              QuizAttempt  @relation(fields: [attempt_uuid], references: [uuid], onDelete: Cascade)
+  question_uuid        String
+  question             QuizQuestion @relation(fields: [question_uuid], references: [uuid], onDelete: Cascade)
+  selected_option_uuid String?
+  boolean_answer       Boolean?
+  text_answer          String?      @db.Text
+  is_correct           Boolean      @default(false)
+  points_awarded       Int          @default(0)
+  submitted_at         DateTime     @default(now())
+
+  @@unique([attempt_uuid, question_uuid])
+  @@index([attempt_uuid])
+  @@index([question_uuid])
+  @@map("quiz_attempt_answers")
 }
 
 model ChatMessage {

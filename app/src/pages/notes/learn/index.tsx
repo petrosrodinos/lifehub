@@ -5,7 +5,7 @@ import { useFlashCardGroups } from '../../../features/flash-cards/hooks/use-flas
 import { FlashCardGroupCard } from './components/FlashCardGroupCard';
 import { FlashCardGroupSkeleton } from './components/FlashCardGroupSkeleton';
 import { CreateFlashCardGroupModal } from './components/CreateFlashCardGroupModal';
-import { QuizzesPlaceholder } from './components/QuizzesPlaceholder';
+import { QuizTab } from './components/quiz/QuizTab';
 import { Routes } from '../../../routes/routes';
 
 type Tab = 'flashcards' | 'quizzes';
@@ -32,13 +32,15 @@ export function LearnPage() {
                 </button>
                 <div className="flex items-center justify-between mb-4">
                     <h1 className="text-2xl font-bold text-white">Learn</h1>
-                    <button
-                        onClick={() => setShowCreate(true)}
-                        className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-xl bg-violet-600 hover:bg-violet-500 text-white transition-colors"
-                    >
-                        <Plus className="w-4 h-4" />
-                        New Flash Cards
-                    </button>
+                    {tab === 'flashcards' && (
+                        <button
+                            onClick={() => setShowCreate(true)}
+                            className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-xl bg-violet-600 hover:bg-violet-500 text-white transition-colors"
+                        >
+                            <Plus className="w-4 h-4" />
+                            New Flash Cards
+                        </button>
+                    )}
                 </div>
 
                 <div className="flex gap-1 p-1 bg-slate-900 rounded-xl border border-slate-800">
@@ -93,7 +95,7 @@ export function LearnPage() {
                         </div>
                     )
                 ) : (
-                    <QuizzesPlaceholder />
+                    <QuizTab />
                 )}
             </div>
 

@@ -493,6 +493,89 @@ exports.Prisma.FlashCardImageScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.QuizGroupScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  user_title: 'user_title',
+  ai_title: 'ai_title',
+  ai_description: 'ai_description',
+  status: 'status',
+  difficulty: 'difficulty',
+  question_count_target: 'question_count_target',
+  question_types: 'question_types',
+  total_questions: 'total_questions',
+  source_note_uuids: 'source_note_uuids',
+  input_tokens: 'input_tokens',
+  output_tokens: 'output_tokens',
+  total_cost_usd: 'total_cost_usd',
+  error_message: 'error_message',
+  ai_provider: 'ai_provider',
+  ai_model: 'ai_model',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.QuizQuestionScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  group_uuid: 'group_uuid',
+  question_text: 'question_text',
+  question_type: 'question_type',
+  difficulty: 'difficulty',
+  correct_answer: 'correct_answer',
+  explanation: 'explanation',
+  hint: 'hint',
+  source_note_uuid: 'source_note_uuid',
+  order_index: 'order_index',
+  points: 'points',
+  acceptable_answers: 'acceptable_answers',
+  grading_guidance: 'grading_guidance',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.QuizQuestionOptionScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  question_uuid: 'question_uuid',
+  text: 'text',
+  is_correct: 'is_correct',
+  order_index: 'order_index',
+  created_at: 'created_at'
+};
+
+exports.Prisma.QuizAttemptScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  group_uuid: 'group_uuid',
+  status: 'status',
+  score: 'score',
+  max_score: 'max_score',
+  correct_answers: 'correct_answers',
+  incorrect_answers: 'incorrect_answers',
+  total_questions: 'total_questions',
+  time_spent_seconds: 'time_spent_seconds',
+  started_at: 'started_at',
+  completed_at: 'completed_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.QuizAttemptAnswerScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  attempt_uuid: 'attempt_uuid',
+  question_uuid: 'question_uuid',
+  selected_option_uuid: 'selected_option_uuid',
+  boolean_answer: 'boolean_answer',
+  text_answer: 'text_answer',
+  is_correct: 'is_correct',
+  points_awarded: 'points_awarded',
+  submitted_at: 'submitted_at'
+};
+
 exports.Prisma.ChatMessageScalarFieldEnum = {
   id: 'id',
   uuid: 'uuid',
@@ -605,6 +688,33 @@ exports.FlashCardGroupStatus = exports.$Enums.FlashCardGroupStatus = {
   PARTIAL: 'PARTIAL'
 };
 
+exports.QuizGroupStatus = exports.$Enums.QuizGroupStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  PARTIAL: 'PARTIAL'
+};
+
+exports.QuizDifficulty = exports.$Enums.QuizDifficulty = {
+  EASY: 'EASY',
+  MEDIUM: 'MEDIUM',
+  HARD: 'HARD',
+  MIXED: 'MIXED'
+};
+
+exports.QuizQuestionType = exports.$Enums.QuizQuestionType = {
+  MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
+  TRUE_FALSE: 'TRUE_FALSE',
+  SHORT_ANSWER: 'SHORT_ANSWER'
+};
+
+exports.QuizAttemptStatus = exports.$Enums.QuizAttemptStatus = {
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  ABANDONED: 'ABANDONED'
+};
+
 exports.ChatMessageRole = exports.$Enums.ChatMessageRole = {
   USER: 'USER',
   ASSISTANT: 'ASSISTANT',
@@ -642,6 +752,11 @@ exports.Prisma.ModelName = {
   FlashCardGroup: 'FlashCardGroup',
   FlashCard: 'FlashCard',
   FlashCardImage: 'FlashCardImage',
+  QuizGroup: 'QuizGroup',
+  QuizQuestion: 'QuizQuestion',
+  QuizQuestionOption: 'QuizQuestionOption',
+  QuizAttempt: 'QuizAttempt',
+  QuizAttemptAnswer: 'QuizAttemptAnswer',
   ChatMessage: 'ChatMessage'
 };
 
