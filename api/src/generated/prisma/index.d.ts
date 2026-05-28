@@ -149,6 +149,21 @@ export type HiddenSubcategory = $Result.DefaultSelection<Prisma.$HiddenSubcatego
  */
 export type ChatConversation = $Result.DefaultSelection<Prisma.$ChatConversationPayload>
 /**
+ * Model FlashCardGroup
+ * 
+ */
+export type FlashCardGroup = $Result.DefaultSelection<Prisma.$FlashCardGroupPayload>
+/**
+ * Model FlashCard
+ * 
+ */
+export type FlashCard = $Result.DefaultSelection<Prisma.$FlashCardPayload>
+/**
+ * Model FlashCardImage
+ * 
+ */
+export type FlashCardImage = $Result.DefaultSelection<Prisma.$FlashCardImagePayload>
+/**
  * Model ChatMessage
  * 
  */
@@ -265,6 +280,17 @@ export const ChatMessageRole: {
 
 export type ChatMessageRole = (typeof ChatMessageRole)[keyof typeof ChatMessageRole]
 
+
+export const FlashCardGroupStatus: {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  PARTIAL: 'PARTIAL'
+};
+
+export type FlashCardGroupStatus = (typeof FlashCardGroupStatus)[keyof typeof FlashCardGroupStatus]
+
 }
 
 export type AuthRole = $Enums.AuthRole
@@ -310,6 +336,10 @@ export const NoteType: typeof $Enums.NoteType
 export type ChatMessageRole = $Enums.ChatMessageRole
 
 export const ChatMessageRole: typeof $Enums.ChatMessageRole
+
+export type FlashCardGroupStatus = $Enums.FlashCardGroupStatus
+
+export const FlashCardGroupStatus: typeof $Enums.FlashCardGroupStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -701,6 +731,36 @@ export class PrismaClient<
     * ```
     */
   get chatConversation(): Prisma.ChatConversationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.flashCardGroup`: Exposes CRUD operations for the **FlashCardGroup** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FlashCardGroups
+    * const flashCardGroups = await prisma.flashCardGroup.findMany()
+    * ```
+    */
+  get flashCardGroup(): Prisma.FlashCardGroupDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.flashCard`: Exposes CRUD operations for the **FlashCard** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FlashCards
+    * const flashCards = await prisma.flashCard.findMany()
+    * ```
+    */
+  get flashCard(): Prisma.FlashCardDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.flashCardImage`: Exposes CRUD operations for the **FlashCardImage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FlashCardImages
+    * const flashCardImages = await prisma.flashCardImage.findMany()
+    * ```
+    */
+  get flashCardImage(): Prisma.FlashCardImageDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.chatMessage`: Exposes CRUD operations for the **ChatMessage** model.
@@ -1172,6 +1232,9 @@ export namespace Prisma {
     HiddenCategory: 'HiddenCategory',
     HiddenSubcategory: 'HiddenSubcategory',
     ChatConversation: 'ChatConversation',
+    FlashCardGroup: 'FlashCardGroup',
+    FlashCard: 'FlashCard',
+    FlashCardImage: 'FlashCardImage',
     ChatMessage: 'ChatMessage'
   };
 
@@ -1188,7 +1251,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "noteTag" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory" | "chatConversation" | "chatMessage"
+      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "noteTag" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory" | "chatConversation" | "flashCardGroup" | "flashCard" | "flashCardImage" | "chatMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3190,6 +3253,228 @@ export namespace Prisma {
           }
         }
       }
+      FlashCardGroup: {
+        payload: Prisma.$FlashCardGroupPayload<ExtArgs>
+        fields: Prisma.FlashCardGroupFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FlashCardGroupFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FlashCardGroupFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload>
+          }
+          findFirst: {
+            args: Prisma.FlashCardGroupFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FlashCardGroupFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload>
+          }
+          findMany: {
+            args: Prisma.FlashCardGroupFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload>[]
+          }
+          create: {
+            args: Prisma.FlashCardGroupCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload>
+          }
+          createMany: {
+            args: Prisma.FlashCardGroupCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FlashCardGroupCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload>[]
+          }
+          delete: {
+            args: Prisma.FlashCardGroupDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload>
+          }
+          update: {
+            args: Prisma.FlashCardGroupUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload>
+          }
+          deleteMany: {
+            args: Prisma.FlashCardGroupDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FlashCardGroupUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FlashCardGroupUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload>[]
+          }
+          upsert: {
+            args: Prisma.FlashCardGroupUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardGroupPayload>
+          }
+          aggregate: {
+            args: Prisma.FlashCardGroupAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFlashCardGroup>
+          }
+          groupBy: {
+            args: Prisma.FlashCardGroupGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FlashCardGroupGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FlashCardGroupCountArgs<ExtArgs>
+            result: $Utils.Optional<FlashCardGroupCountAggregateOutputType> | number
+          }
+        }
+      }
+      FlashCard: {
+        payload: Prisma.$FlashCardPayload<ExtArgs>
+        fields: Prisma.FlashCardFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FlashCardFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FlashCardFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload>
+          }
+          findFirst: {
+            args: Prisma.FlashCardFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FlashCardFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload>
+          }
+          findMany: {
+            args: Prisma.FlashCardFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload>[]
+          }
+          create: {
+            args: Prisma.FlashCardCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload>
+          }
+          createMany: {
+            args: Prisma.FlashCardCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FlashCardCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload>[]
+          }
+          delete: {
+            args: Prisma.FlashCardDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload>
+          }
+          update: {
+            args: Prisma.FlashCardUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload>
+          }
+          deleteMany: {
+            args: Prisma.FlashCardDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FlashCardUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FlashCardUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload>[]
+          }
+          upsert: {
+            args: Prisma.FlashCardUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardPayload>
+          }
+          aggregate: {
+            args: Prisma.FlashCardAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFlashCard>
+          }
+          groupBy: {
+            args: Prisma.FlashCardGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FlashCardGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FlashCardCountArgs<ExtArgs>
+            result: $Utils.Optional<FlashCardCountAggregateOutputType> | number
+          }
+        }
+      }
+      FlashCardImage: {
+        payload: Prisma.$FlashCardImagePayload<ExtArgs>
+        fields: Prisma.FlashCardImageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FlashCardImageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FlashCardImageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload>
+          }
+          findFirst: {
+            args: Prisma.FlashCardImageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FlashCardImageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload>
+          }
+          findMany: {
+            args: Prisma.FlashCardImageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload>[]
+          }
+          create: {
+            args: Prisma.FlashCardImageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload>
+          }
+          createMany: {
+            args: Prisma.FlashCardImageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FlashCardImageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload>[]
+          }
+          delete: {
+            args: Prisma.FlashCardImageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload>
+          }
+          update: {
+            args: Prisma.FlashCardImageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload>
+          }
+          deleteMany: {
+            args: Prisma.FlashCardImageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FlashCardImageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FlashCardImageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload>[]
+          }
+          upsert: {
+            args: Prisma.FlashCardImageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashCardImagePayload>
+          }
+          aggregate: {
+            args: Prisma.FlashCardImageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFlashCardImage>
+          }
+          groupBy: {
+            args: Prisma.FlashCardImageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FlashCardImageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FlashCardImageCountArgs<ExtArgs>
+            result: $Utils.Optional<FlashCardImageCountAggregateOutputType> | number
+          }
+        }
+      }
       ChatMessage: {
         payload: Prisma.$ChatMessagePayload<ExtArgs>
         fields: Prisma.ChatMessageFieldRefs
@@ -3399,6 +3684,9 @@ export namespace Prisma {
     hiddenCategory?: HiddenCategoryOmit
     hiddenSubcategory?: HiddenSubcategoryOmit
     chatConversation?: ChatConversationOmit
+    flashCardGroup?: FlashCardGroupOmit
+    flashCard?: FlashCardOmit
+    flashCardImage?: FlashCardImageOmit
     chatMessage?: ChatMessageOmit
   }
 
@@ -3500,6 +3788,7 @@ export namespace Prisma {
     workouts: number
     notes: number
     note_tags: number
+    flash_card_groups: number
     chat_conversations: number
   }
 
@@ -3524,6 +3813,7 @@ export namespace Prisma {
     workouts?: boolean | UserCountOutputTypeCountWorkoutsArgs
     notes?: boolean | UserCountOutputTypeCountNotesArgs
     note_tags?: boolean | UserCountOutputTypeCountNote_tagsArgs
+    flash_card_groups?: boolean | UserCountOutputTypeCountFlash_card_groupsArgs
     chat_conversations?: boolean | UserCountOutputTypeCountChat_conversationsArgs
   }
 
@@ -3676,6 +3966,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountNote_tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NoteTagWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFlash_card_groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashCardGroupWhereInput
   }
 
   /**
@@ -4278,6 +4575,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type FlashCardGroupCountOutputType
+   */
+
+  export type FlashCardGroupCountOutputType = {
+    cards: number
+  }
+
+  export type FlashCardGroupCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cards?: boolean | FlashCardGroupCountOutputTypeCountCardsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FlashCardGroupCountOutputType without action
+   */
+  export type FlashCardGroupCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroupCountOutputType
+     */
+    select?: FlashCardGroupCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FlashCardGroupCountOutputType without action
+   */
+  export type FlashCardGroupCountOutputTypeCountCardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashCardWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -4539,6 +4867,7 @@ export namespace Prisma {
     workouts?: boolean | User$workoutsArgs<ExtArgs>
     notes?: boolean | User$notesArgs<ExtArgs>
     note_tags?: boolean | User$note_tagsArgs<ExtArgs>
+    flash_card_groups?: boolean | User$flash_card_groupsArgs<ExtArgs>
     chat_conversations?: boolean | User$chat_conversationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -4604,6 +4933,7 @@ export namespace Prisma {
     workouts?: boolean | User$workoutsArgs<ExtArgs>
     notes?: boolean | User$notesArgs<ExtArgs>
     note_tags?: boolean | User$note_tagsArgs<ExtArgs>
+    flash_card_groups?: boolean | User$flash_card_groupsArgs<ExtArgs>
     chat_conversations?: boolean | User$chat_conversationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -4633,6 +4963,7 @@ export namespace Prisma {
       workouts: Prisma.$WorkoutPayload<ExtArgs>[]
       notes: Prisma.$NotePayload<ExtArgs>[]
       note_tags: Prisma.$NoteTagPayload<ExtArgs>[]
+      flash_card_groups: Prisma.$FlashCardGroupPayload<ExtArgs>[]
       chat_conversations: Prisma.$ChatConversationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -5060,6 +5391,7 @@ export namespace Prisma {
     workouts<T extends User$workoutsArgs<ExtArgs> = {}>(args?: Subset<T, User$workoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notes<T extends User$notesArgs<ExtArgs> = {}>(args?: Subset<T, User$notesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     note_tags<T extends User$note_tagsArgs<ExtArgs> = {}>(args?: Subset<T, User$note_tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoteTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    flash_card_groups<T extends User$flash_card_groupsArgs<ExtArgs> = {}>(args?: Subset<T, User$flash_card_groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     chat_conversations<T extends User$chat_conversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$chat_conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5970,6 +6302,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NoteTagScalarFieldEnum | NoteTagScalarFieldEnum[]
+  }
+
+  /**
+   * User.flash_card_groups
+   */
+  export type User$flash_card_groupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+    where?: FlashCardGroupWhereInput
+    orderBy?: FlashCardGroupOrderByWithRelationInput | FlashCardGroupOrderByWithRelationInput[]
+    cursor?: FlashCardGroupWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FlashCardGroupScalarFieldEnum | FlashCardGroupScalarFieldEnum[]
   }
 
   /**
@@ -37353,6 +37709,3660 @@ export namespace Prisma {
 
 
   /**
+   * Model FlashCardGroup
+   */
+
+  export type AggregateFlashCardGroup = {
+    _count: FlashCardGroupCountAggregateOutputType | null
+    _avg: FlashCardGroupAvgAggregateOutputType | null
+    _sum: FlashCardGroupSumAggregateOutputType | null
+    _min: FlashCardGroupMinAggregateOutputType | null
+    _max: FlashCardGroupMaxAggregateOutputType | null
+  }
+
+  export type FlashCardGroupAvgAggregateOutputType = {
+    id: number | null
+    total_cards: number | null
+    completed_cards: number | null
+    failed_cards: number | null
+    input_tokens: number | null
+    output_tokens: number | null
+    total_cost_usd: Decimal | null
+  }
+
+  export type FlashCardGroupSumAggregateOutputType = {
+    id: number | null
+    total_cards: number | null
+    completed_cards: number | null
+    failed_cards: number | null
+    input_tokens: number | null
+    output_tokens: number | null
+    total_cost_usd: Decimal | null
+  }
+
+  export type FlashCardGroupMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    user_title: string | null
+    ai_title: string | null
+    status: $Enums.FlashCardGroupStatus | null
+    total_cards: number | null
+    completed_cards: number | null
+    failed_cards: number | null
+    input_tokens: number | null
+    output_tokens: number | null
+    total_cost_usd: Decimal | null
+    error_message: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type FlashCardGroupMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    user_title: string | null
+    ai_title: string | null
+    status: $Enums.FlashCardGroupStatus | null
+    total_cards: number | null
+    completed_cards: number | null
+    failed_cards: number | null
+    input_tokens: number | null
+    output_tokens: number | null
+    total_cost_usd: Decimal | null
+    error_message: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type FlashCardGroupCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    user_title: number
+    ai_title: number
+    status: number
+    source_note_uuids: number
+    total_cards: number
+    completed_cards: number
+    failed_cards: number
+    input_tokens: number
+    output_tokens: number
+    total_cost_usd: number
+    error_message: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type FlashCardGroupAvgAggregateInputType = {
+    id?: true
+    total_cards?: true
+    completed_cards?: true
+    failed_cards?: true
+    input_tokens?: true
+    output_tokens?: true
+    total_cost_usd?: true
+  }
+
+  export type FlashCardGroupSumAggregateInputType = {
+    id?: true
+    total_cards?: true
+    completed_cards?: true
+    failed_cards?: true
+    input_tokens?: true
+    output_tokens?: true
+    total_cost_usd?: true
+  }
+
+  export type FlashCardGroupMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    user_title?: true
+    ai_title?: true
+    status?: true
+    total_cards?: true
+    completed_cards?: true
+    failed_cards?: true
+    input_tokens?: true
+    output_tokens?: true
+    total_cost_usd?: true
+    error_message?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type FlashCardGroupMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    user_title?: true
+    ai_title?: true
+    status?: true
+    total_cards?: true
+    completed_cards?: true
+    failed_cards?: true
+    input_tokens?: true
+    output_tokens?: true
+    total_cost_usd?: true
+    error_message?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type FlashCardGroupCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    user_title?: true
+    ai_title?: true
+    status?: true
+    source_note_uuids?: true
+    total_cards?: true
+    completed_cards?: true
+    failed_cards?: true
+    input_tokens?: true
+    output_tokens?: true
+    total_cost_usd?: true
+    error_message?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type FlashCardGroupAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlashCardGroup to aggregate.
+     */
+    where?: FlashCardGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCardGroups to fetch.
+     */
+    orderBy?: FlashCardGroupOrderByWithRelationInput | FlashCardGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FlashCardGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCardGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCardGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FlashCardGroups
+    **/
+    _count?: true | FlashCardGroupCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FlashCardGroupAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FlashCardGroupSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FlashCardGroupMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FlashCardGroupMaxAggregateInputType
+  }
+
+  export type GetFlashCardGroupAggregateType<T extends FlashCardGroupAggregateArgs> = {
+        [P in keyof T & keyof AggregateFlashCardGroup]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFlashCardGroup[P]>
+      : GetScalarType<T[P], AggregateFlashCardGroup[P]>
+  }
+
+
+
+
+  export type FlashCardGroupGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashCardGroupWhereInput
+    orderBy?: FlashCardGroupOrderByWithAggregationInput | FlashCardGroupOrderByWithAggregationInput[]
+    by: FlashCardGroupScalarFieldEnum[] | FlashCardGroupScalarFieldEnum
+    having?: FlashCardGroupScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FlashCardGroupCountAggregateInputType | true
+    _avg?: FlashCardGroupAvgAggregateInputType
+    _sum?: FlashCardGroupSumAggregateInputType
+    _min?: FlashCardGroupMinAggregateInputType
+    _max?: FlashCardGroupMaxAggregateInputType
+  }
+
+  export type FlashCardGroupGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    user_title: string | null
+    ai_title: string | null
+    status: $Enums.FlashCardGroupStatus
+    source_note_uuids: string[]
+    total_cards: number
+    completed_cards: number
+    failed_cards: number
+    input_tokens: number
+    output_tokens: number
+    total_cost_usd: Decimal
+    error_message: string | null
+    created_at: Date
+    updated_at: Date
+    _count: FlashCardGroupCountAggregateOutputType | null
+    _avg: FlashCardGroupAvgAggregateOutputType | null
+    _sum: FlashCardGroupSumAggregateOutputType | null
+    _min: FlashCardGroupMinAggregateOutputType | null
+    _max: FlashCardGroupMaxAggregateOutputType | null
+  }
+
+  type GetFlashCardGroupGroupByPayload<T extends FlashCardGroupGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FlashCardGroupGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FlashCardGroupGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FlashCardGroupGroupByOutputType[P]>
+            : GetScalarType<T[P], FlashCardGroupGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FlashCardGroupSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    user_title?: boolean
+    ai_title?: boolean
+    status?: boolean
+    source_note_uuids?: boolean
+    total_cards?: boolean
+    completed_cards?: boolean
+    failed_cards?: boolean
+    input_tokens?: boolean
+    output_tokens?: boolean
+    total_cost_usd?: boolean
+    error_message?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    cards?: boolean | FlashCardGroup$cardsArgs<ExtArgs>
+    _count?: boolean | FlashCardGroupCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashCardGroup"]>
+
+  export type FlashCardGroupSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    user_title?: boolean
+    ai_title?: boolean
+    status?: boolean
+    source_note_uuids?: boolean
+    total_cards?: boolean
+    completed_cards?: boolean
+    failed_cards?: boolean
+    input_tokens?: boolean
+    output_tokens?: boolean
+    total_cost_usd?: boolean
+    error_message?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashCardGroup"]>
+
+  export type FlashCardGroupSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    user_title?: boolean
+    ai_title?: boolean
+    status?: boolean
+    source_note_uuids?: boolean
+    total_cards?: boolean
+    completed_cards?: boolean
+    failed_cards?: boolean
+    input_tokens?: boolean
+    output_tokens?: boolean
+    total_cost_usd?: boolean
+    error_message?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashCardGroup"]>
+
+  export type FlashCardGroupSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    user_title?: boolean
+    ai_title?: boolean
+    status?: boolean
+    source_note_uuids?: boolean
+    total_cards?: boolean
+    completed_cards?: boolean
+    failed_cards?: boolean
+    input_tokens?: boolean
+    output_tokens?: boolean
+    total_cost_usd?: boolean
+    error_message?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type FlashCardGroupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "user_title" | "ai_title" | "status" | "source_note_uuids" | "total_cards" | "completed_cards" | "failed_cards" | "input_tokens" | "output_tokens" | "total_cost_usd" | "error_message" | "created_at" | "updated_at", ExtArgs["result"]["flashCardGroup"]>
+  export type FlashCardGroupInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    cards?: boolean | FlashCardGroup$cardsArgs<ExtArgs>
+    _count?: boolean | FlashCardGroupCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type FlashCardGroupIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FlashCardGroupIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $FlashCardGroupPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FlashCardGroup"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      cards: Prisma.$FlashCardPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      user_title: string | null
+      ai_title: string | null
+      status: $Enums.FlashCardGroupStatus
+      source_note_uuids: string[]
+      total_cards: number
+      completed_cards: number
+      failed_cards: number
+      input_tokens: number
+      output_tokens: number
+      total_cost_usd: Prisma.Decimal
+      error_message: string | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["flashCardGroup"]>
+    composites: {}
+  }
+
+  type FlashCardGroupGetPayload<S extends boolean | null | undefined | FlashCardGroupDefaultArgs> = $Result.GetResult<Prisma.$FlashCardGroupPayload, S>
+
+  type FlashCardGroupCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FlashCardGroupFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FlashCardGroupCountAggregateInputType | true
+    }
+
+  export interface FlashCardGroupDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FlashCardGroup'], meta: { name: 'FlashCardGroup' } }
+    /**
+     * Find zero or one FlashCardGroup that matches the filter.
+     * @param {FlashCardGroupFindUniqueArgs} args - Arguments to find a FlashCardGroup
+     * @example
+     * // Get one FlashCardGroup
+     * const flashCardGroup = await prisma.flashCardGroup.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FlashCardGroupFindUniqueArgs>(args: SelectSubset<T, FlashCardGroupFindUniqueArgs<ExtArgs>>): Prisma__FlashCardGroupClient<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FlashCardGroup that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FlashCardGroupFindUniqueOrThrowArgs} args - Arguments to find a FlashCardGroup
+     * @example
+     * // Get one FlashCardGroup
+     * const flashCardGroup = await prisma.flashCardGroup.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FlashCardGroupFindUniqueOrThrowArgs>(args: SelectSubset<T, FlashCardGroupFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FlashCardGroupClient<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlashCardGroup that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardGroupFindFirstArgs} args - Arguments to find a FlashCardGroup
+     * @example
+     * // Get one FlashCardGroup
+     * const flashCardGroup = await prisma.flashCardGroup.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FlashCardGroupFindFirstArgs>(args?: SelectSubset<T, FlashCardGroupFindFirstArgs<ExtArgs>>): Prisma__FlashCardGroupClient<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlashCardGroup that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardGroupFindFirstOrThrowArgs} args - Arguments to find a FlashCardGroup
+     * @example
+     * // Get one FlashCardGroup
+     * const flashCardGroup = await prisma.flashCardGroup.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FlashCardGroupFindFirstOrThrowArgs>(args?: SelectSubset<T, FlashCardGroupFindFirstOrThrowArgs<ExtArgs>>): Prisma__FlashCardGroupClient<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FlashCardGroups that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardGroupFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FlashCardGroups
+     * const flashCardGroups = await prisma.flashCardGroup.findMany()
+     * 
+     * // Get first 10 FlashCardGroups
+     * const flashCardGroups = await prisma.flashCardGroup.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const flashCardGroupWithIdOnly = await prisma.flashCardGroup.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FlashCardGroupFindManyArgs>(args?: SelectSubset<T, FlashCardGroupFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FlashCardGroup.
+     * @param {FlashCardGroupCreateArgs} args - Arguments to create a FlashCardGroup.
+     * @example
+     * // Create one FlashCardGroup
+     * const FlashCardGroup = await prisma.flashCardGroup.create({
+     *   data: {
+     *     // ... data to create a FlashCardGroup
+     *   }
+     * })
+     * 
+     */
+    create<T extends FlashCardGroupCreateArgs>(args: SelectSubset<T, FlashCardGroupCreateArgs<ExtArgs>>): Prisma__FlashCardGroupClient<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FlashCardGroups.
+     * @param {FlashCardGroupCreateManyArgs} args - Arguments to create many FlashCardGroups.
+     * @example
+     * // Create many FlashCardGroups
+     * const flashCardGroup = await prisma.flashCardGroup.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FlashCardGroupCreateManyArgs>(args?: SelectSubset<T, FlashCardGroupCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FlashCardGroups and returns the data saved in the database.
+     * @param {FlashCardGroupCreateManyAndReturnArgs} args - Arguments to create many FlashCardGroups.
+     * @example
+     * // Create many FlashCardGroups
+     * const flashCardGroup = await prisma.flashCardGroup.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FlashCardGroups and only return the `id`
+     * const flashCardGroupWithIdOnly = await prisma.flashCardGroup.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FlashCardGroupCreateManyAndReturnArgs>(args?: SelectSubset<T, FlashCardGroupCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FlashCardGroup.
+     * @param {FlashCardGroupDeleteArgs} args - Arguments to delete one FlashCardGroup.
+     * @example
+     * // Delete one FlashCardGroup
+     * const FlashCardGroup = await prisma.flashCardGroup.delete({
+     *   where: {
+     *     // ... filter to delete one FlashCardGroup
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FlashCardGroupDeleteArgs>(args: SelectSubset<T, FlashCardGroupDeleteArgs<ExtArgs>>): Prisma__FlashCardGroupClient<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FlashCardGroup.
+     * @param {FlashCardGroupUpdateArgs} args - Arguments to update one FlashCardGroup.
+     * @example
+     * // Update one FlashCardGroup
+     * const flashCardGroup = await prisma.flashCardGroup.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FlashCardGroupUpdateArgs>(args: SelectSubset<T, FlashCardGroupUpdateArgs<ExtArgs>>): Prisma__FlashCardGroupClient<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FlashCardGroups.
+     * @param {FlashCardGroupDeleteManyArgs} args - Arguments to filter FlashCardGroups to delete.
+     * @example
+     * // Delete a few FlashCardGroups
+     * const { count } = await prisma.flashCardGroup.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FlashCardGroupDeleteManyArgs>(args?: SelectSubset<T, FlashCardGroupDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlashCardGroups.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardGroupUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FlashCardGroups
+     * const flashCardGroup = await prisma.flashCardGroup.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FlashCardGroupUpdateManyArgs>(args: SelectSubset<T, FlashCardGroupUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlashCardGroups and returns the data updated in the database.
+     * @param {FlashCardGroupUpdateManyAndReturnArgs} args - Arguments to update many FlashCardGroups.
+     * @example
+     * // Update many FlashCardGroups
+     * const flashCardGroup = await prisma.flashCardGroup.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FlashCardGroups and only return the `id`
+     * const flashCardGroupWithIdOnly = await prisma.flashCardGroup.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FlashCardGroupUpdateManyAndReturnArgs>(args: SelectSubset<T, FlashCardGroupUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FlashCardGroup.
+     * @param {FlashCardGroupUpsertArgs} args - Arguments to update or create a FlashCardGroup.
+     * @example
+     * // Update or create a FlashCardGroup
+     * const flashCardGroup = await prisma.flashCardGroup.upsert({
+     *   create: {
+     *     // ... data to create a FlashCardGroup
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FlashCardGroup we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FlashCardGroupUpsertArgs>(args: SelectSubset<T, FlashCardGroupUpsertArgs<ExtArgs>>): Prisma__FlashCardGroupClient<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FlashCardGroups.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardGroupCountArgs} args - Arguments to filter FlashCardGroups to count.
+     * @example
+     * // Count the number of FlashCardGroups
+     * const count = await prisma.flashCardGroup.count({
+     *   where: {
+     *     // ... the filter for the FlashCardGroups we want to count
+     *   }
+     * })
+    **/
+    count<T extends FlashCardGroupCountArgs>(
+      args?: Subset<T, FlashCardGroupCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FlashCardGroupCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FlashCardGroup.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardGroupAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FlashCardGroupAggregateArgs>(args: Subset<T, FlashCardGroupAggregateArgs>): Prisma.PrismaPromise<GetFlashCardGroupAggregateType<T>>
+
+    /**
+     * Group by FlashCardGroup.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardGroupGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FlashCardGroupGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FlashCardGroupGroupByArgs['orderBy'] }
+        : { orderBy?: FlashCardGroupGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FlashCardGroupGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFlashCardGroupGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FlashCardGroup model
+   */
+  readonly fields: FlashCardGroupFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FlashCardGroup.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FlashCardGroupClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    cards<T extends FlashCardGroup$cardsArgs<ExtArgs> = {}>(args?: Subset<T, FlashCardGroup$cardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FlashCardGroup model
+   */
+  interface FlashCardGroupFieldRefs {
+    readonly id: FieldRef<"FlashCardGroup", 'Int'>
+    readonly uuid: FieldRef<"FlashCardGroup", 'String'>
+    readonly user_uuid: FieldRef<"FlashCardGroup", 'String'>
+    readonly user_title: FieldRef<"FlashCardGroup", 'String'>
+    readonly ai_title: FieldRef<"FlashCardGroup", 'String'>
+    readonly status: FieldRef<"FlashCardGroup", 'FlashCardGroupStatus'>
+    readonly source_note_uuids: FieldRef<"FlashCardGroup", 'String[]'>
+    readonly total_cards: FieldRef<"FlashCardGroup", 'Int'>
+    readonly completed_cards: FieldRef<"FlashCardGroup", 'Int'>
+    readonly failed_cards: FieldRef<"FlashCardGroup", 'Int'>
+    readonly input_tokens: FieldRef<"FlashCardGroup", 'Int'>
+    readonly output_tokens: FieldRef<"FlashCardGroup", 'Int'>
+    readonly total_cost_usd: FieldRef<"FlashCardGroup", 'Decimal'>
+    readonly error_message: FieldRef<"FlashCardGroup", 'String'>
+    readonly created_at: FieldRef<"FlashCardGroup", 'DateTime'>
+    readonly updated_at: FieldRef<"FlashCardGroup", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FlashCardGroup findUnique
+   */
+  export type FlashCardGroupFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCardGroup to fetch.
+     */
+    where: FlashCardGroupWhereUniqueInput
+  }
+
+  /**
+   * FlashCardGroup findUniqueOrThrow
+   */
+  export type FlashCardGroupFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCardGroup to fetch.
+     */
+    where: FlashCardGroupWhereUniqueInput
+  }
+
+  /**
+   * FlashCardGroup findFirst
+   */
+  export type FlashCardGroupFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCardGroup to fetch.
+     */
+    where?: FlashCardGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCardGroups to fetch.
+     */
+    orderBy?: FlashCardGroupOrderByWithRelationInput | FlashCardGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlashCardGroups.
+     */
+    cursor?: FlashCardGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCardGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCardGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashCardGroups.
+     */
+    distinct?: FlashCardGroupScalarFieldEnum | FlashCardGroupScalarFieldEnum[]
+  }
+
+  /**
+   * FlashCardGroup findFirstOrThrow
+   */
+  export type FlashCardGroupFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCardGroup to fetch.
+     */
+    where?: FlashCardGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCardGroups to fetch.
+     */
+    orderBy?: FlashCardGroupOrderByWithRelationInput | FlashCardGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlashCardGroups.
+     */
+    cursor?: FlashCardGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCardGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCardGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashCardGroups.
+     */
+    distinct?: FlashCardGroupScalarFieldEnum | FlashCardGroupScalarFieldEnum[]
+  }
+
+  /**
+   * FlashCardGroup findMany
+   */
+  export type FlashCardGroupFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCardGroups to fetch.
+     */
+    where?: FlashCardGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCardGroups to fetch.
+     */
+    orderBy?: FlashCardGroupOrderByWithRelationInput | FlashCardGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FlashCardGroups.
+     */
+    cursor?: FlashCardGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCardGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCardGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashCardGroups.
+     */
+    distinct?: FlashCardGroupScalarFieldEnum | FlashCardGroupScalarFieldEnum[]
+  }
+
+  /**
+   * FlashCardGroup create
+   */
+  export type FlashCardGroupCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FlashCardGroup.
+     */
+    data: XOR<FlashCardGroupCreateInput, FlashCardGroupUncheckedCreateInput>
+  }
+
+  /**
+   * FlashCardGroup createMany
+   */
+  export type FlashCardGroupCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FlashCardGroups.
+     */
+    data: FlashCardGroupCreateManyInput | FlashCardGroupCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FlashCardGroup createManyAndReturn
+   */
+  export type FlashCardGroupCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * The data used to create many FlashCardGroups.
+     */
+    data: FlashCardGroupCreateManyInput | FlashCardGroupCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FlashCardGroup update
+   */
+  export type FlashCardGroupUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FlashCardGroup.
+     */
+    data: XOR<FlashCardGroupUpdateInput, FlashCardGroupUncheckedUpdateInput>
+    /**
+     * Choose, which FlashCardGroup to update.
+     */
+    where: FlashCardGroupWhereUniqueInput
+  }
+
+  /**
+   * FlashCardGroup updateMany
+   */
+  export type FlashCardGroupUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FlashCardGroups.
+     */
+    data: XOR<FlashCardGroupUpdateManyMutationInput, FlashCardGroupUncheckedUpdateManyInput>
+    /**
+     * Filter which FlashCardGroups to update
+     */
+    where?: FlashCardGroupWhereInput
+    /**
+     * Limit how many FlashCardGroups to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlashCardGroup updateManyAndReturn
+   */
+  export type FlashCardGroupUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * The data used to update FlashCardGroups.
+     */
+    data: XOR<FlashCardGroupUpdateManyMutationInput, FlashCardGroupUncheckedUpdateManyInput>
+    /**
+     * Filter which FlashCardGroups to update
+     */
+    where?: FlashCardGroupWhereInput
+    /**
+     * Limit how many FlashCardGroups to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FlashCardGroup upsert
+   */
+  export type FlashCardGroupUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FlashCardGroup to update in case it exists.
+     */
+    where: FlashCardGroupWhereUniqueInput
+    /**
+     * In case the FlashCardGroup found by the `where` argument doesn't exist, create a new FlashCardGroup with this data.
+     */
+    create: XOR<FlashCardGroupCreateInput, FlashCardGroupUncheckedCreateInput>
+    /**
+     * In case the FlashCardGroup was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FlashCardGroupUpdateInput, FlashCardGroupUncheckedUpdateInput>
+  }
+
+  /**
+   * FlashCardGroup delete
+   */
+  export type FlashCardGroupDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+    /**
+     * Filter which FlashCardGroup to delete.
+     */
+    where: FlashCardGroupWhereUniqueInput
+  }
+
+  /**
+   * FlashCardGroup deleteMany
+   */
+  export type FlashCardGroupDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlashCardGroups to delete
+     */
+    where?: FlashCardGroupWhereInput
+    /**
+     * Limit how many FlashCardGroups to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlashCardGroup.cards
+   */
+  export type FlashCardGroup$cardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+    where?: FlashCardWhereInput
+    orderBy?: FlashCardOrderByWithRelationInput | FlashCardOrderByWithRelationInput[]
+    cursor?: FlashCardWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FlashCardScalarFieldEnum | FlashCardScalarFieldEnum[]
+  }
+
+  /**
+   * FlashCardGroup without action
+   */
+  export type FlashCardGroupDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardGroup
+     */
+    select?: FlashCardGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardGroup
+     */
+    omit?: FlashCardGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardGroupInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FlashCard
+   */
+
+  export type AggregateFlashCard = {
+    _count: FlashCardCountAggregateOutputType | null
+    _avg: FlashCardAvgAggregateOutputType | null
+    _sum: FlashCardSumAggregateOutputType | null
+    _min: FlashCardMinAggregateOutputType | null
+    _max: FlashCardMaxAggregateOutputType | null
+  }
+
+  export type FlashCardAvgAggregateOutputType = {
+    id: number | null
+    order_index: number | null
+  }
+
+  export type FlashCardSumAggregateOutputType = {
+    id: number | null
+    order_index: number | null
+  }
+
+  export type FlashCardMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    group_uuid: string | null
+    front: string | null
+    back: string | null
+    ai_image_prompt: string | null
+    order_index: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type FlashCardMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    group_uuid: string | null
+    front: string | null
+    back: string | null
+    ai_image_prompt: string | null
+    order_index: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type FlashCardCountAggregateOutputType = {
+    id: number
+    uuid: number
+    group_uuid: number
+    front: number
+    back: number
+    keywords: number
+    ai_image_prompt: number
+    order_index: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type FlashCardAvgAggregateInputType = {
+    id?: true
+    order_index?: true
+  }
+
+  export type FlashCardSumAggregateInputType = {
+    id?: true
+    order_index?: true
+  }
+
+  export type FlashCardMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    group_uuid?: true
+    front?: true
+    back?: true
+    ai_image_prompt?: true
+    order_index?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type FlashCardMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    group_uuid?: true
+    front?: true
+    back?: true
+    ai_image_prompt?: true
+    order_index?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type FlashCardCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    group_uuid?: true
+    front?: true
+    back?: true
+    keywords?: true
+    ai_image_prompt?: true
+    order_index?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type FlashCardAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlashCard to aggregate.
+     */
+    where?: FlashCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCards to fetch.
+     */
+    orderBy?: FlashCardOrderByWithRelationInput | FlashCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FlashCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FlashCards
+    **/
+    _count?: true | FlashCardCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FlashCardAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FlashCardSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FlashCardMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FlashCardMaxAggregateInputType
+  }
+
+  export type GetFlashCardAggregateType<T extends FlashCardAggregateArgs> = {
+        [P in keyof T & keyof AggregateFlashCard]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFlashCard[P]>
+      : GetScalarType<T[P], AggregateFlashCard[P]>
+  }
+
+
+
+
+  export type FlashCardGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashCardWhereInput
+    orderBy?: FlashCardOrderByWithAggregationInput | FlashCardOrderByWithAggregationInput[]
+    by: FlashCardScalarFieldEnum[] | FlashCardScalarFieldEnum
+    having?: FlashCardScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FlashCardCountAggregateInputType | true
+    _avg?: FlashCardAvgAggregateInputType
+    _sum?: FlashCardSumAggregateInputType
+    _min?: FlashCardMinAggregateInputType
+    _max?: FlashCardMaxAggregateInputType
+  }
+
+  export type FlashCardGroupByOutputType = {
+    id: number
+    uuid: string
+    group_uuid: string
+    front: string
+    back: string
+    keywords: string[]
+    ai_image_prompt: string | null
+    order_index: number
+    created_at: Date
+    updated_at: Date
+    _count: FlashCardCountAggregateOutputType | null
+    _avg: FlashCardAvgAggregateOutputType | null
+    _sum: FlashCardSumAggregateOutputType | null
+    _min: FlashCardMinAggregateOutputType | null
+    _max: FlashCardMaxAggregateOutputType | null
+  }
+
+  type GetFlashCardGroupByPayload<T extends FlashCardGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FlashCardGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FlashCardGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FlashCardGroupByOutputType[P]>
+            : GetScalarType<T[P], FlashCardGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FlashCardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    group_uuid?: boolean
+    front?: boolean
+    back?: boolean
+    keywords?: boolean
+    ai_image_prompt?: boolean
+    order_index?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    group?: boolean | FlashCardGroupDefaultArgs<ExtArgs>
+    image?: boolean | FlashCard$imageArgs<ExtArgs>
+  }, ExtArgs["result"]["flashCard"]>
+
+  export type FlashCardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    group_uuid?: boolean
+    front?: boolean
+    back?: boolean
+    keywords?: boolean
+    ai_image_prompt?: boolean
+    order_index?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    group?: boolean | FlashCardGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashCard"]>
+
+  export type FlashCardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    group_uuid?: boolean
+    front?: boolean
+    back?: boolean
+    keywords?: boolean
+    ai_image_prompt?: boolean
+    order_index?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    group?: boolean | FlashCardGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashCard"]>
+
+  export type FlashCardSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    group_uuid?: boolean
+    front?: boolean
+    back?: boolean
+    keywords?: boolean
+    ai_image_prompt?: boolean
+    order_index?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type FlashCardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "group_uuid" | "front" | "back" | "keywords" | "ai_image_prompt" | "order_index" | "created_at" | "updated_at", ExtArgs["result"]["flashCard"]>
+  export type FlashCardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    group?: boolean | FlashCardGroupDefaultArgs<ExtArgs>
+    image?: boolean | FlashCard$imageArgs<ExtArgs>
+  }
+  export type FlashCardIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    group?: boolean | FlashCardGroupDefaultArgs<ExtArgs>
+  }
+  export type FlashCardIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    group?: boolean | FlashCardGroupDefaultArgs<ExtArgs>
+  }
+
+  export type $FlashCardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FlashCard"
+    objects: {
+      group: Prisma.$FlashCardGroupPayload<ExtArgs>
+      image: Prisma.$FlashCardImagePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      group_uuid: string
+      front: string
+      back: string
+      keywords: string[]
+      ai_image_prompt: string | null
+      order_index: number
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["flashCard"]>
+    composites: {}
+  }
+
+  type FlashCardGetPayload<S extends boolean | null | undefined | FlashCardDefaultArgs> = $Result.GetResult<Prisma.$FlashCardPayload, S>
+
+  type FlashCardCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FlashCardFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FlashCardCountAggregateInputType | true
+    }
+
+  export interface FlashCardDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FlashCard'], meta: { name: 'FlashCard' } }
+    /**
+     * Find zero or one FlashCard that matches the filter.
+     * @param {FlashCardFindUniqueArgs} args - Arguments to find a FlashCard
+     * @example
+     * // Get one FlashCard
+     * const flashCard = await prisma.flashCard.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FlashCardFindUniqueArgs>(args: SelectSubset<T, FlashCardFindUniqueArgs<ExtArgs>>): Prisma__FlashCardClient<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FlashCard that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FlashCardFindUniqueOrThrowArgs} args - Arguments to find a FlashCard
+     * @example
+     * // Get one FlashCard
+     * const flashCard = await prisma.flashCard.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FlashCardFindUniqueOrThrowArgs>(args: SelectSubset<T, FlashCardFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FlashCardClient<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlashCard that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardFindFirstArgs} args - Arguments to find a FlashCard
+     * @example
+     * // Get one FlashCard
+     * const flashCard = await prisma.flashCard.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FlashCardFindFirstArgs>(args?: SelectSubset<T, FlashCardFindFirstArgs<ExtArgs>>): Prisma__FlashCardClient<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlashCard that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardFindFirstOrThrowArgs} args - Arguments to find a FlashCard
+     * @example
+     * // Get one FlashCard
+     * const flashCard = await prisma.flashCard.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FlashCardFindFirstOrThrowArgs>(args?: SelectSubset<T, FlashCardFindFirstOrThrowArgs<ExtArgs>>): Prisma__FlashCardClient<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FlashCards that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FlashCards
+     * const flashCards = await prisma.flashCard.findMany()
+     * 
+     * // Get first 10 FlashCards
+     * const flashCards = await prisma.flashCard.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const flashCardWithIdOnly = await prisma.flashCard.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FlashCardFindManyArgs>(args?: SelectSubset<T, FlashCardFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FlashCard.
+     * @param {FlashCardCreateArgs} args - Arguments to create a FlashCard.
+     * @example
+     * // Create one FlashCard
+     * const FlashCard = await prisma.flashCard.create({
+     *   data: {
+     *     // ... data to create a FlashCard
+     *   }
+     * })
+     * 
+     */
+    create<T extends FlashCardCreateArgs>(args: SelectSubset<T, FlashCardCreateArgs<ExtArgs>>): Prisma__FlashCardClient<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FlashCards.
+     * @param {FlashCardCreateManyArgs} args - Arguments to create many FlashCards.
+     * @example
+     * // Create many FlashCards
+     * const flashCard = await prisma.flashCard.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FlashCardCreateManyArgs>(args?: SelectSubset<T, FlashCardCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FlashCards and returns the data saved in the database.
+     * @param {FlashCardCreateManyAndReturnArgs} args - Arguments to create many FlashCards.
+     * @example
+     * // Create many FlashCards
+     * const flashCard = await prisma.flashCard.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FlashCards and only return the `id`
+     * const flashCardWithIdOnly = await prisma.flashCard.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FlashCardCreateManyAndReturnArgs>(args?: SelectSubset<T, FlashCardCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FlashCard.
+     * @param {FlashCardDeleteArgs} args - Arguments to delete one FlashCard.
+     * @example
+     * // Delete one FlashCard
+     * const FlashCard = await prisma.flashCard.delete({
+     *   where: {
+     *     // ... filter to delete one FlashCard
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FlashCardDeleteArgs>(args: SelectSubset<T, FlashCardDeleteArgs<ExtArgs>>): Prisma__FlashCardClient<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FlashCard.
+     * @param {FlashCardUpdateArgs} args - Arguments to update one FlashCard.
+     * @example
+     * // Update one FlashCard
+     * const flashCard = await prisma.flashCard.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FlashCardUpdateArgs>(args: SelectSubset<T, FlashCardUpdateArgs<ExtArgs>>): Prisma__FlashCardClient<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FlashCards.
+     * @param {FlashCardDeleteManyArgs} args - Arguments to filter FlashCards to delete.
+     * @example
+     * // Delete a few FlashCards
+     * const { count } = await prisma.flashCard.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FlashCardDeleteManyArgs>(args?: SelectSubset<T, FlashCardDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlashCards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FlashCards
+     * const flashCard = await prisma.flashCard.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FlashCardUpdateManyArgs>(args: SelectSubset<T, FlashCardUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlashCards and returns the data updated in the database.
+     * @param {FlashCardUpdateManyAndReturnArgs} args - Arguments to update many FlashCards.
+     * @example
+     * // Update many FlashCards
+     * const flashCard = await prisma.flashCard.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FlashCards and only return the `id`
+     * const flashCardWithIdOnly = await prisma.flashCard.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FlashCardUpdateManyAndReturnArgs>(args: SelectSubset<T, FlashCardUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FlashCard.
+     * @param {FlashCardUpsertArgs} args - Arguments to update or create a FlashCard.
+     * @example
+     * // Update or create a FlashCard
+     * const flashCard = await prisma.flashCard.upsert({
+     *   create: {
+     *     // ... data to create a FlashCard
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FlashCard we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FlashCardUpsertArgs>(args: SelectSubset<T, FlashCardUpsertArgs<ExtArgs>>): Prisma__FlashCardClient<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FlashCards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardCountArgs} args - Arguments to filter FlashCards to count.
+     * @example
+     * // Count the number of FlashCards
+     * const count = await prisma.flashCard.count({
+     *   where: {
+     *     // ... the filter for the FlashCards we want to count
+     *   }
+     * })
+    **/
+    count<T extends FlashCardCountArgs>(
+      args?: Subset<T, FlashCardCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FlashCardCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FlashCard.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FlashCardAggregateArgs>(args: Subset<T, FlashCardAggregateArgs>): Prisma.PrismaPromise<GetFlashCardAggregateType<T>>
+
+    /**
+     * Group by FlashCard.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FlashCardGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FlashCardGroupByArgs['orderBy'] }
+        : { orderBy?: FlashCardGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FlashCardGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFlashCardGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FlashCard model
+   */
+  readonly fields: FlashCardFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FlashCard.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FlashCardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    group<T extends FlashCardGroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FlashCardGroupDefaultArgs<ExtArgs>>): Prisma__FlashCardGroupClient<$Result.GetResult<Prisma.$FlashCardGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    image<T extends FlashCard$imageArgs<ExtArgs> = {}>(args?: Subset<T, FlashCard$imageArgs<ExtArgs>>): Prisma__FlashCardImageClient<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FlashCard model
+   */
+  interface FlashCardFieldRefs {
+    readonly id: FieldRef<"FlashCard", 'Int'>
+    readonly uuid: FieldRef<"FlashCard", 'String'>
+    readonly group_uuid: FieldRef<"FlashCard", 'String'>
+    readonly front: FieldRef<"FlashCard", 'String'>
+    readonly back: FieldRef<"FlashCard", 'String'>
+    readonly keywords: FieldRef<"FlashCard", 'String[]'>
+    readonly ai_image_prompt: FieldRef<"FlashCard", 'String'>
+    readonly order_index: FieldRef<"FlashCard", 'Int'>
+    readonly created_at: FieldRef<"FlashCard", 'DateTime'>
+    readonly updated_at: FieldRef<"FlashCard", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FlashCard findUnique
+   */
+  export type FlashCardFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCard to fetch.
+     */
+    where: FlashCardWhereUniqueInput
+  }
+
+  /**
+   * FlashCard findUniqueOrThrow
+   */
+  export type FlashCardFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCard to fetch.
+     */
+    where: FlashCardWhereUniqueInput
+  }
+
+  /**
+   * FlashCard findFirst
+   */
+  export type FlashCardFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCard to fetch.
+     */
+    where?: FlashCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCards to fetch.
+     */
+    orderBy?: FlashCardOrderByWithRelationInput | FlashCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlashCards.
+     */
+    cursor?: FlashCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashCards.
+     */
+    distinct?: FlashCardScalarFieldEnum | FlashCardScalarFieldEnum[]
+  }
+
+  /**
+   * FlashCard findFirstOrThrow
+   */
+  export type FlashCardFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCard to fetch.
+     */
+    where?: FlashCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCards to fetch.
+     */
+    orderBy?: FlashCardOrderByWithRelationInput | FlashCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlashCards.
+     */
+    cursor?: FlashCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashCards.
+     */
+    distinct?: FlashCardScalarFieldEnum | FlashCardScalarFieldEnum[]
+  }
+
+  /**
+   * FlashCard findMany
+   */
+  export type FlashCardFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCards to fetch.
+     */
+    where?: FlashCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCards to fetch.
+     */
+    orderBy?: FlashCardOrderByWithRelationInput | FlashCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FlashCards.
+     */
+    cursor?: FlashCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashCards.
+     */
+    distinct?: FlashCardScalarFieldEnum | FlashCardScalarFieldEnum[]
+  }
+
+  /**
+   * FlashCard create
+   */
+  export type FlashCardCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FlashCard.
+     */
+    data: XOR<FlashCardCreateInput, FlashCardUncheckedCreateInput>
+  }
+
+  /**
+   * FlashCard createMany
+   */
+  export type FlashCardCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FlashCards.
+     */
+    data: FlashCardCreateManyInput | FlashCardCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FlashCard createManyAndReturn
+   */
+  export type FlashCardCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * The data used to create many FlashCards.
+     */
+    data: FlashCardCreateManyInput | FlashCardCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FlashCard update
+   */
+  export type FlashCardUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FlashCard.
+     */
+    data: XOR<FlashCardUpdateInput, FlashCardUncheckedUpdateInput>
+    /**
+     * Choose, which FlashCard to update.
+     */
+    where: FlashCardWhereUniqueInput
+  }
+
+  /**
+   * FlashCard updateMany
+   */
+  export type FlashCardUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FlashCards.
+     */
+    data: XOR<FlashCardUpdateManyMutationInput, FlashCardUncheckedUpdateManyInput>
+    /**
+     * Filter which FlashCards to update
+     */
+    where?: FlashCardWhereInput
+    /**
+     * Limit how many FlashCards to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlashCard updateManyAndReturn
+   */
+  export type FlashCardUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * The data used to update FlashCards.
+     */
+    data: XOR<FlashCardUpdateManyMutationInput, FlashCardUncheckedUpdateManyInput>
+    /**
+     * Filter which FlashCards to update
+     */
+    where?: FlashCardWhereInput
+    /**
+     * Limit how many FlashCards to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FlashCard upsert
+   */
+  export type FlashCardUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FlashCard to update in case it exists.
+     */
+    where: FlashCardWhereUniqueInput
+    /**
+     * In case the FlashCard found by the `where` argument doesn't exist, create a new FlashCard with this data.
+     */
+    create: XOR<FlashCardCreateInput, FlashCardUncheckedCreateInput>
+    /**
+     * In case the FlashCard was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FlashCardUpdateInput, FlashCardUncheckedUpdateInput>
+  }
+
+  /**
+   * FlashCard delete
+   */
+  export type FlashCardDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+    /**
+     * Filter which FlashCard to delete.
+     */
+    where: FlashCardWhereUniqueInput
+  }
+
+  /**
+   * FlashCard deleteMany
+   */
+  export type FlashCardDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlashCards to delete
+     */
+    where?: FlashCardWhereInput
+    /**
+     * Limit how many FlashCards to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlashCard.image
+   */
+  export type FlashCard$imageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+    where?: FlashCardImageWhereInput
+  }
+
+  /**
+   * FlashCard without action
+   */
+  export type FlashCardDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCard
+     */
+    select?: FlashCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCard
+     */
+    omit?: FlashCardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FlashCardImage
+   */
+
+  export type AggregateFlashCardImage = {
+    _count: FlashCardImageCountAggregateOutputType | null
+    _avg: FlashCardImageAvgAggregateOutputType | null
+    _sum: FlashCardImageSumAggregateOutputType | null
+    _min: FlashCardImageMinAggregateOutputType | null
+    _max: FlashCardImageMaxAggregateOutputType | null
+  }
+
+  export type FlashCardImageAvgAggregateOutputType = {
+    id: number | null
+    size: number | null
+  }
+
+  export type FlashCardImageSumAggregateOutputType = {
+    id: number | null
+    size: number | null
+  }
+
+  export type FlashCardImageMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    card_uuid: string | null
+    url: string | null
+    gcs_path: string | null
+    gcs_bucket: string | null
+    filename: string | null
+    size: number | null
+    content_type: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type FlashCardImageMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    card_uuid: string | null
+    url: string | null
+    gcs_path: string | null
+    gcs_bucket: string | null
+    filename: string | null
+    size: number | null
+    content_type: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type FlashCardImageCountAggregateOutputType = {
+    id: number
+    uuid: number
+    card_uuid: number
+    url: number
+    gcs_path: number
+    gcs_bucket: number
+    filename: number
+    size: number
+    content_type: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type FlashCardImageAvgAggregateInputType = {
+    id?: true
+    size?: true
+  }
+
+  export type FlashCardImageSumAggregateInputType = {
+    id?: true
+    size?: true
+  }
+
+  export type FlashCardImageMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    card_uuid?: true
+    url?: true
+    gcs_path?: true
+    gcs_bucket?: true
+    filename?: true
+    size?: true
+    content_type?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type FlashCardImageMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    card_uuid?: true
+    url?: true
+    gcs_path?: true
+    gcs_bucket?: true
+    filename?: true
+    size?: true
+    content_type?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type FlashCardImageCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    card_uuid?: true
+    url?: true
+    gcs_path?: true
+    gcs_bucket?: true
+    filename?: true
+    size?: true
+    content_type?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type FlashCardImageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlashCardImage to aggregate.
+     */
+    where?: FlashCardImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCardImages to fetch.
+     */
+    orderBy?: FlashCardImageOrderByWithRelationInput | FlashCardImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FlashCardImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCardImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCardImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FlashCardImages
+    **/
+    _count?: true | FlashCardImageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FlashCardImageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FlashCardImageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FlashCardImageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FlashCardImageMaxAggregateInputType
+  }
+
+  export type GetFlashCardImageAggregateType<T extends FlashCardImageAggregateArgs> = {
+        [P in keyof T & keyof AggregateFlashCardImage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFlashCardImage[P]>
+      : GetScalarType<T[P], AggregateFlashCardImage[P]>
+  }
+
+
+
+
+  export type FlashCardImageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashCardImageWhereInput
+    orderBy?: FlashCardImageOrderByWithAggregationInput | FlashCardImageOrderByWithAggregationInput[]
+    by: FlashCardImageScalarFieldEnum[] | FlashCardImageScalarFieldEnum
+    having?: FlashCardImageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FlashCardImageCountAggregateInputType | true
+    _avg?: FlashCardImageAvgAggregateInputType
+    _sum?: FlashCardImageSumAggregateInputType
+    _min?: FlashCardImageMinAggregateInputType
+    _max?: FlashCardImageMaxAggregateInputType
+  }
+
+  export type FlashCardImageGroupByOutputType = {
+    id: number
+    uuid: string
+    card_uuid: string
+    url: string
+    gcs_path: string
+    gcs_bucket: string
+    filename: string
+    size: number
+    content_type: string
+    created_at: Date
+    updated_at: Date
+    _count: FlashCardImageCountAggregateOutputType | null
+    _avg: FlashCardImageAvgAggregateOutputType | null
+    _sum: FlashCardImageSumAggregateOutputType | null
+    _min: FlashCardImageMinAggregateOutputType | null
+    _max: FlashCardImageMaxAggregateOutputType | null
+  }
+
+  type GetFlashCardImageGroupByPayload<T extends FlashCardImageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FlashCardImageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FlashCardImageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FlashCardImageGroupByOutputType[P]>
+            : GetScalarType<T[P], FlashCardImageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FlashCardImageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    card_uuid?: boolean
+    url?: boolean
+    gcs_path?: boolean
+    gcs_bucket?: boolean
+    filename?: boolean
+    size?: boolean
+    content_type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    card?: boolean | FlashCardDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashCardImage"]>
+
+  export type FlashCardImageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    card_uuid?: boolean
+    url?: boolean
+    gcs_path?: boolean
+    gcs_bucket?: boolean
+    filename?: boolean
+    size?: boolean
+    content_type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    card?: boolean | FlashCardDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashCardImage"]>
+
+  export type FlashCardImageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    card_uuid?: boolean
+    url?: boolean
+    gcs_path?: boolean
+    gcs_bucket?: boolean
+    filename?: boolean
+    size?: boolean
+    content_type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    card?: boolean | FlashCardDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashCardImage"]>
+
+  export type FlashCardImageSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    card_uuid?: boolean
+    url?: boolean
+    gcs_path?: boolean
+    gcs_bucket?: boolean
+    filename?: boolean
+    size?: boolean
+    content_type?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type FlashCardImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "card_uuid" | "url" | "gcs_path" | "gcs_bucket" | "filename" | "size" | "content_type" | "created_at" | "updated_at", ExtArgs["result"]["flashCardImage"]>
+  export type FlashCardImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    card?: boolean | FlashCardDefaultArgs<ExtArgs>
+  }
+  export type FlashCardImageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    card?: boolean | FlashCardDefaultArgs<ExtArgs>
+  }
+  export type FlashCardImageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    card?: boolean | FlashCardDefaultArgs<ExtArgs>
+  }
+
+  export type $FlashCardImagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FlashCardImage"
+    objects: {
+      card: Prisma.$FlashCardPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      card_uuid: string
+      url: string
+      gcs_path: string
+      gcs_bucket: string
+      filename: string
+      size: number
+      content_type: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["flashCardImage"]>
+    composites: {}
+  }
+
+  type FlashCardImageGetPayload<S extends boolean | null | undefined | FlashCardImageDefaultArgs> = $Result.GetResult<Prisma.$FlashCardImagePayload, S>
+
+  type FlashCardImageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FlashCardImageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FlashCardImageCountAggregateInputType | true
+    }
+
+  export interface FlashCardImageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FlashCardImage'], meta: { name: 'FlashCardImage' } }
+    /**
+     * Find zero or one FlashCardImage that matches the filter.
+     * @param {FlashCardImageFindUniqueArgs} args - Arguments to find a FlashCardImage
+     * @example
+     * // Get one FlashCardImage
+     * const flashCardImage = await prisma.flashCardImage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FlashCardImageFindUniqueArgs>(args: SelectSubset<T, FlashCardImageFindUniqueArgs<ExtArgs>>): Prisma__FlashCardImageClient<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FlashCardImage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FlashCardImageFindUniqueOrThrowArgs} args - Arguments to find a FlashCardImage
+     * @example
+     * // Get one FlashCardImage
+     * const flashCardImage = await prisma.flashCardImage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FlashCardImageFindUniqueOrThrowArgs>(args: SelectSubset<T, FlashCardImageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FlashCardImageClient<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlashCardImage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardImageFindFirstArgs} args - Arguments to find a FlashCardImage
+     * @example
+     * // Get one FlashCardImage
+     * const flashCardImage = await prisma.flashCardImage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FlashCardImageFindFirstArgs>(args?: SelectSubset<T, FlashCardImageFindFirstArgs<ExtArgs>>): Prisma__FlashCardImageClient<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlashCardImage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardImageFindFirstOrThrowArgs} args - Arguments to find a FlashCardImage
+     * @example
+     * // Get one FlashCardImage
+     * const flashCardImage = await prisma.flashCardImage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FlashCardImageFindFirstOrThrowArgs>(args?: SelectSubset<T, FlashCardImageFindFirstOrThrowArgs<ExtArgs>>): Prisma__FlashCardImageClient<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FlashCardImages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardImageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FlashCardImages
+     * const flashCardImages = await prisma.flashCardImage.findMany()
+     * 
+     * // Get first 10 FlashCardImages
+     * const flashCardImages = await prisma.flashCardImage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const flashCardImageWithIdOnly = await prisma.flashCardImage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FlashCardImageFindManyArgs>(args?: SelectSubset<T, FlashCardImageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FlashCardImage.
+     * @param {FlashCardImageCreateArgs} args - Arguments to create a FlashCardImage.
+     * @example
+     * // Create one FlashCardImage
+     * const FlashCardImage = await prisma.flashCardImage.create({
+     *   data: {
+     *     // ... data to create a FlashCardImage
+     *   }
+     * })
+     * 
+     */
+    create<T extends FlashCardImageCreateArgs>(args: SelectSubset<T, FlashCardImageCreateArgs<ExtArgs>>): Prisma__FlashCardImageClient<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FlashCardImages.
+     * @param {FlashCardImageCreateManyArgs} args - Arguments to create many FlashCardImages.
+     * @example
+     * // Create many FlashCardImages
+     * const flashCardImage = await prisma.flashCardImage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FlashCardImageCreateManyArgs>(args?: SelectSubset<T, FlashCardImageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FlashCardImages and returns the data saved in the database.
+     * @param {FlashCardImageCreateManyAndReturnArgs} args - Arguments to create many FlashCardImages.
+     * @example
+     * // Create many FlashCardImages
+     * const flashCardImage = await prisma.flashCardImage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FlashCardImages and only return the `id`
+     * const flashCardImageWithIdOnly = await prisma.flashCardImage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FlashCardImageCreateManyAndReturnArgs>(args?: SelectSubset<T, FlashCardImageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FlashCardImage.
+     * @param {FlashCardImageDeleteArgs} args - Arguments to delete one FlashCardImage.
+     * @example
+     * // Delete one FlashCardImage
+     * const FlashCardImage = await prisma.flashCardImage.delete({
+     *   where: {
+     *     // ... filter to delete one FlashCardImage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FlashCardImageDeleteArgs>(args: SelectSubset<T, FlashCardImageDeleteArgs<ExtArgs>>): Prisma__FlashCardImageClient<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FlashCardImage.
+     * @param {FlashCardImageUpdateArgs} args - Arguments to update one FlashCardImage.
+     * @example
+     * // Update one FlashCardImage
+     * const flashCardImage = await prisma.flashCardImage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FlashCardImageUpdateArgs>(args: SelectSubset<T, FlashCardImageUpdateArgs<ExtArgs>>): Prisma__FlashCardImageClient<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FlashCardImages.
+     * @param {FlashCardImageDeleteManyArgs} args - Arguments to filter FlashCardImages to delete.
+     * @example
+     * // Delete a few FlashCardImages
+     * const { count } = await prisma.flashCardImage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FlashCardImageDeleteManyArgs>(args?: SelectSubset<T, FlashCardImageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlashCardImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardImageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FlashCardImages
+     * const flashCardImage = await prisma.flashCardImage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FlashCardImageUpdateManyArgs>(args: SelectSubset<T, FlashCardImageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlashCardImages and returns the data updated in the database.
+     * @param {FlashCardImageUpdateManyAndReturnArgs} args - Arguments to update many FlashCardImages.
+     * @example
+     * // Update many FlashCardImages
+     * const flashCardImage = await prisma.flashCardImage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FlashCardImages and only return the `id`
+     * const flashCardImageWithIdOnly = await prisma.flashCardImage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FlashCardImageUpdateManyAndReturnArgs>(args: SelectSubset<T, FlashCardImageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FlashCardImage.
+     * @param {FlashCardImageUpsertArgs} args - Arguments to update or create a FlashCardImage.
+     * @example
+     * // Update or create a FlashCardImage
+     * const flashCardImage = await prisma.flashCardImage.upsert({
+     *   create: {
+     *     // ... data to create a FlashCardImage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FlashCardImage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FlashCardImageUpsertArgs>(args: SelectSubset<T, FlashCardImageUpsertArgs<ExtArgs>>): Prisma__FlashCardImageClient<$Result.GetResult<Prisma.$FlashCardImagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FlashCardImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardImageCountArgs} args - Arguments to filter FlashCardImages to count.
+     * @example
+     * // Count the number of FlashCardImages
+     * const count = await prisma.flashCardImage.count({
+     *   where: {
+     *     // ... the filter for the FlashCardImages we want to count
+     *   }
+     * })
+    **/
+    count<T extends FlashCardImageCountArgs>(
+      args?: Subset<T, FlashCardImageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FlashCardImageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FlashCardImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardImageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FlashCardImageAggregateArgs>(args: Subset<T, FlashCardImageAggregateArgs>): Prisma.PrismaPromise<GetFlashCardImageAggregateType<T>>
+
+    /**
+     * Group by FlashCardImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashCardImageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FlashCardImageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FlashCardImageGroupByArgs['orderBy'] }
+        : { orderBy?: FlashCardImageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FlashCardImageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFlashCardImageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FlashCardImage model
+   */
+  readonly fields: FlashCardImageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FlashCardImage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FlashCardImageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    card<T extends FlashCardDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FlashCardDefaultArgs<ExtArgs>>): Prisma__FlashCardClient<$Result.GetResult<Prisma.$FlashCardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FlashCardImage model
+   */
+  interface FlashCardImageFieldRefs {
+    readonly id: FieldRef<"FlashCardImage", 'Int'>
+    readonly uuid: FieldRef<"FlashCardImage", 'String'>
+    readonly card_uuid: FieldRef<"FlashCardImage", 'String'>
+    readonly url: FieldRef<"FlashCardImage", 'String'>
+    readonly gcs_path: FieldRef<"FlashCardImage", 'String'>
+    readonly gcs_bucket: FieldRef<"FlashCardImage", 'String'>
+    readonly filename: FieldRef<"FlashCardImage", 'String'>
+    readonly size: FieldRef<"FlashCardImage", 'Int'>
+    readonly content_type: FieldRef<"FlashCardImage", 'String'>
+    readonly created_at: FieldRef<"FlashCardImage", 'DateTime'>
+    readonly updated_at: FieldRef<"FlashCardImage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FlashCardImage findUnique
+   */
+  export type FlashCardImageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCardImage to fetch.
+     */
+    where: FlashCardImageWhereUniqueInput
+  }
+
+  /**
+   * FlashCardImage findUniqueOrThrow
+   */
+  export type FlashCardImageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCardImage to fetch.
+     */
+    where: FlashCardImageWhereUniqueInput
+  }
+
+  /**
+   * FlashCardImage findFirst
+   */
+  export type FlashCardImageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCardImage to fetch.
+     */
+    where?: FlashCardImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCardImages to fetch.
+     */
+    orderBy?: FlashCardImageOrderByWithRelationInput | FlashCardImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlashCardImages.
+     */
+    cursor?: FlashCardImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCardImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCardImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashCardImages.
+     */
+    distinct?: FlashCardImageScalarFieldEnum | FlashCardImageScalarFieldEnum[]
+  }
+
+  /**
+   * FlashCardImage findFirstOrThrow
+   */
+  export type FlashCardImageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCardImage to fetch.
+     */
+    where?: FlashCardImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCardImages to fetch.
+     */
+    orderBy?: FlashCardImageOrderByWithRelationInput | FlashCardImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlashCardImages.
+     */
+    cursor?: FlashCardImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCardImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCardImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashCardImages.
+     */
+    distinct?: FlashCardImageScalarFieldEnum | FlashCardImageScalarFieldEnum[]
+  }
+
+  /**
+   * FlashCardImage findMany
+   */
+  export type FlashCardImageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashCardImages to fetch.
+     */
+    where?: FlashCardImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashCardImages to fetch.
+     */
+    orderBy?: FlashCardImageOrderByWithRelationInput | FlashCardImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FlashCardImages.
+     */
+    cursor?: FlashCardImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashCardImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashCardImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashCardImages.
+     */
+    distinct?: FlashCardImageScalarFieldEnum | FlashCardImageScalarFieldEnum[]
+  }
+
+  /**
+   * FlashCardImage create
+   */
+  export type FlashCardImageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FlashCardImage.
+     */
+    data: XOR<FlashCardImageCreateInput, FlashCardImageUncheckedCreateInput>
+  }
+
+  /**
+   * FlashCardImage createMany
+   */
+  export type FlashCardImageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FlashCardImages.
+     */
+    data: FlashCardImageCreateManyInput | FlashCardImageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FlashCardImage createManyAndReturn
+   */
+  export type FlashCardImageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * The data used to create many FlashCardImages.
+     */
+    data: FlashCardImageCreateManyInput | FlashCardImageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FlashCardImage update
+   */
+  export type FlashCardImageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FlashCardImage.
+     */
+    data: XOR<FlashCardImageUpdateInput, FlashCardImageUncheckedUpdateInput>
+    /**
+     * Choose, which FlashCardImage to update.
+     */
+    where: FlashCardImageWhereUniqueInput
+  }
+
+  /**
+   * FlashCardImage updateMany
+   */
+  export type FlashCardImageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FlashCardImages.
+     */
+    data: XOR<FlashCardImageUpdateManyMutationInput, FlashCardImageUncheckedUpdateManyInput>
+    /**
+     * Filter which FlashCardImages to update
+     */
+    where?: FlashCardImageWhereInput
+    /**
+     * Limit how many FlashCardImages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlashCardImage updateManyAndReturn
+   */
+  export type FlashCardImageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * The data used to update FlashCardImages.
+     */
+    data: XOR<FlashCardImageUpdateManyMutationInput, FlashCardImageUncheckedUpdateManyInput>
+    /**
+     * Filter which FlashCardImages to update
+     */
+    where?: FlashCardImageWhereInput
+    /**
+     * Limit how many FlashCardImages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FlashCardImage upsert
+   */
+  export type FlashCardImageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FlashCardImage to update in case it exists.
+     */
+    where: FlashCardImageWhereUniqueInput
+    /**
+     * In case the FlashCardImage found by the `where` argument doesn't exist, create a new FlashCardImage with this data.
+     */
+    create: XOR<FlashCardImageCreateInput, FlashCardImageUncheckedCreateInput>
+    /**
+     * In case the FlashCardImage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FlashCardImageUpdateInput, FlashCardImageUncheckedUpdateInput>
+  }
+
+  /**
+   * FlashCardImage delete
+   */
+  export type FlashCardImageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+    /**
+     * Filter which FlashCardImage to delete.
+     */
+    where: FlashCardImageWhereUniqueInput
+  }
+
+  /**
+   * FlashCardImage deleteMany
+   */
+  export type FlashCardImageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlashCardImages to delete
+     */
+    where?: FlashCardImageWhereInput
+    /**
+     * Limit how many FlashCardImages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlashCardImage without action
+   */
+  export type FlashCardImageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashCardImage
+     */
+    select?: FlashCardImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashCardImage
+     */
+    omit?: FlashCardImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashCardImageInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model ChatMessage
    */
 
@@ -38893,6 +42903,61 @@ export namespace Prisma {
   export type ChatConversationScalarFieldEnum = (typeof ChatConversationScalarFieldEnum)[keyof typeof ChatConversationScalarFieldEnum]
 
 
+  export const FlashCardGroupScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    user_title: 'user_title',
+    ai_title: 'ai_title',
+    status: 'status',
+    source_note_uuids: 'source_note_uuids',
+    total_cards: 'total_cards',
+    completed_cards: 'completed_cards',
+    failed_cards: 'failed_cards',
+    input_tokens: 'input_tokens',
+    output_tokens: 'output_tokens',
+    total_cost_usd: 'total_cost_usd',
+    error_message: 'error_message',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type FlashCardGroupScalarFieldEnum = (typeof FlashCardGroupScalarFieldEnum)[keyof typeof FlashCardGroupScalarFieldEnum]
+
+
+  export const FlashCardScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    group_uuid: 'group_uuid',
+    front: 'front',
+    back: 'back',
+    keywords: 'keywords',
+    ai_image_prompt: 'ai_image_prompt',
+    order_index: 'order_index',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type FlashCardScalarFieldEnum = (typeof FlashCardScalarFieldEnum)[keyof typeof FlashCardScalarFieldEnum]
+
+
+  export const FlashCardImageScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    card_uuid: 'card_uuid',
+    url: 'url',
+    gcs_path: 'gcs_path',
+    gcs_bucket: 'gcs_bucket',
+    filename: 'filename',
+    size: 'size',
+    content_type: 'content_type',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type FlashCardImageScalarFieldEnum = (typeof FlashCardImageScalarFieldEnum)[keyof typeof FlashCardImageScalarFieldEnum]
+
+
   export const ChatMessageScalarFieldEnum: {
     id: 'id',
     uuid: 'uuid',
@@ -39170,6 +43235,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'FlashCardGroupStatus'
+   */
+  export type EnumFlashCardGroupStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlashCardGroupStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'FlashCardGroupStatus[]'
+   */
+  export type ListEnumFlashCardGroupStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlashCardGroupStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ChatMessageRole'
    */
   export type EnumChatMessageRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChatMessageRole'>
@@ -39234,6 +43313,7 @@ export namespace Prisma {
     workouts?: WorkoutListRelationFilter
     notes?: NoteListRelationFilter
     note_tags?: NoteTagListRelationFilter
+    flash_card_groups?: FlashCardGroupListRelationFilter
     chat_conversations?: ChatConversationListRelationFilter
   }
 
@@ -39268,6 +43348,7 @@ export namespace Prisma {
     workouts?: WorkoutOrderByRelationAggregateInput
     notes?: NoteOrderByRelationAggregateInput
     note_tags?: NoteTagOrderByRelationAggregateInput
+    flash_card_groups?: FlashCardGroupOrderByRelationAggregateInput
     chat_conversations?: ChatConversationOrderByRelationAggregateInput
   }
 
@@ -39305,6 +43386,7 @@ export namespace Prisma {
     workouts?: WorkoutListRelationFilter
     notes?: NoteListRelationFilter
     note_tags?: NoteTagListRelationFilter
+    flash_card_groups?: FlashCardGroupListRelationFilter
     chat_conversations?: ChatConversationListRelationFilter
   }, "id" | "uuid" | "email" | "phone">
 
@@ -41519,6 +45601,293 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"ChatConversation"> | Date | string
   }
 
+  export type FlashCardGroupWhereInput = {
+    AND?: FlashCardGroupWhereInput | FlashCardGroupWhereInput[]
+    OR?: FlashCardGroupWhereInput[]
+    NOT?: FlashCardGroupWhereInput | FlashCardGroupWhereInput[]
+    id?: IntFilter<"FlashCardGroup"> | number
+    uuid?: StringFilter<"FlashCardGroup"> | string
+    user_uuid?: StringFilter<"FlashCardGroup"> | string
+    user_title?: StringNullableFilter<"FlashCardGroup"> | string | null
+    ai_title?: StringNullableFilter<"FlashCardGroup"> | string | null
+    status?: EnumFlashCardGroupStatusFilter<"FlashCardGroup"> | $Enums.FlashCardGroupStatus
+    source_note_uuids?: StringNullableListFilter<"FlashCardGroup">
+    total_cards?: IntFilter<"FlashCardGroup"> | number
+    completed_cards?: IntFilter<"FlashCardGroup"> | number
+    failed_cards?: IntFilter<"FlashCardGroup"> | number
+    input_tokens?: IntFilter<"FlashCardGroup"> | number
+    output_tokens?: IntFilter<"FlashCardGroup"> | number
+    total_cost_usd?: DecimalFilter<"FlashCardGroup"> | Decimal | DecimalJsLike | number | string
+    error_message?: StringNullableFilter<"FlashCardGroup"> | string | null
+    created_at?: DateTimeFilter<"FlashCardGroup"> | Date | string
+    updated_at?: DateTimeFilter<"FlashCardGroup"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    cards?: FlashCardListRelationFilter
+  }
+
+  export type FlashCardGroupOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    user_title?: SortOrderInput | SortOrder
+    ai_title?: SortOrderInput | SortOrder
+    status?: SortOrder
+    source_note_uuids?: SortOrder
+    total_cards?: SortOrder
+    completed_cards?: SortOrder
+    failed_cards?: SortOrder
+    input_tokens?: SortOrder
+    output_tokens?: SortOrder
+    total_cost_usd?: SortOrder
+    error_message?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    cards?: FlashCardOrderByRelationAggregateInput
+  }
+
+  export type FlashCardGroupWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: FlashCardGroupWhereInput | FlashCardGroupWhereInput[]
+    OR?: FlashCardGroupWhereInput[]
+    NOT?: FlashCardGroupWhereInput | FlashCardGroupWhereInput[]
+    user_uuid?: StringFilter<"FlashCardGroup"> | string
+    user_title?: StringNullableFilter<"FlashCardGroup"> | string | null
+    ai_title?: StringNullableFilter<"FlashCardGroup"> | string | null
+    status?: EnumFlashCardGroupStatusFilter<"FlashCardGroup"> | $Enums.FlashCardGroupStatus
+    source_note_uuids?: StringNullableListFilter<"FlashCardGroup">
+    total_cards?: IntFilter<"FlashCardGroup"> | number
+    completed_cards?: IntFilter<"FlashCardGroup"> | number
+    failed_cards?: IntFilter<"FlashCardGroup"> | number
+    input_tokens?: IntFilter<"FlashCardGroup"> | number
+    output_tokens?: IntFilter<"FlashCardGroup"> | number
+    total_cost_usd?: DecimalFilter<"FlashCardGroup"> | Decimal | DecimalJsLike | number | string
+    error_message?: StringNullableFilter<"FlashCardGroup"> | string | null
+    created_at?: DateTimeFilter<"FlashCardGroup"> | Date | string
+    updated_at?: DateTimeFilter<"FlashCardGroup"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    cards?: FlashCardListRelationFilter
+  }, "id" | "uuid">
+
+  export type FlashCardGroupOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    user_title?: SortOrderInput | SortOrder
+    ai_title?: SortOrderInput | SortOrder
+    status?: SortOrder
+    source_note_uuids?: SortOrder
+    total_cards?: SortOrder
+    completed_cards?: SortOrder
+    failed_cards?: SortOrder
+    input_tokens?: SortOrder
+    output_tokens?: SortOrder
+    total_cost_usd?: SortOrder
+    error_message?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: FlashCardGroupCountOrderByAggregateInput
+    _avg?: FlashCardGroupAvgOrderByAggregateInput
+    _max?: FlashCardGroupMaxOrderByAggregateInput
+    _min?: FlashCardGroupMinOrderByAggregateInput
+    _sum?: FlashCardGroupSumOrderByAggregateInput
+  }
+
+  export type FlashCardGroupScalarWhereWithAggregatesInput = {
+    AND?: FlashCardGroupScalarWhereWithAggregatesInput | FlashCardGroupScalarWhereWithAggregatesInput[]
+    OR?: FlashCardGroupScalarWhereWithAggregatesInput[]
+    NOT?: FlashCardGroupScalarWhereWithAggregatesInput | FlashCardGroupScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"FlashCardGroup"> | number
+    uuid?: StringWithAggregatesFilter<"FlashCardGroup"> | string
+    user_uuid?: StringWithAggregatesFilter<"FlashCardGroup"> | string
+    user_title?: StringNullableWithAggregatesFilter<"FlashCardGroup"> | string | null
+    ai_title?: StringNullableWithAggregatesFilter<"FlashCardGroup"> | string | null
+    status?: EnumFlashCardGroupStatusWithAggregatesFilter<"FlashCardGroup"> | $Enums.FlashCardGroupStatus
+    source_note_uuids?: StringNullableListFilter<"FlashCardGroup">
+    total_cards?: IntWithAggregatesFilter<"FlashCardGroup"> | number
+    completed_cards?: IntWithAggregatesFilter<"FlashCardGroup"> | number
+    failed_cards?: IntWithAggregatesFilter<"FlashCardGroup"> | number
+    input_tokens?: IntWithAggregatesFilter<"FlashCardGroup"> | number
+    output_tokens?: IntWithAggregatesFilter<"FlashCardGroup"> | number
+    total_cost_usd?: DecimalWithAggregatesFilter<"FlashCardGroup"> | Decimal | DecimalJsLike | number | string
+    error_message?: StringNullableWithAggregatesFilter<"FlashCardGroup"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"FlashCardGroup"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"FlashCardGroup"> | Date | string
+  }
+
+  export type FlashCardWhereInput = {
+    AND?: FlashCardWhereInput | FlashCardWhereInput[]
+    OR?: FlashCardWhereInput[]
+    NOT?: FlashCardWhereInput | FlashCardWhereInput[]
+    id?: IntFilter<"FlashCard"> | number
+    uuid?: StringFilter<"FlashCard"> | string
+    group_uuid?: StringFilter<"FlashCard"> | string
+    front?: StringFilter<"FlashCard"> | string
+    back?: StringFilter<"FlashCard"> | string
+    keywords?: StringNullableListFilter<"FlashCard">
+    ai_image_prompt?: StringNullableFilter<"FlashCard"> | string | null
+    order_index?: IntFilter<"FlashCard"> | number
+    created_at?: DateTimeFilter<"FlashCard"> | Date | string
+    updated_at?: DateTimeFilter<"FlashCard"> | Date | string
+    group?: XOR<FlashCardGroupScalarRelationFilter, FlashCardGroupWhereInput>
+    image?: XOR<FlashCardImageNullableScalarRelationFilter, FlashCardImageWhereInput> | null
+  }
+
+  export type FlashCardOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    group_uuid?: SortOrder
+    front?: SortOrder
+    back?: SortOrder
+    keywords?: SortOrder
+    ai_image_prompt?: SortOrderInput | SortOrder
+    order_index?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    group?: FlashCardGroupOrderByWithRelationInput
+    image?: FlashCardImageOrderByWithRelationInput
+  }
+
+  export type FlashCardWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: FlashCardWhereInput | FlashCardWhereInput[]
+    OR?: FlashCardWhereInput[]
+    NOT?: FlashCardWhereInput | FlashCardWhereInput[]
+    group_uuid?: StringFilter<"FlashCard"> | string
+    front?: StringFilter<"FlashCard"> | string
+    back?: StringFilter<"FlashCard"> | string
+    keywords?: StringNullableListFilter<"FlashCard">
+    ai_image_prompt?: StringNullableFilter<"FlashCard"> | string | null
+    order_index?: IntFilter<"FlashCard"> | number
+    created_at?: DateTimeFilter<"FlashCard"> | Date | string
+    updated_at?: DateTimeFilter<"FlashCard"> | Date | string
+    group?: XOR<FlashCardGroupScalarRelationFilter, FlashCardGroupWhereInput>
+    image?: XOR<FlashCardImageNullableScalarRelationFilter, FlashCardImageWhereInput> | null
+  }, "id" | "uuid">
+
+  export type FlashCardOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    group_uuid?: SortOrder
+    front?: SortOrder
+    back?: SortOrder
+    keywords?: SortOrder
+    ai_image_prompt?: SortOrderInput | SortOrder
+    order_index?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: FlashCardCountOrderByAggregateInput
+    _avg?: FlashCardAvgOrderByAggregateInput
+    _max?: FlashCardMaxOrderByAggregateInput
+    _min?: FlashCardMinOrderByAggregateInput
+    _sum?: FlashCardSumOrderByAggregateInput
+  }
+
+  export type FlashCardScalarWhereWithAggregatesInput = {
+    AND?: FlashCardScalarWhereWithAggregatesInput | FlashCardScalarWhereWithAggregatesInput[]
+    OR?: FlashCardScalarWhereWithAggregatesInput[]
+    NOT?: FlashCardScalarWhereWithAggregatesInput | FlashCardScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"FlashCard"> | number
+    uuid?: StringWithAggregatesFilter<"FlashCard"> | string
+    group_uuid?: StringWithAggregatesFilter<"FlashCard"> | string
+    front?: StringWithAggregatesFilter<"FlashCard"> | string
+    back?: StringWithAggregatesFilter<"FlashCard"> | string
+    keywords?: StringNullableListFilter<"FlashCard">
+    ai_image_prompt?: StringNullableWithAggregatesFilter<"FlashCard"> | string | null
+    order_index?: IntWithAggregatesFilter<"FlashCard"> | number
+    created_at?: DateTimeWithAggregatesFilter<"FlashCard"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"FlashCard"> | Date | string
+  }
+
+  export type FlashCardImageWhereInput = {
+    AND?: FlashCardImageWhereInput | FlashCardImageWhereInput[]
+    OR?: FlashCardImageWhereInput[]
+    NOT?: FlashCardImageWhereInput | FlashCardImageWhereInput[]
+    id?: IntFilter<"FlashCardImage"> | number
+    uuid?: StringFilter<"FlashCardImage"> | string
+    card_uuid?: StringFilter<"FlashCardImage"> | string
+    url?: StringFilter<"FlashCardImage"> | string
+    gcs_path?: StringFilter<"FlashCardImage"> | string
+    gcs_bucket?: StringFilter<"FlashCardImage"> | string
+    filename?: StringFilter<"FlashCardImage"> | string
+    size?: IntFilter<"FlashCardImage"> | number
+    content_type?: StringFilter<"FlashCardImage"> | string
+    created_at?: DateTimeFilter<"FlashCardImage"> | Date | string
+    updated_at?: DateTimeFilter<"FlashCardImage"> | Date | string
+    card?: XOR<FlashCardScalarRelationFilter, FlashCardWhereInput>
+  }
+
+  export type FlashCardImageOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    card_uuid?: SortOrder
+    url?: SortOrder
+    gcs_path?: SortOrder
+    gcs_bucket?: SortOrder
+    filename?: SortOrder
+    size?: SortOrder
+    content_type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    card?: FlashCardOrderByWithRelationInput
+  }
+
+  export type FlashCardImageWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    card_uuid?: string
+    AND?: FlashCardImageWhereInput | FlashCardImageWhereInput[]
+    OR?: FlashCardImageWhereInput[]
+    NOT?: FlashCardImageWhereInput | FlashCardImageWhereInput[]
+    url?: StringFilter<"FlashCardImage"> | string
+    gcs_path?: StringFilter<"FlashCardImage"> | string
+    gcs_bucket?: StringFilter<"FlashCardImage"> | string
+    filename?: StringFilter<"FlashCardImage"> | string
+    size?: IntFilter<"FlashCardImage"> | number
+    content_type?: StringFilter<"FlashCardImage"> | string
+    created_at?: DateTimeFilter<"FlashCardImage"> | Date | string
+    updated_at?: DateTimeFilter<"FlashCardImage"> | Date | string
+    card?: XOR<FlashCardScalarRelationFilter, FlashCardWhereInput>
+  }, "id" | "uuid" | "card_uuid">
+
+  export type FlashCardImageOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    card_uuid?: SortOrder
+    url?: SortOrder
+    gcs_path?: SortOrder
+    gcs_bucket?: SortOrder
+    filename?: SortOrder
+    size?: SortOrder
+    content_type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: FlashCardImageCountOrderByAggregateInput
+    _avg?: FlashCardImageAvgOrderByAggregateInput
+    _max?: FlashCardImageMaxOrderByAggregateInput
+    _min?: FlashCardImageMinOrderByAggregateInput
+    _sum?: FlashCardImageSumOrderByAggregateInput
+  }
+
+  export type FlashCardImageScalarWhereWithAggregatesInput = {
+    AND?: FlashCardImageScalarWhereWithAggregatesInput | FlashCardImageScalarWhereWithAggregatesInput[]
+    OR?: FlashCardImageScalarWhereWithAggregatesInput[]
+    NOT?: FlashCardImageScalarWhereWithAggregatesInput | FlashCardImageScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"FlashCardImage"> | number
+    uuid?: StringWithAggregatesFilter<"FlashCardImage"> | string
+    card_uuid?: StringWithAggregatesFilter<"FlashCardImage"> | string
+    url?: StringWithAggregatesFilter<"FlashCardImage"> | string
+    gcs_path?: StringWithAggregatesFilter<"FlashCardImage"> | string
+    gcs_bucket?: StringWithAggregatesFilter<"FlashCardImage"> | string
+    filename?: StringWithAggregatesFilter<"FlashCardImage"> | string
+    size?: IntWithAggregatesFilter<"FlashCardImage"> | number
+    content_type?: StringWithAggregatesFilter<"FlashCardImage"> | string
+    created_at?: DateTimeWithAggregatesFilter<"FlashCardImage"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"FlashCardImage"> | Date | string
+  }
+
   export type ChatMessageWhereInput = {
     AND?: ChatMessageWhereInput | ChatMessageWhereInput[]
     OR?: ChatMessageWhereInput[]
@@ -41616,6 +45985,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -41650,6 +46020,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -41683,6 +46054,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -41717,6 +46089,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -43953,6 +48326,324 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FlashCardGroupCreateInput = {
+    uuid?: string
+    user_title?: string | null
+    ai_title?: string | null
+    status?: $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupCreatesource_note_uuidsInput | string[]
+    total_cards?: number
+    completed_cards?: number
+    failed_cards?: number
+    input_tokens?: number
+    output_tokens?: number
+    total_cost_usd?: Decimal | DecimalJsLike | number | string
+    error_message?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutFlash_card_groupsInput
+    cards?: FlashCardCreateNestedManyWithoutGroupInput
+  }
+
+  export type FlashCardGroupUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    user_title?: string | null
+    ai_title?: string | null
+    status?: $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupCreatesource_note_uuidsInput | string[]
+    total_cards?: number
+    completed_cards?: number
+    failed_cards?: number
+    input_tokens?: number
+    output_tokens?: number
+    total_cost_usd?: Decimal | DecimalJsLike | number | string
+    error_message?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    cards?: FlashCardUncheckedCreateNestedManyWithoutGroupInput
+  }
+
+  export type FlashCardGroupUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_title?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_title?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumFlashCardGroupStatusFieldUpdateOperationsInput | $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupUpdatesource_note_uuidsInput | string[]
+    total_cards?: IntFieldUpdateOperationsInput | number
+    completed_cards?: IntFieldUpdateOperationsInput | number
+    failed_cards?: IntFieldUpdateOperationsInput | number
+    input_tokens?: IntFieldUpdateOperationsInput | number
+    output_tokens?: IntFieldUpdateOperationsInput | number
+    total_cost_usd?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    error_message?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFlash_card_groupsNestedInput
+    cards?: FlashCardUpdateManyWithoutGroupNestedInput
+  }
+
+  export type FlashCardGroupUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    user_title?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_title?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumFlashCardGroupStatusFieldUpdateOperationsInput | $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupUpdatesource_note_uuidsInput | string[]
+    total_cards?: IntFieldUpdateOperationsInput | number
+    completed_cards?: IntFieldUpdateOperationsInput | number
+    failed_cards?: IntFieldUpdateOperationsInput | number
+    input_tokens?: IntFieldUpdateOperationsInput | number
+    output_tokens?: IntFieldUpdateOperationsInput | number
+    total_cost_usd?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    error_message?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    cards?: FlashCardUncheckedUpdateManyWithoutGroupNestedInput
+  }
+
+  export type FlashCardGroupCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    user_title?: string | null
+    ai_title?: string | null
+    status?: $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupCreatesource_note_uuidsInput | string[]
+    total_cards?: number
+    completed_cards?: number
+    failed_cards?: number
+    input_tokens?: number
+    output_tokens?: number
+    total_cost_usd?: Decimal | DecimalJsLike | number | string
+    error_message?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type FlashCardGroupUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_title?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_title?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumFlashCardGroupStatusFieldUpdateOperationsInput | $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupUpdatesource_note_uuidsInput | string[]
+    total_cards?: IntFieldUpdateOperationsInput | number
+    completed_cards?: IntFieldUpdateOperationsInput | number
+    failed_cards?: IntFieldUpdateOperationsInput | number
+    input_tokens?: IntFieldUpdateOperationsInput | number
+    output_tokens?: IntFieldUpdateOperationsInput | number
+    total_cost_usd?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    error_message?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardGroupUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    user_title?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_title?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumFlashCardGroupStatusFieldUpdateOperationsInput | $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupUpdatesource_note_uuidsInput | string[]
+    total_cards?: IntFieldUpdateOperationsInput | number
+    completed_cards?: IntFieldUpdateOperationsInput | number
+    failed_cards?: IntFieldUpdateOperationsInput | number
+    input_tokens?: IntFieldUpdateOperationsInput | number
+    output_tokens?: IntFieldUpdateOperationsInput | number
+    total_cost_usd?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    error_message?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardCreateInput = {
+    uuid?: string
+    front: string
+    back: string
+    keywords?: FlashCardCreatekeywordsInput | string[]
+    ai_image_prompt?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    group: FlashCardGroupCreateNestedOneWithoutCardsInput
+    image?: FlashCardImageCreateNestedOneWithoutCardInput
+  }
+
+  export type FlashCardUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    group_uuid: string
+    front: string
+    back: string
+    keywords?: FlashCardCreatekeywordsInput | string[]
+    ai_image_prompt?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    image?: FlashCardImageUncheckedCreateNestedOneWithoutCardInput
+  }
+
+  export type FlashCardUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    keywords?: FlashCardUpdatekeywordsInput | string[]
+    ai_image_prompt?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: FlashCardGroupUpdateOneRequiredWithoutCardsNestedInput
+    image?: FlashCardImageUpdateOneWithoutCardNestedInput
+  }
+
+  export type FlashCardUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    group_uuid?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    keywords?: FlashCardUpdatekeywordsInput | string[]
+    ai_image_prompt?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: FlashCardImageUncheckedUpdateOneWithoutCardNestedInput
+  }
+
+  export type FlashCardCreateManyInput = {
+    id?: number
+    uuid?: string
+    group_uuid: string
+    front: string
+    back: string
+    keywords?: FlashCardCreatekeywordsInput | string[]
+    ai_image_prompt?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type FlashCardUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    keywords?: FlashCardUpdatekeywordsInput | string[]
+    ai_image_prompt?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    group_uuid?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    keywords?: FlashCardUpdatekeywordsInput | string[]
+    ai_image_prompt?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardImageCreateInput = {
+    uuid?: string
+    url: string
+    gcs_path: string
+    gcs_bucket: string
+    filename: string
+    size: number
+    content_type?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    card: FlashCardCreateNestedOneWithoutImageInput
+  }
+
+  export type FlashCardImageUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    card_uuid: string
+    url: string
+    gcs_path: string
+    gcs_bucket: string
+    filename: string
+    size: number
+    content_type?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type FlashCardImageUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    gcs_path?: StringFieldUpdateOperationsInput | string
+    gcs_bucket?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    content_type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    card?: FlashCardUpdateOneRequiredWithoutImageNestedInput
+  }
+
+  export type FlashCardImageUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    card_uuid?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    gcs_path?: StringFieldUpdateOperationsInput | string
+    gcs_bucket?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    content_type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardImageCreateManyInput = {
+    id?: number
+    uuid?: string
+    card_uuid: string
+    url: string
+    gcs_path: string
+    gcs_bucket: string
+    filename: string
+    size: number
+    content_type?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type FlashCardImageUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    gcs_path?: StringFieldUpdateOperationsInput | string
+    gcs_bucket?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    content_type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardImageUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    card_uuid?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    gcs_path?: StringFieldUpdateOperationsInput | string
+    gcs_bucket?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    content_type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ChatMessageCreateInput = {
     uuid?: string
     role: $Enums.ChatMessageRole
@@ -44198,6 +48889,12 @@ export namespace Prisma {
     none?: NoteTagWhereInput
   }
 
+  export type FlashCardGroupListRelationFilter = {
+    every?: FlashCardGroupWhereInput
+    some?: FlashCardGroupWhereInput
+    none?: FlashCardGroupWhereInput
+  }
+
   export type ChatConversationListRelationFilter = {
     every?: ChatConversationWhereInput
     some?: ChatConversationWhereInput
@@ -44286,6 +48983,10 @@ export namespace Prisma {
   }
 
   export type NoteTagOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FlashCardGroupOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -46090,6 +50791,230 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type EnumFlashCardGroupStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashCardGroupStatus | EnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashCardGroupStatus[] | ListEnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashCardGroupStatus[] | ListEnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashCardGroupStatusFilter<$PrismaModel> | $Enums.FlashCardGroupStatus
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type FlashCardListRelationFilter = {
+    every?: FlashCardWhereInput
+    some?: FlashCardWhereInput
+    none?: FlashCardWhereInput
+  }
+
+  export type FlashCardOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FlashCardGroupCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    user_title?: SortOrder
+    ai_title?: SortOrder
+    status?: SortOrder
+    source_note_uuids?: SortOrder
+    total_cards?: SortOrder
+    completed_cards?: SortOrder
+    failed_cards?: SortOrder
+    input_tokens?: SortOrder
+    output_tokens?: SortOrder
+    total_cost_usd?: SortOrder
+    error_message?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashCardGroupAvgOrderByAggregateInput = {
+    id?: SortOrder
+    total_cards?: SortOrder
+    completed_cards?: SortOrder
+    failed_cards?: SortOrder
+    input_tokens?: SortOrder
+    output_tokens?: SortOrder
+    total_cost_usd?: SortOrder
+  }
+
+  export type FlashCardGroupMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    user_title?: SortOrder
+    ai_title?: SortOrder
+    status?: SortOrder
+    total_cards?: SortOrder
+    completed_cards?: SortOrder
+    failed_cards?: SortOrder
+    input_tokens?: SortOrder
+    output_tokens?: SortOrder
+    total_cost_usd?: SortOrder
+    error_message?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashCardGroupMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    user_title?: SortOrder
+    ai_title?: SortOrder
+    status?: SortOrder
+    total_cards?: SortOrder
+    completed_cards?: SortOrder
+    failed_cards?: SortOrder
+    input_tokens?: SortOrder
+    output_tokens?: SortOrder
+    total_cost_usd?: SortOrder
+    error_message?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashCardGroupSumOrderByAggregateInput = {
+    id?: SortOrder
+    total_cards?: SortOrder
+    completed_cards?: SortOrder
+    failed_cards?: SortOrder
+    input_tokens?: SortOrder
+    output_tokens?: SortOrder
+    total_cost_usd?: SortOrder
+  }
+
+  export type EnumFlashCardGroupStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashCardGroupStatus | EnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashCardGroupStatus[] | ListEnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashCardGroupStatus[] | ListEnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashCardGroupStatusWithAggregatesFilter<$PrismaModel> | $Enums.FlashCardGroupStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFlashCardGroupStatusFilter<$PrismaModel>
+    _max?: NestedEnumFlashCardGroupStatusFilter<$PrismaModel>
+  }
+
+  export type FlashCardGroupScalarRelationFilter = {
+    is?: FlashCardGroupWhereInput
+    isNot?: FlashCardGroupWhereInput
+  }
+
+  export type FlashCardImageNullableScalarRelationFilter = {
+    is?: FlashCardImageWhereInput | null
+    isNot?: FlashCardImageWhereInput | null
+  }
+
+  export type FlashCardCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    group_uuid?: SortOrder
+    front?: SortOrder
+    back?: SortOrder
+    keywords?: SortOrder
+    ai_image_prompt?: SortOrder
+    order_index?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashCardAvgOrderByAggregateInput = {
+    id?: SortOrder
+    order_index?: SortOrder
+  }
+
+  export type FlashCardMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    group_uuid?: SortOrder
+    front?: SortOrder
+    back?: SortOrder
+    ai_image_prompt?: SortOrder
+    order_index?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashCardMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    group_uuid?: SortOrder
+    front?: SortOrder
+    back?: SortOrder
+    ai_image_prompt?: SortOrder
+    order_index?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashCardSumOrderByAggregateInput = {
+    id?: SortOrder
+    order_index?: SortOrder
+  }
+
+  export type FlashCardScalarRelationFilter = {
+    is?: FlashCardWhereInput
+    isNot?: FlashCardWhereInput
+  }
+
+  export type FlashCardImageCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    card_uuid?: SortOrder
+    url?: SortOrder
+    gcs_path?: SortOrder
+    gcs_bucket?: SortOrder
+    filename?: SortOrder
+    size?: SortOrder
+    content_type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashCardImageAvgOrderByAggregateInput = {
+    id?: SortOrder
+    size?: SortOrder
+  }
+
+  export type FlashCardImageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    card_uuid?: SortOrder
+    url?: SortOrder
+    gcs_path?: SortOrder
+    gcs_bucket?: SortOrder
+    filename?: SortOrder
+    size?: SortOrder
+    content_type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashCardImageMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    card_uuid?: SortOrder
+    url?: SortOrder
+    gcs_path?: SortOrder
+    gcs_bucket?: SortOrder
+    filename?: SortOrder
+    size?: SortOrder
+    content_type?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashCardImageSumOrderByAggregateInput = {
+    id?: SortOrder
+    size?: SortOrder
+  }
+
   export type EnumChatMessageRoleFilter<$PrismaModel = never> = {
     equals?: $Enums.ChatMessageRole | EnumChatMessageRoleFieldRefInput<$PrismaModel>
     in?: $Enums.ChatMessageRole[] | ListEnumChatMessageRoleFieldRefInput<$PrismaModel>
@@ -46337,6 +51262,13 @@ export namespace Prisma {
     connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
   }
 
+  export type FlashCardGroupCreateNestedManyWithoutUserInput = {
+    create?: XOR<FlashCardGroupCreateWithoutUserInput, FlashCardGroupUncheckedCreateWithoutUserInput> | FlashCardGroupCreateWithoutUserInput[] | FlashCardGroupUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashCardGroupCreateOrConnectWithoutUserInput | FlashCardGroupCreateOrConnectWithoutUserInput[]
+    createMany?: FlashCardGroupCreateManyUserInputEnvelope
+    connect?: FlashCardGroupWhereUniqueInput | FlashCardGroupWhereUniqueInput[]
+  }
+
   export type ChatConversationCreateNestedManyWithoutUserInput = {
     create?: XOR<ChatConversationCreateWithoutUserInput, ChatConversationUncheckedCreateWithoutUserInput> | ChatConversationCreateWithoutUserInput[] | ChatConversationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatConversationCreateOrConnectWithoutUserInput | ChatConversationCreateOrConnectWithoutUserInput[]
@@ -46482,6 +51414,13 @@ export namespace Prisma {
     connectOrCreate?: NoteTagCreateOrConnectWithoutUserInput | NoteTagCreateOrConnectWithoutUserInput[]
     createMany?: NoteTagCreateManyUserInputEnvelope
     connect?: NoteTagWhereUniqueInput | NoteTagWhereUniqueInput[]
+  }
+
+  export type FlashCardGroupUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FlashCardGroupCreateWithoutUserInput, FlashCardGroupUncheckedCreateWithoutUserInput> | FlashCardGroupCreateWithoutUserInput[] | FlashCardGroupUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashCardGroupCreateOrConnectWithoutUserInput | FlashCardGroupCreateOrConnectWithoutUserInput[]
+    createMany?: FlashCardGroupCreateManyUserInputEnvelope
+    connect?: FlashCardGroupWhereUniqueInput | FlashCardGroupWhereUniqueInput[]
   }
 
   export type ChatConversationUncheckedCreateNestedManyWithoutUserInput = {
@@ -46787,6 +51726,20 @@ export namespace Prisma {
     deleteMany?: NoteTagScalarWhereInput | NoteTagScalarWhereInput[]
   }
 
+  export type FlashCardGroupUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FlashCardGroupCreateWithoutUserInput, FlashCardGroupUncheckedCreateWithoutUserInput> | FlashCardGroupCreateWithoutUserInput[] | FlashCardGroupUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashCardGroupCreateOrConnectWithoutUserInput | FlashCardGroupCreateOrConnectWithoutUserInput[]
+    upsert?: FlashCardGroupUpsertWithWhereUniqueWithoutUserInput | FlashCardGroupUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FlashCardGroupCreateManyUserInputEnvelope
+    set?: FlashCardGroupWhereUniqueInput | FlashCardGroupWhereUniqueInput[]
+    disconnect?: FlashCardGroupWhereUniqueInput | FlashCardGroupWhereUniqueInput[]
+    delete?: FlashCardGroupWhereUniqueInput | FlashCardGroupWhereUniqueInput[]
+    connect?: FlashCardGroupWhereUniqueInput | FlashCardGroupWhereUniqueInput[]
+    update?: FlashCardGroupUpdateWithWhereUniqueWithoutUserInput | FlashCardGroupUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FlashCardGroupUpdateManyWithWhereWithoutUserInput | FlashCardGroupUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FlashCardGroupScalarWhereInput | FlashCardGroupScalarWhereInput[]
+  }
+
   export type ChatConversationUpdateManyWithoutUserNestedInput = {
     create?: XOR<ChatConversationCreateWithoutUserInput, ChatConversationUncheckedCreateWithoutUserInput> | ChatConversationCreateWithoutUserInput[] | ChatConversationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatConversationCreateOrConnectWithoutUserInput | ChatConversationCreateOrConnectWithoutUserInput[]
@@ -47087,6 +52040,20 @@ export namespace Prisma {
     update?: NoteTagUpdateWithWhereUniqueWithoutUserInput | NoteTagUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: NoteTagUpdateManyWithWhereWithoutUserInput | NoteTagUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: NoteTagScalarWhereInput | NoteTagScalarWhereInput[]
+  }
+
+  export type FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FlashCardGroupCreateWithoutUserInput, FlashCardGroupUncheckedCreateWithoutUserInput> | FlashCardGroupCreateWithoutUserInput[] | FlashCardGroupUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashCardGroupCreateOrConnectWithoutUserInput | FlashCardGroupCreateOrConnectWithoutUserInput[]
+    upsert?: FlashCardGroupUpsertWithWhereUniqueWithoutUserInput | FlashCardGroupUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FlashCardGroupCreateManyUserInputEnvelope
+    set?: FlashCardGroupWhereUniqueInput | FlashCardGroupWhereUniqueInput[]
+    disconnect?: FlashCardGroupWhereUniqueInput | FlashCardGroupWhereUniqueInput[]
+    delete?: FlashCardGroupWhereUniqueInput | FlashCardGroupWhereUniqueInput[]
+    connect?: FlashCardGroupWhereUniqueInput | FlashCardGroupWhereUniqueInput[]
+    update?: FlashCardGroupUpdateWithWhereUniqueWithoutUserInput | FlashCardGroupUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FlashCardGroupUpdateManyWithWhereWithoutUserInput | FlashCardGroupUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FlashCardGroupScalarWhereInput | FlashCardGroupScalarWhereInput[]
   }
 
   export type ChatConversationUncheckedUpdateManyWithoutUserNestedInput = {
@@ -49169,6 +54136,144 @@ export namespace Prisma {
     deleteMany?: ChatMessageScalarWhereInput | ChatMessageScalarWhereInput[]
   }
 
+  export type FlashCardGroupCreatesource_note_uuidsInput = {
+    set: string[]
+  }
+
+  export type UserCreateNestedOneWithoutFlash_card_groupsInput = {
+    create?: XOR<UserCreateWithoutFlash_card_groupsInput, UserUncheckedCreateWithoutFlash_card_groupsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFlash_card_groupsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type FlashCardCreateNestedManyWithoutGroupInput = {
+    create?: XOR<FlashCardCreateWithoutGroupInput, FlashCardUncheckedCreateWithoutGroupInput> | FlashCardCreateWithoutGroupInput[] | FlashCardUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: FlashCardCreateOrConnectWithoutGroupInput | FlashCardCreateOrConnectWithoutGroupInput[]
+    createMany?: FlashCardCreateManyGroupInputEnvelope
+    connect?: FlashCardWhereUniqueInput | FlashCardWhereUniqueInput[]
+  }
+
+  export type FlashCardUncheckedCreateNestedManyWithoutGroupInput = {
+    create?: XOR<FlashCardCreateWithoutGroupInput, FlashCardUncheckedCreateWithoutGroupInput> | FlashCardCreateWithoutGroupInput[] | FlashCardUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: FlashCardCreateOrConnectWithoutGroupInput | FlashCardCreateOrConnectWithoutGroupInput[]
+    createMany?: FlashCardCreateManyGroupInputEnvelope
+    connect?: FlashCardWhereUniqueInput | FlashCardWhereUniqueInput[]
+  }
+
+  export type EnumFlashCardGroupStatusFieldUpdateOperationsInput = {
+    set?: $Enums.FlashCardGroupStatus
+  }
+
+  export type FlashCardGroupUpdatesource_note_uuidsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserUpdateOneRequiredWithoutFlash_card_groupsNestedInput = {
+    create?: XOR<UserCreateWithoutFlash_card_groupsInput, UserUncheckedCreateWithoutFlash_card_groupsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFlash_card_groupsInput
+    upsert?: UserUpsertWithoutFlash_card_groupsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFlash_card_groupsInput, UserUpdateWithoutFlash_card_groupsInput>, UserUncheckedUpdateWithoutFlash_card_groupsInput>
+  }
+
+  export type FlashCardUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<FlashCardCreateWithoutGroupInput, FlashCardUncheckedCreateWithoutGroupInput> | FlashCardCreateWithoutGroupInput[] | FlashCardUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: FlashCardCreateOrConnectWithoutGroupInput | FlashCardCreateOrConnectWithoutGroupInput[]
+    upsert?: FlashCardUpsertWithWhereUniqueWithoutGroupInput | FlashCardUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: FlashCardCreateManyGroupInputEnvelope
+    set?: FlashCardWhereUniqueInput | FlashCardWhereUniqueInput[]
+    disconnect?: FlashCardWhereUniqueInput | FlashCardWhereUniqueInput[]
+    delete?: FlashCardWhereUniqueInput | FlashCardWhereUniqueInput[]
+    connect?: FlashCardWhereUniqueInput | FlashCardWhereUniqueInput[]
+    update?: FlashCardUpdateWithWhereUniqueWithoutGroupInput | FlashCardUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: FlashCardUpdateManyWithWhereWithoutGroupInput | FlashCardUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: FlashCardScalarWhereInput | FlashCardScalarWhereInput[]
+  }
+
+  export type FlashCardUncheckedUpdateManyWithoutGroupNestedInput = {
+    create?: XOR<FlashCardCreateWithoutGroupInput, FlashCardUncheckedCreateWithoutGroupInput> | FlashCardCreateWithoutGroupInput[] | FlashCardUncheckedCreateWithoutGroupInput[]
+    connectOrCreate?: FlashCardCreateOrConnectWithoutGroupInput | FlashCardCreateOrConnectWithoutGroupInput[]
+    upsert?: FlashCardUpsertWithWhereUniqueWithoutGroupInput | FlashCardUpsertWithWhereUniqueWithoutGroupInput[]
+    createMany?: FlashCardCreateManyGroupInputEnvelope
+    set?: FlashCardWhereUniqueInput | FlashCardWhereUniqueInput[]
+    disconnect?: FlashCardWhereUniqueInput | FlashCardWhereUniqueInput[]
+    delete?: FlashCardWhereUniqueInput | FlashCardWhereUniqueInput[]
+    connect?: FlashCardWhereUniqueInput | FlashCardWhereUniqueInput[]
+    update?: FlashCardUpdateWithWhereUniqueWithoutGroupInput | FlashCardUpdateWithWhereUniqueWithoutGroupInput[]
+    updateMany?: FlashCardUpdateManyWithWhereWithoutGroupInput | FlashCardUpdateManyWithWhereWithoutGroupInput[]
+    deleteMany?: FlashCardScalarWhereInput | FlashCardScalarWhereInput[]
+  }
+
+  export type FlashCardCreatekeywordsInput = {
+    set: string[]
+  }
+
+  export type FlashCardGroupCreateNestedOneWithoutCardsInput = {
+    create?: XOR<FlashCardGroupCreateWithoutCardsInput, FlashCardGroupUncheckedCreateWithoutCardsInput>
+    connectOrCreate?: FlashCardGroupCreateOrConnectWithoutCardsInput
+    connect?: FlashCardGroupWhereUniqueInput
+  }
+
+  export type FlashCardImageCreateNestedOneWithoutCardInput = {
+    create?: XOR<FlashCardImageCreateWithoutCardInput, FlashCardImageUncheckedCreateWithoutCardInput>
+    connectOrCreate?: FlashCardImageCreateOrConnectWithoutCardInput
+    connect?: FlashCardImageWhereUniqueInput
+  }
+
+  export type FlashCardImageUncheckedCreateNestedOneWithoutCardInput = {
+    create?: XOR<FlashCardImageCreateWithoutCardInput, FlashCardImageUncheckedCreateWithoutCardInput>
+    connectOrCreate?: FlashCardImageCreateOrConnectWithoutCardInput
+    connect?: FlashCardImageWhereUniqueInput
+  }
+
+  export type FlashCardUpdatekeywordsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type FlashCardGroupUpdateOneRequiredWithoutCardsNestedInput = {
+    create?: XOR<FlashCardGroupCreateWithoutCardsInput, FlashCardGroupUncheckedCreateWithoutCardsInput>
+    connectOrCreate?: FlashCardGroupCreateOrConnectWithoutCardsInput
+    upsert?: FlashCardGroupUpsertWithoutCardsInput
+    connect?: FlashCardGroupWhereUniqueInput
+    update?: XOR<XOR<FlashCardGroupUpdateToOneWithWhereWithoutCardsInput, FlashCardGroupUpdateWithoutCardsInput>, FlashCardGroupUncheckedUpdateWithoutCardsInput>
+  }
+
+  export type FlashCardImageUpdateOneWithoutCardNestedInput = {
+    create?: XOR<FlashCardImageCreateWithoutCardInput, FlashCardImageUncheckedCreateWithoutCardInput>
+    connectOrCreate?: FlashCardImageCreateOrConnectWithoutCardInput
+    upsert?: FlashCardImageUpsertWithoutCardInput
+    disconnect?: FlashCardImageWhereInput | boolean
+    delete?: FlashCardImageWhereInput | boolean
+    connect?: FlashCardImageWhereUniqueInput
+    update?: XOR<XOR<FlashCardImageUpdateToOneWithWhereWithoutCardInput, FlashCardImageUpdateWithoutCardInput>, FlashCardImageUncheckedUpdateWithoutCardInput>
+  }
+
+  export type FlashCardImageUncheckedUpdateOneWithoutCardNestedInput = {
+    create?: XOR<FlashCardImageCreateWithoutCardInput, FlashCardImageUncheckedCreateWithoutCardInput>
+    connectOrCreate?: FlashCardImageCreateOrConnectWithoutCardInput
+    upsert?: FlashCardImageUpsertWithoutCardInput
+    disconnect?: FlashCardImageWhereInput | boolean
+    delete?: FlashCardImageWhereInput | boolean
+    connect?: FlashCardImageWhereUniqueInput
+    update?: XOR<XOR<FlashCardImageUpdateToOneWithWhereWithoutCardInput, FlashCardImageUpdateWithoutCardInput>, FlashCardImageUncheckedUpdateWithoutCardInput>
+  }
+
+  export type FlashCardCreateNestedOneWithoutImageInput = {
+    create?: XOR<FlashCardCreateWithoutImageInput, FlashCardUncheckedCreateWithoutImageInput>
+    connectOrCreate?: FlashCardCreateOrConnectWithoutImageInput
+    connect?: FlashCardWhereUniqueInput
+  }
+
+  export type FlashCardUpdateOneRequiredWithoutImageNestedInput = {
+    create?: XOR<FlashCardCreateWithoutImageInput, FlashCardUncheckedCreateWithoutImageInput>
+    connectOrCreate?: FlashCardCreateOrConnectWithoutImageInput
+    upsert?: FlashCardUpsertWithoutImageInput
+    connect?: FlashCardWhereUniqueInput
+    update?: XOR<XOR<FlashCardUpdateToOneWithWhereWithoutImageInput, FlashCardUpdateWithoutImageInput>, FlashCardUncheckedUpdateWithoutImageInput>
+  }
+
   export type ChatConversationCreateNestedOneWithoutMessagesInput = {
     create?: XOR<ChatConversationCreateWithoutMessagesInput, ChatConversationUncheckedCreateWithoutMessagesInput>
     connectOrCreate?: ChatConversationCreateOrConnectWithoutMessagesInput
@@ -49626,6 +54731,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumNoteTypeFilter<$PrismaModel>
     _max?: NestedEnumNoteTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumFlashCardGroupStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashCardGroupStatus | EnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashCardGroupStatus[] | ListEnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashCardGroupStatus[] | ListEnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashCardGroupStatusFilter<$PrismaModel> | $Enums.FlashCardGroupStatus
+  }
+
+  export type NestedEnumFlashCardGroupStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashCardGroupStatus | EnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashCardGroupStatus[] | ListEnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashCardGroupStatus[] | ListEnumFlashCardGroupStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashCardGroupStatusWithAggregatesFilter<$PrismaModel> | $Enums.FlashCardGroupStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFlashCardGroupStatusFilter<$PrismaModel>
+    _max?: NestedEnumFlashCardGroupStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumChatMessageRoleFilter<$PrismaModel = never> = {
@@ -50360,6 +55482,53 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FlashCardGroupCreateWithoutUserInput = {
+    uuid?: string
+    user_title?: string | null
+    ai_title?: string | null
+    status?: $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupCreatesource_note_uuidsInput | string[]
+    total_cards?: number
+    completed_cards?: number
+    failed_cards?: number
+    input_tokens?: number
+    output_tokens?: number
+    total_cost_usd?: Decimal | DecimalJsLike | number | string
+    error_message?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    cards?: FlashCardCreateNestedManyWithoutGroupInput
+  }
+
+  export type FlashCardGroupUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    user_title?: string | null
+    ai_title?: string | null
+    status?: $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupCreatesource_note_uuidsInput | string[]
+    total_cards?: number
+    completed_cards?: number
+    failed_cards?: number
+    input_tokens?: number
+    output_tokens?: number
+    total_cost_usd?: Decimal | DecimalJsLike | number | string
+    error_message?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    cards?: FlashCardUncheckedCreateNestedManyWithoutGroupInput
+  }
+
+  export type FlashCardGroupCreateOrConnectWithoutUserInput = {
+    where: FlashCardGroupWhereUniqueInput
+    create: XOR<FlashCardGroupCreateWithoutUserInput, FlashCardGroupUncheckedCreateWithoutUserInput>
+  }
+
+  export type FlashCardGroupCreateManyUserInputEnvelope = {
+    data: FlashCardGroupCreateManyUserInput | FlashCardGroupCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ChatConversationCreateWithoutUserInput = {
     uuid?: string
     title?: string
@@ -51018,6 +56187,44 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"NoteTag"> | Date | string
   }
 
+  export type FlashCardGroupUpsertWithWhereUniqueWithoutUserInput = {
+    where: FlashCardGroupWhereUniqueInput
+    update: XOR<FlashCardGroupUpdateWithoutUserInput, FlashCardGroupUncheckedUpdateWithoutUserInput>
+    create: XOR<FlashCardGroupCreateWithoutUserInput, FlashCardGroupUncheckedCreateWithoutUserInput>
+  }
+
+  export type FlashCardGroupUpdateWithWhereUniqueWithoutUserInput = {
+    where: FlashCardGroupWhereUniqueInput
+    data: XOR<FlashCardGroupUpdateWithoutUserInput, FlashCardGroupUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FlashCardGroupUpdateManyWithWhereWithoutUserInput = {
+    where: FlashCardGroupScalarWhereInput
+    data: XOR<FlashCardGroupUpdateManyMutationInput, FlashCardGroupUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type FlashCardGroupScalarWhereInput = {
+    AND?: FlashCardGroupScalarWhereInput | FlashCardGroupScalarWhereInput[]
+    OR?: FlashCardGroupScalarWhereInput[]
+    NOT?: FlashCardGroupScalarWhereInput | FlashCardGroupScalarWhereInput[]
+    id?: IntFilter<"FlashCardGroup"> | number
+    uuid?: StringFilter<"FlashCardGroup"> | string
+    user_uuid?: StringFilter<"FlashCardGroup"> | string
+    user_title?: StringNullableFilter<"FlashCardGroup"> | string | null
+    ai_title?: StringNullableFilter<"FlashCardGroup"> | string | null
+    status?: EnumFlashCardGroupStatusFilter<"FlashCardGroup"> | $Enums.FlashCardGroupStatus
+    source_note_uuids?: StringNullableListFilter<"FlashCardGroup">
+    total_cards?: IntFilter<"FlashCardGroup"> | number
+    completed_cards?: IntFilter<"FlashCardGroup"> | number
+    failed_cards?: IntFilter<"FlashCardGroup"> | number
+    input_tokens?: IntFilter<"FlashCardGroup"> | number
+    output_tokens?: IntFilter<"FlashCardGroup"> | number
+    total_cost_usd?: DecimalFilter<"FlashCardGroup"> | Decimal | DecimalJsLike | number | string
+    error_message?: StringNullableFilter<"FlashCardGroup"> | string | null
+    created_at?: DateTimeFilter<"FlashCardGroup"> | Date | string
+    updated_at?: DateTimeFilter<"FlashCardGroup"> | Date | string
+  }
+
   export type ChatConversationUpsertWithWhereUniqueWithoutUserInput = {
     where: ChatConversationWhereUniqueInput
     update: XOR<ChatConversationUpdateWithoutUserInput, ChatConversationUncheckedUpdateWithoutUserInput>
@@ -51077,6 +56284,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -51110,6 +56318,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -51353,6 +56562,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -51386,6 +56596,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -51498,6 +56709,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -51531,6 +56743,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -51617,6 +56830,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -51650,6 +56864,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -51764,6 +56979,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -51797,6 +57013,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -52009,6 +57226,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -52042,6 +57260,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -52466,6 +57685,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -52499,6 +57719,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -52693,6 +57914,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -52726,6 +57948,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -52926,6 +58149,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -52959,6 +58183,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -53143,6 +58368,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -53176,6 +58402,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -53208,6 +58435,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -53241,6 +58469,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -53371,6 +58600,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -53404,6 +58634,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -53468,6 +58699,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -53501,6 +58733,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -53685,6 +58918,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -53718,6 +58952,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -53814,6 +59049,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -53847,6 +59083,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -54030,6 +59267,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -54063,6 +59301,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -54181,6 +59420,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -54214,6 +59454,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -54410,6 +59651,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -54443,6 +59685,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -54653,6 +59896,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -54686,6 +59930,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -54767,6 +60012,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -54800,6 +60046,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -54848,6 +60095,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -54881,6 +60129,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -55018,6 +60267,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -55051,6 +60301,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -55184,6 +60435,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -55217,6 +60469,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -55356,6 +60609,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -55389,6 +60643,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -55641,6 +60896,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -55674,6 +60930,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -55755,6 +61012,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -55788,6 +61046,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -55836,6 +61095,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -55869,6 +61129,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -55970,6 +61231,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -56003,6 +61265,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -56094,6 +61357,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -56127,6 +61391,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -56204,6 +61469,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -56237,6 +61503,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -56555,6 +61822,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -56588,6 +61856,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -56691,6 +61960,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -56724,6 +61994,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -56788,6 +62059,7 @@ export namespace Prisma {
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -56821,6 +62093,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -56901,6 +62174,7 @@ export namespace Prisma {
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -56934,6 +62208,7 @@ export namespace Prisma {
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -56982,6 +62257,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -57015,6 +62291,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -57101,6 +62378,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -57134,6 +62412,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -57210,6 +62489,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -57243,6 +62523,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -57323,6 +62604,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -57356,6 +62638,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -57426,6 +62709,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
   }
 
@@ -57459,6 +62743,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
     chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -57535,6 +62820,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
   }
 
@@ -57568,6 +62854,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
     chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -57635,6 +62922,7 @@ export namespace Prisma {
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
     note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChat_conversationsInput = {
@@ -57668,6 +62956,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
     note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChat_conversationsInput = {
@@ -57775,6 +63064,7 @@ export namespace Prisma {
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChat_conversationsInput = {
@@ -57808,6 +63098,7 @@ export namespace Prisma {
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
     note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type NoteUpsertWithoutChatConversationsInput = {
@@ -57875,6 +63166,445 @@ export namespace Prisma {
     content?: StringFilter<"ChatMessage"> | string
     metadata?: JsonNullableFilter<"ChatMessage">
     created_at?: DateTimeFilter<"ChatMessage"> | Date | string
+  }
+
+  export type UserCreateWithoutFlash_card_groupsInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFlash_card_groupsInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFlash_card_groupsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFlash_card_groupsInput, UserUncheckedCreateWithoutFlash_card_groupsInput>
+  }
+
+  export type FlashCardCreateWithoutGroupInput = {
+    uuid?: string
+    front: string
+    back: string
+    keywords?: FlashCardCreatekeywordsInput | string[]
+    ai_image_prompt?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    image?: FlashCardImageCreateNestedOneWithoutCardInput
+  }
+
+  export type FlashCardUncheckedCreateWithoutGroupInput = {
+    id?: number
+    uuid?: string
+    front: string
+    back: string
+    keywords?: FlashCardCreatekeywordsInput | string[]
+    ai_image_prompt?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    image?: FlashCardImageUncheckedCreateNestedOneWithoutCardInput
+  }
+
+  export type FlashCardCreateOrConnectWithoutGroupInput = {
+    where: FlashCardWhereUniqueInput
+    create: XOR<FlashCardCreateWithoutGroupInput, FlashCardUncheckedCreateWithoutGroupInput>
+  }
+
+  export type FlashCardCreateManyGroupInputEnvelope = {
+    data: FlashCardCreateManyGroupInput | FlashCardCreateManyGroupInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutFlash_card_groupsInput = {
+    update: XOR<UserUpdateWithoutFlash_card_groupsInput, UserUncheckedUpdateWithoutFlash_card_groupsInput>
+    create: XOR<UserCreateWithoutFlash_card_groupsInput, UserUncheckedCreateWithoutFlash_card_groupsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFlash_card_groupsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFlash_card_groupsInput, UserUncheckedUpdateWithoutFlash_card_groupsInput>
+  }
+
+  export type UserUpdateWithoutFlash_card_groupsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFlash_card_groupsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type FlashCardUpsertWithWhereUniqueWithoutGroupInput = {
+    where: FlashCardWhereUniqueInput
+    update: XOR<FlashCardUpdateWithoutGroupInput, FlashCardUncheckedUpdateWithoutGroupInput>
+    create: XOR<FlashCardCreateWithoutGroupInput, FlashCardUncheckedCreateWithoutGroupInput>
+  }
+
+  export type FlashCardUpdateWithWhereUniqueWithoutGroupInput = {
+    where: FlashCardWhereUniqueInput
+    data: XOR<FlashCardUpdateWithoutGroupInput, FlashCardUncheckedUpdateWithoutGroupInput>
+  }
+
+  export type FlashCardUpdateManyWithWhereWithoutGroupInput = {
+    where: FlashCardScalarWhereInput
+    data: XOR<FlashCardUpdateManyMutationInput, FlashCardUncheckedUpdateManyWithoutGroupInput>
+  }
+
+  export type FlashCardScalarWhereInput = {
+    AND?: FlashCardScalarWhereInput | FlashCardScalarWhereInput[]
+    OR?: FlashCardScalarWhereInput[]
+    NOT?: FlashCardScalarWhereInput | FlashCardScalarWhereInput[]
+    id?: IntFilter<"FlashCard"> | number
+    uuid?: StringFilter<"FlashCard"> | string
+    group_uuid?: StringFilter<"FlashCard"> | string
+    front?: StringFilter<"FlashCard"> | string
+    back?: StringFilter<"FlashCard"> | string
+    keywords?: StringNullableListFilter<"FlashCard">
+    ai_image_prompt?: StringNullableFilter<"FlashCard"> | string | null
+    order_index?: IntFilter<"FlashCard"> | number
+    created_at?: DateTimeFilter<"FlashCard"> | Date | string
+    updated_at?: DateTimeFilter<"FlashCard"> | Date | string
+  }
+
+  export type FlashCardGroupCreateWithoutCardsInput = {
+    uuid?: string
+    user_title?: string | null
+    ai_title?: string | null
+    status?: $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupCreatesource_note_uuidsInput | string[]
+    total_cards?: number
+    completed_cards?: number
+    failed_cards?: number
+    input_tokens?: number
+    output_tokens?: number
+    total_cost_usd?: Decimal | DecimalJsLike | number | string
+    error_message?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutFlash_card_groupsInput
+  }
+
+  export type FlashCardGroupUncheckedCreateWithoutCardsInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    user_title?: string | null
+    ai_title?: string | null
+    status?: $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupCreatesource_note_uuidsInput | string[]
+    total_cards?: number
+    completed_cards?: number
+    failed_cards?: number
+    input_tokens?: number
+    output_tokens?: number
+    total_cost_usd?: Decimal | DecimalJsLike | number | string
+    error_message?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type FlashCardGroupCreateOrConnectWithoutCardsInput = {
+    where: FlashCardGroupWhereUniqueInput
+    create: XOR<FlashCardGroupCreateWithoutCardsInput, FlashCardGroupUncheckedCreateWithoutCardsInput>
+  }
+
+  export type FlashCardImageCreateWithoutCardInput = {
+    uuid?: string
+    url: string
+    gcs_path: string
+    gcs_bucket: string
+    filename: string
+    size: number
+    content_type?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type FlashCardImageUncheckedCreateWithoutCardInput = {
+    id?: number
+    uuid?: string
+    url: string
+    gcs_path: string
+    gcs_bucket: string
+    filename: string
+    size: number
+    content_type?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type FlashCardImageCreateOrConnectWithoutCardInput = {
+    where: FlashCardImageWhereUniqueInput
+    create: XOR<FlashCardImageCreateWithoutCardInput, FlashCardImageUncheckedCreateWithoutCardInput>
+  }
+
+  export type FlashCardGroupUpsertWithoutCardsInput = {
+    update: XOR<FlashCardGroupUpdateWithoutCardsInput, FlashCardGroupUncheckedUpdateWithoutCardsInput>
+    create: XOR<FlashCardGroupCreateWithoutCardsInput, FlashCardGroupUncheckedCreateWithoutCardsInput>
+    where?: FlashCardGroupWhereInput
+  }
+
+  export type FlashCardGroupUpdateToOneWithWhereWithoutCardsInput = {
+    where?: FlashCardGroupWhereInput
+    data: XOR<FlashCardGroupUpdateWithoutCardsInput, FlashCardGroupUncheckedUpdateWithoutCardsInput>
+  }
+
+  export type FlashCardGroupUpdateWithoutCardsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_title?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_title?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumFlashCardGroupStatusFieldUpdateOperationsInput | $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupUpdatesource_note_uuidsInput | string[]
+    total_cards?: IntFieldUpdateOperationsInput | number
+    completed_cards?: IntFieldUpdateOperationsInput | number
+    failed_cards?: IntFieldUpdateOperationsInput | number
+    input_tokens?: IntFieldUpdateOperationsInput | number
+    output_tokens?: IntFieldUpdateOperationsInput | number
+    total_cost_usd?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    error_message?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFlash_card_groupsNestedInput
+  }
+
+  export type FlashCardGroupUncheckedUpdateWithoutCardsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    user_title?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_title?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumFlashCardGroupStatusFieldUpdateOperationsInput | $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupUpdatesource_note_uuidsInput | string[]
+    total_cards?: IntFieldUpdateOperationsInput | number
+    completed_cards?: IntFieldUpdateOperationsInput | number
+    failed_cards?: IntFieldUpdateOperationsInput | number
+    input_tokens?: IntFieldUpdateOperationsInput | number
+    output_tokens?: IntFieldUpdateOperationsInput | number
+    total_cost_usd?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    error_message?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardImageUpsertWithoutCardInput = {
+    update: XOR<FlashCardImageUpdateWithoutCardInput, FlashCardImageUncheckedUpdateWithoutCardInput>
+    create: XOR<FlashCardImageCreateWithoutCardInput, FlashCardImageUncheckedCreateWithoutCardInput>
+    where?: FlashCardImageWhereInput
+  }
+
+  export type FlashCardImageUpdateToOneWithWhereWithoutCardInput = {
+    where?: FlashCardImageWhereInput
+    data: XOR<FlashCardImageUpdateWithoutCardInput, FlashCardImageUncheckedUpdateWithoutCardInput>
+  }
+
+  export type FlashCardImageUpdateWithoutCardInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    gcs_path?: StringFieldUpdateOperationsInput | string
+    gcs_bucket?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    content_type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardImageUncheckedUpdateWithoutCardInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    gcs_path?: StringFieldUpdateOperationsInput | string
+    gcs_bucket?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
+    size?: IntFieldUpdateOperationsInput | number
+    content_type?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardCreateWithoutImageInput = {
+    uuid?: string
+    front: string
+    back: string
+    keywords?: FlashCardCreatekeywordsInput | string[]
+    ai_image_prompt?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    group: FlashCardGroupCreateNestedOneWithoutCardsInput
+  }
+
+  export type FlashCardUncheckedCreateWithoutImageInput = {
+    id?: number
+    uuid?: string
+    group_uuid: string
+    front: string
+    back: string
+    keywords?: FlashCardCreatekeywordsInput | string[]
+    ai_image_prompt?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type FlashCardCreateOrConnectWithoutImageInput = {
+    where: FlashCardWhereUniqueInput
+    create: XOR<FlashCardCreateWithoutImageInput, FlashCardUncheckedCreateWithoutImageInput>
+  }
+
+  export type FlashCardUpsertWithoutImageInput = {
+    update: XOR<FlashCardUpdateWithoutImageInput, FlashCardUncheckedUpdateWithoutImageInput>
+    create: XOR<FlashCardCreateWithoutImageInput, FlashCardUncheckedCreateWithoutImageInput>
+    where?: FlashCardWhereInput
+  }
+
+  export type FlashCardUpdateToOneWithWhereWithoutImageInput = {
+    where?: FlashCardWhereInput
+    data: XOR<FlashCardUpdateWithoutImageInput, FlashCardUncheckedUpdateWithoutImageInput>
+  }
+
+  export type FlashCardUpdateWithoutImageInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    keywords?: FlashCardUpdatekeywordsInput | string[]
+    ai_image_prompt?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    group?: FlashCardGroupUpdateOneRequiredWithoutCardsNestedInput
+  }
+
+  export type FlashCardUncheckedUpdateWithoutImageInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    group_uuid?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    keywords?: FlashCardUpdatekeywordsInput | string[]
+    ai_image_prompt?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ChatConversationCreateWithoutMessagesInput = {
@@ -58158,6 +63888,24 @@ export namespace Prisma {
     uuid?: string
     title: string
     color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type FlashCardGroupCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    user_title?: string | null
+    ai_title?: string | null
+    status?: $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupCreatesource_note_uuidsInput | string[]
+    total_cards?: number
+    completed_cards?: number
+    failed_cards?: number
+    input_tokens?: number
+    output_tokens?: number
+    total_cost_usd?: Decimal | DecimalJsLike | number | string
+    error_message?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -58887,6 +64635,61 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardGroupUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_title?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_title?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumFlashCardGroupStatusFieldUpdateOperationsInput | $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupUpdatesource_note_uuidsInput | string[]
+    total_cards?: IntFieldUpdateOperationsInput | number
+    completed_cards?: IntFieldUpdateOperationsInput | number
+    failed_cards?: IntFieldUpdateOperationsInput | number
+    input_tokens?: IntFieldUpdateOperationsInput | number
+    output_tokens?: IntFieldUpdateOperationsInput | number
+    total_cost_usd?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    error_message?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    cards?: FlashCardUpdateManyWithoutGroupNestedInput
+  }
+
+  export type FlashCardGroupUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_title?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_title?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumFlashCardGroupStatusFieldUpdateOperationsInput | $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupUpdatesource_note_uuidsInput | string[]
+    total_cards?: IntFieldUpdateOperationsInput | number
+    completed_cards?: IntFieldUpdateOperationsInput | number
+    failed_cards?: IntFieldUpdateOperationsInput | number
+    input_tokens?: IntFieldUpdateOperationsInput | number
+    output_tokens?: IntFieldUpdateOperationsInput | number
+    total_cost_usd?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    error_message?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    cards?: FlashCardUncheckedUpdateManyWithoutGroupNestedInput
+  }
+
+  export type FlashCardGroupUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_title?: NullableStringFieldUpdateOperationsInput | string | null
+    ai_title?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumFlashCardGroupStatusFieldUpdateOperationsInput | $Enums.FlashCardGroupStatus
+    source_note_uuids?: FlashCardGroupUpdatesource_note_uuidsInput | string[]
+    total_cards?: IntFieldUpdateOperationsInput | number
+    completed_cards?: IntFieldUpdateOperationsInput | number
+    failed_cards?: IntFieldUpdateOperationsInput | number
+    input_tokens?: IntFieldUpdateOperationsInput | number
+    output_tokens?: IntFieldUpdateOperationsInput | number
+    total_cost_usd?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    error_message?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -60298,6 +66101,55 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     metadata?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlashCardCreateManyGroupInput = {
+    id?: number
+    uuid?: string
+    front: string
+    back: string
+    keywords?: FlashCardCreatekeywordsInput | string[]
+    ai_image_prompt?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type FlashCardUpdateWithoutGroupInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    keywords?: FlashCardUpdatekeywordsInput | string[]
+    ai_image_prompt?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: FlashCardImageUpdateOneWithoutCardNestedInput
+  }
+
+  export type FlashCardUncheckedUpdateWithoutGroupInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    keywords?: FlashCardUpdatekeywordsInput | string[]
+    ai_image_prompt?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: FlashCardImageUncheckedUpdateOneWithoutCardNestedInput
+  }
+
+  export type FlashCardUncheckedUpdateManyWithoutGroupInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    front?: StringFieldUpdateOperationsInput | string
+    back?: StringFieldUpdateOperationsInput | string
+    keywords?: FlashCardUpdatekeywordsInput | string[]
+    ai_image_prompt?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

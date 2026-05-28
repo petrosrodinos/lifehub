@@ -223,6 +223,18 @@ export const ApiRoutes = {
       delete: (uuid: string) => `/note-tags/${uuid}`,
     },
   },
+  flashCards: {
+    groups: {
+      list: '/flash-card-groups',
+      create: '/flash-card-groups',
+      get: (uuid: string) => `/flash-card-groups/${uuid}`,
+      update: (uuid: string) => `/flash-card-groups/${uuid}`,
+      delete: (uuid: string) => `/flash-card-groups/${uuid}`,
+    },
+    cards: {
+      delete: (groupUuid: string, cardUuid: string) => `/flash-card-groups/${groupUuid}/cards/${cardUuid}`,
+    },
+  },
   youtubeScraper: {
     transcript: '/youtube-scraper/transcript',
   },

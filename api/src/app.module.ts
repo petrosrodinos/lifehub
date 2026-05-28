@@ -37,6 +37,7 @@ import { NotesModule } from './modules/notes/notes.module';
 import { NoteTagsModule } from './modules/notes/note-tags/note-tags.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { InternalYoutubeScraperModule } from './modules/internal/youtube-scraper/youtube-scraper.module';
+import { FlashCardsModule } from './modules/flash-cards/flash-cards.module';
 
 @Module({
   imports: [
@@ -76,6 +77,7 @@ import { InternalYoutubeScraperModule } from './modules/internal/youtube-scraper
     NoteTagsModule,
     ChatModule,
     InternalYoutubeScraperModule,
+    FlashCardsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

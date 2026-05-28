@@ -115,6 +115,7 @@ model User {
   // Notes
   notes Note[]
   note_tags NoteTag[]
+  flash_card_groups FlashCardGroup[]
 
   // Assistant
   chat_conversations ChatConversation[]
@@ -675,6 +676,75 @@ model ChatConversation {
   @@index([user_uuid, updated_at])
   @@index([user_uuid, note_uuid])
   @@map("chat_conversations")
+}
+
+enum FlashCardGroupStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  PARTIAL
+}
+
+model FlashCardGroup {
+  id                Int                  @id @default(autoincrement())
+  uuid              String               @unique @default(uuid())
+  user_uuid         String
+  user              User                 @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  user_title        String?
+  ai_title          String?
+  status            FlashCardGroupStatus @default(PENDING)
+  source_note_uuids String[]
+  total_cards       Int                  @default(0)
+  completed_cards   Int                  @default(0)
+  failed_cards      Int                  @default(0)
+  input_tokens      Int                  @default(0)
+  output_tokens     Int                  @default(0)
+  total_cost_usd    Decimal              @default(0) @db.Decimal(10, 6)
+  error_message     String?
+  created_at        DateTime             @default(now())
+  updated_at        DateTime             @updatedAt
+  cards             FlashCard[]
+
+  @@index([user_uuid])
+  @@index([user_uuid, status])
+  @@map("flash_card_groups")
+}
+
+model FlashCard {
+  id              Int            @id @default(autoincrement())
+  uuid            String         @unique @default(uuid())
+  group_uuid      String
+  group           FlashCardGroup @relation(fields: [group_uuid], references: [uuid], onDelete: Cascade)
+  front           String
+  back            String         @db.Text
+  keywords        String[]
+  ai_image_prompt String?        @db.Text
+  order_index     Int            @default(0)
+  created_at      DateTime       @default(now())
+  updated_at      DateTime       @updatedAt
+  image           FlashCardImage?
+
+  @@index([group_uuid])
+  @@index([group_uuid, order_index])
+  @@map("flash_cards")
+}
+
+model FlashCardImage {
+  id           Int       @id @default(autoincrement())
+  uuid         String    @unique @default(uuid())
+  card_uuid    String    @unique
+  card         FlashCard @relation(fields: [card_uuid], references: [uuid], onDelete: Cascade)
+  url          String
+  gcs_path     String
+  gcs_bucket   String
+  filename     String
+  size         Int
+  content_type String    @default("image/png")
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+
+  @@map("flash_card_images")
 }
 
 model ChatMessage {

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FileText, Plus, Loader2, ChevronDown, ChevronUp, Youtube, AlertCircle, Sparkles, Wand2, Tags, Pencil, Trash2, Check, X, Search, SlidersHorizontal } from 'lucide-react'
-import { useNotes, useCreateNote, useSummarizeNote, useBulkAutoTagNotes } from '../../features/notes/hooks/use-notes'
+import { FileText, Plus, Loader2, ChevronDown, ChevronUp, Youtube, AlertCircle, Sparkles, Tags, Pencil, Trash2, Check, X, Search, SlidersHorizontal, GraduationCap } from 'lucide-react'
+import { useNotes, useCreateNote, useSummarizeNote } from '../../features/notes/hooks/use-notes'
 import { useNoteTags, useCreateNoteTag, useUpdateNoteTag, useDeleteNoteTag } from '../../features/notes/hooks/use-note-tags'
 import { fetchYoutubeTranscript } from '../../features/notes/services/notes'
 import { NOTE_TYPES, NOTE_TYPE_MAP } from '../../features/notes/constants'
@@ -114,7 +114,6 @@ export function NotesPage() {
     const updateTagMutation = useUpdateNoteTag()
     const deleteTagMutation = useDeleteNoteTag()
     const summarizeMutation = useSummarizeNote()
-    const bulkAutoTagMutation = useBulkAutoTagNotes()
 
     const [title, setTitle] = useState('')
     const [selectedType, setSelectedType] = useState<NoteType>('NOTE')
@@ -221,18 +220,11 @@ export function NotesPage() {
                     </div>
                     <div className="grid grid-cols-4 gap-2 w-full sm:flex sm:w-auto sm:items-center">
                         <button
-                            onClick={() => bulkAutoTagMutation.mutate()}
-                            disabled={bulkAutoTagMutation.isPending || notes.length === 0}
-                            title="Auto-tag all untagged notes with AI"
-                            className="flex min-w-0 items-center justify-center gap-1 h-9 px-2 sm:px-3 sm:shrink-0 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed text-slate-300 text-xs sm:text-sm font-medium transition-all"
+                            onClick={() => navigate(Routes.notes.learn.prefix)}
+                            className="flex min-w-0 items-center justify-center gap-1 h-9 px-2 sm:px-3 sm:shrink-0 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs sm:text-sm font-medium transition-all"
                         >
-                            {bulkAutoTagMutation.isPending
-                                ? <Loader2 className="w-4 h-4 shrink-0 animate-spin" />
-                                : <Wand2 className="w-4 h-4 shrink-0" />
-                            }
-                            <span className="truncate hidden sm:inline">
-                                {bulkAutoTagMutation.isPending ? 'Tagging…' : 'Auto-tag'}
-                            </span>
+                            <GraduationCap className="w-4 h-4 shrink-0" />
+                            <span className="truncate hidden sm:inline">Learn</span>
                         </button>
                         <button
                             onClick={() => setShowTagsPanel(true)}

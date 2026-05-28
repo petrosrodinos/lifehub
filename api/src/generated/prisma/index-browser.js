@@ -447,6 +447,52 @@ exports.Prisma.ChatConversationScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.FlashCardGroupScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  user_title: 'user_title',
+  ai_title: 'ai_title',
+  status: 'status',
+  source_note_uuids: 'source_note_uuids',
+  total_cards: 'total_cards',
+  completed_cards: 'completed_cards',
+  failed_cards: 'failed_cards',
+  input_tokens: 'input_tokens',
+  output_tokens: 'output_tokens',
+  total_cost_usd: 'total_cost_usd',
+  error_message: 'error_message',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.FlashCardScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  group_uuid: 'group_uuid',
+  front: 'front',
+  back: 'back',
+  keywords: 'keywords',
+  ai_image_prompt: 'ai_image_prompt',
+  order_index: 'order_index',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.FlashCardImageScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  card_uuid: 'card_uuid',
+  url: 'url',
+  gcs_path: 'gcs_path',
+  gcs_bucket: 'gcs_bucket',
+  filename: 'filename',
+  size: 'size',
+  content_type: 'content_type',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.ChatMessageScalarFieldEnum = {
   id: 'id',
   uuid: 'uuid',
@@ -551,6 +597,14 @@ exports.NoteType = exports.$Enums.NoteType = {
   ARTICLE: 'ARTICLE'
 };
 
+exports.FlashCardGroupStatus = exports.$Enums.FlashCardGroupStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  PARTIAL: 'PARTIAL'
+};
+
 exports.ChatMessageRole = exports.$Enums.ChatMessageRole = {
   USER: 'USER',
   ASSISTANT: 'ASSISTANT',
@@ -585,6 +639,9 @@ exports.Prisma.ModelName = {
   HiddenCategory: 'HiddenCategory',
   HiddenSubcategory: 'HiddenSubcategory',
   ChatConversation: 'ChatConversation',
+  FlashCardGroup: 'FlashCardGroup',
+  FlashCard: 'FlashCard',
+  FlashCardImage: 'FlashCardImage',
   ChatMessage: 'ChatMessage'
 };
 
