@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Filter } from "lucide-react";
 import { AnalyticsFilters } from "./AnalyticsFilters";
+import type { ExpenseEntryType } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 
 type AccountFiltersProps = {
   selectedAccounts: string[];
@@ -9,6 +10,12 @@ type AccountFiltersProps = {
   onFromDateChange: (date: string) => void;
   toDate: string;
   onToDateChange: (date: string) => void;
+  type?: ExpenseEntryType | "";
+  onTypeChange?: (type: ExpenseEntryType | "") => void;
+  categoryUuid?: string;
+  onCategoryChange?: (uuid: string) => void;
+  subcategoryUuid?: string;
+  onSubcategoryChange?: (uuid: string) => void;
 };
 
 export function AccountFilters({
@@ -18,6 +25,12 @@ export function AccountFilters({
   onFromDateChange,
   toDate,
   onToDateChange,
+  type,
+  onTypeChange,
+  categoryUuid,
+  onCategoryChange,
+  subcategoryUuid,
+  onSubcategoryChange,
 }: AccountFiltersProps) {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
@@ -42,6 +55,12 @@ export function AccountFilters({
           onFromDateChange={onFromDateChange}
           toDate={toDate}
           onToDateChange={onToDateChange}
+          type={type}
+          onTypeChange={onTypeChange}
+          categoryUuid={categoryUuid}
+          onCategoryChange={onCategoryChange}
+          subcategoryUuid={subcategoryUuid}
+          onSubcategoryChange={onSubcategoryChange}
         />
       )}
     </div>
