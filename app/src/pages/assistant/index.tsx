@@ -27,7 +27,16 @@ export function AssistantPage() {
     const sendMessage = useSendAssistantMessage()
 
     useEffect(() => {
+        if (conversationsLoading) {
+            return
+        }
+
         if (conversations.length === 0) {
+            setSelectedUuid(null)
+            return
+        }
+
+        if (selectedUuid && !conversations.some((conversation) => conversation.uuid === selectedUuid)) {
             setSelectedUuid(null)
             return
         }
@@ -35,7 +44,7 @@ export function AssistantPage() {
         if (!selectedUuid) {
             setSelectedUuid(conversations[0].uuid)
         }
-    }, [conversations, selectedUuid])
+    }, [conversations, selectedUuid, conversationsLoading])
 
     const displayMessages: DisplayMessage[] = useMemo(() => {
         return messages.map((m) => ({
@@ -76,12 +85,18 @@ export function AssistantPage() {
 
     const handleConfirmDelete = useCallback(async () => {
         if (!deleteTargetUuid) return
-        await deleteConversation.mutateAsync(deleteTargetUuid)
-        if (deleteTargetUuid === selectedUuid) {
-            setSelectedUuid(null)
+
+        const wasSelected = deleteTargetUuid === selectedUuid
+
+        if (wasSelected) {
+            const created = await createConversation.mutateAsync(undefined)
+            setSelectedUuid(created.uuid)
+            setSidebarOpen(false)
         }
+
+        await deleteConversation.mutateAsync(deleteTargetUuid)
         setDeleteTargetUuid(null)
-    }, [deleteTargetUuid, deleteConversation, selectedUuid])
+    }, [deleteTargetUuid, deleteConversation, selectedUuid, createConversation])
 
     const selectedTitle = conversations.find((c) => c.uuid === selectedUuid)?.title ?? 'Assistant'
 

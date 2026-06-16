@@ -58,7 +58,11 @@ export function useDeleteConversation() {
 
     return useMutation({
         mutationFn: (uuid: string) => deleteConversation(uuid),
-        onSuccess: () => {
+        onSuccess: (_data, deletedUuid) => {
+            queryClient.setQueryData<ChatConversation[]>(CONVERSATIONS_KEY, (old) =>
+                old?.filter((conversation) => conversation.uuid !== deletedUuid) ?? [],
+            )
+            queryClient.removeQueries({ queryKey: ['assistant', 'messages', deletedUuid] })
             queryClient.invalidateQueries({ queryKey: CONVERSATIONS_KEY })
             toast.success('Chat deleted', { duration: 2000 })
         },
