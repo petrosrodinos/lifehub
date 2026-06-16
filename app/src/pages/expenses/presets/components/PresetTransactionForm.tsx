@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import type { CreateExpenseEntryPresetDto, ExpenseEntryType } from "../../../../features/expenses/expense-entry-presets/interfaces/expense-entry-presets.interfaces";
+import type { CreateExpenseEntryPresetDto } from "../../../../features/expenses/expense-entry-presets/interfaces/expense-entry-presets.interfaces";
+import type { ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { TransactionFormFields } from "../../transactions/components/TransactionFormFields";
 
