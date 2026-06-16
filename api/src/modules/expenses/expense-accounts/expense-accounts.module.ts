@@ -7,5 +7,6 @@ import { PrismaModule } from '@/core/databases/prisma/prisma.module';
   imports: [PrismaModule],
   controllers: [ExpenseAccountsController],
   providers: [ExpenseAccountsService],
+  exports: [ExpenseAccountsService],
 })
 export class ExpenseAccountsModule { }

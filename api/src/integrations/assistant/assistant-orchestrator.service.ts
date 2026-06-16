@@ -3,6 +3,7 @@ import { Agent, run, user } from '@openai/agents';
 import { ConfigService } from '@nestjs/config';
 import { ChatMessage } from '@/generated/prisma';
 import { ChatImageService } from '@/assistant/images/chat-image.service';
+import { ExpensesRetrievalService } from '@/assistant/retrieval/expenses-retrieval.service';
 import { NotesRetrievalService } from '@/assistant/retrieval/notes-retrieval.service';
 import { createToolRegistry } from '@/assistant/tools/tool-registry';
 import { ASSISTANT_SYSTEM_PROMPT } from '@/assistant/prompts/system-prompt';
@@ -19,6 +20,7 @@ export class AssistantOrchestratorService {
 
     constructor(
         private readonly notesRetrieval: NotesRetrievalService,
+        private readonly expensesRetrieval: ExpensesRetrievalService,
         private readonly chatImageService: ChatImageService,
         private readonly assistantConfig: AssistantConfig,
         private readonly configService: ConfigService,
@@ -37,13 +39,16 @@ export class AssistantOrchestratorService {
     ): Promise<AssistantRunResult> {
         const tools = createToolRegistry({
             notesRetrieval: this.notesRetrieval,
+            expensesRetrieval: this.expensesRetrieval,
             chatImageService: this.chatImageService,
             assistantConfig: this.assistantConfig,
         });
 
+        const todayIso = new Date().toISOString().split('T')[0];
+
         const agent = new Agent<AssistantToolContext>({
             name: 'LifeHub Assistant',
-            instructions: ASSISTANT_SYSTEM_PROMPT,
+            instructions: `${ASSISTANT_SYSTEM_PROMPT}\nToday's date: ${todayIso}.`,
             model: this.assistantConfig.model,
             tools,
         });
