@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
+import { ChevronRight } from "lucide-react";
 import type { CreateExpenseEntryDto, ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { useExpenseAccounts } from "../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
@@ -6,6 +7,7 @@ import { useExpenseCategories } from "../../../../features/expenses/expense-cate
 import { useExpenseSubcategories } from "../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories";
 import { useExpenseTags, useCreateExpenseTag } from "../../../../features/expenses/expense-tags/hooks/use-expense-tags";
 import { TagSelector } from "../../../../components/ui/TagSelector";
+import { CategorySubcategoryPickerModal } from "./CategorySubcategoryPickerModal";
 
 type TransactionFormProps = {
   onSubmit: (data: CreateExpenseEntryDto) => void;
@@ -33,6 +35,7 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
   const [subcategoryUuid, setSubcategoryUuid] = useState(initialData?.subcategory_uuid || "");
   const [selectedTagUuids, setSelectedTagUuids] = useState<string[]>(initialData?.tag_uuids || []);
   const [entryDate, setEntryDate] = useState(initialData?.entry_date ? initialData.entry_date.split("T")[0] : new Date().toISOString().split("T")[0]);
+  const [isCategoryPickerOpen, setIsCategoryPickerOpen] = useState(false);
 
   const accounts = accountsData || [];
   const categories = categoriesData || [];
@@ -47,13 +50,23 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
     [createTagMutation],
   );
 
-  const filteredSubcategories = categoryUuid ? subcategories.filter((sub) => sub.category_uuid === categoryUuid) : [];
+  const handleCategorySelect = useCallback((nextCategoryUuid: string, nextSubcategoryUuid: string) => {
+    setCategoryUuid(nextCategoryUuid);
+    setSubcategoryUuid(nextSubcategoryUuid);
+  }, []);
 
-  useEffect(() => {
-    if (categoryUuid && !filteredSubcategories.find((sub) => sub.uuid === subcategoryUuid)) {
-      setSubcategoryUuid(filteredSubcategories[0]?.uuid || "");
-    }
-  }, [categoryUuid, filteredSubcategories, subcategoryUuid]);
+  const handleOpenCategoryPicker = useCallback(() => {
+    setIsCategoryPickerOpen(true);
+  }, []);
+
+  const handleCloseCategoryPicker = useCallback(() => {
+    setIsCategoryPickerOpen(false);
+  }, []);
+
+  const selectedCategory = categories.find((category) => category.uuid === categoryUuid);
+  const selectedSubcategory = subcategories.find((subcategory) => subcategory.uuid === subcategoryUuid);
+  const selectedCategoryColor = selectedCategory?.color || "#8b5cf6";
+  const hasCategorySelection = Boolean(selectedCategory && selectedSubcategory);
 
   const isTransfer = type === ExpenseEntryTypes.TRANSFER;
 
@@ -204,27 +217,41 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
         <>
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Category</label>
-            <select value={categoryUuid} onChange={(e) => setCategoryUuid(e.target.value)} className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors" disabled={isPending} required>
-              <option value="">Select category</option>
-              {categories.map((category) => (
-                <option key={category.uuid} value={category.uuid}>
-                  {category.icon} {category.name}
-                </option>
-              ))}
-            </select>
+            <button
+              type="button"
+              onClick={handleOpenCategoryPicker}
+              disabled={isPending}
+              className="w-full flex items-center gap-3 px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-left hover:border-violet-500/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {hasCategorySelection ? (
+                <>
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center text-lg shrink-0"
+                    style={{ backgroundColor: selectedCategoryColor }}
+                  >
+                    {selectedCategory?.icon || "📁"}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white font-medium truncate">{selectedCategory?.name}</p>
+                    <p className="text-sm text-slate-400 truncate">{selectedSubcategory?.name}</p>
+                  </div>
+                </>
+              ) : (
+                <span className="flex-1 text-slate-500">Select category</span>
+              )}
+              <ChevronRight className="w-4 h-4 text-slate-500 shrink-0" />
+            </button>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Subcategory</label>
-            <select value={subcategoryUuid} onChange={(e) => setSubcategoryUuid(e.target.value)} className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors" disabled={isPending || !categoryUuid} required>
-              <option value="">Select subcategory</option>
-              {filteredSubcategories.map((subcategory) => (
-                <option key={subcategory.uuid} value={subcategory.uuid}>
-                  {subcategory.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <CategorySubcategoryPickerModal
+            isOpen={isCategoryPickerOpen}
+            onClose={handleCloseCategoryPicker}
+            categories={categories}
+            subcategories={subcategories}
+            selectedCategoryUuid={categoryUuid}
+            selectedSubcategoryUuid={subcategoryUuid}
+            onSelect={handleCategorySelect}
+          />
 
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Tags</label>

@@ -11,6 +11,7 @@ type ModalProps = {
   size?: 'sm' | 'md' | 'lg'
   headerActions?: ReactNode
   scrollable?: boolean
+  nested?: boolean
 }
 
 export function Modal({
@@ -21,6 +22,7 @@ export function Modal({
   size = 'md',
   headerActions,
   scrollable = false,
+  nested = false,
 }: ModalProps) {
   useEffect(() => {
     if (isOpen) {
@@ -42,6 +44,9 @@ export function Modal({
     lg: 'max-w-2xl',
   }
 
+  const backdropZIndex = nested ? 'z-[10000]' : 'z-[9998]'
+  const contentZIndex = nested ? 'z-[10001]' : 'z-[9999]'
+
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose()
@@ -51,11 +56,11 @@ export function Modal({
   return createPortal(
     <>
       <div 
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998]" 
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm ${backdropZIndex}`}
         onClick={handleBackdropClick}
       />
       <div 
-        className="fixed inset-0 flex items-center justify-center p-4 z-[9999]"
+        className={`fixed inset-0 flex items-center justify-center p-4 ${contentZIndex}`}
         onClick={handleBackdropClick}
       >
         <div
