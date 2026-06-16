@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { ChevronDown, FolderTree, Plus, Tag } from 'lucide-react'
+import { Bookmark, ChevronDown, FolderTree, Plus, Tag } from 'lucide-react'
 import {
   EXPENSE_ACCOUNTS_HEADER_ACTIONS,
   EXPENSE_ACCOUNTS_HEADER_ACTION_OPTIONS,
@@ -11,12 +11,14 @@ type AccountsHeaderActionsDropdownProps = {
   onCreateClick: () => void
   onCategoriesClick: () => void
   onTagsClick: () => void
+  onPresetsClick: () => void
 }
 
 const ACTION_ICONS: Record<ExpenseAccountsHeaderAction, typeof Plus> = {
   [EXPENSE_ACCOUNTS_HEADER_ACTIONS.NEW_ACCOUNT]: Plus,
   [EXPENSE_ACCOUNTS_HEADER_ACTIONS.MANAGE_CATEGORIES]: FolderTree,
   [EXPENSE_ACCOUNTS_HEADER_ACTIONS.MANAGE_TAGS]: Tag,
+  [EXPENSE_ACCOUNTS_HEADER_ACTIONS.MANAGE_PRESETS]: Bookmark,
 }
 
 type MenuPosition = {
@@ -28,6 +30,7 @@ export function AccountsHeaderActionsDropdown({
   onCreateClick,
   onCategoriesClick,
   onTagsClick,
+  onPresetsClick,
 }: AccountsHeaderActionsDropdownProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [menuPosition, setMenuPosition] = useState<MenuPosition>({ top: 0, left: 0 })
@@ -102,7 +105,12 @@ export function AccountsHeaderActionsDropdown({
         return
       }
 
-      onTagsClick()
+      if (action === EXPENSE_ACCOUNTS_HEADER_ACTIONS.MANAGE_TAGS) {
+        onTagsClick()
+        return
+      }
+
+      onPresetsClick()
     }, 0)
   }
 

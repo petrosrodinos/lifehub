@@ -15,6 +15,7 @@ import { ExpenseCategoriesModule } from './modules/expenses/expense-categories/e
 import { ExpenseSubcategoriesModule } from './modules/expenses/expense-subcategories/expense-subcategories.module';
 import { ExpenseEntriesModule } from './modules/expenses/expense-entries/expense-entries.module';
 import { ExpenseTagsModule } from './modules/expenses/expense-tags/expense-tags.module';
+import { ExpenseEntryPresetsModule } from './modules/expenses/expense-entry-presets/expense-entry-presets.module';
 import { ExercisesModule } from './modules/gym/exercises/exercises.module';
 import { MuscleGroupsModule } from './modules/gym/muscle-groups/muscle-groups.module';
 import { WorkoutsModule } from './modules/gym/workouts/workouts.module';
@@ -57,6 +58,7 @@ import { QuizzesModule } from './modules/quizzes/quizzes.module';
     ExpenseSubcategoriesModule,
     ExpenseEntriesModule,
     ExpenseTagsModule,
+    ExpenseEntryPresetsModule,
     ExercisesModule,
     MuscleGroupsModule,
     WorkoutsModule,

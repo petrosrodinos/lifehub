@@ -6,9 +6,10 @@ type AccountsHeaderProps = {
   onCreateClick: () => void
   onCategoriesClick: () => void
   onTagsClick: () => void
+  onPresetsClick: () => void
 }
 
-export function AccountsHeader({ onCreateClick, onCategoriesClick, onTagsClick }: AccountsHeaderProps) {
+export function AccountsHeader({ onCreateClick, onCategoriesClick, onTagsClick, onPresetsClick }: AccountsHeaderProps) {
   const showAccountBalances = useAuthStore((state) => state.showAccountBalances)
   const setShowAccountBalances = useAuthStore((state) => state.setShowAccountBalances)
 
@@ -29,7 +30,7 @@ export function AccountsHeader({ onCreateClick, onCategoriesClick, onTagsClick }
         <p className="text-sm text-slate-500 mt-0.5">Manage your financial accounts</p>
       </div>
       <div className="flex items-center gap-2 shrink-0">
-        <AccountsHeaderActionsDropdown onCreateClick={onCreateClick} onCategoriesClick={onCategoriesClick} onTagsClick={onTagsClick} />
+        <AccountsHeaderActionsDropdown onCreateClick={onCreateClick} onCategoriesClick={onCategoriesClick} onTagsClick={onTagsClick} onPresetsClick={onPresetsClick} />
       </div>
     </header>
   )

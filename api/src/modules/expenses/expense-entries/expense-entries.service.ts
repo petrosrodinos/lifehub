@@ -6,6 +6,7 @@ import { ExpenseEntryType } from '@/generated/prisma';
 import { ExpenseEntriesQueryType } from './schemas/expense-entries-query.schema';
 import { AnalyticsQueryType } from './schemas/analytics-query.schema';
 import { CategoryAnalyticsQueryType, TransactionTrendQueryType } from './schemas/category-analytics-query.schema';
+import { validateExpenseRelations, validateExpenseTags } from '../utils/expense-relations.utils';
 
 
 @Injectable()
@@ -14,13 +15,13 @@ export class ExpenseEntriesService {
 
   async create(user_uuid: string, createExpenseEntryDto: CreateExpenseEntryDto) {
     try {
-      await this.validateRelations(user_uuid, createExpenseEntryDto);
+      await validateExpenseRelations(this.prisma, user_uuid, createExpenseEntryDto);
 
       const { quantity: quantityInput, tag_uuids, ...entryFields } = createExpenseEntryDto;
       const quantity = quantityInput ?? 1;
 
       if (tag_uuids?.length) {
-        await this.validateTags(user_uuid, tag_uuids);
+        await validateExpenseTags(this.prisma, user_uuid, tag_uuids);
       }
 
       const entryData = {
@@ -165,13 +166,13 @@ export class ExpenseEntriesService {
       const existingEntry = await this.findOne(user_uuid, uuid);
 
       if (Object.keys(updateExpenseEntryDto).length > 0) {
-        await this.validateRelations(user_uuid, updateExpenseEntryDto);
+        await validateExpenseRelations(this.prisma, user_uuid, updateExpenseEntryDto);
       }
 
       const { tag_uuids, entry_date, quantity, ...updateFields } = updateExpenseEntryDto;
 
       if (tag_uuids?.length) {
-        await this.validateTags(user_uuid, tag_uuids);
+        await validateExpenseTags(this.prisma, user_uuid, tag_uuids);
       }
 
       await this.revertAccountBalances(existingEntry);
@@ -215,69 +216,6 @@ export class ExpenseEntriesService {
         throw error;
       }
       throw new InternalServerErrorException('Failed to delete expense entry');
-    }
-  }
-
-  private async validateRelations(user_uuid: string, dto: Partial<CreateExpenseEntryDto>) {
-    if (dto.from_account_uuid) {
-      const fromAccount = await this.prisma.expenseAccount.findFirst({
-        where: { uuid: dto.from_account_uuid, user_uuid },
-      });
-
-      if (!fromAccount) {
-        throw new BadRequestException('Source account not found or does not belong to user');
-      }
-    }
-
-    if (dto.to_account_uuid) {
-      const toAccount = await this.prisma.expenseAccount.findFirst({
-        where: { uuid: dto.to_account_uuid, user_uuid },
-      });
-
-      if (!toAccount) {
-        throw new BadRequestException('Destination account not found or does not belong to user');
-      }
-    }
-
-    if (dto.category_uuid) {
-      const category = await this.prisma.expenseCategory.findFirst({
-        where: { uuid: dto.category_uuid, OR: [{ user_uuid }, { user_uuid: null }] },
-      });
-
-      if (!category) {
-        throw new BadRequestException('Category not found or does not belong to user');
-      }
-    }
-
-    if (dto.subcategory_uuid) {
-      const subcategory = await this.prisma.expenseSubcategory.findFirst({
-        where: { uuid: dto.subcategory_uuid, OR: [{ user_uuid }, { user_uuid: null }] },
-      });
-
-      if (!subcategory) {
-        throw new BadRequestException('Subcategory not found or does not belong to user');
-      }
-
-      if (dto.category_uuid && subcategory.category_uuid !== dto.category_uuid) {
-        throw new BadRequestException('Subcategory does not belong to the selected category');
-      }
-    }
-  }
-
-  private async validateTags(user_uuid: string, tag_uuids: string[]) {
-    if (tag_uuids.length === 0) {
-      return;
-    }
-
-    const count = await this.prisma.expenseTag.count({
-      where: {
-        user_uuid,
-        uuid: { in: tag_uuids },
-      },
-    });
-
-    if (count !== tag_uuids.length) {
-      throw new BadRequestException('One or more tags not found or do not belong to user');
     }
   }
 

@@ -164,6 +164,13 @@ export const ApiRoutes = {
       update: (uuid: string) => `/expense-tags/${uuid}`,
       delete: (uuid: string) => `/expense-tags/${uuid}`,
     },
+    presets: {
+      list: "/expense-entry-presets",
+      create: "/expense-entry-presets",
+      get: (uuid: string) => `/expense-entry-presets/${uuid}`,
+      update: (uuid: string) => `/expense-entry-presets/${uuid}`,
+      delete: (uuid: string) => `/expense-entry-presets/${uuid}`,
+    },
     entries: {
       list: "/expense-entries",
       create: "/expense-entries",

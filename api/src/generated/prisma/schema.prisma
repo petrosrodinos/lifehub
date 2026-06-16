@@ -95,13 +95,14 @@ model User {
   hidden_activities    HiddenActivity[]
 
   // Expenses
-  expense_accounts     ExpenseAccount[]
-  expense_entries      ExpenseEntry[]
-  expense_tags         ExpenseTag[]
-  categories           ExpenseCategory[]
-  subcategories        ExpenseSubcategory[]
-  hidden_categories    HiddenCategory[]
-  hidden_subcategories HiddenSubcategory[]
+  expense_accounts      ExpenseAccount[]
+  expense_entries       ExpenseEntry[]
+  expense_entry_presets ExpenseEntryPreset[]
+  expense_tags          ExpenseTag[]
+  categories            ExpenseCategory[]
+  subcategories         ExpenseSubcategory[]
+  hidden_categories     HiddenCategory[]
+  hidden_subcategories  HiddenSubcategory[]
 
   // Receipts
   expense_receipts ExpenseReceipt[]
@@ -308,9 +309,11 @@ model ExpenseAccount {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  user         User           @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  entries_from ExpenseEntry[] @relation("EntryFromAccount")
-  entries_to   ExpenseEntry[] @relation("EntryToAccount")
+  user         User                 @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  entries_from ExpenseEntry[]       @relation("EntryFromAccount")
+  entries_to   ExpenseEntry[]       @relation("EntryToAccount")
+  presets_from ExpenseEntryPreset[] @relation("PresetFromAccount")
+  presets_to   ExpenseEntryPreset[] @relation("PresetToAccount")
 
   @@index([user_uuid])
   @@map("expense_accounts")
@@ -329,6 +332,7 @@ model ExpenseCategory {
   user              User?                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
   subcategories     ExpenseSubcategory[]
   entries           ExpenseEntry[]
+  entry_presets     ExpenseEntryPreset[]
   products          ExpenseProduct[]
   hidden_categories HiddenCategory[]
 
@@ -345,9 +349,10 @@ model ExpenseSubcategory {
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 
-  user                 User?               @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  category             ExpenseCategory     @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
+  user                 User?                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  category             ExpenseCategory      @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
   entries              ExpenseEntry[]
+  entry_presets        ExpenseEntryPreset[]
   products             ExpenseProduct[]
   hidden_subcategories HiddenSubcategory[]
 
@@ -385,16 +390,45 @@ model ExpenseEntry {
   @@map("expense_entries")
 }
 
+model ExpenseEntryPreset {
+  id                Int              @id @default(autoincrement())
+  uuid              String           @unique @default(uuid())
+  user_uuid         String
+  title             String
+  type              ExpenseEntryType
+  amount            Decimal
+  description       String?
+  from_account_uuid String
+  to_account_uuid   String?
+  category_uuid     String?
+  subcategory_uuid  String?
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+
+  user         User                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  from_account ExpenseAccount      @relation("PresetFromAccount", fields: [from_account_uuid], references: [uuid], onDelete: Cascade)
+  to_account   ExpenseAccount?     @relation("PresetToAccount", fields: [to_account_uuid], references: [uuid], onDelete: Cascade)
+  category     ExpenseCategory?    @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
+  subcategory  ExpenseSubcategory? @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
+  tags         ExpenseTag[]
+
+  @@index([user_uuid])
+  @@index([category_uuid])
+  @@index([subcategory_uuid])
+  @@map("expense_entry_presets")
+}
+
 model ExpenseTag {
-  id         Int            @id @default(autoincrement())
-  uuid       String         @unique @default(uuid())
-  user_uuid  String
-  user       User           @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  title      String
-  color      String         @default("#8b5cf6")
-  entries    ExpenseEntry[]
-  created_at DateTime       @default(now())
-  updated_at DateTime       @updatedAt
+  id            Int                  @id @default(autoincrement())
+  uuid          String               @unique @default(uuid())
+  user_uuid     String
+  user          User                 @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  title         String
+  color         String               @default("#8b5cf6")
+  entries       ExpenseEntry[]
+  entry_presets ExpenseEntryPreset[]
+  created_at    DateTime             @default(now())
+  updated_at    DateTime             @updatedAt
 
   @@index([user_uuid])
   @@map("expense_tags")

@@ -22,12 +22,12 @@ export function SortableWorkoutEntryCard({ entry, sortableProps }: SortableWorko
     <div
       ref={setNodeRef}
       style={style}
-      className={`bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/80 p-6 ${isDragging ? "opacity-60 shadow-lg z-10" : ""}`}
+      className={`bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/80 p-4 sm:p-6 ${isDragging ? "opacity-60 shadow-lg z-10" : ""}`}
     >
-      <div className="flex items-start gap-3 mb-4">
+      <div className="flex items-start gap-2 sm:gap-3 mb-4">
         <button
           type="button"
-          className="mt-1 p-1.5 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 cursor-grab active:cursor-grabbing touch-none"
+          className="mt-1 p-1.5 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 cursor-grab active:cursor-grabbing touch-none shrink-0"
           {...attributes}
           {...listeners}
           aria-label="Drag to reorder"
@@ -37,17 +37,17 @@ export function SortableWorkoutEntryCard({ entry, sortableProps }: SortableWorko
         <button
           type="button"
           onClick={() => navigate(`/dashboard/gym/workout-entry/${entry.uuid}`)}
-          className="flex-1 flex items-center justify-between text-left group/header min-w-0"
+          className="flex-1 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-left group/header min-w-0"
         >
-          <div className="min-w-0">
-            <h2 className="text-lg font-semibold text-white group-hover/header:text-violet-300 transition-colors truncate">
+          <div className="min-w-0 flex-1">
+            <h2 className="text-base sm:text-lg font-semibold text-white group-hover/header:text-violet-300 transition-colors break-words">
               {entry.exercise?.name || "Unknown Exercise"}
             </h2>
             {entry.exercise?.description && (
               <p className="text-sm text-slate-400 mt-1 line-clamp-2">{entry.exercise.description}</p>
             )}
           </div>
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
             <button
               type="button"
               onClick={(e) => {
@@ -59,7 +59,7 @@ export function SortableWorkoutEntryCard({ entry, sortableProps }: SortableWorko
             >
               {showSets ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
             </button>
-            <span className="text-sm text-slate-500 bg-slate-800 px-3 py-1 rounded-lg">
+            <span className="text-sm text-slate-500 bg-slate-800 px-2.5 sm:px-3 py-1 rounded-lg whitespace-nowrap">
               {setCount} {setCount === 1 ? "set" : "sets"}
             </span>
             <ChevronRight className="w-5 h-5 text-slate-600 group-hover/header:text-violet-400 transition-colors" />

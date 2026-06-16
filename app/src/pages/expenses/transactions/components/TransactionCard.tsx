@@ -83,6 +83,8 @@ export function TransactionCard({ transaction, onDuplicate }: TransactionCardPro
     }
   };
 
+  const isTransfer = transaction.type === ExpenseEntryTypes.TRANSFER && !!transaction.to_account;
+
   return (
     <>
       <div
@@ -104,17 +106,22 @@ export function TransactionCard({ transaction, onDuplicate }: TransactionCardPro
             <div className="mb-1">
               <p className="text-xs sm:text-sm font-medium text-white truncate">{transaction.subcategory?.name || transaction.category?.name || "Transaction"}</p>
             </div>
-            <div className="flex items-center gap-1 sm:gap-2 text-[10px] sm:text-xs text-slate-400">
-              <span className="truncate">{transaction.from_account?.name || "Account"}</span>
-              {transaction.type === ExpenseEntryTypes.TRANSFER && transaction.to_account && (
-                <>
-                  <span className="hidden sm:inline">→</span>
-                  <span className="hidden sm:inline truncate">{transaction.to_account.name}</span>
-                </>
-              )}
-              <span>•</span>
-              <span>{formattedDate}</span>
-            </div>
+            {isTransfer ? (
+              <div className="space-y-0.5 text-[10px] sm:text-xs text-slate-400">
+                <div className="flex items-center gap-1.5 min-w-0 w-full sm:w-fit">
+                  <span className="truncate min-w-0 flex-1 sm:flex-initial sm:max-w-[12rem]">{transaction.from_account?.name || "Account"}</span>
+                  <span className="shrink-0 text-slate-500">→</span>
+                  <span className="truncate min-w-0 flex-1 sm:flex-initial sm:max-w-[12rem]">{transaction.to_account!.name}</span>
+                </div>
+                <span>{formattedDate}</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-1 sm:gap-2 text-[10px] sm:text-xs text-slate-400">
+                <span className="truncate">{transaction.from_account?.name || "Account"}</span>
+                <span className="shrink-0">•</span>
+                <span className="shrink-0">{formattedDate}</span>
+              </div>
+            )}
             {transaction.tags && transaction.tags.length > 0 && (
               <div className="flex flex-wrap gap-1 mt-1.5">
                 {transaction.tags.map((tag) => (
