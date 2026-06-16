@@ -1,6 +1,7 @@
 import type { ExpenseAccount } from "../../expense-accounts/interfaces/expense-accounts.interfaces"
 import type { ExpenseCategory } from "../../expense-categories/interfaces/expense-categories.interfaces"
 import type { ExpenseSubcategory } from "../../expense-subcategories/interfaces/expense-subcategories.interfaces"
+import type { ExpenseTag } from "../../expense-tags/interfaces/expense-tags.interfaces"
 import type { ExpenseReceipt } from "../../../receipts/expense-receipt/interfaces/expense-receipt.interfaces"
 import type { PaginationMeta } from "../../../../interfaces/pagination.interfaces"
 
@@ -23,6 +24,7 @@ export interface ExpenseEntry {
   category?: ExpenseCategory
   subcategory?: ExpenseSubcategory
   expense_receipt?: ExpenseReceipt
+  tags?: ExpenseTag[]
 }
 
 export interface CreateExpenseEntryDto {
@@ -35,6 +37,7 @@ export interface CreateExpenseEntryDto {
   subcategory_uuid?: string
   entry_date?: string
   quantity?: number
+  tag_uuids?: string[]
 }
 
 export interface UpdateExpenseEntryDto {
@@ -46,6 +49,7 @@ export interface UpdateExpenseEntryDto {
   category_uuid?: string
   subcategory_uuid?: string
   entry_date?: string
+  tag_uuids?: string[]
 }
 
 export interface ExpenseEntriesQueryParams {

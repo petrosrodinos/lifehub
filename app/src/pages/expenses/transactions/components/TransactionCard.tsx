@@ -115,6 +115,23 @@ export function TransactionCard({ transaction, onDuplicate }: TransactionCardPro
               <span>•</span>
               <span>{formattedDate}</span>
             </div>
+            {transaction.tags && transaction.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1 mt-1.5">
+                {transaction.tags.map((tag) => (
+                  <span
+                    key={tag.uuid}
+                    className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium border"
+                    style={{
+                      backgroundColor: `${tag.color}20`,
+                      borderColor: `${tag.color}50`,
+                      color: tag.color,
+                    }}
+                  >
+                    {tag.title}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-2 shrink-0">

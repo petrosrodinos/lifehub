@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional, IsEnum, IsDateString, Min, IsInt, Max } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsEnum, IsDateString, Min, IsInt, Max, IsArray, IsUUID } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { ExpenseEntryType } from '@/generated/prisma';
@@ -85,4 +85,15 @@ export class CreateExpenseEntryDto {
   @Max(100)
   @Type(() => Number)
   quantity?: number;
+
+  @ApiProperty({
+    description: 'Tag UUIDs to associate with the entry',
+    example: ['123e4567-e89b-12d3-a456-426614174000'],
+    required: false,
+    type: [String],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsUUID('4', { each: true })
+  tag_uuids?: string[];
 }

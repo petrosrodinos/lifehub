@@ -97,6 +97,7 @@ model User {
   // Expenses
   expense_accounts     ExpenseAccount[]
   expense_entries      ExpenseEntry[]
+  expense_tags         ExpenseTag[]
   categories           ExpenseCategory[]
   subcategories        ExpenseSubcategory[]
   hidden_categories    HiddenCategory[]
@@ -375,12 +376,28 @@ model ExpenseEntry {
   category        ExpenseCategory?    @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
   subcategory     ExpenseSubcategory? @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
   expense_receipt ExpenseReceipt?
+  tags            ExpenseTag[]
 
   @@index([user_uuid])
   @@index([category_uuid])
   @@index([subcategory_uuid])
   @@index([entry_date])
   @@map("expense_entries")
+}
+
+model ExpenseTag {
+  id         Int            @id @default(autoincrement())
+  uuid       String         @unique @default(uuid())
+  user_uuid  String
+  user       User           @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  title      String
+  color      String         @default("#8b5cf6")
+  entries    ExpenseEntry[]
+  created_at DateTime       @default(now())
+  updated_at DateTime       @updatedAt
+
+  @@index([user_uuid])
+  @@map("expense_tags")
 }
 
 model ExpenseStore {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { ChevronDown, FolderTree, Plus } from 'lucide-react'
+import { ChevronDown, FolderTree, Plus, Tag } from 'lucide-react'
 import {
   EXPENSE_ACCOUNTS_HEADER_ACTIONS,
   EXPENSE_ACCOUNTS_HEADER_ACTION_OPTIONS,
@@ -10,11 +10,13 @@ import {
 type AccountsHeaderActionsDropdownProps = {
   onCreateClick: () => void
   onCategoriesClick: () => void
+  onTagsClick: () => void
 }
 
 const ACTION_ICONS: Record<ExpenseAccountsHeaderAction, typeof Plus> = {
   [EXPENSE_ACCOUNTS_HEADER_ACTIONS.NEW_ACCOUNT]: Plus,
   [EXPENSE_ACCOUNTS_HEADER_ACTIONS.MANAGE_CATEGORIES]: FolderTree,
+  [EXPENSE_ACCOUNTS_HEADER_ACTIONS.MANAGE_TAGS]: Tag,
 }
 
 type MenuPosition = {
@@ -25,6 +27,7 @@ type MenuPosition = {
 export function AccountsHeaderActionsDropdown({
   onCreateClick,
   onCategoriesClick,
+  onTagsClick,
 }: AccountsHeaderActionsDropdownProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [menuPosition, setMenuPosition] = useState<MenuPosition>({ top: 0, left: 0 })
@@ -39,7 +42,7 @@ export function AccountsHeaderActionsDropdown({
 
     const rect = trigger.getBoundingClientRect()
     const menuWidth = menu?.offsetWidth ?? 176
-    const menuHeight = menu?.offsetHeight ?? 88
+    const menuHeight = menu?.offsetHeight ?? 132
     const gap = 4
     const spaceBelow = window.innerHeight - rect.bottom
     const openUpward = spaceBelow < menuHeight + gap
@@ -88,12 +91,19 @@ export function AccountsHeaderActionsDropdown({
   const handleAction = (action: ExpenseAccountsHeaderAction) => {
     setIsOpen(false)
 
-    if (action === EXPENSE_ACCOUNTS_HEADER_ACTIONS.NEW_ACCOUNT) {
-      onCreateClick()
-      return
-    }
+    window.setTimeout(() => {
+      if (action === EXPENSE_ACCOUNTS_HEADER_ACTIONS.NEW_ACCOUNT) {
+        onCreateClick()
+        return
+      }
 
-    onCategoriesClick()
+      if (action === EXPENSE_ACCOUNTS_HEADER_ACTIONS.MANAGE_CATEGORIES) {
+        onCategoriesClick()
+        return
+      }
+
+      onTagsClick()
+    }, 0)
   }
 
   const menu = isOpen
@@ -110,7 +120,8 @@ export function AccountsHeaderActionsDropdown({
               <button
                 key={option.value}
                 type="button"
-                onClick={(e) => {
+                onMouseDown={(e) => {
+                  e.preventDefault()
                   e.stopPropagation()
                   handleAction(option.value)
                 }}

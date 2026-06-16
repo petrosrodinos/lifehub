@@ -74,6 +74,11 @@ export type ExpenseSubcategory = $Result.DefaultSelection<Prisma.$ExpenseSubcate
  */
 export type ExpenseEntry = $Result.DefaultSelection<Prisma.$ExpenseEntryPayload>
 /**
+ * Model ExpenseTag
+ * 
+ */
+export type ExpenseTag = $Result.DefaultSelection<Prisma.$ExpenseTagPayload>
+/**
  * Model ExpenseStore
  * 
  */
@@ -661,6 +666,16 @@ export class PrismaClient<
     * ```
     */
   get expenseEntry(): Prisma.ExpenseEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.expenseTag`: Exposes CRUD operations for the **ExpenseTag** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ExpenseTags
+    * const expenseTags = await prisma.expenseTag.findMany()
+    * ```
+    */
+  get expenseTag(): Prisma.ExpenseTagDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.expenseStore`: Exposes CRUD operations for the **ExpenseStore** model.
@@ -1347,6 +1362,7 @@ export namespace Prisma {
     ExpenseCategory: 'ExpenseCategory',
     ExpenseSubcategory: 'ExpenseSubcategory',
     ExpenseEntry: 'ExpenseEntry',
+    ExpenseTag: 'ExpenseTag',
     ExpenseStore: 'ExpenseStore',
     ExpenseReceipt: 'ExpenseReceipt',
     ExpenseProduct: 'ExpenseProduct',
@@ -1386,7 +1402,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "noteTag" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory" | "chatConversation" | "flashCardGroup" | "flashCard" | "flashCardImage" | "quizGroup" | "quizQuestion" | "quizQuestionOption" | "quizAttempt" | "quizAttemptAnswer" | "chatMessage"
+      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseTag" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "noteTag" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory" | "chatConversation" | "flashCardGroup" | "flashCard" | "flashCardImage" | "quizGroup" | "quizQuestion" | "quizQuestionOption" | "quizAttempt" | "quizAttemptAnswer" | "chatMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2275,6 +2291,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ExpenseEntryCountArgs<ExtArgs>
             result: $Utils.Optional<ExpenseEntryCountAggregateOutputType> | number
+          }
+        }
+      }
+      ExpenseTag: {
+        payload: Prisma.$ExpenseTagPayload<ExtArgs>
+        fields: Prisma.ExpenseTagFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExpenseTagFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExpenseTagFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload>
+          }
+          findFirst: {
+            args: Prisma.ExpenseTagFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExpenseTagFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload>
+          }
+          findMany: {
+            args: Prisma.ExpenseTagFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload>[]
+          }
+          create: {
+            args: Prisma.ExpenseTagCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload>
+          }
+          createMany: {
+            args: Prisma.ExpenseTagCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExpenseTagCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload>[]
+          }
+          delete: {
+            args: Prisma.ExpenseTagDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload>
+          }
+          update: {
+            args: Prisma.ExpenseTagUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload>
+          }
+          deleteMany: {
+            args: Prisma.ExpenseTagDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExpenseTagUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExpenseTagUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload>[]
+          }
+          upsert: {
+            args: Prisma.ExpenseTagUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpenseTagPayload>
+          }
+          aggregate: {
+            args: Prisma.ExpenseTagAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExpenseTag>
+          }
+          groupBy: {
+            args: Prisma.ExpenseTagGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExpenseTagGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExpenseTagCountArgs<ExtArgs>
+            result: $Utils.Optional<ExpenseTagCountAggregateOutputType> | number
           }
         }
       }
@@ -4174,6 +4264,7 @@ export namespace Prisma {
     expenseCategory?: ExpenseCategoryOmit
     expenseSubcategory?: ExpenseSubcategoryOmit
     expenseEntry?: ExpenseEntryOmit
+    expenseTag?: ExpenseTagOmit
     expenseStore?: ExpenseStoreOmit
     expenseReceipt?: ExpenseReceiptOmit
     expenseProduct?: ExpenseProductOmit
@@ -4286,6 +4377,7 @@ export namespace Prisma {
     hidden_activities: number
     expense_accounts: number
     expense_entries: number
+    expense_tags: number
     categories: number
     subcategories: number
     hidden_categories: number
@@ -4312,6 +4404,7 @@ export namespace Prisma {
     hidden_activities?: boolean | UserCountOutputTypeCountHidden_activitiesArgs
     expense_accounts?: boolean | UserCountOutputTypeCountExpense_accountsArgs
     expense_entries?: boolean | UserCountOutputTypeCountExpense_entriesArgs
+    expense_tags?: boolean | UserCountOutputTypeCountExpense_tagsArgs
     categories?: boolean | UserCountOutputTypeCountCategoriesArgs
     subcategories?: boolean | UserCountOutputTypeCountSubcategoriesArgs
     hidden_categories?: boolean | UserCountOutputTypeCountHidden_categoriesArgs
@@ -4394,6 +4487,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountExpense_entriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseEntryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountExpense_tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseTagWhereInput
   }
 
   /**
@@ -4771,6 +4871,68 @@ export namespace Prisma {
    */
   export type ExpenseSubcategoryCountOutputTypeCountHidden_subcategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: HiddenSubcategoryWhereInput
+  }
+
+
+  /**
+   * Count Type ExpenseEntryCountOutputType
+   */
+
+  export type ExpenseEntryCountOutputType = {
+    tags: number
+  }
+
+  export type ExpenseEntryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tags?: boolean | ExpenseEntryCountOutputTypeCountTagsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ExpenseEntryCountOutputType without action
+   */
+  export type ExpenseEntryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseEntryCountOutputType
+     */
+    select?: ExpenseEntryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ExpenseEntryCountOutputType without action
+   */
+  export type ExpenseEntryCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseTagWhereInput
+  }
+
+
+  /**
+   * Count Type ExpenseTagCountOutputType
+   */
+
+  export type ExpenseTagCountOutputType = {
+    entries: number
+  }
+
+  export type ExpenseTagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    entries?: boolean | ExpenseTagCountOutputTypeCountEntriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ExpenseTagCountOutputType without action
+   */
+  export type ExpenseTagCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTagCountOutputType
+     */
+    select?: ExpenseTagCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ExpenseTagCountOutputType without action
+   */
+  export type ExpenseTagCountOutputTypeCountEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseEntryWhereInput
   }
 
 
@@ -5485,6 +5647,7 @@ export namespace Prisma {
     hidden_activities?: boolean | User$hidden_activitiesArgs<ExtArgs>
     expense_accounts?: boolean | User$expense_accountsArgs<ExtArgs>
     expense_entries?: boolean | User$expense_entriesArgs<ExtArgs>
+    expense_tags?: boolean | User$expense_tagsArgs<ExtArgs>
     categories?: boolean | User$categoriesArgs<ExtArgs>
     subcategories?: boolean | User$subcategoriesArgs<ExtArgs>
     hidden_categories?: boolean | User$hidden_categoriesArgs<ExtArgs>
@@ -5552,6 +5715,7 @@ export namespace Prisma {
     hidden_activities?: boolean | User$hidden_activitiesArgs<ExtArgs>
     expense_accounts?: boolean | User$expense_accountsArgs<ExtArgs>
     expense_entries?: boolean | User$expense_entriesArgs<ExtArgs>
+    expense_tags?: boolean | User$expense_tagsArgs<ExtArgs>
     categories?: boolean | User$categoriesArgs<ExtArgs>
     subcategories?: boolean | User$subcategoriesArgs<ExtArgs>
     hidden_categories?: boolean | User$hidden_categoriesArgs<ExtArgs>
@@ -5583,6 +5747,7 @@ export namespace Prisma {
       hidden_activities: Prisma.$HiddenActivityPayload<ExtArgs>[]
       expense_accounts: Prisma.$ExpenseAccountPayload<ExtArgs>[]
       expense_entries: Prisma.$ExpenseEntryPayload<ExtArgs>[]
+      expense_tags: Prisma.$ExpenseTagPayload<ExtArgs>[]
       categories: Prisma.$ExpenseCategoryPayload<ExtArgs>[]
       subcategories: Prisma.$ExpenseSubcategoryPayload<ExtArgs>[]
       hidden_categories: Prisma.$HiddenCategoryPayload<ExtArgs>[]
@@ -6012,6 +6177,7 @@ export namespace Prisma {
     hidden_activities<T extends User$hidden_activitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$hidden_activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_accounts<T extends User$expense_accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_entries<T extends User$expense_entriesArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    expense_tags<T extends User$expense_tagsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categories<T extends User$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     subcategories<T extends User$subcategoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$subcategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     hidden_categories<T extends User$hidden_categoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$hidden_categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6648,6 +6814,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExpenseEntryScalarFieldEnum | ExpenseEntryScalarFieldEnum[]
+  }
+
+  /**
+   * User.expense_tags
+   */
+  export type User$expense_tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    where?: ExpenseTagWhereInput
+    orderBy?: ExpenseTagOrderByWithRelationInput | ExpenseTagOrderByWithRelationInput[]
+    cursor?: ExpenseTagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExpenseTagScalarFieldEnum | ExpenseTagScalarFieldEnum[]
   }
 
   /**
@@ -19510,6 +19700,8 @@ export namespace Prisma {
     category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
     expense_receipt?: boolean | ExpenseEntry$expense_receiptArgs<ExtArgs>
+    tags?: boolean | ExpenseEntry$tagsArgs<ExtArgs>
+    _count?: boolean | ExpenseEntryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expenseEntry"]>
 
   export type ExpenseEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -19578,6 +19770,8 @@ export namespace Prisma {
     category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
     expense_receipt?: boolean | ExpenseEntry$expense_receiptArgs<ExtArgs>
+    tags?: boolean | ExpenseEntry$tagsArgs<ExtArgs>
+    _count?: boolean | ExpenseEntryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExpenseEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -19603,6 +19797,7 @@ export namespace Prisma {
       category: Prisma.$ExpenseCategoryPayload<ExtArgs> | null
       subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs> | null
       expense_receipt: Prisma.$ExpenseReceiptPayload<ExtArgs> | null
+      tags: Prisma.$ExpenseTagPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -20018,6 +20213,7 @@ export namespace Prisma {
     category<T extends ExpenseEntry$categoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$categoryArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     subcategory<T extends ExpenseEntry$subcategoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$subcategoryArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     expense_receipt<T extends ExpenseEntry$expense_receiptArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$expense_receiptArgs<ExtArgs>>): Prisma__ExpenseReceiptClient<$Result.GetResult<Prisma.$ExpenseReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    tags<T extends ExpenseEntry$tagsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20537,6 +20733,30 @@ export namespace Prisma {
   }
 
   /**
+   * ExpenseEntry.tags
+   */
+  export type ExpenseEntry$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    where?: ExpenseTagWhereInput
+    orderBy?: ExpenseTagOrderByWithRelationInput | ExpenseTagOrderByWithRelationInput[]
+    cursor?: ExpenseTagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExpenseTagScalarFieldEnum | ExpenseTagScalarFieldEnum[]
+  }
+
+  /**
    * ExpenseEntry without action
    */
   export type ExpenseEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20552,6 +20772,1159 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ExpenseEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ExpenseTag
+   */
+
+  export type AggregateExpenseTag = {
+    _count: ExpenseTagCountAggregateOutputType | null
+    _avg: ExpenseTagAvgAggregateOutputType | null
+    _sum: ExpenseTagSumAggregateOutputType | null
+    _min: ExpenseTagMinAggregateOutputType | null
+    _max: ExpenseTagMaxAggregateOutputType | null
+  }
+
+  export type ExpenseTagAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ExpenseTagSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ExpenseTagMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    title: string | null
+    color: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ExpenseTagMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    title: string | null
+    color: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ExpenseTagCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    title: number
+    color: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type ExpenseTagAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ExpenseTagSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ExpenseTagMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    title?: true
+    color?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ExpenseTagMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    title?: true
+    color?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ExpenseTagCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    title?: true
+    color?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type ExpenseTagAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExpenseTag to aggregate.
+     */
+    where?: ExpenseTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExpenseTags to fetch.
+     */
+    orderBy?: ExpenseTagOrderByWithRelationInput | ExpenseTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExpenseTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExpenseTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExpenseTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ExpenseTags
+    **/
+    _count?: true | ExpenseTagCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ExpenseTagAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExpenseTagSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExpenseTagMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExpenseTagMaxAggregateInputType
+  }
+
+  export type GetExpenseTagAggregateType<T extends ExpenseTagAggregateArgs> = {
+        [P in keyof T & keyof AggregateExpenseTag]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExpenseTag[P]>
+      : GetScalarType<T[P], AggregateExpenseTag[P]>
+  }
+
+
+
+
+  export type ExpenseTagGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseTagWhereInput
+    orderBy?: ExpenseTagOrderByWithAggregationInput | ExpenseTagOrderByWithAggregationInput[]
+    by: ExpenseTagScalarFieldEnum[] | ExpenseTagScalarFieldEnum
+    having?: ExpenseTagScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExpenseTagCountAggregateInputType | true
+    _avg?: ExpenseTagAvgAggregateInputType
+    _sum?: ExpenseTagSumAggregateInputType
+    _min?: ExpenseTagMinAggregateInputType
+    _max?: ExpenseTagMaxAggregateInputType
+  }
+
+  export type ExpenseTagGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    title: string
+    color: string
+    created_at: Date
+    updated_at: Date
+    _count: ExpenseTagCountAggregateOutputType | null
+    _avg: ExpenseTagAvgAggregateOutputType | null
+    _sum: ExpenseTagSumAggregateOutputType | null
+    _min: ExpenseTagMinAggregateOutputType | null
+    _max: ExpenseTagMaxAggregateOutputType | null
+  }
+
+  type GetExpenseTagGroupByPayload<T extends ExpenseTagGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExpenseTagGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExpenseTagGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExpenseTagGroupByOutputType[P]>
+            : GetScalarType<T[P], ExpenseTagGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExpenseTagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    title?: boolean
+    color?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    entries?: boolean | ExpenseTag$entriesArgs<ExtArgs>
+    _count?: boolean | ExpenseTagCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["expenseTag"]>
+
+  export type ExpenseTagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    title?: boolean
+    color?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["expenseTag"]>
+
+  export type ExpenseTagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    title?: boolean
+    color?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["expenseTag"]>
+
+  export type ExpenseTagSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    title?: boolean
+    color?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type ExpenseTagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "title" | "color" | "created_at" | "updated_at", ExtArgs["result"]["expenseTag"]>
+  export type ExpenseTagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    entries?: boolean | ExpenseTag$entriesArgs<ExtArgs>
+    _count?: boolean | ExpenseTagCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ExpenseTagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ExpenseTagIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ExpenseTagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ExpenseTag"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      entries: Prisma.$ExpenseEntryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      title: string
+      color: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["expenseTag"]>
+    composites: {}
+  }
+
+  type ExpenseTagGetPayload<S extends boolean | null | undefined | ExpenseTagDefaultArgs> = $Result.GetResult<Prisma.$ExpenseTagPayload, S>
+
+  type ExpenseTagCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExpenseTagFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExpenseTagCountAggregateInputType | true
+    }
+
+  export interface ExpenseTagDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ExpenseTag'], meta: { name: 'ExpenseTag' } }
+    /**
+     * Find zero or one ExpenseTag that matches the filter.
+     * @param {ExpenseTagFindUniqueArgs} args - Arguments to find a ExpenseTag
+     * @example
+     * // Get one ExpenseTag
+     * const expenseTag = await prisma.expenseTag.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExpenseTagFindUniqueArgs>(args: SelectSubset<T, ExpenseTagFindUniqueArgs<ExtArgs>>): Prisma__ExpenseTagClient<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ExpenseTag that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExpenseTagFindUniqueOrThrowArgs} args - Arguments to find a ExpenseTag
+     * @example
+     * // Get one ExpenseTag
+     * const expenseTag = await prisma.expenseTag.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExpenseTagFindUniqueOrThrowArgs>(args: SelectSubset<T, ExpenseTagFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExpenseTagClient<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExpenseTag that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseTagFindFirstArgs} args - Arguments to find a ExpenseTag
+     * @example
+     * // Get one ExpenseTag
+     * const expenseTag = await prisma.expenseTag.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExpenseTagFindFirstArgs>(args?: SelectSubset<T, ExpenseTagFindFirstArgs<ExtArgs>>): Prisma__ExpenseTagClient<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExpenseTag that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseTagFindFirstOrThrowArgs} args - Arguments to find a ExpenseTag
+     * @example
+     * // Get one ExpenseTag
+     * const expenseTag = await prisma.expenseTag.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExpenseTagFindFirstOrThrowArgs>(args?: SelectSubset<T, ExpenseTagFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExpenseTagClient<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ExpenseTags that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseTagFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ExpenseTags
+     * const expenseTags = await prisma.expenseTag.findMany()
+     * 
+     * // Get first 10 ExpenseTags
+     * const expenseTags = await prisma.expenseTag.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const expenseTagWithIdOnly = await prisma.expenseTag.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExpenseTagFindManyArgs>(args?: SelectSubset<T, ExpenseTagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ExpenseTag.
+     * @param {ExpenseTagCreateArgs} args - Arguments to create a ExpenseTag.
+     * @example
+     * // Create one ExpenseTag
+     * const ExpenseTag = await prisma.expenseTag.create({
+     *   data: {
+     *     // ... data to create a ExpenseTag
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExpenseTagCreateArgs>(args: SelectSubset<T, ExpenseTagCreateArgs<ExtArgs>>): Prisma__ExpenseTagClient<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ExpenseTags.
+     * @param {ExpenseTagCreateManyArgs} args - Arguments to create many ExpenseTags.
+     * @example
+     * // Create many ExpenseTags
+     * const expenseTag = await prisma.expenseTag.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExpenseTagCreateManyArgs>(args?: SelectSubset<T, ExpenseTagCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ExpenseTags and returns the data saved in the database.
+     * @param {ExpenseTagCreateManyAndReturnArgs} args - Arguments to create many ExpenseTags.
+     * @example
+     * // Create many ExpenseTags
+     * const expenseTag = await prisma.expenseTag.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ExpenseTags and only return the `id`
+     * const expenseTagWithIdOnly = await prisma.expenseTag.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExpenseTagCreateManyAndReturnArgs>(args?: SelectSubset<T, ExpenseTagCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ExpenseTag.
+     * @param {ExpenseTagDeleteArgs} args - Arguments to delete one ExpenseTag.
+     * @example
+     * // Delete one ExpenseTag
+     * const ExpenseTag = await prisma.expenseTag.delete({
+     *   where: {
+     *     // ... filter to delete one ExpenseTag
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExpenseTagDeleteArgs>(args: SelectSubset<T, ExpenseTagDeleteArgs<ExtArgs>>): Prisma__ExpenseTagClient<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ExpenseTag.
+     * @param {ExpenseTagUpdateArgs} args - Arguments to update one ExpenseTag.
+     * @example
+     * // Update one ExpenseTag
+     * const expenseTag = await prisma.expenseTag.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExpenseTagUpdateArgs>(args: SelectSubset<T, ExpenseTagUpdateArgs<ExtArgs>>): Prisma__ExpenseTagClient<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ExpenseTags.
+     * @param {ExpenseTagDeleteManyArgs} args - Arguments to filter ExpenseTags to delete.
+     * @example
+     * // Delete a few ExpenseTags
+     * const { count } = await prisma.expenseTag.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExpenseTagDeleteManyArgs>(args?: SelectSubset<T, ExpenseTagDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExpenseTags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseTagUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ExpenseTags
+     * const expenseTag = await prisma.expenseTag.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExpenseTagUpdateManyArgs>(args: SelectSubset<T, ExpenseTagUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExpenseTags and returns the data updated in the database.
+     * @param {ExpenseTagUpdateManyAndReturnArgs} args - Arguments to update many ExpenseTags.
+     * @example
+     * // Update many ExpenseTags
+     * const expenseTag = await prisma.expenseTag.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ExpenseTags and only return the `id`
+     * const expenseTagWithIdOnly = await prisma.expenseTag.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExpenseTagUpdateManyAndReturnArgs>(args: SelectSubset<T, ExpenseTagUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ExpenseTag.
+     * @param {ExpenseTagUpsertArgs} args - Arguments to update or create a ExpenseTag.
+     * @example
+     * // Update or create a ExpenseTag
+     * const expenseTag = await prisma.expenseTag.upsert({
+     *   create: {
+     *     // ... data to create a ExpenseTag
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ExpenseTag we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExpenseTagUpsertArgs>(args: SelectSubset<T, ExpenseTagUpsertArgs<ExtArgs>>): Prisma__ExpenseTagClient<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ExpenseTags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseTagCountArgs} args - Arguments to filter ExpenseTags to count.
+     * @example
+     * // Count the number of ExpenseTags
+     * const count = await prisma.expenseTag.count({
+     *   where: {
+     *     // ... the filter for the ExpenseTags we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExpenseTagCountArgs>(
+      args?: Subset<T, ExpenseTagCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExpenseTagCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ExpenseTag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseTagAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExpenseTagAggregateArgs>(args: Subset<T, ExpenseTagAggregateArgs>): Prisma.PrismaPromise<GetExpenseTagAggregateType<T>>
+
+    /**
+     * Group by ExpenseTag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseTagGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExpenseTagGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExpenseTagGroupByArgs['orderBy'] }
+        : { orderBy?: ExpenseTagGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExpenseTagGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExpenseTagGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ExpenseTag model
+   */
+  readonly fields: ExpenseTagFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ExpenseTag.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExpenseTagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    entries<T extends ExpenseTag$entriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseTag$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ExpenseTag model
+   */
+  interface ExpenseTagFieldRefs {
+    readonly id: FieldRef<"ExpenseTag", 'Int'>
+    readonly uuid: FieldRef<"ExpenseTag", 'String'>
+    readonly user_uuid: FieldRef<"ExpenseTag", 'String'>
+    readonly title: FieldRef<"ExpenseTag", 'String'>
+    readonly color: FieldRef<"ExpenseTag", 'String'>
+    readonly created_at: FieldRef<"ExpenseTag", 'DateTime'>
+    readonly updated_at: FieldRef<"ExpenseTag", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExpenseTag findUnique
+   */
+  export type ExpenseTagFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    /**
+     * Filter, which ExpenseTag to fetch.
+     */
+    where: ExpenseTagWhereUniqueInput
+  }
+
+  /**
+   * ExpenseTag findUniqueOrThrow
+   */
+  export type ExpenseTagFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    /**
+     * Filter, which ExpenseTag to fetch.
+     */
+    where: ExpenseTagWhereUniqueInput
+  }
+
+  /**
+   * ExpenseTag findFirst
+   */
+  export type ExpenseTagFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    /**
+     * Filter, which ExpenseTag to fetch.
+     */
+    where?: ExpenseTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExpenseTags to fetch.
+     */
+    orderBy?: ExpenseTagOrderByWithRelationInput | ExpenseTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExpenseTags.
+     */
+    cursor?: ExpenseTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExpenseTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExpenseTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseTags.
+     */
+    distinct?: ExpenseTagScalarFieldEnum | ExpenseTagScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseTag findFirstOrThrow
+   */
+  export type ExpenseTagFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    /**
+     * Filter, which ExpenseTag to fetch.
+     */
+    where?: ExpenseTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExpenseTags to fetch.
+     */
+    orderBy?: ExpenseTagOrderByWithRelationInput | ExpenseTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExpenseTags.
+     */
+    cursor?: ExpenseTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExpenseTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExpenseTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseTags.
+     */
+    distinct?: ExpenseTagScalarFieldEnum | ExpenseTagScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseTag findMany
+   */
+  export type ExpenseTagFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    /**
+     * Filter, which ExpenseTags to fetch.
+     */
+    where?: ExpenseTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExpenseTags to fetch.
+     */
+    orderBy?: ExpenseTagOrderByWithRelationInput | ExpenseTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ExpenseTags.
+     */
+    cursor?: ExpenseTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExpenseTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExpenseTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExpenseTags.
+     */
+    distinct?: ExpenseTagScalarFieldEnum | ExpenseTagScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseTag create
+   */
+  export type ExpenseTagCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ExpenseTag.
+     */
+    data: XOR<ExpenseTagCreateInput, ExpenseTagUncheckedCreateInput>
+  }
+
+  /**
+   * ExpenseTag createMany
+   */
+  export type ExpenseTagCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ExpenseTags.
+     */
+    data: ExpenseTagCreateManyInput | ExpenseTagCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExpenseTag createManyAndReturn
+   */
+  export type ExpenseTagCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * The data used to create many ExpenseTags.
+     */
+    data: ExpenseTagCreateManyInput | ExpenseTagCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExpenseTag update
+   */
+  export type ExpenseTagUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ExpenseTag.
+     */
+    data: XOR<ExpenseTagUpdateInput, ExpenseTagUncheckedUpdateInput>
+    /**
+     * Choose, which ExpenseTag to update.
+     */
+    where: ExpenseTagWhereUniqueInput
+  }
+
+  /**
+   * ExpenseTag updateMany
+   */
+  export type ExpenseTagUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ExpenseTags.
+     */
+    data: XOR<ExpenseTagUpdateManyMutationInput, ExpenseTagUncheckedUpdateManyInput>
+    /**
+     * Filter which ExpenseTags to update
+     */
+    where?: ExpenseTagWhereInput
+    /**
+     * Limit how many ExpenseTags to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExpenseTag updateManyAndReturn
+   */
+  export type ExpenseTagUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * The data used to update ExpenseTags.
+     */
+    data: XOR<ExpenseTagUpdateManyMutationInput, ExpenseTagUncheckedUpdateManyInput>
+    /**
+     * Filter which ExpenseTags to update
+     */
+    where?: ExpenseTagWhereInput
+    /**
+     * Limit how many ExpenseTags to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExpenseTag upsert
+   */
+  export type ExpenseTagUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ExpenseTag to update in case it exists.
+     */
+    where: ExpenseTagWhereUniqueInput
+    /**
+     * In case the ExpenseTag found by the `where` argument doesn't exist, create a new ExpenseTag with this data.
+     */
+    create: XOR<ExpenseTagCreateInput, ExpenseTagUncheckedCreateInput>
+    /**
+     * In case the ExpenseTag was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExpenseTagUpdateInput, ExpenseTagUncheckedUpdateInput>
+  }
+
+  /**
+   * ExpenseTag delete
+   */
+  export type ExpenseTagDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
+    /**
+     * Filter which ExpenseTag to delete.
+     */
+    where: ExpenseTagWhereUniqueInput
+  }
+
+  /**
+   * ExpenseTag deleteMany
+   */
+  export type ExpenseTagDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExpenseTags to delete
+     */
+    where?: ExpenseTagWhereInput
+    /**
+     * Limit how many ExpenseTags to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExpenseTag.entries
+   */
+  export type ExpenseTag$entriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseEntry
+     */
+    select?: ExpenseEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseEntry
+     */
+    omit?: ExpenseEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseEntryInclude<ExtArgs> | null
+    where?: ExpenseEntryWhereInput
+    orderBy?: ExpenseEntryOrderByWithRelationInput | ExpenseEntryOrderByWithRelationInput[]
+    cursor?: ExpenseEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExpenseEntryScalarFieldEnum | ExpenseEntryScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseTag without action
+   */
+  export type ExpenseTagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseTag
+     */
+    select?: ExpenseTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseTag
+     */
+    omit?: ExpenseTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseTagInclude<ExtArgs> | null
   }
 
 
@@ -49588,6 +50961,19 @@ export namespace Prisma {
   export type ExpenseEntryScalarFieldEnum = (typeof ExpenseEntryScalarFieldEnum)[keyof typeof ExpenseEntryScalarFieldEnum]
 
 
+  export const ExpenseTagScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    title: 'title',
+    color: 'color',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type ExpenseTagScalarFieldEnum = (typeof ExpenseTagScalarFieldEnum)[keyof typeof ExpenseTagScalarFieldEnum]
+
+
   export const ExpenseStoreScalarFieldEnum: {
     id: 'id',
     uuid: 'uuid',
@@ -50359,6 +51745,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityListRelationFilter
     expense_accounts?: ExpenseAccountListRelationFilter
     expense_entries?: ExpenseEntryListRelationFilter
+    expense_tags?: ExpenseTagListRelationFilter
     categories?: ExpenseCategoryListRelationFilter
     subcategories?: ExpenseSubcategoryListRelationFilter
     hidden_categories?: HiddenCategoryListRelationFilter
@@ -50395,6 +51782,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityOrderByRelationAggregateInput
     expense_accounts?: ExpenseAccountOrderByRelationAggregateInput
     expense_entries?: ExpenseEntryOrderByRelationAggregateInput
+    expense_tags?: ExpenseTagOrderByRelationAggregateInput
     categories?: ExpenseCategoryOrderByRelationAggregateInput
     subcategories?: ExpenseSubcategoryOrderByRelationAggregateInput
     hidden_categories?: HiddenCategoryOrderByRelationAggregateInput
@@ -50434,6 +51822,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityListRelationFilter
     expense_accounts?: ExpenseAccountListRelationFilter
     expense_entries?: ExpenseEntryListRelationFilter
+    expense_tags?: ExpenseTagListRelationFilter
     categories?: ExpenseCategoryListRelationFilter
     subcategories?: ExpenseSubcategoryListRelationFilter
     hidden_categories?: HiddenCategoryListRelationFilter
@@ -51382,6 +52771,7 @@ export namespace Prisma {
     category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
     subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
     expense_receipt?: XOR<ExpenseReceiptNullableScalarRelationFilter, ExpenseReceiptWhereInput> | null
+    tags?: ExpenseTagListRelationFilter
   }
 
   export type ExpenseEntryOrderByWithRelationInput = {
@@ -51404,6 +52794,7 @@ export namespace Prisma {
     category?: ExpenseCategoryOrderByWithRelationInput
     subcategory?: ExpenseSubcategoryOrderByWithRelationInput
     expense_receipt?: ExpenseReceiptOrderByWithRelationInput
+    tags?: ExpenseTagOrderByRelationAggregateInput
   }
 
   export type ExpenseEntryWhereUniqueInput = Prisma.AtLeast<{
@@ -51429,6 +52820,7 @@ export namespace Prisma {
     category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
     subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
     expense_receipt?: XOR<ExpenseReceiptNullableScalarRelationFilter, ExpenseReceiptWhereInput> | null
+    tags?: ExpenseTagListRelationFilter
   }, "id" | "uuid">
 
   export type ExpenseEntryOrderByWithAggregationInput = {
@@ -51469,6 +52861,76 @@ export namespace Prisma {
     entry_date?: DateTimeWithAggregatesFilter<"ExpenseEntry"> | Date | string
     created_at?: DateTimeWithAggregatesFilter<"ExpenseEntry"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ExpenseEntry"> | Date | string
+  }
+
+  export type ExpenseTagWhereInput = {
+    AND?: ExpenseTagWhereInput | ExpenseTagWhereInput[]
+    OR?: ExpenseTagWhereInput[]
+    NOT?: ExpenseTagWhereInput | ExpenseTagWhereInput[]
+    id?: IntFilter<"ExpenseTag"> | number
+    uuid?: StringFilter<"ExpenseTag"> | string
+    user_uuid?: StringFilter<"ExpenseTag"> | string
+    title?: StringFilter<"ExpenseTag"> | string
+    color?: StringFilter<"ExpenseTag"> | string
+    created_at?: DateTimeFilter<"ExpenseTag"> | Date | string
+    updated_at?: DateTimeFilter<"ExpenseTag"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    entries?: ExpenseEntryListRelationFilter
+  }
+
+  export type ExpenseTagOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    title?: SortOrder
+    color?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    entries?: ExpenseEntryOrderByRelationAggregateInput
+  }
+
+  export type ExpenseTagWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    AND?: ExpenseTagWhereInput | ExpenseTagWhereInput[]
+    OR?: ExpenseTagWhereInput[]
+    NOT?: ExpenseTagWhereInput | ExpenseTagWhereInput[]
+    user_uuid?: StringFilter<"ExpenseTag"> | string
+    title?: StringFilter<"ExpenseTag"> | string
+    color?: StringFilter<"ExpenseTag"> | string
+    created_at?: DateTimeFilter<"ExpenseTag"> | Date | string
+    updated_at?: DateTimeFilter<"ExpenseTag"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    entries?: ExpenseEntryListRelationFilter
+  }, "id" | "uuid">
+
+  export type ExpenseTagOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    title?: SortOrder
+    color?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: ExpenseTagCountOrderByAggregateInput
+    _avg?: ExpenseTagAvgOrderByAggregateInput
+    _max?: ExpenseTagMaxOrderByAggregateInput
+    _min?: ExpenseTagMinOrderByAggregateInput
+    _sum?: ExpenseTagSumOrderByAggregateInput
+  }
+
+  export type ExpenseTagScalarWhereWithAggregatesInput = {
+    AND?: ExpenseTagScalarWhereWithAggregatesInput | ExpenseTagScalarWhereWithAggregatesInput[]
+    OR?: ExpenseTagScalarWhereWithAggregatesInput[]
+    NOT?: ExpenseTagScalarWhereWithAggregatesInput | ExpenseTagScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ExpenseTag"> | number
+    uuid?: StringWithAggregatesFilter<"ExpenseTag"> | string
+    user_uuid?: StringWithAggregatesFilter<"ExpenseTag"> | string
+    title?: StringWithAggregatesFilter<"ExpenseTag"> | string
+    color?: StringWithAggregatesFilter<"ExpenseTag"> | string
+    created_at?: DateTimeWithAggregatesFilter<"ExpenseTag"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ExpenseTag"> | Date | string
   }
 
   export type ExpenseStoreWhereInput = {
@@ -53553,6 +55015,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -53589,6 +55052,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -53624,6 +55088,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -53660,6 +55125,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -54625,6 +56091,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateInput = {
@@ -54642,6 +56109,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryUpdateInput = {
@@ -54658,6 +56126,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateInput = {
@@ -54675,6 +56144,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryCreateManyInput = {
@@ -54715,6 +56185,76 @@ export namespace Prisma {
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseTagCreateInput = {
+    uuid?: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutExpense_tagsInput
+    entries?: ExpenseEntryCreateNestedManyWithoutTagsInput
+  }
+
+  export type ExpenseTagUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type ExpenseTagUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutExpense_tagsNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutTagsNestedInput
+  }
+
+  export type ExpenseTagUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type ExpenseTagCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ExpenseTagUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseTagUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -56981,6 +58521,12 @@ export namespace Prisma {
     none?: ExpenseEntryWhereInput
   }
 
+  export type ExpenseTagListRelationFilter = {
+    every?: ExpenseTagWhereInput
+    some?: ExpenseTagWhereInput
+    none?: ExpenseTagWhereInput
+  }
+
   export type ExpenseCategoryListRelationFilter = {
     every?: ExpenseCategoryWhereInput
     some?: ExpenseCategoryWhereInput
@@ -57105,6 +58651,10 @@ export namespace Prisma {
   }
 
   export type ExpenseEntryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ExpenseTagOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -58146,6 +59696,44 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumExpenseEntryTypeFilter<$PrismaModel>
     _max?: NestedEnumExpenseEntryTypeFilter<$PrismaModel>
+  }
+
+  export type ExpenseTagCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    title?: SortOrder
+    color?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ExpenseTagAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ExpenseTagMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    title?: SortOrder
+    color?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ExpenseTagMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    title?: SortOrder
+    color?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ExpenseTagSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type ExpenseStoreCountOrderByAggregateInput = {
@@ -59806,6 +61394,13 @@ export namespace Prisma {
     connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
   }
 
+  export type ExpenseTagCreateNestedManyWithoutUserInput = {
+    create?: XOR<ExpenseTagCreateWithoutUserInput, ExpenseTagUncheckedCreateWithoutUserInput> | ExpenseTagCreateWithoutUserInput[] | ExpenseTagUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseTagCreateOrConnectWithoutUserInput | ExpenseTagCreateOrConnectWithoutUserInput[]
+    createMany?: ExpenseTagCreateManyUserInputEnvelope
+    connect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+  }
+
   export type ExpenseCategoryCreateNestedManyWithoutUserInput = {
     create?: XOR<ExpenseCategoryCreateWithoutUserInput, ExpenseCategoryUncheckedCreateWithoutUserInput> | ExpenseCategoryCreateWithoutUserInput[] | ExpenseCategoryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ExpenseCategoryCreateOrConnectWithoutUserInput | ExpenseCategoryCreateOrConnectWithoutUserInput[]
@@ -59965,6 +61560,13 @@ export namespace Prisma {
     connectOrCreate?: ExpenseEntryCreateOrConnectWithoutUserInput | ExpenseEntryCreateOrConnectWithoutUserInput[]
     createMany?: ExpenseEntryCreateManyUserInputEnvelope
     connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+  }
+
+  export type ExpenseTagUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ExpenseTagCreateWithoutUserInput, ExpenseTagUncheckedCreateWithoutUserInput> | ExpenseTagCreateWithoutUserInput[] | ExpenseTagUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseTagCreateOrConnectWithoutUserInput | ExpenseTagCreateOrConnectWithoutUserInput[]
+    createMany?: ExpenseTagCreateManyUserInputEnvelope
+    connect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
   }
 
   export type ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput = {
@@ -60198,6 +61800,20 @@ export namespace Prisma {
     update?: ExpenseEntryUpdateWithWhereUniqueWithoutUserInput | ExpenseEntryUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ExpenseEntryUpdateManyWithWhereWithoutUserInput | ExpenseEntryUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ExpenseEntryScalarWhereInput | ExpenseEntryScalarWhereInput[]
+  }
+
+  export type ExpenseTagUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ExpenseTagCreateWithoutUserInput, ExpenseTagUncheckedCreateWithoutUserInput> | ExpenseTagCreateWithoutUserInput[] | ExpenseTagUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseTagCreateOrConnectWithoutUserInput | ExpenseTagCreateOrConnectWithoutUserInput[]
+    upsert?: ExpenseTagUpsertWithWhereUniqueWithoutUserInput | ExpenseTagUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ExpenseTagCreateManyUserInputEnvelope
+    set?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    disconnect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    delete?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    connect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    update?: ExpenseTagUpdateWithWhereUniqueWithoutUserInput | ExpenseTagUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ExpenseTagUpdateManyWithWhereWithoutUserInput | ExpenseTagUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ExpenseTagScalarWhereInput | ExpenseTagScalarWhereInput[]
   }
 
   export type ExpenseCategoryUpdateManyWithoutUserNestedInput = {
@@ -60528,6 +62144,20 @@ export namespace Prisma {
     update?: ExpenseEntryUpdateWithWhereUniqueWithoutUserInput | ExpenseEntryUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ExpenseEntryUpdateManyWithWhereWithoutUserInput | ExpenseEntryUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ExpenseEntryScalarWhereInput | ExpenseEntryScalarWhereInput[]
+  }
+
+  export type ExpenseTagUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ExpenseTagCreateWithoutUserInput, ExpenseTagUncheckedCreateWithoutUserInput> | ExpenseTagCreateWithoutUserInput[] | ExpenseTagUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ExpenseTagCreateOrConnectWithoutUserInput | ExpenseTagCreateOrConnectWithoutUserInput[]
+    upsert?: ExpenseTagUpsertWithWhereUniqueWithoutUserInput | ExpenseTagUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ExpenseTagCreateManyUserInputEnvelope
+    set?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    disconnect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    delete?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    connect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    update?: ExpenseTagUpdateWithWhereUniqueWithoutUserInput | ExpenseTagUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ExpenseTagUpdateManyWithWhereWithoutUserInput | ExpenseTagUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ExpenseTagScalarWhereInput | ExpenseTagScalarWhereInput[]
   }
 
   export type ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput = {
@@ -61876,10 +63506,22 @@ export namespace Prisma {
     connect?: ExpenseReceiptWhereUniqueInput
   }
 
+  export type ExpenseTagCreateNestedManyWithoutEntriesInput = {
+    create?: XOR<ExpenseTagCreateWithoutEntriesInput, ExpenseTagUncheckedCreateWithoutEntriesInput> | ExpenseTagCreateWithoutEntriesInput[] | ExpenseTagUncheckedCreateWithoutEntriesInput[]
+    connectOrCreate?: ExpenseTagCreateOrConnectWithoutEntriesInput | ExpenseTagCreateOrConnectWithoutEntriesInput[]
+    connect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+  }
+
   export type ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput = {
     create?: XOR<ExpenseReceiptCreateWithoutExpense_entryInput, ExpenseReceiptUncheckedCreateWithoutExpense_entryInput>
     connectOrCreate?: ExpenseReceiptCreateOrConnectWithoutExpense_entryInput
     connect?: ExpenseReceiptWhereUniqueInput
+  }
+
+  export type ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput = {
+    create?: XOR<ExpenseTagCreateWithoutEntriesInput, ExpenseTagUncheckedCreateWithoutEntriesInput> | ExpenseTagCreateWithoutEntriesInput[] | ExpenseTagUncheckedCreateWithoutEntriesInput[]
+    connectOrCreate?: ExpenseTagCreateOrConnectWithoutEntriesInput | ExpenseTagCreateOrConnectWithoutEntriesInput[]
+    connect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
   }
 
   export type EnumExpenseEntryTypeFieldUpdateOperationsInput = {
@@ -61942,6 +63584,19 @@ export namespace Prisma {
     update?: XOR<XOR<ExpenseReceiptUpdateToOneWithWhereWithoutExpense_entryInput, ExpenseReceiptUpdateWithoutExpense_entryInput>, ExpenseReceiptUncheckedUpdateWithoutExpense_entryInput>
   }
 
+  export type ExpenseTagUpdateManyWithoutEntriesNestedInput = {
+    create?: XOR<ExpenseTagCreateWithoutEntriesInput, ExpenseTagUncheckedCreateWithoutEntriesInput> | ExpenseTagCreateWithoutEntriesInput[] | ExpenseTagUncheckedCreateWithoutEntriesInput[]
+    connectOrCreate?: ExpenseTagCreateOrConnectWithoutEntriesInput | ExpenseTagCreateOrConnectWithoutEntriesInput[]
+    upsert?: ExpenseTagUpsertWithWhereUniqueWithoutEntriesInput | ExpenseTagUpsertWithWhereUniqueWithoutEntriesInput[]
+    set?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    disconnect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    delete?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    connect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    update?: ExpenseTagUpdateWithWhereUniqueWithoutEntriesInput | ExpenseTagUpdateWithWhereUniqueWithoutEntriesInput[]
+    updateMany?: ExpenseTagUpdateManyWithWhereWithoutEntriesInput | ExpenseTagUpdateManyWithWhereWithoutEntriesInput[]
+    deleteMany?: ExpenseTagScalarWhereInput | ExpenseTagScalarWhereInput[]
+  }
+
   export type ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput = {
     create?: XOR<ExpenseReceiptCreateWithoutExpense_entryInput, ExpenseReceiptUncheckedCreateWithoutExpense_entryInput>
     connectOrCreate?: ExpenseReceiptCreateOrConnectWithoutExpense_entryInput
@@ -61950,6 +63605,71 @@ export namespace Prisma {
     delete?: ExpenseReceiptWhereInput | boolean
     connect?: ExpenseReceiptWhereUniqueInput
     update?: XOR<XOR<ExpenseReceiptUpdateToOneWithWhereWithoutExpense_entryInput, ExpenseReceiptUpdateWithoutExpense_entryInput>, ExpenseReceiptUncheckedUpdateWithoutExpense_entryInput>
+  }
+
+  export type ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput = {
+    create?: XOR<ExpenseTagCreateWithoutEntriesInput, ExpenseTagUncheckedCreateWithoutEntriesInput> | ExpenseTagCreateWithoutEntriesInput[] | ExpenseTagUncheckedCreateWithoutEntriesInput[]
+    connectOrCreate?: ExpenseTagCreateOrConnectWithoutEntriesInput | ExpenseTagCreateOrConnectWithoutEntriesInput[]
+    upsert?: ExpenseTagUpsertWithWhereUniqueWithoutEntriesInput | ExpenseTagUpsertWithWhereUniqueWithoutEntriesInput[]
+    set?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    disconnect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    delete?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    connect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+    update?: ExpenseTagUpdateWithWhereUniqueWithoutEntriesInput | ExpenseTagUpdateWithWhereUniqueWithoutEntriesInput[]
+    updateMany?: ExpenseTagUpdateManyWithWhereWithoutEntriesInput | ExpenseTagUpdateManyWithWhereWithoutEntriesInput[]
+    deleteMany?: ExpenseTagScalarWhereInput | ExpenseTagScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutExpense_tagsInput = {
+    create?: XOR<UserCreateWithoutExpense_tagsInput, UserUncheckedCreateWithoutExpense_tagsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutExpense_tagsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ExpenseEntryCreateNestedManyWithoutTagsInput = {
+    create?: XOR<ExpenseEntryCreateWithoutTagsInput, ExpenseEntryUncheckedCreateWithoutTagsInput> | ExpenseEntryCreateWithoutTagsInput[] | ExpenseEntryUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: ExpenseEntryCreateOrConnectWithoutTagsInput | ExpenseEntryCreateOrConnectWithoutTagsInput[]
+    connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+  }
+
+  export type ExpenseEntryUncheckedCreateNestedManyWithoutTagsInput = {
+    create?: XOR<ExpenseEntryCreateWithoutTagsInput, ExpenseEntryUncheckedCreateWithoutTagsInput> | ExpenseEntryCreateWithoutTagsInput[] | ExpenseEntryUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: ExpenseEntryCreateOrConnectWithoutTagsInput | ExpenseEntryCreateOrConnectWithoutTagsInput[]
+    connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutExpense_tagsNestedInput = {
+    create?: XOR<UserCreateWithoutExpense_tagsInput, UserUncheckedCreateWithoutExpense_tagsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutExpense_tagsInput
+    upsert?: UserUpsertWithoutExpense_tagsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutExpense_tagsInput, UserUpdateWithoutExpense_tagsInput>, UserUncheckedUpdateWithoutExpense_tagsInput>
+  }
+
+  export type ExpenseEntryUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<ExpenseEntryCreateWithoutTagsInput, ExpenseEntryUncheckedCreateWithoutTagsInput> | ExpenseEntryCreateWithoutTagsInput[] | ExpenseEntryUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: ExpenseEntryCreateOrConnectWithoutTagsInput | ExpenseEntryCreateOrConnectWithoutTagsInput[]
+    upsert?: ExpenseEntryUpsertWithWhereUniqueWithoutTagsInput | ExpenseEntryUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    disconnect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    delete?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    update?: ExpenseEntryUpdateWithWhereUniqueWithoutTagsInput | ExpenseEntryUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: ExpenseEntryUpdateManyWithWhereWithoutTagsInput | ExpenseEntryUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: ExpenseEntryScalarWhereInput | ExpenseEntryScalarWhereInput[]
+  }
+
+  export type ExpenseEntryUncheckedUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<ExpenseEntryCreateWithoutTagsInput, ExpenseEntryUncheckedCreateWithoutTagsInput> | ExpenseEntryCreateWithoutTagsInput[] | ExpenseEntryUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: ExpenseEntryCreateOrConnectWithoutTagsInput | ExpenseEntryCreateOrConnectWithoutTagsInput[]
+    upsert?: ExpenseEntryUpsertWithWhereUniqueWithoutTagsInput | ExpenseEntryUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    disconnect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    delete?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    update?: ExpenseEntryUpdateWithWhereUniqueWithoutTagsInput | ExpenseEntryUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: ExpenseEntryUpdateManyWithWhereWithoutTagsInput | ExpenseEntryUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: ExpenseEntryScalarWhereInput | ExpenseEntryScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutExpense_storesInput = {
@@ -64168,6 +65888,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutUserInput = {
@@ -64184,6 +65905,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryCreateOrConnectWithoutUserInput = {
@@ -64193,6 +65915,35 @@ export namespace Prisma {
 
   export type ExpenseEntryCreateManyUserInputEnvelope = {
     data: ExpenseEntryCreateManyUserInput | ExpenseEntryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ExpenseTagCreateWithoutUserInput = {
+    uuid?: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    entries?: ExpenseEntryCreateNestedManyWithoutTagsInput
+  }
+
+  export type ExpenseTagUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type ExpenseTagCreateOrConnectWithoutUserInput = {
+    where: ExpenseTagWhereUniqueInput
+    create: XOR<ExpenseTagCreateWithoutUserInput, ExpenseTagUncheckedCreateWithoutUserInput>
+  }
+
+  export type ExpenseTagCreateManyUserInputEnvelope = {
+    data: ExpenseTagCreateManyUserInput | ExpenseTagCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -64977,6 +66728,35 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
   }
 
+  export type ExpenseTagUpsertWithWhereUniqueWithoutUserInput = {
+    where: ExpenseTagWhereUniqueInput
+    update: XOR<ExpenseTagUpdateWithoutUserInput, ExpenseTagUncheckedUpdateWithoutUserInput>
+    create: XOR<ExpenseTagCreateWithoutUserInput, ExpenseTagUncheckedCreateWithoutUserInput>
+  }
+
+  export type ExpenseTagUpdateWithWhereUniqueWithoutUserInput = {
+    where: ExpenseTagWhereUniqueInput
+    data: XOR<ExpenseTagUpdateWithoutUserInput, ExpenseTagUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ExpenseTagUpdateManyWithWhereWithoutUserInput = {
+    where: ExpenseTagScalarWhereInput
+    data: XOR<ExpenseTagUpdateManyMutationInput, ExpenseTagUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ExpenseTagScalarWhereInput = {
+    AND?: ExpenseTagScalarWhereInput | ExpenseTagScalarWhereInput[]
+    OR?: ExpenseTagScalarWhereInput[]
+    NOT?: ExpenseTagScalarWhereInput | ExpenseTagScalarWhereInput[]
+    id?: IntFilter<"ExpenseTag"> | number
+    uuid?: StringFilter<"ExpenseTag"> | string
+    user_uuid?: StringFilter<"ExpenseTag"> | string
+    title?: StringFilter<"ExpenseTag"> | string
+    color?: StringFilter<"ExpenseTag"> | string
+    created_at?: DateTimeFilter<"ExpenseTag"> | Date | string
+    updated_at?: DateTimeFilter<"ExpenseTag"> | Date | string
+  }
+
   export type ExpenseCategoryUpsertWithWhereUniqueWithoutUserInput = {
     where: ExpenseCategoryWhereUniqueInput
     update: XOR<ExpenseCategoryUpdateWithoutUserInput, ExpenseCategoryUncheckedUpdateWithoutUserInput>
@@ -65463,6 +67243,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -65498,6 +67279,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -65743,6 +67525,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -65778,6 +67561,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -65892,6 +67676,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -65927,6 +67712,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -66015,6 +67801,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -66050,6 +67837,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -66166,6 +67954,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -66201,6 +67990,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -66415,6 +68205,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -66450,6 +68241,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -66876,6 +68668,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -66911,6 +68704,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -67107,6 +68901,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -67142,6 +68937,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -67344,6 +69140,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -67379,6 +69176,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -67565,6 +69363,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -67600,6 +69399,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -67634,6 +69434,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -67669,6 +69470,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -67704,6 +69506,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutFrom_accountInput = {
@@ -67720,6 +69523,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryCreateOrConnectWithoutFrom_accountInput = {
@@ -67745,6 +69549,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutTo_accountInput = {
@@ -67761,6 +69566,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryCreateOrConnectWithoutTo_accountInput = {
@@ -67801,6 +69607,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -67836,6 +69643,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -67903,6 +69711,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
@@ -67938,6 +69747,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
@@ -68005,6 +69815,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutCategoryInput = {
@@ -68021,6 +69832,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryCreateOrConnectWithoutCategoryInput = {
@@ -68124,6 +69936,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
@@ -68159,6 +69972,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -68257,6 +70071,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
@@ -68292,6 +70107,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
@@ -68358,6 +70174,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutSubcategoryInput = {
@@ -68374,6 +70191,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryCreateOrConnectWithoutSubcategoryInput = {
@@ -68477,6 +70295,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
@@ -68512,6 +70331,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -68631,6 +70451,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -68666,6 +70487,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -68836,6 +70658,30 @@ export namespace Prisma {
     create: XOR<ExpenseReceiptCreateWithoutExpense_entryInput, ExpenseReceiptUncheckedCreateWithoutExpense_entryInput>
   }
 
+  export type ExpenseTagCreateWithoutEntriesInput = {
+    uuid?: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutExpense_tagsInput
+  }
+
+  export type ExpenseTagUncheckedCreateWithoutEntriesInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ExpenseTagCreateOrConnectWithoutEntriesInput = {
+    where: ExpenseTagWhereUniqueInput
+    create: XOR<ExpenseTagCreateWithoutEntriesInput, ExpenseTagUncheckedCreateWithoutEntriesInput>
+  }
+
   export type UserUpsertWithoutExpense_entriesInput = {
     update: XOR<UserUpdateWithoutExpense_entriesInput, UserUncheckedUpdateWithoutExpense_entriesInput>
     create: XOR<UserCreateWithoutExpense_entriesInput, UserUncheckedCreateWithoutExpense_entriesInput>
@@ -68864,6 +70710,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -68899,6 +70746,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -69094,6 +70942,234 @@ export namespace Prisma {
     items?: ExpenseReceiptItemUncheckedUpdateManyWithoutReceiptNestedInput
   }
 
+  export type ExpenseTagUpsertWithWhereUniqueWithoutEntriesInput = {
+    where: ExpenseTagWhereUniqueInput
+    update: XOR<ExpenseTagUpdateWithoutEntriesInput, ExpenseTagUncheckedUpdateWithoutEntriesInput>
+    create: XOR<ExpenseTagCreateWithoutEntriesInput, ExpenseTagUncheckedCreateWithoutEntriesInput>
+  }
+
+  export type ExpenseTagUpdateWithWhereUniqueWithoutEntriesInput = {
+    where: ExpenseTagWhereUniqueInput
+    data: XOR<ExpenseTagUpdateWithoutEntriesInput, ExpenseTagUncheckedUpdateWithoutEntriesInput>
+  }
+
+  export type ExpenseTagUpdateManyWithWhereWithoutEntriesInput = {
+    where: ExpenseTagScalarWhereInput
+    data: XOR<ExpenseTagUpdateManyMutationInput, ExpenseTagUncheckedUpdateManyWithoutEntriesInput>
+  }
+
+  export type UserCreateWithoutExpense_tagsInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
+    quiz_groups?: QuizGroupCreateNestedManyWithoutUserInput
+    chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutExpense_tagsInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
+    quiz_groups?: QuizGroupUncheckedCreateNestedManyWithoutUserInput
+    chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutExpense_tagsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutExpense_tagsInput, UserUncheckedCreateWithoutExpense_tagsInput>
+  }
+
+  export type ExpenseEntryCreateWithoutTagsInput = {
+    uuid?: string
+    type: $Enums.ExpenseEntryType
+    amount: Decimal | DecimalJsLike | number | string
+    description?: string | null
+    entry_date?: Date | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutExpense_entriesInput
+    from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
+    to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
+    category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+  }
+
+  export type ExpenseEntryUncheckedCreateWithoutTagsInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    type: $Enums.ExpenseEntryType
+    amount: Decimal | DecimalJsLike | number | string
+    description?: string | null
+    from_account_uuid: string
+    to_account_uuid?: string | null
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
+    entry_date?: Date | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+  }
+
+  export type ExpenseEntryCreateOrConnectWithoutTagsInput = {
+    where: ExpenseEntryWhereUniqueInput
+    create: XOR<ExpenseEntryCreateWithoutTagsInput, ExpenseEntryUncheckedCreateWithoutTagsInput>
+  }
+
+  export type UserUpsertWithoutExpense_tagsInput = {
+    update: XOR<UserUpdateWithoutExpense_tagsInput, UserUncheckedUpdateWithoutExpense_tagsInput>
+    create: XOR<UserCreateWithoutExpense_tagsInput, UserUncheckedCreateWithoutExpense_tagsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutExpense_tagsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutExpense_tagsInput, UserUncheckedUpdateWithoutExpense_tagsInput>
+  }
+
+  export type UserUpdateWithoutExpense_tagsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
+    quiz_groups?: QuizGroupUpdateManyWithoutUserNestedInput
+    chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutExpense_tagsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
+    quiz_groups?: QuizGroupUncheckedUpdateManyWithoutUserNestedInput
+    chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ExpenseEntryUpsertWithWhereUniqueWithoutTagsInput = {
+    where: ExpenseEntryWhereUniqueInput
+    update: XOR<ExpenseEntryUpdateWithoutTagsInput, ExpenseEntryUncheckedUpdateWithoutTagsInput>
+    create: XOR<ExpenseEntryCreateWithoutTagsInput, ExpenseEntryUncheckedCreateWithoutTagsInput>
+  }
+
+  export type ExpenseEntryUpdateWithWhereUniqueWithoutTagsInput = {
+    where: ExpenseEntryWhereUniqueInput
+    data: XOR<ExpenseEntryUpdateWithoutTagsInput, ExpenseEntryUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type ExpenseEntryUpdateManyWithWhereWithoutTagsInput = {
+    where: ExpenseEntryScalarWhereInput
+    data: XOR<ExpenseEntryUpdateManyMutationInput, ExpenseEntryUncheckedUpdateManyWithoutTagsInput>
+  }
+
   export type UserCreateWithoutExpense_storesInput = {
     uuid?: string
     email: string
@@ -69112,6 +71188,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -69147,6 +71224,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -69230,6 +71308,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -69265,6 +71344,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -69315,6 +71395,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -69350,6 +71431,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -69406,6 +71488,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutExpense_receiptInput = {
@@ -69422,6 +71505,7 @@ export namespace Prisma {
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
+    tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
   export type ExpenseEntryCreateOrConnectWithoutExpense_receiptInput = {
@@ -69489,6 +71573,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -69524,6 +71609,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -69592,6 +71678,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutExpense_receiptInput = {
@@ -69608,6 +71695,7 @@ export namespace Prisma {
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseReceiptItemUpsertWithWhereUniqueWithoutReceiptInput = {
@@ -69659,6 +71747,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -69694,6 +71783,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -69835,6 +71925,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -69870,6 +71961,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -70124,6 +72216,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -70159,6 +72252,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -70242,6 +72336,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -70277,6 +72372,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -70327,6 +72423,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -70362,6 +72459,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -70465,6 +72563,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -70500,6 +72599,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -70593,6 +72693,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -70628,6 +72729,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -70707,6 +72809,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -70742,6 +72845,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -71062,6 +73166,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -71097,6 +73202,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -71202,6 +73308,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -71237,6 +73344,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -71303,6 +73411,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -71338,6 +73447,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -71420,6 +73530,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -71455,6 +73566,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -71504,6 +73616,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -71539,6 +73652,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -71627,6 +73741,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -71662,6 +73777,7 @@ export namespace Prisma {
     activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -71741,6 +73857,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
@@ -71776,6 +73893,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
@@ -71858,6 +73976,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
@@ -71893,6 +74012,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -71965,6 +74085,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -72000,6 +74121,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -72078,6 +74200,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -72113,6 +74236,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -72181,6 +74305,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -72216,6 +74341,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -72325,6 +74451,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -72360,6 +74487,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -72461,6 +74589,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -72496,6 +74625,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -72581,6 +74711,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -72616,6 +74747,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -72904,6 +75036,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
@@ -72939,6 +75072,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
     expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
     expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
@@ -73083,6 +75217,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
@@ -73118,6 +75253,7 @@ export namespace Prisma {
     hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
     expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
     expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
@@ -74039,6 +76175,15 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type ExpenseTagCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    title: string
+    color?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type ExpenseCategoryCreateManyUserInput = {
     id?: number
     uuid?: string
@@ -74517,6 +76662,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutUserInput = {
@@ -74533,6 +76679,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateManyWithoutUserInput = {
@@ -74546,6 +76693,34 @@ export namespace Prisma {
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseTagUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    entries?: ExpenseEntryUpdateManyWithoutTagsNestedInput
+  }
+
+  export type ExpenseTagUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type ExpenseTagUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -75572,6 +77747,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutFrom_accountInput = {
@@ -75588,6 +77764,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateManyWithoutFrom_accountInput = {
@@ -75618,6 +77795,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutTo_accountInput = {
@@ -75634,6 +77812,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateManyWithoutTo_accountInput = {
@@ -75741,6 +77920,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutCategoryInput = {
@@ -75757,6 +77937,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateManyWithoutCategoryInput = {
@@ -75886,6 +78067,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutSubcategoryInput = {
@@ -75902,6 +78084,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateManyWithoutSubcategoryInput = {
@@ -75978,6 +78161,84 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     uuid?: StringFieldUpdateOperationsInput | string
     user_uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseTagUpdateWithoutEntriesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutExpense_tagsNestedInput
+  }
+
+  export type ExpenseTagUncheckedUpdateWithoutEntriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseTagUncheckedUpdateManyWithoutEntriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseEntryUpdateWithoutTagsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutExpense_entriesNestedInput
+    from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
+    to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+  }
+
+  export type ExpenseEntryUncheckedUpdateWithoutTagsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    from_account_uuid?: StringFieldUpdateOperationsInput | string
+    to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+  }
+
+  export type ExpenseEntryUncheckedUpdateManyWithoutTagsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    from_account_uuid?: StringFieldUpdateOperationsInput | string
+    to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

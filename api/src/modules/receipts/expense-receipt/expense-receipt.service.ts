@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException, NotFoundException, BadRequest
 import { CreateExpenseReceiptDto } from './dto/create-expense-receipt.dto';
 import { UpdateExpenseReceiptDto } from './dto/update-expense-receipt.dto';
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
-import { ExpenseAccount, ExpenseEntry, ExpenseEntryType } from '@/generated/prisma';
+import { ExpenseAccount, ExpenseEntry, ExpenseEntryType, Prisma } from '@/generated/prisma';
 import { type ExtractedReceiptItem } from './schemas/extracted-receipt.schema';
 import { AiHelperService } from '@/shared/services/ai/ai.service';
 import type { ExpenseReceiptsQueryType } from './schemas/expense-receipts-query.schema';
@@ -283,7 +283,7 @@ export class ExpenseReceiptService {
   }
 
   private async findOrCreateStore(
-    tx: Omit<PrismaService, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>,
+    tx: Prisma.TransactionClient,
     user_uuid: string,
     name: string,
   ) {
@@ -301,7 +301,7 @@ export class ExpenseReceiptService {
   }
 
   private async findOrCreateProduct(
-    tx: Omit<PrismaService, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>,
+    tx: Prisma.TransactionClient,
     user_uuid: string,
     item: ExtractedReceiptItem,
   ) {
@@ -334,7 +334,7 @@ export class ExpenseReceiptService {
   }
 
   private async findOrCreateCategory(
-    tx: Omit<PrismaService, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>,
+    tx: Prisma.TransactionClient,
     user_uuid: string,
     name: string,
   ) {
@@ -351,7 +351,7 @@ export class ExpenseReceiptService {
   }
 
   private async findOrCreateSubcategory(
-    tx: Omit<PrismaService, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>,
+    tx: Prisma.TransactionClient,
     user_uuid: string,
     category_uuid: string,
     name: string,

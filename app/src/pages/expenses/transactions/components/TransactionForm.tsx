@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { CreateExpenseEntryDto, ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { useExpenseAccounts } from "../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
 import { useExpenseCategories } from "../../../../features/expenses/expense-categories/hooks/use-expense-categories";
 import { useExpenseSubcategories } from "../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories";
+import { useExpenseTags, useCreateExpenseTag } from "../../../../features/expenses/expense-tags/hooks/use-expense-tags";
+import { TagSelector } from "../../../../components/ui/TagSelector";
 
 type TransactionFormProps = {
   onSubmit: (data: CreateExpenseEntryDto) => void;
@@ -18,6 +20,8 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
   const { data: accountsData } = useExpenseAccounts();
   const { data: categoriesData } = useExpenseCategories();
   const { data: subcategoriesData } = useExpenseSubcategories();
+  const { data: tagsData } = useExpenseTags();
+  const createTagMutation = useCreateExpenseTag();
 
   const [type, setType] = useState<ExpenseEntryType>(initialData?.type || ExpenseEntryTypes.EXPENSE);
   const [amount, setAmount] = useState(initialData?.amount?.toString() || "");
@@ -27,11 +31,21 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
   const [toAccountUuid, setToAccountUuid] = useState(initialData?.to_account_uuid || "");
   const [categoryUuid, setCategoryUuid] = useState(initialData?.category_uuid || "");
   const [subcategoryUuid, setSubcategoryUuid] = useState(initialData?.subcategory_uuid || "");
+  const [selectedTagUuids, setSelectedTagUuids] = useState<string[]>(initialData?.tag_uuids || []);
   const [entryDate, setEntryDate] = useState(initialData?.entry_date ? initialData.entry_date.split("T")[0] : new Date().toISOString().split("T")[0]);
 
   const accounts = accountsData || [];
   const categories = categoriesData || [];
   const subcategories = subcategoriesData || [];
+  const tags = tagsData || [];
+
+  const handleCreateTag = useCallback(
+    async (data: { title: string; color?: string }) => {
+      const tag = await createTagMutation.mutateAsync(data);
+      return tag;
+    },
+    [createTagMutation],
+  );
 
   const filteredSubcategories = categoryUuid ? subcategories.filter((sub) => sub.category_uuid === categoryUuid) : [];
 
@@ -55,6 +69,7 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
       category_uuid: isTransfer ? undefined : categoryUuid,
       subcategory_uuid: isTransfer ? undefined : subcategoryUuid,
       entry_date: entryDate,
+      tag_uuids: selectedTagUuids.length > 0 ? selectedTagUuids : undefined,
       ...(showQuantity && { quantity: parseInt(quantity, 10) }),
     };
 
@@ -63,6 +78,7 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
 
   const parsedQuantity = parseInt(quantity, 10);
   const isFormValid = amount && parseFloat(amount) > 0 && fromAccountUuid && (isTransfer ? toAccountUuid : categoryUuid && subcategoryUuid) && (!showQuantity || (parsedQuantity >= 1 && Number.isInteger(parsedQuantity)));
+  const pendingSubmitLabel = submitLabel === "Create" ? "Creating..." : "Saving...";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -209,6 +225,17 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
               ))}
             </select>
           </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">Tags</label>
+            <TagSelector
+              selectedTagUuids={selectedTagUuids}
+              onChange={setSelectedTagUuids}
+              allTags={tags}
+              onCreateTag={handleCreateTag}
+              isCreating={createTagMutation.isPending}
+            />
+          </div>
         </>
       )}
 
@@ -224,7 +251,7 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
 
       <div className="flex gap-3 pt-4">
         <button type="submit" disabled={isPending || !isFormValid} className="flex-1 px-3 py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-          {isPending ? "Creating..." : submitLabel}
+          {isPending ? pendingSubmitLabel : submitLabel}
         </button>
         <button type="button" onClick={onCancel} disabled={isPending} className="flex-1 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
           Cancel

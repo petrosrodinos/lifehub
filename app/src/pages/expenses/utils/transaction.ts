@@ -9,6 +9,7 @@ export const expenseEntryToCreateDto = (transaction: ExpenseEntry): Partial<Crea
   category_uuid: transaction.category_uuid,
   subcategory_uuid: transaction.subcategory_uuid,
   entry_date: transaction.entry_date,
+  tag_uuids: transaction.tags?.map((tag) => tag.uuid) ?? [],
 });
 
 export const formatDate = (value: string) => {

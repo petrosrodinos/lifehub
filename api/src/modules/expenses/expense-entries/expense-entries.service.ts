@@ -16,29 +16,41 @@ export class ExpenseEntriesService {
     try {
       await this.validateRelations(user_uuid, createExpenseEntryDto);
 
-      const quantity = createExpenseEntryDto.quantity ?? 1;
+      const { quantity: quantityInput, tag_uuids, ...entryFields } = createExpenseEntryDto;
+      const quantity = quantityInput ?? 1;
+
+      if (tag_uuids?.length) {
+        await this.validateTags(user_uuid, tag_uuids);
+      }
 
       const entryData = {
         user_uuid,
-        type: createExpenseEntryDto.type,
-        amount: createExpenseEntryDto.amount,
-        description: createExpenseEntryDto.description,
-        from_account_uuid: createExpenseEntryDto.from_account_uuid,
-        to_account_uuid: createExpenseEntryDto.to_account_uuid,
-        category_uuid: createExpenseEntryDto.category_uuid,
-        subcategory_uuid: createExpenseEntryDto.subcategory_uuid,
-        entry_date: createExpenseEntryDto.entry_date ? new Date(createExpenseEntryDto.entry_date) : new Date(),
+        type: entryFields.type,
+        amount: entryFields.amount,
+        description: entryFields.description,
+        from_account_uuid: entryFields.from_account_uuid,
+        to_account_uuid: entryFields.to_account_uuid,
+        category_uuid: entryFields.category_uuid,
+        subcategory_uuid: entryFields.subcategory_uuid,
+        entry_date: entryFields.entry_date ? new Date(entryFields.entry_date) : new Date(),
+        ...(tag_uuids?.length ? { tags: { connect: tag_uuids.map((tagUuid) => ({ uuid: tagUuid })) } } : {}),
       };
 
       let lastEntry;
 
       for (let i = 0; i < quantity; i++) {
-        lastEntry = await this.prisma.expenseEntry.create({ data: entryData });
+        lastEntry = await this.prisma.expenseEntry.create({
+          data: entryData,
+        });
 
         await this.updateAccountBalances(createExpenseEntryDto);
       }
 
-      return lastEntry;
+      if (!lastEntry) {
+        throw new InternalServerErrorException('Failed to create expense entry');
+      }
+
+      return this.findOne(user_uuid, lastEntry.uuid);
     } catch (error) {
       if (error instanceof BadRequestException) {
         throw error;
@@ -103,13 +115,7 @@ export class ExpenseEntriesService {
           skip,
           take: limit,
           orderBy: { entry_date: 'desc' },
-          include: {
-            from_account: true,
-            to_account: true,
-            category: true,
-            subcategory: true,
-            expense_receipt: true,
-          },
+          include: this.getEntryIncludes(),
         }),
         this.prisma.expenseEntry.count({ where }),
       ]);
@@ -138,12 +144,7 @@ export class ExpenseEntriesService {
       const where = { uuid, user_uuid, ...excludeHidden };
       const entry = await this.prisma.expenseEntry.findFirst({
         where,
-        include: {
-          from_account: true,
-          to_account: true,
-          category: true,
-          subcategory: true,
-        },
+        include: this.getEntryIncludes(),
       });
 
       if (!entry) {
@@ -167,14 +168,21 @@ export class ExpenseEntriesService {
         await this.validateRelations(user_uuid, updateExpenseEntryDto);
       }
 
+      const { tag_uuids, entry_date, quantity, ...updateFields } = updateExpenseEntryDto;
+
+      if (tag_uuids?.length) {
+        await this.validateTags(user_uuid, tag_uuids);
+      }
+
       await this.revertAccountBalances(existingEntry);
 
       const updatedEntry = await this.prisma.expenseEntry.update({
         where: { uuid },
         data: {
-          ...updateExpenseEntryDto,
-          entry_date: updateExpenseEntryDto.entry_date ? new Date(updateExpenseEntryDto.entry_date) : undefined,
-        }
+          ...updateFields,
+          entry_date: entry_date ? new Date(entry_date) : undefined,
+          ...(tag_uuids !== undefined ? { tags: { set: tag_uuids.map((tagUuid) => ({ uuid: tagUuid })) } } : {}),
+        },
       });
 
       await this.updateAccountBalances({
@@ -184,7 +192,7 @@ export class ExpenseEntriesService {
         to_account_uuid: updatedEntry.to_account_uuid,
       });
 
-      return updatedEntry;
+      return this.findOne(user_uuid, uuid);
     } catch (error) {
       if (error instanceof NotFoundException || error instanceof BadRequestException) {
         throw error;
@@ -254,6 +262,34 @@ export class ExpenseEntriesService {
         throw new BadRequestException('Subcategory does not belong to the selected category');
       }
     }
+  }
+
+  private async validateTags(user_uuid: string, tag_uuids: string[]) {
+    if (tag_uuids.length === 0) {
+      return;
+    }
+
+    const count = await this.prisma.expenseTag.count({
+      where: {
+        user_uuid,
+        uuid: { in: tag_uuids },
+      },
+    });
+
+    if (count !== tag_uuids.length) {
+      throw new BadRequestException('One or more tags not found or do not belong to user');
+    }
+  }
+
+  private getEntryIncludes() {
+    return {
+      from_account: true,
+      to_account: true,
+      category: true,
+      subcategory: true,
+      expense_receipt: true,
+      tags: true,
+    };
   }
 
   private async updateAccountBalances(data: { type: ExpenseEntryType; amount: number; from_account_uuid: string; to_account_uuid?: string | null }) {

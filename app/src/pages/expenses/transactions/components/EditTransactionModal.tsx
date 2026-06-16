@@ -27,6 +27,7 @@ export function EditTransactionModal({ isOpen, onClose, transaction }: EditTrans
       category_uuid: data.category_uuid,
       subcategory_uuid: data.subcategory_uuid,
       entry_date: data.entry_date,
+      tag_uuids: data.tag_uuids ?? [],
     };
 
     updateEntry.mutate(

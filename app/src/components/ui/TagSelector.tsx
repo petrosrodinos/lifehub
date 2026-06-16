@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
 import { Tag, X, Plus, Check, ChevronDown, Loader2 } from 'lucide-react'
-import type { NoteTag, CreateNoteTagDto } from '../../features/notes/interfaces/note.interface'
 
 const PRESET_COLORS = [
     '#8b5cf6',
@@ -13,11 +12,22 @@ const PRESET_COLORS = [
     '#f97316',
 ] as const
 
+export type TagSelectorItem = {
+    uuid: string
+    title: string
+    color: string
+}
+
+export type CreateTagSelectorInput = {
+    title: string
+    color?: string
+}
+
 interface TagSelectorProps {
     selectedTagUuids: string[]
     onChange: (uuids: string[]) => void
-    allTags: NoteTag[]
-    onCreateTag: (data: CreateNoteTagDto) => Promise<NoteTag>
+    allTags: TagSelectorItem[]
+    onCreateTag: (data: CreateTagSelectorInput) => Promise<TagSelectorItem>
     isCreating?: boolean
 }
 

@@ -273,6 +273,16 @@ exports.Prisma.ExpenseEntryScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.ExpenseTagScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  title: 'title',
+  color: 'color',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.ExpenseStoreScalarFieldEnum = {
   id: 'id',
   uuid: 'uuid',
@@ -734,6 +744,7 @@ exports.Prisma.ModelName = {
   ExpenseCategory: 'ExpenseCategory',
   ExpenseSubcategory: 'ExpenseSubcategory',
   ExpenseEntry: 'ExpenseEntry',
+  ExpenseTag: 'ExpenseTag',
   ExpenseStore: 'ExpenseStore',
   ExpenseReceipt: 'ExpenseReceipt',
   ExpenseProduct: 'ExpenseProduct',

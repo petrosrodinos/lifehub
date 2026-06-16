@@ -157,6 +157,13 @@ export const ApiRoutes = {
       update: (uuid: string) => `/hidden-subcategories/${uuid}`,
       delete: (uuid: string) => `/hidden-subcategories/${uuid}`,
     },
+    tags: {
+      list: "/expense-tags",
+      create: "/expense-tags",
+      get: (uuid: string) => `/expense-tags/${uuid}`,
+      update: (uuid: string) => `/expense-tags/${uuid}`,
+      delete: (uuid: string) => `/expense-tags/${uuid}`,
+    },
     entries: {
       list: "/expense-entries",
       create: "/expense-entries",
