@@ -1,4 +1,5 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { formatCurrency } from "../../../../../utils/format-currency.utils";
 
 type DataPoint = {
   date: string;
@@ -37,7 +38,7 @@ export function BalanceTrendChart({ data }: BalanceTrendChartProps) {
             stroke="#94a3b8"
             tick={{ fill: "#94a3b8" }}
             tickLine={{ stroke: "#334155" }}
-            tickFormatter={(value) => `$${value.toLocaleString()}`}
+            tickFormatter={(value) => formatCurrency(value, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
           />
           <Tooltip
             contentStyle={{
@@ -46,7 +47,7 @@ export function BalanceTrendChart({ data }: BalanceTrendChartProps) {
               borderRadius: "8px",
               color: "#f1f5f9",
             }}
-            formatter={(value: number | undefined) => value !== undefined ? [`$${value.toLocaleString()}`, "Balance"] : ["N/A", "Balance"]}
+            formatter={(value: number | undefined) => value !== undefined ? [formatCurrency(value), "Balance"] : ["N/A", "Balance"]}
             labelStyle={{ color: "#cbd5e1" }}
           />
           <Legend

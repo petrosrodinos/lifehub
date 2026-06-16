@@ -4,7 +4,7 @@ export interface NamedEntity {
 }
 
 export interface EntityCandidate extends NamedEntity {
-    type: 'account' | 'category' | 'subcategory';
+    type: 'account' | 'category' | 'subcategory' | 'tag';
 }
 
 export type EntityResolution =
@@ -90,4 +90,23 @@ export function resolveCategoryOrSubcategory(
     }
 
     return { ok: false, error: `No category or subcategory matching "${name}" was found.` };
+}
+
+export function resolveTag(tags: Array<{ uuid: string; title: string }>, name: string): EntityResolution {
+    const candidates = tags.map((tag) => ({ uuid: tag.uuid, name: tag.title }));
+    const matches = matchByName(candidates, name);
+
+    if (matches.length === 0) {
+        return { ok: false, error: `No tag matching "${name}" was found.` };
+    }
+
+    if (matches.length > 1) {
+        return {
+            ok: false,
+            error: `Multiple tags match "${name}". Ask the user to clarify or call list_expense_tags.`,
+            candidates: matches.map((match) => ({ ...match, type: 'tag' as const })),
+        };
+    }
+
+    return { ok: true, uuid: matches[0].uuid };
 }

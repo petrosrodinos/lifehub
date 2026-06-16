@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { ChatMessage } from '@/generated/prisma';
 import { ChatImageService } from '@/assistant/images/chat-image.service';
 import { ExpensesRetrievalService } from '@/assistant/retrieval/expenses-retrieval.service';
+import { GymRetrievalService } from '@/assistant/retrieval/gym-retrieval.service';
 import { NotesRetrievalService } from '@/assistant/retrieval/notes-retrieval.service';
 import { createToolRegistry } from '@/assistant/tools/tool-registry';
 import { ASSISTANT_SYSTEM_PROMPT } from '@/assistant/prompts/system-prompt';
@@ -21,6 +22,7 @@ export class AssistantOrchestratorService {
     constructor(
         private readonly notesRetrieval: NotesRetrievalService,
         private readonly expensesRetrieval: ExpensesRetrievalService,
+        private readonly gymRetrieval: GymRetrievalService,
         private readonly chatImageService: ChatImageService,
         private readonly assistantConfig: AssistantConfig,
         private readonly configService: ConfigService,
@@ -40,6 +42,7 @@ export class AssistantOrchestratorService {
         const tools = createToolRegistry({
             notesRetrieval: this.notesRetrieval,
             expensesRetrieval: this.expensesRetrieval,
+            gymRetrieval: this.gymRetrieval,
             chatImageService: this.chatImageService,
             assistantConfig: this.assistantConfig,
         });

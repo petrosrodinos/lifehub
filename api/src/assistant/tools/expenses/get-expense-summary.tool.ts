@@ -10,14 +10,15 @@ export function createGetExpenseSummaryTool(
 ) {
     return tool({
         name: 'get_expense_summary',
-        description: 'Get income, expense, and balance totals for a date range, optionally filtered by account name.',
+        description: 'Get income, expense, and balance totals for a date range, optionally filtered by account name or tag name.',
         parameters: z.object({
             from_date: z.string().nullable().optional().describe('Start date in ISO format (YYYY-MM-DD)'),
             to_date: z.string().nullable().optional().describe('End date in ISO format (YYYY-MM-DD)'),
             account_name: z.string().nullable().optional().describe('Account name to filter by'),
+            tag_name: z.string().nullable().optional().describe('Tag name to filter by, e.g. Claude'),
         }),
         timeoutMs: assistantConfig.toolTimeoutMs,
-        async execute({ from_date, to_date, account_name }, runContext) {
+        async execute({ from_date, to_date, account_name, tag_name }, runContext) {
             const context = runContext?.context as AssistantToolContext | undefined;
 
             if (!context?.user_uuid) {
@@ -28,6 +29,7 @@ export function createGetExpenseSummaryTool(
                 from_date: from_date ?? undefined,
                 to_date: to_date ?? undefined,
                 account_name: account_name ?? undefined,
+                tag_name: tag_name ?? undefined,
             });
         },
     });

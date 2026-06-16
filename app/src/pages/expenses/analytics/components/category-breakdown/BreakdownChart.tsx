@@ -1,6 +1,7 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 import type { BreakdownData } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { getPieChartDimensions, useIsSmallScreen } from "../../utils/pie-chart.utils";
+import { formatCurrency } from "../../../../../utils/format-currency.utils";
 
 type BreakdownChartProps = {
   data: BreakdownData[];
@@ -75,7 +76,7 @@ export function BreakdownChart({ data, groupBy }: BreakdownChartProps) {
               contentStyle={tooltipContentStyle}
               formatter={(value: number | undefined, _name: string | undefined, item) => {
                 const payload = item.payload as ChartPayload;
-                const amount = value !== undefined ? `$${value.toLocaleString()}` : "N/A";
+                const amount = value !== undefined ? formatCurrency(value) : "N/A";
                 const percentage = payload.percentage.toFixed(1);
                 return [`${amount} (${percentage}%) · ${payload.count} transactions`, item.payload.name];
               }}

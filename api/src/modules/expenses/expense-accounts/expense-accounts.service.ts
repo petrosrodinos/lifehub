@@ -37,6 +37,20 @@ export class ExpenseAccountsService {
     }
   }
 
+  async getTotalBalance(user_uuid: string): Promise<{ balance: number }> {
+
+    try {
+      const result = await this.prisma.expenseAccount.aggregate({
+        where: { user_uuid },
+        _sum: { balance: true },
+      });
+
+      return { balance: Number(result._sum.balance || 0) };
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to get total balance');
+    }
+  }
+
   async findOne(user_uuid: string, uuid: string) {
 
     try {

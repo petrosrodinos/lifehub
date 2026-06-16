@@ -4,6 +4,7 @@ import type {
   ExpenseAccount,
   CreateExpenseAccountDto,
   UpdateExpenseAccountDto,
+  ExpenseAccountsBalance,
 } from '../interfaces/expense-accounts.interfaces'
 
 export const getExpenseAccounts = async (): Promise<ExpenseAccount[]> => {
@@ -12,6 +13,15 @@ export const getExpenseAccounts = async (): Promise<ExpenseAccount[]> => {
     return response.data
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to fetch expense accounts')
+  }
+}
+
+export const getExpenseAccountsBalance = async (): Promise<ExpenseAccountsBalance> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.expenses.accounts.balance)
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to fetch total balance')
   }
 }
 

@@ -1,6 +1,7 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import type { PriceEvolutionPoint } from "../../../../../features/receipts/expense-receipt-item/interfaces/price-evolution.interfaces";
 import { formatPriceEvolutionDate } from "../../../utils/analytics.utils";
+import { formatCurrency } from "../../../../../utils/format-currency.utils";
 
 type PriceEvolutionChartProps = {
   data: PriceEvolutionPoint[];
@@ -23,7 +24,7 @@ export function PriceEvolutionChart({ data }: PriceEvolutionChartProps) {
 
         <XAxis dataKey="label" stroke="#94a3b8" tick={{ fill: "#94a3b8", fontSize: 12 }} tickLine={{ stroke: "#334155" }} />
 
-        <YAxis stroke="#94a3b8" tick={{ fill: "#94a3b8", fontSize: 12 }} tickLine={{ stroke: "#334155" }} tickFormatter={(value: number) => `€${value.toFixed(2)}`} />
+        <YAxis stroke="#94a3b8" tick={{ fill: "#94a3b8", fontSize: 12 }} tickLine={{ stroke: "#334155" }} tickFormatter={(value: number) => formatCurrency(value)} />
 
         <Tooltip
           contentStyle={{
@@ -32,7 +33,7 @@ export function PriceEvolutionChart({ data }: PriceEvolutionChartProps) {
             borderRadius: "8px",
             color: "#f1f5f9",
           }}
-          formatter={(value: number | undefined) => [`€${(value ?? 0).toFixed(2)}`, "Unit Price"]}
+          formatter={(value: number | undefined) => [formatCurrency(value ?? 0), "Unit Price"]}
           labelFormatter={(label, payload) => {
             const storeName = payload?.[0]?.payload?.store_name ?? "Unknown store";
 

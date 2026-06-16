@@ -1,5 +1,6 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import type { TransactionTrendData } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { formatCurrency } from "../../../../../utils/format-currency.utils";
 
 type TransactionTrendChartProps = {
   data: TransactionTrendData[];
@@ -40,7 +41,7 @@ export function TransactionTrendChart({ data, type }: TransactionTrendChartProps
             stroke="#94a3b8"
             tick={{ fill: "#94a3b8" }}
             tickLine={{ stroke: "#334155" }}
-            tickFormatter={(value) => `$${value.toLocaleString()}`}
+            tickFormatter={(value) => formatCurrency(value, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
           />
           <Tooltip
             contentStyle={{
@@ -49,7 +50,7 @@ export function TransactionTrendChart({ data, type }: TransactionTrendChartProps
               borderRadius: "8px",
               color: "#f1f5f9",
             }}
-            formatter={(value: number | undefined) => value !== undefined ? [`$${value.toLocaleString()}`, "Total"] : ["N/A", "Total"]}
+            formatter={(value: number | undefined) => value !== undefined ? [formatCurrency(value), "Total"] : ["N/A", "Total"]}
             labelStyle={{ color: "#cbd5e1" }}
           />
           <Line

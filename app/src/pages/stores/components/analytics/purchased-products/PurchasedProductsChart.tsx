@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from "react"
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts"
 import type { PurchasedProductPoint } from "../../../../../features/receipts/expense-receipt-item/interfaces/purchased-products.interfaces"
+import { formatCurrency } from "../../../../../utils/format-currency.utils"
 
 const SMALL_SCREEN_BREAKPOINT = 640
 
@@ -112,7 +113,7 @@ export function PurchasedProductsChart({ data }: PurchasedProductsChartProps) {
               data.find((d) => d.name === safeName)?.total_amount ?? 0
 
             return [
-              `${safeValue} units · €${total.toFixed(2)}`,
+              `${safeValue} units · ${formatCurrency(total)}`,
               safeName,
             ] as [string, string]
           }}

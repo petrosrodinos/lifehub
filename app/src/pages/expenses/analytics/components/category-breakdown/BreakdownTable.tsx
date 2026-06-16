@@ -1,4 +1,5 @@
 import type { BreakdownData } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { formatCurrency } from "../../../../../utils/format-currency.utils";
 
 type BreakdownTableProps = {
   data: BreakdownData[];
@@ -51,14 +52,14 @@ export function BreakdownTable({ data, groupBy }: BreakdownTableProps) {
                   <td className="py-3 px-2 text-sm text-slate-400">{item.categoryName}</td>
                 )}
                 <td className="py-3 px-2 text-sm text-white text-right font-mono">
-                  ${item.total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  {formatCurrency(item.total)}
                 </td>
                 <td className="py-3 px-2 text-sm text-slate-400 text-right">{item.count}</td>
                 <td className="py-3 px-2 text-sm text-slate-400 text-right">
                   {item.percentage.toFixed(1)}%
                 </td>
                 <td className="py-3 px-2 text-sm text-slate-400 text-right font-mono">
-                  ${(item.total / item.count).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  {formatCurrency(item.total / item.count)}
                 </td>
               </tr>
             ))}
@@ -69,12 +70,12 @@ export function BreakdownTable({ data, groupBy }: BreakdownTableProps) {
                 Total
               </td>
               <td className="py-3 px-2 text-sm font-semibold text-white text-right font-mono">
-                ${total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                {formatCurrency(total)}
               </td>
               <td className="py-3 px-2 text-sm font-semibold text-white text-right">{totalTransactions}</td>
               <td className="py-3 px-2 text-sm font-semibold text-white text-right">100%</td>
               <td className="py-3 px-2 text-sm font-semibold text-white text-right font-mono">
-                ${(total / totalTransactions).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                {formatCurrency(total / totalTransactions)}
               </td>
             </tr>
           </tfoot>

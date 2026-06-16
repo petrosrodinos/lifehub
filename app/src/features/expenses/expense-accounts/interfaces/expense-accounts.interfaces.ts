@@ -23,3 +23,7 @@ export interface UpdateExpenseAccountDto {
   color?: string
   balance?: number
 }
+
+export interface ExpenseAccountsBalance {
+  balance: number
+}

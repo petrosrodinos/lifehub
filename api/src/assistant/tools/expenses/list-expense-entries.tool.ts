@@ -11,7 +11,7 @@ export function createListExpenseEntriesTool(
 ) {
     return tool({
         name: 'list_expense_entries',
-        description: 'List the user expense, income, or transfer entries with optional filters by date range, account name, category name, subcategory name, or description search.',
+        description: 'List the user expense, income, or transfer entries with optional filters by date range, account name, category name, subcategory name, tag name, or description search.',
         parameters: z.object({
             from_date: z.string().nullable().optional().describe('Start date in ISO format (YYYY-MM-DD)'),
             to_date: z.string().nullable().optional().describe('End date in ISO format (YYYY-MM-DD)'),
@@ -19,11 +19,12 @@ export function createListExpenseEntriesTool(
             account_name: z.string().nullable().optional().describe('Account name to filter by, e.g. Eurobank'),
             category_name: z.string().nullable().optional().describe('Category name to filter by'),
             subcategory_name: z.string().nullable().optional().describe('Subcategory name to filter by'),
+            tag_name: z.string().nullable().optional().describe('Tag name to filter by, e.g. Claude'),
             search: z.string().nullable().optional().describe('Search text in the entry description'),
             limit: z.number().int().min(1).max(50).nullable().optional().describe('Maximum number of entries to return'),
         }),
         timeoutMs: assistantConfig.toolTimeoutMs,
-        async execute({ from_date, to_date, type, account_name, category_name, subcategory_name, search, limit }, runContext) {
+        async execute({ from_date, to_date, type, account_name, category_name, subcategory_name, tag_name, search, limit }, runContext) {
             const context = runContext?.context as AssistantToolContext | undefined;
 
             if (!context?.user_uuid) {
@@ -37,6 +38,7 @@ export function createListExpenseEntriesTool(
                 account_name: account_name ?? undefined,
                 category_name: category_name ?? undefined,
                 subcategory_name: subcategory_name ?? undefined,
+                tag_name: tag_name ?? undefined,
                 search: search ?? undefined,
                 limit: limit ?? undefined,
             });

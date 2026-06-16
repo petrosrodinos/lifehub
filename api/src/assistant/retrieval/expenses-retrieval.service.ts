@@ -4,9 +4,11 @@ import { ExpenseEntriesService } from '@/modules/expenses/expense-entries/expens
 import { ExpenseAccountsService } from '@/modules/expenses/expense-accounts/expense-accounts.service';
 import { ExpenseCategoriesService } from '@/modules/expenses/expense-categories/expense-categories.service';
 import { ExpenseSubcategoriesService } from '@/modules/expenses/expense-subcategories/expense-subcategories.service';
+import { ExpenseTagsService } from '@/modules/expenses/expense-tags/expense-tags.service';
 import {
     resolveAccount,
     resolveCategoryOrSubcategory,
+    resolveTag,
     type EntityCandidate,
 } from '@/assistant/utils/expense-entity-resolver.helper';
 
@@ -17,6 +19,7 @@ export interface ExpenseEntryFilters {
     account_name?: string;
     category_name?: string;
     subcategory_name?: string;
+    tag_name?: string;
     search?: string;
     limit?: number;
 }
@@ -25,6 +28,7 @@ export interface ExpenseSummaryFilters {
     from_date?: string;
     to_date?: string;
     account_name?: string;
+    tag_name?: string;
 }
 
 export interface ExpenseBreakdownFilters {
@@ -82,11 +86,17 @@ export interface ExpenseCategoryItem {
     subcategories: Array<{ uuid: string; name: string }>;
 }
 
+export interface ExpenseTagItem {
+    uuid: string;
+    title: string;
+}
+
 type ResolvedEntryFilters = {
     type?: ExpenseEntryType;
     from_account_uuid?: string;
     category_uuid?: string;
     subcategory_uuid?: string;
+    tag_uuid?: string;
 };
 
 type ResolverError = {
@@ -109,6 +119,7 @@ export class ExpensesRetrievalService {
         private readonly expenseAccountsService: ExpenseAccountsService,
         private readonly expenseCategoriesService: ExpenseCategoriesService,
         private readonly expenseSubcategoriesService: ExpenseSubcategoriesService,
+        private readonly expenseTagsService: ExpenseTagsService,
     ) {}
 
     async listEntries(user_uuid: string, filters: ExpenseEntryFilters): Promise<ExpenseEntriesResult | ResolverError> {
@@ -129,6 +140,7 @@ export class ExpensesRetrievalService {
             from_date: this.parseDate(filters.from_date),
             to_date: this.parseDate(filters.to_date),
             search: filters.search,
+            tag_uuid: resolved.tag_uuid,
         });
 
         this.logger.log(`Listed ${result.data.length} expense entries for user ${user_uuid}`);
@@ -144,6 +156,7 @@ export class ExpensesRetrievalService {
 
     async getSummary(user_uuid: string, filters: ExpenseSummaryFilters): Promise<ExpenseSummaryResult | ResolverError> {
         let accountUuids: string | undefined;
+        let tagUuid: string | undefined;
 
         if (filters.account_name) {
             const accounts = await this.expenseAccountsService.findAll(user_uuid);
@@ -156,8 +169,20 @@ export class ExpensesRetrievalService {
             accountUuids = accountResolution.uuid;
         }
 
+        if (filters.tag_name) {
+            const tags = await this.expenseTagsService.findAll(user_uuid);
+            const tagResolution = resolveTag(tags, filters.tag_name);
+
+            if (tagResolution.ok === false) {
+                return { error: tagResolution.error, candidates: tagResolution.candidates };
+            }
+
+            tagUuid = tagResolution.uuid;
+        }
+
         const stats = await this.expenseEntriesService.getStats(user_uuid, {
             account_uuids: accountUuids,
+            tag_uuid: tagUuid,
             from_date: this.parseDate(filters.from_date),
             to_date: this.parseDate(filters.to_date),
         });
@@ -206,10 +231,20 @@ export class ExpensesRetrievalService {
         }));
     }
 
+    async listTags(user_uuid: string): Promise<ExpenseTagItem[]> {
+        const tags = await this.expenseTagsService.findAll(user_uuid);
+
+        return tags.map((tag) => ({
+            uuid: tag.uuid,
+            title: tag.title,
+        }));
+    }
+
     private async resolveEntryFilters(user_uuid: string, filters: ExpenseEntryFilters): Promise<ResolvedEntryFiltersResult> {
         let from_account_uuid: string | undefined;
         let category_uuid: string | undefined;
         let subcategory_uuid: string | undefined;
+        let tag_uuid: string | undefined;
 
         if (filters.account_name) {
             const accounts = await this.expenseAccountsService.findAll(user_uuid);
@@ -247,11 +282,23 @@ export class ExpensesRetrievalService {
             subcategory_uuid = resolution.subcategory_uuid;
         }
 
+        if (filters.tag_name) {
+            const tags = await this.expenseTagsService.findAll(user_uuid);
+            const tagResolution = resolveTag(tags, filters.tag_name);
+
+            if (tagResolution.ok === false) {
+                return { error: tagResolution.error, candidates: tagResolution.candidates };
+            }
+
+            tag_uuid = tagResolution.uuid;
+        }
+
         return {
             type: filters.type,
             from_account_uuid,
             category_uuid,
             subcategory_uuid,
+            tag_uuid,
         };
     }
 
@@ -289,7 +336,7 @@ export class ExpensesRetrievalService {
             account: entry.from_account.name,
             category: entry.category?.name ?? null,
             subcategory: entry.subcategory?.name ?? null,
-            tags: entry.tags.map((tag) => tag.title),
+            tags: (entry.tags ?? []).map((tag) => tag.title),
         };
     }
 }

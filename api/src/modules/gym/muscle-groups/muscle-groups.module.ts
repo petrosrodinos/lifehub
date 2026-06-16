@@ -7,5 +7,6 @@ import { PrismaModule } from '@/core/databases/prisma/prisma.module'
   imports: [PrismaModule],
   controllers: [MuscleGroupsController],
   providers: [MuscleGroupsService],
+  exports: [MuscleGroupsService],
 })
 export class MuscleGroupsModule {}

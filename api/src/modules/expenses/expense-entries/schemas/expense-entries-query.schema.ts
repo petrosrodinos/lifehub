@@ -12,6 +12,7 @@ export const ExpenseEntriesQuerySchema = z.object({
   from_date: z.coerce.date().optional(),
   to_date: z.coerce.date().optional(),
   search: z.string().optional(),
+  tag_uuid: z.string().uuid().optional(),
 });
 
 export type ExpenseEntriesQueryType = z.infer<typeof ExpenseEntriesQuerySchema>;

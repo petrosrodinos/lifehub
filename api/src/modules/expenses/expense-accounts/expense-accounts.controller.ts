@@ -33,6 +33,14 @@ export class ExpenseAccountsController {
     return this.expenseAccountsService.findAll(user_uuid);
   }
 
+  @Get('balance')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Get total balance across all expense accounts' })
+  @ApiResponse({ status: 200, description: 'Total balance retrieved successfully' })
+  getTotalBalance(@CurrentUser('user_uuid') user_uuid: string): Promise<{ balance: number }> {
+    return this.expenseAccountsService.getTotalBalance(user_uuid);
+  }
+
   @Get(':uuid')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Get a specific expense account by UUID' })

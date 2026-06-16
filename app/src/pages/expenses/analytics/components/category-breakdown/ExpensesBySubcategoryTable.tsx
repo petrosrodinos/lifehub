@@ -1,4 +1,5 @@
 import type { ExpenseBySubcategoryData } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { formatCurrency } from "../../../../../utils/format-currency.utils";
 
 type ExpensesBySubcategoryTableProps = {
   data: ExpenseBySubcategoryData[];
@@ -36,10 +37,10 @@ export function ExpensesBySubcategoryTable({ data }: ExpensesBySubcategoryTableP
               <tr key={item.subcategoryUuid} className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors">
                 <td className="py-3 px-2 text-sm text-white font-medium">{item.subcategoryName}</td>
                 <td className="py-3 px-2 text-sm text-slate-400">{item.categoryName}</td>
-                <td className="py-3 px-2 text-sm text-white text-right font-mono">${item.total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td className="py-3 px-2 text-sm text-white text-right font-mono">{formatCurrency(item.total)}</td>
                 <td className="py-3 px-2 text-sm text-slate-400 text-right">{item.count}</td>
                 <td className="py-3 px-2 text-sm text-slate-400 text-right">{item.percentage.toFixed(1)}%</td>
-                <td className="py-3 px-2 text-sm text-slate-400 text-right font-mono">${(item.total / item.count).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td className="py-3 px-2 text-sm text-slate-400 text-right font-mono">{formatCurrency(item.total / item.count)}</td>
               </tr>
             ))}
           </tbody>
@@ -48,10 +49,10 @@ export function ExpensesBySubcategoryTable({ data }: ExpensesBySubcategoryTableP
               <td colSpan={2} className="py-3 px-2 text-sm font-semibold text-white">
                 Total
               </td>
-              <td className="py-3 px-2 text-sm font-semibold text-white text-right font-mono">${totalExpenses.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td className="py-3 px-2 text-sm font-semibold text-white text-right font-mono">{formatCurrency(totalExpenses)}</td>
               <td className="py-3 px-2 text-sm font-semibold text-white text-right">{totalTransactions}</td>
               <td className="py-3 px-2 text-sm font-semibold text-white text-right">100%</td>
-              <td className="py-3 px-2 text-sm font-semibold text-white text-right font-mono">${(totalExpenses / totalTransactions).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+              <td className="py-3 px-2 text-sm font-semibold text-white text-right font-mono">{formatCurrency(totalExpenses / totalTransactions)}</td>
             </tr>
           </tfoot>
         </table>

@@ -125,6 +125,7 @@ export const ApiRoutes = {
     accounts: {
       list: "/expense-accounts",
       create: "/expense-accounts",
+      balance: "/expense-accounts/balance",
       get: (uuid: string) => `/expense-accounts/${uuid}`,
       update: (uuid: string) => `/expense-accounts/${uuid}`,
       delete: (uuid: string) => `/expense-accounts/${uuid}`,

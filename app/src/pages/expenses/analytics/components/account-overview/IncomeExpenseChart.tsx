@@ -1,4 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { formatCurrency } from "../../../../../utils/format-currency.utils";
 
 type DataPoint = {
   date: string;
@@ -38,7 +39,7 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
             stroke="#94a3b8"
             tick={{ fill: "#94a3b8" }}
             tickLine={{ stroke: "#334155" }}
-            tickFormatter={(value) => `$${value.toLocaleString()}`}
+            tickFormatter={(value) => formatCurrency(value, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
           />
           <Tooltip
             contentStyle={{
@@ -47,7 +48,7 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
               borderRadius: "8px",
               color: "#f1f5f9",
             }}
-            formatter={(value: number | undefined) => value !== undefined ? `$${value.toLocaleString()}` : "N/A"}
+            formatter={(value: number | undefined) => value !== undefined ? formatCurrency(value) : "N/A"}
             labelStyle={{ color: "#cbd5e1" }}
           />
           <Legend

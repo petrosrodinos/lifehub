@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AccountsHeader } from "./accounts/components/AccountsHeader";
+import { TotalBalance } from "./accounts/components/TotalBalance";
 import { AccountsList } from "./accounts/components/AccountsList";
 import { CreateAccountModal } from "./accounts/components/CreateAccountModal";
 import { TransactionsSection } from "./transactions/components/TransactionsSection";
@@ -39,6 +40,8 @@ export function ExpenseAccountsPage() {
           onTagsClick={() => setTagsMenuOpen(true)}
           onPresetsClick={() => setPresetsMenuOpen(true)}
         />
+
+        <TotalBalance />
 
         <AccountsList />
 

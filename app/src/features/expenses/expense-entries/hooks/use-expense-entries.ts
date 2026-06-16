@@ -25,6 +25,7 @@ const QUERY_KEYS = {
   expenseEntries: (params?: ExpenseEntriesQueryParams) => ['expense-entries', params],
   expenseEntry: (uuid: string) => ['expense-entries', uuid],
   expenseAccounts: ['expense-accounts'],
+  expenseAccountsBalance: ['expense-accounts', 'balance'],
   analytics: {
     balanceTrend: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'balance-trend', params],
     incomeExpense: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'income-expense', params],
@@ -57,6 +58,7 @@ export function useCreateExpenseEntry() {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['expense-entries'] })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccounts })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccountsBalance })
       const count = variables.quantity ?? 1
       toast.success(
         count === 1 ? 'Expense entry created successfully' : `${count} expense entries created successfully`,
@@ -79,6 +81,7 @@ export function useUpdateExpenseEntry() {
       queryClient.invalidateQueries({ queryKey: ['expense-entries'] })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseEntry(variables.uuid) })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccounts })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccountsBalance })
       toast.success('Expense entry updated successfully', { duration: 2000 })
     },
     onError: (error: Error) => {
@@ -95,6 +98,7 @@ export function useDeleteExpenseEntry() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['expense-entries'] })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccounts })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccountsBalance })
       toast.success('Expense entry deleted successfully', { duration: 2000 })
     },
     onError: (error: Error) => {

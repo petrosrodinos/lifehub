@@ -62,7 +62,7 @@ export class ExpenseEntriesService {
 
   async findAll(user_uuid: string, query: ExpenseEntriesQueryType) {
     try {
-      const { page, limit, type, category_uuid, subcategory_uuid, from_account_uuid, to_account_uuid, from_date, to_date, search } = query;
+      const { page, limit, type, category_uuid, subcategory_uuid, from_account_uuid, to_account_uuid, from_date, to_date, search, tag_uuid } = query;
 
       const skip = (page - 1) * limit;
 
@@ -104,6 +104,12 @@ export class ExpenseEntriesService {
         where.description = {
           contains: search,
           mode: 'insensitive',
+        };
+      }
+
+      if (tag_uuid) {
+        where.tags = {
+          some: { uuid: tag_uuid },
         };
       }
 
@@ -503,6 +509,12 @@ export class ExpenseEntriesService {
         if (query.to_date) {
           where.entry_date.lte = query.to_date;
         }
+      }
+
+      if (query.tag_uuid) {
+        where.tags = {
+          some: { uuid: query.tag_uuid },
+        };
       }
 
       where.type = { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] };

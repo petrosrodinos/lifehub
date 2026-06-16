@@ -1,5 +1,6 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts"
 import type { SpendingPerStorePoint } from "../../../../../features/receipts/expense-receipt-item/interfaces/spending-per-store.interfaces"
+import { formatCurrency } from "../../../../../utils/format-currency.utils"
 
 const CHART_COLORS = [
   "#8b5cf6",
@@ -57,7 +58,7 @@ export function StorePurchasesChart({ data }: StorePurchasesChartProps) {
           }}
           formatter={(value?: number, name?: string) => {
             const amount = value ?? 0
-            return [`€${amount.toFixed(2)}`, name ?? ""] as [string, string]
+            return [formatCurrency(amount), name ?? ""] as [string, string]
           }}
           labelStyle={{ color: "#cbd5e1" }}
         />

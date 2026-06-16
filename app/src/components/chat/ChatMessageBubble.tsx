@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import type { Components } from 'react-markdown'
 import type { DisplayMessage } from '../../features/assistant/interfaces/chat.interface'
 import { stripMarkdownImages } from '../../features/assistant/utils/strip-markdown-images.utils'
+import { ChatMessageImage } from './ChatMessageImage'
 
 const assistantMarkdownComponents: Components = {
     img: () => null,
@@ -52,13 +53,7 @@ export function ChatMessageBubble({ message }: ChatMessageBubbleProps) {
                 {!isUser && images.length > 0 && !isPending && (
                     <div className="mt-3 space-y-3">
                         {images.map((image) => (
-                            <figure key={image.url} className="space-y-2">
-                                <img
-                                    src={image.url}
-                                    alt={image.prompt}
-                                    className="w-full rounded-xl border border-slate-600/50"
-                                />
-                            </figure>
+                            <ChatMessageImage key={image.url} url={image.url} alt={image.prompt} />
                         ))}
                     </div>
                 )}

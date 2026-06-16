@@ -1,3 +1,4 @@
+import { formatCurrency } from "../../../utils/format-currency.utils";
 import type { CreateExpenseEntryDto, ExpenseEntry } from "../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 
 export const expenseEntryToCreateDto = (transaction: ExpenseEntry): Partial<CreateExpenseEntryDto> => ({
@@ -23,11 +24,6 @@ export const formatDate = (value: string) => {
 
 }
 
-export const formatAmount = (value: any) => {
-    const amount = typeof value === "string" ? parseFloat(value) : value;
-
-    return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-    }).format(Math.abs(amount));
+export const formatAmount = (value: string | number) => {
+    return formatCurrency(value, { absolute: true });
 }

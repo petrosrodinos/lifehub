@@ -1,3 +1,5 @@
+import { formatCurrency } from "../../../../../utils/format-currency.utils";
+
 type StatsCardProps = {
   label: string;
   value: number;
@@ -25,7 +27,7 @@ export function StatsCard({ label, value, color, icon }: StatsCardProps) {
       <div className="flex items-center justify-between mb-2">
         <span className="text-2xl">{icon}</span>
         <span className={`text-2xl font-bold ${textColorClasses[color]}`}>
-          ${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          {formatCurrency(value)}
         </span>
       </div>
       <p className="text-sm text-slate-400">{label}</p>

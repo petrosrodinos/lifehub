@@ -1,3 +1,5 @@
+import { formatCurrency } from "../../../utils/format-currency.utils"
+
 export const formatReceiptDate = (value: string): string => {
     const date = new Date(value)
 
@@ -9,12 +11,7 @@ export const formatReceiptDate = (value: string): string => {
 }
 
 export const formatReceiptAmount = (value: string | number): string => {
-    const amount = typeof value === "string" ? parseFloat(value) : value
-
-    return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-    }).format(amount)
+    return formatCurrency(value)
 }
 
 export const parseNumericValue = (value: string | number): number => {

@@ -7,6 +7,7 @@ import type {
 import {
   getExpenseAccounts,
   getExpenseAccount,
+  getExpenseAccountsBalance,
   createExpenseAccount,
   updateExpenseAccount,
   deleteExpenseAccount,
@@ -14,6 +15,7 @@ import {
 
 const QUERY_KEYS = {
   expenseAccounts: ['expense-accounts'],
+  expenseAccountsBalance: ['expense-accounts', 'balance'],
   expenseAccount: (uuid: string) => ['expense-accounts', uuid],
   expenseEntries: ['expense-entries'],
 }
@@ -22,6 +24,13 @@ export function useExpenseAccounts() {
   return useQuery({
     queryKey: QUERY_KEYS.expenseAccounts,
     queryFn: getExpenseAccounts,
+  })
+}
+
+export function useExpenseAccountsBalance() {
+  return useQuery({
+    queryKey: QUERY_KEYS.expenseAccountsBalance,
+    queryFn: getExpenseAccountsBalance,
   })
 }
 
@@ -40,6 +49,7 @@ export function useCreateExpenseAccount() {
     mutationFn: (data: CreateExpenseAccountDto) => createExpenseAccount(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccounts })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccountsBalance })
       toast.success('Expense account created successfully', { duration: 2000 })
     },
     onError: (error: Error) => {
@@ -56,6 +66,7 @@ export function useUpdateExpenseAccount() {
       updateExpenseAccount(uuid, data),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccounts })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccountsBalance })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccount(variables.uuid) })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseEntries })
       toast.success('Expense account updated successfully', { duration: 2000 })
@@ -73,6 +84,7 @@ export function useDeleteExpenseAccount() {
     mutationFn: (uuid: string) => deleteExpenseAccount(uuid),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccounts })
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccountsBalance })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseEntries })
       toast.success('Expense account deleted successfully', { duration: 2000 })
     },
