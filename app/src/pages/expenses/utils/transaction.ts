@@ -1,3 +1,16 @@
+import type { CreateExpenseEntryDto, ExpenseEntry } from "../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+
+export const expenseEntryToCreateDto = (transaction: ExpenseEntry): Partial<CreateExpenseEntryDto> => ({
+  type: transaction.type,
+  amount: typeof transaction.amount === "string" ? parseFloat(transaction.amount) : transaction.amount,
+  description: transaction.description,
+  from_account_uuid: transaction.from_account_uuid,
+  to_account_uuid: transaction.to_account_uuid,
+  category_uuid: transaction.category_uuid,
+  subcategory_uuid: transaction.subcategory_uuid,
+  entry_date: transaction.entry_date,
+});
+
 export const formatDate = (value: string) => {
     const date = new Date(value);
 

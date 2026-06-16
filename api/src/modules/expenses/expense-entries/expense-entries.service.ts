@@ -16,23 +16,29 @@ export class ExpenseEntriesService {
     try {
       await this.validateRelations(user_uuid, createExpenseEntryDto);
 
-      const entry = await this.prisma.expenseEntry.create({
-        data: {
-          user_uuid,
-          type: createExpenseEntryDto.type,
-          amount: createExpenseEntryDto.amount,
-          description: createExpenseEntryDto.description,
-          from_account_uuid: createExpenseEntryDto.from_account_uuid,
-          to_account_uuid: createExpenseEntryDto.to_account_uuid,
-          category_uuid: createExpenseEntryDto.category_uuid,
-          subcategory_uuid: createExpenseEntryDto.subcategory_uuid,
-          entry_date: createExpenseEntryDto.entry_date ? new Date(createExpenseEntryDto.entry_date) : new Date(),
-        }
-      });
+      const quantity = createExpenseEntryDto.quantity ?? 1;
 
-      await this.updateAccountBalances(createExpenseEntryDto);
+      const entryData = {
+        user_uuid,
+        type: createExpenseEntryDto.type,
+        amount: createExpenseEntryDto.amount,
+        description: createExpenseEntryDto.description,
+        from_account_uuid: createExpenseEntryDto.from_account_uuid,
+        to_account_uuid: createExpenseEntryDto.to_account_uuid,
+        category_uuid: createExpenseEntryDto.category_uuid,
+        subcategory_uuid: createExpenseEntryDto.subcategory_uuid,
+        entry_date: createExpenseEntryDto.entry_date ? new Date(createExpenseEntryDto.entry_date) : new Date(),
+      };
 
-      return entry;
+      let lastEntry;
+
+      for (let i = 0; i < quantity; i++) {
+        lastEntry = await this.prisma.expenseEntry.create({ data: entryData });
+
+        await this.updateAccountBalances(createExpenseEntryDto);
+      }
+
+      return lastEntry;
     } catch (error) {
       if (error instanceof BadRequestException) {
         throw error;

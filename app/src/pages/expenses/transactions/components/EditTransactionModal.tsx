@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Trash2 } from "lucide-react";
 import { useUpdateExpenseEntry } from "../../../../features/expenses/expense-entries/hooks/use-expense-entries";
 import type { ExpenseEntry, UpdateExpenseEntryDto, CreateExpenseEntryDto } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { expenseEntryToCreateDto } from "../../utils/transaction";
 import { TransactionForm } from "./TransactionForm";
 import { DeleteTransactionModal } from "./DeleteTransactionModal";
 import { Modal } from "../../../../components/ui/Modal";
@@ -47,16 +48,7 @@ export function EditTransactionModal({ isOpen, onClose, transaction }: EditTrans
     onClose();
   };
 
-  const initialData: Partial<CreateExpenseEntryDto> = {
-    type: transaction.type,
-    amount: typeof transaction.amount === "string" ? parseFloat(transaction.amount) : transaction.amount,
-    description: transaction.description,
-    from_account_uuid: transaction.from_account_uuid,
-    to_account_uuid: transaction.to_account_uuid,
-    category_uuid: transaction.category_uuid,
-    subcategory_uuid: transaction.subcategory_uuid,
-    entry_date: transaction.entry_date,
-  };
+  const initialData: Partial<CreateExpenseEntryDto> = expenseEntryToCreateDto(transaction);
 
   return (
     <>

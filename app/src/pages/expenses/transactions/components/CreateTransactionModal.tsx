@@ -6,9 +6,11 @@ import { Modal } from "../../../../components/ui/Modal";
 type CreateTransactionModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  initialData?: Partial<CreateExpenseEntryDto>;
+  formKey?: string;
 };
 
-export function CreateTransactionModal({ isOpen, onClose }: CreateTransactionModalProps) {
+export function CreateTransactionModal({ isOpen, onClose, initialData, formKey = "new" }: CreateTransactionModalProps) {
   const createEntry = useCreateExpenseEntry();
 
   const handleSubmit = (data: CreateExpenseEntryDto) => {
@@ -21,7 +23,7 @@ export function CreateTransactionModal({ isOpen, onClose }: CreateTransactionMod
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Add Transaction" scrollable>
-      <TransactionForm onSubmit={handleSubmit} onCancel={onClose} submitLabel="Create" isPending={createEntry.isPending} />
+      <TransactionForm key={formKey} onSubmit={handleSubmit} onCancel={onClose} submitLabel="Create" isPending={createEntry.isPending} initialData={initialData} showQuantity />
     </Modal>
   );
 }

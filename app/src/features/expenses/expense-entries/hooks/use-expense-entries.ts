@@ -54,10 +54,14 @@ export function useCreateExpenseEntry() {
 
   return useMutation({
     mutationFn: (data: CreateExpenseEntryDto) => createExpenseEntry(data),
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['expense-entries'] })
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccounts })
-      toast.success('Expense entry created successfully', { duration: 2000 })
+      const count = variables.quantity ?? 1
+      toast.success(
+        count === 1 ? 'Expense entry created successfully' : `${count} expense entries created successfully`,
+        { duration: 2000 },
+      )
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to create expense entry', { duration: 3000 })

@@ -6,12 +6,13 @@ import { SetCard } from "../workout-detail/components/SetCard";
 interface SortableSetCardProps {
   set: WorkoutSet;
   setNumber: number;
+  entrySets: WorkoutSet[];
   sortableProps: SortableItemRenderProps;
   onSelect?: () => void;
 }
 
 export function SortableSetCard(props: SortableSetCardProps) {
-  const { set, setNumber, sortableProps, onSelect } = props;
+  const { set, setNumber, entrySets, sortableProps, onSelect } = props;
   const { setNodeRef, attributes, listeners, style, isDragging } = sortableProps;
 
   return (
@@ -38,7 +39,7 @@ export function SortableSetCard(props: SortableSetCardProps) {
         }}
         className="flex-1 min-w-0 text-left rounded-lg border border-transparent hover:border-slate-700 focus:outline-none focus:ring-1 focus:ring-violet-500/50 transition-colors"
       >
-        <SetCard set={set} setNumber={setNumber} />
+        <SetCard set={set} setNumber={setNumber} entrySets={entrySets} />
       </button>
     </div>
   );

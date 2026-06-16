@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowUpRight, ArrowDownLeft, ArrowRightLeft, Receipt } from "lucide-react";
+import { ArrowUpRight, ArrowDownLeft, ArrowRightLeft, Receipt, Copy } from "lucide-react";
 import type { ExpenseEntry } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { EditTransactionModal } from "./EditTransactionModal";
@@ -9,9 +9,10 @@ import { Routes } from "../../../../routes/routes";
 
 type TransactionCardProps = {
   transaction: ExpenseEntry;
+  onDuplicate?: (transaction: ExpenseEntry) => void;
 };
 
-export function TransactionCard({ transaction }: TransactionCardProps) {
+export function TransactionCard({ transaction, onDuplicate }: TransactionCardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -33,6 +34,14 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
       navigate(`${Routes.receipts.prefix}?receipt=${receipt.uuid}`);
     },
     [transaction.expense_receipt, navigate],
+  );
+
+  const handleDuplicateClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      onDuplicate?.(transaction);
+    },
+    [onDuplicate, transaction],
   );
 
   const getTypeIcon = () => {
@@ -109,6 +118,12 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
+            {onDuplicate && (
+              <button type="button" onClick={handleDuplicateClick} className="p-1.5 text-slate-400 hover:text-violet-300 hover:bg-violet-500/15 rounded-md transition-colors" title="Duplicate transaction">
+                <Copy className="w-4 h-4" />
+              </button>
+            )}
+
             {hasReceipt && (
               <button type="button" onClick={handleReceiptClick} className="p-1.5 text-violet-400 hover:text-violet-300 hover:bg-violet-500/15 rounded-md transition-colors">
                 <Receipt className="w-4 h-4" />

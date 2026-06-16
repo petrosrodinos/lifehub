@@ -11,15 +11,17 @@ type TransactionFormProps = {
   submitLabel: string;
   isPending: boolean;
   initialData?: Partial<CreateExpenseEntryDto>;
+  showQuantity?: boolean;
 };
 
-export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, initialData }: TransactionFormProps) {
+export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, initialData, showQuantity = false }: TransactionFormProps) {
   const { data: accountsData } = useExpenseAccounts();
   const { data: categoriesData } = useExpenseCategories();
   const { data: subcategoriesData } = useExpenseSubcategories();
 
   const [type, setType] = useState<ExpenseEntryType>(initialData?.type || ExpenseEntryTypes.EXPENSE);
   const [amount, setAmount] = useState(initialData?.amount?.toString() || "");
+  const [quantity, setQuantity] = useState("1");
   const [description, setDescription] = useState(initialData?.description || "");
   const [fromAccountUuid, setFromAccountUuid] = useState(initialData?.from_account_uuid || "");
   const [toAccountUuid, setToAccountUuid] = useState(initialData?.to_account_uuid || "");
@@ -53,12 +55,14 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
       category_uuid: isTransfer ? undefined : categoryUuid,
       subcategory_uuid: isTransfer ? undefined : subcategoryUuid,
       entry_date: entryDate,
+      ...(showQuantity && { quantity: parseInt(quantity, 10) }),
     };
 
     onSubmit(data);
   };
 
-  const isFormValid = amount && parseFloat(amount) > 0 && fromAccountUuid && (isTransfer ? toAccountUuid : categoryUuid && subcategoryUuid);
+  const parsedQuantity = parseInt(quantity, 10);
+  const isFormValid = amount && parseFloat(amount) > 0 && fromAccountUuid && (isTransfer ? toAccountUuid : categoryUuid && subcategoryUuid) && (!showQuantity || (parsedQuantity >= 1 && Number.isInteger(parsedQuantity)));
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -108,6 +112,13 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
         <label className="block text-sm font-medium text-slate-300 mb-2">Amount</label>
         <input type="number" step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition-colors" disabled={isPending} required />
       </div>
+
+      {showQuantity && (
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Quantity</label>
+          <input type="number" min="1" step="1" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition-colors" disabled={isPending} required />
+        </div>
+      )}
 
       <div>
         <label className="block text-sm font-medium text-slate-300 mb-3">{type === ExpenseEntryTypes.TRANSFER ? "From Account" : "Account"}</label>

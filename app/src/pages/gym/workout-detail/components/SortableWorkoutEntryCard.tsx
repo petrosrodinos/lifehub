@@ -70,7 +70,7 @@ export function SortableWorkoutEntryCard({ entry, sortableProps }: SortableWorko
       {showSets && (
         <div className="space-y-3">
           {entry.sets?.map((set: WorkoutSet, index: number) => (
-            <SetCard key={set.uuid} set={set} setNumber={index + 1} />
+            <SetCard key={set.uuid} set={set} setNumber={index + 1} entrySets={entry.sets ?? []} />
           ))}
         </div>
       )}

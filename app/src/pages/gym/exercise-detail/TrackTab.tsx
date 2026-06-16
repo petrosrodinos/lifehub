@@ -95,7 +95,7 @@ export function TrackTab({ entry }: TrackTabProps) {
             gapClass="space-y-3"
           >
             {(set, index, sortableProps) => (
-              <SortableSetCard set={set} setNumber={index + 1} sortableProps={sortableProps} onSelect={() => setSelectedSetUuid(set.uuid)} />
+              <SortableSetCard set={set} setNumber={index + 1} entrySets={exerciseSets} sortableProps={sortableProps} onSelect={() => setSelectedSetUuid(set.uuid)} />
             )}
           </ReorderableList>
         )}

@@ -1,5 +1,6 @@
-import { Plus, FolderTree, Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
 import { useAuthStore } from '../../../../store/auth-store'
+import { AccountsHeaderActionsDropdown } from './AccountsHeaderActionsDropdown'
 
 type AccountsHeaderProps = {
   onCreateClick: () => void
@@ -27,22 +28,7 @@ export function AccountsHeader({ onCreateClick, onCategoriesClick }: AccountsHea
         <p className="text-sm text-slate-500 mt-0.5">Manage your financial accounts</p>
       </div>
       <div className="flex items-center gap-2 shrink-0">
-        <button
-          type="button"
-          onClick={onCategoriesClick}
-          className="p-2.5 text-slate-400 hover:text-violet-400 rounded-lg hover:bg-slate-800/50 transition-colors"
-          title="Manage categories"
-        >
-          <FolderTree className="w-5 h-5" />
-        </button>
-        <button
-          type="button"
-          onClick={onCreateClick}
-          className="flex items-center gap-2 px-3 py-1.5 bg-violet-500 hover:bg-violet-600 text-white text-sm font-medium rounded-lg transition-colors"
-        >
-          <Plus className="w-4 h-4" strokeWidth={2} />
-          <span className="hidden sm:inline">New</span>
-        </button>
+        <AccountsHeaderActionsDropdown onCreateClick={onCreateClick} onCategoriesClick={onCategoriesClick} />
       </div>
     </header>
   )

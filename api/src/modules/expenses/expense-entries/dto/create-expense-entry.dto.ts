@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional, IsEnum, IsDateString, Min } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsEnum, IsDateString, Min, IsInt, Max } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { ExpenseEntryType } from '@/generated/prisma';
@@ -72,4 +72,17 @@ export class CreateExpenseEntryDto {
   @IsOptional()
   @IsDateString()
   entry_date?: string;
+
+  @ApiProperty({
+    description: 'Number of identical entries to create',
+    example: 1,
+    required: false,
+    default: 1,
+  })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(100)
+  @Type(() => Number)
+  quantity?: number;
 }

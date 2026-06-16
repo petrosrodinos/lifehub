@@ -1,19 +1,22 @@
 import { useState } from "react";
-import { Edit2, Trash2 } from "lucide-react";
 import { DateTime } from "luxon";
 import type { WorkoutSet } from "../../../../features/gym/workout-sets/interfaces/workout-sets.interface";
+import { useDuplicateWorkoutSet } from "../../../../features/gym/workout-sets/hooks/use-duplicate-workout-set";
 import { DeleteSetModal } from "./DeleteSetModal";
 import { EditSetModal } from "./EditSetModal";
+import { SetActionsDropdown } from "./SetActionsDropdown";
 import { ExerciseTypes } from "../../../../features/gym/exercises/interfaces/exercises.interface";
 
 type SetCardProps = {
   set: WorkoutSet;
   setNumber: number;
+  entrySets?: WorkoutSet[];
 };
 
-export function SetCard({ set, setNumber }: SetCardProps) {
+export function SetCard({ set, setNumber, entrySets = [] }: SetCardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const duplicateSet = useDuplicateWorkoutSet();
 
   const renderSetDetails = () => {
     const details = [];
@@ -57,6 +60,10 @@ export function SetCard({ set, setNumber }: SetCardProps) {
     return DateTime.fromISO(timestamp).toFormat("h:mm a");
   };
 
+  const handleDuplicate = () => {
+    duplicateSet.mutate({ set, entrySets });
+  };
+
   return (
     <>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 sm:gap-3 p-2.5 sm:p-3 bg-slate-800/50 rounded-lg border border-slate-700 group hover:border-violet-500/40 transition-colors">
@@ -84,13 +91,13 @@ export function SetCard({ set, setNumber }: SetCardProps) {
           </div>
         </div>
 
-        <div className="flex gap-1 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity self-end sm:self-auto shrink-0">
-          <button type="button" onClick={() => setIsEditModalOpen(true)} className="p-1.5 text-slate-400 hover:text-violet-400 rounded-md hover:bg-slate-700 transition-colors">
-            <Edit2 className="w-4 h-4" />
-          </button>
-          <button type="button" onClick={() => setIsDeleteModalOpen(true)} className="p-1.5 text-slate-400 hover:text-red-400 rounded-md hover:bg-slate-700 transition-colors">
-            <Trash2 className="w-4 h-4" />
-          </button>
+        <div className="sm:opacity-0 sm:group-hover:opacity-100 transition-opacity self-end sm:self-auto shrink-0">
+          <SetActionsDropdown
+            onEdit={() => setIsEditModalOpen(true)}
+            onDuplicate={handleDuplicate}
+            onDelete={() => setIsDeleteModalOpen(true)}
+            isDuplicatePending={duplicateSet.isPending}
+          />
         </div>
       </div>
 

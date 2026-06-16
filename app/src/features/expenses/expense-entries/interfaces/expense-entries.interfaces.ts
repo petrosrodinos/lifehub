@@ -34,6 +34,7 @@ export interface CreateExpenseEntryDto {
   category_uuid?: string
   subcategory_uuid?: string
   entry_date?: string
+  quantity?: number
 }
 
 export interface UpdateExpenseEntryDto {

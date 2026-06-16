@@ -5,7 +5,7 @@ import type { ExpenseEntryType } from '../../../../features/expenses/expense-ent
 import { ExpenseEntryTypes } from '../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces'
 import { useTransactionsPage } from '../hooks/use-transactions-page'
 import { AccountFilters } from '../../analytics/components/account-overview/AccountFilters'
-import { formatAmount } from '../../utils/transaction'
+import { expenseEntryToCreateDto, formatAmount } from '../../utils/transaction'
 import { CreateTransactionModal } from './CreateTransactionModal'
 import { TransactionCard } from './TransactionCard'
 import { TransactionsLoading } from './TransactionsLoading'
@@ -15,7 +15,7 @@ import { TransactionsPagination } from './TransactionsPagination'
 const ITEMS_PER_PAGE = 10
 
 export function TransactionsSection() {
-  const { isCreateModalOpen, openCreateModal, closeCreateModal, currentPage, setCurrentPage } =
+  const { isCreateModalOpen, duplicateFrom, openCreateModal, openDuplicateModal, closeCreateModal, currentPage, setCurrentPage } =
     useTransactionsPage()
 
   const [selectedAccounts, setSelectedAccounts] = useState<string[]>([])
@@ -114,7 +114,7 @@ export function TransactionsSection() {
           <>
             <div className="space-y-2">
               {transactions.map((transaction) => (
-                <TransactionCard key={transaction.uuid} transaction={transaction} />
+                <TransactionCard key={transaction.uuid} transaction={transaction} onDuplicate={openDuplicateModal} />
               ))}
             </div>
 
@@ -128,7 +128,12 @@ export function TransactionsSection() {
         )}
       </div>
 
-      <CreateTransactionModal isOpen={isCreateModalOpen} onClose={closeCreateModal} />
+      <CreateTransactionModal
+        isOpen={isCreateModalOpen}
+        onClose={closeCreateModal}
+        initialData={duplicateFrom ? expenseEntryToCreateDto(duplicateFrom) : undefined}
+        formKey={duplicateFrom?.uuid ?? 'new'}
+      />
     </>
   )
 }

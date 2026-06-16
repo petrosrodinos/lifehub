@@ -20,6 +20,16 @@ function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
 }
 
+function parseRepsInput(value: string): number {
+  const parsed = parseInt(value, 10);
+  return Number.isNaN(parsed) ? 0 : parsed;
+}
+
+function parseWeightInput(value: string): number {
+  const parsed = parseFloat(value);
+  return Number.isNaN(parsed) ? 0 : parsed;
+}
+
 export type SetFormValues = {
   reps: number;
   weight: number;
@@ -36,31 +46,49 @@ type SetFormProps = {
 };
 
 export function SetForm({ exerciseType, initialValues, onSave, isPending, submitLabel = "Save" }: SetFormProps) {
-  const [reps, setReps] = useState(initialValues?.reps ?? 10);
-  const [weight, setWeight] = useState(initialValues?.weight ?? 20);
+  const [repsInput, setRepsInput] = useState(String(initialValues?.reps ?? 10));
+  const [weightInput, setWeightInput] = useState(String(initialValues?.weight ?? 20));
   const [durationSeconds, setDurationSeconds] = useState(initialValues?.durationSeconds ?? 60);
   const [distanceMeters, setDistanceMeters] = useState(initialValues?.distanceMeters ?? 100);
 
   useEffect(() => {
     if (initialValues) {
-      if (initialValues.reps !== undefined) setReps(initialValues.reps);
-      if (initialValues.weight !== undefined) setWeight(initialValues.weight);
+      if (initialValues.reps !== undefined) setRepsInput(String(initialValues.reps));
+      if (initialValues.weight !== undefined) setWeightInput(String(initialValues.weight));
       if (initialValues.durationSeconds !== undefined) setDurationSeconds(initialValues.durationSeconds);
       if (initialValues.distanceMeters !== undefined) setDistanceMeters(initialValues.distanceMeters);
     }
   }, [initialValues?.reps, initialValues?.weight, initialValues?.durationSeconds, initialValues?.distanceMeters]);
 
-  const handleDecrementReps = () => setReps((prev) => clamp(prev - REPS_STEP, REPS_MIN, REPS_MAX));
-  const handleIncrementReps = () => setReps((prev) => clamp(prev + REPS_STEP, REPS_MIN, REPS_MAX));
+  const repsValue = parseRepsInput(repsInput);
+  const weightValue = parseWeightInput(weightInput);
+  const isRepsFormInvalid = exerciseType === ExerciseTypes.REPS && (repsInput === "" || weightInput === "");
+
+  const handleDecrementReps = () => setRepsInput(String(clamp(repsValue - REPS_STEP, REPS_MIN, REPS_MAX)));
+  const handleIncrementReps = () => setRepsInput(String(clamp(repsValue + REPS_STEP, REPS_MIN, REPS_MAX)));
   const handleRepsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const parsed = parseInt(e.target.value, 10);
-    if (!Number.isNaN(parsed)) setReps(clamp(parsed, REPS_MIN, REPS_MAX));
+    const value = e.target.value;
+    if (value === "") {
+      setRepsInput("");
+      return;
+    }
+    if (!/^\d+$/.test(value)) return;
+    const parsed = parseInt(value, 10);
+    if (parsed > REPS_MAX) return;
+    setRepsInput(value);
   };
-  const handleDecrementWeight = () => setWeight((prev) => clamp(prev - WEIGHT_STEP, WEIGHT_MIN, WEIGHT_MAX));
-  const handleIncrementWeight = () => setWeight((prev) => clamp(prev + WEIGHT_STEP, WEIGHT_MIN, WEIGHT_MAX));
+  const handleDecrementWeight = () => setWeightInput(String(clamp(weightValue - WEIGHT_STEP, WEIGHT_MIN, WEIGHT_MAX)));
+  const handleIncrementWeight = () => setWeightInput(String(clamp(weightValue + WEIGHT_STEP, WEIGHT_MIN, WEIGHT_MAX)));
   const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const parsed = parseFloat(e.target.value);
-    if (!Number.isNaN(parsed)) setWeight(clamp(parsed, WEIGHT_MIN, WEIGHT_MAX));
+    const value = e.target.value;
+    if (value === "") {
+      setWeightInput("");
+      return;
+    }
+    if (!/^\d*\.?\d*$/.test(value)) return;
+    const parsed = parseFloat(value);
+    if (!Number.isNaN(parsed) && parsed > WEIGHT_MAX) return;
+    setWeightInput(value);
   };
   const handleDecrementDuration = () => setDurationSeconds((prev) => clamp(prev - DURATION_STEP, DURATION_MIN, DURATION_MAX));
   const handleIncrementDuration = () => setDurationSeconds((prev) => clamp(prev + DURATION_STEP, DURATION_MIN, DURATION_MAX));
@@ -76,7 +104,7 @@ export function SetForm({ exerciseType, initialValues, onSave, isPending, submit
   };
 
   const handleSave = () => {
-    onSave({ reps, weight, durationSeconds, distanceMeters });
+    onSave({ reps: repsValue, weight: weightValue, durationSeconds, distanceMeters });
   };
 
   return (
@@ -86,19 +114,17 @@ export function SetForm({ exerciseType, initialValues, onSave, isPending, submit
           <div className="space-y-2">
             <p className="text-xs font-medium text-slate-500 uppercase tracking-wider text-center">Reps</p>
             <div className="flex items-center gap-3">
-              <button type="button" onClick={handleDecrementReps} disabled={reps <= REPS_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
+              <button type="button" onClick={handleDecrementReps} disabled={repsValue <= REPS_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Minus className="w-4 h-4 text-slate-300" />
               </button>
               <input
-                type="number"
-                min={REPS_MIN}
-                max={REPS_MAX}
-                step={REPS_STEP}
-                value={reps}
+                type="text"
+                inputMode="numeric"
+                value={repsInput}
                 onChange={handleRepsChange}
                 className="flex-1 min-w-0 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 text-3xl font-bold text-white tabular-nums text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
-              <button type="button" onClick={handleIncrementReps} disabled={reps >= REPS_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
+              <button type="button" onClick={handleIncrementReps} disabled={repsValue >= REPS_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Plus className="w-4 h-4 text-slate-300" />
               </button>
             </div>
@@ -107,19 +133,17 @@ export function SetForm({ exerciseType, initialValues, onSave, isPending, submit
           <div className="space-y-2">
             <p className="text-xs font-medium text-slate-500 uppercase tracking-wider text-center">Weight (kg)</p>
             <div className="flex items-center gap-3">
-              <button type="button" onClick={handleDecrementWeight} disabled={weight <= WEIGHT_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
+              <button type="button" onClick={handleDecrementWeight} disabled={weightValue <= WEIGHT_MIN} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Minus className="w-4 h-4 text-slate-300" />
               </button>
               <input
-                type="number"
-                min={WEIGHT_MIN}
-                max={WEIGHT_MAX}
-                step={WEIGHT_STEP}
-                value={weight}
+                type="text"
+                inputMode="decimal"
+                value={weightInput}
                 onChange={handleWeightChange}
                 className="flex-1 min-w-0 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 focus:border-violet-500 focus:ring-1 focus:ring-violet-500/30 text-3xl font-bold text-white tabular-nums text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
-              <button type="button" onClick={handleIncrementWeight} disabled={weight >= WEIGHT_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
+              <button type="button" onClick={handleIncrementWeight} disabled={weightValue >= WEIGHT_MAX} className="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 hover:border-violet-500/50 hover:bg-slate-700 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed active:scale-95">
                 <Plus className="w-4 h-4 text-slate-300" />
               </button>
             </div>
@@ -173,7 +197,7 @@ export function SetForm({ exerciseType, initialValues, onSave, isPending, submit
         </div>
       )}
 
-      <button type="button" onClick={handleSave} disabled={isPending} className="w-full py-3 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+      <button type="button" onClick={handleSave} disabled={isPending || isRepsFormInvalid} className="w-full py-3 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
         {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" strokeWidth={2.5} />}
         {isPending ? "Saving..." : submitLabel}
       </button>

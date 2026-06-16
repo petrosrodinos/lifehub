@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Dumbbell } from "lucide-react";
+import { ArrowLeft, Dumbbell, Trash2 } from "lucide-react";
 import { useWorkoutEntry } from "../../../features/gym/workout-entries/hooks/use-workout-entries";
 import { ExerciseDetailSkeleton } from "./ExerciseDetailSkeleton";
 import { TrackTab } from "./TrackTab";
 import { HistoryTab } from "./HistoryTab";
 import { GymAnalytics } from "../components/analytics";
+import { DeleteWorkoutEntryModal } from "./components/DeleteWorkoutEntryModal";
 
 const TABS = [
   { id: "track", label: "Track" },
@@ -20,6 +21,7 @@ export function ExerciseDetailPage() {
   const navigate = useNavigate();
   const { data: entry, isLoading } = useWorkoutEntry(entryUuid || "");
   const [activeTab, setActiveTab] = useState<TabId>("track");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const exercise = entry?.exercise;
   const workoutUuid = entry?.workout_uuid;
@@ -48,13 +50,31 @@ export function ExerciseDetailPage() {
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
+      <DeleteWorkoutEntryModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        entry={entry}
+        onDeleted={handleBack}
+      />
+
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.08),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(34,197,94,0.08),transparent_40%)] -z-10" />
 
       <div className="relative max-w-2xl mx-auto px-4 sm:px-6 py-6 lg:py-8 space-y-6">
-        <button type="button" onClick={handleBack} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
-          <ArrowLeft className="w-5 h-5" />
-          <span>Back to Workout</span>
-        </button>
+        <div className="flex items-center justify-between gap-4">
+          <button type="button" onClick={handleBack} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+            <ArrowLeft className="w-5 h-5" />
+            <span>Back to Workout</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsDeleteModalOpen(true)}
+            className="p-2.5 text-slate-400 hover:text-red-400 rounded-lg hover:bg-red-500/10 transition-colors"
+            title="Remove exercise"
+          >
+            <Trash2 className="w-5 h-5" />
+          </button>
+        </div>
 
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center">
