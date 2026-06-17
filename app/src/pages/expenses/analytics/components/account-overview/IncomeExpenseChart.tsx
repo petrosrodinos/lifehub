@@ -27,7 +27,7 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
     <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/50 p-6">
       <h3 className="text-lg font-semibold text-white mb-4">Income vs Expenses</h3>
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+        <BarChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 8 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
           <XAxis
             dataKey="date"
@@ -36,6 +36,7 @@ export function IncomeExpenseChart({ data }: IncomeExpenseChartProps) {
             tickLine={{ stroke: "#334155" }}
           />
           <YAxis
+            width={88}
             stroke="#94a3b8"
             tick={{ fill: "#94a3b8" }}
             tickLine={{ stroke: "#334155" }}
