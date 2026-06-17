@@ -2,6 +2,7 @@ import { ArrowDownLeft, ArrowRightLeft, ArrowUpRight, Edit2, Trash2 } from "luci
 import type { ExpenseEntryPreset, CreateExpenseEntryPresetDto } from "../../../../features/expenses/expense-entry-presets/interfaces/expense-entry-presets.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { formatAmount } from "../../utils/transaction";
+import { mapPresetToFormData } from "../utils/preset-form-data.helper";
 import { PresetTransactionForm } from "./PresetTransactionForm";
 
 type PresetTransactionItemProps = {
@@ -53,22 +54,6 @@ function getAmountDisplay(preset: ExpenseEntryPreset) {
   }
 }
 
-function presetToFormData(preset: ExpenseEntryPreset): Partial<CreateExpenseEntryPresetDto> {
-  const amount = typeof preset.amount === "string" ? parseFloat(preset.amount) : preset.amount;
-
-  return {
-    title: preset.title,
-    type: preset.type,
-    amount,
-    description: preset.description,
-    from_account_uuid: preset.from_account_uuid,
-    to_account_uuid: preset.to_account_uuid,
-    category_uuid: preset.category_uuid,
-    subcategory_uuid: preset.subcategory_uuid,
-    tag_uuids: preset.tags?.map((tag) => tag.uuid) ?? [],
-  };
-}
-
 export function PresetTransactionItem({
   preset,
   isEditing,
@@ -83,7 +68,7 @@ export function PresetTransactionItem({
       <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
         <PresetTransactionForm
           key={preset.uuid}
-          initialData={presetToFormData(preset)}
+          initialData={mapPresetToFormData(preset)}
           onSubmit={onEdit}
           onCancel={onCancelEdit}
           submitLabel="Save"

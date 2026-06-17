@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import { X, Bookmark } from "lucide-react";
 import {
   useExpenseEntryPresets,
-  useCreateExpenseEntryPreset,
   useUpdateExpenseEntryPreset,
   useDeleteExpenseEntryPreset,
 } from "../../../../features/expenses/expense-entry-presets/hooks/use-expense-entry-presets";
 import type { ExpenseEntryPreset } from "../../../../features/expenses/expense-entry-presets/interfaces/expense-entry-presets.interfaces";
 import type { CreateExpenseEntryPresetDto } from "../../../../features/expenses/expense-entry-presets/interfaces/expense-entry-presets.interfaces";
 import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
-import { PresetTransactionForm } from "./PresetTransactionForm";
+import { CreatePresetTransactionModal } from "./CreatePresetTransactionModal";
 import { PresetTransactionItem } from "./PresetTransactionItem";
 import { PresetTransactionsEmptyState } from "./PresetTransactionsEmptyState";
 
@@ -20,11 +19,10 @@ type PresetTransactionsMenuProps = {
 
 export function PresetTransactionsMenu({ isOpen, onClose }: PresetTransactionsMenuProps) {
   const { data: presets = [], isLoading } = useExpenseEntryPresets();
-  const createPreset = useCreateExpenseEntryPreset();
   const updatePreset = useUpdateExpenseEntryPreset();
   const deletePreset = useDeleteExpenseEntryPreset();
 
-  const [isAdding, setIsAdding] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [editingUuid, setEditingUuid] = useState<string | null>(null);
   const [deletingPreset, setDeletingPreset] = useState<ExpenseEntryPreset | null>(null);
 
@@ -41,18 +39,10 @@ export function PresetTransactionsMenu({ isOpen, onClose }: PresetTransactionsMe
 
   useEffect(() => {
     if (!isOpen) {
-      setIsAdding(false);
+      setIsCreateModalOpen(false);
       setEditingUuid(null);
     }
   }, [isOpen]);
-
-  const handleAdd = (data: CreateExpenseEntryPresetDto) => {
-    createPreset.mutate(data, {
-      onSuccess: () => {
-        setIsAdding(false);
-      },
-    });
-  };
 
   const handleUpdate = (uuid: string, data: CreateExpenseEntryPresetDto) => {
     updatePreset.mutate(
@@ -92,20 +82,13 @@ export function PresetTransactionsMenu({ isOpen, onClose }: PresetTransactionsMe
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {isAdding ? (
-            <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
-              <h3 className="text-sm font-medium text-slate-300 mb-3">Add preset</h3>
-              <PresetTransactionForm onSubmit={handleAdd} onCancel={() => setIsAdding(false)} submitLabel="Create" isPending={createPreset.isPending} />
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={() => setIsAdding(true)}
-              className="w-full py-3 border-2 border-dashed border-slate-600 rounded-xl text-slate-400 hover:text-violet-400 hover:border-violet-500/50 transition-colors font-medium"
-            >
-              + Add preset transaction
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() => setIsCreateModalOpen(true)}
+            className="w-full py-3 border-2 border-dashed border-slate-600 rounded-xl text-slate-400 hover:text-violet-400 hover:border-violet-500/50 transition-colors font-medium"
+          >
+            + Add preset transaction
+          </button>
 
           {isLoading ? (
             <div className="text-center py-8 text-slate-400">Loading presets...</div>
@@ -129,6 +112,11 @@ export function PresetTransactionsMenu({ isOpen, onClose }: PresetTransactionsMe
           )}
         </div>
       </aside>
+
+      <CreatePresetTransactionModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+      />
 
       <ConfirmationModal
         isOpen={!!deletingPreset}

@@ -7,6 +7,8 @@ import { useTransactionsPage } from '../hooks/use-transactions-page'
 import { AccountFilters } from '../../analytics/components/account-overview/AccountFilters'
 import { expenseEntryToCreateDto, formatAmount } from '../../utils/transaction'
 import { CreateTransactionModal } from './CreateTransactionModal'
+import { CreatePresetTransactionModal } from '../../presets/components/CreatePresetTransactionModal'
+import { mapEntryToPresetFormData } from '../../presets/utils/preset-form-data.helper'
 import { TransactionCard } from './TransactionCard'
 import { TransactionsLoading } from './TransactionsLoading'
 import { TransactionsEmptyState } from './TransactionsEmptyState'
@@ -15,8 +17,19 @@ import { TransactionsPagination } from './TransactionsPagination'
 const ITEMS_PER_PAGE = 10
 
 export function TransactionsSection() {
-  const { isCreateModalOpen, duplicateFrom, openCreateModal, openDuplicateModal, closeCreateModal, currentPage, setCurrentPage } =
-    useTransactionsPage()
+  const {
+    isCreateModalOpen,
+    isPresetModalOpen,
+    duplicateFrom,
+    presetFrom,
+    openCreateModal,
+    openDuplicateModal,
+    openPresetModal,
+    closeCreateModal,
+    closePresetModal,
+    currentPage,
+    setCurrentPage,
+  } = useTransactionsPage()
 
   const [selectedAccounts, setSelectedAccounts] = useState<string[]>([])
   const [fromDate, setFromDate] = useState('')
@@ -114,7 +127,12 @@ export function TransactionsSection() {
           <>
             <div className="space-y-2">
               {transactions.map((transaction) => (
-                <TransactionCard key={transaction.uuid} transaction={transaction} onDuplicate={openDuplicateModal} />
+                <TransactionCard
+                  key={transaction.uuid}
+                  transaction={transaction}
+                  onDuplicate={openDuplicateModal}
+                  onCreatePreset={openPresetModal}
+                />
               ))}
             </div>
 
@@ -133,6 +151,13 @@ export function TransactionsSection() {
         onClose={closeCreateModal}
         initialData={duplicateFrom ? expenseEntryToCreateDto(duplicateFrom) : undefined}
         formKey={duplicateFrom?.uuid ?? 'new'}
+      />
+
+      <CreatePresetTransactionModal
+        isOpen={isPresetModalOpen}
+        onClose={closePresetModal}
+        initialData={presetFrom ? mapEntryToPresetFormData(presetFrom) : undefined}
+        formKey={presetFrom?.uuid ?? 'new'}
       />
     </>
   )
