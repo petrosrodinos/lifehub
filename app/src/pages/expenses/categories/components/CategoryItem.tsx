@@ -1,3 +1,4 @@
+import { useDroppable } from "@dnd-kit/core";
 import { ChevronDown, ChevronRight, Edit2, Trash2, Plus } from "lucide-react";
 import type { ExpenseCategory } from "../../../../features/expenses/expense-categories/interfaces/expense-categories.interfaces";
 import type { ExpenseSubcategory } from "../../../../features/expenses/expense-subcategories/interfaces/expense-subcategories.interfaces";
@@ -6,11 +7,13 @@ import { SubcategoryForm } from "./SubcategoryForm";
 import { SubcategoryItem } from "./SubcategoryItem";
 import { PRESET_COLORS } from "../../../../config/constants/dropdowns/expenses-colors";
 import { CATEGORY_PRESET_ICONS } from "../../../../config/constants/dropdowns/account-icons";
+import { getCategoryDropId } from "../utils/subcategory-drag-drop.helper";
 
 type CategoryItemProps = {
   category: ExpenseCategory;
   subcategories: ExpenseSubcategory[];
   isExpanded: boolean;
+  isDragOverTarget: boolean;
   onToggle: () => void;
   onEdit: (name: string, color: string, icon: string) => void;
   onDelete: () => void;
@@ -32,9 +35,17 @@ type CategoryItemProps = {
   canEditDelete: boolean;
 };
 
-export function CategoryItem({ category, subcategories, isExpanded, onToggle, onEdit, onDelete, onAddSubcategory, onEditSubcategory, onDeleteSubcategory, isEditing, onStartEdit, onCancelEdit, isUpdatePending, addingSubcategory, onStartAddingSubcategory, onCancelAddingSubcategory, isCreateSubcategoryPending, editingSubcategoryUuid, onStartEditSubcategory, onCancelEditSubcategory, isUpdateSubcategoryPending, canEditDelete }: CategoryItemProps) {
+export function CategoryItem({ category, subcategories, isExpanded, isDragOverTarget, onToggle, onEdit, onDelete, onAddSubcategory, onEditSubcategory, onDeleteSubcategory, isEditing, onStartEdit, onCancelEdit, isUpdatePending, addingSubcategory, onStartAddingSubcategory, onCancelAddingSubcategory, isCreateSubcategoryPending, editingSubcategoryUuid, onStartEditSubcategory, onCancelEditSubcategory, isUpdateSubcategoryPending, canEditDelete }: CategoryItemProps) {
+  const { setNodeRef } = useDroppable({
+    id: getCategoryDropId(category.uuid),
+    data: { type: "category", categoryUuid: category.uuid },
+  });
+
   return (
-    <div className="bg-slate-800/50 rounded-xl border border-slate-700">
+    <div
+      ref={setNodeRef}
+      className={`bg-slate-800/50 rounded-xl border transition-colors ${isDragOverTarget ? "border-violet-500 bg-violet-500/10" : "border-slate-700"}`}
+    >
       {isEditing ? (
         <div className="p-3">
           <CategoryForm initialName={category.name} initialColor={category.color || PRESET_COLORS[0]} initialIcon={category.icon || CATEGORY_PRESET_ICONS[0]} onSubmit={onEdit} onCancel={onCancelEdit} submitLabel="Save" isPending={isUpdatePending} />

@@ -1,4 +1,16 @@
 import { useState, useEffect, useCallback } from "react";
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+  type DragCancelEvent,
+  type DragEndEvent,
+  type DragOverEvent,
+  type DragStartEvent,
+} from "@dnd-kit/core";
 import { X } from "lucide-react";
 import { useExpenseCategories, useCreateExpenseCategory, useUpdateExpenseCategory, useDeleteExpenseCategory } from "../../../../features/expenses/expense-categories/hooks/use-expense-categories";
 import { useExpenseSubcategories, useCreateExpenseSubcategory, useUpdateExpenseSubcategory, useDeleteExpenseSubcategory } from "../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories";
@@ -12,6 +24,10 @@ import { PRESET_COLORS } from "../../../../config/constants/dropdowns/expenses-c
 import { CATEGORY_PRESET_ICONS } from "../../../../config/constants/dropdowns/account-icons";
 import { useAuthStore } from "../../../../store/auth-store";
 import { AUTH_ROLES } from "../../../../config/constants/auth-roles";
+import {
+  getSubcategoryFromActiveId,
+  getTargetCategoryUuidFromOver,
+} from "../utils/subcategory-drag-drop.helper";
 
 type CategoriesMenuProps = {
   isOpen: boolean;
@@ -44,6 +60,12 @@ export function CategoriesMenu({ isOpen, onClose }: CategoriesMenuProps) {
   const [addingSubcategoryToCategoryUuid, setAddingSubcategoryToCategoryUuid] = useState<string | null>(null);
   const [deletingCategory, setDeletingCategory] = useState<ExpenseCategory | null>(null);
   const [deletingSubcategory, setDeletingSubcategory] = useState<ExpenseSubcategory | null>(null);
+  const [draggingSubcategory, setDraggingSubcategory] = useState<ExpenseSubcategory | null>(null);
+  const [dragOverCategoryUuid, setDragOverCategoryUuid] = useState<string | null>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+  );
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -66,6 +88,79 @@ export function CategoriesMenu({ isOpen, onClose }: CategoriesMenuProps) {
       return next;
     });
   };
+
+  const expandCategory = useCallback((uuid: string) => {
+    setExpandedCategories((prev) => {
+      if (prev.has(uuid)) return prev;
+      const next = new Set(prev);
+      next.add(uuid);
+      return next;
+    });
+  }, []);
+
+  const resetDragState = useCallback(() => {
+    setDraggingSubcategory(null);
+    setDragOverCategoryUuid(null);
+  }, []);
+
+  const handleDragStart = useCallback(
+    (event: DragStartEvent) => {
+      const subcategory = getSubcategoryFromActiveId(event.active.id, allSubcategories);
+      setDraggingSubcategory(subcategory);
+    },
+    [allSubcategories],
+  );
+
+  const handleDragOver = useCallback(
+    (event: DragOverEvent) => {
+      const targetCategoryUuid = getTargetCategoryUuidFromOver(event.over);
+      setDragOverCategoryUuid(targetCategoryUuid);
+      if (targetCategoryUuid) {
+        expandCategory(targetCategoryUuid);
+      }
+    },
+    [expandCategory],
+  );
+
+  const handleUpdateSubcategory = useCallback((uuid: string, name: string, categoryUuid: string) => {
+    updateSubcategory.mutate(
+      { uuid, data: { name, category_uuid: categoryUuid } },
+      {
+        onSuccess: () => {
+          setEditingSubcategoryUuid(null);
+        },
+      },
+    );
+  }, [updateSubcategory]);
+
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      const subcategory = getSubcategoryFromActiveId(event.active.id, allSubcategories);
+      const targetCategoryUuid = getTargetCategoryUuidFromOver(event.over);
+
+      resetDragState();
+
+      if (!subcategory || !targetCategoryUuid || targetCategoryUuid === subcategory.category_uuid) {
+        return;
+      }
+
+      handleUpdateSubcategory(subcategory.uuid, subcategory.name, targetCategoryUuid);
+    },
+    [allSubcategories, resetDragState, handleUpdateSubcategory],
+  );
+
+  const handleDragCancel = useCallback(
+    (_event: DragCancelEvent) => {
+      resetDragState();
+    },
+    [resetDragState],
+  );
+
+  useEffect(() => {
+    if (!isOpen) {
+      resetDragState();
+    }
+  }, [isOpen, resetDragState]);
 
   const handleAddCategory = (name: string, color: string, icon: string) => {
     createCategory.mutate(
@@ -95,17 +190,6 @@ export function CategoriesMenu({ isOpen, onClose }: CategoriesMenuProps) {
       {
         onSuccess: () => {
           setAddingSubcategoryToCategoryUuid(null);
-        },
-      },
-    );
-  };
-
-  const handleUpdateSubcategory = (uuid: string, name: string, categoryUuid: string) => {
-    updateSubcategory.mutate(
-      { uuid, data: { name, category_uuid: categoryUuid } },
-      {
-        onSuccess: () => {
-          setEditingSubcategoryUuid(null);
         },
       },
     );
@@ -160,46 +244,68 @@ export function CategoriesMenu({ isOpen, onClose }: CategoriesMenuProps) {
             </button>
           )}
 
-          <div className="space-y-2">
-            {categoriesLoading || subcategoriesLoading ? (
-              <div className="text-center py-8 text-slate-400">Loading categories...</div>
-            ) : categories.length === 0 ? (
-              <EmptyState onCreateClick={() => setIsAddingCategory(true)} />
-            ) : (
-              categories.map((category) => {
-                const subcategories = getSubcategoriesForCategory(category.uuid);
-                const isExpanded = expandedCategories.has(category.uuid);
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragStart={handleDragStart}
+            onDragOver={handleDragOver}
+            onDragEnd={handleDragEnd}
+            onDragCancel={handleDragCancel}
+          >
+            <div className="space-y-2">
+              {categoriesLoading || subcategoriesLoading ? (
+                <div className="text-center py-8 text-slate-400">Loading categories...</div>
+              ) : categories.length === 0 ? (
+                <EmptyState onCreateClick={() => setIsAddingCategory(true)} />
+              ) : (
+                categories.map((category) => {
+                  const subcategories = getSubcategoriesForCategory(category.uuid);
+                  const isExpanded = expandedCategories.has(category.uuid);
 
-                return (
-                  <CategoryItem
-                    key={category.uuid}
-                    category={category}
-                    subcategories={subcategories}
-                    isExpanded={isExpanded}
-                    onToggle={() => toggleCategory(category.uuid)}
-                    onEdit={(name, color, icon) => handleUpdateCategory(category.uuid, name, color, icon)}
-                    onDelete={() => setDeletingCategory(category)}
-                    onAddSubcategory={(name) => handleAddSubcategory(category.uuid, name)}
-                    onEditSubcategory={(subcategoryUuid, name) => handleUpdateSubcategory(subcategoryUuid, name, category.uuid)}
-                    onDeleteSubcategory={setDeletingSubcategory}
-                    isEditing={editingCategoryUuid === category.uuid}
-                    onStartEdit={() => setEditingCategoryUuid(category.uuid)}
-                    onCancelEdit={() => setEditingCategoryUuid(null)}
-                    isUpdatePending={updateCategory.isPending}
-                    addingSubcategory={addingSubcategoryToCategoryUuid === category.uuid}
-                    onStartAddingSubcategory={() => setAddingSubcategoryToCategoryUuid(category.uuid)}
-                    onCancelAddingSubcategory={() => setAddingSubcategoryToCategoryUuid(null)}
-                    isCreateSubcategoryPending={createSubcategory.isPending}
-                    editingSubcategoryUuid={editingSubcategoryUuid}
-                    onStartEditSubcategory={setEditingSubcategoryUuid}
-                    onCancelEditSubcategory={() => setEditingSubcategoryUuid(null)}
-                    isUpdateSubcategoryPending={updateSubcategory.isPending}
-                    canEditDelete={canEditDeleteCategory(category)}
-                  />
-                );
-              })
-            )}
-          </div>
+                  return (
+                    <CategoryItem
+                      key={category.uuid}
+                      category={category}
+                      subcategories={subcategories}
+                      isExpanded={isExpanded}
+                      isDragOverTarget={
+                        dragOverCategoryUuid === category.uuid
+                        && draggingSubcategory !== null
+                        && draggingSubcategory.category_uuid !== category.uuid
+                      }
+                      onToggle={() => toggleCategory(category.uuid)}
+                      onEdit={(name, color, icon) => handleUpdateCategory(category.uuid, name, color, icon)}
+                      onDelete={() => setDeletingCategory(category)}
+                      onAddSubcategory={(name) => handleAddSubcategory(category.uuid, name)}
+                      onEditSubcategory={(subcategoryUuid, name) => handleUpdateSubcategory(subcategoryUuid, name, category.uuid)}
+                      onDeleteSubcategory={setDeletingSubcategory}
+                      isEditing={editingCategoryUuid === category.uuid}
+                      onStartEdit={() => setEditingCategoryUuid(category.uuid)}
+                      onCancelEdit={() => setEditingCategoryUuid(null)}
+                      isUpdatePending={updateCategory.isPending}
+                      addingSubcategory={addingSubcategoryToCategoryUuid === category.uuid}
+                      onStartAddingSubcategory={() => setAddingSubcategoryToCategoryUuid(category.uuid)}
+                      onCancelAddingSubcategory={() => setAddingSubcategoryToCategoryUuid(null)}
+                      isCreateSubcategoryPending={createSubcategory.isPending}
+                      editingSubcategoryUuid={editingSubcategoryUuid}
+                      onStartEditSubcategory={setEditingSubcategoryUuid}
+                      onCancelEditSubcategory={() => setEditingSubcategoryUuid(null)}
+                      isUpdateSubcategoryPending={updateSubcategory.isPending}
+                      canEditDelete={canEditDeleteCategory(category)}
+                    />
+                  );
+                })
+              )}
+            </div>
+
+            <DragOverlay dropAnimation={null}>
+              {draggingSubcategory ? (
+                <div className="flex items-center gap-2 p-2 bg-slate-800 rounded-lg border border-violet-500 shadow-lg">
+                  <span className="text-sm text-white font-medium">{draggingSubcategory.name}</span>
+                </div>
+              ) : null}
+            </DragOverlay>
+          </DndContext>
         </div>
       </aside>
 
