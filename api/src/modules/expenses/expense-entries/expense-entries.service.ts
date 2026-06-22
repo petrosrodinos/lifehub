@@ -7,6 +7,8 @@ import { ExpenseEntriesQueryType } from './schemas/expense-entries-query.schema'
 import { AnalyticsQueryType } from './schemas/analytics-query.schema';
 import { CategoryAnalyticsQueryType, TransactionTrendQueryType } from './schemas/category-analytics-query.schema';
 import { validateExpenseRelations, validateExpenseTags } from '../utils/expense-relations.utils';
+import { calculateMonthlyBudgetProgress, getCurrentMonthUtcDateRange } from '../utils/monthly-budget-progress.helper';
+import { MonthlyBudgetProgressQueryType } from './schemas/monthly-budget-progress-query.schema';
 
 
 @Injectable()
@@ -472,6 +474,55 @@ export class ExpenseEntriesService {
       return data;
     } catch (error) {
       throw new InternalServerErrorException('Failed to fetch income and expense data');
+    }
+  }
+
+  async getMonthlyBudgetProgress(user_uuid: string, query: MonthlyBudgetProgressQueryType) {
+    try {
+      const { monthStart, monthEndExclusive, monthStartKey, monthEndKey } = getCurrentMonthUtcDateRange(
+        query.year,
+        query.month,
+      );
+      const excludeHidden = await this.getExcludeHiddenWhere(user_uuid);
+
+      const incomeEntries = await this.prisma.expenseEntry.findMany({
+        where: {
+          user_uuid,
+          type: ExpenseEntryType.INCOME,
+          entry_date: { gte: monthStart, lt: monthEndExclusive },
+        },
+        orderBy: { entry_date: 'asc' },
+        select: { amount: true, entry_date: true },
+      });
+
+      const totalIncome = incomeEntries.reduce((sum, entry) => sum + Number(entry.amount), 0);
+      const firstIncomeDate = incomeEntries.length > 0 ? incomeEntries[0].entry_date : null;
+
+      let totalExpense = 0;
+
+      if (firstIncomeDate) {
+        const expenseEntries = await this.prisma.expenseEntry.findMany({
+          where: {
+            user_uuid,
+            ...excludeHidden,
+            type: ExpenseEntryType.EXPENSE,
+            entry_date: { gte: firstIncomeDate, lt: monthEndExclusive },
+          },
+          select: { amount: true },
+        });
+
+        totalExpense = expenseEntries.reduce((sum, entry) => sum + Number(entry.amount), 0);
+      }
+
+      return calculateMonthlyBudgetProgress({
+        totalIncome,
+        totalExpense,
+        firstIncomeDate,
+        monthStartKey,
+        monthEndKey,
+      });
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to fetch monthly budget progress');
     }
   }
 

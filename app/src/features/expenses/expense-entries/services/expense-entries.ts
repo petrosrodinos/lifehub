@@ -14,6 +14,8 @@ import type {
   TransactionTrendQueryParams,
   BreakdownData,
   TransactionTrendData,
+  MonthlyBudgetProgressData,
+  MonthlyBudgetProgressQueryParams,
 } from '../interfaces/expense-entries.interfaces'
 
 export const getExpenseEntries = async (
@@ -110,5 +112,18 @@ export const getTransactionTrend = async (params: TransactionTrendQueryParams): 
     return response.data
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to fetch transaction trend')
+  }
+}
+
+import { getLocalMonthQueryParams } from '../utils/month-query-params.helper'
+
+export const getMonthlyBudgetProgress = async (
+  params: MonthlyBudgetProgressQueryParams = getLocalMonthQueryParams(),
+): Promise<MonthlyBudgetProgressData> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.expenses.entries.analytics.monthlyBudgetProgress, { params })
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to fetch monthly budget progress')
   }
 }

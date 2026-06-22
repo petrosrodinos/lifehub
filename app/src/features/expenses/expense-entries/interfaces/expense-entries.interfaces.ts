@@ -101,6 +101,21 @@ export interface StatsData {
   netBalance: number;
 }
 
+export interface MonthlyBudgetProgressData {
+  totalIncome: number;
+  totalExpense: number;
+  remaining: number;
+  progressPercentage: number;
+  firstIncomeDate: string | null;
+  monthStart: string;
+  monthEnd: string;
+}
+
+export interface MonthlyBudgetProgressQueryParams {
+  year: number;
+  month: number;
+}
+
 export interface CategoryAnalyticsQueryParams {
   type?: ExpenseEntryType;
   group_by?: 'category' | 'subcategory';

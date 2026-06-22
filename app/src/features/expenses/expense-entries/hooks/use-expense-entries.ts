@@ -7,6 +7,7 @@ import type {
   AnalyticsQueryParams,
   CategoryAnalyticsQueryParams,
   TransactionTrendQueryParams,
+  MonthlyBudgetProgressQueryParams,
 } from '../interfaces/expense-entries.interfaces'
 import {
   getExpenseEntries,
@@ -19,7 +20,9 @@ import {
   getStats,
   getExpensesBySubcategory,
   getTransactionTrend,
+  getMonthlyBudgetProgress,
 } from '../services/expense-entries'
+import { getLocalMonthQueryParams } from '../utils/month-query-params.helper'
 
 const QUERY_KEYS = {
   expenseEntries: (params?: ExpenseEntriesQueryParams) => ['expense-entries', params],
@@ -32,6 +35,12 @@ const QUERY_KEYS = {
     stats: (params: AnalyticsQueryParams) => ['expense-entries', 'analytics', 'stats', params],
     expensesBySubcategory: (params: CategoryAnalyticsQueryParams) => ['expense-entries', 'analytics', 'expenses-by-subcategory', params],
     transactionTrend: (params: TransactionTrendQueryParams) => ['expense-entries', 'analytics', 'transaction-trend', params],
+    monthlyBudgetProgress: (params: MonthlyBudgetProgressQueryParams) => [
+      'expense-entries',
+      'analytics',
+      'monthly-budget-progress',
+      params,
+    ],
   },
 }
 
@@ -144,4 +153,13 @@ export function useTransactionTrend(params: TransactionTrendQueryParams) {
     queryFn: () => getTransactionTrend(params),
     enabled: !!params.category_uuid,
   })
+}
+
+export function useMonthlyBudgetProgress() {
+  const params = getLocalMonthQueryParams();
+
+  return useQuery({
+    queryKey: QUERY_KEYS.analytics.monthlyBudgetProgress(params),
+    queryFn: () => getMonthlyBudgetProgress(params),
+  });
 }

@@ -9,6 +9,7 @@ import { ZodValidationPipe } from '@/shared/pipes/zod.validation.pipe';
 import { ExpenseEntriesQuerySchema, ExpenseEntriesQueryType } from './schemas/expense-entries-query.schema';
 import { AnalyticsQuerySchema, AnalyticsQueryType } from './schemas/analytics-query.schema';
 import { CategoryAnalyticsQuerySchema, CategoryAnalyticsQueryType, TransactionTrendQuerySchema, TransactionTrendQueryType } from './schemas/category-analytics-query.schema';
+import { MonthlyBudgetProgressQuerySchema, MonthlyBudgetProgressQueryType } from './schemas/monthly-budget-progress-query.schema';
 
 @ApiTags('Expense Entries')
 @ApiBearerAuth()
@@ -59,6 +60,17 @@ export class ExpenseEntriesController {
     @Query(new ZodValidationPipe(AnalyticsQuerySchema)) query: AnalyticsQueryType
   ) {
     return this.expenseEntriesService.getIncomeExpense(user_uuid, query);
+  }
+
+  @Get('analytics/monthly-budget-progress')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Get monthly income vs expense progress for the current month' })
+  @ApiResponse({ status: 200, description: 'Monthly budget progress retrieved successfully' })
+  getMonthlyBudgetProgress(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(MonthlyBudgetProgressQuerySchema)) query: MonthlyBudgetProgressQueryType,
+  ) {
+    return this.expenseEntriesService.getMonthlyBudgetProgress(user_uuid, query);
   }
 
   @Get('analytics/stats')
