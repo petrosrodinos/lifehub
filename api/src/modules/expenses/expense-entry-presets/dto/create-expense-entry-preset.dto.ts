@@ -1,7 +1,7 @@
-import { IsString, IsNumber, IsOptional, IsEnum, Min, IsArray, IsUUID, MinLength, MaxLength } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsEnum, Min, IsArray, IsUUID, MinLength, MaxLength, IsBoolean, IsInt, Max, ValidateIf } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { ExpenseEntryType } from '@/generated/prisma';
+import { ExpenseEntryType, ExpenseRecurrenceFrequency } from '@/generated/prisma';
 
 export class CreateExpenseEntryPresetDto {
   @ApiProperty({
@@ -83,4 +83,70 @@ export class CreateExpenseEntryPresetDto {
   @IsArray()
   @IsUUID('4', { each: true })
   tag_uuids?: string[];
+
+  @ApiProperty({
+    description: 'Whether this preset automatically creates transactions on a schedule',
+    example: false,
+    required: false,
+    default: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  is_recurring?: boolean;
+
+  @ApiProperty({
+    description: 'Recurrence frequency',
+    enum: ExpenseRecurrenceFrequency,
+    required: false,
+  })
+  @ValidateIf((dto: CreateExpenseEntryPresetDto) => dto.is_recurring === true)
+  @IsEnum(ExpenseRecurrenceFrequency)
+  recurrence_frequency?: ExpenseRecurrenceFrequency;
+
+  @ApiProperty({
+    description: 'ISO weekday (1=Mon … 7=Sun) for weekly recurrence',
+    example: 1,
+    required: false,
+  })
+  @ValidateIf(
+    (dto: CreateExpenseEntryPresetDto) =>
+      dto.is_recurring === true && dto.recurrence_frequency === ExpenseRecurrenceFrequency.WEEKLY,
+  )
+  @IsInt()
+  @Min(1)
+  @Max(7)
+  @Type(() => Number)
+  recurrence_weekday?: number;
+
+  @ApiProperty({
+    description: 'Day of month (1-31) for monthly or yearly recurrence',
+    example: 15,
+    required: false,
+  })
+  @ValidateIf(
+    (dto: CreateExpenseEntryPresetDto) =>
+      dto.is_recurring === true &&
+      (dto.recurrence_frequency === ExpenseRecurrenceFrequency.MONTHLY ||
+        dto.recurrence_frequency === ExpenseRecurrenceFrequency.YEARLY),
+  )
+  @IsInt()
+  @Min(1)
+  @Max(31)
+  @Type(() => Number)
+  recurrence_day_of_month?: number;
+
+  @ApiProperty({
+    description: 'Month (1-12) for yearly recurrence',
+    example: 1,
+    required: false,
+  })
+  @ValidateIf(
+    (dto: CreateExpenseEntryPresetDto) =>
+      dto.is_recurring === true && dto.recurrence_frequency === ExpenseRecurrenceFrequency.YEARLY,
+  )
+  @IsInt()
+  @Min(1)
+  @Max(12)
+  @Type(() => Number)
+  recurrence_month?: number;
 }

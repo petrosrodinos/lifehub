@@ -3,6 +3,11 @@ import { PrismaService } from '@/core/databases/prisma/prisma.service';
 import { CreateExpenseEntryPresetDto } from './dto/create-expense-entry-preset.dto';
 import { UpdateExpenseEntryPresetDto } from './dto/update-expense-entry-preset.dto';
 import { validateExpenseRelations, validateExpenseTags } from '../utils/expense-relations.utils';
+import {
+  normalizePresetRecurrenceFields,
+  validatePresetRecurrence,
+} from '../utils/preset-recurrence-validation.helper';
+import { buildRecurrenceConfig, getNextOccurrenceDate } from '../utils/preset-recurrence.helper';
 
 @Injectable()
 export class ExpenseEntryPresetsService {
@@ -13,12 +18,20 @@ export class ExpenseEntryPresetsService {
   async create(user_uuid: string, dto: CreateExpenseEntryPresetDto) {
     try {
       await validateExpenseRelations(this.prisma, user_uuid, dto);
+      validatePresetRecurrence(dto);
 
       const { tag_uuids, ...presetFields } = dto;
 
       if (tag_uuids?.length) {
         await validateExpenseTags(this.prisma, user_uuid, tag_uuids);
       }
+
+      const recurrenceFields = normalizePresetRecurrenceFields(presetFields);
+      const recurrenceConfig = buildRecurrenceConfig(recurrenceFields);
+      const next_run_at =
+        recurrenceFields.is_recurring && recurrenceConfig
+          ? getNextOccurrenceDate(recurrenceConfig, new Date(), true)
+          : null;
 
       return await this.prisma.expenseEntryPreset.create({
         data: {
@@ -31,6 +44,8 @@ export class ExpenseEntryPresetsService {
           to_account_uuid: presetFields.to_account_uuid,
           category_uuid: presetFields.category_uuid,
           subcategory_uuid: presetFields.subcategory_uuid,
+          ...recurrenceFields,
+          next_run_at,
           ...(tag_uuids?.length ? { tags: { connect: tag_uuids.map((tagUuid) => ({ uuid: tagUuid })) } } : {}),
         },
         include: this.getPresetIncludes(),
@@ -85,7 +100,7 @@ export class ExpenseEntryPresetsService {
 
   async update(user_uuid: string, uuid: string, dto: UpdateExpenseEntryPresetDto) {
     try {
-      await this.findOne(user_uuid, uuid);
+      const existing = await this.findOne(user_uuid, uuid);
 
       if (dto.from_account_uuid || dto.to_account_uuid || dto.category_uuid || dto.subcategory_uuid) {
         await validateExpenseRelations(this.prisma, user_uuid, dto);
@@ -97,10 +112,43 @@ export class ExpenseEntryPresetsService {
         await validateExpenseTags(this.prisma, user_uuid, tag_uuids);
       }
 
+      const recurrenceInput = {
+        is_recurring: updateFields.is_recurring ?? existing.is_recurring,
+        recurrence_frequency: updateFields.recurrence_frequency ?? existing.recurrence_frequency,
+        recurrence_weekday: updateFields.recurrence_weekday ?? existing.recurrence_weekday,
+        recurrence_day_of_month: updateFields.recurrence_day_of_month ?? existing.recurrence_day_of_month,
+        recurrence_month: updateFields.recurrence_month ?? existing.recurrence_month,
+      };
+
+      const hasRecurrenceUpdate =
+        updateFields.is_recurring !== undefined ||
+        updateFields.recurrence_frequency !== undefined ||
+        updateFields.recurrence_weekday !== undefined ||
+        updateFields.recurrence_day_of_month !== undefined ||
+        updateFields.recurrence_month !== undefined;
+
+      let recurrenceData: Record<string, unknown> = {};
+
+      if (hasRecurrenceUpdate) {
+        validatePresetRecurrence(recurrenceInput);
+        const normalized = normalizePresetRecurrenceFields(recurrenceInput);
+        const recurrenceConfig = buildRecurrenceConfig(normalized);
+        const next_run_at =
+          normalized.is_recurring && recurrenceConfig
+            ? getNextOccurrenceDate(recurrenceConfig, new Date(), true)
+            : null;
+
+        recurrenceData = {
+          ...normalized,
+          next_run_at,
+        };
+      }
+
       return await this.prisma.expenseEntryPreset.update({
         where: { uuid },
         data: {
           ...updateFields,
+          ...recurrenceData,
           ...(tag_uuids !== undefined ? { tags: { set: tag_uuids.map((tagUuid) => ({ uuid: tagUuid })) } } : {}),
         },
         include: this.getPresetIncludes(),

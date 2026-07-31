@@ -19,6 +19,11 @@ export function mapPresetToFormData(preset: ExpenseEntryPreset): Partial<CreateE
     category_uuid: preset.category_uuid,
     subcategory_uuid: preset.subcategory_uuid,
     tag_uuids: preset.tags?.map((tag) => tag.uuid) ?? [],
+    is_recurring: preset.is_recurring,
+    recurrence_frequency: preset.recurrence_frequency ?? undefined,
+    recurrence_weekday: preset.recurrence_weekday ?? undefined,
+    recurrence_day_of_month: preset.recurrence_day_of_month ?? undefined,
+    recurrence_month: preset.recurrence_month ?? undefined,
   }
 }
 

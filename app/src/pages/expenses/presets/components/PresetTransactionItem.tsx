@@ -3,6 +3,7 @@ import type { ExpenseEntryPreset, CreateExpenseEntryPresetDto } from "../../../.
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { formatAmount } from "../../utils/transaction";
 import { mapPresetToFormData } from "../utils/preset-form-data.helper";
+import { formatPresetRecurrenceLabel } from "../utils/preset-recurrence.helper";
 import { PresetTransactionForm } from "./PresetTransactionForm";
 
 type PresetTransactionItemProps = {
@@ -79,6 +80,7 @@ export function PresetTransactionItem({
   }
 
   const isTransfer = preset.type === ExpenseEntryTypes.TRANSFER && !!preset.to_account;
+  const recurrenceLabel = formatPresetRecurrenceLabel(preset);
 
   return (
     <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
@@ -86,7 +88,14 @@ export function PresetTransactionItem({
         <div className="flex items-center justify-center w-9 h-9 bg-slate-700/50 rounded-lg shrink-0">{getTypeIcon(preset.type)}</div>
 
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-white truncate">{preset.title}</p>
+          <div className="flex items-center gap-2 min-w-0">
+            <p className="text-sm font-semibold text-white truncate">{preset.title}</p>
+            {recurrenceLabel && (
+              <span className="shrink-0 inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-medium bg-violet-500/15 text-violet-300 border border-violet-500/30">
+                {recurrenceLabel}
+              </span>
+            )}
+          </div>
           <p className="text-xs text-slate-400 mt-0.5 truncate">
             {isTransfer
               ? `${preset.from_account?.name || "Account"} → ${preset.to_account?.name || "Account"}`

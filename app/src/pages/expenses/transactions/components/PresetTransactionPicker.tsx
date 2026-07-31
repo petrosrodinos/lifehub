@@ -3,6 +3,7 @@ import { useExpenseEntryPresets } from "../../../../features/expenses/expense-en
 import type { ExpenseEntryPreset } from "../../../../features/expenses/expense-entry-presets/interfaces/expense-entry-presets.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { formatAmount } from "../../utils/transaction";
+import { formatPresetRecurrenceLabel } from "../../presets/utils/preset-recurrence.helper";
 
 type PresetTransactionPickerProps = {
   onSelect: (preset: ExpenseEntryPreset) => void;
@@ -67,6 +68,7 @@ export function PresetTransactionPicker({ onSelect }: PresetTransactionPickerPro
     <div className="space-y-2 max-h-[60vh] overflow-y-auto">
       {presets.map((preset) => {
         const isTransfer = preset.type === ExpenseEntryTypes.TRANSFER && !!preset.to_account;
+        const recurrenceLabel = formatPresetRecurrenceLabel(preset);
 
         return (
           <button
@@ -79,7 +81,14 @@ export function PresetTransactionPicker({ onSelect }: PresetTransactionPickerPro
               <div className="flex items-center justify-center w-9 h-9 bg-slate-700/50 rounded-lg shrink-0">{getTypeIcon(preset.type)}</div>
 
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-white truncate">{preset.title}</p>
+                <div className="flex items-center gap-2 min-w-0">
+                  <p className="text-sm font-semibold text-white truncate">{preset.title}</p>
+                  {recurrenceLabel && (
+                    <span className="shrink-0 inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-medium bg-violet-500/15 text-violet-300 border border-violet-500/30">
+                      {recurrenceLabel}
+                    </span>
+                  )}
+                </div>
                 <p className="text-xs text-slate-400 mt-0.5 truncate">
                   {isTransfer
                     ? `${preset.from_account?.name || "Account"} → ${preset.to_account?.name || "Account"}`

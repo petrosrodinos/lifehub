@@ -270,6 +270,7 @@ exports.Prisma.ExpenseEntryScalarFieldEnum = {
   to_account_uuid: 'to_account_uuid',
   category_uuid: 'category_uuid',
   subcategory_uuid: 'subcategory_uuid',
+  preset_uuid: 'preset_uuid',
   entry_date: 'entry_date',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -287,6 +288,13 @@ exports.Prisma.ExpenseEntryPresetScalarFieldEnum = {
   to_account_uuid: 'to_account_uuid',
   category_uuid: 'category_uuid',
   subcategory_uuid: 'subcategory_uuid',
+  is_recurring: 'is_recurring',
+  recurrence_frequency: 'recurrence_frequency',
+  recurrence_weekday: 'recurrence_weekday',
+  recurrence_day_of_month: 'recurrence_day_of_month',
+  recurrence_month: 'recurrence_month',
+  next_run_at: 'next_run_at',
+  last_run_at: 'last_run_at',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -693,6 +701,12 @@ exports.ExpenseEntryType = exports.$Enums.ExpenseEntryType = {
   INCOME: 'INCOME',
   EXPENSE: 'EXPENSE',
   TRANSFER: 'TRANSFER'
+};
+
+exports.ExpenseRecurrenceFrequency = exports.$Enums.ExpenseRecurrenceFrequency = {
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  YEARLY: 'YEARLY'
 };
 
 exports.ExerciseType = exports.$Enums.ExerciseType = {

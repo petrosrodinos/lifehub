@@ -240,6 +240,15 @@ export const ExpenseEntryType: {
 export type ExpenseEntryType = (typeof ExpenseEntryType)[keyof typeof ExpenseEntryType]
 
 
+export const ExpenseRecurrenceFrequency: {
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  YEARLY: 'YEARLY'
+};
+
+export type ExpenseRecurrenceFrequency = (typeof ExpenseRecurrenceFrequency)[keyof typeof ExpenseRecurrenceFrequency]
+
+
 export const ExerciseType: {
   REPS: 'REPS',
   TIME: 'TIME'
@@ -378,6 +387,10 @@ export const ScheduleDay: typeof $Enums.ScheduleDay
 export type ExpenseEntryType = $Enums.ExpenseEntryType
 
 export const ExpenseEntryType: typeof $Enums.ExpenseEntryType
+
+export type ExpenseRecurrenceFrequency = $Enums.ExpenseRecurrenceFrequency
+
+export const ExpenseRecurrenceFrequency: typeof $Enums.ExpenseRecurrenceFrequency
 
 export type ExerciseType = $Enums.ExerciseType
 
@@ -5047,10 +5060,12 @@ export namespace Prisma {
 
   export type ExpenseEntryPresetCountOutputType = {
     tags: number
+    entries: number
   }
 
   export type ExpenseEntryPresetCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tags?: boolean | ExpenseEntryPresetCountOutputTypeCountTagsArgs
+    entries?: boolean | ExpenseEntryPresetCountOutputTypeCountEntriesArgs
   }
 
   // Custom InputTypes
@@ -5069,6 +5084,13 @@ export namespace Prisma {
    */
   export type ExpenseEntryPresetCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseTagWhereInput
+  }
+
+  /**
+   * ExpenseEntryPresetCountOutputType without action
+   */
+  export type ExpenseEntryPresetCountOutputTypeCountEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseEntryWhereInput
   }
 
 
@@ -19803,6 +19825,7 @@ export namespace Prisma {
     to_account_uuid: string | null
     category_uuid: string | null
     subcategory_uuid: string | null
+    preset_uuid: string | null
     entry_date: Date | null
     created_at: Date | null
     updated_at: Date | null
@@ -19819,6 +19842,7 @@ export namespace Prisma {
     to_account_uuid: string | null
     category_uuid: string | null
     subcategory_uuid: string | null
+    preset_uuid: string | null
     entry_date: Date | null
     created_at: Date | null
     updated_at: Date | null
@@ -19835,6 +19859,7 @@ export namespace Prisma {
     to_account_uuid: number
     category_uuid: number
     subcategory_uuid: number
+    preset_uuid: number
     entry_date: number
     created_at: number
     updated_at: number
@@ -19863,6 +19888,7 @@ export namespace Prisma {
     to_account_uuid?: true
     category_uuid?: true
     subcategory_uuid?: true
+    preset_uuid?: true
     entry_date?: true
     created_at?: true
     updated_at?: true
@@ -19879,6 +19905,7 @@ export namespace Prisma {
     to_account_uuid?: true
     category_uuid?: true
     subcategory_uuid?: true
+    preset_uuid?: true
     entry_date?: true
     created_at?: true
     updated_at?: true
@@ -19895,6 +19922,7 @@ export namespace Prisma {
     to_account_uuid?: true
     category_uuid?: true
     subcategory_uuid?: true
+    preset_uuid?: true
     entry_date?: true
     created_at?: true
     updated_at?: true
@@ -19998,6 +20026,7 @@ export namespace Prisma {
     to_account_uuid: string | null
     category_uuid: string | null
     subcategory_uuid: string | null
+    preset_uuid: string | null
     entry_date: Date
     created_at: Date
     updated_at: Date
@@ -20033,6 +20062,7 @@ export namespace Prisma {
     to_account_uuid?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
+    preset_uuid?: boolean
     entry_date?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -20041,6 +20071,7 @@ export namespace Prisma {
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
     category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
+    preset?: boolean | ExpenseEntry$presetArgs<ExtArgs>
     expense_receipt?: boolean | ExpenseEntry$expense_receiptArgs<ExtArgs>
     tags?: boolean | ExpenseEntry$tagsArgs<ExtArgs>
     _count?: boolean | ExpenseEntryCountOutputTypeDefaultArgs<ExtArgs>
@@ -20057,6 +20088,7 @@ export namespace Prisma {
     to_account_uuid?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
+    preset_uuid?: boolean
     entry_date?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -20065,6 +20097,7 @@ export namespace Prisma {
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
     category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
+    preset?: boolean | ExpenseEntry$presetArgs<ExtArgs>
   }, ExtArgs["result"]["expenseEntry"]>
 
   export type ExpenseEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -20078,6 +20111,7 @@ export namespace Prisma {
     to_account_uuid?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
+    preset_uuid?: boolean
     entry_date?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -20086,6 +20120,7 @@ export namespace Prisma {
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
     category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
+    preset?: boolean | ExpenseEntry$presetArgs<ExtArgs>
   }, ExtArgs["result"]["expenseEntry"]>
 
   export type ExpenseEntrySelectScalar = {
@@ -20099,18 +20134,20 @@ export namespace Prisma {
     to_account_uuid?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
+    preset_uuid?: boolean
     entry_date?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type ExpenseEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "type" | "amount" | "description" | "from_account_uuid" | "to_account_uuid" | "category_uuid" | "subcategory_uuid" | "entry_date" | "created_at" | "updated_at", ExtArgs["result"]["expenseEntry"]>
+  export type ExpenseEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "type" | "amount" | "description" | "from_account_uuid" | "to_account_uuid" | "category_uuid" | "subcategory_uuid" | "preset_uuid" | "entry_date" | "created_at" | "updated_at", ExtArgs["result"]["expenseEntry"]>
   export type ExpenseEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     from_account?: boolean | ExpenseAccountDefaultArgs<ExtArgs>
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
     category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
+    preset?: boolean | ExpenseEntry$presetArgs<ExtArgs>
     expense_receipt?: boolean | ExpenseEntry$expense_receiptArgs<ExtArgs>
     tags?: boolean | ExpenseEntry$tagsArgs<ExtArgs>
     _count?: boolean | ExpenseEntryCountOutputTypeDefaultArgs<ExtArgs>
@@ -20121,6 +20158,7 @@ export namespace Prisma {
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
     category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
+    preset?: boolean | ExpenseEntry$presetArgs<ExtArgs>
   }
   export type ExpenseEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -20128,6 +20166,7 @@ export namespace Prisma {
     to_account?: boolean | ExpenseEntry$to_accountArgs<ExtArgs>
     category?: boolean | ExpenseEntry$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
+    preset?: boolean | ExpenseEntry$presetArgs<ExtArgs>
   }
 
   export type $ExpenseEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20138,6 +20177,7 @@ export namespace Prisma {
       to_account: Prisma.$ExpenseAccountPayload<ExtArgs> | null
       category: Prisma.$ExpenseCategoryPayload<ExtArgs> | null
       subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs> | null
+      preset: Prisma.$ExpenseEntryPresetPayload<ExtArgs> | null
       expense_receipt: Prisma.$ExpenseReceiptPayload<ExtArgs> | null
       tags: Prisma.$ExpenseTagPayload<ExtArgs>[]
     }
@@ -20152,6 +20192,7 @@ export namespace Prisma {
       to_account_uuid: string | null
       category_uuid: string | null
       subcategory_uuid: string | null
+      preset_uuid: string | null
       entry_date: Date
       created_at: Date
       updated_at: Date
@@ -20554,6 +20595,7 @@ export namespace Prisma {
     to_account<T extends ExpenseEntry$to_accountArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$to_accountArgs<ExtArgs>>): Prisma__ExpenseAccountClient<$Result.GetResult<Prisma.$ExpenseAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     category<T extends ExpenseEntry$categoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$categoryArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     subcategory<T extends ExpenseEntry$subcategoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$subcategoryArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    preset<T extends ExpenseEntry$presetArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$presetArgs<ExtArgs>>): Prisma__ExpenseEntryPresetClient<$Result.GetResult<Prisma.$ExpenseEntryPresetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     expense_receipt<T extends ExpenseEntry$expense_receiptArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$expense_receiptArgs<ExtArgs>>): Prisma__ExpenseReceiptClient<$Result.GetResult<Prisma.$ExpenseReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     tags<T extends ExpenseEntry$tagsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -20595,6 +20637,7 @@ export namespace Prisma {
     readonly to_account_uuid: FieldRef<"ExpenseEntry", 'String'>
     readonly category_uuid: FieldRef<"ExpenseEntry", 'String'>
     readonly subcategory_uuid: FieldRef<"ExpenseEntry", 'String'>
+    readonly preset_uuid: FieldRef<"ExpenseEntry", 'String'>
     readonly entry_date: FieldRef<"ExpenseEntry", 'DateTime'>
     readonly created_at: FieldRef<"ExpenseEntry", 'DateTime'>
     readonly updated_at: FieldRef<"ExpenseEntry", 'DateTime'>
@@ -21056,6 +21099,25 @@ export namespace Prisma {
   }
 
   /**
+   * ExpenseEntry.preset
+   */
+  export type ExpenseEntry$presetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseEntryPreset
+     */
+    select?: ExpenseEntryPresetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseEntryPreset
+     */
+    omit?: ExpenseEntryPresetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseEntryPresetInclude<ExtArgs> | null
+    where?: ExpenseEntryPresetWhereInput
+  }
+
+  /**
    * ExpenseEntry.expense_receipt
    */
   export type ExpenseEntry$expense_receiptArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21132,11 +21194,17 @@ export namespace Prisma {
   export type ExpenseEntryPresetAvgAggregateOutputType = {
     id: number | null
     amount: Decimal | null
+    recurrence_weekday: number | null
+    recurrence_day_of_month: number | null
+    recurrence_month: number | null
   }
 
   export type ExpenseEntryPresetSumAggregateOutputType = {
     id: number | null
     amount: Decimal | null
+    recurrence_weekday: number | null
+    recurrence_day_of_month: number | null
+    recurrence_month: number | null
   }
 
   export type ExpenseEntryPresetMinAggregateOutputType = {
@@ -21151,6 +21219,13 @@ export namespace Prisma {
     to_account_uuid: string | null
     category_uuid: string | null
     subcategory_uuid: string | null
+    is_recurring: boolean | null
+    recurrence_frequency: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday: number | null
+    recurrence_day_of_month: number | null
+    recurrence_month: number | null
+    next_run_at: Date | null
+    last_run_at: Date | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -21167,6 +21242,13 @@ export namespace Prisma {
     to_account_uuid: string | null
     category_uuid: string | null
     subcategory_uuid: string | null
+    is_recurring: boolean | null
+    recurrence_frequency: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday: number | null
+    recurrence_day_of_month: number | null
+    recurrence_month: number | null
+    next_run_at: Date | null
+    last_run_at: Date | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -21183,6 +21265,13 @@ export namespace Prisma {
     to_account_uuid: number
     category_uuid: number
     subcategory_uuid: number
+    is_recurring: number
+    recurrence_frequency: number
+    recurrence_weekday: number
+    recurrence_day_of_month: number
+    recurrence_month: number
+    next_run_at: number
+    last_run_at: number
     created_at: number
     updated_at: number
     _all: number
@@ -21192,11 +21281,17 @@ export namespace Prisma {
   export type ExpenseEntryPresetAvgAggregateInputType = {
     id?: true
     amount?: true
+    recurrence_weekday?: true
+    recurrence_day_of_month?: true
+    recurrence_month?: true
   }
 
   export type ExpenseEntryPresetSumAggregateInputType = {
     id?: true
     amount?: true
+    recurrence_weekday?: true
+    recurrence_day_of_month?: true
+    recurrence_month?: true
   }
 
   export type ExpenseEntryPresetMinAggregateInputType = {
@@ -21211,6 +21306,13 @@ export namespace Prisma {
     to_account_uuid?: true
     category_uuid?: true
     subcategory_uuid?: true
+    is_recurring?: true
+    recurrence_frequency?: true
+    recurrence_weekday?: true
+    recurrence_day_of_month?: true
+    recurrence_month?: true
+    next_run_at?: true
+    last_run_at?: true
     created_at?: true
     updated_at?: true
   }
@@ -21227,6 +21329,13 @@ export namespace Prisma {
     to_account_uuid?: true
     category_uuid?: true
     subcategory_uuid?: true
+    is_recurring?: true
+    recurrence_frequency?: true
+    recurrence_weekday?: true
+    recurrence_day_of_month?: true
+    recurrence_month?: true
+    next_run_at?: true
+    last_run_at?: true
     created_at?: true
     updated_at?: true
   }
@@ -21243,6 +21352,13 @@ export namespace Prisma {
     to_account_uuid?: true
     category_uuid?: true
     subcategory_uuid?: true
+    is_recurring?: true
+    recurrence_frequency?: true
+    recurrence_weekday?: true
+    recurrence_day_of_month?: true
+    recurrence_month?: true
+    next_run_at?: true
+    last_run_at?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -21346,6 +21462,13 @@ export namespace Prisma {
     to_account_uuid: string | null
     category_uuid: string | null
     subcategory_uuid: string | null
+    is_recurring: boolean
+    recurrence_frequency: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday: number | null
+    recurrence_day_of_month: number | null
+    recurrence_month: number | null
+    next_run_at: Date | null
+    last_run_at: Date | null
     created_at: Date
     updated_at: Date
     _count: ExpenseEntryPresetCountAggregateOutputType | null
@@ -21381,6 +21504,13 @@ export namespace Prisma {
     to_account_uuid?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
+    is_recurring?: boolean
+    recurrence_frequency?: boolean
+    recurrence_weekday?: boolean
+    recurrence_day_of_month?: boolean
+    recurrence_month?: boolean
+    next_run_at?: boolean
+    last_run_at?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -21389,6 +21519,7 @@ export namespace Prisma {
     category?: boolean | ExpenseEntryPreset$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseEntryPreset$subcategoryArgs<ExtArgs>
     tags?: boolean | ExpenseEntryPreset$tagsArgs<ExtArgs>
+    entries?: boolean | ExpenseEntryPreset$entriesArgs<ExtArgs>
     _count?: boolean | ExpenseEntryPresetCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expenseEntryPreset"]>
 
@@ -21404,6 +21535,13 @@ export namespace Prisma {
     to_account_uuid?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
+    is_recurring?: boolean
+    recurrence_frequency?: boolean
+    recurrence_weekday?: boolean
+    recurrence_day_of_month?: boolean
+    recurrence_month?: boolean
+    next_run_at?: boolean
+    last_run_at?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -21425,6 +21563,13 @@ export namespace Prisma {
     to_account_uuid?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
+    is_recurring?: boolean
+    recurrence_frequency?: boolean
+    recurrence_weekday?: boolean
+    recurrence_day_of_month?: boolean
+    recurrence_month?: boolean
+    next_run_at?: boolean
+    last_run_at?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -21446,11 +21591,18 @@ export namespace Prisma {
     to_account_uuid?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
+    is_recurring?: boolean
+    recurrence_frequency?: boolean
+    recurrence_weekday?: boolean
+    recurrence_day_of_month?: boolean
+    recurrence_month?: boolean
+    next_run_at?: boolean
+    last_run_at?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type ExpenseEntryPresetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "title" | "type" | "amount" | "description" | "from_account_uuid" | "to_account_uuid" | "category_uuid" | "subcategory_uuid" | "created_at" | "updated_at", ExtArgs["result"]["expenseEntryPreset"]>
+  export type ExpenseEntryPresetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "title" | "type" | "amount" | "description" | "from_account_uuid" | "to_account_uuid" | "category_uuid" | "subcategory_uuid" | "is_recurring" | "recurrence_frequency" | "recurrence_weekday" | "recurrence_day_of_month" | "recurrence_month" | "next_run_at" | "last_run_at" | "created_at" | "updated_at", ExtArgs["result"]["expenseEntryPreset"]>
   export type ExpenseEntryPresetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     from_account?: boolean | ExpenseAccountDefaultArgs<ExtArgs>
@@ -21458,6 +21610,7 @@ export namespace Prisma {
     category?: boolean | ExpenseEntryPreset$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseEntryPreset$subcategoryArgs<ExtArgs>
     tags?: boolean | ExpenseEntryPreset$tagsArgs<ExtArgs>
+    entries?: boolean | ExpenseEntryPreset$entriesArgs<ExtArgs>
     _count?: boolean | ExpenseEntryPresetCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExpenseEntryPresetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21484,6 +21637,7 @@ export namespace Prisma {
       category: Prisma.$ExpenseCategoryPayload<ExtArgs> | null
       subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs> | null
       tags: Prisma.$ExpenseTagPayload<ExtArgs>[]
+      entries: Prisma.$ExpenseEntryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -21497,6 +21651,13 @@ export namespace Prisma {
       to_account_uuid: string | null
       category_uuid: string | null
       subcategory_uuid: string | null
+      is_recurring: boolean
+      recurrence_frequency: $Enums.ExpenseRecurrenceFrequency | null
+      recurrence_weekday: number | null
+      recurrence_day_of_month: number | null
+      recurrence_month: number | null
+      next_run_at: Date | null
+      last_run_at: Date | null
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["expenseEntryPreset"]>
@@ -21899,6 +22060,7 @@ export namespace Prisma {
     category<T extends ExpenseEntryPreset$categoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntryPreset$categoryArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     subcategory<T extends ExpenseEntryPreset$subcategoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntryPreset$subcategoryArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     tags<T extends ExpenseEntryPreset$tagsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntryPreset$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    entries<T extends ExpenseEntryPreset$entriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntryPreset$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21939,6 +22101,13 @@ export namespace Prisma {
     readonly to_account_uuid: FieldRef<"ExpenseEntryPreset", 'String'>
     readonly category_uuid: FieldRef<"ExpenseEntryPreset", 'String'>
     readonly subcategory_uuid: FieldRef<"ExpenseEntryPreset", 'String'>
+    readonly is_recurring: FieldRef<"ExpenseEntryPreset", 'Boolean'>
+    readonly recurrence_frequency: FieldRef<"ExpenseEntryPreset", 'ExpenseRecurrenceFrequency'>
+    readonly recurrence_weekday: FieldRef<"ExpenseEntryPreset", 'Int'>
+    readonly recurrence_day_of_month: FieldRef<"ExpenseEntryPreset", 'Int'>
+    readonly recurrence_month: FieldRef<"ExpenseEntryPreset", 'Int'>
+    readonly next_run_at: FieldRef<"ExpenseEntryPreset", 'DateTime'>
+    readonly last_run_at: FieldRef<"ExpenseEntryPreset", 'DateTime'>
     readonly created_at: FieldRef<"ExpenseEntryPreset", 'DateTime'>
     readonly updated_at: FieldRef<"ExpenseEntryPreset", 'DateTime'>
   }
@@ -22420,6 +22589,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExpenseTagScalarFieldEnum | ExpenseTagScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseEntryPreset.entries
+   */
+  export type ExpenseEntryPreset$entriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseEntry
+     */
+    select?: ExpenseEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseEntry
+     */
+    omit?: ExpenseEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseEntryInclude<ExtArgs> | null
+    where?: ExpenseEntryWhereInput
+    orderBy?: ExpenseEntryOrderByWithRelationInput | ExpenseEntryOrderByWithRelationInput[]
+    cursor?: ExpenseEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExpenseEntryScalarFieldEnum | ExpenseEntryScalarFieldEnum[]
   }
 
   /**
@@ -52649,6 +52842,7 @@ export namespace Prisma {
     to_account_uuid: 'to_account_uuid',
     category_uuid: 'category_uuid',
     subcategory_uuid: 'subcategory_uuid',
+    preset_uuid: 'preset_uuid',
     entry_date: 'entry_date',
     created_at: 'created_at',
     updated_at: 'updated_at'
@@ -52669,6 +52863,13 @@ export namespace Prisma {
     to_account_uuid: 'to_account_uuid',
     category_uuid: 'category_uuid',
     subcategory_uuid: 'subcategory_uuid',
+    is_recurring: 'is_recurring',
+    recurrence_frequency: 'recurrence_frequency',
+    recurrence_weekday: 'recurrence_weekday',
+    recurrence_day_of_month: 'recurrence_day_of_month',
+    recurrence_month: 'recurrence_month',
+    next_run_at: 'next_run_at',
+    last_run_at: 'last_run_at',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -53306,6 +53507,20 @@ export namespace Prisma {
    * Reference to a field of type 'ExpenseEntryType[]'
    */
   export type ListEnumExpenseEntryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseEntryType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ExpenseRecurrenceFrequency'
+   */
+  export type EnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseRecurrenceFrequency'>
+    
+
+
+  /**
+   * Reference to a field of type 'ExpenseRecurrenceFrequency[]'
+   */
+  export type ListEnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExpenseRecurrenceFrequency[]'>
     
 
 
@@ -54502,6 +54717,7 @@ export namespace Prisma {
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     category_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     subcategory_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
+    preset_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     entry_date?: DateTimeFilter<"ExpenseEntry"> | Date | string
     created_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
@@ -54510,6 +54726,7 @@ export namespace Prisma {
     to_account?: XOR<ExpenseAccountNullableScalarRelationFilter, ExpenseAccountWhereInput> | null
     category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
     subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
+    preset?: XOR<ExpenseEntryPresetNullableScalarRelationFilter, ExpenseEntryPresetWhereInput> | null
     expense_receipt?: XOR<ExpenseReceiptNullableScalarRelationFilter, ExpenseReceiptWhereInput> | null
     tags?: ExpenseTagListRelationFilter
   }
@@ -54525,6 +54742,7 @@ export namespace Prisma {
     to_account_uuid?: SortOrderInput | SortOrder
     category_uuid?: SortOrderInput | SortOrder
     subcategory_uuid?: SortOrderInput | SortOrder
+    preset_uuid?: SortOrderInput | SortOrder
     entry_date?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -54533,6 +54751,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountOrderByWithRelationInput
     category?: ExpenseCategoryOrderByWithRelationInput
     subcategory?: ExpenseSubcategoryOrderByWithRelationInput
+    preset?: ExpenseEntryPresetOrderByWithRelationInput
     expense_receipt?: ExpenseReceiptOrderByWithRelationInput
     tags?: ExpenseTagOrderByRelationAggregateInput
   }
@@ -54551,6 +54770,7 @@ export namespace Prisma {
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     category_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     subcategory_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
+    preset_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     entry_date?: DateTimeFilter<"ExpenseEntry"> | Date | string
     created_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
@@ -54559,6 +54779,7 @@ export namespace Prisma {
     to_account?: XOR<ExpenseAccountNullableScalarRelationFilter, ExpenseAccountWhereInput> | null
     category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
     subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
+    preset?: XOR<ExpenseEntryPresetNullableScalarRelationFilter, ExpenseEntryPresetWhereInput> | null
     expense_receipt?: XOR<ExpenseReceiptNullableScalarRelationFilter, ExpenseReceiptWhereInput> | null
     tags?: ExpenseTagListRelationFilter
   }, "id" | "uuid">
@@ -54574,6 +54795,7 @@ export namespace Prisma {
     to_account_uuid?: SortOrderInput | SortOrder
     category_uuid?: SortOrderInput | SortOrder
     subcategory_uuid?: SortOrderInput | SortOrder
+    preset_uuid?: SortOrderInput | SortOrder
     entry_date?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -54598,6 +54820,7 @@ export namespace Prisma {
     to_account_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
     category_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
     subcategory_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
+    preset_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
     entry_date?: DateTimeWithAggregatesFilter<"ExpenseEntry"> | Date | string
     created_at?: DateTimeWithAggregatesFilter<"ExpenseEntry"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ExpenseEntry"> | Date | string
@@ -54618,6 +54841,13 @@ export namespace Prisma {
     to_account_uuid?: StringNullableFilter<"ExpenseEntryPreset"> | string | null
     category_uuid?: StringNullableFilter<"ExpenseEntryPreset"> | string | null
     subcategory_uuid?: StringNullableFilter<"ExpenseEntryPreset"> | string | null
+    is_recurring?: BoolFilter<"ExpenseEntryPreset"> | boolean
+    recurrence_frequency?: EnumExpenseRecurrenceFrequencyNullableFilter<"ExpenseEntryPreset"> | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: IntNullableFilter<"ExpenseEntryPreset"> | number | null
+    recurrence_day_of_month?: IntNullableFilter<"ExpenseEntryPreset"> | number | null
+    recurrence_month?: IntNullableFilter<"ExpenseEntryPreset"> | number | null
+    next_run_at?: DateTimeNullableFilter<"ExpenseEntryPreset"> | Date | string | null
+    last_run_at?: DateTimeNullableFilter<"ExpenseEntryPreset"> | Date | string | null
     created_at?: DateTimeFilter<"ExpenseEntryPreset"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseEntryPreset"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -54626,6 +54856,7 @@ export namespace Prisma {
     category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
     subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
     tags?: ExpenseTagListRelationFilter
+    entries?: ExpenseEntryListRelationFilter
   }
 
   export type ExpenseEntryPresetOrderByWithRelationInput = {
@@ -54640,6 +54871,13 @@ export namespace Prisma {
     to_account_uuid?: SortOrderInput | SortOrder
     category_uuid?: SortOrderInput | SortOrder
     subcategory_uuid?: SortOrderInput | SortOrder
+    is_recurring?: SortOrder
+    recurrence_frequency?: SortOrderInput | SortOrder
+    recurrence_weekday?: SortOrderInput | SortOrder
+    recurrence_day_of_month?: SortOrderInput | SortOrder
+    recurrence_month?: SortOrderInput | SortOrder
+    next_run_at?: SortOrderInput | SortOrder
+    last_run_at?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -54648,6 +54886,7 @@ export namespace Prisma {
     category?: ExpenseCategoryOrderByWithRelationInput
     subcategory?: ExpenseSubcategoryOrderByWithRelationInput
     tags?: ExpenseTagOrderByRelationAggregateInput
+    entries?: ExpenseEntryOrderByRelationAggregateInput
   }
 
   export type ExpenseEntryPresetWhereUniqueInput = Prisma.AtLeast<{
@@ -54665,6 +54904,13 @@ export namespace Prisma {
     to_account_uuid?: StringNullableFilter<"ExpenseEntryPreset"> | string | null
     category_uuid?: StringNullableFilter<"ExpenseEntryPreset"> | string | null
     subcategory_uuid?: StringNullableFilter<"ExpenseEntryPreset"> | string | null
+    is_recurring?: BoolFilter<"ExpenseEntryPreset"> | boolean
+    recurrence_frequency?: EnumExpenseRecurrenceFrequencyNullableFilter<"ExpenseEntryPreset"> | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: IntNullableFilter<"ExpenseEntryPreset"> | number | null
+    recurrence_day_of_month?: IntNullableFilter<"ExpenseEntryPreset"> | number | null
+    recurrence_month?: IntNullableFilter<"ExpenseEntryPreset"> | number | null
+    next_run_at?: DateTimeNullableFilter<"ExpenseEntryPreset"> | Date | string | null
+    last_run_at?: DateTimeNullableFilter<"ExpenseEntryPreset"> | Date | string | null
     created_at?: DateTimeFilter<"ExpenseEntryPreset"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseEntryPreset"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -54673,6 +54919,7 @@ export namespace Prisma {
     category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
     subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
     tags?: ExpenseTagListRelationFilter
+    entries?: ExpenseEntryListRelationFilter
   }, "id" | "uuid">
 
   export type ExpenseEntryPresetOrderByWithAggregationInput = {
@@ -54687,6 +54934,13 @@ export namespace Prisma {
     to_account_uuid?: SortOrderInput | SortOrder
     category_uuid?: SortOrderInput | SortOrder
     subcategory_uuid?: SortOrderInput | SortOrder
+    is_recurring?: SortOrder
+    recurrence_frequency?: SortOrderInput | SortOrder
+    recurrence_weekday?: SortOrderInput | SortOrder
+    recurrence_day_of_month?: SortOrderInput | SortOrder
+    recurrence_month?: SortOrderInput | SortOrder
+    next_run_at?: SortOrderInput | SortOrder
+    last_run_at?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: ExpenseEntryPresetCountOrderByAggregateInput
@@ -54711,6 +54965,13 @@ export namespace Prisma {
     to_account_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntryPreset"> | string | null
     category_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntryPreset"> | string | null
     subcategory_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntryPreset"> | string | null
+    is_recurring?: BoolWithAggregatesFilter<"ExpenseEntryPreset"> | boolean
+    recurrence_frequency?: EnumExpenseRecurrenceFrequencyNullableWithAggregatesFilter<"ExpenseEntryPreset"> | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: IntNullableWithAggregatesFilter<"ExpenseEntryPreset"> | number | null
+    recurrence_day_of_month?: IntNullableWithAggregatesFilter<"ExpenseEntryPreset"> | number | null
+    recurrence_month?: IntNullableWithAggregatesFilter<"ExpenseEntryPreset"> | number | null
+    next_run_at?: DateTimeNullableWithAggregatesFilter<"ExpenseEntryPreset"> | Date | string | null
+    last_run_at?: DateTimeNullableWithAggregatesFilter<"ExpenseEntryPreset"> | Date | string | null
     created_at?: DateTimeWithAggregatesFilter<"ExpenseEntryPreset"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ExpenseEntryPreset"> | Date | string
   }
@@ -57979,6 +58240,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
@@ -57994,6 +58256,7 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -58014,6 +58277,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
@@ -58029,6 +58293,7 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58047,6 +58312,7 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -58073,6 +58339,7 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58084,6 +58351,13 @@ export namespace Prisma {
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_entry_presetsInput
@@ -58092,6 +58366,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntry_presetsInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntry_presetsInput
     tags?: ExpenseTagCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetUncheckedCreateInput = {
@@ -58106,9 +58381,17 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetUpdateInput = {
@@ -58117,6 +58400,13 @@ export namespace Prisma {
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_entry_presetsNestedInput
@@ -58125,6 +58415,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntry_presetsNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntry_presetsNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateInput = {
@@ -58139,9 +58430,17 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetCreateManyInput = {
@@ -58156,6 +58455,13 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -58166,6 +58472,13 @@ export namespace Prisma {
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -58182,6 +58495,13 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -61642,6 +61962,11 @@ export namespace Prisma {
     isNot?: ExpenseSubcategoryWhereInput | null
   }
 
+  export type ExpenseEntryPresetNullableScalarRelationFilter = {
+    is?: ExpenseEntryPresetWhereInput | null
+    isNot?: ExpenseEntryPresetWhereInput | null
+  }
+
   export type ExpenseReceiptNullableScalarRelationFilter = {
     is?: ExpenseReceiptWhereInput | null
     isNot?: ExpenseReceiptWhereInput | null
@@ -61658,6 +61983,7 @@ export namespace Prisma {
     to_account_uuid?: SortOrder
     category_uuid?: SortOrder
     subcategory_uuid?: SortOrder
+    preset_uuid?: SortOrder
     entry_date?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -61679,6 +62005,7 @@ export namespace Prisma {
     to_account_uuid?: SortOrder
     category_uuid?: SortOrder
     subcategory_uuid?: SortOrder
+    preset_uuid?: SortOrder
     entry_date?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -61695,6 +62022,7 @@ export namespace Prisma {
     to_account_uuid?: SortOrder
     category_uuid?: SortOrder
     subcategory_uuid?: SortOrder
+    preset_uuid?: SortOrder
     entry_date?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -61715,6 +62043,13 @@ export namespace Prisma {
     _max?: NestedEnumExpenseEntryTypeFilter<$PrismaModel>
   }
 
+  export type EnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExpenseRecurrenceFrequency | EnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ExpenseRecurrenceFrequency[] | ListEnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ExpenseRecurrenceFrequency[] | ListEnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel> | $Enums.ExpenseRecurrenceFrequency | null
+  }
+
   export type ExpenseEntryPresetCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
@@ -61727,6 +62062,13 @@ export namespace Prisma {
     to_account_uuid?: SortOrder
     category_uuid?: SortOrder
     subcategory_uuid?: SortOrder
+    is_recurring?: SortOrder
+    recurrence_frequency?: SortOrder
+    recurrence_weekday?: SortOrder
+    recurrence_day_of_month?: SortOrder
+    recurrence_month?: SortOrder
+    next_run_at?: SortOrder
+    last_run_at?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -61734,6 +62076,9 @@ export namespace Prisma {
   export type ExpenseEntryPresetAvgOrderByAggregateInput = {
     id?: SortOrder
     amount?: SortOrder
+    recurrence_weekday?: SortOrder
+    recurrence_day_of_month?: SortOrder
+    recurrence_month?: SortOrder
   }
 
   export type ExpenseEntryPresetMaxOrderByAggregateInput = {
@@ -61748,6 +62093,13 @@ export namespace Prisma {
     to_account_uuid?: SortOrder
     category_uuid?: SortOrder
     subcategory_uuid?: SortOrder
+    is_recurring?: SortOrder
+    recurrence_frequency?: SortOrder
+    recurrence_weekday?: SortOrder
+    recurrence_day_of_month?: SortOrder
+    recurrence_month?: SortOrder
+    next_run_at?: SortOrder
+    last_run_at?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -61764,6 +62116,13 @@ export namespace Prisma {
     to_account_uuid?: SortOrder
     category_uuid?: SortOrder
     subcategory_uuid?: SortOrder
+    is_recurring?: SortOrder
+    recurrence_frequency?: SortOrder
+    recurrence_weekday?: SortOrder
+    recurrence_day_of_month?: SortOrder
+    recurrence_month?: SortOrder
+    next_run_at?: SortOrder
+    last_run_at?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -61771,6 +62130,19 @@ export namespace Prisma {
   export type ExpenseEntryPresetSumOrderByAggregateInput = {
     id?: SortOrder
     amount?: SortOrder
+    recurrence_weekday?: SortOrder
+    recurrence_day_of_month?: SortOrder
+    recurrence_month?: SortOrder
+  }
+
+  export type EnumExpenseRecurrenceFrequencyNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExpenseRecurrenceFrequency | EnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ExpenseRecurrenceFrequency[] | ListEnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ExpenseRecurrenceFrequency[] | ListEnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumExpenseRecurrenceFrequencyNullableWithAggregatesFilter<$PrismaModel> | $Enums.ExpenseRecurrenceFrequency | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel>
+    _max?: NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel>
   }
 
   export type ExpenseTagCountOrderByAggregateInput = {
@@ -65785,6 +66157,12 @@ export namespace Prisma {
     connect?: ExpenseSubcategoryWhereUniqueInput
   }
 
+  export type ExpenseEntryPresetCreateNestedOneWithoutEntriesInput = {
+    create?: XOR<ExpenseEntryPresetCreateWithoutEntriesInput, ExpenseEntryPresetUncheckedCreateWithoutEntriesInput>
+    connectOrCreate?: ExpenseEntryPresetCreateOrConnectWithoutEntriesInput
+    connect?: ExpenseEntryPresetWhereUniqueInput
+  }
+
   export type ExpenseReceiptCreateNestedOneWithoutExpense_entryInput = {
     create?: XOR<ExpenseReceiptCreateWithoutExpense_entryInput, ExpenseReceiptUncheckedCreateWithoutExpense_entryInput>
     connectOrCreate?: ExpenseReceiptCreateOrConnectWithoutExpense_entryInput
@@ -65857,6 +66235,16 @@ export namespace Prisma {
     delete?: ExpenseSubcategoryWhereInput | boolean
     connect?: ExpenseSubcategoryWhereUniqueInput
     update?: XOR<XOR<ExpenseSubcategoryUpdateToOneWithWhereWithoutEntriesInput, ExpenseSubcategoryUpdateWithoutEntriesInput>, ExpenseSubcategoryUncheckedUpdateWithoutEntriesInput>
+  }
+
+  export type ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput = {
+    create?: XOR<ExpenseEntryPresetCreateWithoutEntriesInput, ExpenseEntryPresetUncheckedCreateWithoutEntriesInput>
+    connectOrCreate?: ExpenseEntryPresetCreateOrConnectWithoutEntriesInput
+    upsert?: ExpenseEntryPresetUpsertWithoutEntriesInput
+    disconnect?: ExpenseEntryPresetWhereInput | boolean
+    delete?: ExpenseEntryPresetWhereInput | boolean
+    connect?: ExpenseEntryPresetWhereUniqueInput
+    update?: XOR<XOR<ExpenseEntryPresetUpdateToOneWithWhereWithoutEntriesInput, ExpenseEntryPresetUpdateWithoutEntriesInput>, ExpenseEntryPresetUncheckedUpdateWithoutEntriesInput>
   }
 
   export type ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput = {
@@ -65941,10 +66329,28 @@ export namespace Prisma {
     connect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
   }
 
+  export type ExpenseEntryCreateNestedManyWithoutPresetInput = {
+    create?: XOR<ExpenseEntryCreateWithoutPresetInput, ExpenseEntryUncheckedCreateWithoutPresetInput> | ExpenseEntryCreateWithoutPresetInput[] | ExpenseEntryUncheckedCreateWithoutPresetInput[]
+    connectOrCreate?: ExpenseEntryCreateOrConnectWithoutPresetInput | ExpenseEntryCreateOrConnectWithoutPresetInput[]
+    createMany?: ExpenseEntryCreateManyPresetInputEnvelope
+    connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+  }
+
   export type ExpenseTagUncheckedCreateNestedManyWithoutEntry_presetsInput = {
     create?: XOR<ExpenseTagCreateWithoutEntry_presetsInput, ExpenseTagUncheckedCreateWithoutEntry_presetsInput> | ExpenseTagCreateWithoutEntry_presetsInput[] | ExpenseTagUncheckedCreateWithoutEntry_presetsInput[]
     connectOrCreate?: ExpenseTagCreateOrConnectWithoutEntry_presetsInput | ExpenseTagCreateOrConnectWithoutEntry_presetsInput[]
     connect?: ExpenseTagWhereUniqueInput | ExpenseTagWhereUniqueInput[]
+  }
+
+  export type ExpenseEntryUncheckedCreateNestedManyWithoutPresetInput = {
+    create?: XOR<ExpenseEntryCreateWithoutPresetInput, ExpenseEntryUncheckedCreateWithoutPresetInput> | ExpenseEntryCreateWithoutPresetInput[] | ExpenseEntryUncheckedCreateWithoutPresetInput[]
+    connectOrCreate?: ExpenseEntryCreateOrConnectWithoutPresetInput | ExpenseEntryCreateOrConnectWithoutPresetInput[]
+    createMany?: ExpenseEntryCreateManyPresetInputEnvelope
+    connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+  }
+
+  export type NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput = {
+    set?: $Enums.ExpenseRecurrenceFrequency | null
   }
 
   export type UserUpdateOneRequiredWithoutExpense_entry_presetsNestedInput = {
@@ -66006,6 +66412,20 @@ export namespace Prisma {
     deleteMany?: ExpenseTagScalarWhereInput | ExpenseTagScalarWhereInput[]
   }
 
+  export type ExpenseEntryUpdateManyWithoutPresetNestedInput = {
+    create?: XOR<ExpenseEntryCreateWithoutPresetInput, ExpenseEntryUncheckedCreateWithoutPresetInput> | ExpenseEntryCreateWithoutPresetInput[] | ExpenseEntryUncheckedCreateWithoutPresetInput[]
+    connectOrCreate?: ExpenseEntryCreateOrConnectWithoutPresetInput | ExpenseEntryCreateOrConnectWithoutPresetInput[]
+    upsert?: ExpenseEntryUpsertWithWhereUniqueWithoutPresetInput | ExpenseEntryUpsertWithWhereUniqueWithoutPresetInput[]
+    createMany?: ExpenseEntryCreateManyPresetInputEnvelope
+    set?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    disconnect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    delete?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    update?: ExpenseEntryUpdateWithWhereUniqueWithoutPresetInput | ExpenseEntryUpdateWithWhereUniqueWithoutPresetInput[]
+    updateMany?: ExpenseEntryUpdateManyWithWhereWithoutPresetInput | ExpenseEntryUpdateManyWithWhereWithoutPresetInput[]
+    deleteMany?: ExpenseEntryScalarWhereInput | ExpenseEntryScalarWhereInput[]
+  }
+
   export type ExpenseTagUncheckedUpdateManyWithoutEntry_presetsNestedInput = {
     create?: XOR<ExpenseTagCreateWithoutEntry_presetsInput, ExpenseTagUncheckedCreateWithoutEntry_presetsInput> | ExpenseTagCreateWithoutEntry_presetsInput[] | ExpenseTagUncheckedCreateWithoutEntry_presetsInput[]
     connectOrCreate?: ExpenseTagCreateOrConnectWithoutEntry_presetsInput | ExpenseTagCreateOrConnectWithoutEntry_presetsInput[]
@@ -66017,6 +66437,20 @@ export namespace Prisma {
     update?: ExpenseTagUpdateWithWhereUniqueWithoutEntry_presetsInput | ExpenseTagUpdateWithWhereUniqueWithoutEntry_presetsInput[]
     updateMany?: ExpenseTagUpdateManyWithWhereWithoutEntry_presetsInput | ExpenseTagUpdateManyWithWhereWithoutEntry_presetsInput[]
     deleteMany?: ExpenseTagScalarWhereInput | ExpenseTagScalarWhereInput[]
+  }
+
+  export type ExpenseEntryUncheckedUpdateManyWithoutPresetNestedInput = {
+    create?: XOR<ExpenseEntryCreateWithoutPresetInput, ExpenseEntryUncheckedCreateWithoutPresetInput> | ExpenseEntryCreateWithoutPresetInput[] | ExpenseEntryUncheckedCreateWithoutPresetInput[]
+    connectOrCreate?: ExpenseEntryCreateOrConnectWithoutPresetInput | ExpenseEntryCreateOrConnectWithoutPresetInput[]
+    upsert?: ExpenseEntryUpsertWithWhereUniqueWithoutPresetInput | ExpenseEntryUpsertWithWhereUniqueWithoutPresetInput[]
+    createMany?: ExpenseEntryCreateManyPresetInputEnvelope
+    set?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    disconnect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    delete?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    connect?: ExpenseEntryWhereUniqueInput | ExpenseEntryWhereUniqueInput[]
+    update?: ExpenseEntryUpdateWithWhereUniqueWithoutPresetInput | ExpenseEntryUpdateWithWhereUniqueWithoutPresetInput[]
+    updateMany?: ExpenseEntryUpdateManyWithWhereWithoutPresetInput | ExpenseEntryUpdateManyWithWhereWithoutPresetInput[]
+    deleteMany?: ExpenseEntryScalarWhereInput | ExpenseEntryScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutExpense_tagsInput = {
@@ -67840,6 +68274,23 @@ export namespace Prisma {
     _max?: NestedEnumExpenseEntryTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExpenseRecurrenceFrequency | EnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ExpenseRecurrenceFrequency[] | ListEnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ExpenseRecurrenceFrequency[] | ListEnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel> | $Enums.ExpenseRecurrenceFrequency | null
+  }
+
+  export type NestedEnumExpenseRecurrenceFrequencyNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ExpenseRecurrenceFrequency | EnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ExpenseRecurrenceFrequency[] | ListEnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ExpenseRecurrenceFrequency[] | ListEnumExpenseRecurrenceFrequencyFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumExpenseRecurrenceFrequencyNullableWithAggregatesFilter<$PrismaModel> | $Enums.ExpenseRecurrenceFrequency | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel>
+    _max?: NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel>
+  }
+
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -68328,6 +68779,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
@@ -68342,6 +68794,7 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -68365,6 +68818,13 @@ export namespace Prisma {
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     from_account: ExpenseAccountCreateNestedOneWithoutPresets_fromInput
@@ -68372,6 +68832,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntry_presetsInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntry_presetsInput
     tags?: ExpenseTagCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetUncheckedCreateWithoutUserInput = {
@@ -68385,9 +68846,17 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetCreateOrConnectWithoutUserInput = {
@@ -69211,6 +69680,7 @@ export namespace Prisma {
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     category_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     subcategory_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
+    preset_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
     entry_date?: DateTimeFilter<"ExpenseEntry"> | Date | string
     created_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseEntry"> | Date | string
@@ -69247,6 +69717,13 @@ export namespace Prisma {
     to_account_uuid?: StringNullableFilter<"ExpenseEntryPreset"> | string | null
     category_uuid?: StringNullableFilter<"ExpenseEntryPreset"> | string | null
     subcategory_uuid?: StringNullableFilter<"ExpenseEntryPreset"> | string | null
+    is_recurring?: BoolFilter<"ExpenseEntryPreset"> | boolean
+    recurrence_frequency?: EnumExpenseRecurrenceFrequencyNullableFilter<"ExpenseEntryPreset"> | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: IntNullableFilter<"ExpenseEntryPreset"> | number | null
+    recurrence_day_of_month?: IntNullableFilter<"ExpenseEntryPreset"> | number | null
+    recurrence_month?: IntNullableFilter<"ExpenseEntryPreset"> | number | null
+    next_run_at?: DateTimeNullableFilter<"ExpenseEntryPreset"> | Date | string | null
+    last_run_at?: DateTimeNullableFilter<"ExpenseEntryPreset"> | Date | string | null
     created_at?: DateTimeFilter<"ExpenseEntryPreset"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseEntryPreset"> | Date | string
   }
@@ -72094,6 +72571,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
@@ -72108,6 +72586,7 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -72137,6 +72616,7 @@ export namespace Prisma {
     from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
@@ -72151,6 +72631,7 @@ export namespace Prisma {
     from_account_uuid: string
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -72174,6 +72655,13 @@ export namespace Prisma {
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_entry_presetsInput
@@ -72181,6 +72669,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntry_presetsInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntry_presetsInput
     tags?: ExpenseTagCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetUncheckedCreateWithoutFrom_accountInput = {
@@ -72194,9 +72683,17 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetCreateOrConnectWithoutFrom_accountInput = {
@@ -72215,6 +72712,13 @@ export namespace Prisma {
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_entry_presetsInput
@@ -72222,6 +72726,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntry_presetsInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntry_presetsInput
     tags?: ExpenseTagCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetUncheckedCreateWithoutTo_accountInput = {
@@ -72235,9 +72740,17 @@ export namespace Prisma {
     from_account_uuid: string
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetCreateOrConnectWithoutTo_accountInput = {
@@ -72531,6 +73044,7 @@ export namespace Prisma {
     from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
@@ -72545,6 +73059,7 @@ export namespace Prisma {
     from_account_uuid: string
     to_account_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -72568,6 +73083,13 @@ export namespace Prisma {
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_entry_presetsInput
@@ -72575,6 +73097,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutPresets_toInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntry_presetsInput
     tags?: ExpenseTagCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetUncheckedCreateWithoutCategoryInput = {
@@ -72588,9 +73111,17 @@ export namespace Prisma {
     from_account_uuid: string
     to_account_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetCreateOrConnectWithoutCategoryInput = {
@@ -72961,6 +73492,7 @@ export namespace Prisma {
     from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
+    preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
@@ -72975,6 +73507,7 @@ export namespace Prisma {
     from_account_uuid: string
     to_account_uuid?: string | null
     category_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -72998,6 +73531,13 @@ export namespace Prisma {
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_entry_presetsInput
@@ -73005,6 +73545,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutPresets_toInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntry_presetsInput
     tags?: ExpenseTagCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetUncheckedCreateWithoutSubcategoryInput = {
@@ -73018,9 +73559,17 @@ export namespace Prisma {
     from_account_uuid: string
     to_account_uuid?: string | null
     category_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntry_presetsInput
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetCreateOrConnectWithoutSubcategoryInput = {
@@ -73501,6 +74050,58 @@ export namespace Prisma {
     create: XOR<ExpenseSubcategoryCreateWithoutEntriesInput, ExpenseSubcategoryUncheckedCreateWithoutEntriesInput>
   }
 
+  export type ExpenseEntryPresetCreateWithoutEntriesInput = {
+    uuid?: string
+    title: string
+    type: $Enums.ExpenseEntryType
+    amount: Decimal | DecimalJsLike | number | string
+    description?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutExpense_entry_presetsInput
+    from_account: ExpenseAccountCreateNestedOneWithoutPresets_fromInput
+    to_account?: ExpenseAccountCreateNestedOneWithoutPresets_toInput
+    category?: ExpenseCategoryCreateNestedOneWithoutEntry_presetsInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntry_presetsInput
+    tags?: ExpenseTagCreateNestedManyWithoutEntry_presetsInput
+  }
+
+  export type ExpenseEntryPresetUncheckedCreateWithoutEntriesInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    title: string
+    type: $Enums.ExpenseEntryType
+    amount: Decimal | DecimalJsLike | number | string
+    description?: string | null
+    from_account_uuid: string
+    to_account_uuid?: string | null
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntry_presetsInput
+  }
+
+  export type ExpenseEntryPresetCreateOrConnectWithoutEntriesInput = {
+    where: ExpenseEntryPresetWhereUniqueInput
+    create: XOR<ExpenseEntryPresetCreateWithoutEntriesInput, ExpenseEntryPresetUncheckedCreateWithoutEntriesInput>
+  }
+
   export type ExpenseReceiptCreateWithoutExpense_entryInput = {
     uuid?: string
     receipt_date?: Date | string
@@ -73799,6 +74400,64 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
+  export type ExpenseEntryPresetUpsertWithoutEntriesInput = {
+    update: XOR<ExpenseEntryPresetUpdateWithoutEntriesInput, ExpenseEntryPresetUncheckedUpdateWithoutEntriesInput>
+    create: XOR<ExpenseEntryPresetCreateWithoutEntriesInput, ExpenseEntryPresetUncheckedCreateWithoutEntriesInput>
+    where?: ExpenseEntryPresetWhereInput
+  }
+
+  export type ExpenseEntryPresetUpdateToOneWithWhereWithoutEntriesInput = {
+    where?: ExpenseEntryPresetWhereInput
+    data: XOR<ExpenseEntryPresetUpdateWithoutEntriesInput, ExpenseEntryPresetUncheckedUpdateWithoutEntriesInput>
+  }
+
+  export type ExpenseEntryPresetUpdateWithoutEntriesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutExpense_entry_presetsNestedInput
+    from_account?: ExpenseAccountUpdateOneRequiredWithoutPresets_fromNestedInput
+    to_account?: ExpenseAccountUpdateOneWithoutPresets_toNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutEntry_presetsNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutEntry_presetsNestedInput
+    tags?: ExpenseTagUpdateManyWithoutEntry_presetsNestedInput
+  }
+
+  export type ExpenseEntryPresetUncheckedUpdateWithoutEntriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    from_account_uuid?: StringFieldUpdateOperationsInput | string
+    to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: ExpenseTagUncheckedUpdateManyWithoutEntry_presetsNestedInput
+  }
+
   export type ExpenseReceiptUpsertWithoutExpense_entryInput = {
     update: XOR<ExpenseReceiptUpdateWithoutExpense_entryInput, ExpenseReceiptUncheckedUpdateWithoutExpense_entryInput>
     create: XOR<ExpenseReceiptCreateWithoutExpense_entryInput, ExpenseReceiptUncheckedCreateWithoutExpense_entryInput>
@@ -74089,6 +74748,51 @@ export namespace Prisma {
     create: XOR<ExpenseTagCreateWithoutEntry_presetsInput, ExpenseTagUncheckedCreateWithoutEntry_presetsInput>
   }
 
+  export type ExpenseEntryCreateWithoutPresetInput = {
+    uuid?: string
+    type: $Enums.ExpenseEntryType
+    amount: Decimal | DecimalJsLike | number | string
+    description?: string | null
+    entry_date?: Date | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutExpense_entriesInput
+    from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
+    to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
+    category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
+  }
+
+  export type ExpenseEntryUncheckedCreateWithoutPresetInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    type: $Enums.ExpenseEntryType
+    amount: Decimal | DecimalJsLike | number | string
+    description?: string | null
+    from_account_uuid: string
+    to_account_uuid?: string | null
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
+    entry_date?: Date | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
+  }
+
+  export type ExpenseEntryCreateOrConnectWithoutPresetInput = {
+    where: ExpenseEntryWhereUniqueInput
+    create: XOR<ExpenseEntryCreateWithoutPresetInput, ExpenseEntryUncheckedCreateWithoutPresetInput>
+  }
+
+  export type ExpenseEntryCreateManyPresetInputEnvelope = {
+    data: ExpenseEntryCreateManyPresetInput | ExpenseEntryCreateManyPresetInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutExpense_entry_presetsInput = {
     update: XOR<UserUpdateWithoutExpense_entry_presetsInput, UserUncheckedUpdateWithoutExpense_entry_presetsInput>
     create: XOR<UserCreateWithoutExpense_entry_presetsInput, UserUncheckedCreateWithoutExpense_entry_presetsInput>
@@ -74349,6 +75053,22 @@ export namespace Prisma {
     data: XOR<ExpenseTagUpdateManyMutationInput, ExpenseTagUncheckedUpdateManyWithoutEntry_presetsInput>
   }
 
+  export type ExpenseEntryUpsertWithWhereUniqueWithoutPresetInput = {
+    where: ExpenseEntryWhereUniqueInput
+    update: XOR<ExpenseEntryUpdateWithoutPresetInput, ExpenseEntryUncheckedUpdateWithoutPresetInput>
+    create: XOR<ExpenseEntryCreateWithoutPresetInput, ExpenseEntryUncheckedCreateWithoutPresetInput>
+  }
+
+  export type ExpenseEntryUpdateWithWhereUniqueWithoutPresetInput = {
+    where: ExpenseEntryWhereUniqueInput
+    data: XOR<ExpenseEntryUpdateWithoutPresetInput, ExpenseEntryUncheckedUpdateWithoutPresetInput>
+  }
+
+  export type ExpenseEntryUpdateManyWithWhereWithoutPresetInput = {
+    where: ExpenseEntryScalarWhereInput
+    data: XOR<ExpenseEntryUpdateManyMutationInput, ExpenseEntryUncheckedUpdateManyWithoutPresetInput>
+  }
+
   export type UserCreateWithoutExpense_tagsInput = {
     uuid?: string
     email: string
@@ -74444,6 +75164,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
   }
 
@@ -74458,6 +75179,7 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -74475,6 +75197,13 @@ export namespace Prisma {
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
     description?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_entry_presetsInput
@@ -74482,6 +75211,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutPresets_toInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntry_presetsInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntry_presetsInput
+    entries?: ExpenseEntryCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetUncheckedCreateWithoutTagsInput = {
@@ -74496,8 +75226,16 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutPresetInput
   }
 
   export type ExpenseEntryPresetCreateOrConnectWithoutTagsInput = {
@@ -74961,6 +75699,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
@@ -74975,6 +75714,7 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -75157,6 +75897,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
@@ -75171,6 +75912,7 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79809,6 +80551,7 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -79825,6 +80568,13 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -80319,6 +81069,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
@@ -80333,6 +81084,7 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80350,6 +81102,7 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -80361,6 +81114,13 @@ export namespace Prisma {
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     from_account?: ExpenseAccountUpdateOneRequiredWithoutPresets_fromNestedInput
@@ -80368,6 +81128,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntry_presetsNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntry_presetsNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateWithoutUserInput = {
@@ -80381,9 +81142,17 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateManyWithoutUserInput = {
@@ -80397,6 +81166,13 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -81424,6 +82200,7 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -81439,6 +82216,7 @@ export namespace Prisma {
     from_account_uuid: string
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -81455,6 +82233,13 @@ export namespace Prisma {
     to_account_uuid?: string | null
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -81470,6 +82255,13 @@ export namespace Prisma {
     from_account_uuid: string
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -81486,6 +82278,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
@@ -81500,6 +82293,7 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81517,6 +82311,7 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81534,6 +82329,7 @@ export namespace Prisma {
     from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
@@ -81548,6 +82344,7 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81565,6 +82362,7 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81576,6 +82374,13 @@ export namespace Prisma {
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_entry_presetsNestedInput
@@ -81583,6 +82388,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntry_presetsNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntry_presetsNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateWithoutFrom_accountInput = {
@@ -81596,9 +82402,17 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateManyWithoutFrom_accountInput = {
@@ -81612,6 +82426,13 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -81622,6 +82443,13 @@ export namespace Prisma {
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_entry_presetsNestedInput
@@ -81629,6 +82457,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntry_presetsNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntry_presetsNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateWithoutTo_accountInput = {
@@ -81642,9 +82471,17 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateManyWithoutTo_accountInput = {
@@ -81658,6 +82495,13 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -81681,6 +82525,7 @@ export namespace Prisma {
     from_account_uuid: string
     to_account_uuid?: string | null
     subcategory_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -81697,6 +82542,13 @@ export namespace Prisma {
     from_account_uuid: string
     to_account_uuid?: string | null
     subcategory_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -81768,6 +82620,7 @@ export namespace Prisma {
     from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
@@ -81782,6 +82635,7 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81799,6 +82653,7 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81810,6 +82665,13 @@ export namespace Prisma {
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_entry_presetsNestedInput
@@ -81817,6 +82679,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutPresets_toNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntry_presetsNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateWithoutCategoryInput = {
@@ -81830,9 +82693,17 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateManyWithoutCategoryInput = {
@@ -81846,6 +82717,13 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -81923,6 +82801,7 @@ export namespace Prisma {
     from_account_uuid: string
     to_account_uuid?: string | null
     category_uuid?: string | null
+    preset_uuid?: string | null
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
@@ -81939,6 +82818,13 @@ export namespace Prisma {
     from_account_uuid: string
     to_account_uuid?: string | null
     category_uuid?: string | null
+    is_recurring?: boolean
+    recurrence_frequency?: $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: number | null
+    recurrence_day_of_month?: number | null
+    recurrence_month?: number | null
+    next_run_at?: Date | string | null
+    last_run_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -81976,6 +82862,7 @@ export namespace Prisma {
     from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
+    preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
@@ -81990,6 +82877,7 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -82007,6 +82895,7 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -82018,6 +82907,13 @@ export namespace Prisma {
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_entry_presetsNestedInput
@@ -82025,6 +82921,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutPresets_toNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntry_presetsNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateWithoutSubcategoryInput = {
@@ -82038,9 +82935,17 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateManyWithoutSubcategoryInput = {
@@ -82054,6 +82959,13 @@ export namespace Prisma {
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -82152,6 +83064,22 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ExpenseEntryCreateManyPresetInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    type: $Enums.ExpenseEntryType
+    amount: Decimal | DecimalJsLike | number | string
+    description?: string | null
+    from_account_uuid: string
+    to_account_uuid?: string | null
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
+    entry_date?: Date | string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type ExpenseTagUpdateWithoutEntry_presetsInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -82183,6 +83111,57 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ExpenseEntryUpdateWithoutPresetInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutExpense_entriesNestedInput
+    from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
+    to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
+  }
+
+  export type ExpenseEntryUncheckedUpdateWithoutPresetInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    from_account_uuid?: StringFieldUpdateOperationsInput | string
+    to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
+  }
+
+  export type ExpenseEntryUncheckedUpdateManyWithoutPresetInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    from_account_uuid?: StringFieldUpdateOperationsInput | string
+    to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ExpenseEntryUpdateWithoutTagsInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
@@ -82196,6 +83175,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
   }
 
@@ -82210,6 +83190,7 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -82227,6 +83208,7 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -82238,6 +83220,13 @@ export namespace Prisma {
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_entry_presetsNestedInput
@@ -82245,6 +83234,7 @@ export namespace Prisma {
     to_account?: ExpenseAccountUpdateOneWithoutPresets_toNestedInput
     category?: ExpenseCategoryUpdateOneWithoutEntry_presetsNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntry_presetsNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateWithoutTagsInput = {
@@ -82259,8 +83249,16 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutPresetNestedInput
   }
 
   export type ExpenseEntryPresetUncheckedUpdateManyWithoutTagsInput = {
@@ -82275,6 +83273,13 @@ export namespace Prisma {
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    is_recurring?: BoolFieldUpdateOperationsInput | boolean
+    recurrence_frequency?: NullableEnumExpenseRecurrenceFrequencyFieldUpdateOperationsInput | $Enums.ExpenseRecurrenceFrequency | null
+    recurrence_weekday?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_day_of_month?: NullableIntFieldUpdateOperationsInput | number | null
+    recurrence_month?: NullableIntFieldUpdateOperationsInput | number | null
+    next_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_run_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

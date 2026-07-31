@@ -96,4 +96,13 @@ export class CreateExpenseEntryDto {
   @IsArray()
   @IsUUID('4', { each: true })
   tag_uuids?: string[];
+
+  @ApiProperty({
+    description: 'Preset UUID when the entry was generated from a recurring preset',
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    required: false,
+  })
+  @IsOptional()
+  @IsUUID('4')
+  preset_uuid?: string;
 }

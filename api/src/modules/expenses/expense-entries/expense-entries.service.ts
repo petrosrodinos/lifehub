@@ -35,6 +35,7 @@ export class ExpenseEntriesService {
         to_account_uuid: entryFields.to_account_uuid,
         category_uuid: entryFields.category_uuid,
         subcategory_uuid: entryFields.subcategory_uuid,
+        preset_uuid: entryFields.preset_uuid,
         entry_date: entryFields.entry_date ? new Date(entryFields.entry_date) : new Date(),
         ...(tag_uuids?.length ? { tags: { connect: tag_uuids.map((tagUuid) => ({ uuid: tagUuid })) } } : {}),
       };
