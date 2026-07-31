@@ -7,6 +7,7 @@ import { useExpenseCategories } from "../../../../features/expenses/expense-cate
 import { useExpenseSubcategories } from "../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories";
 import { useExpenseTags, useCreateExpenseTag } from "../../../../features/expenses/expense-tags/hooks/use-expense-tags";
 import { TagSelector } from "../../../../components/ui/TagSelector";
+import { AmountCalculatorField } from "./AmountCalculatorField";
 import { CategorySubcategoryPickerModal } from "./CategorySubcategoryPickerModal";
 
 type TransactionFormFieldsProps = {
@@ -124,19 +125,7 @@ export function TransactionFormFields({
         </div>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Amount</label>
-        <input
-          type="number"
-          step="0.01"
-          value={amount}
-          onChange={(e) => onAmountChange(e.target.value)}
-          placeholder="0.00"
-          className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition-colors"
-          disabled={isPending}
-          required
-        />
-      </div>
+      <AmountCalculatorField value={amount} onChange={onAmountChange} disabled={isPending} />
 
       <div>
         <label className="block text-sm font-medium text-slate-300 mb-3">{isTransfer ? "From Account" : "Account"}</label>

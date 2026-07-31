@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import type { CreateExpenseEntryPresetDto } from "../../../../features/expenses/expense-entry-presets/interfaces/expense-entry-presets.interfaces";
 import type { ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { evaluateAmountExpression } from "../../transactions/utils/amount-calculator.helper";
 import { TransactionFormFields } from "../../transactions/components/TransactionFormFields";
 
 type PresetTransactionFormProps = {
@@ -33,10 +34,13 @@ export function PresetTransactionForm({ onSubmit, onCancel, submitLabel, isPendi
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const resolvedAmount = evaluateAmountExpression(amount);
+    if (!resolvedAmount || parseFloat(resolvedAmount) <= 0) return;
+
     const data: CreateExpenseEntryPresetDto = {
       title: title.trim(),
       type,
-      amount: parseFloat(amount),
+      amount: parseFloat(resolvedAmount),
       description: description || undefined,
       from_account_uuid: fromAccountUuid,
       to_account_uuid: isTransfer ? toAccountUuid : undefined,
@@ -48,7 +52,8 @@ export function PresetTransactionForm({ onSubmit, onCancel, submitLabel, isPendi
     onSubmit(data);
   };
 
-  const isFormValid = title.trim() && amount && parseFloat(amount) > 0 && fromAccountUuid && (isTransfer ? toAccountUuid : categoryUuid && subcategoryUuid);
+  const resolvedAmount = evaluateAmountExpression(amount);
+  const isFormValid = title.trim() && resolvedAmount !== null && parseFloat(resolvedAmount) > 0 && fromAccountUuid && (isTransfer ? toAccountUuid : categoryUuid && subcategoryUuid);
   const pendingSubmitLabel = submitLabel === "Create" ? "Creating..." : "Saving...";
 
   return (

@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import type { CreateExpenseEntryDto, ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { evaluateAmountExpression } from "../utils/amount-calculator.helper";
 import { TransactionFormFields } from "./TransactionFormFields";
 
 type TransactionFormProps = {
@@ -34,9 +35,12 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const resolvedAmount = evaluateAmountExpression(amount);
+    if (!resolvedAmount || parseFloat(resolvedAmount) <= 0) return;
+
     const data: CreateExpenseEntryDto = {
       type,
-      amount: parseFloat(amount),
+      amount: parseFloat(resolvedAmount),
       description: description || undefined,
       from_account_uuid: fromAccountUuid,
       to_account_uuid: isTransfer ? toAccountUuid : undefined,
@@ -51,7 +55,8 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
   };
 
   const parsedQuantity = parseInt(quantity, 10);
-  const isFormValid = amount && parseFloat(amount) > 0 && fromAccountUuid && (isTransfer ? toAccountUuid : categoryUuid && subcategoryUuid) && (!showQuantity || (parsedQuantity >= 1 && Number.isInteger(parsedQuantity)));
+  const resolvedAmount = evaluateAmountExpression(amount);
+  const isFormValid = resolvedAmount !== null && parseFloat(resolvedAmount) > 0 && fromAccountUuid && (isTransfer ? toAccountUuid : categoryUuid && subcategoryUuid) && (!showQuantity || (parsedQuantity >= 1 && Number.isInteger(parsedQuantity)));
   const pendingSubmitLabel = submitLabel === "Create" ? "Creating..." : "Saving...";
 
   return (
