@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { ExpenseAccount } from "../../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
+import { getInitialFromAccountUuid } from "../../../../expenses/utils/resolve-default-account.helper";
+import { useAuthStore } from "../../../../../store/auth-store";
 import { ReceiptPhotoCapture } from "./ReceiptPhotoCapture";
 
 type ReceiptUploadTabProps = {
@@ -10,7 +12,9 @@ type ReceiptUploadTabProps = {
 };
 
 export function ReceiptUploadTab({ accounts, isUploadPending, onSubmit, onCancel }: ReceiptUploadTabProps) {
-  const [fromAccountUuid, setFromAccountUuid] = useState("");
+  const defaultAccountUuid = useAuthStore((state) => state.defaultAccountUuid);
+  const validDefaultAccountUuid = accounts.some((account) => account.uuid === defaultAccountUuid) ? defaultAccountUuid : null;
+  const [fromAccountUuid, setFromAccountUuid] = useState(getInitialFromAccountUuid(undefined, validDefaultAccountUuid));
   const [uploadFile, setUploadFile] = useState<File | null>(null);
 
   const canSubmit = !!fromAccountUuid && !!uploadFile;

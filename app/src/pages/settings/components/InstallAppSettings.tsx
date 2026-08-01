@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Smartphone, Download, CheckCircle2, ChevronDown } from "lucide-react";
+import { Smartphone, CheckCircle2, ChevronDown } from "lucide-react";
 import { useInstallApp } from "../../../hooks/use-install-app";
 import {
   INSTALL_PLATFORMS,
@@ -12,17 +12,13 @@ export function InstallAppSettings() {
   const [showDirections, setShowDirections] = useState(false);
   const [activePlatform, setActivePlatform] = useState<InstallPlatform>(INSTALL_PLATFORMS.ANDROID);
 
-  const handleInstallClick = async () => {
-    if (canPromptInstall) {
+  const handleButtonClick = async () => {
+    if (canPromptInstall && !showDirections) {
       const accepted = await promptInstall();
       if (accepted) {
         return;
       }
     }
-    setShowDirections(true);
-  };
-
-  const handleToggleDirections = () => {
     setShowDirections((previous) => !previous);
   };
 
@@ -67,24 +63,14 @@ export function InstallAppSettings() {
           <p className="text-sm text-slate-400 mb-4">
             Install LifeHub as a shortcut on your Android or iPhone for quick access like a native app.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <button
-              type="button"
-              onClick={handleInstallClick}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-violet-500 hover:bg-violet-600 text-white rounded-lg font-medium transition-colors"
-            >
-              <Download className="w-4 h-4" />
-              {canPromptInstall ? "Install App" : "Show Install Steps"}
-            </button>
-            <button
-              type="button"
-              onClick={handleToggleDirections}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-medium transition-colors"
-            >
-              Directions
-              <ChevronDown className={`w-4 h-4 transition-transform ${showDirections ? "rotate-180" : ""}`} />
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={handleButtonClick}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-violet-500 hover:bg-violet-600 text-white rounded-lg font-medium transition-colors"
+          >
+            {canPromptInstall && !showDirections ? "Install App" : "Directions"}
+            <ChevronDown className={`w-4 h-4 transition-transform ${showDirections ? "rotate-180" : ""}`} />
+          </button>
         </div>
       </div>
 

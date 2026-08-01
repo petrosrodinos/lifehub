@@ -12,6 +12,8 @@ import {
   PRESET_RECURRENCE_MONTH_OPTIONS,
   PRESET_RECURRENCE_WEEKDAY_OPTIONS,
 } from "../../../../config/constants/dropdowns/preset-recurrence";
+import { useAuthStore } from "../../../../store/auth-store";
+import { getInitialFromAccountUuid } from "../../utils/resolve-default-account.helper";
 import { evaluateAmountExpression } from "../../transactions/utils/amount-calculator.helper";
 import { TransactionFormFields } from "../../transactions/components/TransactionFormFields";
 import { buildPresetRecurrencePayload, isPresetRecurrenceValid } from "../utils/preset-recurrence.helper";
@@ -28,11 +30,12 @@ const selectClassName =
   "w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors";
 
 export function PresetTransactionForm({ onSubmit, onCancel, submitLabel, isPending, initialData }: PresetTransactionFormProps) {
+  const defaultAccountUuid = useAuthStore((state) => state.defaultAccountUuid);
   const [title, setTitle] = useState(initialData?.title || "");
   const [type, setType] = useState<ExpenseEntryType>(initialData?.type || ExpenseEntryTypes.EXPENSE);
   const [amount, setAmount] = useState(initialData?.amount?.toString() || "");
   const [description, setDescription] = useState(initialData?.description || "");
-  const [fromAccountUuid, setFromAccountUuid] = useState(initialData?.from_account_uuid || "");
+  const [fromAccountUuid, setFromAccountUuid] = useState(getInitialFromAccountUuid(initialData?.from_account_uuid, defaultAccountUuid));
   const [toAccountUuid, setToAccountUuid] = useState(initialData?.to_account_uuid || "");
   const [categoryUuid, setCategoryUuid] = useState(initialData?.category_uuid || "");
   const [subcategoryUuid, setSubcategoryUuid] = useState(initialData?.subcategory_uuid || "");

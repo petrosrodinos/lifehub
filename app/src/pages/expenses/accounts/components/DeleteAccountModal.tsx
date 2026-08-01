@@ -1,6 +1,7 @@
 import { useDeleteExpenseAccount } from "../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
 import type { ExpenseAccount } from "../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
+import { useAuthStore } from "../../../../store/auth-store";
 
 type DeleteAccountModalProps = {
   isOpen: boolean;
@@ -11,10 +12,15 @@ type DeleteAccountModalProps = {
 
 export function DeleteAccountModal({ isOpen, onClose, onSuccess, account }: DeleteAccountModalProps) {
   const deleteAccount = useDeleteExpenseAccount();
+  const defaultAccountUuid = useAuthStore((state) => state.defaultAccountUuid);
+  const setDefaultAccountUuid = useAuthStore((state) => state.setDefaultAccountUuid);
 
   const handleConfirm = () => {
     deleteAccount.mutate(account.uuid, {
       onSuccess: () => {
+        if (defaultAccountUuid === account.uuid) {
+          setDefaultAccountUuid(null);
+        }
         onClose();
         onSuccess?.();
       },

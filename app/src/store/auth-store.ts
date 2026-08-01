@@ -6,6 +6,7 @@ interface UserStore extends LoggedInUser {
     pinHash: string | null;
     isAppLocked: boolean;
     showAccountBalances: boolean;
+    defaultAccountUuid: string | null;
     login(user: any): void;
     logout(): void;
     updateUser(user: any): void;
@@ -13,9 +14,10 @@ interface UserStore extends LoggedInUser {
     lockApp(): void;
     unlockApp(): void;
     setShowAccountBalances(show: boolean): void;
+    setDefaultAccountUuid(uuid: string | null): void;
 }
 
-const initialValues: Omit<UserStore, 'login' | 'logout' | 'updateUser' | 'setPinHash' | 'lockApp' | 'unlockApp' | 'setShowAccountBalances'> = {
+const initialValues: Omit<UserStore, 'login' | 'logout' | 'updateUser' | 'setPinHash' | 'lockApp' | 'unlockApp' | 'setShowAccountBalances' | 'setDefaultAccountUuid'> = {
     isLoggedIn: false,
     user_uuid: null,
     role: null,
@@ -27,6 +29,7 @@ const initialValues: Omit<UserStore, 'login' | 'logout' | 'updateUser' | 'setPin
     pinHash: null,
     isAppLocked: false,
     showAccountBalances: true,
+    defaultAccountUuid: null,
 };
 
 const STORE_KEY = `lifehub-auth`;
@@ -62,6 +65,9 @@ export const useAuthStore = create<UserStore>()(
                 },
                 setShowAccountBalances: (show: boolean) => {
                     set((state) => ({ ...state, showAccountBalances: show }));
+                },
+                setDefaultAccountUuid: (uuid: string | null) => {
+                    set((state) => ({ ...state, defaultAccountUuid: uuid }));
                 },
             }),
             {

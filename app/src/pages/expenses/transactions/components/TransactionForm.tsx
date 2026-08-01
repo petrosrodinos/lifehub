@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 import type { CreateExpenseEntryDto, ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { useAuthStore } from "../../../../store/auth-store";
+import { getInitialFromAccountUuid } from "../../utils/resolve-default-account.helper";
 import { evaluateAmountExpression } from "../utils/amount-calculator.helper";
 import { TransactionFormFields } from "./TransactionFormFields";
 
@@ -14,11 +16,12 @@ type TransactionFormProps = {
 };
 
 export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, initialData, showQuantity = false }: TransactionFormProps) {
+  const defaultAccountUuid = useAuthStore((state) => state.defaultAccountUuid);
   const [type, setType] = useState<ExpenseEntryType>(initialData?.type || ExpenseEntryTypes.EXPENSE);
   const [amount, setAmount] = useState(initialData?.amount?.toString() || "");
   const [quantity, setQuantity] = useState("1");
   const [description, setDescription] = useState(initialData?.description || "");
-  const [fromAccountUuid, setFromAccountUuid] = useState(initialData?.from_account_uuid || "");
+  const [fromAccountUuid, setFromAccountUuid] = useState(getInitialFromAccountUuid(initialData?.from_account_uuid, defaultAccountUuid));
   const [toAccountUuid, setToAccountUuid] = useState(initialData?.to_account_uuid || "");
   const [categoryUuid, setCategoryUuid] = useState(initialData?.category_uuid || "");
   const [subcategoryUuid, setSubcategoryUuid] = useState(initialData?.subcategory_uuid || "");
