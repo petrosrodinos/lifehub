@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { PinSettings } from "./components/PinSettings";
 import { VisibilitySettingsNav } from "./components/VisibilitySettingsNav";
-import { Settings as SettingsIcon, ShieldCheck, LogOut, User, ArrowLeft, EyeOff } from "lucide-react";
+import { InstallAppSettings } from "./components/InstallAppSettings";
+import { Settings as SettingsIcon, ShieldCheck, LogOut, User, ArrowLeft, EyeOff, Smartphone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth-store";
 import { ConfirmationModal } from "../../components/ui/ConfirmationModal";
@@ -78,6 +79,14 @@ export function SettingsPage() {
               <h2 className="text-xl font-semibold text-white">Security</h2>
             </div>
             <PinSettings />
+          </section>
+
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+              <Smartphone className="w-5 h-5 text-violet-400" />
+              <h2 className="text-xl font-semibold text-white">Install App</h2>
+            </div>
+            <InstallAppSettings />
           </section>
 
           <section>
