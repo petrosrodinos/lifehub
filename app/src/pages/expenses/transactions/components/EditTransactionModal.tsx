@@ -22,6 +22,7 @@ export function EditTransactionModal({ isOpen, onClose, transaction }: EditTrans
       type: data.type,
       amount: data.amount,
       has_vat: data.has_vat,
+      vat_amount: data.vat_amount,
       description: data.description,
       from_account_uuid: data.from_account_uuid,
       to_account_uuid: data.to_account_uuid,

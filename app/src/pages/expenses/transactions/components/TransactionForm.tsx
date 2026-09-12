@@ -1,10 +1,11 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import type { CreateExpenseEntryDto, ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { useAuthStore } from "../../../../store/auth-store";
 import { getInitialFromAccountUuid } from "../../utils/resolve-default-account.helper";
 import { calculateVatAmount, evaluateAmountExpression } from "../utils/amount-calculator.helper";
 import { TransactionFormFields } from "./TransactionFormFields";
+import { toDatetimeLocalInputValue, fromDatetimeLocalInputValue } from "../../utils/transaction";
 
 type TransactionFormProps = {
   onSubmit: (data: CreateExpenseEntryDto) => void;
@@ -20,6 +21,8 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
   const [type, setType] = useState<ExpenseEntryType>(initialData?.type || ExpenseEntryTypes.EXPENSE);
   const [amount, setAmount] = useState(initialData?.amount?.toString() || "");
   const [hasVat, setHasVat] = useState(initialData?.has_vat || false);
+  const [vatAmount, setVatAmount] = useState(initialData?.vat_amount !== undefined ? initialData.vat_amount.toString() : "");
+  const [isVatAmountTouched, setIsVatAmountTouched] = useState(initialData?.vat_amount !== undefined);
   const [quantity, setQuantity] = useState("1");
   const [description, setDescription] = useState(initialData?.description || "");
   const [fromAccountUuid, setFromAccountUuid] = useState(getInitialFromAccountUuid(initialData?.from_account_uuid, defaultAccountUuid));
@@ -27,12 +30,30 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
   const [categoryUuid, setCategoryUuid] = useState(initialData?.category_uuid || "");
   const [subcategoryUuid, setSubcategoryUuid] = useState(initialData?.subcategory_uuid || "");
   const [selectedTagUuids, setSelectedTagUuids] = useState<string[]>(initialData?.tag_uuids || []);
-  const [entryDate, setEntryDate] = useState(initialData?.entry_date ? initialData.entry_date.split("T")[0] : new Date().toISOString().split("T")[0]);
+  const [entryDateTime, setEntryDateTime] = useState(toDatetimeLocalInputValue(initialData?.entry_date));
 
   const handleCategorySelect = useCallback((nextCategoryUuid: string, nextSubcategoryUuid: string) => {
     setCategoryUuid(nextCategoryUuid);
     setSubcategoryUuid(nextSubcategoryUuid);
   }, []);
+
+  const handleVatAmountChange = useCallback((value: string) => {
+    setVatAmount(value);
+    setIsVatAmountTouched(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasVat || isVatAmountTouched) return;
+
+    const resolvedAmount = evaluateAmountExpression(amount);
+    setVatAmount(resolvedAmount ? calculateVatAmount(parseFloat(resolvedAmount)) : "0.00");
+  }, [amount, hasVat, isVatAmountTouched]);
+
+  useEffect(() => {
+    if (!hasVat) {
+      setIsVatAmountTouched(false);
+    }
+  }, [hasVat]);
 
   const isTransfer = type === ExpenseEntryTypes.TRANSFER;
 
@@ -46,12 +67,13 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
       type,
       amount: parseFloat(resolvedAmount),
       has_vat: hasVat,
+      vat_amount: hasVat ? parseFloat(vatAmount) || 0 : undefined,
       description: description || undefined,
       from_account_uuid: fromAccountUuid,
       to_account_uuid: isTransfer ? toAccountUuid : undefined,
       category_uuid: isTransfer ? undefined : categoryUuid,
       subcategory_uuid: isTransfer ? undefined : subcategoryUuid,
-      entry_date: entryDate,
+      entry_date: fromDatetimeLocalInputValue(entryDateTime),
       tag_uuids: selectedTagUuids.length > 0 ? selectedTagUuids : undefined,
       ...(showQuantity && { quantity: parseInt(quantity, 10) }),
     };
@@ -61,7 +83,6 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
 
   const parsedQuantity = parseInt(quantity, 10);
   const resolvedAmount = evaluateAmountExpression(amount);
-  const vatAmount = resolvedAmount ? calculateVatAmount(parseFloat(resolvedAmount)) : "0.00";
   const isFormValid = resolvedAmount !== null && parseFloat(resolvedAmount) > 0 && fromAccountUuid && (isTransfer ? toAccountUuid : categoryUuid && subcategoryUuid) && (!showQuantity || (parsedQuantity >= 1 && Number.isInteger(parsedQuantity)));
   const pendingSubmitLabel = submitLabel === "Create" ? "Creating..." : "Saving...";
 
@@ -75,6 +96,7 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
         hasVat={hasVat}
         onHasVatChange={setHasVat}
         vatAmount={vatAmount}
+        onVatAmountChange={handleVatAmountChange}
         fromAccountUuid={fromAccountUuid}
         onFromAccountChange={setFromAccountUuid}
         toAccountUuid={toAccountUuid}
@@ -97,8 +119,8 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
       )}
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Date</label>
-        <input type="date" value={entryDate} onChange={(e) => setEntryDate(e.target.value)} className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors" disabled={isPending} required />
+        <label className="block text-sm font-medium text-slate-300 mb-2">Date & Time</label>
+        <input type="datetime-local" value={entryDateTime} onChange={(e) => setEntryDateTime(e.target.value)} className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors" disabled={isPending} required />
       </div>
 
       <div className="flex gap-3 pt-4">

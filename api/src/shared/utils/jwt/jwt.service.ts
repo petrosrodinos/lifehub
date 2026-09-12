@@ -18,7 +18,7 @@ export class CreateJwtService {
     async signToken(payload: any): Promise<string> {
 
 
-        const expiresIn = this.expiration ?? '1m';
+        const expiresIn = this.expiration ?? '30d';
 
         const token = await this.jwt.signAsync(payload, {
             expiresIn: expiresIn as `${number}${'s' | 'm' | 'h' | 'd' | 'w' | 'y'}`,

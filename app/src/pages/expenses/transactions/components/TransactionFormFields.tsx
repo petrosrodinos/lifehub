@@ -18,6 +18,8 @@ type TransactionFormFieldsProps = {
   hasVat: boolean;
   onHasVatChange: (value: boolean) => void;
   vatAmount: string;
+  onVatAmountChange: (value: string) => void;
+  vatSupported?: boolean;
   fromAccountUuid: string;
   onFromAccountChange: (uuid: string) => void;
   toAccountUuid: string;
@@ -40,6 +42,8 @@ export function TransactionFormFields({
   hasVat,
   onHasVatChange,
   vatAmount,
+  onVatAmountChange,
+  vatSupported = true,
   fromAccountUuid,
   onFromAccountChange,
   toAccountUuid,
@@ -88,7 +92,7 @@ export function TransactionFormFields({
   const isTransfer = type === ExpenseEntryTypes.TRANSFER;
 
   const selectedFromAccount = accounts.find((account) => account.uuid === fromAccountUuid);
-  const canHaveVat = selectedFromAccount?.is_professional === true && !isTransfer;
+  const canHaveVat = vatSupported && selectedFromAccount?.is_professional === true && !isTransfer;
 
   useEffect(() => {
     if (!canHaveVat && hasVat) {
@@ -145,7 +149,7 @@ export function TransactionFormFields({
       {canHaveVat && (
         <div>
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-300">VAT (24%)</label>
+            <label className="text-sm font-medium text-slate-300">VAT</label>
             <button
               type="button"
               role="switch"
@@ -167,10 +171,14 @@ export function TransactionFormFields({
             <div className="mt-2">
               <input
                 type="text"
+                inputMode="decimal"
                 value={vatAmount}
-                readOnly
-                className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-300 focus:outline-none"
+                onChange={(e) => onVatAmountChange(e.target.value.replace(/[^0-9.]/g, ""))}
+                disabled={isPending}
+                placeholder="0.00"
+                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               />
+              <p className="mt-1 text-xs text-slate-500">Defaults to 24% of the amount. Edit to set a custom VAT amount.</p>
             </div>
           )}
         </div>

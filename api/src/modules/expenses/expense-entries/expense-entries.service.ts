@@ -13,8 +13,16 @@ import { VatLiabilityQueryType } from './schemas/vat-liability-query.schema';
 
 const VAT_RATE = 0.24;
 
-function calculateVatAmount(hasVat: boolean, amount: number): number | null {
-  return hasVat ? Math.round(amount * VAT_RATE * 100) / 100 : null;
+function calculateVatAmount(hasVat: boolean, amount: number, vatAmountOverride?: number | null): number | null {
+  if (!hasVat) {
+    return null;
+  }
+
+  if (vatAmountOverride !== undefined && vatAmountOverride !== null) {
+    return Math.round(vatAmountOverride * 100) / 100;
+  }
+
+  return Math.round(amount * VAT_RATE * 100) / 100;
 }
 
 @Injectable()
@@ -42,7 +50,7 @@ export class ExpenseEntriesService {
         type: entryFields.type,
         amount: entryFields.amount,
         has_vat: hasVat,
-        vat_amount: calculateVatAmount(hasVat, entryFields.amount),
+        vat_amount: calculateVatAmount(hasVat, entryFields.amount, entryFields.vat_amount),
         description: entryFields.description,
         from_account_uuid: entryFields.from_account_uuid,
         to_account_uuid: entryFields.to_account_uuid,
@@ -99,7 +107,10 @@ export class ExpenseEntriesService {
       const accountUuids = account_uuids ? account_uuids.split(',').filter(Boolean) : [];
 
       if (accountUuids.length > 0) {
-        where.from_account_uuid = { in: accountUuids };
+        where.OR = [
+          { from_account_uuid: { in: accountUuids } },
+          { to_account_uuid: { in: accountUuids } },
+        ];
       } else if (from_account_uuid) {
         where.from_account_uuid = from_account_uuid;
       }
@@ -214,7 +225,7 @@ export class ExpenseEntriesService {
         where: { uuid },
         data: {
           ...updateFields,
-          vat_amount: calculateVatAmount(nextHasVat, nextAmount),
+          vat_amount: calculateVatAmount(nextHasVat, nextAmount, updateFields.vat_amount),
           entry_date: entry_date ? new Date(entry_date) : undefined,
           ...(tag_uuids !== undefined ? { tags: { set: tag_uuids.map((tagUuid) => ({ uuid: tagUuid })) } } : {}),
         },
@@ -332,14 +343,50 @@ export class ExpenseEntriesService {
 
       const currentTotalBalance = Number(accountBalances._sum.balance || 0);
 
+      const signedAmountForAccountSet = (entry: { type: ExpenseEntryType; amount: unknown; from_account_uuid: string; to_account_uuid: string | null }): number => {
+        const amount = Number(entry.amount);
+
+        if (entry.type === ExpenseEntryType.INCOME) {
+          return amount;
+        }
+
+        if (entry.type === ExpenseEntryType.EXPENSE) {
+          return -amount;
+        }
+
+        if (accountUuids.length === 0) {
+          return 0;
+        }
+
+        const fromInSet = accountUuids.includes(entry.from_account_uuid);
+        const toInSet = entry.to_account_uuid ? accountUuids.includes(entry.to_account_uuid) : false;
+
+        if (fromInSet && toInSet) {
+          return 0;
+        }
+
+        if (toInSet) {
+          return amount;
+        }
+
+        if (fromInSet) {
+          return -amount;
+        }
+
+        return 0;
+      };
+
       const entryWhere: Record<string, unknown> = {
         user_uuid,
-        type: { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] },
+        type: { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE, ExpenseEntryType.TRANSFER] },
         ...excludeHidden,
       };
 
       if (accountUuids.length > 0) {
-        entryWhere.from_account_uuid = { in: accountUuids };
+        entryWhere.OR = [
+          { from_account_uuid: { in: accountUuids } },
+          { to_account_uuid: { in: accountUuids } },
+        ];
       }
 
       if (query.from_date || query.to_date) {
@@ -363,17 +410,22 @@ export class ExpenseEntriesService {
           entry_date: true,
           amount: true,
           type: true,
+          from_account_uuid: true,
+          to_account_uuid: true,
         },
       });
 
       const fromDateEntriesWhere: Record<string, unknown> = {
         user_uuid,
-        type: { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] },
+        type: { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE, ExpenseEntryType.TRANSFER] },
         ...excludeHidden,
       };
 
       if (accountUuids.length > 0) {
-        fromDateEntriesWhere.from_account_uuid = { in: accountUuids };
+        fromDateEntriesWhere.OR = [
+          { from_account_uuid: { in: accountUuids } },
+          { to_account_uuid: { in: accountUuids } },
+        ];
       }
 
       if (query.from_date) {
@@ -385,20 +437,12 @@ export class ExpenseEntriesService {
         select: {
           amount: true,
           type: true,
+          from_account_uuid: true,
+          to_account_uuid: true,
         },
       });
 
-      let netFromDateOnward = 0;
-
-      entriesFromDateOnward.forEach((entry) => {
-        const amount = Number(entry.amount);
-
-        if (entry.type === ExpenseEntryType.INCOME) {
-          netFromDateOnward += amount;
-        } else if (entry.type === ExpenseEntryType.EXPENSE) {
-          netFromDateOnward -= amount;
-        }
-      });
+      const netFromDateOnward = entriesFromDateOnward.reduce((sum, entry) => sum + signedAmountForAccountSet(entry), 0);
 
       const startingBalance = currentTotalBalance - netFromDateOnward;
 
@@ -406,17 +450,12 @@ export class ExpenseEntriesService {
 
       entries.forEach((entry) => {
         const date = entry.entry_date.toISOString().split('T')[0];
-        const amount = Number(entry.amount);
 
         if (!dateMap.has(date)) {
           dateMap.set(date, 0);
         }
 
-        if (entry.type === ExpenseEntryType.INCOME) {
-          dateMap.set(date, dateMap.get(date)! + amount);
-        } else if (entry.type === ExpenseEntryType.EXPENSE) {
-          dateMap.set(date, dateMap.get(date)! - amount);
-        }
+        dateMap.set(date, dateMap.get(date)! + signedAmountForAccountSet(entry));
       });
 
       const sortedDates = Array.from(dateMap.keys()).sort();
@@ -613,22 +652,26 @@ export class ExpenseEntriesService {
 
       const accountsBalance = Number(accountBalances._sum.balance || 0);
 
+      const entryDateFilter: Record<string, Date> = {};
+
+      if (query.from_date) {
+        entryDateFilter.gte = query.from_date;
+      }
+
+      if (query.to_date) {
+        entryDateFilter.lte = query.to_date;
+      }
+
+      const hasDateFilter = Object.keys(entryDateFilter).length > 0;
+
       const where: any = { user_uuid, ...excludeHidden };
 
       if (accountUuids.length > 0) {
         where.from_account_uuid = { in: accountUuids };
       }
 
-      if (query.from_date || query.to_date) {
-        where.entry_date = {};
-
-        if (query.from_date) {
-          where.entry_date.gte = query.from_date;
-        }
-
-        if (query.to_date) {
-          where.entry_date.lte = query.to_date;
-        }
+      if (hasDateFilter) {
+        where.entry_date = entryDateFilter;
       }
 
       if (query.tag_uuid) {
@@ -660,11 +703,60 @@ export class ExpenseEntriesService {
         }
       });
 
+      let transfersIn = 0;
+      let transfersOut = 0;
+
+      if (accountUuids.length > 0) {
+        const transferWhere: any = {
+          user_uuid,
+          type: ExpenseEntryType.TRANSFER,
+          OR: [
+            { from_account_uuid: { in: accountUuids } },
+            { to_account_uuid: { in: accountUuids } },
+          ],
+        };
+
+        if (hasDateFilter) {
+          transferWhere.entry_date = entryDateFilter;
+        }
+
+        if (query.tag_uuid) {
+          transferWhere.tags = {
+            some: { uuid: query.tag_uuid },
+          };
+        }
+
+        const transfers = await this.prisma.expenseEntry.findMany({
+          where: transferWhere,
+          select: {
+            amount: true,
+            from_account_uuid: true,
+            to_account_uuid: true,
+          },
+        });
+
+        transfers.forEach((transfer) => {
+          const amount = Number(transfer.amount);
+          const fromInSet = accountUuids.includes(transfer.from_account_uuid);
+          const toInSet = transfer.to_account_uuid ? accountUuids.includes(transfer.to_account_uuid) : false;
+
+          if (fromInSet && toInSet) {
+            return;
+          }
+
+          if (toInSet) {
+            transfersIn += amount;
+          } else if (fromInSet) {
+            transfersOut += amount;
+          }
+        });
+      }
+
       return {
         totalIncome,
         totalExpense,
         accountsBalance,
-        netBalance: totalIncome - totalExpense,
+        netBalance: totalIncome - totalExpense + transfersIn - transfersOut,
       };
     } catch (error) {
       throw new InternalServerErrorException('Failed to fetch stats');

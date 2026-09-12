@@ -5,7 +5,7 @@ import type { ExpenseEntry } from "../../../../features/expenses/expense-entries
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { EditTransactionModal } from "./EditTransactionModal";
 import { TransactionActionsDropdown } from "./TransactionActionsDropdown";
-import { formatAmount, formatDate } from "../../utils/transaction";
+import { formatAmount, formatDate, formatTime } from "../../utils/transaction";
 import { Routes } from "../../../../routes/routes";
 
 type TransactionCardProps = {
@@ -19,6 +19,7 @@ export function TransactionCard({ transaction, onDuplicate, onCreatePreset }: Tr
   const navigate = useNavigate();
 
   const formattedDate = formatDate(transaction.entry_date);
+  const formattedTime = formatTime(transaction.entry_date);
   const formattedAmount = formatAmount(transaction.amount);
 
   const hasReceipt = !!transaction.expense_receipt;
@@ -115,13 +116,13 @@ export function TransactionCard({ transaction, onDuplicate, onCreatePreset }: Tr
                   <span className="shrink-0 text-slate-500">→</span>
                   <span className="truncate min-w-0 flex-1 sm:flex-initial sm:max-w-[12rem]">{transaction.to_account!.name}</span>
                 </div>
-                <span>{formattedDate}</span>
+                <span>{formattedDate} · {formattedTime}</span>
               </div>
             ) : (
               <div className="flex items-center gap-1 sm:gap-2 text-[10px] sm:text-xs text-slate-400">
                 <span className="truncate">{transaction.from_account?.name || "Account"}</span>
                 <span className="shrink-0">•</span>
-                <span className="shrink-0">{formattedDate}</span>
+                <span className="shrink-0">{formattedDate} · {formattedTime}</span>
               </div>
             )}
             {transaction.tags && transaction.tags.length > 0 && (

@@ -12,7 +12,7 @@ export function mapPresetToCreateEntryDto(preset: ExpenseEntryPreset): Partial<C
     to_account_uuid: preset.to_account_uuid,
     category_uuid: preset.category_uuid,
     subcategory_uuid: preset.subcategory_uuid,
-    entry_date: new Date().toISOString().split('T')[0],
+    entry_date: new Date().toISOString(),
     tag_uuids: preset.tags?.map((tag) => tag.uuid) ?? [],
   }
 }

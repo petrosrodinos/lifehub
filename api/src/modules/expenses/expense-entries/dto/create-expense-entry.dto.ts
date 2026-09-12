@@ -32,6 +32,17 @@ export class CreateExpenseEntryDto {
   has_vat?: boolean;
 
   @ApiProperty({
+    description: 'Custom VAT amount to use instead of the default 24% calculation. Only applied when has_vat is true.',
+    example: 30.5,
+    required: false,
+  })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Type(() => Number)
+  vat_amount?: number;
+
+  @ApiProperty({
     description: 'Entry description',
     example: 'Grocery shopping at Walmart',
     required: false,

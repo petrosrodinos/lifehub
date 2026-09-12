@@ -21,13 +21,14 @@ export function createCreateExpenseEntryTool(
             subcategory_name: z.string().nullable().optional().describe('Subcategory name, more specific than category_name'),
             tag_names: z.array(z.string()).nullable().optional().describe('Tag names to attach to the entry'),
             description: z.string().nullable().optional().describe('Entry description, e.g. Grocery shopping'),
-            has_vat: z.boolean().nullable().optional().describe('Whether 24% VAT applies; only valid for professional accounts'),
+            has_vat: z.boolean().nullable().optional().describe('Whether VAT applies; only valid for professional accounts'),
+            vat_amount: z.number().min(0).nullable().optional().describe('Custom VAT amount; defaults to 24% of the amount when has_vat is true'),
             entry_date: z.string().nullable().optional().describe('Entry date/time in ISO format; defaults to now'),
             quantity: z.number().int().min(1).max(100).nullable().optional().describe('Number of identical entries to create; defaults to 1'),
         }),
         timeoutMs: assistantConfig.toolTimeoutMs,
         async execute(
-            { type, amount, account_name, to_account_name, category_name, subcategory_name, tag_names, description, has_vat, entry_date, quantity },
+            { type, amount, account_name, to_account_name, category_name, subcategory_name, tag_names, description, has_vat, vat_amount, entry_date, quantity },
             runContext,
         ) {
             const context = runContext?.context as AssistantToolContext | undefined;
@@ -46,6 +47,7 @@ export function createCreateExpenseEntryTool(
                 tag_names: tag_names ?? undefined,
                 description: description ?? undefined,
                 has_vat: has_vat ?? undefined,
+                vat_amount: vat_amount ?? undefined,
                 entry_date: entry_date ?? undefined,
                 quantity: quantity ?? undefined,
             });

@@ -142,6 +142,11 @@ export function PresetTransactionForm({ onSubmit, onCancel, submitLabel, isPendi
         onTypeChange={setType}
         amount={amount}
         onAmountChange={setAmount}
+        hasVat={false}
+        onHasVatChange={() => {}}
+        vatAmount=""
+        onVatAmountChange={() => {}}
+        vatSupported={false}
         fromAccountUuid={fromAccountUuid}
         onFromAccountChange={setFromAccountUuid}
         toAccountUuid={toAccountUuid}
