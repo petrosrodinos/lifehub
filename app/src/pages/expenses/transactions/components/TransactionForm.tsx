@@ -3,7 +3,7 @@ import type { CreateExpenseEntryDto, ExpenseEntryType } from "../../../../featur
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { useAuthStore } from "../../../../store/auth-store";
 import { getInitialFromAccountUuid } from "../../utils/resolve-default-account.helper";
-import { evaluateAmountExpression } from "../utils/amount-calculator.helper";
+import { calculateVatAmount, evaluateAmountExpression } from "../utils/amount-calculator.helper";
 import { TransactionFormFields } from "./TransactionFormFields";
 
 type TransactionFormProps = {
@@ -19,6 +19,7 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
   const defaultAccountUuid = useAuthStore((state) => state.defaultAccountUuid);
   const [type, setType] = useState<ExpenseEntryType>(initialData?.type || ExpenseEntryTypes.EXPENSE);
   const [amount, setAmount] = useState(initialData?.amount?.toString() || "");
+  const [hasVat, setHasVat] = useState(initialData?.has_vat || false);
   const [quantity, setQuantity] = useState("1");
   const [description, setDescription] = useState(initialData?.description || "");
   const [fromAccountUuid, setFromAccountUuid] = useState(getInitialFromAccountUuid(initialData?.from_account_uuid, defaultAccountUuid));
@@ -44,6 +45,7 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
     const data: CreateExpenseEntryDto = {
       type,
       amount: parseFloat(resolvedAmount),
+      has_vat: hasVat,
       description: description || undefined,
       from_account_uuid: fromAccountUuid,
       to_account_uuid: isTransfer ? toAccountUuid : undefined,
@@ -59,6 +61,7 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
 
   const parsedQuantity = parseInt(quantity, 10);
   const resolvedAmount = evaluateAmountExpression(amount);
+  const vatAmount = resolvedAmount ? calculateVatAmount(parseFloat(resolvedAmount)) : "0.00";
   const isFormValid = resolvedAmount !== null && parseFloat(resolvedAmount) > 0 && fromAccountUuid && (isTransfer ? toAccountUuid : categoryUuid && subcategoryUuid) && (!showQuantity || (parsedQuantity >= 1 && Number.isInteger(parsedQuantity)));
   const pendingSubmitLabel = submitLabel === "Create" ? "Creating..." : "Saving...";
 
@@ -69,6 +72,9 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
         onTypeChange={setType}
         amount={amount}
         onAmountChange={setAmount}
+        hasVat={hasVat}
+        onHasVatChange={setHasVat}
+        vatAmount={vatAmount}
         fromAccountUuid={fromAccountUuid}
         onFromAccountChange={setFromAccountUuid}
         toAccountUuid={toAccountUuid}

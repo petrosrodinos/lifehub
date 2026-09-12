@@ -4,6 +4,7 @@ import type { CreateExpenseEntryDto, ExpenseEntry } from "../../../features/expe
 export const expenseEntryToCreateDto = (transaction: ExpenseEntry): Partial<CreateExpenseEntryDto> => ({
   type: transaction.type,
   amount: typeof transaction.amount === "string" ? parseFloat(transaction.amount) : transaction.amount,
+  has_vat: transaction.has_vat ?? false,
   description: transaction.description,
   from_account_uuid: transaction.from_account_uuid,
   to_account_uuid: transaction.to_account_uuid,

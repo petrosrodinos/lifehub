@@ -21,6 +21,7 @@ export function EditTransactionModal({ isOpen, onClose, transaction }: EditTrans
     const updateData: UpdateExpenseEntryDto = {
       type: data.type,
       amount: data.amount,
+      has_vat: data.has_vat,
       description: data.description,
       from_account_uuid: data.from_account_uuid,
       to_account_uuid: data.to_account_uuid,

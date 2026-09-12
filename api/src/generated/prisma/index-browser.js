@@ -265,6 +265,8 @@ exports.Prisma.ExpenseEntryScalarFieldEnum = {
   user_uuid: 'user_uuid',
   type: 'type',
   amount: 'amount',
+  has_vat: 'has_vat',
+  vat_amount: 'vat_amount',
   description: 'description',
   from_account_uuid: 'from_account_uuid',
   to_account_uuid: 'to_account_uuid',

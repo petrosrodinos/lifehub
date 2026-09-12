@@ -19807,11 +19807,13 @@ export namespace Prisma {
   export type ExpenseEntryAvgAggregateOutputType = {
     id: number | null
     amount: Decimal | null
+    vat_amount: Decimal | null
   }
 
   export type ExpenseEntrySumAggregateOutputType = {
     id: number | null
     amount: Decimal | null
+    vat_amount: Decimal | null
   }
 
   export type ExpenseEntryMinAggregateOutputType = {
@@ -19820,6 +19822,8 @@ export namespace Prisma {
     user_uuid: string | null
     type: $Enums.ExpenseEntryType | null
     amount: Decimal | null
+    has_vat: boolean | null
+    vat_amount: Decimal | null
     description: string | null
     from_account_uuid: string | null
     to_account_uuid: string | null
@@ -19837,6 +19841,8 @@ export namespace Prisma {
     user_uuid: string | null
     type: $Enums.ExpenseEntryType | null
     amount: Decimal | null
+    has_vat: boolean | null
+    vat_amount: Decimal | null
     description: string | null
     from_account_uuid: string | null
     to_account_uuid: string | null
@@ -19854,6 +19860,8 @@ export namespace Prisma {
     user_uuid: number
     type: number
     amount: number
+    has_vat: number
+    vat_amount: number
     description: number
     from_account_uuid: number
     to_account_uuid: number
@@ -19870,11 +19878,13 @@ export namespace Prisma {
   export type ExpenseEntryAvgAggregateInputType = {
     id?: true
     amount?: true
+    vat_amount?: true
   }
 
   export type ExpenseEntrySumAggregateInputType = {
     id?: true
     amount?: true
+    vat_amount?: true
   }
 
   export type ExpenseEntryMinAggregateInputType = {
@@ -19883,6 +19893,8 @@ export namespace Prisma {
     user_uuid?: true
     type?: true
     amount?: true
+    has_vat?: true
+    vat_amount?: true
     description?: true
     from_account_uuid?: true
     to_account_uuid?: true
@@ -19900,6 +19912,8 @@ export namespace Prisma {
     user_uuid?: true
     type?: true
     amount?: true
+    has_vat?: true
+    vat_amount?: true
     description?: true
     from_account_uuid?: true
     to_account_uuid?: true
@@ -19917,6 +19931,8 @@ export namespace Prisma {
     user_uuid?: true
     type?: true
     amount?: true
+    has_vat?: true
+    vat_amount?: true
     description?: true
     from_account_uuid?: true
     to_account_uuid?: true
@@ -20021,6 +20037,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal
+    has_vat: boolean
+    vat_amount: Decimal | null
     description: string | null
     from_account_uuid: string
     to_account_uuid: string | null
@@ -20057,6 +20075,8 @@ export namespace Prisma {
     user_uuid?: boolean
     type?: boolean
     amount?: boolean
+    has_vat?: boolean
+    vat_amount?: boolean
     description?: boolean
     from_account_uuid?: boolean
     to_account_uuid?: boolean
@@ -20083,6 +20103,8 @@ export namespace Prisma {
     user_uuid?: boolean
     type?: boolean
     amount?: boolean
+    has_vat?: boolean
+    vat_amount?: boolean
     description?: boolean
     from_account_uuid?: boolean
     to_account_uuid?: boolean
@@ -20106,6 +20128,8 @@ export namespace Prisma {
     user_uuid?: boolean
     type?: boolean
     amount?: boolean
+    has_vat?: boolean
+    vat_amount?: boolean
     description?: boolean
     from_account_uuid?: boolean
     to_account_uuid?: boolean
@@ -20129,6 +20153,8 @@ export namespace Prisma {
     user_uuid?: boolean
     type?: boolean
     amount?: boolean
+    has_vat?: boolean
+    vat_amount?: boolean
     description?: boolean
     from_account_uuid?: boolean
     to_account_uuid?: boolean
@@ -20140,7 +20166,7 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type ExpenseEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "type" | "amount" | "description" | "from_account_uuid" | "to_account_uuid" | "category_uuid" | "subcategory_uuid" | "preset_uuid" | "entry_date" | "created_at" | "updated_at", ExtArgs["result"]["expenseEntry"]>
+  export type ExpenseEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "type" | "amount" | "has_vat" | "vat_amount" | "description" | "from_account_uuid" | "to_account_uuid" | "category_uuid" | "subcategory_uuid" | "preset_uuid" | "entry_date" | "created_at" | "updated_at", ExtArgs["result"]["expenseEntry"]>
   export type ExpenseEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     from_account?: boolean | ExpenseAccountDefaultArgs<ExtArgs>
@@ -20187,6 +20213,8 @@ export namespace Prisma {
       user_uuid: string
       type: $Enums.ExpenseEntryType
       amount: Prisma.Decimal
+      has_vat: boolean
+      vat_amount: Prisma.Decimal | null
       description: string | null
       from_account_uuid: string
       to_account_uuid: string | null
@@ -20632,6 +20660,8 @@ export namespace Prisma {
     readonly user_uuid: FieldRef<"ExpenseEntry", 'String'>
     readonly type: FieldRef<"ExpenseEntry", 'ExpenseEntryType'>
     readonly amount: FieldRef<"ExpenseEntry", 'Decimal'>
+    readonly has_vat: FieldRef<"ExpenseEntry", 'Boolean'>
+    readonly vat_amount: FieldRef<"ExpenseEntry", 'Decimal'>
     readonly description: FieldRef<"ExpenseEntry", 'String'>
     readonly from_account_uuid: FieldRef<"ExpenseEntry", 'String'>
     readonly to_account_uuid: FieldRef<"ExpenseEntry", 'String'>
@@ -52837,6 +52867,8 @@ export namespace Prisma {
     user_uuid: 'user_uuid',
     type: 'type',
     amount: 'amount',
+    has_vat: 'has_vat',
+    vat_amount: 'vat_amount',
     description: 'description',
     from_account_uuid: 'from_account_uuid',
     to_account_uuid: 'to_account_uuid',
@@ -54712,6 +54744,8 @@ export namespace Prisma {
     user_uuid?: StringFilter<"ExpenseEntry"> | string
     type?: EnumExpenseEntryTypeFilter<"ExpenseEntry"> | $Enums.ExpenseEntryType
     amount?: DecimalFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFilter<"ExpenseEntry"> | boolean
+    vat_amount?: DecimalNullableFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string | null
     description?: StringNullableFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
@@ -54737,6 +54771,8 @@ export namespace Prisma {
     user_uuid?: SortOrder
     type?: SortOrder
     amount?: SortOrder
+    has_vat?: SortOrder
+    vat_amount?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrderInput | SortOrder
@@ -54765,6 +54801,8 @@ export namespace Prisma {
     user_uuid?: StringFilter<"ExpenseEntry"> | string
     type?: EnumExpenseEntryTypeFilter<"ExpenseEntry"> | $Enums.ExpenseEntryType
     amount?: DecimalFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFilter<"ExpenseEntry"> | boolean
+    vat_amount?: DecimalNullableFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string | null
     description?: StringNullableFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
@@ -54790,6 +54828,8 @@ export namespace Prisma {
     user_uuid?: SortOrder
     type?: SortOrder
     amount?: SortOrder
+    has_vat?: SortOrder
+    vat_amount?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrderInput | SortOrder
@@ -54815,6 +54855,8 @@ export namespace Prisma {
     user_uuid?: StringWithAggregatesFilter<"ExpenseEntry"> | string
     type?: EnumExpenseEntryTypeWithAggregatesFilter<"ExpenseEntry"> | $Enums.ExpenseEntryType
     amount?: DecimalWithAggregatesFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolWithAggregatesFilter<"ExpenseEntry"> | boolean
+    vat_amount?: DecimalNullableWithAggregatesFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string | null
     description?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringWithAggregatesFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
@@ -58231,6 +58273,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -58251,6 +58295,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -58268,6 +58314,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58288,6 +58336,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -58307,6 +58357,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -58322,6 +58374,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58334,6 +58388,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61942,6 +61998,17 @@ export namespace Prisma {
     not?: NestedEnumExpenseEntryTypeFilter<$PrismaModel> | $Enums.ExpenseEntryType
   }
 
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
   export type ExpenseAccountScalarRelationFilter = {
     is?: ExpenseAccountWhereInput
     isNot?: ExpenseAccountWhereInput
@@ -61978,6 +62045,8 @@ export namespace Prisma {
     user_uuid?: SortOrder
     type?: SortOrder
     amount?: SortOrder
+    has_vat?: SortOrder
+    vat_amount?: SortOrder
     description?: SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrder
@@ -61992,6 +62061,7 @@ export namespace Prisma {
   export type ExpenseEntryAvgOrderByAggregateInput = {
     id?: SortOrder
     amount?: SortOrder
+    vat_amount?: SortOrder
   }
 
   export type ExpenseEntryMaxOrderByAggregateInput = {
@@ -62000,6 +62070,8 @@ export namespace Prisma {
     user_uuid?: SortOrder
     type?: SortOrder
     amount?: SortOrder
+    has_vat?: SortOrder
+    vat_amount?: SortOrder
     description?: SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrder
@@ -62017,6 +62089,8 @@ export namespace Prisma {
     user_uuid?: SortOrder
     type?: SortOrder
     amount?: SortOrder
+    has_vat?: SortOrder
+    vat_amount?: SortOrder
     description?: SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrder
@@ -62031,6 +62105,7 @@ export namespace Prisma {
   export type ExpenseEntrySumOrderByAggregateInput = {
     id?: SortOrder
     amount?: SortOrder
+    vat_amount?: SortOrder
   }
 
   export type EnumExpenseEntryTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -62041,6 +62116,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumExpenseEntryTypeFilter<$PrismaModel>
     _max?: NestedEnumExpenseEntryTypeFilter<$PrismaModel>
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type EnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel = never> = {
@@ -62284,17 +62375,6 @@ export namespace Prisma {
     total_amount?: SortOrder
   }
 
-  export type DecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
   export type ExpenseProductCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
@@ -62345,22 +62425,6 @@ export namespace Prisma {
   export type ExpenseProductSumOrderByAggregateInput = {
     id?: SortOrder
     size?: SortOrder
-  }
-
-  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type ExpenseReceiptScalarRelationFilter = {
@@ -66191,6 +66255,14 @@ export namespace Prisma {
     set?: $Enums.ExpenseEntryType
   }
 
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
   export type UserUpdateOneRequiredWithoutExpense_entriesNestedInput = {
     create?: XOR<UserCreateWithoutExpense_entriesInput, UserUncheckedCreateWithoutExpense_entriesInput>
     connectOrCreate?: UserCreateOrConnectWithoutExpense_entriesInput
@@ -66717,14 +66789,6 @@ export namespace Prisma {
     connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutProductInput | ExpenseReceiptItemCreateOrConnectWithoutProductInput[]
     createMany?: ExpenseReceiptItemCreateManyProductInputEnvelope
     connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
-  }
-
-  export type NullableDecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string | null
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type UserUpdateOneWithoutExpense_productsNestedInput = {
@@ -68264,6 +68328,17 @@ export namespace Prisma {
     not?: NestedEnumExpenseEntryTypeFilter<$PrismaModel> | $Enums.ExpenseEntryType
   }
 
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
   export type NestedEnumExpenseEntryTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ExpenseEntryType | EnumExpenseEntryTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ExpenseEntryType[] | ListEnumExpenseEntryTypeFieldRefInput<$PrismaModel>
@@ -68272,6 +68347,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumExpenseEntryTypeFilter<$PrismaModel>
     _max?: NestedEnumExpenseEntryTypeFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel = never> = {
@@ -68289,33 +68380,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel>
     _max?: NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel>
-  }
-
-  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
-  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumExerciseTypeFilter<$PrismaModel = never> = {
@@ -68771,6 +68835,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -68789,6 +68855,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -69675,6 +69743,8 @@ export namespace Prisma {
     user_uuid?: StringFilter<"ExpenseEntry"> | string
     type?: EnumExpenseEntryTypeFilter<"ExpenseEntry"> | $Enums.ExpenseEntryType
     amount?: DecimalFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFilter<"ExpenseEntry"> | boolean
+    vat_amount?: DecimalNullableFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string | null
     description?: StringNullableFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
@@ -72563,6 +72633,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -72582,6 +72654,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     to_account_uuid?: string | null
     category_uuid?: string | null
@@ -72608,6 +72682,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -72627,6 +72703,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     category_uuid?: string | null
@@ -73036,6 +73114,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -73055,6 +73135,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -73484,6 +73566,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -73503,6 +73587,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -74752,6 +74838,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -74771,6 +74859,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -75155,6 +75245,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -75174,6 +75266,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -75690,6 +75784,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -75709,6 +75805,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -75888,6 +75986,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -75907,6 +76007,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -80546,6 +80648,8 @@ export namespace Prisma {
     uuid?: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -81061,6 +81165,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -81079,6 +81185,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -81097,6 +81205,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -82196,6 +82306,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     to_account_uuid?: string | null
     category_uuid?: string | null
@@ -82212,6 +82324,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     category_uuid?: string | null
@@ -82270,6 +82384,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -82289,6 +82405,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -82307,6 +82425,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -82321,6 +82441,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -82340,6 +82462,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -82358,6 +82482,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -82521,6 +82647,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -82612,6 +82740,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -82631,6 +82761,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -82649,6 +82781,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -82797,6 +82931,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -82854,6 +82990,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -82873,6 +83011,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -82891,6 +83031,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83070,6 +83212,8 @@ export namespace Prisma {
     user_uuid: string
     type: $Enums.ExpenseEntryType
     amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -83115,6 +83259,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -83134,6 +83280,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83152,6 +83300,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83166,6 +83316,8 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -83185,6 +83337,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -83203,6 +83357,8 @@ export namespace Prisma {
     user_uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null

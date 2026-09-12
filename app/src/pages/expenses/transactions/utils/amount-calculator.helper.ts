@@ -198,3 +198,9 @@ export function sanitizeAmountInput(value: string): string {
     .replace(/\*/g, '×')
     .replace(/\//g, '÷')
 }
+
+export const VAT_RATE = 0.24
+
+export function calculateVatAmount(amount: number): string {
+  return (Math.round(amount * VAT_RATE * 100) / 100).toFixed(2)
+}

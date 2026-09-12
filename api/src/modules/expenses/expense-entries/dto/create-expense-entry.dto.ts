@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional, IsEnum, IsDateString, Min, IsInt, Max, IsArray, IsUUID } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsEnum, IsDateString, Min, IsInt, Max, IsArray, IsUUID, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { ExpenseEntryType } from '@/generated/prisma';
@@ -20,6 +20,16 @@ export class CreateExpenseEntryDto {
   @Min(0)
   @Type(() => Number)
   amount: number;
+
+  @ApiProperty({
+    description: 'Whether VAT (24%) applies to this entry',
+    example: false,
+    required: false,
+    default: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  has_vat?: boolean;
 
   @ApiProperty({
     description: 'Entry description',

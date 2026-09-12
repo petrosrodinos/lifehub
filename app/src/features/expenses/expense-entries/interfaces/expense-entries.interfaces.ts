@@ -11,6 +11,8 @@ export interface ExpenseEntry {
   user_uuid: string
   type: ExpenseEntryType
   amount: string | number
+  has_vat?: boolean
+  vat_amount?: string | number | null
   description?: string
   from_account_uuid: string
   to_account_uuid?: string
@@ -30,6 +32,7 @@ export interface ExpenseEntry {
 export interface CreateExpenseEntryDto {
   type: ExpenseEntryType
   amount: number
+  has_vat?: boolean
   description?: string
   from_account_uuid: string
   to_account_uuid?: string
@@ -43,6 +46,7 @@ export interface CreateExpenseEntryDto {
 export interface UpdateExpenseEntryDto {
   type?: ExpenseEntryType
   amount?: number
+  has_vat?: boolean
   description?: string
   from_account_uuid?: string
   to_account_uuid?: string

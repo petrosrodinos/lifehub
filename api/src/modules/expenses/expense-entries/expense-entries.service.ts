@@ -10,6 +10,11 @@ import { validateExpenseRelations, validateExpenseTags } from '../utils/expense-
 import { calculateMonthlyBudgetProgress, getCurrentMonthUtcDateRange } from '../utils/monthly-budget-progress.helper';
 import { MonthlyBudgetProgressQueryType } from './schemas/monthly-budget-progress-query.schema';
 
+const VAT_RATE = 0.24;
+
+function calculateVatAmount(hasVat: boolean, amount: number): number | null {
+  return hasVat ? Math.round(amount * VAT_RATE * 100) / 100 : null;
+}
 
 @Injectable()
 export class ExpenseEntriesService {
@@ -26,10 +31,14 @@ export class ExpenseEntriesService {
         await validateExpenseTags(this.prisma, user_uuid, tag_uuids);
       }
 
+      const hasVat = entryFields.has_vat ?? false;
+
       const entryData = {
         user_uuid,
         type: entryFields.type,
         amount: entryFields.amount,
+        has_vat: hasVat,
+        vat_amount: calculateVatAmount(hasVat, entryFields.amount),
         description: entryFields.description,
         from_account_uuid: entryFields.from_account_uuid,
         to_account_uuid: entryFields.to_account_uuid,
@@ -186,10 +195,14 @@ export class ExpenseEntriesService {
 
       await this.revertAccountBalances(existingEntry);
 
+      const nextHasVat = updateFields.has_vat ?? existingEntry.has_vat;
+      const nextAmount = updateFields.amount ?? Number(existingEntry.amount);
+
       const updatedEntry = await this.prisma.expenseEntry.update({
         where: { uuid },
         data: {
           ...updateFields,
+          vat_amount: calculateVatAmount(nextHasVat, nextAmount),
           entry_date: entry_date ? new Date(entry_date) : undefined,
           ...(tag_uuids !== undefined ? { tags: { set: tag_uuids.map((tagUuid) => ({ uuid: tagUuid })) } } : {}),
         },

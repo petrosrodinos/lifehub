@@ -376,6 +376,8 @@ model ExpenseEntry {
   user_uuid         String
   type              ExpenseEntryType
   amount            Decimal
+  has_vat           Boolean          @default(false)
+  vat_amount        Decimal?
   description       String?
   from_account_uuid String
   to_account_uuid   String?

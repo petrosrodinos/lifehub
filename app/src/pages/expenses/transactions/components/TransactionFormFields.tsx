@@ -15,6 +15,9 @@ type TransactionFormFieldsProps = {
   onTypeChange: (type: ExpenseEntryType) => void;
   amount: string;
   onAmountChange: (value: string) => void;
+  hasVat: boolean;
+  onHasVatChange: (value: boolean) => void;
+  vatAmount: string;
   fromAccountUuid: string;
   onFromAccountChange: (uuid: string) => void;
   toAccountUuid: string;
@@ -34,6 +37,9 @@ export function TransactionFormFields({
   onTypeChange,
   amount,
   onAmountChange,
+  hasVat,
+  onHasVatChange,
+  vatAmount,
   fromAccountUuid,
   onFromAccountChange,
   toAccountUuid,
@@ -126,6 +132,38 @@ export function TransactionFormFields({
       </div>
 
       <AmountCalculatorField value={amount} onChange={onAmountChange} disabled={isPending} />
+
+      <div>
+        <div className="flex items-center justify-between">
+          <label className="text-sm font-medium text-slate-300">VAT (24%)</label>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={hasVat}
+            onClick={() => onHasVatChange(!hasVat)}
+            disabled={isPending}
+            className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
+              hasVat ? "bg-violet-500" : "bg-slate-700"
+            } disabled:opacity-50 disabled:cursor-not-allowed`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                hasVat ? "translate-x-6" : "translate-x-1"
+              }`}
+            />
+          </button>
+        </div>
+        {hasVat && (
+          <div className="mt-2">
+            <input
+              type="text"
+              value={vatAmount}
+              readOnly
+              className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-300 focus:outline-none"
+            />
+          </div>
+        )}
+      </div>
 
       <div>
         <label className="block text-sm font-medium text-slate-300 mb-3">{isTransfer ? "From Account" : "Account"}</label>
