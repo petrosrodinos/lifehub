@@ -20,8 +20,10 @@ type TransactionsListSectionProps = {
   onPageChange: (page: number) => void
   itemsPerPage?: number
   showQuickStats?: boolean
+  hasVatOnly?: boolean
   onDuplicate?: (transaction: ExpenseEntry) => void
   onCreatePreset?: (transaction: ExpenseEntry) => void
+  onTrackProduct?: (transaction: ExpenseEntry) => void
 }
 
 export function TransactionsListSection({
@@ -35,8 +37,10 @@ export function TransactionsListSection({
   onPageChange,
   itemsPerPage = ITEMS_PER_PAGE,
   showQuickStats = true,
+  hasVatOnly = false,
   onDuplicate,
   onCreatePreset,
+  onTrackProduct,
 }: TransactionsListSectionProps) {
   const { data, isLoading } = useExpenseEntries({
     page: currentPage,
@@ -47,6 +51,7 @@ export function TransactionsListSection({
     ...(selectedAccounts.length > 0 && { account_uuids: selectedAccounts.join(',') }),
     ...(fromDate && { from_date: fromDate }),
     ...(toDate && { to_date: toDate }),
+    ...(hasVatOnly && { has_vat: true }),
   })
 
   const transactions = data?.data || []
@@ -99,6 +104,8 @@ export function TransactionsListSection({
                 transaction={transaction}
                 onDuplicate={onDuplicate}
                 onCreatePreset={onCreatePreset}
+                onTrackProduct={onTrackProduct}
+                showVatDetails={hasVatOnly}
               />
             ))}
           </div>

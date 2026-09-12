@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback } from "react"
 import { useExpenseProducts } from "../../../features/receipts/expense-products/hooks/use-expense-products"
+import { ProductSources } from "../../../features/receipts/expense-products/interfaces/expense-products.interfaces"
 import { usePriceEvolution } from "../../../features/receipts/expense-receipt-item/hooks/use-expense-receipt-item"
 import { formatDateForQuery } from "../utils/analytics.utils"
 
@@ -9,7 +10,7 @@ export function usePriceEvolutionFilters() {
     const [toDate, setToDate] = useState("")
 
     const { data: products, isLoading: isProductsLoading } =
-        useExpenseProducts()
+        useExpenseProducts(ProductSources.RECEIPTS)
 
     const queryParams = useMemo(() => {
         const params: {

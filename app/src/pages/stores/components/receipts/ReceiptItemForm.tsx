@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { CreateExpenseReceiptItemDto } from "../../../../features/receipts/expense-receipt-item/interfaces/expense-receipt-item.interfaces";
 import { useExpenseProducts } from "../../../../features/receipts/expense-products/hooks/use-expense-products";
+import { ProductSources } from "../../../../features/receipts/expense-products/interfaces/expense-products.interfaces";
 
 type ReceiptItemFormProps = {
   onSubmit: (data: CreateExpenseReceiptItemDto) => void;
@@ -22,7 +23,7 @@ export function ReceiptItemForm({ onSubmit, onCancel, receiptUuid, submitLabel, 
   const [unitPrice, setUnitPrice] = useState(initialData?.unit_price?.toString() || "");
   const [totalPrice, setTotalPrice] = useState(initialData?.total_price?.toString() || "");
 
-  const { data: products = [] } = useExpenseProducts();
+  const { data: products = [] } = useExpenseProducts(ProductSources.RECEIPTS);
 
   const selectedProduct = products.find((p) => p.uuid === productUuid);
 

@@ -4,6 +4,7 @@ import { ProductForm } from "./ProductForm";
 import { Modal } from "../../../../components/ui/Modal";
 import { ConfirmationModal } from "../../../../components/ui/ConfirmationModal";
 import type { CreateExpenseProductDto, ExpenseProduct, UpdateExpenseProductDto } from "../../../../features/receipts/expense-products/interfaces/expense-products.interfaces";
+import { ProductSources } from "../../../../features/receipts/expense-products/interfaces/expense-products.interfaces";
 import { useCreateExpenseProduct, useDeleteExpenseProduct, useExpenseProducts, useUpdateExpenseProduct } from "../../../../features/receipts/expense-products/hooks/use-expense-products";
 
 type ProductsModalProps = {
@@ -19,7 +20,7 @@ export function ProductsModal({ isOpen, onClose }: ProductsModalProps) {
   const [deletingProduct, setDeletingProduct] = useState<ExpenseProduct | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { data: products = [], isLoading } = useExpenseProducts(isOpen);
+  const { data: products = [], isLoading } = useExpenseProducts(ProductSources.RECEIPTS, isOpen);
   const createProduct = useCreateExpenseProduct();
   const updateProduct = useUpdateExpenseProduct();
   const deleteProduct = useDeleteExpenseProduct();
@@ -27,7 +28,7 @@ export function ProductsModal({ isOpen, onClose }: ProductsModalProps) {
   const filteredProducts = searchQuery ? products.filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.brand?.toLowerCase().includes(searchQuery.toLowerCase())) : products;
 
   const handleCreate = (data: CreateExpenseProductDto | UpdateExpenseProductDto) => {
-    createProduct.mutate(data as CreateExpenseProductDto, {
+    createProduct.mutate({ ...(data as CreateExpenseProductDto), source: ProductSources.RECEIPTS }, {
       onSuccess: () => setView("list"),
     });
   };
@@ -181,7 +182,17 @@ export function ProductsModal({ isOpen, onClose }: ProductsModalProps) {
         )}
       </Modal>
 
-      <ConfirmationModal isOpen={!!deletingProduct} onClose={() => setDeletingProduct(null)} onConfirm={handleDelete} title="Delete Product" description={`Are you sure you want to delete "${deletingProduct?.name}"? This will not affect existing receipt items.`} confirmText="Delete" cancelText="Cancel" variant="danger" isPending={deleteProduct.isPending} />
+      <ConfirmationModal
+        isOpen={!!deletingProduct}
+        onClose={() => setDeletingProduct(null)}
+        onConfirm={handleDelete}
+        title="Delete Product"
+        description={`Are you sure you want to delete "${deletingProduct?.name}"? This will not affect existing receipt items, but any tracked consumption/purchase history for this product will be deleted too.`}
+        confirmText="Delete"
+        cancelText="Cancel"
+        variant="danger"
+        isPending={deleteProduct.isPending}
+      />
     </>
   );
 }

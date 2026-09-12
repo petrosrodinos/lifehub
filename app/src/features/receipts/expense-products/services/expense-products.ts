@@ -4,11 +4,12 @@ import type {
     ExpenseProduct,
     CreateExpenseProductDto,
     UpdateExpenseProductDto,
+    ProductSource,
 } from '../interfaces/expense-products.interfaces'
 
-export const getExpenseProducts = async (): Promise<ExpenseProduct[]> => {
+export const getExpenseProducts = async (source?: ProductSource): Promise<ExpenseProduct[]> => {
     try {
-        const response = await axiosInstance.get(ApiRoutes.expenses.products.list)
+        const response = await axiosInstance.get(ApiRoutes.expenses.products.list, { params: source ? { source } : undefined })
         return response.data
     } catch (error: unknown) {
         const err = error as { response?: { data?: { message?: string } } }

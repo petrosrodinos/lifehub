@@ -1,30 +1,20 @@
-import { useState } from "react";
 import { useVatLiability } from "../../../features/expenses/expense-entries/hooks/use-expense-entries";
-import { getLocalMonthQueryParams } from "../../../features/expenses/expense-entries/utils/month-query-params.helper";
-import { MonthPicker } from "../../../components/ui/MonthPicker";
 import { formatCurrency } from "../../../utils/format-currency.utils";
 
-export function VatLiabilityCard() {
-  const initial = getLocalMonthQueryParams();
-  const [year, setYear] = useState(initial.year);
-  const [month, setMonth] = useState(initial.month);
+type VatLiabilityCardProps = {
+  year: number;
+  month: number;
+};
 
+export function VatLiabilityCard({ year, month }: VatLiabilityCardProps) {
   const { data, isLoading } = useVatLiability({ year, month });
 
   const vatToPay = data?.vatToPay ?? 0;
   const isOwed = vatToPay > 0;
 
-  const handleChange = (nextYear: number, nextMonth: number) => {
-    setYear(nextYear);
-    setMonth(nextMonth);
-  };
-
   return (
     <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/50 p-6 space-y-4">
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-medium text-slate-400">VAT to pay</p>
-        <MonthPicker year={year} month={month} onChange={handleChange} disabled={isLoading} />
-      </div>
+      <p className="text-sm font-medium text-slate-400">VAT to pay</p>
 
       {isLoading ? (
         <div className="h-8 w-32 bg-slate-800/50 rounded-lg animate-pulse" />

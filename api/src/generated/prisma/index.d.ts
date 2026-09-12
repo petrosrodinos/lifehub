@@ -104,6 +104,11 @@ export type ExpenseProduct = $Result.DefaultSelection<Prisma.$ExpenseProductPayl
  */
 export type ExpenseReceiptItem = $Result.DefaultSelection<Prisma.$ExpenseReceiptItemPayload>
 /**
+ * Model ProductPurchase
+ * 
+ */
+export type ProductPurchase = $Result.DefaultSelection<Prisma.$ProductPurchasePayload>
+/**
  * Model MuscleGroup
  * 
  */
@@ -305,6 +310,33 @@ export const OccurrenceStatus: {
 export type OccurrenceStatus = (typeof OccurrenceStatus)[keyof typeof OccurrenceStatus]
 
 
+export const ProductSource: {
+  RECEIPTS: 'RECEIPTS',
+  CONSUMPTION: 'CONSUMPTION'
+};
+
+export type ProductSource = (typeof ProductSource)[keyof typeof ProductSource]
+
+
+export const ProductTrackingMethod: {
+  START_FINISH: 'START_FINISH',
+  QUANTITY_DOSE: 'QUANTITY_DOSE'
+};
+
+export type ProductTrackingMethod = (typeof ProductTrackingMethod)[keyof typeof ProductTrackingMethod]
+
+
+export const ProductPurchaseStatus: {
+  NOT_STARTED: 'NOT_STARTED',
+  ACTIVE: 'ACTIVE',
+  FINISHED: 'FINISHED',
+  PAUSED: 'PAUSED',
+  DISCARDED: 'DISCARDED'
+};
+
+export type ProductPurchaseStatus = (typeof ProductPurchaseStatus)[keyof typeof ProductPurchaseStatus]
+
+
 export const NoteType: {
   BOOK: 'BOOK',
   IDEA: 'IDEA',
@@ -415,6 +447,18 @@ export const FrequencyPeriod: typeof $Enums.FrequencyPeriod
 export type OccurrenceStatus = $Enums.OccurrenceStatus
 
 export const OccurrenceStatus: typeof $Enums.OccurrenceStatus
+
+export type ProductSource = $Enums.ProductSource
+
+export const ProductSource: typeof $Enums.ProductSource
+
+export type ProductTrackingMethod = $Enums.ProductTrackingMethod
+
+export const ProductTrackingMethod: typeof $Enums.ProductTrackingMethod
+
+export type ProductPurchaseStatus = $Enums.ProductPurchaseStatus
+
+export const ProductPurchaseStatus: typeof $Enums.ProductPurchaseStatus
 
 export type NoteType = $Enums.NoteType
 
@@ -744,6 +788,16 @@ export class PrismaClient<
     * ```
     */
   get expenseReceiptItem(): Prisma.ExpenseReceiptItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.productPurchase`: Exposes CRUD operations for the **ProductPurchase** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProductPurchases
+    * const productPurchases = await prisma.productPurchase.findMany()
+    * ```
+    */
+  get productPurchase(): Prisma.ProductPurchaseDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.muscleGroup`: Exposes CRUD operations for the **MuscleGroup** model.
@@ -1396,6 +1450,7 @@ export namespace Prisma {
     ExpenseReceipt: 'ExpenseReceipt',
     ExpenseProduct: 'ExpenseProduct',
     ExpenseReceiptItem: 'ExpenseReceiptItem',
+    ProductPurchase: 'ProductPurchase',
     MuscleGroup: 'MuscleGroup',
     Exercise: 'Exercise',
     Workout: 'Workout',
@@ -1431,7 +1486,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseEntryPreset" | "expenseTag" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "noteTag" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory" | "chatConversation" | "flashCardGroup" | "flashCard" | "flashCardImage" | "quizGroup" | "quizQuestion" | "quizQuestionOption" | "quizAttempt" | "quizAttemptAnswer" | "chatMessage"
+      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseEntryPreset" | "expenseTag" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "productPurchase" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "noteTag" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory" | "chatConversation" | "flashCardGroup" | "flashCard" | "flashCardImage" | "quizGroup" | "quizQuestion" | "quizQuestionOption" | "quizAttempt" | "quizAttemptAnswer" | "chatMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2764,6 +2819,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ExpenseReceiptItemCountArgs<ExtArgs>
             result: $Utils.Optional<ExpenseReceiptItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      ProductPurchase: {
+        payload: Prisma.$ProductPurchasePayload<ExtArgs>
+        fields: Prisma.ProductPurchaseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProductPurchaseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProductPurchaseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload>
+          }
+          findFirst: {
+            args: Prisma.ProductPurchaseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProductPurchaseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload>
+          }
+          findMany: {
+            args: Prisma.ProductPurchaseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload>[]
+          }
+          create: {
+            args: Prisma.ProductPurchaseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload>
+          }
+          createMany: {
+            args: Prisma.ProductPurchaseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProductPurchaseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload>[]
+          }
+          delete: {
+            args: Prisma.ProductPurchaseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload>
+          }
+          update: {
+            args: Prisma.ProductPurchaseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload>
+          }
+          deleteMany: {
+            args: Prisma.ProductPurchaseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProductPurchaseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProductPurchaseUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload>[]
+          }
+          upsert: {
+            args: Prisma.ProductPurchaseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPurchasePayload>
+          }
+          aggregate: {
+            args: Prisma.ProductPurchaseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProductPurchase>
+          }
+          groupBy: {
+            args: Prisma.ProductPurchaseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductPurchaseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProductPurchaseCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductPurchaseCountAggregateOutputType> | number
           }
         }
       }
@@ -4373,6 +4502,7 @@ export namespace Prisma {
     expenseReceipt?: ExpenseReceiptOmit
     expenseProduct?: ExpenseProductOmit
     expenseReceiptItem?: ExpenseReceiptItemOmit
+    productPurchase?: ProductPurchaseOmit
     muscleGroup?: MuscleGroupOmit
     exercise?: ExerciseOmit
     workout?: WorkoutOmit
@@ -4490,6 +4620,7 @@ export namespace Prisma {
     expense_receipts: number
     expense_stores: number
     expense_products: number
+    product_purchases: number
     muscle_groups: number
     exercises: number
     workouts: number
@@ -4518,6 +4649,7 @@ export namespace Prisma {
     expense_receipts?: boolean | UserCountOutputTypeCountExpense_receiptsArgs
     expense_stores?: boolean | UserCountOutputTypeCountExpense_storesArgs
     expense_products?: boolean | UserCountOutputTypeCountExpense_productsArgs
+    product_purchases?: boolean | UserCountOutputTypeCountProduct_purchasesArgs
     muscle_groups?: boolean | UserCountOutputTypeCountMuscle_groupsArgs
     exercises?: boolean | UserCountOutputTypeCountExercisesArgs
     workouts?: boolean | UserCountOutputTypeCountWorkoutsArgs
@@ -4656,6 +4788,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountExpense_productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseProductWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProduct_purchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductPurchaseWhereInput
   }
 
   /**
@@ -5202,10 +5341,12 @@ export namespace Prisma {
 
   export type ExpenseProductCountOutputType = {
     receipt_items: number
+    purchases: number
   }
 
   export type ExpenseProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     receipt_items?: boolean | ExpenseProductCountOutputTypeCountReceipt_itemsArgs
+    purchases?: boolean | ExpenseProductCountOutputTypeCountPurchasesArgs
   }
 
   // Custom InputTypes
@@ -5224,6 +5365,13 @@ export namespace Prisma {
    */
   export type ExpenseProductCountOutputTypeCountReceipt_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ExpenseReceiptItemWhereInput
+  }
+
+  /**
+   * ExpenseProductCountOutputType without action
+   */
+  export type ExpenseProductCountOutputTypeCountPurchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductPurchaseWhereInput
   }
 
 
@@ -5870,6 +6018,7 @@ export namespace Prisma {
     expense_receipts?: boolean | User$expense_receiptsArgs<ExtArgs>
     expense_stores?: boolean | User$expense_storesArgs<ExtArgs>
     expense_products?: boolean | User$expense_productsArgs<ExtArgs>
+    product_purchases?: boolean | User$product_purchasesArgs<ExtArgs>
     muscle_groups?: boolean | User$muscle_groupsArgs<ExtArgs>
     exercises?: boolean | User$exercisesArgs<ExtArgs>
     workouts?: boolean | User$workoutsArgs<ExtArgs>
@@ -5945,6 +6094,7 @@ export namespace Prisma {
     expense_receipts?: boolean | User$expense_receiptsArgs<ExtArgs>
     expense_stores?: boolean | User$expense_storesArgs<ExtArgs>
     expense_products?: boolean | User$expense_productsArgs<ExtArgs>
+    product_purchases?: boolean | User$product_purchasesArgs<ExtArgs>
     muscle_groups?: boolean | User$muscle_groupsArgs<ExtArgs>
     exercises?: boolean | User$exercisesArgs<ExtArgs>
     workouts?: boolean | User$workoutsArgs<ExtArgs>
@@ -5978,6 +6128,7 @@ export namespace Prisma {
       expense_receipts: Prisma.$ExpenseReceiptPayload<ExtArgs>[]
       expense_stores: Prisma.$ExpenseStorePayload<ExtArgs>[]
       expense_products: Prisma.$ExpenseProductPayload<ExtArgs>[]
+      product_purchases: Prisma.$ProductPurchasePayload<ExtArgs>[]
       muscle_groups: Prisma.$MuscleGroupPayload<ExtArgs>[]
       exercises: Prisma.$ExercisePayload<ExtArgs>[]
       workouts: Prisma.$WorkoutPayload<ExtArgs>[]
@@ -6411,6 +6562,7 @@ export namespace Prisma {
     expense_receipts<T extends User$expense_receiptsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_receiptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_stores<T extends User$expense_storesArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_storesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseStorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_products<T extends User$expense_productsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    product_purchases<T extends User$product_purchasesArgs<ExtArgs> = {}>(args?: Subset<T, User$product_purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     muscle_groups<T extends User$muscle_groupsArgs<ExtArgs> = {}>(args?: Subset<T, User$muscle_groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MuscleGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     exercises<T extends User$exercisesArgs<ExtArgs> = {}>(args?: Subset<T, User$exercisesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     workouts<T extends User$workoutsArgs<ExtArgs> = {}>(args?: Subset<T, User$workoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7258,6 +7410,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExpenseProductScalarFieldEnum | ExpenseProductScalarFieldEnum[]
+  }
+
+  /**
+   * User.product_purchases
+   */
+  export type User$product_purchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    where?: ProductPurchaseWhereInput
+    orderBy?: ProductPurchaseOrderByWithRelationInput | ProductPurchaseOrderByWithRelationInput[]
+    cursor?: ProductPurchaseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductPurchaseScalarFieldEnum | ProductPurchaseScalarFieldEnum[]
   }
 
   /**
@@ -20106,6 +20282,7 @@ export namespace Prisma {
     subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
     preset?: boolean | ExpenseEntry$presetArgs<ExtArgs>
     expense_receipt?: boolean | ExpenseEntry$expense_receiptArgs<ExtArgs>
+    product_purchase?: boolean | ExpenseEntry$product_purchaseArgs<ExtArgs>
     tags?: boolean | ExpenseEntry$tagsArgs<ExtArgs>
     _count?: boolean | ExpenseEntryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expenseEntry"]>
@@ -20188,6 +20365,7 @@ export namespace Prisma {
     subcategory?: boolean | ExpenseEntry$subcategoryArgs<ExtArgs>
     preset?: boolean | ExpenseEntry$presetArgs<ExtArgs>
     expense_receipt?: boolean | ExpenseEntry$expense_receiptArgs<ExtArgs>
+    product_purchase?: boolean | ExpenseEntry$product_purchaseArgs<ExtArgs>
     tags?: boolean | ExpenseEntry$tagsArgs<ExtArgs>
     _count?: boolean | ExpenseEntryCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -20218,6 +20396,7 @@ export namespace Prisma {
       subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs> | null
       preset: Prisma.$ExpenseEntryPresetPayload<ExtArgs> | null
       expense_receipt: Prisma.$ExpenseReceiptPayload<ExtArgs> | null
+      product_purchase: Prisma.$ProductPurchasePayload<ExtArgs> | null
       tags: Prisma.$ExpenseTagPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -20638,6 +20817,7 @@ export namespace Prisma {
     subcategory<T extends ExpenseEntry$subcategoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$subcategoryArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     preset<T extends ExpenseEntry$presetArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$presetArgs<ExtArgs>>): Prisma__ExpenseEntryPresetClient<$Result.GetResult<Prisma.$ExpenseEntryPresetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     expense_receipt<T extends ExpenseEntry$expense_receiptArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$expense_receiptArgs<ExtArgs>>): Prisma__ExpenseReceiptClient<$Result.GetResult<Prisma.$ExpenseReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    product_purchase<T extends ExpenseEntry$product_purchaseArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$product_purchaseArgs<ExtArgs>>): Prisma__ProductPurchaseClient<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     tags<T extends ExpenseEntry$tagsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseEntry$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -21177,6 +21357,25 @@ export namespace Prisma {
      */
     include?: ExpenseReceiptInclude<ExtArgs> | null
     where?: ExpenseReceiptWhereInput
+  }
+
+  /**
+   * ExpenseEntry.product_purchase
+   */
+  export type ExpenseEntry$product_purchaseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    where?: ProductPurchaseWhereInput
   }
 
   /**
@@ -26265,6 +26464,7 @@ export namespace Prisma {
     brand: string | null
     unit: string | null
     size: Decimal | null
+    source: $Enums.ProductSource | null
     category_uuid: string | null
     subcategory_uuid: string | null
     created_at: Date | null
@@ -26279,6 +26479,7 @@ export namespace Prisma {
     brand: string | null
     unit: string | null
     size: Decimal | null
+    source: $Enums.ProductSource | null
     category_uuid: string | null
     subcategory_uuid: string | null
     created_at: Date | null
@@ -26293,6 +26494,7 @@ export namespace Prisma {
     brand: number
     unit: number
     size: number
+    source: number
     category_uuid: number
     subcategory_uuid: number
     created_at: number
@@ -26319,6 +26521,7 @@ export namespace Prisma {
     brand?: true
     unit?: true
     size?: true
+    source?: true
     category_uuid?: true
     subcategory_uuid?: true
     created_at?: true
@@ -26333,6 +26536,7 @@ export namespace Prisma {
     brand?: true
     unit?: true
     size?: true
+    source?: true
     category_uuid?: true
     subcategory_uuid?: true
     created_at?: true
@@ -26347,6 +26551,7 @@ export namespace Prisma {
     brand?: true
     unit?: true
     size?: true
+    source?: true
     category_uuid?: true
     subcategory_uuid?: true
     created_at?: true
@@ -26448,6 +26653,7 @@ export namespace Prisma {
     brand: string | null
     unit: string | null
     size: Decimal | null
+    source: $Enums.ProductSource
     category_uuid: string | null
     subcategory_uuid: string | null
     created_at: Date
@@ -26481,6 +26687,7 @@ export namespace Prisma {
     brand?: boolean
     unit?: boolean
     size?: boolean
+    source?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
     created_at?: boolean
@@ -26489,6 +26696,7 @@ export namespace Prisma {
     category?: boolean | ExpenseProduct$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseProduct$subcategoryArgs<ExtArgs>
     receipt_items?: boolean | ExpenseProduct$receipt_itemsArgs<ExtArgs>
+    purchases?: boolean | ExpenseProduct$purchasesArgs<ExtArgs>
     _count?: boolean | ExpenseProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expenseProduct"]>
 
@@ -26500,6 +26708,7 @@ export namespace Prisma {
     brand?: boolean
     unit?: boolean
     size?: boolean
+    source?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
     created_at?: boolean
@@ -26517,6 +26726,7 @@ export namespace Prisma {
     brand?: boolean
     unit?: boolean
     size?: boolean
+    source?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
     created_at?: boolean
@@ -26534,18 +26744,20 @@ export namespace Prisma {
     brand?: boolean
     unit?: boolean
     size?: boolean
+    source?: boolean
     category_uuid?: boolean
     subcategory_uuid?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type ExpenseProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "brand" | "unit" | "size" | "category_uuid" | "subcategory_uuid" | "created_at" | "updated_at", ExtArgs["result"]["expenseProduct"]>
+  export type ExpenseProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "brand" | "unit" | "size" | "source" | "category_uuid" | "subcategory_uuid" | "created_at" | "updated_at", ExtArgs["result"]["expenseProduct"]>
   export type ExpenseProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | ExpenseProduct$userArgs<ExtArgs>
     category?: boolean | ExpenseProduct$categoryArgs<ExtArgs>
     subcategory?: boolean | ExpenseProduct$subcategoryArgs<ExtArgs>
     receipt_items?: boolean | ExpenseProduct$receipt_itemsArgs<ExtArgs>
+    purchases?: boolean | ExpenseProduct$purchasesArgs<ExtArgs>
     _count?: boolean | ExpenseProductCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExpenseProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -26566,6 +26778,7 @@ export namespace Prisma {
       category: Prisma.$ExpenseCategoryPayload<ExtArgs> | null
       subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs> | null
       receipt_items: Prisma.$ExpenseReceiptItemPayload<ExtArgs>[]
+      purchases: Prisma.$ProductPurchasePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -26575,6 +26788,7 @@ export namespace Prisma {
       brand: string | null
       unit: string | null
       size: Prisma.Decimal | null
+      source: $Enums.ProductSource
       category_uuid: string | null
       subcategory_uuid: string | null
       created_at: Date
@@ -26977,6 +27191,7 @@ export namespace Prisma {
     category<T extends ExpenseProduct$categoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseProduct$categoryArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     subcategory<T extends ExpenseProduct$subcategoryArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseProduct$subcategoryArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     receipt_items<T extends ExpenseProduct$receipt_itemsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseProduct$receipt_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseReceiptItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    purchases<T extends ExpenseProduct$purchasesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseProduct$purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -27013,6 +27228,7 @@ export namespace Prisma {
     readonly brand: FieldRef<"ExpenseProduct", 'String'>
     readonly unit: FieldRef<"ExpenseProduct", 'String'>
     readonly size: FieldRef<"ExpenseProduct", 'Decimal'>
+    readonly source: FieldRef<"ExpenseProduct", 'ProductSource'>
     readonly category_uuid: FieldRef<"ExpenseProduct", 'String'>
     readonly subcategory_uuid: FieldRef<"ExpenseProduct", 'String'>
     readonly created_at: FieldRef<"ExpenseProduct", 'DateTime'>
@@ -27496,6 +27712,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ExpenseReceiptItemScalarFieldEnum | ExpenseReceiptItemScalarFieldEnum[]
+  }
+
+  /**
+   * ExpenseProduct.purchases
+   */
+  export type ExpenseProduct$purchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    where?: ProductPurchaseWhereInput
+    orderBy?: ProductPurchaseOrderByWithRelationInput | ProductPurchaseOrderByWithRelationInput[]
+    cursor?: ProductPurchaseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductPurchaseScalarFieldEnum | ProductPurchaseScalarFieldEnum[]
   }
 
   /**
@@ -28702,6 +28942,1323 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ExpenseReceiptItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProductPurchase
+   */
+
+  export type AggregateProductPurchase = {
+    _count: ProductPurchaseCountAggregateOutputType | null
+    _avg: ProductPurchaseAvgAggregateOutputType | null
+    _sum: ProductPurchaseSumAggregateOutputType | null
+    _min: ProductPurchaseMinAggregateOutputType | null
+    _max: ProductPurchaseMaxAggregateOutputType | null
+  }
+
+  export type ProductPurchaseAvgAggregateOutputType = {
+    id: number | null
+    purchase_price: Decimal | null
+    total_units: Decimal | null
+    consumption_amount: Decimal | null
+    consumption_period_days: number | null
+  }
+
+  export type ProductPurchaseSumAggregateOutputType = {
+    id: number | null
+    purchase_price: Decimal | null
+    total_units: Decimal | null
+    consumption_amount: Decimal | null
+    consumption_period_days: number | null
+  }
+
+  export type ProductPurchaseMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    product_uuid: string | null
+    expense_entry_uuid: string | null
+    tracking_method: $Enums.ProductTrackingMethod | null
+    status: $Enums.ProductPurchaseStatus | null
+    purchase_price: Decimal | null
+    purchase_date: Date | null
+    start_date: Date | null
+    actual_finish_date: Date | null
+    total_units: Decimal | null
+    unit_label: string | null
+    consumption_amount: Decimal | null
+    consumption_period_days: number | null
+    notes: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ProductPurchaseMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    product_uuid: string | null
+    expense_entry_uuid: string | null
+    tracking_method: $Enums.ProductTrackingMethod | null
+    status: $Enums.ProductPurchaseStatus | null
+    purchase_price: Decimal | null
+    purchase_date: Date | null
+    start_date: Date | null
+    actual_finish_date: Date | null
+    total_units: Decimal | null
+    unit_label: string | null
+    consumption_amount: Decimal | null
+    consumption_period_days: number | null
+    notes: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ProductPurchaseCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    product_uuid: number
+    expense_entry_uuid: number
+    tracking_method: number
+    status: number
+    purchase_price: number
+    purchase_date: number
+    start_date: number
+    actual_finish_date: number
+    total_units: number
+    unit_label: number
+    consumption_amount: number
+    consumption_period_days: number
+    notes: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type ProductPurchaseAvgAggregateInputType = {
+    id?: true
+    purchase_price?: true
+    total_units?: true
+    consumption_amount?: true
+    consumption_period_days?: true
+  }
+
+  export type ProductPurchaseSumAggregateInputType = {
+    id?: true
+    purchase_price?: true
+    total_units?: true
+    consumption_amount?: true
+    consumption_period_days?: true
+  }
+
+  export type ProductPurchaseMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    product_uuid?: true
+    expense_entry_uuid?: true
+    tracking_method?: true
+    status?: true
+    purchase_price?: true
+    purchase_date?: true
+    start_date?: true
+    actual_finish_date?: true
+    total_units?: true
+    unit_label?: true
+    consumption_amount?: true
+    consumption_period_days?: true
+    notes?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ProductPurchaseMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    product_uuid?: true
+    expense_entry_uuid?: true
+    tracking_method?: true
+    status?: true
+    purchase_price?: true
+    purchase_date?: true
+    start_date?: true
+    actual_finish_date?: true
+    total_units?: true
+    unit_label?: true
+    consumption_amount?: true
+    consumption_period_days?: true
+    notes?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ProductPurchaseCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    product_uuid?: true
+    expense_entry_uuid?: true
+    tracking_method?: true
+    status?: true
+    purchase_price?: true
+    purchase_date?: true
+    start_date?: true
+    actual_finish_date?: true
+    total_units?: true
+    unit_label?: true
+    consumption_amount?: true
+    consumption_period_days?: true
+    notes?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type ProductPurchaseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductPurchase to aggregate.
+     */
+    where?: ProductPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductPurchases to fetch.
+     */
+    orderBy?: ProductPurchaseOrderByWithRelationInput | ProductPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProductPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductPurchases.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProductPurchases
+    **/
+    _count?: true | ProductPurchaseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductPurchaseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductPurchaseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductPurchaseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductPurchaseMaxAggregateInputType
+  }
+
+  export type GetProductPurchaseAggregateType<T extends ProductPurchaseAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductPurchase]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductPurchase[P]>
+      : GetScalarType<T[P], AggregateProductPurchase[P]>
+  }
+
+
+
+
+  export type ProductPurchaseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductPurchaseWhereInput
+    orderBy?: ProductPurchaseOrderByWithAggregationInput | ProductPurchaseOrderByWithAggregationInput[]
+    by: ProductPurchaseScalarFieldEnum[] | ProductPurchaseScalarFieldEnum
+    having?: ProductPurchaseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductPurchaseCountAggregateInputType | true
+    _avg?: ProductPurchaseAvgAggregateInputType
+    _sum?: ProductPurchaseSumAggregateInputType
+    _min?: ProductPurchaseMinAggregateInputType
+    _max?: ProductPurchaseMaxAggregateInputType
+  }
+
+  export type ProductPurchaseGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    product_uuid: string
+    expense_entry_uuid: string | null
+    tracking_method: $Enums.ProductTrackingMethod
+    status: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal
+    purchase_date: Date
+    start_date: Date | null
+    actual_finish_date: Date | null
+    total_units: Decimal | null
+    unit_label: string | null
+    consumption_amount: Decimal | null
+    consumption_period_days: number | null
+    notes: string | null
+    created_at: Date
+    updated_at: Date
+    _count: ProductPurchaseCountAggregateOutputType | null
+    _avg: ProductPurchaseAvgAggregateOutputType | null
+    _sum: ProductPurchaseSumAggregateOutputType | null
+    _min: ProductPurchaseMinAggregateOutputType | null
+    _max: ProductPurchaseMaxAggregateOutputType | null
+  }
+
+  type GetProductPurchaseGroupByPayload<T extends ProductPurchaseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductPurchaseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductPurchaseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductPurchaseGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductPurchaseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProductPurchaseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    product_uuid?: boolean
+    expense_entry_uuid?: boolean
+    tracking_method?: boolean
+    status?: boolean
+    purchase_price?: boolean
+    purchase_date?: boolean
+    start_date?: boolean
+    actual_finish_date?: boolean
+    total_units?: boolean
+    unit_label?: boolean
+    consumption_amount?: boolean
+    consumption_period_days?: boolean
+    notes?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    product?: boolean | ExpenseProductDefaultArgs<ExtArgs>
+    expense_entry?: boolean | ProductPurchase$expense_entryArgs<ExtArgs>
+  }, ExtArgs["result"]["productPurchase"]>
+
+  export type ProductPurchaseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    product_uuid?: boolean
+    expense_entry_uuid?: boolean
+    tracking_method?: boolean
+    status?: boolean
+    purchase_price?: boolean
+    purchase_date?: boolean
+    start_date?: boolean
+    actual_finish_date?: boolean
+    total_units?: boolean
+    unit_label?: boolean
+    consumption_amount?: boolean
+    consumption_period_days?: boolean
+    notes?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    product?: boolean | ExpenseProductDefaultArgs<ExtArgs>
+    expense_entry?: boolean | ProductPurchase$expense_entryArgs<ExtArgs>
+  }, ExtArgs["result"]["productPurchase"]>
+
+  export type ProductPurchaseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    product_uuid?: boolean
+    expense_entry_uuid?: boolean
+    tracking_method?: boolean
+    status?: boolean
+    purchase_price?: boolean
+    purchase_date?: boolean
+    start_date?: boolean
+    actual_finish_date?: boolean
+    total_units?: boolean
+    unit_label?: boolean
+    consumption_amount?: boolean
+    consumption_period_days?: boolean
+    notes?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    product?: boolean | ExpenseProductDefaultArgs<ExtArgs>
+    expense_entry?: boolean | ProductPurchase$expense_entryArgs<ExtArgs>
+  }, ExtArgs["result"]["productPurchase"]>
+
+  export type ProductPurchaseSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    product_uuid?: boolean
+    expense_entry_uuid?: boolean
+    tracking_method?: boolean
+    status?: boolean
+    purchase_price?: boolean
+    purchase_date?: boolean
+    start_date?: boolean
+    actual_finish_date?: boolean
+    total_units?: boolean
+    unit_label?: boolean
+    consumption_amount?: boolean
+    consumption_period_days?: boolean
+    notes?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type ProductPurchaseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "product_uuid" | "expense_entry_uuid" | "tracking_method" | "status" | "purchase_price" | "purchase_date" | "start_date" | "actual_finish_date" | "total_units" | "unit_label" | "consumption_amount" | "consumption_period_days" | "notes" | "created_at" | "updated_at", ExtArgs["result"]["productPurchase"]>
+  export type ProductPurchaseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    product?: boolean | ExpenseProductDefaultArgs<ExtArgs>
+    expense_entry?: boolean | ProductPurchase$expense_entryArgs<ExtArgs>
+  }
+  export type ProductPurchaseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    product?: boolean | ExpenseProductDefaultArgs<ExtArgs>
+    expense_entry?: boolean | ProductPurchase$expense_entryArgs<ExtArgs>
+  }
+  export type ProductPurchaseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    product?: boolean | ExpenseProductDefaultArgs<ExtArgs>
+    expense_entry?: boolean | ProductPurchase$expense_entryArgs<ExtArgs>
+  }
+
+  export type $ProductPurchasePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProductPurchase"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      product: Prisma.$ExpenseProductPayload<ExtArgs>
+      expense_entry: Prisma.$ExpenseEntryPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      product_uuid: string
+      expense_entry_uuid: string | null
+      tracking_method: $Enums.ProductTrackingMethod
+      status: $Enums.ProductPurchaseStatus
+      purchase_price: Prisma.Decimal
+      purchase_date: Date
+      start_date: Date | null
+      actual_finish_date: Date | null
+      total_units: Prisma.Decimal | null
+      unit_label: string | null
+      consumption_amount: Prisma.Decimal | null
+      consumption_period_days: number | null
+      notes: string | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["productPurchase"]>
+    composites: {}
+  }
+
+  type ProductPurchaseGetPayload<S extends boolean | null | undefined | ProductPurchaseDefaultArgs> = $Result.GetResult<Prisma.$ProductPurchasePayload, S>
+
+  type ProductPurchaseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductPurchaseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductPurchaseCountAggregateInputType | true
+    }
+
+  export interface ProductPurchaseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProductPurchase'], meta: { name: 'ProductPurchase' } }
+    /**
+     * Find zero or one ProductPurchase that matches the filter.
+     * @param {ProductPurchaseFindUniqueArgs} args - Arguments to find a ProductPurchase
+     * @example
+     * // Get one ProductPurchase
+     * const productPurchase = await prisma.productPurchase.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductPurchaseFindUniqueArgs>(args: SelectSubset<T, ProductPurchaseFindUniqueArgs<ExtArgs>>): Prisma__ProductPurchaseClient<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProductPurchase that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProductPurchaseFindUniqueOrThrowArgs} args - Arguments to find a ProductPurchase
+     * @example
+     * // Get one ProductPurchase
+     * const productPurchase = await prisma.productPurchase.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductPurchaseFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductPurchaseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductPurchaseClient<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductPurchase that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductPurchaseFindFirstArgs} args - Arguments to find a ProductPurchase
+     * @example
+     * // Get one ProductPurchase
+     * const productPurchase = await prisma.productPurchase.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductPurchaseFindFirstArgs>(args?: SelectSubset<T, ProductPurchaseFindFirstArgs<ExtArgs>>): Prisma__ProductPurchaseClient<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductPurchase that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductPurchaseFindFirstOrThrowArgs} args - Arguments to find a ProductPurchase
+     * @example
+     * // Get one ProductPurchase
+     * const productPurchase = await prisma.productPurchase.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductPurchaseFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductPurchaseFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductPurchaseClient<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProductPurchases that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductPurchaseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProductPurchases
+     * const productPurchases = await prisma.productPurchase.findMany()
+     * 
+     * // Get first 10 ProductPurchases
+     * const productPurchases = await prisma.productPurchase.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productPurchaseWithIdOnly = await prisma.productPurchase.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProductPurchaseFindManyArgs>(args?: SelectSubset<T, ProductPurchaseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProductPurchase.
+     * @param {ProductPurchaseCreateArgs} args - Arguments to create a ProductPurchase.
+     * @example
+     * // Create one ProductPurchase
+     * const ProductPurchase = await prisma.productPurchase.create({
+     *   data: {
+     *     // ... data to create a ProductPurchase
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProductPurchaseCreateArgs>(args: SelectSubset<T, ProductPurchaseCreateArgs<ExtArgs>>): Prisma__ProductPurchaseClient<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProductPurchases.
+     * @param {ProductPurchaseCreateManyArgs} args - Arguments to create many ProductPurchases.
+     * @example
+     * // Create many ProductPurchases
+     * const productPurchase = await prisma.productPurchase.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProductPurchaseCreateManyArgs>(args?: SelectSubset<T, ProductPurchaseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProductPurchases and returns the data saved in the database.
+     * @param {ProductPurchaseCreateManyAndReturnArgs} args - Arguments to create many ProductPurchases.
+     * @example
+     * // Create many ProductPurchases
+     * const productPurchase = await prisma.productPurchase.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProductPurchases and only return the `id`
+     * const productPurchaseWithIdOnly = await prisma.productPurchase.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProductPurchaseCreateManyAndReturnArgs>(args?: SelectSubset<T, ProductPurchaseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ProductPurchase.
+     * @param {ProductPurchaseDeleteArgs} args - Arguments to delete one ProductPurchase.
+     * @example
+     * // Delete one ProductPurchase
+     * const ProductPurchase = await prisma.productPurchase.delete({
+     *   where: {
+     *     // ... filter to delete one ProductPurchase
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProductPurchaseDeleteArgs>(args: SelectSubset<T, ProductPurchaseDeleteArgs<ExtArgs>>): Prisma__ProductPurchaseClient<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProductPurchase.
+     * @param {ProductPurchaseUpdateArgs} args - Arguments to update one ProductPurchase.
+     * @example
+     * // Update one ProductPurchase
+     * const productPurchase = await prisma.productPurchase.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProductPurchaseUpdateArgs>(args: SelectSubset<T, ProductPurchaseUpdateArgs<ExtArgs>>): Prisma__ProductPurchaseClient<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProductPurchases.
+     * @param {ProductPurchaseDeleteManyArgs} args - Arguments to filter ProductPurchases to delete.
+     * @example
+     * // Delete a few ProductPurchases
+     * const { count } = await prisma.productPurchase.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProductPurchaseDeleteManyArgs>(args?: SelectSubset<T, ProductPurchaseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductPurchases.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductPurchaseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProductPurchases
+     * const productPurchase = await prisma.productPurchase.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProductPurchaseUpdateManyArgs>(args: SelectSubset<T, ProductPurchaseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductPurchases and returns the data updated in the database.
+     * @param {ProductPurchaseUpdateManyAndReturnArgs} args - Arguments to update many ProductPurchases.
+     * @example
+     * // Update many ProductPurchases
+     * const productPurchase = await prisma.productPurchase.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProductPurchases and only return the `id`
+     * const productPurchaseWithIdOnly = await prisma.productPurchase.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProductPurchaseUpdateManyAndReturnArgs>(args: SelectSubset<T, ProductPurchaseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ProductPurchase.
+     * @param {ProductPurchaseUpsertArgs} args - Arguments to update or create a ProductPurchase.
+     * @example
+     * // Update or create a ProductPurchase
+     * const productPurchase = await prisma.productPurchase.upsert({
+     *   create: {
+     *     // ... data to create a ProductPurchase
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProductPurchase we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductPurchaseUpsertArgs>(args: SelectSubset<T, ProductPurchaseUpsertArgs<ExtArgs>>): Prisma__ProductPurchaseClient<$Result.GetResult<Prisma.$ProductPurchasePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProductPurchases.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductPurchaseCountArgs} args - Arguments to filter ProductPurchases to count.
+     * @example
+     * // Count the number of ProductPurchases
+     * const count = await prisma.productPurchase.count({
+     *   where: {
+     *     // ... the filter for the ProductPurchases we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProductPurchaseCountArgs>(
+      args?: Subset<T, ProductPurchaseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductPurchaseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProductPurchase.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductPurchaseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductPurchaseAggregateArgs>(args: Subset<T, ProductPurchaseAggregateArgs>): Prisma.PrismaPromise<GetProductPurchaseAggregateType<T>>
+
+    /**
+     * Group by ProductPurchase.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductPurchaseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProductPurchaseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductPurchaseGroupByArgs['orderBy'] }
+        : { orderBy?: ProductPurchaseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductPurchaseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductPurchaseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProductPurchase model
+   */
+  readonly fields: ProductPurchaseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProductPurchase.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductPurchaseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    product<T extends ExpenseProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseProductDefaultArgs<ExtArgs>>): Prisma__ExpenseProductClient<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    expense_entry<T extends ProductPurchase$expense_entryArgs<ExtArgs> = {}>(args?: Subset<T, ProductPurchase$expense_entryArgs<ExtArgs>>): Prisma__ExpenseEntryClient<$Result.GetResult<Prisma.$ExpenseEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProductPurchase model
+   */
+  interface ProductPurchaseFieldRefs {
+    readonly id: FieldRef<"ProductPurchase", 'Int'>
+    readonly uuid: FieldRef<"ProductPurchase", 'String'>
+    readonly user_uuid: FieldRef<"ProductPurchase", 'String'>
+    readonly product_uuid: FieldRef<"ProductPurchase", 'String'>
+    readonly expense_entry_uuid: FieldRef<"ProductPurchase", 'String'>
+    readonly tracking_method: FieldRef<"ProductPurchase", 'ProductTrackingMethod'>
+    readonly status: FieldRef<"ProductPurchase", 'ProductPurchaseStatus'>
+    readonly purchase_price: FieldRef<"ProductPurchase", 'Decimal'>
+    readonly purchase_date: FieldRef<"ProductPurchase", 'DateTime'>
+    readonly start_date: FieldRef<"ProductPurchase", 'DateTime'>
+    readonly actual_finish_date: FieldRef<"ProductPurchase", 'DateTime'>
+    readonly total_units: FieldRef<"ProductPurchase", 'Decimal'>
+    readonly unit_label: FieldRef<"ProductPurchase", 'String'>
+    readonly consumption_amount: FieldRef<"ProductPurchase", 'Decimal'>
+    readonly consumption_period_days: FieldRef<"ProductPurchase", 'Int'>
+    readonly notes: FieldRef<"ProductPurchase", 'String'>
+    readonly created_at: FieldRef<"ProductPurchase", 'DateTime'>
+    readonly updated_at: FieldRef<"ProductPurchase", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProductPurchase findUnique
+   */
+  export type ProductPurchaseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductPurchase to fetch.
+     */
+    where: ProductPurchaseWhereUniqueInput
+  }
+
+  /**
+   * ProductPurchase findUniqueOrThrow
+   */
+  export type ProductPurchaseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductPurchase to fetch.
+     */
+    where: ProductPurchaseWhereUniqueInput
+  }
+
+  /**
+   * ProductPurchase findFirst
+   */
+  export type ProductPurchaseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductPurchase to fetch.
+     */
+    where?: ProductPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductPurchases to fetch.
+     */
+    orderBy?: ProductPurchaseOrderByWithRelationInput | ProductPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductPurchases.
+     */
+    cursor?: ProductPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductPurchases.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductPurchases.
+     */
+    distinct?: ProductPurchaseScalarFieldEnum | ProductPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * ProductPurchase findFirstOrThrow
+   */
+  export type ProductPurchaseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductPurchase to fetch.
+     */
+    where?: ProductPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductPurchases to fetch.
+     */
+    orderBy?: ProductPurchaseOrderByWithRelationInput | ProductPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductPurchases.
+     */
+    cursor?: ProductPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductPurchases.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductPurchases.
+     */
+    distinct?: ProductPurchaseScalarFieldEnum | ProductPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * ProductPurchase findMany
+   */
+  export type ProductPurchaseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductPurchases to fetch.
+     */
+    where?: ProductPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductPurchases to fetch.
+     */
+    orderBy?: ProductPurchaseOrderByWithRelationInput | ProductPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProductPurchases.
+     */
+    cursor?: ProductPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductPurchases.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductPurchases.
+     */
+    distinct?: ProductPurchaseScalarFieldEnum | ProductPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * ProductPurchase create
+   */
+  export type ProductPurchaseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProductPurchase.
+     */
+    data: XOR<ProductPurchaseCreateInput, ProductPurchaseUncheckedCreateInput>
+  }
+
+  /**
+   * ProductPurchase createMany
+   */
+  export type ProductPurchaseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProductPurchases.
+     */
+    data: ProductPurchaseCreateManyInput | ProductPurchaseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProductPurchase createManyAndReturn
+   */
+  export type ProductPurchaseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProductPurchases.
+     */
+    data: ProductPurchaseCreateManyInput | ProductPurchaseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductPurchase update
+   */
+  export type ProductPurchaseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProductPurchase.
+     */
+    data: XOR<ProductPurchaseUpdateInput, ProductPurchaseUncheckedUpdateInput>
+    /**
+     * Choose, which ProductPurchase to update.
+     */
+    where: ProductPurchaseWhereUniqueInput
+  }
+
+  /**
+   * ProductPurchase updateMany
+   */
+  export type ProductPurchaseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProductPurchases.
+     */
+    data: XOR<ProductPurchaseUpdateManyMutationInput, ProductPurchaseUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductPurchases to update
+     */
+    where?: ProductPurchaseWhereInput
+    /**
+     * Limit how many ProductPurchases to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductPurchase updateManyAndReturn
+   */
+  export type ProductPurchaseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * The data used to update ProductPurchases.
+     */
+    data: XOR<ProductPurchaseUpdateManyMutationInput, ProductPurchaseUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductPurchases to update
+     */
+    where?: ProductPurchaseWhereInput
+    /**
+     * Limit how many ProductPurchases to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductPurchase upsert
+   */
+  export type ProductPurchaseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProductPurchase to update in case it exists.
+     */
+    where: ProductPurchaseWhereUniqueInput
+    /**
+     * In case the ProductPurchase found by the `where` argument doesn't exist, create a new ProductPurchase with this data.
+     */
+    create: XOR<ProductPurchaseCreateInput, ProductPurchaseUncheckedCreateInput>
+    /**
+     * In case the ProductPurchase was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductPurchaseUpdateInput, ProductPurchaseUncheckedUpdateInput>
+  }
+
+  /**
+   * ProductPurchase delete
+   */
+  export type ProductPurchaseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter which ProductPurchase to delete.
+     */
+    where: ProductPurchaseWhereUniqueInput
+  }
+
+  /**
+   * ProductPurchase deleteMany
+   */
+  export type ProductPurchaseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductPurchases to delete
+     */
+    where?: ProductPurchaseWhereInput
+    /**
+     * Limit how many ProductPurchases to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductPurchase.expense_entry
+   */
+  export type ProductPurchase$expense_entryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseEntry
+     */
+    select?: ExpenseEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseEntry
+     */
+    omit?: ExpenseEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseEntryInclude<ExtArgs> | null
+    where?: ExpenseEntryWhereInput
+  }
+
+  /**
+   * ProductPurchase without action
+   */
+  export type ProductPurchaseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductPurchase
+     */
+    select?: ProductPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductPurchase
+     */
+    omit?: ProductPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductPurchaseInclude<ExtArgs> | null
   }
 
 
@@ -52971,6 +54528,7 @@ export namespace Prisma {
     brand: 'brand',
     unit: 'unit',
     size: 'size',
+    source: 'source',
     category_uuid: 'category_uuid',
     subcategory_uuid: 'subcategory_uuid',
     created_at: 'created_at',
@@ -52993,6 +54551,30 @@ export namespace Prisma {
   };
 
   export type ExpenseReceiptItemScalarFieldEnum = (typeof ExpenseReceiptItemScalarFieldEnum)[keyof typeof ExpenseReceiptItemScalarFieldEnum]
+
+
+  export const ProductPurchaseScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    product_uuid: 'product_uuid',
+    expense_entry_uuid: 'expense_entry_uuid',
+    tracking_method: 'tracking_method',
+    status: 'status',
+    purchase_price: 'purchase_price',
+    purchase_date: 'purchase_date',
+    start_date: 'start_date',
+    actual_finish_date: 'actual_finish_date',
+    total_units: 'total_units',
+    unit_label: 'unit_label',
+    consumption_amount: 'consumption_amount',
+    consumption_period_days: 'consumption_period_days',
+    notes: 'notes',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type ProductPurchaseScalarFieldEnum = (typeof ProductPurchaseScalarFieldEnum)[keyof typeof ProductPurchaseScalarFieldEnum]
 
 
   export const MuscleGroupScalarFieldEnum: {
@@ -53571,6 +55153,48 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ProductSource'
+   */
+  export type EnumProductSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductSource'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductSource[]'
+   */
+  export type ListEnumProductSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductSource[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductTrackingMethod'
+   */
+  export type EnumProductTrackingMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductTrackingMethod'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductTrackingMethod[]'
+   */
+  export type ListEnumProductTrackingMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductTrackingMethod[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductPurchaseStatus'
+   */
+  export type EnumProductPurchaseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductPurchaseStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductPurchaseStatus[]'
+   */
+  export type ListEnumProductPurchaseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductPurchaseStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ExerciseType'
    */
   export type EnumExerciseTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExerciseType'>
@@ -53732,6 +55356,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptListRelationFilter
     expense_stores?: ExpenseStoreListRelationFilter
     expense_products?: ExpenseProductListRelationFilter
+    product_purchases?: ProductPurchaseListRelationFilter
     muscle_groups?: MuscleGroupListRelationFilter
     exercises?: ExerciseListRelationFilter
     workouts?: WorkoutListRelationFilter
@@ -53772,6 +55397,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptOrderByRelationAggregateInput
     expense_stores?: ExpenseStoreOrderByRelationAggregateInput
     expense_products?: ExpenseProductOrderByRelationAggregateInput
+    product_purchases?: ProductPurchaseOrderByRelationAggregateInput
     muscle_groups?: MuscleGroupOrderByRelationAggregateInput
     exercises?: ExerciseOrderByRelationAggregateInput
     workouts?: WorkoutOrderByRelationAggregateInput
@@ -53815,6 +55441,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptListRelationFilter
     expense_stores?: ExpenseStoreListRelationFilter
     expense_products?: ExpenseProductListRelationFilter
+    product_purchases?: ProductPurchaseListRelationFilter
     muscle_groups?: MuscleGroupListRelationFilter
     exercises?: ExerciseListRelationFilter
     workouts?: WorkoutListRelationFilter
@@ -54781,6 +56408,7 @@ export namespace Prisma {
     subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
     preset?: XOR<ExpenseEntryPresetNullableScalarRelationFilter, ExpenseEntryPresetWhereInput> | null
     expense_receipt?: XOR<ExpenseReceiptNullableScalarRelationFilter, ExpenseReceiptWhereInput> | null
+    product_purchase?: XOR<ProductPurchaseNullableScalarRelationFilter, ProductPurchaseWhereInput> | null
     tags?: ExpenseTagListRelationFilter
   }
 
@@ -54808,6 +56436,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryOrderByWithRelationInput
     preset?: ExpenseEntryPresetOrderByWithRelationInput
     expense_receipt?: ExpenseReceiptOrderByWithRelationInput
+    product_purchase?: ProductPurchaseOrderByWithRelationInput
     tags?: ExpenseTagOrderByRelationAggregateInput
   }
 
@@ -54838,6 +56467,7 @@ export namespace Prisma {
     subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
     preset?: XOR<ExpenseEntryPresetNullableScalarRelationFilter, ExpenseEntryPresetWhereInput> | null
     expense_receipt?: XOR<ExpenseReceiptNullableScalarRelationFilter, ExpenseReceiptWhereInput> | null
+    product_purchase?: XOR<ProductPurchaseNullableScalarRelationFilter, ProductPurchaseWhereInput> | null
     tags?: ExpenseTagListRelationFilter
   }, "id" | "uuid">
 
@@ -55272,6 +56902,7 @@ export namespace Prisma {
     brand?: StringNullableFilter<"ExpenseProduct"> | string | null
     unit?: StringNullableFilter<"ExpenseProduct"> | string | null
     size?: DecimalNullableFilter<"ExpenseProduct"> | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFilter<"ExpenseProduct"> | $Enums.ProductSource
     category_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
     subcategory_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
     created_at?: DateTimeFilter<"ExpenseProduct"> | Date | string
@@ -55280,6 +56911,7 @@ export namespace Prisma {
     category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
     subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
     receipt_items?: ExpenseReceiptItemListRelationFilter
+    purchases?: ProductPurchaseListRelationFilter
   }
 
   export type ExpenseProductOrderByWithRelationInput = {
@@ -55290,6 +56922,7 @@ export namespace Prisma {
     brand?: SortOrderInput | SortOrder
     unit?: SortOrderInput | SortOrder
     size?: SortOrderInput | SortOrder
+    source?: SortOrder
     category_uuid?: SortOrderInput | SortOrder
     subcategory_uuid?: SortOrderInput | SortOrder
     created_at?: SortOrder
@@ -55298,6 +56931,7 @@ export namespace Prisma {
     category?: ExpenseCategoryOrderByWithRelationInput
     subcategory?: ExpenseSubcategoryOrderByWithRelationInput
     receipt_items?: ExpenseReceiptItemOrderByRelationAggregateInput
+    purchases?: ProductPurchaseOrderByRelationAggregateInput
   }
 
   export type ExpenseProductWhereUniqueInput = Prisma.AtLeast<{
@@ -55311,6 +56945,7 @@ export namespace Prisma {
     brand?: StringNullableFilter<"ExpenseProduct"> | string | null
     unit?: StringNullableFilter<"ExpenseProduct"> | string | null
     size?: DecimalNullableFilter<"ExpenseProduct"> | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFilter<"ExpenseProduct"> | $Enums.ProductSource
     category_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
     subcategory_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
     created_at?: DateTimeFilter<"ExpenseProduct"> | Date | string
@@ -55319,6 +56954,7 @@ export namespace Prisma {
     category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
     subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
     receipt_items?: ExpenseReceiptItemListRelationFilter
+    purchases?: ProductPurchaseListRelationFilter
   }, "id" | "uuid">
 
   export type ExpenseProductOrderByWithAggregationInput = {
@@ -55329,6 +56965,7 @@ export namespace Prisma {
     brand?: SortOrderInput | SortOrder
     unit?: SortOrderInput | SortOrder
     size?: SortOrderInput | SortOrder
+    source?: SortOrder
     category_uuid?: SortOrderInput | SortOrder
     subcategory_uuid?: SortOrderInput | SortOrder
     created_at?: SortOrder
@@ -55351,6 +56988,7 @@ export namespace Prisma {
     brand?: StringNullableWithAggregatesFilter<"ExpenseProduct"> | string | null
     unit?: StringNullableWithAggregatesFilter<"ExpenseProduct"> | string | null
     size?: DecimalNullableWithAggregatesFilter<"ExpenseProduct"> | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceWithAggregatesFilter<"ExpenseProduct"> | $Enums.ProductSource
     category_uuid?: StringNullableWithAggregatesFilter<"ExpenseProduct"> | string | null
     subcategory_uuid?: StringNullableWithAggregatesFilter<"ExpenseProduct"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"ExpenseProduct"> | Date | string
@@ -55435,6 +57073,134 @@ export namespace Prisma {
     total_price?: DecimalWithAggregatesFilter<"ExpenseReceiptItem"> | Decimal | DecimalJsLike | number | string
     created_at?: DateTimeWithAggregatesFilter<"ExpenseReceiptItem"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ExpenseReceiptItem"> | Date | string
+  }
+
+  export type ProductPurchaseWhereInput = {
+    AND?: ProductPurchaseWhereInput | ProductPurchaseWhereInput[]
+    OR?: ProductPurchaseWhereInput[]
+    NOT?: ProductPurchaseWhereInput | ProductPurchaseWhereInput[]
+    id?: IntFilter<"ProductPurchase"> | number
+    uuid?: StringFilter<"ProductPurchase"> | string
+    user_uuid?: StringFilter<"ProductPurchase"> | string
+    product_uuid?: StringFilter<"ProductPurchase"> | string
+    expense_entry_uuid?: StringNullableFilter<"ProductPurchase"> | string | null
+    tracking_method?: EnumProductTrackingMethodFilter<"ProductPurchase"> | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFilter<"ProductPurchase"> | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFilter<"ProductPurchase"> | Date | string
+    start_date?: DateTimeNullableFilter<"ProductPurchase"> | Date | string | null
+    actual_finish_date?: DateTimeNullableFilter<"ProductPurchase"> | Date | string | null
+    total_units?: DecimalNullableFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string | null
+    unit_label?: StringNullableFilter<"ProductPurchase"> | string | null
+    consumption_amount?: DecimalNullableFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: IntNullableFilter<"ProductPurchase"> | number | null
+    notes?: StringNullableFilter<"ProductPurchase"> | string | null
+    created_at?: DateTimeFilter<"ProductPurchase"> | Date | string
+    updated_at?: DateTimeFilter<"ProductPurchase"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    product?: XOR<ExpenseProductScalarRelationFilter, ExpenseProductWhereInput>
+    expense_entry?: XOR<ExpenseEntryNullableScalarRelationFilter, ExpenseEntryWhereInput> | null
+  }
+
+  export type ProductPurchaseOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    product_uuid?: SortOrder
+    expense_entry_uuid?: SortOrderInput | SortOrder
+    tracking_method?: SortOrder
+    status?: SortOrder
+    purchase_price?: SortOrder
+    purchase_date?: SortOrder
+    start_date?: SortOrderInput | SortOrder
+    actual_finish_date?: SortOrderInput | SortOrder
+    total_units?: SortOrderInput | SortOrder
+    unit_label?: SortOrderInput | SortOrder
+    consumption_amount?: SortOrderInput | SortOrder
+    consumption_period_days?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    product?: ExpenseProductOrderByWithRelationInput
+    expense_entry?: ExpenseEntryOrderByWithRelationInput
+  }
+
+  export type ProductPurchaseWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    expense_entry_uuid?: string
+    AND?: ProductPurchaseWhereInput | ProductPurchaseWhereInput[]
+    OR?: ProductPurchaseWhereInput[]
+    NOT?: ProductPurchaseWhereInput | ProductPurchaseWhereInput[]
+    user_uuid?: StringFilter<"ProductPurchase"> | string
+    product_uuid?: StringFilter<"ProductPurchase"> | string
+    tracking_method?: EnumProductTrackingMethodFilter<"ProductPurchase"> | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFilter<"ProductPurchase"> | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFilter<"ProductPurchase"> | Date | string
+    start_date?: DateTimeNullableFilter<"ProductPurchase"> | Date | string | null
+    actual_finish_date?: DateTimeNullableFilter<"ProductPurchase"> | Date | string | null
+    total_units?: DecimalNullableFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string | null
+    unit_label?: StringNullableFilter<"ProductPurchase"> | string | null
+    consumption_amount?: DecimalNullableFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: IntNullableFilter<"ProductPurchase"> | number | null
+    notes?: StringNullableFilter<"ProductPurchase"> | string | null
+    created_at?: DateTimeFilter<"ProductPurchase"> | Date | string
+    updated_at?: DateTimeFilter<"ProductPurchase"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    product?: XOR<ExpenseProductScalarRelationFilter, ExpenseProductWhereInput>
+    expense_entry?: XOR<ExpenseEntryNullableScalarRelationFilter, ExpenseEntryWhereInput> | null
+  }, "id" | "uuid" | "expense_entry_uuid">
+
+  export type ProductPurchaseOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    product_uuid?: SortOrder
+    expense_entry_uuid?: SortOrderInput | SortOrder
+    tracking_method?: SortOrder
+    status?: SortOrder
+    purchase_price?: SortOrder
+    purchase_date?: SortOrder
+    start_date?: SortOrderInput | SortOrder
+    actual_finish_date?: SortOrderInput | SortOrder
+    total_units?: SortOrderInput | SortOrder
+    unit_label?: SortOrderInput | SortOrder
+    consumption_amount?: SortOrderInput | SortOrder
+    consumption_period_days?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: ProductPurchaseCountOrderByAggregateInput
+    _avg?: ProductPurchaseAvgOrderByAggregateInput
+    _max?: ProductPurchaseMaxOrderByAggregateInput
+    _min?: ProductPurchaseMinOrderByAggregateInput
+    _sum?: ProductPurchaseSumOrderByAggregateInput
+  }
+
+  export type ProductPurchaseScalarWhereWithAggregatesInput = {
+    AND?: ProductPurchaseScalarWhereWithAggregatesInput | ProductPurchaseScalarWhereWithAggregatesInput[]
+    OR?: ProductPurchaseScalarWhereWithAggregatesInput[]
+    NOT?: ProductPurchaseScalarWhereWithAggregatesInput | ProductPurchaseScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ProductPurchase"> | number
+    uuid?: StringWithAggregatesFilter<"ProductPurchase"> | string
+    user_uuid?: StringWithAggregatesFilter<"ProductPurchase"> | string
+    product_uuid?: StringWithAggregatesFilter<"ProductPurchase"> | string
+    expense_entry_uuid?: StringNullableWithAggregatesFilter<"ProductPurchase"> | string | null
+    tracking_method?: EnumProductTrackingMethodWithAggregatesFilter<"ProductPurchase"> | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusWithAggregatesFilter<"ProductPurchase"> | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalWithAggregatesFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeWithAggregatesFilter<"ProductPurchase"> | Date | string
+    start_date?: DateTimeNullableWithAggregatesFilter<"ProductPurchase"> | Date | string | null
+    actual_finish_date?: DateTimeNullableWithAggregatesFilter<"ProductPurchase"> | Date | string | null
+    total_units?: DecimalNullableWithAggregatesFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string | null
+    unit_label?: StringNullableWithAggregatesFilter<"ProductPurchase"> | string | null
+    consumption_amount?: DecimalNullableWithAggregatesFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: IntNullableWithAggregatesFilter<"ProductPurchase"> | number | null
+    notes?: StringNullableWithAggregatesFilter<"ProductPurchase"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"ProductPurchase"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ProductPurchase"> | Date | string
   }
 
   export type MuscleGroupWhereInput = {
@@ -57203,6 +58969,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -57243,6 +59010,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -57282,6 +59050,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -57322,6 +59091,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -58312,6 +60082,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
@@ -58333,6 +60104,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseUncheckedCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
@@ -58353,6 +60125,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
@@ -58374,6 +60147,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUncheckedUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
@@ -58813,12 +60587,14 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     created_at?: Date | string
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutExpense_productsInput
     category?: ExpenseCategoryCreateNestedOneWithoutProductsInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutProductsInput
     receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutProductInput
+    purchases?: ProductPurchaseCreateNestedManyWithoutProductInput
   }
 
   export type ExpenseProductUncheckedCreateInput = {
@@ -58829,11 +60605,13 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     category_uuid?: string | null
     subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput
+    purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ExpenseProductUpdateInput = {
@@ -58842,12 +60620,14 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutExpense_productsNestedInput
     category?: ExpenseCategoryUpdateOneWithoutProductsNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutProductsNestedInput
     receipt_items?: ExpenseReceiptItemUpdateManyWithoutProductNestedInput
+    purchases?: ProductPurchaseUpdateManyWithoutProductNestedInput
   }
 
   export type ExpenseProductUncheckedUpdateInput = {
@@ -58858,11 +60638,13 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput
+    purchases?: ProductPurchaseUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ExpenseProductCreateManyInput = {
@@ -58873,6 +60655,7 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     category_uuid?: string | null
     subcategory_uuid?: string | null
     created_at?: Date | string
@@ -58885,6 +60668,7 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -58897,6 +60681,7 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -58978,6 +60763,147 @@ export namespace Prisma {
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductPurchaseCreateInput = {
+    uuid?: string
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutProduct_purchasesInput
+    product: ExpenseProductCreateNestedOneWithoutPurchasesInput
+    expense_entry?: ExpenseEntryCreateNestedOneWithoutProduct_purchaseInput
+  }
+
+  export type ProductPurchaseUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    product_uuid: string
+    expense_entry_uuid?: string | null
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ProductPurchaseUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProduct_purchasesNestedInput
+    product?: ExpenseProductUpdateOneRequiredWithoutPurchasesNestedInput
+    expense_entry?: ExpenseEntryUpdateOneWithoutProduct_purchaseNestedInput
+  }
+
+  export type ProductPurchaseUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    product_uuid?: StringFieldUpdateOperationsInput | string
+    expense_entry_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductPurchaseCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    product_uuid: string
+    expense_entry_uuid?: string | null
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ProductPurchaseUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductPurchaseUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    product_uuid?: StringFieldUpdateOperationsInput | string
+    expense_entry_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -60983,6 +62909,12 @@ export namespace Prisma {
     none?: ExpenseProductWhereInput
   }
 
+  export type ProductPurchaseListRelationFilter = {
+    every?: ProductPurchaseWhereInput
+    some?: ProductPurchaseWhereInput
+    none?: ProductPurchaseWhereInput
+  }
+
   export type MuscleGroupListRelationFilter = {
     every?: MuscleGroupWhereInput
     some?: MuscleGroupWhereInput
@@ -61101,6 +63033,10 @@ export namespace Prisma {
   }
 
   export type ExpenseProductOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProductPurchaseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -62068,6 +64004,11 @@ export namespace Prisma {
     isNot?: ExpenseReceiptWhereInput | null
   }
 
+  export type ProductPurchaseNullableScalarRelationFilter = {
+    is?: ProductPurchaseWhereInput | null
+    isNot?: ProductPurchaseWhereInput | null
+  }
+
   export type ExpenseEntryCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
@@ -62404,6 +64345,13 @@ export namespace Prisma {
     total_amount?: SortOrder
   }
 
+  export type EnumProductSourceFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductSource | EnumProductSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductSource[] | ListEnumProductSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductSource[] | ListEnumProductSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductSourceFilter<$PrismaModel> | $Enums.ProductSource
+  }
+
   export type ExpenseProductCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
@@ -62412,6 +64360,7 @@ export namespace Prisma {
     brand?: SortOrder
     unit?: SortOrder
     size?: SortOrder
+    source?: SortOrder
     category_uuid?: SortOrder
     subcategory_uuid?: SortOrder
     created_at?: SortOrder
@@ -62431,6 +64380,7 @@ export namespace Prisma {
     brand?: SortOrder
     unit?: SortOrder
     size?: SortOrder
+    source?: SortOrder
     category_uuid?: SortOrder
     subcategory_uuid?: SortOrder
     created_at?: SortOrder
@@ -62445,6 +64395,7 @@ export namespace Prisma {
     brand?: SortOrder
     unit?: SortOrder
     size?: SortOrder
+    source?: SortOrder
     category_uuid?: SortOrder
     subcategory_uuid?: SortOrder
     created_at?: SortOrder
@@ -62454,6 +64405,16 @@ export namespace Prisma {
   export type ExpenseProductSumOrderByAggregateInput = {
     id?: SortOrder
     size?: SortOrder
+  }
+
+  export type EnumProductSourceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductSource | EnumProductSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductSource[] | ListEnumProductSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductSource[] | ListEnumProductSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductSourceWithAggregatesFilter<$PrismaModel> | $Enums.ProductSource
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductSourceFilter<$PrismaModel>
+    _max?: NestedEnumProductSourceFilter<$PrismaModel>
   }
 
   export type ExpenseReceiptScalarRelationFilter = {
@@ -62514,6 +64475,129 @@ export namespace Prisma {
     quantity?: SortOrder
     unit_price?: SortOrder
     total_price?: SortOrder
+  }
+
+  export type EnumProductTrackingMethodFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductTrackingMethod | EnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductTrackingMethod[] | ListEnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductTrackingMethod[] | ListEnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductTrackingMethodFilter<$PrismaModel> | $Enums.ProductTrackingMethod
+  }
+
+  export type EnumProductPurchaseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductPurchaseStatus | EnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductPurchaseStatus[] | ListEnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductPurchaseStatus[] | ListEnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductPurchaseStatusFilter<$PrismaModel> | $Enums.ProductPurchaseStatus
+  }
+
+  export type ExpenseProductScalarRelationFilter = {
+    is?: ExpenseProductWhereInput
+    isNot?: ExpenseProductWhereInput
+  }
+
+  export type ExpenseEntryNullableScalarRelationFilter = {
+    is?: ExpenseEntryWhereInput | null
+    isNot?: ExpenseEntryWhereInput | null
+  }
+
+  export type ProductPurchaseCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    product_uuid?: SortOrder
+    expense_entry_uuid?: SortOrder
+    tracking_method?: SortOrder
+    status?: SortOrder
+    purchase_price?: SortOrder
+    purchase_date?: SortOrder
+    start_date?: SortOrder
+    actual_finish_date?: SortOrder
+    total_units?: SortOrder
+    unit_label?: SortOrder
+    consumption_amount?: SortOrder
+    consumption_period_days?: SortOrder
+    notes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ProductPurchaseAvgOrderByAggregateInput = {
+    id?: SortOrder
+    purchase_price?: SortOrder
+    total_units?: SortOrder
+    consumption_amount?: SortOrder
+    consumption_period_days?: SortOrder
+  }
+
+  export type ProductPurchaseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    product_uuid?: SortOrder
+    expense_entry_uuid?: SortOrder
+    tracking_method?: SortOrder
+    status?: SortOrder
+    purchase_price?: SortOrder
+    purchase_date?: SortOrder
+    start_date?: SortOrder
+    actual_finish_date?: SortOrder
+    total_units?: SortOrder
+    unit_label?: SortOrder
+    consumption_amount?: SortOrder
+    consumption_period_days?: SortOrder
+    notes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ProductPurchaseMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    product_uuid?: SortOrder
+    expense_entry_uuid?: SortOrder
+    tracking_method?: SortOrder
+    status?: SortOrder
+    purchase_price?: SortOrder
+    purchase_date?: SortOrder
+    start_date?: SortOrder
+    actual_finish_date?: SortOrder
+    total_units?: SortOrder
+    unit_label?: SortOrder
+    consumption_amount?: SortOrder
+    consumption_period_days?: SortOrder
+    notes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ProductPurchaseSumOrderByAggregateInput = {
+    id?: SortOrder
+    purchase_price?: SortOrder
+    total_units?: SortOrder
+    consumption_amount?: SortOrder
+    consumption_period_days?: SortOrder
+  }
+
+  export type EnumProductTrackingMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductTrackingMethod | EnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductTrackingMethod[] | ListEnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductTrackingMethod[] | ListEnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductTrackingMethodWithAggregatesFilter<$PrismaModel> | $Enums.ProductTrackingMethod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductTrackingMethodFilter<$PrismaModel>
+    _max?: NestedEnumProductTrackingMethodFilter<$PrismaModel>
+  }
+
+  export type EnumProductPurchaseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductPurchaseStatus | EnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductPurchaseStatus[] | ListEnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductPurchaseStatus[] | ListEnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductPurchaseStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductPurchaseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductPurchaseStatusFilter<$PrismaModel>
+    _max?: NestedEnumProductPurchaseStatusFilter<$PrismaModel>
   }
 
   export type MuscleGroupCountOrderByAggregateInput = {
@@ -63997,6 +66081,13 @@ export namespace Prisma {
     connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
   }
 
+  export type ProductPurchaseCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProductPurchaseCreateWithoutUserInput, ProductPurchaseUncheckedCreateWithoutUserInput> | ProductPurchaseCreateWithoutUserInput[] | ProductPurchaseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutUserInput | ProductPurchaseCreateOrConnectWithoutUserInput[]
+    createMany?: ProductPurchaseCreateManyUserInputEnvelope
+    connect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+  }
+
   export type MuscleGroupCreateNestedManyWithoutUserInput = {
     create?: XOR<MuscleGroupCreateWithoutUserInput, MuscleGroupUncheckedCreateWithoutUserInput> | MuscleGroupCreateWithoutUserInput[] | MuscleGroupUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MuscleGroupCreateOrConnectWithoutUserInput | MuscleGroupCreateOrConnectWithoutUserInput[]
@@ -64170,6 +66261,13 @@ export namespace Prisma {
     connectOrCreate?: ExpenseProductCreateOrConnectWithoutUserInput | ExpenseProductCreateOrConnectWithoutUserInput[]
     createMany?: ExpenseProductCreateManyUserInputEnvelope
     connect?: ExpenseProductWhereUniqueInput | ExpenseProductWhereUniqueInput[]
+  }
+
+  export type ProductPurchaseUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProductPurchaseCreateWithoutUserInput, ProductPurchaseUncheckedCreateWithoutUserInput> | ProductPurchaseCreateWithoutUserInput[] | ProductPurchaseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutUserInput | ProductPurchaseCreateOrConnectWithoutUserInput[]
+    createMany?: ProductPurchaseCreateManyUserInputEnvelope
+    connect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
   }
 
   export type MuscleGroupUncheckedCreateNestedManyWithoutUserInput = {
@@ -64484,6 +66582,20 @@ export namespace Prisma {
     update?: ExpenseProductUpdateWithWhereUniqueWithoutUserInput | ExpenseProductUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ExpenseProductUpdateManyWithWhereWithoutUserInput | ExpenseProductUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
+  }
+
+  export type ProductPurchaseUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProductPurchaseCreateWithoutUserInput, ProductPurchaseUncheckedCreateWithoutUserInput> | ProductPurchaseCreateWithoutUserInput[] | ProductPurchaseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutUserInput | ProductPurchaseCreateOrConnectWithoutUserInput[]
+    upsert?: ProductPurchaseUpsertWithWhereUniqueWithoutUserInput | ProductPurchaseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProductPurchaseCreateManyUserInputEnvelope
+    set?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    disconnect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    delete?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    connect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    update?: ProductPurchaseUpdateWithWhereUniqueWithoutUserInput | ProductPurchaseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProductPurchaseUpdateManyWithWhereWithoutUserInput | ProductPurchaseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProductPurchaseScalarWhereInput | ProductPurchaseScalarWhereInput[]
   }
 
   export type MuscleGroupUpdateManyWithoutUserNestedInput = {
@@ -64842,6 +66954,20 @@ export namespace Prisma {
     update?: ExpenseProductUpdateWithWhereUniqueWithoutUserInput | ExpenseProductUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ExpenseProductUpdateManyWithWhereWithoutUserInput | ExpenseProductUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ExpenseProductScalarWhereInput | ExpenseProductScalarWhereInput[]
+  }
+
+  export type ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProductPurchaseCreateWithoutUserInput, ProductPurchaseUncheckedCreateWithoutUserInput> | ProductPurchaseCreateWithoutUserInput[] | ProductPurchaseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutUserInput | ProductPurchaseCreateOrConnectWithoutUserInput[]
+    upsert?: ProductPurchaseUpsertWithWhereUniqueWithoutUserInput | ProductPurchaseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProductPurchaseCreateManyUserInputEnvelope
+    set?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    disconnect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    delete?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    connect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    update?: ProductPurchaseUpdateWithWhereUniqueWithoutUserInput | ProductPurchaseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProductPurchaseUpdateManyWithWhereWithoutUserInput | ProductPurchaseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProductPurchaseScalarWhereInput | ProductPurchaseScalarWhereInput[]
   }
 
   export type MuscleGroupUncheckedUpdateManyWithoutUserNestedInput = {
@@ -66262,6 +68388,12 @@ export namespace Prisma {
     connect?: ExpenseReceiptWhereUniqueInput
   }
 
+  export type ProductPurchaseCreateNestedOneWithoutExpense_entryInput = {
+    create?: XOR<ProductPurchaseCreateWithoutExpense_entryInput, ProductPurchaseUncheckedCreateWithoutExpense_entryInput>
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutExpense_entryInput
+    connect?: ProductPurchaseWhereUniqueInput
+  }
+
   export type ExpenseTagCreateNestedManyWithoutEntriesInput = {
     create?: XOR<ExpenseTagCreateWithoutEntriesInput, ExpenseTagUncheckedCreateWithoutEntriesInput> | ExpenseTagCreateWithoutEntriesInput[] | ExpenseTagUncheckedCreateWithoutEntriesInput[]
     connectOrCreate?: ExpenseTagCreateOrConnectWithoutEntriesInput | ExpenseTagCreateOrConnectWithoutEntriesInput[]
@@ -66272,6 +68404,12 @@ export namespace Prisma {
     create?: XOR<ExpenseReceiptCreateWithoutExpense_entryInput, ExpenseReceiptUncheckedCreateWithoutExpense_entryInput>
     connectOrCreate?: ExpenseReceiptCreateOrConnectWithoutExpense_entryInput
     connect?: ExpenseReceiptWhereUniqueInput
+  }
+
+  export type ProductPurchaseUncheckedCreateNestedOneWithoutExpense_entryInput = {
+    create?: XOR<ProductPurchaseCreateWithoutExpense_entryInput, ProductPurchaseUncheckedCreateWithoutExpense_entryInput>
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutExpense_entryInput
+    connect?: ProductPurchaseWhereUniqueInput
   }
 
   export type ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput = {
@@ -66358,6 +68496,16 @@ export namespace Prisma {
     update?: XOR<XOR<ExpenseReceiptUpdateToOneWithWhereWithoutExpense_entryInput, ExpenseReceiptUpdateWithoutExpense_entryInput>, ExpenseReceiptUncheckedUpdateWithoutExpense_entryInput>
   }
 
+  export type ProductPurchaseUpdateOneWithoutExpense_entryNestedInput = {
+    create?: XOR<ProductPurchaseCreateWithoutExpense_entryInput, ProductPurchaseUncheckedCreateWithoutExpense_entryInput>
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutExpense_entryInput
+    upsert?: ProductPurchaseUpsertWithoutExpense_entryInput
+    disconnect?: ProductPurchaseWhereInput | boolean
+    delete?: ProductPurchaseWhereInput | boolean
+    connect?: ProductPurchaseWhereUniqueInput
+    update?: XOR<XOR<ProductPurchaseUpdateToOneWithWhereWithoutExpense_entryInput, ProductPurchaseUpdateWithoutExpense_entryInput>, ProductPurchaseUncheckedUpdateWithoutExpense_entryInput>
+  }
+
   export type ExpenseTagUpdateManyWithoutEntriesNestedInput = {
     create?: XOR<ExpenseTagCreateWithoutEntriesInput, ExpenseTagUncheckedCreateWithoutEntriesInput> | ExpenseTagCreateWithoutEntriesInput[] | ExpenseTagUncheckedCreateWithoutEntriesInput[]
     connectOrCreate?: ExpenseTagCreateOrConnectWithoutEntriesInput | ExpenseTagCreateOrConnectWithoutEntriesInput[]
@@ -66379,6 +68527,16 @@ export namespace Prisma {
     delete?: ExpenseReceiptWhereInput | boolean
     connect?: ExpenseReceiptWhereUniqueInput
     update?: XOR<XOR<ExpenseReceiptUpdateToOneWithWhereWithoutExpense_entryInput, ExpenseReceiptUpdateWithoutExpense_entryInput>, ExpenseReceiptUncheckedUpdateWithoutExpense_entryInput>
+  }
+
+  export type ProductPurchaseUncheckedUpdateOneWithoutExpense_entryNestedInput = {
+    create?: XOR<ProductPurchaseCreateWithoutExpense_entryInput, ProductPurchaseUncheckedCreateWithoutExpense_entryInput>
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutExpense_entryInput
+    upsert?: ProductPurchaseUpsertWithoutExpense_entryInput
+    disconnect?: ProductPurchaseWhereInput | boolean
+    delete?: ProductPurchaseWhereInput | boolean
+    connect?: ProductPurchaseWhereUniqueInput
+    update?: XOR<XOR<ProductPurchaseUpdateToOneWithWhereWithoutExpense_entryInput, ProductPurchaseUpdateWithoutExpense_entryInput>, ProductPurchaseUncheckedUpdateWithoutExpense_entryInput>
   }
 
   export type ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput = {
@@ -66813,11 +68971,29 @@ export namespace Prisma {
     connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
   }
 
+  export type ProductPurchaseCreateNestedManyWithoutProductInput = {
+    create?: XOR<ProductPurchaseCreateWithoutProductInput, ProductPurchaseUncheckedCreateWithoutProductInput> | ProductPurchaseCreateWithoutProductInput[] | ProductPurchaseUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutProductInput | ProductPurchaseCreateOrConnectWithoutProductInput[]
+    createMany?: ProductPurchaseCreateManyProductInputEnvelope
+    connect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+  }
+
   export type ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput = {
     create?: XOR<ExpenseReceiptItemCreateWithoutProductInput, ExpenseReceiptItemUncheckedCreateWithoutProductInput> | ExpenseReceiptItemCreateWithoutProductInput[] | ExpenseReceiptItemUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutProductInput | ExpenseReceiptItemCreateOrConnectWithoutProductInput[]
     createMany?: ExpenseReceiptItemCreateManyProductInputEnvelope
     connect?: ExpenseReceiptItemWhereUniqueInput | ExpenseReceiptItemWhereUniqueInput[]
+  }
+
+  export type ProductPurchaseUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<ProductPurchaseCreateWithoutProductInput, ProductPurchaseUncheckedCreateWithoutProductInput> | ProductPurchaseCreateWithoutProductInput[] | ProductPurchaseUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutProductInput | ProductPurchaseCreateOrConnectWithoutProductInput[]
+    createMany?: ProductPurchaseCreateManyProductInputEnvelope
+    connect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+  }
+
+  export type EnumProductSourceFieldUpdateOperationsInput = {
+    set?: $Enums.ProductSource
   }
 
   export type UserUpdateOneWithoutExpense_productsNestedInput = {
@@ -66864,6 +69040,20 @@ export namespace Prisma {
     deleteMany?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
   }
 
+  export type ProductPurchaseUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ProductPurchaseCreateWithoutProductInput, ProductPurchaseUncheckedCreateWithoutProductInput> | ProductPurchaseCreateWithoutProductInput[] | ProductPurchaseUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutProductInput | ProductPurchaseCreateOrConnectWithoutProductInput[]
+    upsert?: ProductPurchaseUpsertWithWhereUniqueWithoutProductInput | ProductPurchaseUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ProductPurchaseCreateManyProductInputEnvelope
+    set?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    disconnect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    delete?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    connect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    update?: ProductPurchaseUpdateWithWhereUniqueWithoutProductInput | ProductPurchaseUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ProductPurchaseUpdateManyWithWhereWithoutProductInput | ProductPurchaseUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ProductPurchaseScalarWhereInput | ProductPurchaseScalarWhereInput[]
+  }
+
   export type ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<ExpenseReceiptItemCreateWithoutProductInput, ExpenseReceiptItemUncheckedCreateWithoutProductInput> | ExpenseReceiptItemCreateWithoutProductInput[] | ExpenseReceiptItemUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ExpenseReceiptItemCreateOrConnectWithoutProductInput | ExpenseReceiptItemCreateOrConnectWithoutProductInput[]
@@ -66876,6 +69066,20 @@ export namespace Prisma {
     update?: ExpenseReceiptItemUpdateWithWhereUniqueWithoutProductInput | ExpenseReceiptItemUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: ExpenseReceiptItemUpdateManyWithWhereWithoutProductInput | ExpenseReceiptItemUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: ExpenseReceiptItemScalarWhereInput | ExpenseReceiptItemScalarWhereInput[]
+  }
+
+  export type ProductPurchaseUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ProductPurchaseCreateWithoutProductInput, ProductPurchaseUncheckedCreateWithoutProductInput> | ProductPurchaseCreateWithoutProductInput[] | ProductPurchaseUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductPurchaseCreateOrConnectWithoutProductInput | ProductPurchaseCreateOrConnectWithoutProductInput[]
+    upsert?: ProductPurchaseUpsertWithWhereUniqueWithoutProductInput | ProductPurchaseUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ProductPurchaseCreateManyProductInputEnvelope
+    set?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    disconnect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    delete?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    connect?: ProductPurchaseWhereUniqueInput | ProductPurchaseWhereUniqueInput[]
+    update?: ProductPurchaseUpdateWithWhereUniqueWithoutProductInput | ProductPurchaseUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ProductPurchaseUpdateManyWithWhereWithoutProductInput | ProductPurchaseUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ProductPurchaseScalarWhereInput | ProductPurchaseScalarWhereInput[]
   }
 
   export type ExpenseReceiptCreateNestedOneWithoutItemsInput = {
@@ -66906,6 +69110,58 @@ export namespace Prisma {
     delete?: ExpenseProductWhereInput | boolean
     connect?: ExpenseProductWhereUniqueInput
     update?: XOR<XOR<ExpenseProductUpdateToOneWithWhereWithoutReceipt_itemsInput, ExpenseProductUpdateWithoutReceipt_itemsInput>, ExpenseProductUncheckedUpdateWithoutReceipt_itemsInput>
+  }
+
+  export type UserCreateNestedOneWithoutProduct_purchasesInput = {
+    create?: XOR<UserCreateWithoutProduct_purchasesInput, UserUncheckedCreateWithoutProduct_purchasesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProduct_purchasesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ExpenseProductCreateNestedOneWithoutPurchasesInput = {
+    create?: XOR<ExpenseProductCreateWithoutPurchasesInput, ExpenseProductUncheckedCreateWithoutPurchasesInput>
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutPurchasesInput
+    connect?: ExpenseProductWhereUniqueInput
+  }
+
+  export type ExpenseEntryCreateNestedOneWithoutProduct_purchaseInput = {
+    create?: XOR<ExpenseEntryCreateWithoutProduct_purchaseInput, ExpenseEntryUncheckedCreateWithoutProduct_purchaseInput>
+    connectOrCreate?: ExpenseEntryCreateOrConnectWithoutProduct_purchaseInput
+    connect?: ExpenseEntryWhereUniqueInput
+  }
+
+  export type EnumProductTrackingMethodFieldUpdateOperationsInput = {
+    set?: $Enums.ProductTrackingMethod
+  }
+
+  export type EnumProductPurchaseStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ProductPurchaseStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutProduct_purchasesNestedInput = {
+    create?: XOR<UserCreateWithoutProduct_purchasesInput, UserUncheckedCreateWithoutProduct_purchasesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProduct_purchasesInput
+    upsert?: UserUpsertWithoutProduct_purchasesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProduct_purchasesInput, UserUpdateWithoutProduct_purchasesInput>, UserUncheckedUpdateWithoutProduct_purchasesInput>
+  }
+
+  export type ExpenseProductUpdateOneRequiredWithoutPurchasesNestedInput = {
+    create?: XOR<ExpenseProductCreateWithoutPurchasesInput, ExpenseProductUncheckedCreateWithoutPurchasesInput>
+    connectOrCreate?: ExpenseProductCreateOrConnectWithoutPurchasesInput
+    upsert?: ExpenseProductUpsertWithoutPurchasesInput
+    connect?: ExpenseProductWhereUniqueInput
+    update?: XOR<XOR<ExpenseProductUpdateToOneWithWhereWithoutPurchasesInput, ExpenseProductUpdateWithoutPurchasesInput>, ExpenseProductUncheckedUpdateWithoutPurchasesInput>
+  }
+
+  export type ExpenseEntryUpdateOneWithoutProduct_purchaseNestedInput = {
+    create?: XOR<ExpenseEntryCreateWithoutProduct_purchaseInput, ExpenseEntryUncheckedCreateWithoutProduct_purchaseInput>
+    connectOrCreate?: ExpenseEntryCreateOrConnectWithoutProduct_purchaseInput
+    upsert?: ExpenseEntryUpsertWithoutProduct_purchaseInput
+    disconnect?: ExpenseEntryWhereInput | boolean
+    delete?: ExpenseEntryWhereInput | boolean
+    connect?: ExpenseEntryWhereUniqueInput
+    update?: XOR<XOR<ExpenseEntryUpdateToOneWithWhereWithoutProduct_purchaseInput, ExpenseEntryUpdateWithoutProduct_purchaseInput>, ExpenseEntryUncheckedUpdateWithoutProduct_purchaseInput>
   }
 
   export type UserCreateNestedOneWithoutMuscle_groupsInput = {
@@ -68411,6 +70667,57 @@ export namespace Prisma {
     _max?: NestedEnumExpenseRecurrenceFrequencyNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumProductSourceFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductSource | EnumProductSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductSource[] | ListEnumProductSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductSource[] | ListEnumProductSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductSourceFilter<$PrismaModel> | $Enums.ProductSource
+  }
+
+  export type NestedEnumProductSourceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductSource | EnumProductSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductSource[] | ListEnumProductSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductSource[] | ListEnumProductSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductSourceWithAggregatesFilter<$PrismaModel> | $Enums.ProductSource
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductSourceFilter<$PrismaModel>
+    _max?: NestedEnumProductSourceFilter<$PrismaModel>
+  }
+
+  export type NestedEnumProductTrackingMethodFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductTrackingMethod | EnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductTrackingMethod[] | ListEnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductTrackingMethod[] | ListEnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductTrackingMethodFilter<$PrismaModel> | $Enums.ProductTrackingMethod
+  }
+
+  export type NestedEnumProductPurchaseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductPurchaseStatus | EnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductPurchaseStatus[] | ListEnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductPurchaseStatus[] | ListEnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductPurchaseStatusFilter<$PrismaModel> | $Enums.ProductPurchaseStatus
+  }
+
+  export type NestedEnumProductTrackingMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductTrackingMethod | EnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductTrackingMethod[] | ListEnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductTrackingMethod[] | ListEnumProductTrackingMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductTrackingMethodWithAggregatesFilter<$PrismaModel> | $Enums.ProductTrackingMethod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductTrackingMethodFilter<$PrismaModel>
+    _max?: NestedEnumProductTrackingMethodFilter<$PrismaModel>
+  }
+
+  export type NestedEnumProductPurchaseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductPurchaseStatus | EnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductPurchaseStatus[] | ListEnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductPurchaseStatus[] | ListEnumProductPurchaseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductPurchaseStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductPurchaseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductPurchaseStatusFilter<$PrismaModel>
+    _max?: NestedEnumProductPurchaseStatusFilter<$PrismaModel>
+  }
+
   export type NestedEnumExerciseTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ExerciseType | EnumExerciseTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ExerciseType[] | ListEnumExerciseTypeFieldRefInput<$PrismaModel>
@@ -68878,6 +71185,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
@@ -68898,6 +71206,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseUncheckedCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
@@ -69189,11 +71498,13 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     created_at?: Date | string
     updated_at?: Date | string
     category?: ExpenseCategoryCreateNestedOneWithoutProductsInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutProductsInput
     receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutProductInput
+    purchases?: ProductPurchaseCreateNestedManyWithoutProductInput
   }
 
   export type ExpenseProductUncheckedCreateWithoutUserInput = {
@@ -69203,11 +71514,13 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     category_uuid?: string | null
     subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput
+    purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ExpenseProductCreateOrConnectWithoutUserInput = {
@@ -69217,6 +71530,55 @@ export namespace Prisma {
 
   export type ExpenseProductCreateManyUserInputEnvelope = {
     data: ExpenseProductCreateManyUserInput | ExpenseProductCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProductPurchaseCreateWithoutUserInput = {
+    uuid?: string
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    product: ExpenseProductCreateNestedOneWithoutPurchasesInput
+    expense_entry?: ExpenseEntryCreateNestedOneWithoutProduct_purchaseInput
+  }
+
+  export type ProductPurchaseUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    product_uuid: string
+    expense_entry_uuid?: string | null
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ProductPurchaseCreateOrConnectWithoutUserInput = {
+    where: ProductPurchaseWhereUniqueInput
+    create: XOR<ProductPurchaseCreateWithoutUserInput, ProductPurchaseUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProductPurchaseCreateManyUserInputEnvelope = {
+    data: ProductPurchaseCreateManyUserInput | ProductPurchaseCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -70060,10 +72422,51 @@ export namespace Prisma {
     brand?: StringNullableFilter<"ExpenseProduct"> | string | null
     unit?: StringNullableFilter<"ExpenseProduct"> | string | null
     size?: DecimalNullableFilter<"ExpenseProduct"> | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFilter<"ExpenseProduct"> | $Enums.ProductSource
     category_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
     subcategory_uuid?: StringNullableFilter<"ExpenseProduct"> | string | null
     created_at?: DateTimeFilter<"ExpenseProduct"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseProduct"> | Date | string
+  }
+
+  export type ProductPurchaseUpsertWithWhereUniqueWithoutUserInput = {
+    where: ProductPurchaseWhereUniqueInput
+    update: XOR<ProductPurchaseUpdateWithoutUserInput, ProductPurchaseUncheckedUpdateWithoutUserInput>
+    create: XOR<ProductPurchaseCreateWithoutUserInput, ProductPurchaseUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProductPurchaseUpdateWithWhereUniqueWithoutUserInput = {
+    where: ProductPurchaseWhereUniqueInput
+    data: XOR<ProductPurchaseUpdateWithoutUserInput, ProductPurchaseUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ProductPurchaseUpdateManyWithWhereWithoutUserInput = {
+    where: ProductPurchaseScalarWhereInput
+    data: XOR<ProductPurchaseUpdateManyMutationInput, ProductPurchaseUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ProductPurchaseScalarWhereInput = {
+    AND?: ProductPurchaseScalarWhereInput | ProductPurchaseScalarWhereInput[]
+    OR?: ProductPurchaseScalarWhereInput[]
+    NOT?: ProductPurchaseScalarWhereInput | ProductPurchaseScalarWhereInput[]
+    id?: IntFilter<"ProductPurchase"> | number
+    uuid?: StringFilter<"ProductPurchase"> | string
+    user_uuid?: StringFilter<"ProductPurchase"> | string
+    product_uuid?: StringFilter<"ProductPurchase"> | string
+    expense_entry_uuid?: StringNullableFilter<"ProductPurchase"> | string | null
+    tracking_method?: EnumProductTrackingMethodFilter<"ProductPurchase"> | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFilter<"ProductPurchase"> | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFilter<"ProductPurchase"> | Date | string
+    start_date?: DateTimeNullableFilter<"ProductPurchase"> | Date | string | null
+    actual_finish_date?: DateTimeNullableFilter<"ProductPurchase"> | Date | string | null
+    total_units?: DecimalNullableFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string | null
+    unit_label?: StringNullableFilter<"ProductPurchase"> | string | null
+    consumption_amount?: DecimalNullableFilter<"ProductPurchase"> | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: IntNullableFilter<"ProductPurchase"> | number | null
+    notes?: StringNullableFilter<"ProductPurchase"> | string | null
+    created_at?: DateTimeFilter<"ProductPurchase"> | Date | string
+    updated_at?: DateTimeFilter<"ProductPurchase"> | Date | string
   }
 
   export type MuscleGroupUpsertWithWhereUniqueWithoutUserInput = {
@@ -70356,6 +72759,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -70395,6 +72799,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -70644,6 +73049,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -70683,6 +73089,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -70801,6 +73208,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -70840,6 +73248,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -70932,6 +73341,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -70971,6 +73381,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -71091,6 +73502,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -71130,6 +73542,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -71348,6 +73761,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -71387,6 +73801,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -71817,6 +74232,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -71856,6 +74272,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -72056,6 +74473,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -72095,6 +74513,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -72301,6 +74720,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -72340,6 +74760,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -72530,6 +74951,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -72569,6 +74991,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -72607,6 +75030,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -72646,6 +75070,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -72677,6 +75102,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
@@ -72697,6 +75123,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseUncheckedCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
@@ -72726,6 +75153,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
@@ -72746,6 +75174,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseUncheckedCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
@@ -72912,6 +75341,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -72951,6 +75381,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -73053,6 +75484,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -73092,6 +75524,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -73158,6 +75591,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
@@ -73178,6 +75612,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseUncheckedCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
@@ -73254,11 +75689,13 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     created_at?: Date | string
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutExpense_productsInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutProductsInput
     receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutProductInput
+    purchases?: ProductPurchaseCreateNestedManyWithoutProductInput
   }
 
   export type ExpenseProductUncheckedCreateWithoutCategoryInput = {
@@ -73269,10 +75706,12 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput
+    purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ExpenseProductCreateOrConnectWithoutCategoryInput = {
@@ -73349,6 +75788,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -73388,6 +75828,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -73506,6 +75947,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -73545,6 +75987,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -73610,6 +76053,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
@@ -73630,6 +76074,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseUncheckedCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
@@ -73706,11 +76151,13 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     created_at?: Date | string
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutExpense_productsInput
     category?: ExpenseCategoryCreateNestedOneWithoutProductsInput
     receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutProductInput
+    purchases?: ProductPurchaseCreateNestedManyWithoutProductInput
   }
 
   export type ExpenseProductUncheckedCreateWithoutSubcategoryInput = {
@@ -73721,10 +76168,12 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     category_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput
+    purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ExpenseProductCreateOrConnectWithoutSubcategoryInput = {
@@ -73801,6 +76250,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -73840,6 +76290,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -73982,6 +76433,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -74021,6 +76473,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -74252,6 +76705,50 @@ export namespace Prisma {
     create: XOR<ExpenseReceiptCreateWithoutExpense_entryInput, ExpenseReceiptUncheckedCreateWithoutExpense_entryInput>
   }
 
+  export type ProductPurchaseCreateWithoutExpense_entryInput = {
+    uuid?: string
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutProduct_purchasesInput
+    product: ExpenseProductCreateNestedOneWithoutPurchasesInput
+  }
+
+  export type ProductPurchaseUncheckedCreateWithoutExpense_entryInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    product_uuid: string
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ProductPurchaseCreateOrConnectWithoutExpense_entryInput = {
+    where: ProductPurchaseWhereUniqueInput
+    create: XOR<ProductPurchaseCreateWithoutExpense_entryInput, ProductPurchaseUncheckedCreateWithoutExpense_entryInput>
+  }
+
   export type ExpenseTagCreateWithoutEntriesInput = {
     uuid?: string
     title: string
@@ -74317,6 +76814,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -74356,6 +76854,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -74618,6 +77117,56 @@ export namespace Prisma {
     items?: ExpenseReceiptItemUncheckedUpdateManyWithoutReceiptNestedInput
   }
 
+  export type ProductPurchaseUpsertWithoutExpense_entryInput = {
+    update: XOR<ProductPurchaseUpdateWithoutExpense_entryInput, ProductPurchaseUncheckedUpdateWithoutExpense_entryInput>
+    create: XOR<ProductPurchaseCreateWithoutExpense_entryInput, ProductPurchaseUncheckedCreateWithoutExpense_entryInput>
+    where?: ProductPurchaseWhereInput
+  }
+
+  export type ProductPurchaseUpdateToOneWithWhereWithoutExpense_entryInput = {
+    where?: ProductPurchaseWhereInput
+    data: XOR<ProductPurchaseUpdateWithoutExpense_entryInput, ProductPurchaseUncheckedUpdateWithoutExpense_entryInput>
+  }
+
+  export type ProductPurchaseUpdateWithoutExpense_entryInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProduct_purchasesNestedInput
+    product?: ExpenseProductUpdateOneRequiredWithoutPurchasesNestedInput
+  }
+
+  export type ProductPurchaseUncheckedUpdateWithoutExpense_entryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    product_uuid?: StringFieldUpdateOperationsInput | string
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ExpenseTagUpsertWithWhereUniqueWithoutEntriesInput = {
     where: ExpenseTagWhereUniqueInput
     update: XOR<ExpenseTagUpdateWithoutEntriesInput, ExpenseTagUncheckedUpdateWithoutEntriesInput>
@@ -74662,6 +77211,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -74701,6 +77251,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -74894,6 +77445,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
@@ -74914,6 +77466,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseUncheckedCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
@@ -74966,6 +77519,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -75005,6 +77559,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -75235,6 +77790,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -75274,6 +77830,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -75306,6 +77863,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
     expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseCreateNestedOneWithoutExpense_entryInput
   }
 
   export type ExpenseEntryUncheckedCreateWithoutTagsInput = {
@@ -75326,6 +77884,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    product_purchase?: ProductPurchaseUncheckedCreateNestedOneWithoutExpense_entryInput
   }
 
   export type ExpenseEntryCreateOrConnectWithoutTagsInput = {
@@ -75424,6 +77983,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -75463,6 +78023,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -75533,6 +78094,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -75572,6 +78134,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -75659,6 +78222,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -75698,6 +78262,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -75752,6 +78317,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -75791,6 +78357,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -75844,6 +78411,7 @@ export namespace Prisma {
     category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
     preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
+    product_purchase?: ProductPurchaseCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
   }
 
@@ -75864,6 +78432,7 @@ export namespace Prisma {
     entry_date?: Date | string
     created_at?: Date | string
     updated_at?: Date | string
+    product_purchase?: ProductPurchaseUncheckedCreateNestedOneWithoutExpense_entryInput
     tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
   }
 
@@ -75942,6 +78511,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -75981,6 +78551,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -76046,6 +78617,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
+    product_purchase?: ProductPurchaseUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
@@ -76066,6 +78638,7 @@ export namespace Prisma {
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    product_purchase?: ProductPurchaseUncheckedUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
@@ -76128,6 +78701,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -76167,6 +78741,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -76277,6 +78852,55 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProductPurchaseCreateWithoutProductInput = {
+    uuid?: string
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutProduct_purchasesInput
+    expense_entry?: ExpenseEntryCreateNestedOneWithoutProduct_purchaseInput
+  }
+
+  export type ProductPurchaseUncheckedCreateWithoutProductInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    expense_entry_uuid?: string | null
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ProductPurchaseCreateOrConnectWithoutProductInput = {
+    where: ProductPurchaseWhereUniqueInput
+    create: XOR<ProductPurchaseCreateWithoutProductInput, ProductPurchaseUncheckedCreateWithoutProductInput>
+  }
+
+  export type ProductPurchaseCreateManyProductInputEnvelope = {
+    data: ProductPurchaseCreateManyProductInput | ProductPurchaseCreateManyProductInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutExpense_productsInput = {
     update: XOR<UserUpdateWithoutExpense_productsInput, UserUncheckedUpdateWithoutExpense_productsInput>
     create: XOR<UserCreateWithoutExpense_productsInput, UserUncheckedCreateWithoutExpense_productsInput>
@@ -76316,6 +78940,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -76355,6 +78980,7 @@ export namespace Prisma {
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -76457,6 +79083,22 @@ export namespace Prisma {
     data: XOR<ExpenseReceiptItemUpdateManyMutationInput, ExpenseReceiptItemUncheckedUpdateManyWithoutProductInput>
   }
 
+  export type ProductPurchaseUpsertWithWhereUniqueWithoutProductInput = {
+    where: ProductPurchaseWhereUniqueInput
+    update: XOR<ProductPurchaseUpdateWithoutProductInput, ProductPurchaseUncheckedUpdateWithoutProductInput>
+    create: XOR<ProductPurchaseCreateWithoutProductInput, ProductPurchaseUncheckedCreateWithoutProductInput>
+  }
+
+  export type ProductPurchaseUpdateWithWhereUniqueWithoutProductInput = {
+    where: ProductPurchaseWhereUniqueInput
+    data: XOR<ProductPurchaseUpdateWithoutProductInput, ProductPurchaseUncheckedUpdateWithoutProductInput>
+  }
+
+  export type ProductPurchaseUpdateManyWithWhereWithoutProductInput = {
+    where: ProductPurchaseScalarWhereInput
+    data: XOR<ProductPurchaseUpdateManyMutationInput, ProductPurchaseUncheckedUpdateManyWithoutProductInput>
+  }
+
   export type ExpenseReceiptCreateWithoutItemsInput = {
     uuid?: string
     receipt_date?: Date | string
@@ -76491,11 +79133,13 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     created_at?: Date | string
     updated_at?: Date | string
     user?: UserCreateNestedOneWithoutExpense_productsInput
     category?: ExpenseCategoryCreateNestedOneWithoutProductsInput
     subcategory?: ExpenseSubcategoryCreateNestedOneWithoutProductsInput
+    purchases?: ProductPurchaseCreateNestedManyWithoutProductInput
   }
 
   export type ExpenseProductUncheckedCreateWithoutReceipt_itemsInput = {
@@ -76506,10 +79150,12 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     category_uuid?: string | null
     subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ExpenseProductCreateOrConnectWithoutReceipt_itemsInput = {
@@ -76568,11 +79214,13 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutExpense_productsNestedInput
     category?: ExpenseCategoryUpdateOneWithoutProductsNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutProductsNestedInput
+    purchases?: ProductPurchaseUpdateManyWithoutProductNestedInput
   }
 
   export type ExpenseProductUncheckedUpdateWithoutReceipt_itemsInput = {
@@ -76583,10 +79231,362 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchases?: ProductPurchaseUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type UserCreateWithoutProduct_purchasesInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    date?: string | null
+    is_admin?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
+    quiz_groups?: QuizGroupCreateNestedManyWithoutUserInput
+    chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutProduct_purchasesInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    date?: string | null
+    is_admin?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
+    quiz_groups?: QuizGroupUncheckedCreateNestedManyWithoutUserInput
+    chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutProduct_purchasesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProduct_purchasesInput, UserUncheckedCreateWithoutProduct_purchasesInput>
+  }
+
+  export type ExpenseProductCreateWithoutPurchasesInput = {
+    uuid?: string
+    name: string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
+    created_at?: Date | string
+    updated_at?: Date | string
+    user?: UserCreateNestedOneWithoutExpense_productsInput
+    category?: ExpenseCategoryCreateNestedOneWithoutProductsInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutProductsInput
+    receipt_items?: ExpenseReceiptItemCreateNestedManyWithoutProductInput
+  }
+
+  export type ExpenseProductUncheckedCreateWithoutPurchasesInput = {
+    id?: number
+    uuid?: string
+    user_uuid?: string | null
+    name: string
+    brand?: string | null
+    unit?: string | null
+    size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    receipt_items?: ExpenseReceiptItemUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ExpenseProductCreateOrConnectWithoutPurchasesInput = {
+    where: ExpenseProductWhereUniqueInput
+    create: XOR<ExpenseProductCreateWithoutPurchasesInput, ExpenseProductUncheckedCreateWithoutPurchasesInput>
+  }
+
+  export type ExpenseEntryCreateWithoutProduct_purchaseInput = {
+    uuid?: string
+    type: $Enums.ExpenseEntryType
+    amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
+    description?: string | null
+    entry_date?: Date | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutExpense_entriesInput
+    from_account: ExpenseAccountCreateNestedOneWithoutEntries_fromInput
+    to_account?: ExpenseAccountCreateNestedOneWithoutEntries_toInput
+    category?: ExpenseCategoryCreateNestedOneWithoutEntriesInput
+    subcategory?: ExpenseSubcategoryCreateNestedOneWithoutEntriesInput
+    preset?: ExpenseEntryPresetCreateNestedOneWithoutEntriesInput
+    expense_receipt?: ExpenseReceiptCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagCreateNestedManyWithoutEntriesInput
+  }
+
+  export type ExpenseEntryUncheckedCreateWithoutProduct_purchaseInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    type: $Enums.ExpenseEntryType
+    amount: Decimal | DecimalJsLike | number | string
+    has_vat?: boolean
+    vat_amount?: Decimal | DecimalJsLike | number | string | null
+    description?: string | null
+    from_account_uuid: string
+    to_account_uuid?: string | null
+    category_uuid?: string | null
+    subcategory_uuid?: string | null
+    preset_uuid?: string | null
+    entry_date?: Date | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    expense_receipt?: ExpenseReceiptUncheckedCreateNestedOneWithoutExpense_entryInput
+    tags?: ExpenseTagUncheckedCreateNestedManyWithoutEntriesInput
+  }
+
+  export type ExpenseEntryCreateOrConnectWithoutProduct_purchaseInput = {
+    where: ExpenseEntryWhereUniqueInput
+    create: XOR<ExpenseEntryCreateWithoutProduct_purchaseInput, ExpenseEntryUncheckedCreateWithoutProduct_purchaseInput>
+  }
+
+  export type UserUpsertWithoutProduct_purchasesInput = {
+    update: XOR<UserUpdateWithoutProduct_purchasesInput, UserUncheckedUpdateWithoutProduct_purchasesInput>
+    create: XOR<UserCreateWithoutProduct_purchasesInput, UserUncheckedCreateWithoutProduct_purchasesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProduct_purchasesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProduct_purchasesInput, UserUncheckedUpdateWithoutProduct_purchasesInput>
+  }
+
+  export type UserUpdateWithoutProduct_purchasesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    date?: NullableStringFieldUpdateOperationsInput | string | null
+    is_admin?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_entry_presets?: ExpenseEntryPresetUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
+    quiz_groups?: QuizGroupUpdateManyWithoutUserNestedInput
+    chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProduct_purchasesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    date?: NullableStringFieldUpdateOperationsInput | string | null
+    is_admin?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
+    quiz_groups?: QuizGroupUncheckedUpdateManyWithoutUserNestedInput
+    chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ExpenseProductUpsertWithoutPurchasesInput = {
+    update: XOR<ExpenseProductUpdateWithoutPurchasesInput, ExpenseProductUncheckedUpdateWithoutPurchasesInput>
+    create: XOR<ExpenseProductCreateWithoutPurchasesInput, ExpenseProductUncheckedCreateWithoutPurchasesInput>
+    where?: ExpenseProductWhereInput
+  }
+
+  export type ExpenseProductUpdateToOneWithWhereWithoutPurchasesInput = {
+    where?: ExpenseProductWhereInput
+    data: XOR<ExpenseProductUpdateWithoutPurchasesInput, ExpenseProductUncheckedUpdateWithoutPurchasesInput>
+  }
+
+  export type ExpenseProductUpdateWithoutPurchasesInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutExpense_productsNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutProductsNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutProductsNestedInput
+    receipt_items?: ExpenseReceiptItemUpdateManyWithoutProductNestedInput
+  }
+
+  export type ExpenseProductUncheckedUpdateWithoutPurchasesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type ExpenseEntryUpsertWithoutProduct_purchaseInput = {
+    update: XOR<ExpenseEntryUpdateWithoutProduct_purchaseInput, ExpenseEntryUncheckedUpdateWithoutProduct_purchaseInput>
+    create: XOR<ExpenseEntryCreateWithoutProduct_purchaseInput, ExpenseEntryUncheckedCreateWithoutProduct_purchaseInput>
+    where?: ExpenseEntryWhereInput
+  }
+
+  export type ExpenseEntryUpdateToOneWithWhereWithoutProduct_purchaseInput = {
+    where?: ExpenseEntryWhereInput
+    data: XOR<ExpenseEntryUpdateWithoutProduct_purchaseInput, ExpenseEntryUncheckedUpdateWithoutProduct_purchaseInput>
+  }
+
+  export type ExpenseEntryUpdateWithoutProduct_purchaseInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutExpense_entriesNestedInput
+    from_account?: ExpenseAccountUpdateOneRequiredWithoutEntries_fromNestedInput
+    to_account?: ExpenseAccountUpdateOneWithoutEntries_toNestedInput
+    category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
+    subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
+    preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
+    expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
+  }
+
+  export type ExpenseEntryUncheckedUpdateWithoutProduct_purchaseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    has_vat?: BoolFieldUpdateOperationsInput | boolean
+    vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    from_account_uuid?: StringFieldUpdateOperationsInput | string
+    to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    preset_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
   export type UserCreateWithoutMuscle_groupsInput = {
@@ -76618,6 +79618,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
@@ -76657,6 +79658,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
@@ -76744,6 +79746,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
@@ -76783,6 +79786,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
@@ -76837,6 +79841,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
@@ -76876,6 +79881,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
@@ -76983,6 +79989,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
@@ -77022,6 +80029,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
@@ -77119,6 +80127,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     notes?: NoteCreateNestedManyWithoutUserInput
@@ -77158,6 +80167,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     notes?: NoteUncheckedCreateNestedManyWithoutUserInput
@@ -77241,6 +80251,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     notes?: NoteUpdateManyWithoutUserNestedInput
@@ -77280,6 +80291,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
@@ -77604,6 +80616,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -77643,6 +80656,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -77752,6 +80766,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -77791,6 +80806,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -77861,6 +80877,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -77900,6 +80917,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -77986,6 +81004,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -78025,6 +81044,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -78078,6 +81098,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -78117,6 +81138,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -78209,6 +81231,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -78248,6 +81271,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -78330,6 +81354,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -78369,6 +81394,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -78457,6 +81483,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -78496,6 +81523,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -78574,6 +81602,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -78613,6 +81642,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -78697,6 +81727,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -78736,6 +81767,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -78811,6 +81843,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -78850,6 +81883,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -78963,6 +81997,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -79002,6 +82037,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -79107,6 +82143,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -79146,6 +82183,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -79235,6 +82273,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -79274,6 +82313,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -79566,6 +82606,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
     exercises?: ExerciseCreateNestedManyWithoutUserInput
     workouts?: WorkoutCreateNestedManyWithoutUserInput
@@ -79605,6 +82646,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
     muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
     exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
     workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
@@ -79753,6 +82795,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUpdateManyWithoutUserNestedInput
@@ -79792,6 +82835,7 @@ export namespace Prisma {
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
     muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
     exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
     workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
@@ -80802,8 +83846,29 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     category_uuid?: string | null
     subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type ProductPurchaseCreateManyUserInput = {
+    id?: number
+    uuid?: string
+    product_uuid: string
+    expense_entry_uuid?: string | null
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -81229,6 +84294,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
@@ -81249,6 +84315,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUncheckedUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
@@ -81553,11 +84620,13 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ExpenseCategoryUpdateOneWithoutProductsNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutProductsNestedInput
     receipt_items?: ExpenseReceiptItemUpdateManyWithoutProductNestedInput
+    purchases?: ProductPurchaseUpdateManyWithoutProductNestedInput
   }
 
   export type ExpenseProductUncheckedUpdateWithoutUserInput = {
@@ -81567,11 +84636,13 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput
+    purchases?: ProductPurchaseUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ExpenseProductUncheckedUpdateManyWithoutUserInput = {
@@ -81581,8 +84652,68 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductPurchaseUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ExpenseProductUpdateOneRequiredWithoutPurchasesNestedInput
+    expense_entry?: ExpenseEntryUpdateOneWithoutProduct_purchaseNestedInput
+  }
+
+  export type ProductPurchaseUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    product_uuid?: StringFieldUpdateOperationsInput | string
+    expense_entry_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductPurchaseUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    product_uuid?: StringFieldUpdateOperationsInput | string
+    expense_entry_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -82448,6 +85579,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
@@ -82468,6 +85600,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUncheckedUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
@@ -82505,6 +85638,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
@@ -82525,6 +85659,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUncheckedUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
@@ -82741,6 +85876,7 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     subcategory_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -82804,6 +85940,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
@@ -82824,6 +85961,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUncheckedUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
@@ -82920,11 +86058,13 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutExpense_productsNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutProductsNestedInput
     receipt_items?: ExpenseReceiptItemUpdateManyWithoutProductNestedInput
+    purchases?: ProductPurchaseUpdateManyWithoutProductNestedInput
   }
 
   export type ExpenseProductUncheckedUpdateWithoutCategoryInput = {
@@ -82935,10 +86075,12 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput
+    purchases?: ProductPurchaseUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ExpenseProductUncheckedUpdateManyWithoutCategoryInput = {
@@ -82949,6 +86091,7 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -83025,6 +86168,7 @@ export namespace Prisma {
     brand?: string | null
     unit?: string | null
     size?: Decimal | DecimalJsLike | number | string | null
+    source?: $Enums.ProductSource
     category_uuid?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -83054,6 +86198,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
@@ -83074,6 +86219,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUncheckedUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
@@ -83170,11 +86316,13 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutExpense_productsNestedInput
     category?: ExpenseCategoryUpdateOneWithoutProductsNestedInput
     receipt_items?: ExpenseReceiptItemUpdateManyWithoutProductNestedInput
+    purchases?: ProductPurchaseUpdateManyWithoutProductNestedInput
   }
 
   export type ExpenseProductUncheckedUpdateWithoutSubcategoryInput = {
@@ -83185,10 +86333,12 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     receipt_items?: ExpenseReceiptItemUncheckedUpdateManyWithoutProductNestedInput
+    purchases?: ProductPurchaseUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ExpenseProductUncheckedUpdateManyWithoutSubcategoryInput = {
@@ -83199,6 +86349,7 @@ export namespace Prisma {
     brand?: NullableStringFieldUpdateOperationsInput | string | null
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    source?: EnumProductSourceFieldUpdateOperationsInput | $Enums.ProductSource
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -83323,6 +86474,7 @@ export namespace Prisma {
     category?: ExpenseCategoryUpdateOneWithoutEntriesNestedInput
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUpdateManyWithoutEntriesNestedInput
   }
 
@@ -83343,6 +86495,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUncheckedUpdateOneWithoutExpense_entryNestedInput
     tags?: ExpenseTagUncheckedUpdateManyWithoutEntriesNestedInput
   }
 
@@ -83381,6 +86534,7 @@ export namespace Prisma {
     subcategory?: ExpenseSubcategoryUpdateOneWithoutEntriesNestedInput
     preset?: ExpenseEntryPresetUpdateOneWithoutEntriesNestedInput
     expense_receipt?: ExpenseReceiptUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUpdateOneWithoutExpense_entryNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateWithoutTagsInput = {
@@ -83401,6 +86555,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     expense_receipt?: ExpenseReceiptUncheckedUpdateOneWithoutExpense_entryNestedInput
+    product_purchase?: ProductPurchaseUncheckedUpdateOneWithoutExpense_entryNestedInput
   }
 
   export type ExpenseEntryUncheckedUpdateManyWithoutTagsInput = {
@@ -83591,6 +86746,26 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type ProductPurchaseCreateManyProductInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    expense_entry_uuid?: string | null
+    tracking_method: $Enums.ProductTrackingMethod
+    status?: $Enums.ProductPurchaseStatus
+    purchase_price: Decimal | DecimalJsLike | number | string
+    purchase_date?: Date | string
+    start_date?: Date | string | null
+    actual_finish_date?: Date | string | null
+    total_units?: Decimal | DecimalJsLike | number | string | null
+    unit_label?: string | null
+    consumption_amount?: Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: number | null
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type ExpenseReceiptItemUpdateWithoutProductInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -83619,6 +86794,65 @@ export namespace Prisma {
     quantity?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     unit_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductPurchaseUpdateWithoutProductInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProduct_purchasesNestedInput
+    expense_entry?: ExpenseEntryUpdateOneWithoutProduct_purchaseNestedInput
+  }
+
+  export type ProductPurchaseUncheckedUpdateWithoutProductInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    expense_entry_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductPurchaseUncheckedUpdateManyWithoutProductInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    expense_entry_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    tracking_method?: EnumProductTrackingMethodFieldUpdateOperationsInput | $Enums.ProductTrackingMethod
+    status?: EnumProductPurchaseStatusFieldUpdateOperationsInput | $Enums.ProductPurchaseStatus
+    purchase_price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    purchase_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actual_finish_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_units?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unit_label?: NullableStringFieldUpdateOperationsInput | string | null
+    consumption_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    consumption_period_days?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

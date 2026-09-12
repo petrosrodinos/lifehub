@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, HttpStatus, Query, BadRequestException } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiParam, ApiQuery } from '@nestjs/swagger';
 import { ExpenseProductsService } from './expense-products.service';
 import { CreateExpenseProductDto } from './dto/create-expense-product.dto';
 import { UpdateExpenseProductDto } from './dto/update-expense-product.dto';
 import { JwtGuard } from '@/shared/guards/jwt.guard';
 import { CurrentUser } from '@/shared/decorators/current-user.decorator';
+import { ProductSource } from '@/generated/prisma';
 
 @ApiTags('Expense Products')
 @ApiBearerAuth()
@@ -27,9 +28,17 @@ export class ExpenseProductsController {
   @Get()
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Get all expense products for the current user' })
+  @ApiQuery({ name: 'source', enum: ProductSource, required: false, description: 'Filter by which feature the product belongs to' })
   @ApiResponse({ status: 200, description: 'Expense products retrieved successfully' })
-  findAll(@CurrentUser('user_uuid') user_uuid: string) {
-    return this.expenseProductsService.findAll(user_uuid);
+  findAll(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query('source') source?: string,
+  ) {
+    if (source && !Object.values(ProductSource).includes(source as ProductSource)) {
+      throw new BadRequestException('Invalid source');
+    }
+
+    return this.expenseProductsService.findAll(user_uuid, source as ProductSource | undefined);
   }
 
   @Get(':uuid')

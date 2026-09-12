@@ -3,10 +3,23 @@ import { Briefcase } from "lucide-react";
 import { useExpenseAccounts } from "../../features/expenses/expense-accounts/hooks/use-expense-accounts";
 import type { ExpenseAccount } from "../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 import type { ExpenseEntryType } from "../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import { getLocalMonthQueryParams } from "../../features/expenses/expense-entries/utils/month-query-params.helper";
+import { MonthPicker } from "../../components/ui/MonthPicker";
 import { AccountFilters } from "../expenses/analytics/components/account-overview/AccountFilters";
 import { AccountStatsCards } from "../expenses/analytics/components/account-overview/AccountStatsCards";
 import { TransactionsListSection } from "../expenses/transactions/components/TransactionsListSection";
 import { VatLiabilityCard } from "./components/VatLiabilityCard";
+
+const pad = (value: number) => String(value).padStart(2, "0");
+
+function getMonthDateRange(year: number, month: number) {
+  const daysInMonth = new Date(year, month, 0).getDate();
+
+  return {
+    from: `${year}-${pad(month)}-01`,
+    to: `${year}-${pad(month)}-${pad(daysInMonth)}T23:59:59.999Z`,
+  };
+}
 
 export function BusinessPage() {
   const { data: accountsData } = useExpenseAccounts();
@@ -21,6 +34,17 @@ export function BusinessPage() {
   const [categoryUuid, setCategoryUuid] = useState("");
   const [subcategoryUuid, setSubcategoryUuid] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+
+  const initialMonth = getLocalMonthQueryParams();
+  const [vatYear, setVatYear] = useState(initialMonth.year);
+  const [vatMonth, setVatMonth] = useState(initialMonth.month);
+  const vatDateRange = getMonthDateRange(vatYear, vatMonth);
+
+  const handleVatMonthChange = (nextYear: number, nextMonth: number) => {
+    setVatYear(nextYear);
+    setVatMonth(nextMonth);
+    setCurrentPage(1);
+  };
 
   const handleFilterChange = (setter: (v: any) => void) => (v: any) => {
     setter(v);
@@ -75,18 +99,26 @@ export function BusinessPage() {
               toDate={toDate}
             />
 
-            <VatLiabilityCard />
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-white">VAT</h2>
+              <MonthPicker year={vatYear} month={vatMonth} onChange={handleVatMonthChange} />
+            </div>
+
+            <VatLiabilityCard year={vatYear} month={vatMonth} />
+
+            <h2 className="text-lg font-semibold text-white">VAT Transactions</h2>
 
             <TransactionsListSection
-              selectedAccounts={selectedAccounts}
-              fromDate={fromDate}
-              toDate={toDate}
+              selectedAccounts={[]}
+              fromDate={vatDateRange.from}
+              toDate={vatDateRange.to}
               type={type}
               categoryUuid={categoryUuid}
               subcategoryUuid={subcategoryUuid}
               currentPage={currentPage}
               onPageChange={setCurrentPage}
               showQuickStats={false}
+              hasVatOnly
             />
           </>
         )}

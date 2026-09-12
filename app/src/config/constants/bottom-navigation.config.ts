@@ -6,6 +6,7 @@ import {
   CheckCircle,
   DollarSign,
   Dumbbell,
+  Package,
   Receipt,
   type LucideIcon,
 } from 'lucide-react'
@@ -68,5 +69,11 @@ export const BOTTOM_NAV_MORE_TABS = [
     label: 'Receipts',
     path: '/dashboard/receipts',
     icon: Receipt,
+  },
+  {
+    id: 'product-consumption',
+    label: 'Products',
+    path: '/dashboard/product-consumption',
+    icon: Package,
   },
 ] as const satisfies readonly BottomNavTab[]

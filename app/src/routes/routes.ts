@@ -19,6 +19,10 @@ export const Routes = {
     receipts: {
         prefix: '/dashboard/receipts',
     },
+    productConsumption: {
+        prefix: '/dashboard/product-consumption',
+        detail: (uuid: string) => `/dashboard/product-consumption/product/${uuid}`,
+    },
     habits: {
         prefix: '/dashboard/habits',
     },

@@ -341,6 +341,7 @@ exports.Prisma.ExpenseProductScalarFieldEnum = {
   brand: 'brand',
   unit: 'unit',
   size: 'size',
+  source: 'source',
   category_uuid: 'category_uuid',
   subcategory_uuid: 'subcategory_uuid',
   created_at: 'created_at',
@@ -355,6 +356,27 @@ exports.Prisma.ExpenseReceiptItemScalarFieldEnum = {
   quantity: 'quantity',
   unit_price: 'unit_price',
   total_price: 'total_price',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.ProductPurchaseScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  product_uuid: 'product_uuid',
+  expense_entry_uuid: 'expense_entry_uuid',
+  tracking_method: 'tracking_method',
+  status: 'status',
+  purchase_price: 'purchase_price',
+  purchase_date: 'purchase_date',
+  start_date: 'start_date',
+  actual_finish_date: 'actual_finish_date',
+  total_units: 'total_units',
+  unit_label: 'unit_label',
+  consumption_amount: 'consumption_amount',
+  consumption_period_days: 'consumption_period_days',
+  notes: 'notes',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -712,6 +734,24 @@ exports.ExpenseRecurrenceFrequency = exports.$Enums.ExpenseRecurrenceFrequency =
   YEARLY: 'YEARLY'
 };
 
+exports.ProductSource = exports.$Enums.ProductSource = {
+  RECEIPTS: 'RECEIPTS',
+  CONSUMPTION: 'CONSUMPTION'
+};
+
+exports.ProductTrackingMethod = exports.$Enums.ProductTrackingMethod = {
+  START_FINISH: 'START_FINISH',
+  QUANTITY_DOSE: 'QUANTITY_DOSE'
+};
+
+exports.ProductPurchaseStatus = exports.$Enums.ProductPurchaseStatus = {
+  NOT_STARTED: 'NOT_STARTED',
+  ACTIVE: 'ACTIVE',
+  FINISHED: 'FINISHED',
+  PAUSED: 'PAUSED',
+  DISCARDED: 'DISCARDED'
+};
+
 exports.ExerciseType = exports.$Enums.ExerciseType = {
   REPS: 'REPS',
   TIME: 'TIME'
@@ -785,6 +825,7 @@ exports.Prisma.ModelName = {
   ExpenseReceipt: 'ExpenseReceipt',
   ExpenseProduct: 'ExpenseProduct',
   ExpenseReceiptItem: 'ExpenseReceiptItem',
+  ProductPurchase: 'ProductPurchase',
   MuscleGroup: 'MuscleGroup',
   Exercise: 'Exercise',
   Workout: 'Workout',

@@ -12,9 +12,11 @@ type TransactionCardProps = {
   transaction: ExpenseEntry;
   onDuplicate?: (transaction: ExpenseEntry) => void;
   onCreatePreset?: (transaction: ExpenseEntry) => void;
+  onTrackProduct?: (transaction: ExpenseEntry) => void;
+  showVatDetails?: boolean;
 };
 
-export function TransactionCard({ transaction, onDuplicate, onCreatePreset }: TransactionCardProps) {
+export function TransactionCard({ transaction, onDuplicate, onCreatePreset, onTrackProduct, showVatDetails = false }: TransactionCardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -46,6 +48,10 @@ export function TransactionCard({ transaction, onDuplicate, onCreatePreset }: Tr
   const handleCreatePreset = useCallback(() => {
     onCreatePreset?.(transaction);
   }, [onCreatePreset, transaction]);
+
+  const handleTrackProduct = useCallback(() => {
+    onTrackProduct?.(transaction);
+  }, [onTrackProduct, transaction]);
 
   const getTypeIcon = () => {
     switch (transaction.type) {
@@ -87,6 +93,11 @@ export function TransactionCard({ transaction, onDuplicate, onCreatePreset }: Tr
   };
 
   const isTransfer = transaction.type === ExpenseEntryTypes.TRANSFER && !!transaction.to_account;
+
+  const vatAmount = transaction.has_vat && transaction.vat_amount !== undefined && transaction.vat_amount !== null
+    ? Number(transaction.vat_amount)
+    : null;
+  const netAmount = vatAmount !== null ? Number(transaction.amount) - vatAmount : null;
 
   return (
     <>
@@ -142,6 +153,11 @@ export function TransactionCard({ transaction, onDuplicate, onCreatePreset }: Tr
                 ))}
               </div>
             )}
+            {showVatDetails && vatAmount !== null && netAmount !== null && (
+              <div className="mt-1 text-[10px] sm:text-xs text-slate-400">
+                VAT {formatAmount(vatAmount)} · Net {formatAmount(netAmount)}
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
@@ -154,7 +170,11 @@ export function TransactionCard({ transaction, onDuplicate, onCreatePreset }: Tr
             <span className={`text-sm sm:text-base font-semibold ${getTypeColor()}`}>{getAmountDisplay()}</span>
 
             {onDuplicate && onCreatePreset && (
-              <TransactionActionsDropdown onDuplicate={handleDuplicate} onCreatePreset={handleCreatePreset} />
+              <TransactionActionsDropdown
+                onDuplicate={handleDuplicate}
+                onCreatePreset={handleCreatePreset}
+                onTrackProduct={transaction.type === ExpenseEntryTypes.EXPENSE ? handleTrackProduct : undefined}
+              />
             )}
           </div>
         </div>

@@ -11,6 +11,8 @@ import { SettingsPage } from "../pages/settings";
 import { ExpenseAccountsPage } from "../pages/expenses";
 import { BusinessPage } from "../pages/business";
 import { ReceiptsPage } from "../pages/stores";
+import { ProductConsumptionPage } from "../pages/product-consumption";
+import { ProductDetailPage } from "../pages/product-consumption/product-detail";
 import { GymPage } from "../pages/gym";
 import { WorkoutDetailPage } from "../pages/gym/workout-detail";
 import { ExerciseDetailPage } from "../pages/gym/exercise-detail";
@@ -61,6 +63,8 @@ export default function AppRoutes() {
         <Route path="expenses" element={<ExpenseAccountsPage />} />
         <Route path="business" element={<BusinessPage />} />
         <Route path="receipts" element={<ReceiptsPage />} />
+        <Route path="product-consumption" element={<ProductConsumptionPage />} />
+        <Route path="product-consumption/product/:uuid" element={<ProductDetailPage />} />
         <Route path="habits" element={<HabitsPage />} />
         <Route path="settings/security" element={<SettingsPage />} />
         <Route path="settings/activities" element={<ActivitiesSettingsPage />} />

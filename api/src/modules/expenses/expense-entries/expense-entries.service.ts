@@ -86,7 +86,7 @@ export class ExpenseEntriesService {
 
   async findAll(user_uuid: string, query: ExpenseEntriesQueryType) {
     try {
-      const { page, limit, type, category_uuid, subcategory_uuid, from_account_uuid, to_account_uuid, account_uuids, from_date, to_date, search, tag_uuid } = query;
+      const { page, limit, type, category_uuid, subcategory_uuid, from_account_uuid, to_account_uuid, account_uuids, from_date, to_date, search, tag_uuid, has_vat } = query;
 
       const skip = (page - 1) * limit;
 
@@ -94,6 +94,10 @@ export class ExpenseEntriesService {
 
       if (type) {
         where.type = type;
+      }
+
+      if (has_vat !== undefined) {
+        where.has_vat = has_vat;
       }
 
       if (category_uuid) {
@@ -216,10 +220,6 @@ export class ExpenseEntriesService {
 
       const nextHasVat = updateFields.has_vat ?? existingEntry.has_vat;
       const nextAmount = updateFields.amount ?? Number(existingEntry.amount);
-
-      if (nextHasVat && !updateFields.from_account_uuid && !existingEntry.from_account.is_professional) {
-        throw new BadRequestException('VAT can only be applied to entries from a professional account');
-      }
 
       const updatedEntry = await this.prisma.expenseEntry.update({
         where: { uuid },

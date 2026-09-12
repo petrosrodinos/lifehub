@@ -22,10 +22,6 @@ export async function validateExpenseRelations(
     if (!fromAccount) {
       throw new BadRequestException('Source account not found or does not belong to user');
     }
-
-    if (dto.has_vat && !fromAccount.is_professional) {
-      throw new BadRequestException('VAT can only be applied to entries from a professional account');
-    }
   }
 
   if (dto.to_account_uuid) {

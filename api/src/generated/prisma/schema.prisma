@@ -117,6 +117,9 @@ model User {
   expense_stores   ExpenseStore[]
   expense_products ExpenseProduct[]
 
+  // Product Consumption
+  product_purchases ProductPurchase[]
+
   // Gym
   muscle_groups MuscleGroup[]
   exercises     Exercise[]
@@ -387,14 +390,15 @@ model ExpenseEntry {
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
 
-  user            User                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  from_account    ExpenseAccount      @relation("EntryFromAccount", fields: [from_account_uuid], references: [uuid], onDelete: Cascade)
-  to_account      ExpenseAccount?     @relation("EntryToAccount", fields: [to_account_uuid], references: [uuid], onDelete: Cascade)
-  category        ExpenseCategory?    @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
-  subcategory     ExpenseSubcategory? @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
-  preset          ExpenseEntryPreset? @relation(fields: [preset_uuid], references: [uuid], onDelete: SetNull)
-  expense_receipt ExpenseReceipt?
-  tags            ExpenseTag[]
+  user             User                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  from_account     ExpenseAccount      @relation("EntryFromAccount", fields: [from_account_uuid], references: [uuid], onDelete: Cascade)
+  to_account       ExpenseAccount?     @relation("EntryToAccount", fields: [to_account_uuid], references: [uuid], onDelete: Cascade)
+  category         ExpenseCategory?    @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
+  subcategory      ExpenseSubcategory? @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
+  preset           ExpenseEntryPreset? @relation(fields: [preset_uuid], references: [uuid], onDelete: SetNull)
+  expense_receipt  ExpenseReceipt?
+  product_purchase ProductPurchase?
+  tags             ExpenseTag[]
 
   @@index([user_uuid])
   @@index([category_uuid])
@@ -494,26 +498,29 @@ model ExpenseReceipt {
 }
 
 model ExpenseProduct {
-  id               Int      @id @default(autoincrement())
-  uuid             String   @unique @default(uuid())
+  id               Int           @id @default(autoincrement())
+  uuid             String        @unique @default(uuid())
   user_uuid        String?
   name             String
   brand            String?
   unit             String?
   size             Decimal?
+  source           ProductSource @default(RECEIPTS)
   category_uuid    String?
   subcategory_uuid String?
-  created_at       DateTime @default(now())
-  updated_at       DateTime @updatedAt
+  created_at       DateTime      @default(now())
+  updated_at       DateTime      @updatedAt
 
   user          User?                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
   category      ExpenseCategory?     @relation(fields: [category_uuid], references: [uuid], onDelete: SetNull)
   subcategory   ExpenseSubcategory?  @relation(fields: [subcategory_uuid], references: [uuid], onDelete: SetNull)
   receipt_items ExpenseReceiptItem[]
+  purchases     ProductPurchase[]
 
   @@index([user_uuid])
   @@index([category_uuid])
   @@index([subcategory_uuid])
+  @@index([source])
   @@map("expense_products")
 }
 
@@ -533,6 +540,54 @@ model ExpenseReceiptItem {
 
   @@index([receipt_uuid])
   @@map("expense_receipt_items")
+}
+
+enum ProductSource {
+  RECEIPTS
+  CONSUMPTION
+}
+
+enum ProductTrackingMethod {
+  START_FINISH
+  QUANTITY_DOSE
+}
+
+enum ProductPurchaseStatus {
+  NOT_STARTED
+  ACTIVE
+  FINISHED
+  PAUSED
+  DISCARDED
+}
+
+model ProductPurchase {
+  id                      Int                   @id @default(autoincrement())
+  uuid                    String                @unique @default(uuid())
+  user_uuid               String
+  product_uuid            String
+  expense_entry_uuid      String?               @unique
+  tracking_method         ProductTrackingMethod
+  status                  ProductPurchaseStatus @default(NOT_STARTED)
+  purchase_price          Decimal
+  purchase_date           DateTime              @default(now())
+  start_date              DateTime?
+  actual_finish_date      DateTime?
+  total_units             Decimal?
+  unit_label              String?
+  consumption_amount      Decimal?
+  consumption_period_days Int?                  @default(1)
+  notes                   String?
+  created_at              DateTime              @default(now())
+  updated_at              DateTime              @updatedAt
+
+  user          User           @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  product       ExpenseProduct @relation(fields: [product_uuid], references: [uuid], onDelete: Cascade)
+  expense_entry ExpenseEntry?  @relation(fields: [expense_entry_uuid], references: [uuid], onDelete: SetNull)
+
+  @@index([user_uuid])
+  @@index([product_uuid])
+  @@index([status])
+  @@map("product_purchases")
 }
 
 model MuscleGroup {

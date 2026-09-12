@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
-import type { ExpenseEntryType } from '../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces'
+import type { ExpenseEntry, ExpenseEntryType } from '../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces'
 import { useTransactionsPage } from '../hooks/use-transactions-page'
 import { AccountFilters } from '../../analytics/components/account-overview/AccountFilters'
 import { expenseEntryToCreateDto } from '../../utils/transaction'
@@ -8,6 +8,7 @@ import { CreateTransactionModal } from './CreateTransactionModal'
 import { CreatePresetTransactionModal } from '../../presets/components/CreatePresetTransactionModal'
 import { mapEntryToPresetFormData } from '../../presets/utils/preset-form-data.helper'
 import { TransactionsListSection } from './TransactionsListSection'
+import { PurchaseModal } from '../../../product-consumption/components/PurchaseModal'
 
 export function TransactionsSection() {
   const {
@@ -24,6 +25,7 @@ export function TransactionsSection() {
     setCurrentPage,
   } = useTransactionsPage()
 
+  const [trackProductTransaction, setTrackProductTransaction] = useState<ExpenseEntry | null>(null)
   const [selectedAccounts, setSelectedAccounts] = useState<string[]>([])
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
@@ -77,8 +79,15 @@ export function TransactionsSection() {
           onPageChange={setCurrentPage}
           onDuplicate={openDuplicateModal}
           onCreatePreset={openPresetModal}
+          onTrackProduct={setTrackProductTransaction}
         />
       </div>
+
+      <PurchaseModal
+        isOpen={!!trackProductTransaction}
+        onClose={() => setTrackProductTransaction(null)}
+        expenseEntry={trackProductTransaction ?? undefined}
+      />
 
       <CreateTransactionModal
         isOpen={isCreateModalOpen}

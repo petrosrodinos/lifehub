@@ -3,6 +3,7 @@ import toast from 'react-hot-toast'
 import type {
     CreateExpenseProductDto,
     UpdateExpenseProductDto,
+    ProductSource,
 } from '../interfaces/expense-products.interfaces'
 import {
     getExpenseProducts,
@@ -13,14 +14,14 @@ import {
 } from '../services/expense-products'
 
 const QUERY_KEYS = {
-    expenseProducts: ['expense-products'],
+    expenseProducts: (source?: ProductSource) => ['expense-products', source],
     expenseProduct: (uuid: string) => ['expense-products', uuid],
 }
 
-export function useExpenseProducts(enabled = true) {
+export function useExpenseProducts(source?: ProductSource, enabled = true) {
     return useQuery({
-        queryKey: QUERY_KEYS.expenseProducts,
-        queryFn: getExpenseProducts,
+        queryKey: QUERY_KEYS.expenseProducts(source),
+        queryFn: () => getExpenseProducts(source),
         enabled,
     })
 }
@@ -39,7 +40,7 @@ export function useCreateExpenseProduct() {
     return useMutation({
         mutationFn: (data: CreateExpenseProductDto) => createExpenseProduct(data),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseProducts })
+            queryClient.invalidateQueries({ queryKey: ['expense-products'] })
             toast.success('Product created successfully', { duration: 2000 })
         },
         onError: (error: Error) => {
@@ -55,7 +56,7 @@ export function useUpdateExpenseProduct() {
         mutationFn: ({ uuid, data }: { uuid: string; data: UpdateExpenseProductDto }) =>
             updateExpenseProduct(uuid, data),
         onSuccess: (_, variables) => {
-            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseProducts })
+            queryClient.invalidateQueries({ queryKey: ['expense-products'] })
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseProduct(variables.uuid) })
             toast.success('Product updated successfully', { duration: 2000 })
         },
@@ -71,7 +72,7 @@ export function useDeleteExpenseProduct() {
     return useMutation({
         mutationFn: (uuid: string) => deleteExpenseProduct(uuid),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseProducts })
+            queryClient.invalidateQueries({ queryKey: ['expense-products'] })
             toast.success('Product deleted successfully', { duration: 2000 })
         },
         onError: (error: Error) => {

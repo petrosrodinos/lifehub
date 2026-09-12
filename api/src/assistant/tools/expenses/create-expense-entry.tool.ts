@@ -21,7 +21,7 @@ export function createCreateExpenseEntryTool(
             subcategory_name: z.string().nullable().optional().describe('Subcategory name, more specific than category_name'),
             tag_names: z.array(z.string()).nullable().optional().describe('Tag names to attach to the entry'),
             description: z.string().nullable().optional().describe('Entry description, e.g. Grocery shopping'),
-            has_vat: z.boolean().nullable().optional().describe('Whether VAT applies; only valid for professional accounts'),
+            has_vat: z.boolean().nullable().optional().describe('Whether VAT applies to this entry'),
             vat_amount: z.number().min(0).nullable().optional().describe('Custom VAT amount; defaults to 24% of the amount when has_vat is true'),
             entry_date: z.string().nullable().optional().describe('Entry date/time in ISO format; defaults to now'),
             quantity: z.number().int().min(1).max(100).nullable().optional().describe('Number of identical entries to create; defaults to 1'),

@@ -70,6 +70,7 @@ export interface ExpenseEntriesQueryParams {
   from_date?: string
   to_date?: string
   search?: string
+  has_vat?: boolean
 }
 
 export interface ExpenseEntriesResponse {

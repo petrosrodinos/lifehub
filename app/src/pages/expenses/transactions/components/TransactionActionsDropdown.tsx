@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Bookmark, Copy, MoreHorizontal } from 'lucide-react'
+import { Bookmark, Copy, MoreHorizontal, Package } from 'lucide-react'
 import {
   TRANSACTION_CARD_ACTIONS,
   TRANSACTION_CARD_ACTION_OPTIONS,
@@ -10,11 +10,13 @@ import {
 type TransactionActionsDropdownProps = {
   onDuplicate: () => void
   onCreatePreset: () => void
+  onTrackProduct?: () => void
 }
 
 const ACTION_ICONS: Record<TransactionCardAction, typeof Copy> = {
   [TRANSACTION_CARD_ACTIONS.DUPLICATE]: Copy,
   [TRANSACTION_CARD_ACTIONS.CREATE_PRESET]: Bookmark,
+  [TRANSACTION_CARD_ACTIONS.TRACK_PRODUCT]: Package,
 }
 
 type MenuPosition = {
@@ -22,7 +24,7 @@ type MenuPosition = {
   left: number
 }
 
-export function TransactionActionsDropdown({ onDuplicate, onCreatePreset }: TransactionActionsDropdownProps) {
+export function TransactionActionsDropdown({ onDuplicate, onCreatePreset, onTrackProduct }: TransactionActionsDropdownProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [menuPosition, setMenuPosition] = useState<MenuPosition>({ top: 0, left: 0 })
   const [isMenuReady, setIsMenuReady] = useState(false)
@@ -90,8 +92,17 @@ export function TransactionActionsDropdown({ onDuplicate, onCreatePreset }: Tran
       return
     }
 
+    if (action === TRANSACTION_CARD_ACTIONS.TRACK_PRODUCT) {
+      onTrackProduct?.()
+      return
+    }
+
     onCreatePreset()
   }
+
+  const visibleOptions = TRANSACTION_CARD_ACTION_OPTIONS.filter(
+    (option) => option.value !== TRANSACTION_CARD_ACTIONS.TRACK_PRODUCT || !!onTrackProduct,
+  )
 
   const menu = isOpen
     ? createPortal(
@@ -100,7 +111,7 @@ export function TransactionActionsDropdown({ onDuplicate, onCreatePreset }: Tran
           style={{ top: menuPosition.top, left: menuPosition.left }}
           className={`fixed z-[200] min-w-[9.5rem] overflow-hidden rounded-lg border border-slate-700 bg-slate-900 shadow-xl ${isMenuReady ? 'visible' : 'invisible'}`}
         >
-          {TRANSACTION_CARD_ACTION_OPTIONS.map((option) => {
+          {visibleOptions.map((option) => {
             const Icon = ACTION_ICONS[option.value]
 
             return (

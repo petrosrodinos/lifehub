@@ -2,6 +2,7 @@ import { Injectable, InternalServerErrorException, NotFoundException, BadRequest
 import { CreateExpenseProductDto } from './dto/create-expense-product.dto';
 import { UpdateExpenseProductDto } from './dto/update-expense-product.dto';
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
+import { ProductSource } from '@/generated/prisma';
 
 @Injectable()
 export class ExpenseProductsService {
@@ -18,6 +19,7 @@ export class ExpenseProductsService {
           brand: createExpenseProductDto.brand,
           unit: createExpenseProductDto.unit,
           size: createExpenseProductDto.size,
+          source: createExpenseProductDto.source ?? ProductSource.RECEIPTS,
           category_uuid: createExpenseProductDto.category_uuid,
           subcategory_uuid: createExpenseProductDto.subcategory_uuid,
         },
@@ -35,7 +37,7 @@ export class ExpenseProductsService {
     }
   }
 
-  async findAll(user_uuid: string) {
+  async findAll(user_uuid: string, source?: ProductSource) {
     try {
       return await this.prisma.expenseProduct.findMany({
         where: {
@@ -43,6 +45,7 @@ export class ExpenseProductsService {
             { user_uuid },
             { user_uuid: null },
           ],
+          ...(source ? { source } : {}),
         },
         orderBy: { name: 'asc' },
         include: {

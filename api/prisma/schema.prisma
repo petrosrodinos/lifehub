@@ -43,16 +43,16 @@ enum ExpenseRecurrenceFrequency {
 }
 
 enum ExerciseType {
-  REPS        
+  REPS
   TIME
 }
 
 enum ActivityRepeatType {
-  DAILY         // every day
-  WEEKDAYS      // specific days of the week (Mon/Wed/Fri)
-  INTERVAL      // every N days
-  DATES         // specific calendar dates
-  FREQUENCY     // X times per week/month (e.g. gym 3x/week)
+  DAILY // every day
+  WEEKDAYS // specific days of the week (Mon/Wed/Fri)
+  INTERVAL // every N days
+  DATES // specific calendar dates
+  FREQUENCY // X times per week/month (e.g. gym 3x/week)
 }
 
 enum ActivityTargetType {
@@ -64,8 +64,8 @@ enum ActivityTargetUnit {
   PAGES
   MINUTES
   KM
-  TIMES         // for frequency-based (run 3 times/week)
-  CUSTOM        // user-defined unit label
+  TIMES // for frequency-based (run 3 times/week)
+  CUSTOM // user-defined unit label
 }
 
 enum FrequencyPeriod {
@@ -77,56 +77,59 @@ enum OccurrenceStatus {
   PENDING
   COMPLETED
   SKIPPED
-  FAILED        // missed without being explicitly skipped
+  FAILED // missed without being explicitly skipped
 }
 
 model User {
-  id                  Int                 @id @default(autoincrement())
-  uuid                String              @unique @default(uuid())
-  email     String   @unique
-  phone     String?   @unique
-  password  String
+  id         Int      @id @default(autoincrement())
+  uuid       String   @unique @default(uuid())
+  email      String   @unique
+  phone      String?  @unique
+  password   String
   first_name String
-  last_name String
-  role      AuthRole
-  date String?
-  is_admin  Boolean @default(false)
+  last_name  String
+  role       AuthRole
+  date       String?
+  is_admin   Boolean  @default(false)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  
+
   // Routine
-  activities     Activity[]
-  schedule_slots ScheduleSlot[]
-  activity_schedules ActivitySchedule[]
-  activity_logs ActivityLog[]
+  activities           Activity[]
+  schedule_slots       ScheduleSlot[]
+  activity_schedules   ActivitySchedule[]
+  activity_logs        ActivityLog[]
   activity_occurrences ActivityOccurrence[]
-  hidden_activities HiddenActivity[]
+  hidden_activities    HiddenActivity[]
 
   // Expenses
-  expense_accounts ExpenseAccount[]
-  expense_entries  ExpenseEntry[]
+  expense_accounts      ExpenseAccount[]
+  expense_entries       ExpenseEntry[]
   expense_entry_presets ExpenseEntryPreset[]
-  expense_tags ExpenseTag[]
-  categories ExpenseCategory[]
-  subcategories ExpenseSubcategory[]
-  hidden_categories HiddenCategory[]
-  hidden_subcategories HiddenSubcategory[]
+  expense_tags          ExpenseTag[]
+  categories            ExpenseCategory[]
+  subcategories         ExpenseSubcategory[]
+  hidden_categories     HiddenCategory[]
+  hidden_subcategories  HiddenSubcategory[]
 
   // Receipts
   expense_receipts ExpenseReceipt[]
-  expense_stores ExpenseStore[]
+  expense_stores   ExpenseStore[]
   expense_products ExpenseProduct[]
+
+  // Product Consumption
+  product_purchases ProductPurchase[]
 
   // Gym
   muscle_groups MuscleGroup[]
-  exercises Exercise[]
-  workouts Workout[]
+  exercises     Exercise[]
+  workouts      Workout[]
 
   // Notes
-  notes Note[]
-  note_tags NoteTag[]
+  notes             Note[]
+  note_tags         NoteTag[]
   flash_card_groups FlashCardGroup[]
-  quiz_groups QuizGroup[]
+  quiz_groups       QuizGroup[]
 
   // Assistant
   chat_conversations ChatConversation[]
@@ -137,25 +140,24 @@ model User {
   @@map("users")
 }
 
-
 model Activity {
-  id         Int      @id @default(autoincrement())
-  uuid       String   @unique @default(uuid())
-  user_uuid    String
-  name       String
+  id          Int      @id @default(autoincrement())
+  uuid        String   @unique @default(uuid())
+  user_uuid   String
+  name        String
   description String?
-  icon       String?
-  color      String?
-  visible    Boolean @default(true)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  icon        String?
+  color       String?
+  visible     Boolean  @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
-  user       User    @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  schedule_slots ScheduleSlot[]
-  activity_schedules ActivitySchedule[]
-  activity_logs ActivityLog[]
+  user                 User                 @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  schedule_slots       ScheduleSlot[]
+  activity_schedules   ActivitySchedule[]
+  activity_logs        ActivityLog[]
   activity_occurrences ActivityOccurrence[]
-  hidden_activities HiddenActivity[]
+  hidden_activities    HiddenActivity[]
 
   @@index([uuid])
   @@index([user_uuid])
@@ -163,18 +165,18 @@ model Activity {
 }
 
 model ScheduleSlot {
-  id           Int          @id @default(autoincrement())
-  uuid         String       @unique @default(uuid())
-  user_uuid      String
-  activity_uuid  String
-  day          ScheduleDay
-  start_time   String
-  end_time     String
-  created_at   DateTime     @default(now())
-  updated_at   DateTime     @updatedAt
+  id            Int         @id @default(autoincrement())
+  uuid          String      @unique @default(uuid())
+  user_uuid     String
+  activity_uuid String
+  day           ScheduleDay
+  start_time    String
+  end_time      String
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @updatedAt
 
-  user         User        @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  activity     Activity     @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
+  user     User     @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  activity Activity @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
 
   @@index([uuid])
   @@index([user_uuid])
@@ -183,35 +185,35 @@ model ScheduleSlot {
 }
 
 model ActivitySchedule {
-  id            Int                @id @default(autoincrement())
-  uuid          String             @unique @default(uuid())
-  user_uuid     String
-  activity_uuid String
+  id                Int                 @id @default(autoincrement())
+  uuid              String              @unique @default(uuid())
+  user_uuid         String
+  activity_uuid     String
   // When this schedule config is active
-  valid_from    DateTime           @default(now())
-  valid_until   DateTime?          // null = currently active
+  valid_from        DateTime            @default(now())
+  valid_until       DateTime? // null = currently active
   // Repeat configuration
-  repeat_type   ActivityRepeatType
-  interval_days Int?               // used when repeat_type = INTERVAL
-  time_of_day   String?            // "17:00" — store as HH:MM string
+  repeat_type       ActivityRepeatType
+  interval_days     Int? // used when repeat_type = INTERVAL
+  time_of_day       String? // "17:00" — store as HH:MM string
   // Frequency config (e.g. 3 times per week)
-  frequency_value  Int?            // e.g. 3
-  frequency_period FrequencyPeriod? // e.g. WEEK
+  frequency_value   Int? // e.g. 3
+  frequency_period  FrequencyPeriod? // e.g. WEEK
   // Target config — snapshotted per schedule version
-  target_type   ActivityTargetType
-  target_value  Float?
-  target_unit   ActivityTargetUnit?
-  target_unit_label String?        // for CUSTOM unit, e.g. "laps"
-  is_active     Boolean            @default(true)
-  created_at    DateTime           @default(now())
-  updated_at    DateTime           @updatedAt
+  target_type       ActivityTargetType
+  target_value      Float?
+  target_unit       ActivityTargetUnit?
+  target_unit_label String? // for CUSTOM unit, e.g. "laps"
+  is_active         Boolean             @default(true)
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
 
-  activity      Activity           @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
-  user          User               @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  weekdays      ActivityScheduleWeekday[]
+  activity       Activity                  @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
+  user           User                      @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  weekdays       ActivityScheduleWeekday[]
   specific_dates ActivityScheduleDate[]
-  occurrences   ActivityOccurrence[]
-  logs          ActivityLog[]
+  occurrences    ActivityOccurrence[]
+  logs           ActivityLog[]
 
   @@index([activity_uuid])
   @@index([user_uuid])
@@ -221,11 +223,11 @@ model ActivitySchedule {
 
 // Which weekdays the activity repeats on (Mon=1 ... Sun=7, ISO)
 model ActivityScheduleWeekday {
-  id            Int              @id @default(autoincrement())
+  id            Int    @id @default(autoincrement())
   schedule_uuid String
-  weekday       Int              // 1=Mon, 7=Sun
+  weekday       Int // 1=Mon, 7=Sun
 
-  schedule      ActivitySchedule @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
+  schedule ActivitySchedule @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
 
   @@unique([schedule_uuid, weekday])
   @@map("activity_schedule_weekdays")
@@ -233,11 +235,11 @@ model ActivityScheduleWeekday {
 
 // Specific calendar dates for one-off or irregular schedules
 model ActivityScheduleDate {
-  id            Int              @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   schedule_uuid String
-  date          DateTime         // just the date portion matters
+  date          DateTime // just the date portion matters
 
-  schedule      ActivitySchedule @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
+  schedule ActivitySchedule @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
 
   @@unique([schedule_uuid, date])
   @@map("activity_schedule_dates")
@@ -253,15 +255,15 @@ model ActivityOccurrence {
   user_uuid     String
   activity_uuid String
   schedule_uuid String
-  scheduled_for DateTime         // the date (and implied time) this is due
+  scheduled_for DateTime // the date (and implied time) this is due
   status        OccurrenceStatus @default(PENDING)
   created_at    DateTime         @default(now())
   updated_at    DateTime         @updatedAt
 
-  activity      Activity         @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
-  schedule      ActivitySchedule @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
-  user          User             @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  log           ActivityLog?     // one-to-one: log is created when user acts on it
+  activity Activity         @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
+  schedule ActivitySchedule @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
+  user     User             @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  log      ActivityLog? // one-to-one: log is created when user acts on it
 
   @@unique([schedule_uuid, scheduled_for])
   @@index([user_uuid, scheduled_for])
@@ -269,37 +271,36 @@ model ActivityOccurrence {
   @@map("activity_occurrences")
 }
 
-
 model ActivityLog {
-  id                   Int              @id @default(autoincrement())
-  uuid                 String           @unique @default(uuid())
-  user_uuid            String
-  activity_uuid        String
-  schedule_uuid        String
-  occurrence_uuid      String           @unique  // one log per occurrence
-  
+  id              Int    @id @default(autoincrement())
+  uuid            String @unique @default(uuid())
+  user_uuid       String
+  activity_uuid   String
+  schedule_uuid   String
+  occurrence_uuid String @unique // one log per occurrence
+
   // Snapshot of the goal AT THE TIME of this log entry
   // This is critical — don't rely on schedule.target_value for history
-  snapshot_target_type  ActivityTargetType
-  snapshot_target_value Float?
-  snapshot_target_unit  ActivityTargetUnit?
+  snapshot_target_type       ActivityTargetType
+  snapshot_target_value      Float?
+  snapshot_target_unit       ActivityTargetUnit?
   snapshot_target_unit_label String?
 
   // What the user actually did
-  value                Float?           // actual quantity completed
-  completed            Boolean          @default(false)
-  completed_at         DateTime?        // set explicitly when user marks done
-  skipped              Boolean          @default(false)
-  skip_reason          String?
+  value        Float? // actual quantity completed
+  completed    Boolean   @default(false)
+  completed_at DateTime? // set explicitly when user marks done
+  skipped      Boolean   @default(false)
+  skip_reason  String?
 
-  notes                String?
-  created_at           DateTime         @default(now())
-  updated_at           DateTime         @updatedAt
+  notes      String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-  activity             Activity         @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
-  schedule             ActivitySchedule @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
-  occurrence           ActivityOccurrence @relation(fields: [occurrence_uuid], references: [uuid], onDelete: Cascade)
-  user                 User             @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  activity   Activity           @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
+  schedule   ActivitySchedule   @relation(fields: [schedule_uuid], references: [uuid], onDelete: Cascade)
+  occurrence ActivityOccurrence @relation(fields: [occurrence_uuid], references: [uuid], onDelete: Cascade)
+  user       User               @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
 
   @@index([user_uuid])
   @@index([activity_uuid])
@@ -309,20 +310,20 @@ model ActivityLog {
 }
 
 model ExpenseAccount {
-  id           Int        @id @default(autoincrement())
-  uuid         String     @unique @default(uuid())
-  user_uuid    String
-  name         String
-  icon         String?
-  color        String?
-  balance      Decimal    @default(0)
-  is_professional Boolean @default(false)
-  created_at   DateTime   @default(now())
-  updated_at   DateTime   @updatedAt
+  id              Int      @id @default(autoincrement())
+  uuid            String   @unique @default(uuid())
+  user_uuid       String
+  name            String
+  icon            String?
+  color           String?
+  balance         Decimal  @default(0)
+  is_professional Boolean  @default(false)
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
 
-  user         User       @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  entries_from ExpenseEntry[] @relation("EntryFromAccount")
-  entries_to   ExpenseEntry[] @relation("EntryToAccount")
+  user         User                 @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  entries_from ExpenseEntry[]       @relation("EntryFromAccount")
+  entries_to   ExpenseEntry[]       @relation("EntryToAccount")
   presets_from ExpenseEntryPreset[] @relation("PresetFromAccount")
   presets_to   ExpenseEntryPreset[] @relation("PresetToAccount")
 
@@ -331,20 +332,20 @@ model ExpenseAccount {
 }
 
 model ExpenseCategory {
-  id           Int          @id @default(autoincrement())
-  uuid         String       @unique @default(uuid())
-  user_uuid    String?
-  name         String
-  icon         String?
-  color        String?
-  created_at   DateTime     @default(now())
-  updated_at   DateTime     @updatedAt
+  id         Int      @id @default(autoincrement())
+  uuid       String   @unique @default(uuid())
+  user_uuid  String?
+  name       String
+  icon       String?
+  color      String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-  user         User?        @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  subcategories ExpenseSubcategory[]
-  entries ExpenseEntry[]
-  entry_presets ExpenseEntryPreset[]
-  products ExpenseProduct[]
+  user              User?                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  subcategories     ExpenseSubcategory[]
+  entries           ExpenseEntry[]
+  entry_presets     ExpenseEntryPreset[]
+  products          ExpenseProduct[]
   hidden_categories HiddenCategory[]
 
   @@index([user_uuid])
@@ -352,19 +353,19 @@ model ExpenseCategory {
 }
 
 model ExpenseSubcategory {
-  id            Int        @id @default(autoincrement())
-  uuid          String     @unique @default(uuid())
-  user_uuid    String?
+  id            Int      @id @default(autoincrement())
+  uuid          String   @unique @default(uuid())
+  user_uuid     String?
   category_uuid String
   name          String
-  created_at    DateTime   @default(now())
-  updated_at    DateTime   @updatedAt
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
-  user         User?        @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  category      ExpenseCategory   @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
-  entries       ExpenseEntry[]
-  entry_presets ExpenseEntryPreset[]
-  products      ExpenseProduct[]
+  user                 User?                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  category             ExpenseCategory      @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
+  entries              ExpenseEntry[]
+  entry_presets        ExpenseEntryPreset[]
+  products             ExpenseProduct[]
   hidden_subcategories HiddenSubcategory[]
 
   @@index([category_uuid])
@@ -389,14 +390,15 @@ model ExpenseEntry {
   created_at        DateTime         @default(now())
   updated_at        DateTime         @updatedAt
 
-  user              User             @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  from_account      ExpenseAccount   @relation("EntryFromAccount", fields: [from_account_uuid], references: [uuid], onDelete: Cascade)
-  to_account        ExpenseAccount?  @relation("EntryToAccount", fields: [to_account_uuid], references: [uuid], onDelete: Cascade)
-  category          ExpenseCategory?        @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
-  subcategory       ExpenseSubcategory?     @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
-  preset            ExpenseEntryPreset?     @relation(fields: [preset_uuid], references: [uuid], onDelete: SetNull)
-  expense_receipt   ExpenseReceipt?
-  tags              ExpenseTag[]
+  user             User                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  from_account     ExpenseAccount      @relation("EntryFromAccount", fields: [from_account_uuid], references: [uuid], onDelete: Cascade)
+  to_account       ExpenseAccount?     @relation("EntryToAccount", fields: [to_account_uuid], references: [uuid], onDelete: Cascade)
+  category         ExpenseCategory?    @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
+  subcategory      ExpenseSubcategory? @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
+  preset           ExpenseEntryPreset? @relation(fields: [preset_uuid], references: [uuid], onDelete: SetNull)
+  expense_receipt  ExpenseReceipt?
+  product_purchase ProductPurchase?
+  tags             ExpenseTag[]
 
   @@index([user_uuid])
   @@index([category_uuid])
@@ -407,8 +409,8 @@ model ExpenseEntry {
 }
 
 model ExpenseEntryPreset {
-  id                      Int                          @id @default(autoincrement())
-  uuid                    String                       @unique @default(uuid())
+  id                      Int                         @id @default(autoincrement())
+  uuid                    String                      @unique @default(uuid())
   user_uuid               String
   title                   String
   type                    ExpenseEntryType
@@ -418,23 +420,23 @@ model ExpenseEntryPreset {
   to_account_uuid         String?
   category_uuid           String?
   subcategory_uuid        String?
-  is_recurring            Boolean                      @default(false)
+  is_recurring            Boolean                     @default(false)
   recurrence_frequency    ExpenseRecurrenceFrequency?
   recurrence_weekday      Int?
   recurrence_day_of_month Int?
   recurrence_month        Int?
   next_run_at             DateTime?
   last_run_at             DateTime?
-  created_at              DateTime                     @default(now())
-  updated_at              DateTime                     @updatedAt
+  created_at              DateTime                    @default(now())
+  updated_at              DateTime                    @updatedAt
 
-  user              User             @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  from_account      ExpenseAccount   @relation("PresetFromAccount", fields: [from_account_uuid], references: [uuid], onDelete: Cascade)
-  to_account        ExpenseAccount?  @relation("PresetToAccount", fields: [to_account_uuid], references: [uuid], onDelete: Cascade)
-  category          ExpenseCategory? @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
-  subcategory       ExpenseSubcategory? @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
-  tags              ExpenseTag[]
-  entries           ExpenseEntry[]
+  user         User                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  from_account ExpenseAccount      @relation("PresetFromAccount", fields: [from_account_uuid], references: [uuid], onDelete: Cascade)
+  to_account   ExpenseAccount?     @relation("PresetToAccount", fields: [to_account_uuid], references: [uuid], onDelete: Cascade)
+  category     ExpenseCategory?    @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
+  subcategory  ExpenseSubcategory? @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
+  tags         ExpenseTag[]
+  entries      ExpenseEntry[]
 
   @@index([user_uuid])
   @@index([category_uuid])
@@ -444,16 +446,16 @@ model ExpenseEntryPreset {
 }
 
 model ExpenseTag {
-  id         Int            @id @default(autoincrement())
-  uuid       String         @unique @default(uuid())
-  user_uuid  String
-  user       User           @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  title      String
-  color      String         @default("#8b5cf6")
-  entries    ExpenseEntry[]
+  id            Int                  @id @default(autoincrement())
+  uuid          String               @unique @default(uuid())
+  user_uuid     String
+  user          User                 @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  title         String
+  color         String               @default("#8b5cf6")
+  entries       ExpenseEntry[]
   entry_presets ExpenseEntryPreset[]
-  created_at DateTime       @default(now())
-  updated_at DateTime       @updatedAt
+  created_at    DateTime             @default(now())
+  updated_at    DateTime             @updatedAt
 
   @@index([user_uuid])
   @@map("expense_tags")
@@ -467,28 +469,28 @@ model ExpenseStore {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  user       User?    @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  receipts   ExpenseReceipt[]
+  user     User?            @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  receipts ExpenseReceipt[]
 
   @@index([user_uuid])
   @@map("expense_stores")
 }
 
 model ExpenseReceipt {
-  id              Int       @id @default(autoincrement())
-  uuid            String    @unique @default(uuid())
-  user_uuid       String
-  store_uuid      String?
-  expense_entry_uuid String  @unique
-  receipt_date    DateTime  @default(now())
-  total_amount    Decimal
-  created_at      DateTime  @default(now())
-  updated_at      DateTime  @updatedAt
+  id                 Int      @id @default(autoincrement())
+  uuid               String   @unique @default(uuid())
+  user_uuid          String
+  store_uuid         String?
+  expense_entry_uuid String   @unique
+  receipt_date       DateTime @default(now())
+  total_amount       Decimal
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
 
-  user            User      @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  store           ExpenseStore? @relation(fields: [store_uuid], references: [uuid], onDelete: SetNull)
-  expense_entry   ExpenseEntry  @relation(fields: [expense_entry_uuid], references: [uuid], onDelete: Cascade)
-  items           ExpenseReceiptItem[]
+  user          User                 @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  store         ExpenseStore?        @relation(fields: [store_uuid], references: [uuid], onDelete: SetNull)
+  expense_entry ExpenseEntry         @relation(fields: [expense_entry_uuid], references: [uuid], onDelete: Cascade)
+  items         ExpenseReceiptItem[]
 
   @@index([user_uuid])
   @@index([store_uuid])
@@ -496,78 +498,128 @@ model ExpenseReceipt {
 }
 
 model ExpenseProduct {
-  id            Int       @id @default(autoincrement())
-  uuid          String    @unique @default(uuid())
-  user_uuid     String?
-  name          String
-  brand         String?
-  unit          String?
-  size          Decimal?
-  category_uuid     String?
-  subcategory_uuid  String?
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
+  id               Int           @id @default(autoincrement())
+  uuid             String        @unique @default(uuid())
+  user_uuid        String?
+  name             String
+  brand            String?
+  unit             String?
+  size             Decimal?
+  source           ProductSource @default(RECEIPTS)
+  category_uuid    String?
+  subcategory_uuid String?
+  created_at       DateTime      @default(now())
+  updated_at       DateTime      @updatedAt
 
-  user          User?                 @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  category      ExpenseCategory?      @relation(fields: [category_uuid], references: [uuid], onDelete: SetNull)
-  subcategory   ExpenseSubcategory?   @relation(fields: [subcategory_uuid], references: [uuid], onDelete: SetNull)
+  user          User?                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  category      ExpenseCategory?     @relation(fields: [category_uuid], references: [uuid], onDelete: SetNull)
+  subcategory   ExpenseSubcategory?  @relation(fields: [subcategory_uuid], references: [uuid], onDelete: SetNull)
   receipt_items ExpenseReceiptItem[]
+  purchases     ProductPurchase[]
 
   @@index([user_uuid])
   @@index([category_uuid])
   @@index([subcategory_uuid])
+  @@index([source])
   @@map("expense_products")
 }
 
 model ExpenseReceiptItem {
-  id              Int      @id @default(autoincrement())
-  uuid            String   @unique @default(uuid())
-  receipt_uuid    String
-  product_uuid    String?
-  quantity        Decimal  @default(1)
-  unit_price      Decimal
-  total_price     Decimal
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  uuid         String   @unique @default(uuid())
+  receipt_uuid String
+  product_uuid String?
+  quantity     Decimal  @default(1)
+  unit_price   Decimal
+  total_price  Decimal
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
 
-  receipt         ExpenseReceipt     @relation(fields: [receipt_uuid], references: [uuid], onDelete: Cascade)
-  product         ExpenseProduct?    @relation(fields: [product_uuid], references: [uuid], onDelete: SetNull)
+  receipt ExpenseReceipt  @relation(fields: [receipt_uuid], references: [uuid], onDelete: Cascade)
+  product ExpenseProduct? @relation(fields: [product_uuid], references: [uuid], onDelete: SetNull)
 
   @@index([receipt_uuid])
   @@map("expense_receipt_items")
 }
 
+enum ProductSource {
+  RECEIPTS
+  CONSUMPTION
+}
+
+enum ProductTrackingMethod {
+  START_FINISH
+  QUANTITY_DOSE
+}
+
+enum ProductPurchaseStatus {
+  NOT_STARTED
+  ACTIVE
+  FINISHED
+  PAUSED
+  DISCARDED
+}
+
+model ProductPurchase {
+  id                      Int                   @id @default(autoincrement())
+  uuid                    String                @unique @default(uuid())
+  user_uuid               String
+  product_uuid            String
+  expense_entry_uuid      String?               @unique
+  tracking_method         ProductTrackingMethod
+  status                  ProductPurchaseStatus @default(NOT_STARTED)
+  purchase_price          Decimal
+  purchase_date           DateTime              @default(now())
+  start_date              DateTime?
+  actual_finish_date      DateTime?
+  total_units             Decimal?
+  unit_label              String?
+  consumption_amount      Decimal?
+  consumption_period_days Int?                  @default(1)
+  notes                   String?
+  created_at              DateTime              @default(now())
+  updated_at              DateTime              @updatedAt
+
+  user          User           @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  product       ExpenseProduct @relation(fields: [product_uuid], references: [uuid], onDelete: Cascade)
+  expense_entry ExpenseEntry?  @relation(fields: [expense_entry_uuid], references: [uuid], onDelete: SetNull)
+
+  @@index([user_uuid])
+  @@index([product_uuid])
+  @@index([status])
+  @@map("product_purchases")
+}
 
 model MuscleGroup {
-  id          Int      @id @default(autoincrement())
-  uuid        String   @unique @default(uuid())
-  user_uuid   String?
-  name        String
-  color       String?
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  uuid       String   @unique @default(uuid())
+  user_uuid  String?
+  name       String
+  color      String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-  user        User?    @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  exercises   Exercise[]
+  user      User?      @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  exercises Exercise[]
 
   @@index([user_uuid])
   @@map("muscle_groups")
 }
 
 model Exercise {
-  id                Int      @id @default(autoincrement())
-  uuid              String   @unique @default(uuid())
+  id                Int          @id @default(autoincrement())
+  uuid              String       @unique @default(uuid())
   user_uuid         String?
   muscle_group_uuid String
   name              String
   description       String?
   type              ExerciseType
-  created_at        DateTime @default(now())
-  updated_at        DateTime @updatedAt
+  created_at        DateTime     @default(now())
+  updated_at        DateTime     @updatedAt
 
-  user              User?        @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  muscle_group      MuscleGroup  @relation(fields: [muscle_group_uuid], references: [uuid], onDelete: Cascade)
-  entries           WorkoutEntry[]
+  user         User?          @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  muscle_group MuscleGroup    @relation(fields: [muscle_group_uuid], references: [uuid], onDelete: Cascade)
+  entries      WorkoutEntry[]
 
   @@index([user_uuid])
   @@index([muscle_group_uuid])
@@ -580,19 +632,18 @@ model Workout {
   user_uuid   String?
   name        String?
   notes       String?
-  started_at    DateTime @default(now())
-  finished_at  DateTime @updatedAt
+  started_at  DateTime @default(now())
+  finished_at DateTime @updatedAt
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 
-  user        User?          @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  user    User?          @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
   entries WorkoutEntry[]
 
   @@index([user_uuid])
   @@index([started_at])
   @@map("workouts")
 }
-
 
 model WorkoutEntry {
   id            Int      @id @default(autoincrement())
@@ -603,44 +654,42 @@ model WorkoutEntry {
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 
-  workout       Workout  @relation(fields: [workout_uuid], references: [uuid], onDelete: Cascade)
-  exercise      Exercise @relation(fields: [exercise_uuid], references: [uuid], onDelete: Cascade)
-  sets          WorkoutSet[]
+  workout  Workout      @relation(fields: [workout_uuid], references: [uuid], onDelete: Cascade)
+  exercise Exercise     @relation(fields: [exercise_uuid], references: [uuid], onDelete: Cascade)
+  sets     WorkoutSet[]
 
   @@index([workout_uuid])
   @@index([exercise_uuid])
   @@map("workout_entries")
 }
 
-
 model WorkoutSet {
-  id                Int      @id @default(autoincrement())
-  uuid              String   @unique @default(uuid())
+  id                 Int          @id @default(autoincrement())
+  uuid               String       @unique @default(uuid())
   workout_entry_uuid String
-  type              ExerciseType
-  reps              Int?
-  weight            Decimal?
-  duration_seconds  Int?
-  distance_meters   Int?
-  rest_seconds     Int?
-  notes         String?
-  is_dropset        Boolean @default(false)
-  is_amrap         Boolean @default(false)
-  is_rest          Boolean @default(false)
-  is_warmup        Boolean @default(false)
-  is_cooldown      Boolean @default(false)
-  is_super_set     Boolean @default(false)
-  order             Int      @default(0)
-  created_at        DateTime @default(now())
-  updated_at        DateTime @updatedAt
+  type               ExerciseType
+  reps               Int?
+  weight             Decimal?
+  duration_seconds   Int?
+  distance_meters    Int?
+  rest_seconds       Int?
+  notes              String?
+  is_dropset         Boolean      @default(false)
+  is_amrap           Boolean      @default(false)
+  is_rest            Boolean      @default(false)
+  is_warmup          Boolean      @default(false)
+  is_cooldown        Boolean      @default(false)
+  is_super_set       Boolean      @default(false)
+  order              Int          @default(0)
+  created_at         DateTime     @default(now())
+  updated_at         DateTime     @updatedAt
 
-  workout_entry       WorkoutEntry  @relation(fields: [workout_entry_uuid], references: [uuid], onDelete: Cascade)
+  workout_entry WorkoutEntry @relation(fields: [workout_entry_uuid], references: [uuid], onDelete: Cascade)
 
   @@index([workout_entry_uuid])
   @@index([order])
   @@map("workout_sets")
 }
-
 
 enum NoteType {
   BOOK
@@ -651,19 +700,19 @@ enum NoteType {
 }
 
 model Note {
-  id         Int       @id @default(autoincrement())
-  uuid       String    @unique @default(uuid())
-  user_uuid  String
-  user       User      @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  type       NoteType
-  title      String
-  content    String    @db.Text
-  summary    String?   @db.Text
-  vector_id  String?
-  tags       NoteTag[]
+  id                Int                @id @default(autoincrement())
+  uuid              String             @unique @default(uuid())
+  user_uuid         String
+  user              User               @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  type              NoteType
+  title             String
+  content           String             @db.Text
+  summary           String?            @db.Text
+  vector_id         String?
+  tags              NoteTag[]
   chatConversations ChatConversation[]
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
+  created_at        DateTime           @default(now())
+  updated_at        DateTime           @updatedAt
 
   @@index([user_uuid])
   @@map("notes")
@@ -685,28 +734,27 @@ model NoteTag {
 }
 
 model HiddenActivity {
-  id           Int          @id @default(autoincrement())
-  uuid         String       @unique @default(uuid())
-  user_uuid    String
+  id            Int      @id @default(autoincrement())
+  uuid          String   @unique @default(uuid())
+  user_uuid     String
   activity_uuid String
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
-  user         User       @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  activity     Activity @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
+  user     User     @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  activity Activity @relation(fields: [activity_uuid], references: [uuid], onDelete: Cascade)
 }
 
-
 model HiddenCategory {
-  id           Int          @id @default(autoincrement())
-  uuid         String       @unique @default(uuid())
-  user_uuid    String
+  id            Int      @id @default(autoincrement())
+  uuid          String   @unique @default(uuid())
+  user_uuid     String
   category_uuid String
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
-  user         User       @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  category     ExpenseCategory @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
+  user     User            @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  category ExpenseCategory @relation(fields: [category_uuid], references: [uuid], onDelete: Cascade)
 
   @@index([user_uuid])
   @@index([category_uuid])
@@ -714,15 +762,15 @@ model HiddenCategory {
 }
 
 model HiddenSubcategory {
-  id           Int          @id @default(autoincrement())
-  uuid         String       @unique @default(uuid())
-  user_uuid    String
+  id               Int      @id @default(autoincrement())
+  uuid             String   @unique @default(uuid())
+  user_uuid        String
   subcategory_uuid String
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
 
-  user         User       @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
-  subcategory     ExpenseSubcategory @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
+  user        User               @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  subcategory ExpenseSubcategory @relation(fields: [subcategory_uuid], references: [uuid], onDelete: Cascade)
 
   @@index([user_uuid])
   @@index([subcategory_uuid])
@@ -787,17 +835,17 @@ model FlashCardGroup {
 }
 
 model FlashCard {
-  id              Int            @id @default(autoincrement())
-  uuid            String         @unique @default(uuid())
+  id              Int             @id @default(autoincrement())
+  uuid            String          @unique @default(uuid())
   group_uuid      String
-  group           FlashCardGroup @relation(fields: [group_uuid], references: [uuid], onDelete: Cascade)
+  group           FlashCardGroup  @relation(fields: [group_uuid], references: [uuid], onDelete: Cascade)
   front           String
-  back            String         @db.Text
+  back            String          @db.Text
   keywords        String[]
-  ai_image_prompt String?        @db.Text
-  order_index     Int            @default(0)
-  created_at      DateTime       @default(now())
-  updated_at      DateTime       @updatedAt
+  ai_image_prompt String?         @db.Text
+  order_index     Int             @default(0)
+  created_at      DateTime        @default(now())
+  updated_at      DateTime        @updatedAt
   image           FlashCardImage?
 
   @@index([group_uuid])
@@ -872,8 +920,8 @@ model QuizGroup {
   created_at            DateTime        @default(now())
   updated_at            DateTime        @updatedAt
 
-  questions             QuizQuestion[]
-  attempts              QuizAttempt[]
+  questions QuizQuestion[]
+  attempts  QuizAttempt[]
 
   @@index([user_uuid])
   @@index([user_uuid, status])
@@ -899,8 +947,8 @@ model QuizQuestion {
   created_at         DateTime         @default(now())
   updated_at         DateTime         @updatedAt
 
-  options            QuizQuestionOption[]
-  attempt_answers    QuizAttemptAnswer[]
+  options         QuizQuestionOption[]
+  attempt_answers QuizAttemptAnswer[]
 
   @@index([group_uuid])
   @@index([group_uuid, order_index])
@@ -939,7 +987,7 @@ model QuizAttempt {
   created_at         DateTime          @default(now())
   updated_at         DateTime          @updatedAt
 
-  answers            QuizAttemptAnswer[]
+  answers QuizAttemptAnswer[]
 
   @@index([user_uuid])
   @@index([group_uuid])

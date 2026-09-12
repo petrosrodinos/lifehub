@@ -1,5 +1,6 @@
-import { IsString, MinLength, IsOptional, IsNumber, IsUUID, Min } from 'class-validator';
+import { IsString, MinLength, IsOptional, IsNumber, IsUUID, Min, IsEnum } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ProductSource } from '@/generated/prisma';
 
 export class CreateExpenseProductDto {
     @ApiProperty({
@@ -34,6 +35,15 @@ export class CreateExpenseProductDto {
     @IsNumber()
     @Min(0)
     size?: number;
+
+    @ApiPropertyOptional({
+        description: 'Which feature this product belongs to. Defaults to RECEIPTS.',
+        enum: ProductSource,
+        default: ProductSource.RECEIPTS,
+    })
+    @IsOptional()
+    @IsEnum(ProductSource)
+    source?: ProductSource;
 
     @ApiPropertyOptional({
         description: 'Category UUID',

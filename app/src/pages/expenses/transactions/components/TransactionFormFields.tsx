@@ -91,8 +91,7 @@ export function TransactionFormFields({
   const hasCategorySelection = Boolean(selectedCategory && selectedSubcategory);
   const isTransfer = type === ExpenseEntryTypes.TRANSFER;
 
-  const selectedFromAccount = accounts.find((account) => account.uuid === fromAccountUuid);
-  const canHaveVat = vatSupported && selectedFromAccount?.is_professional === true && !isTransfer;
+  const canHaveVat = vatSupported && !isTransfer;
 
   useEffect(() => {
     if (!canHaveVat && hasVat) {

@@ -223,6 +223,27 @@ export const ApiRoutes = {
       delete: (uuid: string) => `/expense-products/${uuid}`,
     },
   },
+  productConsumption: {
+    purchases: {
+      list: "/product-purchases",
+      create: "/product-purchases",
+      createFromExpense: (expense_entry_uuid: string) => `/product-purchases/from-expense/${expense_entry_uuid}`,
+      get: (uuid: string) => `/product-purchases/${uuid}`,
+      update: (uuid: string) => `/product-purchases/${uuid}`,
+      delete: (uuid: string) => `/product-purchases/${uuid}`,
+      dashboard: "/product-purchases/dashboard/summary",
+      productSummary: (product_uuid: string) => `/product-purchases/products/${product_uuid}/summary`,
+      analytics: {
+        mostExpensivePerDay: "/product-purchases/analytics/most-expensive-per-day",
+        mostExpensivePerMonth: "/product-purchases/analytics/most-expensive-per-month",
+        longestLasting: "/product-purchases/analytics/longest-lasting",
+        fastestConsumed: "/product-purchases/analytics/fastest-consumed",
+        mostFrequentlyPurchased: "/product-purchases/analytics/most-frequently-purchased",
+        categoryConsumptionCost: "/product-purchases/analytics/category-consumption-cost",
+        compare: "/product-purchases/analytics/compare",
+      },
+    },
+  },
   notes: {
     list: '/notes',
     create: '/notes',

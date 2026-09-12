@@ -2,6 +2,7 @@ import { Injectable, InternalServerErrorException, NotFoundException, BadRequest
 import { CreateExpenseReceiptItemDto } from './dto/create-expense-receipt-item.dto';
 import { UpdateExpenseReceiptItemDto } from './dto/update-expense-receipt-item.dto';
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
+import { ProductSource } from '@/generated/prisma';
 import type { PriceEvolutionQueryType } from './schemas/price-evolution-query.schema';
 import type { PurchasedProductsQueryType } from './schemas/purchased-products-query.schema';
 import type { SpendingPerStoreQueryType } from './schemas/spending-per-store-query.schema';
@@ -143,6 +144,7 @@ export class ExpenseReceiptItemService {
       const product = await this.prisma.expenseProduct.findFirst({
         where: {
           uuid: dto.product_uuid,
+          source: ProductSource.RECEIPTS,
           OR: [
             { user_uuid },
             { user_uuid: null },
