@@ -108,7 +108,11 @@ export class WorkoutsService {
       include: {
         entries: {
           include: {
-            exercise: true,
+            exercise: {
+              include: {
+                muscle_group: true,
+              },
+            },
             sets: true,
           },
         },

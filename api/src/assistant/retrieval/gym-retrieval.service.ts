@@ -1,7 +1,9 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { HttpException, Injectable, Logger } from '@nestjs/common';
+import { ExerciseType } from '@/generated/prisma';
 import { ExercisesService } from '@/modules/gym/exercises/exercises.service';
 import { MuscleGroupsService } from '@/modules/gym/muscle-groups/muscle-groups.service';
 import { WorkoutEntriesService } from '@/modules/gym/workout-entries/workout-entries.service';
+import { WorkoutSetsService } from '@/modules/gym/workout-sets/workout-sets.service';
 import { WorkoutsService } from '@/modules/gym/workouts/workouts.service';
 import { resolveExercise, resolveMuscleGroup } from '@/assistant/utils/gym-entity-resolver.helper';
 
@@ -25,6 +27,35 @@ export interface WorkoutEntryFilters {
     exercise_name?: string;
     workout_uuid?: string;
     limit?: number;
+}
+
+export interface CreateWorkoutSetInput {
+    type?: ExerciseType;
+    reps?: number;
+    weight?: number;
+    duration_seconds?: number;
+    distance_meters?: number;
+    rest_seconds?: number;
+    notes?: string;
+    is_warmup?: boolean;
+    is_cooldown?: boolean;
+    is_rest?: boolean;
+    is_dropset?: boolean;
+    is_amrap?: boolean;
+    is_super_set?: boolean;
+}
+
+export interface CreateWorkoutExerciseInput {
+    exercise_name: string;
+    sets: CreateWorkoutSetInput[];
+}
+
+export interface CreateWorkoutInput {
+    name?: string;
+    notes?: string;
+    started_at?: string;
+    finished_at?: string;
+    exercises?: CreateWorkoutExerciseInput[];
 }
 
 export interface SlimWorkoutExercise {
@@ -128,6 +159,7 @@ export class GymRetrievalService {
         private readonly workoutsService: WorkoutsService,
         private readonly exercisesService: ExercisesService,
         private readonly workoutEntriesService: WorkoutEntriesService,
+        private readonly workoutSetsService: WorkoutSetsService,
         private readonly muscleGroupsService: MuscleGroupsService,
     ) {}
 
@@ -164,6 +196,77 @@ export class GymRetrievalService {
             limit: result.meta.limit,
             hasNextPage: result.meta.page < result.meta.totalPages,
         };
+    }
+
+    async createWorkout(user_uuid: string, input: CreateWorkoutInput): Promise<{ workout: SlimWorkout } | ResolverError> {
+        const exerciseInputs = input.exercises ?? [];
+        const resolvedExerciseUuids: string[] = [];
+
+        if (exerciseInputs.length > 0) {
+            const exercises = await this.exercisesService.findAll(user_uuid);
+
+            for (const exerciseInput of exerciseInputs) {
+                const resolution = resolveExercise(exercises, exerciseInput.exercise_name);
+
+                if (resolution.ok === false) {
+                    return { error: resolution.error, candidates: resolution.candidates };
+                }
+
+                resolvedExerciseUuids.push(resolution.uuid);
+            }
+        }
+
+        try {
+            const workout = await this.workoutsService.create(user_uuid, {
+                name: input.name,
+                notes: input.notes,
+                started_at: input.started_at,
+                finished_at: input.finished_at,
+            });
+
+            for (let exerciseIndex = 0; exerciseIndex < exerciseInputs.length; exerciseIndex++) {
+                const exerciseInput = exerciseInputs[exerciseIndex];
+                const workoutEntry = await this.workoutEntriesService.create(user_uuid, {
+                    workout_uuid: workout.uuid,
+                    exercise_uuid: resolvedExerciseUuids[exerciseIndex],
+                    order: exerciseIndex,
+                });
+
+                for (let setIndex = 0; setIndex < exerciseInput.sets.length; setIndex++) {
+                    const set = exerciseInput.sets[setIndex];
+
+                    await this.workoutSetsService.create(user_uuid, {
+                        workout_entry_uuid: workoutEntry.uuid,
+                        type: set.type ?? ExerciseType.REPS,
+                        reps: set.reps,
+                        weight: set.weight,
+                        duration_seconds: set.duration_seconds,
+                        distance_meters: set.distance_meters,
+                        rest_seconds: set.rest_seconds,
+                        notes: set.notes,
+                        is_warmup: set.is_warmup,
+                        is_cooldown: set.is_cooldown,
+                        is_rest: set.is_rest,
+                        is_dropset: set.is_dropset,
+                        is_amrap: set.is_amrap,
+                        is_super_set: set.is_super_set,
+                        order: setIndex,
+                    });
+                }
+            }
+
+            const createdWorkout = await this.workoutsService.findOne(workout.uuid, user_uuid);
+
+            this.logger.log(`Created workout ${workout.uuid} for user ${user_uuid}`);
+
+            return { workout: this.toSlimWorkout(createdWorkout) };
+        } catch (error) {
+            if (error instanceof HttpException) {
+                return { error: error.message };
+            }
+
+            throw error;
+        }
     }
 
     async listExercises(user_uuid: string, filters: ExerciseFilters): Promise<SlimExercise[] | ResolverError> {

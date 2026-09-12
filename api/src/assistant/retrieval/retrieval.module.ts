@@ -11,6 +11,7 @@ import { ExpenseTagsModule } from '@/modules/expenses/expense-tags/expense-tags.
 import { ExercisesModule } from '@/modules/gym/exercises/exercises.module';
 import { MuscleGroupsModule } from '@/modules/gym/muscle-groups/muscle-groups.module';
 import { WorkoutEntriesModule } from '@/modules/gym/workout-entries/workout-entries.module';
+import { WorkoutSetsModule } from '@/modules/gym/workout-sets/workout-sets.module';
 import { WorkoutsModule } from '@/modules/gym/workouts/workouts.module';
 import { ExpensesRetrievalService } from './expenses-retrieval.service';
 import { GymRetrievalService } from './gym-retrieval.service';
@@ -29,6 +30,7 @@ import { NotesRetrievalService } from './notes-retrieval.service';
         WorkoutsModule,
         ExercisesModule,
         WorkoutEntriesModule,
+        WorkoutSetsModule,
         MuscleGroupsModule,
     ],
     providers: [AssistantConfig, NotesRetrievalService, ExpensesRetrievalService, GymRetrievalService],

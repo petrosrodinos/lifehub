@@ -31,12 +31,6 @@ export const BOTTOM_NAV_PRIMARY_TABS = [
     icon: Dumbbell,
   },
   {
-    id: 'notes',
-    label: 'Notes',
-    path: '/dashboard/notes',
-    icon: BookOpen,
-  },
-  {
     id: 'assistant',
     label: 'Assistant',
     path: '/dashboard/assistant',
@@ -51,6 +45,12 @@ export const BOTTOM_NAV_PRIMARY_TABS = [
 ] as const satisfies readonly BottomNavTab[]
 
 export const BOTTOM_NAV_MORE_TABS = [
+  {
+    id: 'notes',
+    label: 'Notes',
+    path: '/dashboard/notes',
+    icon: BookOpen,
+  },
   {
     id: 'routine',
     label: 'Routine',

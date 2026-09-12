@@ -4,12 +4,14 @@ import { ExpensesRetrievalService } from '@/assistant/retrieval/expenses-retriev
 import { GymRetrievalService } from '@/assistant/retrieval/gym-retrieval.service';
 import { NotesRetrievalService } from '@/assistant/retrieval/notes-retrieval.service';
 import { AssistantConfig } from '@/integrations/assistant/config/assistant.config';
+import { createCreateExpenseEntryTool } from './expenses/create-expense-entry.tool';
 import { createGetExpenseSummaryTool } from './expenses/get-expense-summary.tool';
 import { createGetSpendingBreakdownTool } from './expenses/get-spending-breakdown.tool';
 import { createListExpenseAccountsTool } from './expenses/list-expense-accounts.tool';
 import { createListExpenseCategoriesTool } from './expenses/list-expense-categories.tool';
 import { createListExpenseEntriesTool } from './expenses/list-expense-entries.tool';
 import { createListExpenseTagsTool } from './expenses/list-expense-tags.tool';
+import { createCreateWorkoutTool } from './gym/create-workout.tool';
 import { createGetExerciseAnalyticsTool } from './gym/get-exercise-analytics.tool';
 import { createListExercisesTool } from './gym/list-exercises.tool';
 import { createListMuscleGroupsTool } from './gym/list-muscle-groups.tool';
@@ -31,12 +33,14 @@ export function createToolRegistry(deps: ToolRegistryDeps): Tool[] {
         createSearchNotesTool(deps.notesRetrieval, deps.assistantConfig),
         createCreateImageTool(deps.chatImageService, deps.assistantConfig),
         createListExpenseEntriesTool(deps.expensesRetrieval, deps.assistantConfig),
+        createCreateExpenseEntryTool(deps.expensesRetrieval, deps.assistantConfig),
         createGetExpenseSummaryTool(deps.expensesRetrieval, deps.assistantConfig),
         createGetSpendingBreakdownTool(deps.expensesRetrieval, deps.assistantConfig),
         createListExpenseAccountsTool(deps.expensesRetrieval, deps.assistantConfig),
         createListExpenseCategoriesTool(deps.expensesRetrieval, deps.assistantConfig),
         createListExpenseTagsTool(deps.expensesRetrieval, deps.assistantConfig),
         createListWorkoutsTool(deps.gymRetrieval, deps.assistantConfig),
+        createCreateWorkoutTool(deps.gymRetrieval, deps.assistantConfig),
         createListExercisesTool(deps.gymRetrieval, deps.assistantConfig),
         createListMuscleGroupsTool(deps.gymRetrieval, deps.assistantConfig),
         createGetExerciseAnalyticsTool(deps.gymRetrieval, deps.assistantConfig),

@@ -168,6 +168,98 @@ export class ExpensesRetrievalService {
         };
     }
 
+    async createEntry(user_uuid: string, input: CreateExpenseEntryInput): Promise<{ entry: SlimExpenseEntry } | ResolverError> {
+        const accounts = await this.expenseAccountsService.findAll(user_uuid);
+        const fromAccountResolution = resolveAccount(accounts, input.account_name);
+
+        if (fromAccountResolution.ok === false) {
+            return { error: fromAccountResolution.error, candidates: fromAccountResolution.candidates };
+        }
+
+        let to_account_uuid: string | undefined;
+
+        if (input.to_account_name) {
+            const toAccountResolution = resolveAccount(accounts, input.to_account_name);
+
+            if (toAccountResolution.ok === false) {
+                return { error: toAccountResolution.error, candidates: toAccountResolution.candidates };
+            }
+
+            to_account_uuid = toAccountResolution.uuid;
+        }
+
+        let category_uuid: string | undefined;
+        let subcategory_uuid: string | undefined;
+
+        if (input.subcategory_name || input.category_name) {
+            const [categories, subcategories] = await Promise.all([
+                this.expenseCategoriesService.findAll(user_uuid),
+                this.expenseSubcategoriesService.findAll(user_uuid),
+            ]);
+
+            const nameToResolve = input.subcategory_name ?? input.category_name!;
+            const resolution = resolveCategoryOrSubcategory(
+                categories,
+                subcategories.map((subcategory) => ({
+                    uuid: subcategory.uuid,
+                    name: subcategory.name,
+                    category_uuid: subcategory.category_uuid,
+                })),
+                nameToResolve,
+            );
+
+            if (resolution.ok === false) {
+                return { error: resolution.error, candidates: resolution.candidates };
+            }
+
+            category_uuid = resolution.category_uuid;
+            subcategory_uuid = resolution.subcategory_uuid;
+        }
+
+        let tag_uuids: string[] | undefined;
+
+        if (input.tag_names?.length) {
+            const tags = await this.expenseTagsService.findAll(user_uuid);
+            tag_uuids = [];
+
+            for (const tagName of input.tag_names) {
+                const tagResolution = resolveTag(tags, tagName);
+
+                if (tagResolution.ok === false) {
+                    return { error: tagResolution.error, candidates: tagResolution.candidates };
+                }
+
+                tag_uuids.push(tagResolution.uuid);
+            }
+        }
+
+        try {
+            const entry = await this.expenseEntriesService.create(user_uuid, {
+                type: input.type,
+                amount: input.amount,
+                description: input.description,
+                has_vat: input.has_vat,
+                from_account_uuid: fromAccountResolution.uuid,
+                to_account_uuid,
+                category_uuid,
+                subcategory_uuid,
+                tag_uuids,
+                entry_date: input.entry_date,
+                quantity: input.quantity,
+            });
+
+            this.logger.log(`Created expense entry ${entry.uuid} for user ${user_uuid}`);
+
+            return { entry: this.toSlimEntry(entry) };
+        } catch (error) {
+            if (error instanceof HttpException) {
+                return { error: error.message };
+            }
+
+            throw error;
+        }
+    }
+
     async getSummary(user_uuid: string, filters: ExpenseSummaryFilters): Promise<ExpenseSummaryResult | ResolverError> {
         let accountUuids: string | undefined;
         let tagUuid: string | undefined;
