@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { Pencil } from "lucide-react";
 import type { ProductPurchase } from "../../../../features/product-consumption/product-purchases/interfaces/product-purchases.interfaces";
 import { ProductPurchaseStatuses } from "../../../../features/product-consumption/product-purchases/interfaces/product-purchases.interfaces";
 import { useUpdateProductPurchase } from "../../../../features/product-consumption/product-purchases/hooks/use-product-purchases";
 import { formatCurrency } from "../../../../utils/format-currency.utils";
 import { formatDate, formatRemainingDays, STATUS_BADGE_CLASSES, STATUS_LABELS } from "../../utils/product-consumption.utils";
+import { EditPurchaseModal } from "../../components/EditPurchaseModal";
 
 type CurrentCycleCardProps = {
   purchase: ProductPurchase;
@@ -22,8 +24,10 @@ export function CurrentCycleCard({ purchase }: CurrentCycleCardProps) {
   const updatePurchase = useUpdateProductPurchase();
   const [finishDate, setFinishDate] = useState(() => new Date().toISOString().split("T")[0]);
   const [showFinishInput, setShowFinishInput] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const isActive = purchase.status === ProductPurchaseStatuses.ACTIVE;
+  const isFinished = purchase.status === ProductPurchaseStatuses.FINISHED;
 
   const handleMarkFinished = () => {
     updatePurchase.mutate({
@@ -31,6 +35,10 @@ export function CurrentCycleCard({ purchase }: CurrentCycleCardProps) {
       data: { actual_finish_date: new Date(finishDate).toISOString(), status: ProductPurchaseStatuses.FINISHED },
     });
     setShowFinishInput(false);
+  };
+
+  const handleUndoFinish = () => {
+    updatePurchase.mutate({ uuid: purchase.uuid, data: { actual_finish_date: null } });
   };
 
   const handleStatusChange = (status: "PAUSED" | "DISCARDED" | "ACTIVE") => {
@@ -42,25 +50,37 @@ export function CurrentCycleCard({ purchase }: CurrentCycleCardProps) {
       <div className="flex items-center justify-between">
         <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${STATUS_BADGE_CLASSES[purchase.status]}`}>{STATUS_LABELS[purchase.status]}</span>
 
-        {isActive && (
-          <div className="flex items-center gap-2">
-            <button type="button" onClick={() => handleStatusChange("PAUSED")} className="text-xs text-slate-400 hover:text-amber-400 transition-colors">
-              Pause
-            </button>
-            <button type="button" onClick={() => handleStatusChange("DISCARDED")} className="text-xs text-slate-400 hover:text-red-400 transition-colors">
-              Discard
-            </button>
-            <button type="button" onClick={() => setShowFinishInput((v) => !v)} className="px-3 py-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-medium rounded-lg transition-colors">
-              Mark Finished
-            </button>
-          </div>
-        )}
+        <div className="flex items-center gap-2">
+          {isActive && (
+            <>
+              <button type="button" onClick={() => handleStatusChange("PAUSED")} className="text-xs text-slate-400 hover:text-amber-400 transition-colors">
+                Pause
+              </button>
+              <button type="button" onClick={() => handleStatusChange("DISCARDED")} className="text-xs text-slate-400 hover:text-red-400 transition-colors">
+                Discard
+              </button>
+              <button type="button" onClick={() => setShowFinishInput((v) => !v)} className="px-3 py-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-medium rounded-lg transition-colors">
+                Mark Finished
+              </button>
+            </>
+          )}
 
-        {purchase.status === ProductPurchaseStatuses.PAUSED && (
-          <button type="button" onClick={() => handleStatusChange("ACTIVE")} className="px-3 py-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-medium rounded-lg transition-colors">
-            Resume
+          {purchase.status === ProductPurchaseStatuses.PAUSED && (
+            <button type="button" onClick={() => handleStatusChange("ACTIVE")} className="px-3 py-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-medium rounded-lg transition-colors">
+              Resume
+            </button>
+          )}
+
+          {isFinished && (
+            <button type="button" onClick={handleUndoFinish} disabled={updatePurchase.isPending} className="text-xs text-slate-400 hover:text-violet-400 transition-colors disabled:opacity-50">
+              Undo Finish
+            </button>
+          )}
+
+          <button type="button" onClick={() => setIsEditModalOpen(true)} className="flex items-center gap-1 p-1.5 text-slate-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-md transition-colors" aria-label="Edit purchase">
+            <Pencil className="w-3.5 h-3.5" />
           </button>
-        )}
+        </div>
       </div>
 
       {showFinishInput && (
@@ -85,6 +105,8 @@ export function CurrentCycleCard({ purchase }: CurrentCycleCardProps) {
         {purchase.estimated_finish_date && <StatTile label="Estimated finish" value={formatDate(purchase.estimated_finish_date)} />}
         {isActive && purchase.remaining_days !== null && <StatTile label="Remaining" value={formatRemainingDays(purchase.remaining_days) ?? "—"} />}
       </div>
+
+      <EditPurchaseModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} purchase={purchase} />
     </div>
   );
 }

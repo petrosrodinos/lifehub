@@ -143,7 +143,8 @@ export class ProductConsumptionService {
       const product_uuid = await this.resolveProduct(user_uuid, entry, dto.product_uuid, dto.product);
 
       const start_date = dto.start_date ? new Date(dto.start_date) : null;
-      const status = deriveStatus({ start_date, actual_finish_date: null });
+      const actual_finish_date = dto.actual_finish_date ? new Date(dto.actual_finish_date) : null;
+      const status = deriveStatus({ start_date, actual_finish_date });
 
       const created = await this.prisma.productPurchase.create({
         data: {
@@ -155,6 +156,7 @@ export class ProductConsumptionService {
           purchase_price: entry.amount,
           purchase_date: entry.entry_date,
           start_date: start_date ?? undefined,
+          actual_finish_date: actual_finish_date ?? undefined,
           total_units: dto.total_units,
           unit_label: dto.unit_label,
           consumption_amount: dto.consumption_amount,
@@ -265,12 +267,21 @@ export class ProductConsumptionService {
       const isManualStatus = existing.status === ProductPurchaseStatus.PAUSED || existing.status === ProductPurchaseStatus.DISCARDED;
       const status = dto.status ?? deriveStatus({ start_date, actual_finish_date }, isManualStatus ? existing.status : undefined);
 
+      if (existing.expense_entry_uuid && (dto.purchase_price !== undefined || dto.purchase_date !== undefined)) {
+        await this.expenseEntriesService.update(user_uuid, existing.expense_entry_uuid, {
+          amount: dto.purchase_price,
+          entry_date: dto.purchase_date,
+        });
+      }
+
       await this.prisma.productPurchase.update({
         where: { uuid },
         data: {
           product_uuid: dto.product_uuid,
           tracking_method: dto.tracking_method,
           status,
+          purchase_price: dto.purchase_price,
+          purchase_date: dto.purchase_date ? new Date(dto.purchase_date) : undefined,
           start_date: dto.start_date !== undefined ? start_date : undefined,
           actual_finish_date: dto.actual_finish_date !== undefined ? actual_finish_date : undefined,
           total_units: dto.total_units,

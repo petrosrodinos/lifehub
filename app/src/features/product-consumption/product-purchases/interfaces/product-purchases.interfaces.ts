@@ -78,9 +78,12 @@ export interface CreateProductPurchaseDto {
 export type UpdateProductPurchaseDto = Partial<
   Pick<
     CreateProductPurchaseDto,
-    'tracking_method' | 'status' | 'start_date' | 'actual_finish_date' | 'total_units' | 'unit_label' | 'consumption_amount' | 'consumption_period_days' | 'notes' | 'product_uuid'
+    'tracking_method' | 'status' | 'start_date' | 'total_units' | 'unit_label' | 'consumption_amount' | 'consumption_period_days' | 'notes' | 'product_uuid' | 'purchase_price' | 'purchase_date'
   >
->
+> & {
+  /** Pass null to clear the finish date (e.g. to undo marking a purchase finished). */
+  actual_finish_date?: string | null
+}
 
 export interface InlineProductInput {
   name: string
@@ -96,6 +99,7 @@ export interface CreateFromExpenseDto {
   product?: InlineProductInput
   tracking_method: ProductTrackingMethod
   start_date?: string
+  actual_finish_date?: string
   total_units?: number
   unit_label?: string
   consumption_amount?: number

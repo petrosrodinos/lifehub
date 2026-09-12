@@ -73,10 +73,10 @@ export class CreateProductPurchaseDto {
   @IsDateString()
   start_date?: string;
 
-  @ApiPropertyOptional({ description: 'Date the product was actually used up / finished' })
+  @ApiPropertyOptional({ description: 'Date the product was actually used up / finished. Pass null to clear it (e.g. to undo marking a purchase finished).', nullable: true })
   @IsOptional()
   @IsDateString()
-  actual_finish_date?: string;
+  actual_finish_date?: string | null;
 
   @ApiPropertyOptional({ description: 'Total units in the package (quantity/dose method)', example: 100 })
   @IsOptional()

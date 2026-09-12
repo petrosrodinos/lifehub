@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Plus } from "lucide-react";
+import { ArrowLeft, Pencil, Plus } from "lucide-react";
 import { useProductSummary } from "../../../features/product-consumption/product-purchases/hooks/use-product-purchases";
 import { ProductPurchaseStatuses } from "../../../features/product-consumption/product-purchases/interfaces/product-purchases.interfaces";
 import { formatCurrency } from "../../../utils/format-currency.utils";
 import { CurrentCycleCard } from "./components/CurrentCycleCard";
 import { PurchaseHistoryTable } from "./components/PurchaseHistoryTable";
 import { PurchaseModal } from "../components/PurchaseModal";
+import { EditProductModal } from "../components/EditProductModal";
 
 export function ProductDetailPage() {
   const { uuid } = useParams<{ uuid: string }>();
   const navigate = useNavigate();
   const { data, isLoading } = useProductSummary(uuid || "");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -44,12 +46,17 @@ export function ProductDetailPage() {
         </button>
 
         <div className="flex items-start justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">{data.product.name}</h1>
-            <p className="text-sm text-slate-400 mt-1">
-              {data.product.category?.name ?? "Uncategorized"}
-              {data.product.brand ? ` · ${data.product.brand}` : ""}
-            </p>
+          <div className="flex items-start gap-2">
+            <div>
+              <h1 className="text-2xl font-bold text-white tracking-tight">{data.product.name}</h1>
+              <p className="text-sm text-slate-400 mt-1">
+                {data.product.category?.name ?? "Uncategorized"}
+                {data.product.brand ? ` · ${data.product.brand}` : ""}
+              </p>
+            </div>
+            <button type="button" onClick={() => setIsEditProductModalOpen(true)} className="p-1.5 text-slate-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-md transition-colors shrink-0" aria-label="Edit product">
+              <Pencil className="w-4 h-4" />
+            </button>
           </div>
           <button type="button" onClick={() => setIsAddModalOpen(true)} className="flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white font-medium rounded-lg transition-colors shrink-0">
             <Plus className="w-4 h-4" />
@@ -90,6 +97,7 @@ export function ProductDetailPage() {
       </div>
 
       <PurchaseModal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} lockedProductUuid={data.product.uuid} lockedProductName={data.product.name} />
+      <EditProductModal isOpen={isEditProductModalOpen} onClose={() => setIsEditProductModalOpen(false)} product={data.product} />
     </div>
   );
 }

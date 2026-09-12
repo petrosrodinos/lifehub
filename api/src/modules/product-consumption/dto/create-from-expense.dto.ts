@@ -60,6 +60,11 @@ export class CreateFromExpenseDto {
   @IsDateString()
   start_date?: string;
 
+  @ApiPropertyOptional({ description: 'Date the product was actually used up / finished' })
+  @IsOptional()
+  @IsDateString()
+  actual_finish_date?: string;
+
   @ApiPropertyOptional({ description: 'Total units in the package (quantity/dose method)', example: 100 })
   @IsOptional()
   @IsNumber()

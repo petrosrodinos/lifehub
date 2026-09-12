@@ -43,13 +43,14 @@ export function PurchaseModal({ isOpen, onClose, expenseEntry, lockedProductUuid
 
   const [purchasePrice, setPurchasePrice] = useState("");
   const [purchaseDate, setPurchaseDate] = useState(() => new Date().toISOString().split("T")[0]);
-  const [createExpenseToggle, setCreateExpenseToggle] = useState(true);
+  const [createExpenseToggle, setCreateExpenseToggle] = useState(false);
   const [fromAccountUuid, setFromAccountUuid] = useState("");
   const [categoryUuid, setCategoryUuid] = useState("");
   const [subcategoryUuid, setSubcategoryUuid] = useState("");
 
   const [trackingMethod, setTrackingMethod] = useState<ProductTrackingMethod>(ProductTrackingMethods.START_FINISH);
   const [startDate, setStartDate] = useState("");
+  const [actualFinishDate, setActualFinishDate] = useState("");
   const [totalUnits, setTotalUnits] = useState("");
   const [unitLabel, setUnitLabel] = useState("");
   const [consumptionAmount, setConsumptionAmount] = useState("");
@@ -63,12 +64,13 @@ export function PurchaseModal({ isOpen, onClose, expenseEntry, lockedProductUuid
     setIsCreateProductModalOpen(false);
     setPurchasePrice("");
     setPurchaseDate(new Date().toISOString().split("T")[0]);
-    setCreateExpenseToggle(true);
+    setCreateExpenseToggle(false);
     setFromAccountUuid("");
     setCategoryUuid("");
     setSubcategoryUuid("");
     setTrackingMethod(ProductTrackingMethods.START_FINISH);
     setStartDate("");
+    setActualFinishDate("");
     setTotalUnits("");
     setUnitLabel("");
     setConsumptionAmount("");
@@ -102,6 +104,7 @@ export function PurchaseModal({ isOpen, onClose, expenseEntry, lockedProductUuid
         : {};
 
     const startDateIso = startDate ? new Date(startDate).toISOString() : undefined;
+    const actualFinishDateIso = actualFinishDate ? new Date(actualFinishDate).toISOString() : undefined;
 
     if (isFromExpense && expenseEntry) {
       createFromExpense.mutate(
@@ -111,6 +114,7 @@ export function PurchaseModal({ isOpen, onClose, expenseEntry, lockedProductUuid
             product_uuid: productUuid,
             tracking_method: trackingMethod,
             start_date: startDateIso,
+            actual_finish_date: actualFinishDateIso,
             notes: notes.trim() || undefined,
             ...methodFields,
           },
@@ -132,6 +136,7 @@ export function PurchaseModal({ isOpen, onClose, expenseEntry, lockedProductUuid
           subcategory_uuid: createExpenseToggle ? subcategoryUuid || undefined : undefined,
           tracking_method: trackingMethod,
           start_date: startDateIso,
+          actual_finish_date: actualFinishDateIso,
           notes: notes.trim() || undefined,
           ...methodFields,
         },
@@ -284,6 +289,13 @@ export function PurchaseModal({ isOpen, onClose, expenseEntry, lockedProductUuid
               Start date <span className="text-slate-500 font-normal">(opt., leave blank if not started yet)</span>
             </label>
             <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className={inputClasses} disabled={isPending} />
+          </div>
+
+          <div className="space-y-2">
+            <label className={labelClasses}>
+              Finish date <span className="text-slate-500 font-normal">(opt., leave blank if still in use)</span>
+            </label>
+            <input type="date" value={actualFinishDate} onChange={(e) => setActualFinishDate(e.target.value)} className={inputClasses} disabled={isPending} />
           </div>
 
           {trackingMethod === ProductTrackingMethods.QUANTITY_DOSE && (
