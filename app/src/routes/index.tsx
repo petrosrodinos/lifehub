@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useIsMobile } from "../hooks/use-is-mobile";
+import { useAppSettingsStore } from "../store/app-settings-store";
 import ProtectedRoute from "./protected-route";
 import { SignIn } from "../pages/auth/sign-in";
 import { SignUp } from "../pages/auth/sign-up";
@@ -24,6 +25,8 @@ import { ExpensesSettingsPage } from "../pages/settings/pages/expenses";
 
 export default function AppRoutes() {
   const isMobile = useIsMobile();
+  const mobileMode = useAppSettingsStore((state) => state.mobileMode);
+  const skipLanding = isMobile || mobileMode;
 
   return (
     <Routes>
@@ -71,7 +74,7 @@ export default function AppRoutes() {
         <Route path="assistant" element={<AssistantPage />} />
       </Route>
 
-      <Route path="/" element={isMobile ? <Navigate to="/dashboard/expenses" replace /> : <LandingPage />} />
+      <Route path="/" element={skipLanding ? <Navigate to="/dashboard/expenses" replace /> : <LandingPage />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
