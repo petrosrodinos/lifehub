@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { ExpenseEntryType } from '@/generated/prisma';
 import { ExpenseEntriesService } from '@/modules/expenses/expense-entries/expense-entries.service';
 import { ExpenseAccountsService } from '@/modules/expenses/expense-accounts/expense-accounts.service';
@@ -22,6 +22,20 @@ export interface ExpenseEntryFilters {
     tag_name?: string;
     search?: string;
     limit?: number;
+}
+
+export interface CreateExpenseEntryInput {
+    type: ExpenseEntryType;
+    amount: number;
+    description?: string;
+    has_vat?: boolean;
+    account_name: string;
+    to_account_name?: string;
+    category_name?: string;
+    subcategory_name?: string;
+    tag_names?: string[];
+    entry_date?: string;
+    quantity?: number;
 }
 
 export interface ExpenseSummaryFilters {

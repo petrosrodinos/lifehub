@@ -15994,6 +15994,7 @@ export namespace Prisma {
     icon: string | null
     color: string | null
     balance: Decimal | null
+    is_professional: boolean | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -16006,6 +16007,7 @@ export namespace Prisma {
     icon: string | null
     color: string | null
     balance: Decimal | null
+    is_professional: boolean | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -16018,6 +16020,7 @@ export namespace Prisma {
     icon: number
     color: number
     balance: number
+    is_professional: number
     created_at: number
     updated_at: number
     _all: number
@@ -16042,6 +16045,7 @@ export namespace Prisma {
     icon?: true
     color?: true
     balance?: true
+    is_professional?: true
     created_at?: true
     updated_at?: true
   }
@@ -16054,6 +16058,7 @@ export namespace Prisma {
     icon?: true
     color?: true
     balance?: true
+    is_professional?: true
     created_at?: true
     updated_at?: true
   }
@@ -16066,6 +16071,7 @@ export namespace Prisma {
     icon?: true
     color?: true
     balance?: true
+    is_professional?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -16165,6 +16171,7 @@ export namespace Prisma {
     icon: string | null
     color: string | null
     balance: Decimal
+    is_professional: boolean
     created_at: Date
     updated_at: Date
     _count: ExpenseAccountCountAggregateOutputType | null
@@ -16196,6 +16203,7 @@ export namespace Prisma {
     icon?: boolean
     color?: boolean
     balance?: boolean
+    is_professional?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -16214,6 +16222,7 @@ export namespace Prisma {
     icon?: boolean
     color?: boolean
     balance?: boolean
+    is_professional?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -16227,6 +16236,7 @@ export namespace Prisma {
     icon?: boolean
     color?: boolean
     balance?: boolean
+    is_professional?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -16240,11 +16250,12 @@ export namespace Prisma {
     icon?: boolean
     color?: boolean
     balance?: boolean
+    is_professional?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type ExpenseAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "icon" | "color" | "balance" | "created_at" | "updated_at", ExtArgs["result"]["expenseAccount"]>
+  export type ExpenseAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "name" | "icon" | "color" | "balance" | "is_professional" | "created_at" | "updated_at", ExtArgs["result"]["expenseAccount"]>
   export type ExpenseAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     entries_from?: boolean | ExpenseAccount$entries_fromArgs<ExtArgs>
@@ -16277,6 +16288,7 @@ export namespace Prisma {
       icon: string | null
       color: string | null
       balance: Prisma.Decimal
+      is_professional: boolean
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["expenseAccount"]>
@@ -16714,6 +16726,7 @@ export namespace Prisma {
     readonly icon: FieldRef<"ExpenseAccount", 'String'>
     readonly color: FieldRef<"ExpenseAccount", 'String'>
     readonly balance: FieldRef<"ExpenseAccount", 'Decimal'>
+    readonly is_professional: FieldRef<"ExpenseAccount", 'Boolean'>
     readonly created_at: FieldRef<"ExpenseAccount", 'DateTime'>
     readonly updated_at: FieldRef<"ExpenseAccount", 'DateTime'>
   }
@@ -52827,6 +52840,7 @@ export namespace Prisma {
     icon: 'icon',
     color: 'color',
     balance: 'balance',
+    is_professional: 'is_professional',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -54488,6 +54502,7 @@ export namespace Prisma {
     icon?: StringNullableFilter<"ExpenseAccount"> | string | null
     color?: StringNullableFilter<"ExpenseAccount"> | string | null
     balance?: DecimalFilter<"ExpenseAccount"> | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFilter<"ExpenseAccount"> | boolean
     created_at?: DateTimeFilter<"ExpenseAccount"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseAccount"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -54505,6 +54520,7 @@ export namespace Prisma {
     icon?: SortOrderInput | SortOrder
     color?: SortOrderInput | SortOrder
     balance?: SortOrder
+    is_professional?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -54525,6 +54541,7 @@ export namespace Prisma {
     icon?: StringNullableFilter<"ExpenseAccount"> | string | null
     color?: StringNullableFilter<"ExpenseAccount"> | string | null
     balance?: DecimalFilter<"ExpenseAccount"> | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFilter<"ExpenseAccount"> | boolean
     created_at?: DateTimeFilter<"ExpenseAccount"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseAccount"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -54542,6 +54559,7 @@ export namespace Prisma {
     icon?: SortOrderInput | SortOrder
     color?: SortOrderInput | SortOrder
     balance?: SortOrder
+    is_professional?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: ExpenseAccountCountOrderByAggregateInput
@@ -54562,6 +54580,7 @@ export namespace Prisma {
     icon?: StringNullableWithAggregatesFilter<"ExpenseAccount"> | string | null
     color?: StringNullableWithAggregatesFilter<"ExpenseAccount"> | string | null
     balance?: DecimalWithAggregatesFilter<"ExpenseAccount"> | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolWithAggregatesFilter<"ExpenseAccount"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"ExpenseAccount"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ExpenseAccount"> | Date | string
   }
@@ -58005,6 +58024,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_accountsInput
@@ -58022,6 +58042,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     entries_from?: ExpenseEntryUncheckedCreateNestedManyWithoutFrom_accountInput
@@ -58036,6 +58057,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_accountsNestedInput
@@ -58053,6 +58075,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries_from?: ExpenseEntryUncheckedUpdateManyWithoutFrom_accountNestedInput
@@ -58069,6 +58092,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -58079,6 +58103,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -58091,6 +58116,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -61848,6 +61874,7 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     balance?: SortOrder
+    is_professional?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -61865,6 +61892,7 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     balance?: SortOrder
+    is_professional?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -61877,6 +61905,7 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     balance?: SortOrder
+    is_professional?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -68798,6 +68827,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     entries_from?: ExpenseEntryCreateNestedManyWithoutFrom_accountInput
@@ -68813,6 +68843,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     entries_from?: ExpenseEntryUncheckedCreateNestedManyWithoutFrom_accountInput
@@ -69714,6 +69745,7 @@ export namespace Prisma {
     icon?: StringNullableFilter<"ExpenseAccount"> | string | null
     color?: StringNullableFilter<"ExpenseAccount"> | string | null
     balance?: DecimalFilter<"ExpenseAccount"> | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFilter<"ExpenseAccount"> | boolean
     created_at?: DateTimeFilter<"ExpenseAccount"> | Date | string
     updated_at?: DateTimeFilter<"ExpenseAccount"> | Date | string
   }
@@ -74010,6 +74042,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_accountsInput
@@ -74026,6 +74059,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     entries_to?: ExpenseEntryUncheckedCreateNestedManyWithoutTo_accountInput
@@ -74044,6 +74078,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_accountsInput
@@ -74060,6 +74095,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     entries_from?: ExpenseEntryUncheckedCreateNestedManyWithoutFrom_accountInput
@@ -74347,6 +74383,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_accountsNestedInput
@@ -74363,6 +74400,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries_to?: ExpenseEntryUncheckedUpdateManyWithoutTo_accountNestedInput
@@ -74387,6 +74425,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_accountsNestedInput
@@ -74403,6 +74442,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries_from?: ExpenseEntryUncheckedUpdateManyWithoutFrom_accountNestedInput
@@ -74682,6 +74722,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_accountsInput
@@ -74698,6 +74739,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     entries_from?: ExpenseEntryUncheckedCreateNestedManyWithoutFrom_accountInput
@@ -74716,6 +74758,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     user: UserCreateNestedOneWithoutExpense_accountsInput
@@ -74732,6 +74775,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     entries_from?: ExpenseEntryUncheckedCreateNestedManyWithoutFrom_accountInput
@@ -74988,6 +75032,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_accountsNestedInput
@@ -75004,6 +75049,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries_from?: ExpenseEntryUncheckedUpdateManyWithoutFrom_accountNestedInput
@@ -75028,6 +75074,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutExpense_accountsNestedInput
@@ -75044,6 +75091,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries_from?: ExpenseEntryUncheckedUpdateManyWithoutFrom_accountNestedInput
@@ -80639,6 +80687,7 @@ export namespace Prisma {
     icon?: string | null
     color?: string | null
     balance?: Decimal | DecimalJsLike | number | string
+    is_professional?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -81127,6 +81176,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries_from?: ExpenseEntryUpdateManyWithoutFrom_accountNestedInput
@@ -81142,6 +81192,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     entries_from?: ExpenseEntryUncheckedUpdateManyWithoutFrom_accountNestedInput
@@ -81157,6 +81208,7 @@ export namespace Prisma {
     icon?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    is_professional?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -64,6 +64,7 @@ export interface ExpenseEntriesQueryParams {
   subcategory_uuid?: string
   from_account_uuid?: string
   to_account_uuid?: string
+  account_uuids?: string
   from_date?: string
   to_date?: string
   search?: string
@@ -116,6 +117,19 @@ export interface MonthlyBudgetProgressData {
 }
 
 export interface MonthlyBudgetProgressQueryParams {
+  year: number;
+  month: number;
+}
+
+export interface VatLiabilityData {
+  vatCollected: number;
+  vatPaid: number;
+  vatToPay: number;
+  monthStart: string;
+  monthEnd: string;
+}
+
+export interface VatLiabilityQueryParams {
   year: number;
   month: number;
 }

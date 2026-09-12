@@ -17,6 +17,7 @@ export class ExpenseAccountsService {
           balance: createExpenseAccountDto.balance ?? 0,
           icon: createExpenseAccountDto.icon,
           color: createExpenseAccountDto.color,
+          is_professional: createExpenseAccountDto.is_professional ?? false,
         },
       });
     } catch (error) {

@@ -13,6 +13,9 @@ export const Routes = {
     expenses: {
         prefix: '/dashboard/expenses',
     },
+    business: {
+        prefix: '/dashboard/business',
+    },
     receipts: {
         prefix: '/dashboard/receipts',
     },

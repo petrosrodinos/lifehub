@@ -10,6 +10,7 @@ import { ExpenseEntriesQuerySchema, ExpenseEntriesQueryType } from './schemas/ex
 import { AnalyticsQuerySchema, AnalyticsQueryType } from './schemas/analytics-query.schema';
 import { CategoryAnalyticsQuerySchema, CategoryAnalyticsQueryType, TransactionTrendQuerySchema, TransactionTrendQueryType } from './schemas/category-analytics-query.schema';
 import { MonthlyBudgetProgressQuerySchema, MonthlyBudgetProgressQueryType } from './schemas/monthly-budget-progress-query.schema';
+import { VatLiabilityQuerySchema, VatLiabilityQueryType } from './schemas/vat-liability-query.schema';
 
 @ApiTags('Expense Entries')
 @ApiBearerAuth()
@@ -71,6 +72,17 @@ export class ExpenseEntriesController {
     @Query(new ZodValidationPipe(MonthlyBudgetProgressQuerySchema)) query: MonthlyBudgetProgressQueryType,
   ) {
     return this.expenseEntriesService.getMonthlyBudgetProgress(user_uuid, query);
+  }
+
+  @Get('analytics/vat-liability')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Get VAT liability (collected minus paid) for a given month' })
+  @ApiResponse({ status: 200, description: 'VAT liability retrieved successfully' })
+  getVatLiability(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Query(new ZodValidationPipe(VatLiabilityQuerySchema)) query: VatLiabilityQueryType,
+  ) {
+    return this.expenseEntriesService.getVatLiability(user_uuid, query);
   }
 
   @Get('analytics/stats')

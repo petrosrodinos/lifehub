@@ -16,6 +16,7 @@ type AccountFormProps<T extends CreateExpenseAccountDto | UpdateExpenseAccountDt
     icon?: string;
     color?: string;
     balance?: number;
+    is_professional?: boolean;
   };
 };
 
@@ -24,6 +25,7 @@ export function AccountForm<T extends CreateExpenseAccountDto | UpdateExpenseAcc
   const [icon, setIcon] = useState(initialData?.icon || ACCOUNT_PRESET_ICONS[0]);
   const [color, setColor] = useState(initialData?.color || PRESET_COLORS[0]);
   const [balance, setBalance] = useState(initialData?.balance?.toString() || "0");
+  const [isProfessional, setIsProfessional] = useState(initialData?.is_professional || false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +37,7 @@ export function AccountForm<T extends CreateExpenseAccountDto | UpdateExpenseAcc
       icon,
       color,
       balance: parseFloat(balance) || 0,
+      is_professional: isProfessional,
     } as T);
   };
 
@@ -65,6 +68,26 @@ export function AccountForm<T extends CreateExpenseAccountDto | UpdateExpenseAcc
           <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-medium">$</span>
           <input id="balance" type="number" step="0.01" value={balance} onChange={(e) => setBalance(e.target.value)} placeholder="0.00" className="w-full pl-8 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-transparent transition-all" disabled={isPending} />
         </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <label className="text-sm font-semibold text-slate-300">Professional / Business account</label>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={isProfessional}
+          onClick={() => setIsProfessional(!isProfessional)}
+          disabled={isPending}
+          className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
+            isProfessional ? "bg-violet-500" : "bg-slate-700"
+          } disabled:opacity-50 disabled:cursor-not-allowed`}
+        >
+          <span
+            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+              isProfessional ? "translate-x-6" : "translate-x-1"
+            }`}
+          />
+        </button>
       </div>
 
       <div className="flex gap-3 pt-2">

@@ -185,6 +185,7 @@ export const ApiRoutes = {
         expensesBySubcategory: "/expense-entries/analytics/expenses-by-subcategory",
         transactionTrend: "/expense-entries/analytics/transaction-trend",
         monthlyBudgetProgress: "/expense-entries/analytics/monthly-budget-progress",
+        vatLiability: "/expense-entries/analytics/vat-liability",
       },
     },
     stores: {

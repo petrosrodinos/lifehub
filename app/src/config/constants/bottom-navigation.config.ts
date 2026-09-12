@@ -1,6 +1,7 @@
 import {
   Bot,
   BookOpen,
+  Briefcase,
   Calendar,
   CheckCircle,
   DollarSign,
@@ -40,6 +41,12 @@ export const BOTTOM_NAV_PRIMARY_TABS = [
     label: 'Assistant',
     path: '/dashboard/assistant',
     icon: Bot,
+  },
+  {
+    id: 'business',
+    label: 'Business',
+    path: '/dashboard/business',
+    icon: Briefcase,
   },
 ] as const satisfies readonly BottomNavTab[]
 

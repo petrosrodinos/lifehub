@@ -1,4 +1,4 @@
-import { IsString, MinLength, IsNumber, IsOptional, Min } from 'class-validator';
+import { IsString, MinLength, IsNumber, IsOptional, Min, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -38,4 +38,14 @@ export class CreateExpenseAccountDto {
   @IsNumber()
   @Type(() => Number)
   balance?: number;
+
+  @ApiProperty({
+    description: 'Whether this account is used for professional/business activity',
+    example: false,
+    required: false,
+    default: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  is_professional?: boolean;
 }

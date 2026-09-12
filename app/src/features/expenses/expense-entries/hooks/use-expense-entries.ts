@@ -8,6 +8,7 @@ import type {
   CategoryAnalyticsQueryParams,
   TransactionTrendQueryParams,
   MonthlyBudgetProgressQueryParams,
+  VatLiabilityQueryParams,
 } from '../interfaces/expense-entries.interfaces'
 import {
   getExpenseEntries,
@@ -21,6 +22,7 @@ import {
   getExpensesBySubcategory,
   getTransactionTrend,
   getMonthlyBudgetProgress,
+  getVatLiability,
 } from '../services/expense-entries'
 import { getLocalMonthQueryParams } from '../utils/month-query-params.helper'
 
@@ -39,6 +41,12 @@ const QUERY_KEYS = {
       'expense-entries',
       'analytics',
       'monthly-budget-progress',
+      params,
+    ],
+    vatLiability: (params: VatLiabilityQueryParams) => [
+      'expense-entries',
+      'analytics',
+      'vat-liability',
       params,
     ],
   },
@@ -161,5 +169,12 @@ export function useMonthlyBudgetProgress() {
   return useQuery({
     queryKey: QUERY_KEYS.analytics.monthlyBudgetProgress(params),
     queryFn: () => getMonthlyBudgetProgress(params),
+  });
+}
+
+export function useVatLiability(params: VatLiabilityQueryParams) {
+  return useQuery({
+    queryKey: QUERY_KEYS.analytics.vatLiability(params),
+    queryFn: () => getVatLiability(params),
   });
 }

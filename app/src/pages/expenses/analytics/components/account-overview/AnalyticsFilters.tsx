@@ -3,6 +3,7 @@ import { useExpenseCategories } from "../../../../../features/expenses/expense-c
 import { useExpenseSubcategories } from "../../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories";
 import { ExpenseEntryTypes } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import type { ExpenseEntryType } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import type { ExpenseAccount } from "../../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 
 type AnalyticsFiltersProps = {
   selectedAccounts: string[];
@@ -17,13 +18,14 @@ type AnalyticsFiltersProps = {
   onCategoryChange?: (uuid: string) => void;
   subcategoryUuid?: string;
   onSubcategoryChange?: (uuid: string) => void;
+  accountsFilter?: (account: ExpenseAccount) => boolean;
 };
 
-export function AnalyticsFilters({ selectedAccounts, onAccountsChange, fromDate, onFromDateChange, toDate, onToDateChange, type, onTypeChange, categoryUuid, onCategoryChange, subcategoryUuid, onSubcategoryChange }: AnalyticsFiltersProps) {
+export function AnalyticsFilters({ selectedAccounts, onAccountsChange, fromDate, onFromDateChange, toDate, onToDateChange, type, onTypeChange, categoryUuid, onCategoryChange, subcategoryUuid, onSubcategoryChange, accountsFilter }: AnalyticsFiltersProps) {
   const { data: accountsData } = useExpenseAccounts();
   const { data: categoriesData } = useExpenseCategories();
   const { data: subcategoriesData } = useExpenseSubcategories();
-  const accounts = accountsData || [];
+  const accounts = (accountsData || []).filter(accountsFilter ?? (() => true));
   const categories = categoriesData || [];
   const allSubcategories = subcategoriesData || [];
   const subcategories = categoryUuid ? allSubcategories.filter((s) => s.category_uuid === categoryUuid) : [];

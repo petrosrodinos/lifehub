@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Filter } from "lucide-react";
 import { AnalyticsFilters } from "./AnalyticsFilters";
 import type { ExpenseEntryType } from "../../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
+import type { ExpenseAccount } from "../../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 
 type AccountFiltersProps = {
   selectedAccounts: string[];
@@ -16,6 +17,7 @@ type AccountFiltersProps = {
   onCategoryChange?: (uuid: string) => void;
   subcategoryUuid?: string;
   onSubcategoryChange?: (uuid: string) => void;
+  accountsFilter?: (account: ExpenseAccount) => boolean;
 };
 
 export function AccountFilters({
@@ -31,6 +33,7 @@ export function AccountFilters({
   onCategoryChange,
   subcategoryUuid,
   onSubcategoryChange,
+  accountsFilter,
 }: AccountFiltersProps) {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
@@ -61,6 +64,7 @@ export function AccountFilters({
           onCategoryChange={onCategoryChange}
           subcategoryUuid={subcategoryUuid}
           onSubcategoryChange={onSubcategoryChange}
+          accountsFilter={accountsFilter}
         />
       )}
     </div>

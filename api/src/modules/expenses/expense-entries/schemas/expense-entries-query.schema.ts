@@ -9,6 +9,7 @@ export const ExpenseEntriesQuerySchema = z.object({
   subcategory_uuid: z.string().uuid().optional(),
   from_account_uuid: z.string().uuid().optional(),
   to_account_uuid: z.string().uuid().optional(),
+  account_uuids: z.string().optional(),
   from_date: z.coerce.date().optional(),
   to_date: z.coerce.date().optional(),
   search: z.string().optional(),

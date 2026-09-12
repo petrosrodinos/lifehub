@@ -9,6 +9,7 @@ import { RoutinePage } from "../pages/routine/index";
 import { HabitsPage } from "../pages/habits";
 import { SettingsPage } from "../pages/settings";
 import { ExpenseAccountsPage } from "../pages/expenses";
+import { BusinessPage } from "../pages/business";
 import { ReceiptsPage } from "../pages/stores";
 import { GymPage } from "../pages/gym";
 import { WorkoutDetailPage } from "../pages/gym/workout-detail";
@@ -58,6 +59,7 @@ export default function AppRoutes() {
         <Route index element={<Navigate to="/dashboard/expenses" replace />} />
         <Route path="routine" element={<RoutinePage />} />
         <Route path="expenses" element={<ExpenseAccountsPage />} />
+        <Route path="business" element={<BusinessPage />} />
         <Route path="receipts" element={<ReceiptsPage />} />
         <Route path="habits" element={<HabitsPage />} />
         <Route path="settings/security" element={<SettingsPage />} />

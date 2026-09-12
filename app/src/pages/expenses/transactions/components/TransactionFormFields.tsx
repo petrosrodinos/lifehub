@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
 import type { ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
@@ -87,6 +87,15 @@ export function TransactionFormFields({
   const hasCategorySelection = Boolean(selectedCategory && selectedSubcategory);
   const isTransfer = type === ExpenseEntryTypes.TRANSFER;
 
+  const selectedFromAccount = accounts.find((account) => account.uuid === fromAccountUuid);
+  const canHaveVat = selectedFromAccount?.is_professional === true && !isTransfer;
+
+  useEffect(() => {
+    if (!canHaveVat && hasVat) {
+      onHasVatChange(false);
+    }
+  }, [canHaveVat, hasVat, onHasVatChange]);
+
   return (
     <>
       <div>
@@ -133,37 +142,39 @@ export function TransactionFormFields({
 
       <AmountCalculatorField value={amount} onChange={onAmountChange} disabled={isPending} />
 
-      <div>
-        <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-slate-300">VAT (24%)</label>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={hasVat}
-            onClick={() => onHasVatChange(!hasVat)}
-            disabled={isPending}
-            className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
-              hasVat ? "bg-violet-500" : "bg-slate-700"
-            } disabled:opacity-50 disabled:cursor-not-allowed`}
-          >
-            <span
-              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                hasVat ? "translate-x-6" : "translate-x-1"
-              }`}
-            />
-          </button>
-        </div>
-        {hasVat && (
-          <div className="mt-2">
-            <input
-              type="text"
-              value={vatAmount}
-              readOnly
-              className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-300 focus:outline-none"
-            />
+      {canHaveVat && (
+        <div>
+          <div className="flex items-center justify-between">
+            <label className="text-sm font-medium text-slate-300">VAT (24%)</label>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={hasVat}
+              onClick={() => onHasVatChange(!hasVat)}
+              disabled={isPending}
+              className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
+                hasVat ? "bg-violet-500" : "bg-slate-700"
+              } disabled:opacity-50 disabled:cursor-not-allowed`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  hasVat ? "translate-x-6" : "translate-x-1"
+                }`}
+              />
+            </button>
           </div>
-        )}
-      </div>
+          {hasVat && (
+            <div className="mt-2">
+              <input
+                type="text"
+                value={vatAmount}
+                readOnly
+                className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-300 focus:outline-none"
+              />
+            </div>
+          )}
+        </div>
+      )}
 
       <div>
         <label className="block text-sm font-medium text-slate-300 mb-3">{isTransfer ? "From Account" : "Account"}</label>

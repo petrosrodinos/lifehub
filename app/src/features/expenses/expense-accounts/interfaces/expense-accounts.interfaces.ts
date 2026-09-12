@@ -6,6 +6,7 @@ export interface ExpenseAccount {
   icon?: string
   color?: string
   balance: string | number
+  is_professional?: boolean
   created_at?: string
   updated_at?: string
 }
@@ -15,6 +16,7 @@ export interface CreateExpenseAccountDto {
   icon?: string
   color?: string
   balance?: number
+  is_professional?: boolean
 }
 
 export interface UpdateExpenseAccountDto {
@@ -22,6 +24,7 @@ export interface UpdateExpenseAccountDto {
   icon?: string
   color?: string
   balance?: number
+  is_professional?: boolean
 }
 
 export interface ExpenseAccountsBalance {

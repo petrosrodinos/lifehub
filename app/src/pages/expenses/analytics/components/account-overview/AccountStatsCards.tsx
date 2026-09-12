@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useExpenseAccounts } from "../../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
+import type { ExpenseAccount } from "../../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 import { useStats } from "../../../../../features/expenses/expense-entries/hooks/use-expense-entries";
 import { StatsCard } from "./StatsCard";
 import { StatsCardSkeleton } from "./StatsCardSkeleton";
@@ -9,11 +10,12 @@ type AccountStatsCardsProps = {
   setSelectedAccounts: (accounts: string[]) => void;
   fromDate: string;
   toDate: string;
+  accountsFilter?: (account: ExpenseAccount) => boolean;
 };
 
-export function AccountStatsCards({ selectedAccounts, setSelectedAccounts, fromDate, toDate }: AccountStatsCardsProps) {
+export function AccountStatsCards({ selectedAccounts, setSelectedAccounts, fromDate, toDate, accountsFilter }: AccountStatsCardsProps) {
   const { data: accountsData } = useExpenseAccounts();
-  const accounts = accountsData || [];
+  const accounts = (accountsData || []).filter(accountsFilter ?? (() => true));
 
   useEffect(() => {
     if (accounts.length > 0 && selectedAccounts.length === 0) {

@@ -9,6 +9,7 @@ import { CategoryAnalyticsQueryType, TransactionTrendQueryType } from './schemas
 import { validateExpenseRelations, validateExpenseTags } from '../utils/expense-relations.utils';
 import { calculateMonthlyBudgetProgress, getCurrentMonthUtcDateRange } from '../utils/monthly-budget-progress.helper';
 import { MonthlyBudgetProgressQueryType } from './schemas/monthly-budget-progress-query.schema';
+import { VatLiabilityQueryType } from './schemas/vat-liability-query.schema';
 
 const VAT_RATE = 0.24;
 
@@ -22,7 +23,10 @@ export class ExpenseEntriesService {
 
   async create(user_uuid: string, createExpenseEntryDto: CreateExpenseEntryDto) {
     try {
-      await validateExpenseRelations(this.prisma, user_uuid, createExpenseEntryDto);
+      await validateExpenseRelations(this.prisma, user_uuid, {
+        ...createExpenseEntryDto,
+        has_vat: createExpenseEntryDto.has_vat ?? false,
+      });
 
       const { quantity: quantityInput, tag_uuids, ...entryFields } = createExpenseEntryDto;
       const quantity = quantityInput ?? 1;
@@ -74,7 +78,7 @@ export class ExpenseEntriesService {
 
   async findAll(user_uuid: string, query: ExpenseEntriesQueryType) {
     try {
-      const { page, limit, type, category_uuid, subcategory_uuid, from_account_uuid, to_account_uuid, from_date, to_date, search, tag_uuid } = query;
+      const { page, limit, type, category_uuid, subcategory_uuid, from_account_uuid, to_account_uuid, account_uuids, from_date, to_date, search, tag_uuid } = query;
 
       const skip = (page - 1) * limit;
 
@@ -92,7 +96,11 @@ export class ExpenseEntriesService {
         where.subcategory_uuid = subcategory_uuid;
       }
 
-      if (from_account_uuid) {
+      const accountUuids = account_uuids ? account_uuids.split(',').filter(Boolean) : [];
+
+      if (accountUuids.length > 0) {
+        where.from_account_uuid = { in: accountUuids };
+      } else if (from_account_uuid) {
         where.from_account_uuid = from_account_uuid;
       }
 
@@ -197,6 +205,10 @@ export class ExpenseEntriesService {
 
       const nextHasVat = updateFields.has_vat ?? existingEntry.has_vat;
       const nextAmount = updateFields.amount ?? Number(existingEntry.amount);
+
+      if (nextHasVat && !updateFields.from_account_uuid && !existingEntry.from_account.is_professional) {
+        throw new BadRequestException('VAT can only be applied to entries from a professional account');
+      }
 
       const updatedEntry = await this.prisma.expenseEntry.update({
         where: { uuid },
@@ -537,6 +549,49 @@ export class ExpenseEntriesService {
       });
     } catch (error) {
       throw new InternalServerErrorException('Failed to fetch monthly budget progress');
+    }
+  }
+
+  async getVatLiability(user_uuid: string, query: VatLiabilityQueryType) {
+    try {
+      const { monthStart, monthEndExclusive, monthStartKey, monthEndKey } = getCurrentMonthUtcDateRange(
+        query.year,
+        query.month,
+      );
+
+      const [incomeVat, expenseVat] = await Promise.all([
+        this.prisma.expenseEntry.aggregate({
+          where: {
+            user_uuid,
+            has_vat: true,
+            type: ExpenseEntryType.INCOME,
+            entry_date: { gte: monthStart, lt: monthEndExclusive },
+          },
+          _sum: { vat_amount: true },
+        }),
+        this.prisma.expenseEntry.aggregate({
+          where: {
+            user_uuid,
+            has_vat: true,
+            type: ExpenseEntryType.EXPENSE,
+            entry_date: { gte: monthStart, lt: monthEndExclusive },
+          },
+          _sum: { vat_amount: true },
+        }),
+      ]);
+
+      const vatCollected = Number(incomeVat._sum.vat_amount || 0);
+      const vatPaid = Number(expenseVat._sum.vat_amount || 0);
+
+      return {
+        vatCollected,
+        vatPaid,
+        vatToPay: vatCollected - vatPaid,
+        monthStart: monthStartKey,
+        monthEnd: monthEndKey,
+      };
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to fetch VAT liability');
     }
   }
 

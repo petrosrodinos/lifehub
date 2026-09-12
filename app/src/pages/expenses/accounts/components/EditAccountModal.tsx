@@ -41,6 +41,7 @@ export function EditAccountModal({ isOpen, onClose, account }: EditAccountModalP
     icon: account.icon,
     color: account.color,
     balance: typeof account.balance === "string" ? parseFloat(account.balance) : account.balance,
+    is_professional: account.is_professional,
   };
 
   return (

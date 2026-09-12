@@ -16,6 +16,8 @@ import type {
   TransactionTrendData,
   MonthlyBudgetProgressData,
   MonthlyBudgetProgressQueryParams,
+  VatLiabilityData,
+  VatLiabilityQueryParams,
 } from '../interfaces/expense-entries.interfaces'
 
 export const getExpenseEntries = async (
@@ -125,5 +127,16 @@ export const getMonthlyBudgetProgress = async (
     return response.data
   } catch (error: any) {
     throw new Error(error.response?.data?.message || 'Failed to fetch monthly budget progress')
+  }
+}
+
+export const getVatLiability = async (
+  params: VatLiabilityQueryParams = getLocalMonthQueryParams(),
+): Promise<VatLiabilityData> => {
+  try {
+    const response = await axiosInstance.get(ApiRoutes.expenses.entries.analytics.vatLiability, { params })
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to fetch VAT liability')
   }
 }
