@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { DisplayMessage } from '../../features/assistant/interfaces/chat.interface'
+import { useVoiceOutputStore } from '../../store/voice-output-store'
 import { ChatMessageBubble } from './ChatMessageBubble'
 
 interface ChatMessageListProps {
@@ -15,6 +16,12 @@ export function ChatMessageList({ messages, isLoading, emptySubtitle }: ChatMess
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
     }, [messages, isLoading])
+
+    useEffect(() => {
+        return () => {
+            useVoiceOutputStore.getState().setSpeakingId(null)
+        }
+    }, [])
 
     return (
         <div className="overflow-y-auto flex-1">

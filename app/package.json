@@ -11,6 +11,8 @@
     "build:android": "tsc -b && vite build && npx cap copy android && npx cap sync android"
   },
   "dependencies": {
+    "@capacitor-community/speech-recognition": "^7.0.1",
+    "@capacitor-community/text-to-speech": "^8.0.2",
     "@capacitor/android": "^8.1.0",
     "@capacitor/camera": "^8.0.1",
     "@capacitor/cli": "^8.1.0",
@@ -40,6 +42,7 @@
     "@capacitor/assets": "^3.0.5",
     "@eslint/js": "^9.39.1",
     "@tailwindcss/vite": "^4.1.18",
+    "@types/dom-speech-recognition": "^0.0.6",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",

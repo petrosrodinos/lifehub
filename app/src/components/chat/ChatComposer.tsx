@@ -1,5 +1,7 @@
-import { useState, useCallback, type KeyboardEvent } from 'react'
-import { Send, Loader2 } from 'lucide-react'
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react'
+import toast from 'react-hot-toast'
+import { Send, Loader2, Mic, MicOff } from 'lucide-react'
+import { useVoiceInput } from '../../hooks/use-voice-input'
 
 interface ChatComposerProps {
     onSend: (content: string) => void
@@ -10,6 +12,12 @@ interface ChatComposerProps {
     variant?: 'page' | 'inline'
 }
 
+function joinWithSpace(base: string, addition: string): string {
+    if (!base.trim()) return addition
+    if (!addition.trim()) return base
+    return `${base} ${addition}`
+}
+
 export function ChatComposer({
     onSend,
     disabled,
@@ -18,13 +26,37 @@ export function ChatComposer({
     variant = 'page',
 }: ChatComposerProps) {
     const [value, setValue] = useState('')
+    const baseValueRef = useRef('')
+
+    const handleTranscript = useCallback((text: string) => {
+        setValue(joinWithSpace(baseValueRef.current, text))
+    }, [])
+
+    const { isListening, isSupported: isMicSupported, error: voiceError, start, stop } = useVoiceInput(handleTranscript)
+
+    useEffect(() => {
+        if (voiceError) {
+            toast.error(voiceError, { duration: 3000 })
+        }
+    }, [voiceError])
+
+    const handleMicClick = useCallback(() => {
+        if (isListening) {
+            void stop()
+            return
+        }
+
+        baseValueRef.current = value
+        void start()
+    }, [isListening, start, stop, value])
 
     const handleSend = useCallback(() => {
         const trimmed = value.trim()
         if (!trimmed || disabled || isPending) return
+        if (isListening) void stop()
         onSend(trimmed)
         setValue('')
-    }, [value, disabled, isPending, onSend])
+    }, [value, disabled, isPending, onSend, isListening, stop])
 
     const handleKeyDown = useCallback(
         (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -53,6 +85,24 @@ export function ChatComposer({
                     disabled={disabled || isPending}
                     className="flex-1 resize-none bg-slate-800/60 border border-slate-700/60 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-violet-500/60 min-h-[48px] max-h-32 disabled:opacity-50"
                 />
+                {isMicSupported && (
+                    <button
+                        type="button"
+                        onClick={handleMicClick}
+                        disabled={disabled || isPending}
+                        aria-label={isListening ? 'Stop voice input' : 'Start voice input'}
+                        className={`relative flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-xl border transition-colors disabled:opacity-40 ${
+                            isListening
+                                ? 'bg-red-500/10 border-red-500/40 text-red-400'
+                                : 'bg-slate-800/60 border-slate-700/60 text-slate-400 hover:text-white'
+                        }`}
+                    >
+                        {isListening && (
+                            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-red-500 animate-ping" />
+                        )}
+                        {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+                    </button>
+                )}
                 <button
                     type="button"
                     onClick={handleSend}

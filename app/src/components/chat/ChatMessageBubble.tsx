@@ -1,7 +1,10 @@
 import ReactMarkdown from 'react-markdown'
 import type { Components } from 'react-markdown'
+import { Volume2, Square } from 'lucide-react'
 import type { DisplayMessage } from '../../features/assistant/interfaces/chat.interface'
 import { stripMarkdownImages } from '../../features/assistant/utils/strip-markdown-images.utils'
+import { stripMarkdownForSpeech } from '../../features/assistant/utils/strip-markdown-for-speech.utils'
+import { useVoiceOutput } from '../../hooks/use-voice-output'
 import { ChatMessageImage } from './ChatMessageImage'
 
 const assistantMarkdownComponents: Components = {
@@ -25,6 +28,17 @@ export function ChatMessageBubble({ message }: ChatMessageBubbleProps) {
               message.content,
               images.map((image) => image.url),
           )
+
+    const { speakingId, isSupported: isTtsSupported, speak, stop } = useVoiceOutput()
+    const isThisSpeaking = speakingId === message.uuid
+
+    const handleToggleSpeak = () => {
+        if (isThisSpeaking) {
+            void stop()
+        } else {
+            void speak(stripMarkdownForSpeech(displayContent), message.uuid)
+        }
+    }
 
     return (
         <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
@@ -57,11 +71,21 @@ export function ChatMessageBubble({ message }: ChatMessageBubbleProps) {
                         ))}
                     </div>
                 )}
-                {!isUser && searchedNotes && !isPending && (
-                    <p className="mt-2 text-xs text-violet-300/80">Searched your notes</p>
-                )}
-                {!isUser && generatedImage && images.length === 0 && !isPending && (
-                    <p className="mt-2 text-xs text-violet-300/80">Generated an image</p>
+                {!isUser && !isPending && (isTtsSupported || searchedNotes || (generatedImage && images.length === 0)) && (
+                    <div className="mt-2 flex items-center gap-2">
+                        {isTtsSupported && (
+                            <button
+                                type="button"
+                                onClick={handleToggleSpeak}
+                                aria-label={isThisSpeaking ? 'Stop reading aloud' : 'Read aloud'}
+                                className="flex-shrink-0 p-1.5 bg-violet-500/10 rounded-lg text-violet-400 hover:text-violet-300 transition-colors"
+                            >
+                                {isThisSpeaking ? <Square className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+                            </button>
+                        )}
+                        {searchedNotes && <p className="text-xs text-violet-300/80">Searched your notes</p>}
+                        {generatedImage && images.length === 0 && <p className="text-xs text-violet-300/80">Generated an image</p>}
+                    </div>
                 )}
             </div>
         </div>
