@@ -90,6 +90,7 @@ export interface AnalyticsQueryParams {
   account_uuids?: string;
   from_date?: string;
   to_date?: string;
+  has_vat?: boolean;
 }
 
 export interface BalanceTrendData {

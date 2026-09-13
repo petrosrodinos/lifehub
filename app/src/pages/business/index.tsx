@@ -1,7 +1,5 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { Briefcase } from "lucide-react";
-import { useExpenseAccounts } from "../../features/expenses/expense-accounts/hooks/use-expense-accounts";
-import type { ExpenseAccount } from "../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 import type { ExpenseEntryType } from "../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { getLocalMonthQueryParams } from "../../features/expenses/expense-entries/utils/month-query-params.helper";
 import { MonthPicker } from "../../components/ui/MonthPicker";
@@ -22,11 +20,6 @@ function getMonthDateRange(year: number, month: number) {
 }
 
 export function BusinessPage() {
-  const { data: accountsData } = useExpenseAccounts();
-  const accounts = accountsData || [];
-  const accountsFilter = useCallback((account: ExpenseAccount) => account.is_professional === true, []);
-  const hasProfessionalAccounts = accounts.some((account) => account.is_professional);
-
   const [selectedAccounts, setSelectedAccounts] = useState<string[]>([]);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
@@ -62,66 +55,54 @@ export function BusinessPage() {
           </div>
           <div>
             <h1 className="text-2xl font-semibold text-white">Business</h1>
-            <p className="text-sm text-slate-500">Professional accounts, transactions and VAT liability</p>
+            <p className="text-sm text-slate-500">VAT-taxed transactions and VAT liability, across all accounts</p>
           </div>
         </header>
 
-        {!hasProfessionalAccounts ? (
-          <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/50 p-8 text-center">
-            <p className="text-slate-300 font-medium">No professional accounts yet</p>
-            <p className="text-sm text-slate-500 mt-1">
-              Mark an account as "Professional / Business account" from the Expenses page to see it here.
-            </p>
-          </div>
-        ) : (
-          <>
-            <AccountFilters
-              accountsFilter={accountsFilter}
-              selectedAccounts={selectedAccounts}
-              onAccountsChange={handleFilterChange(setSelectedAccounts)}
-              fromDate={fromDate}
-              onFromDateChange={handleFilterChange(setFromDate)}
-              toDate={toDate}
-              onToDateChange={handleFilterChange(setToDate)}
-              type={type}
-              onTypeChange={handleFilterChange(setType)}
-              categoryUuid={categoryUuid}
-              onCategoryChange={handleFilterChange(setCategoryUuid)}
-              subcategoryUuid={subcategoryUuid}
-              onSubcategoryChange={handleFilterChange(setSubcategoryUuid)}
-            />
+        <AccountFilters
+          selectedAccounts={selectedAccounts}
+          onAccountsChange={handleFilterChange(setSelectedAccounts)}
+          fromDate={fromDate}
+          onFromDateChange={handleFilterChange(setFromDate)}
+          toDate={toDate}
+          onToDateChange={handleFilterChange(setToDate)}
+          type={type}
+          onTypeChange={handleFilterChange(setType)}
+          categoryUuid={categoryUuid}
+          onCategoryChange={handleFilterChange(setCategoryUuid)}
+          subcategoryUuid={subcategoryUuid}
+          onSubcategoryChange={handleFilterChange(setSubcategoryUuid)}
+        />
 
-            <AccountStatsCards
-              accountsFilter={accountsFilter}
-              selectedAccounts={selectedAccounts}
-              setSelectedAccounts={setSelectedAccounts}
-              fromDate={fromDate}
-              toDate={toDate}
-            />
+        <AccountStatsCards
+          selectedAccounts={selectedAccounts}
+          setSelectedAccounts={setSelectedAccounts}
+          fromDate={fromDate}
+          toDate={toDate}
+          hasVatOnly
+        />
 
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-white">VAT</h2>
-              <MonthPicker year={vatYear} month={vatMonth} onChange={handleVatMonthChange} />
-            </div>
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-white">VAT</h2>
+          <MonthPicker year={vatYear} month={vatMonth} onChange={handleVatMonthChange} />
+        </div>
 
-            <VatLiabilityCard year={vatYear} month={vatMonth} />
+        <VatLiabilityCard year={vatYear} month={vatMonth} />
 
-            <h2 className="text-lg font-semibold text-white">VAT Transactions</h2>
+        <h2 className="text-lg font-semibold text-white">VAT Transactions</h2>
 
-            <TransactionsListSection
-              selectedAccounts={[]}
-              fromDate={vatDateRange.from}
-              toDate={vatDateRange.to}
-              type={type}
-              categoryUuid={categoryUuid}
-              subcategoryUuid={subcategoryUuid}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
-              showQuickStats={false}
-              hasVatOnly
-            />
-          </>
-        )}
+        <TransactionsListSection
+          selectedAccounts={[]}
+          fromDate={vatDateRange.from}
+          toDate={vatDateRange.to}
+          type={type}
+          categoryUuid={categoryUuid}
+          subcategoryUuid={subcategoryUuid}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+          showQuickStats={false}
+          hasVatOnly
+        />
       </div>
     </div>
   );

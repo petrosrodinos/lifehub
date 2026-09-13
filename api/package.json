@@ -53,8 +53,10 @@
     "@nestjs/mapped-types": "^2.1.0",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.1.6",
+    "@nestjs/platform-ws": "^11.2.3",
     "@nestjs/schedule": "^6.0.0",
     "@nestjs/swagger": "^11.2.0",
+    "@nestjs/websockets": "^11.2.3",
     "@openai/agents": "^0.11.4",
     "@pinecone-database/pinecone": "^7.2.0",
     "@prisma/adapter-pg": "^7.2.0",
@@ -93,6 +95,7 @@
     "twilio": "^5.7.2",
     "twitter-api-v2": "^1.23.2",
     "uuid": "^11.1.0",
+    "ws": "^8.21.3",
     "zod": "^4.3.6"
   },
   "devDependencies": {
@@ -107,6 +110,7 @@
     "@types/node": "^20.3.1",
     "@types/otp-generator": "^4.0.2",
     "@types/supertest": "^2.0.12",
+    "@types/ws": "^8.18.1",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "cross-env": "^7.0.3",

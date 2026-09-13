@@ -5,9 +5,10 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '@/core/databases/prisma/prisma.service';
-import { ChatMessage, ChatMessageRole, Prisma } from '@/generated/prisma';
+import { ChatConversation, ChatMessage, ChatMessageRole, Prisma } from '@/generated/prisma';
 import { AssistantOrchestratorService } from '@/integrations/assistant/assistant-orchestrator.service';
 import { AssistantConfig } from '@/integrations/assistant/config/assistant.config';
+import { AssistantGeneratedImage, AssistantToolTraceEntry } from '@/integrations/assistant/interfaces/assistant-run.interface';
 import { stripMarkdownImages } from '@/integrations/assistant/utils/strip-markdown-images.utils';
 import { CreateConversationDto } from './dto/create-conversation.dto';
 import { UpdateConversationDto } from './dto/update-conversation.dto';
@@ -194,47 +195,87 @@ export class ChatService {
                 conversation_uuid,
             );
 
-            const metadataPayload: Record<string, unknown> = {};
-            if (toolTrace.length > 0) metadataPayload.toolTrace = toolTrace;
-            if (images.length > 0) metadataPayload.images = images;
-            const metadata =
-                Object.keys(metadataPayload).length > 0
-                    ? (JSON.parse(JSON.stringify(metadataPayload)) as Prisma.InputJsonValue)
-                    : undefined;
-
-            const assistantContent = stripMarkdownImages(
-                assistantText,
-                images.map((image) => image.url),
-            );
-
-            const assistantMessage = await this.prisma.chatMessage.create({
-                data: {
-                    conversation_uuid,
-                    role: ChatMessageRole.ASSISTANT,
-                    content: assistantContent,
-                    metadata,
-                },
-            });
-
-            const titleUpdate =
-                conversation.title === DEFAULT_TITLE
-                    ? { title: this.truncateTitle(content) }
-                    : {};
-
-            await this.prisma.chatConversation.update({
-                where: { uuid: conversation_uuid },
-                data: { updated_at: new Date(), ...titleUpdate },
-            });
-
-            return {
-                userMessage,
-                assistantMessage,
-            };
+            return await this.persistAssistantReply(conversation, userMessage, assistantText, toolTrace, images);
         } catch (error) {
             this.logger.error(`Assistant run failed: ${error.message}`, error.stack);
             await this.prisma.chatMessage.delete({ where: { uuid: userMessage.uuid } });
             throw new InternalServerErrorException('Failed to generate assistant response');
         }
+    }
+
+    /**
+     * Persists a completed assistant reply (metadata, markdown-stripped content, title/updated_at
+     * bump) for an already-created user message. Shared by the text chat flow above and the voice
+     * mode gateway, so both produce byte-identical ChatMessage rows.
+     */
+    async persistAssistantReply(
+        conversation: ChatConversation,
+        userMessage: ChatMessage,
+        assistantText: string,
+        toolTrace: AssistantToolTraceEntry[],
+        images: AssistantGeneratedImage[],
+    ): Promise<{ userMessage: ChatMessage; assistantMessage: ChatMessage }> {
+        const metadataPayload: Record<string, unknown> = {};
+        if (toolTrace.length > 0) metadataPayload.toolTrace = toolTrace;
+        if (images.length > 0) metadataPayload.images = images;
+        const metadata =
+            Object.keys(metadataPayload).length > 0
+                ? (JSON.parse(JSON.stringify(metadataPayload)) as Prisma.InputJsonValue)
+                : undefined;
+
+        const assistantContent = stripMarkdownImages(
+            assistantText,
+            images.map((image) => image.url),
+        );
+
+        const assistantMessage = await this.prisma.chatMessage.create({
+            data: {
+                conversation_uuid: conversation.uuid,
+                role: ChatMessageRole.ASSISTANT,
+                content: assistantContent,
+                metadata,
+            },
+        });
+
+        const titleUpdate =
+            conversation.title === DEFAULT_TITLE
+                ? { title: this.truncateTitle(userMessage.content) }
+                : {};
+
+        await this.prisma.chatConversation.update({
+            where: { uuid: conversation.uuid },
+            data: { updated_at: new Date(), ...titleUpdate },
+        });
+
+        return {
+            userMessage,
+            assistantMessage,
+        };
+    }
+
+    /**
+     * Persists a fully-completed voice mode turn (both sides of the exchange already known up
+     * front, unlike the streaming text flow above, so there is no partial-write rollback case).
+     */
+    async persistVoiceTurn(
+        user_uuid: string,
+        conversation_uuid: string,
+        userContent: string,
+        assistantText: string,
+        toolTrace: AssistantToolTraceEntry[],
+        images: AssistantGeneratedImage[],
+    ): Promise<{ userMessage: ChatMessage; assistantMessage: ChatMessage }> {
+        const conversation = await this.findOneConversation(user_uuid, conversation_uuid);
+
+        const userMessage = await this.prisma.chatMessage.create({
+            data: {
+                conversation_uuid,
+                role: ChatMessageRole.USER,
+                content: userContent,
+            },
+        });
+
+        return this.persistAssistantReply(conversation, userMessage, assistantText, toolTrace, images);
     }
 
     private truncateTitle(text: string): string {

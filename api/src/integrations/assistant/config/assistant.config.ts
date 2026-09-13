@@ -9,6 +9,8 @@ export class AssistantConfig {
     readonly noteSnippetMaxChars: number;
     readonly toolTimeoutMs: number;
     readonly imageToolTimeoutMs: number;
+    readonly realtimeModel: string;
+    readonly realtimeVoice: string;
 
     constructor(private readonly configService: ConfigService) {
         this.model = this.configService.get<string>('ASSISTANT_MODEL') ?? 'gpt-4o-mini';
@@ -17,5 +19,7 @@ export class AssistantConfig {
         this.noteSnippetMaxChars = Number(this.configService.get<string>('NOTE_SNIPPET_MAX_CHARS') ?? 600);
         this.toolTimeoutMs = Number(this.configService.get<string>('ASSISTANT_TOOL_TIMEOUT_MS') ?? 15000);
         this.imageToolTimeoutMs = Number(this.configService.get<string>('ASSISTANT_IMAGE_TOOL_TIMEOUT_MS') ?? 60000);
+        this.realtimeModel = this.configService.get<string>('ASSISTANT_REALTIME_MODEL') ?? 'gpt-realtime';
+        this.realtimeVoice = this.configService.get<string>('ASSISTANT_REALTIME_VOICE') ?? 'alloy';
     }
 }

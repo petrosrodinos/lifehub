@@ -5,6 +5,7 @@ export const AnalyticsQuerySchema = z.object({
   tag_uuid: z.string().uuid().optional(),
   from_date: z.string().optional().transform((val) => val && val.length > 0 ? new Date(val) : undefined),
   to_date: z.string().optional().transform((val) => val && val.length > 0 ? new Date(val) : undefined),
+  has_vat: z.coerce.boolean().optional(),
 });
 
 export type AnalyticsQueryType = z.infer<typeof AnalyticsQuerySchema>;

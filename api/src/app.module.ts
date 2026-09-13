@@ -39,6 +39,7 @@ import { HiddenActivitiesModule } from './modules/habbits/hidden-activities/hidd
 import { NotesModule } from './modules/notes/notes.module';
 import { NoteTagsModule } from './modules/notes/note-tags/note-tags.module';
 import { ChatModule } from './modules/chat/chat.module';
+import { VoiceModule } from './modules/voice/voice.module';
 import { InternalYoutubeScraperModule } from './modules/internal/youtube-scraper/youtube-scraper.module';
 import { FlashCardsModule } from './modules/flash-cards/flash-cards.module';
 import { QuizzesModule } from './modules/quizzes/quizzes.module';
@@ -83,6 +84,7 @@ import { QuizzesModule } from './modules/quizzes/quizzes.module';
     NotesModule,
     NoteTagsModule,
     ChatModule,
+    VoiceModule,
     InternalYoutubeScraperModule,
     FlashCardsModule,
     QuizzesModule,

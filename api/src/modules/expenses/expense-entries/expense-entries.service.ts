@@ -680,6 +680,10 @@ export class ExpenseEntriesService {
         };
       }
 
+      if (query.has_vat !== undefined) {
+        where.has_vat = query.has_vat;
+      }
+
       where.type = { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] };
 
       const entries = await this.prisma.expenseEntry.findMany({

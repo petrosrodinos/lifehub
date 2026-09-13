@@ -11,9 +11,10 @@ type AccountStatsCardsProps = {
   fromDate: string;
   toDate: string;
   accountsFilter?: (account: ExpenseAccount) => boolean;
+  hasVatOnly?: boolean;
 };
 
-export function AccountStatsCards({ selectedAccounts, setSelectedAccounts, fromDate, toDate, accountsFilter }: AccountStatsCardsProps) {
+export function AccountStatsCards({ selectedAccounts, setSelectedAccounts, fromDate, toDate, accountsFilter, hasVatOnly = false }: AccountStatsCardsProps) {
   const { data: accountsData } = useExpenseAccounts();
   const accounts = (accountsData || []).filter(accountsFilter ?? (() => true));
 
@@ -27,6 +28,7 @@ export function AccountStatsCards({ selectedAccounts, setSelectedAccounts, fromD
     account_uuids: selectedAccounts.join(","),
     from_date: fromDate,
     to_date: toDate,
+    ...(hasVatOnly && { has_vat: true }),
   };
 
   const { data: stats, isLoading: isLoadingStats } = useStats(analyticsParams);

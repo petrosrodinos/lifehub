@@ -1,23 +1,33 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Menu } from 'lucide-react'
+import { useQueryClient } from '@tanstack/react-query'
+import { AudioLines, Menu } from 'lucide-react'
 import { ConfirmationModal } from '../../components/ui/ConfirmationModal'
 import {
+    CONVERSATIONS_KEY,
     useAssistantConversations,
     useCreateConversation,
     useDeleteConversation,
     useUpdateConversation,
 } from '../../features/assistant/hooks/use-assistant-conversations'
-import { useAssistantMessages, useSendAssistantMessage } from '../../features/assistant/hooks/use-assistant-messages'
+import {
+    messagesKey,
+    useAssistantMessages,
+    useSendAssistantMessage,
+} from '../../features/assistant/hooks/use-assistant-messages'
 import type { DisplayMessage } from '../../features/assistant/interfaces/chat.interface'
 import { AssistantSidebar } from './components/AssistantSidebar'
 import { ChatComposer } from './components/ChatComposer'
 import { ChatMessageList } from './components/ChatMessageList'
 import { ChatTitleEditor } from './components/ChatTitleEditor'
+import { VoiceModeOverlay } from './components/VoiceModeOverlay'
 
 export function AssistantPage() {
     const [selectedUuid, setSelectedUuid] = useState<string | null>(null)
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [deleteTargetUuid, setDeleteTargetUuid] = useState<string | null>(null)
+    const [voiceModeOpen, setVoiceModeOpen] = useState(false)
+
+    const queryClient = useQueryClient()
 
     const { data: conversations = [], isLoading: conversationsLoading } = useAssistantConversations()
     const { data: messages = [], isLoading: messagesLoading } = useAssistantMessages(selectedUuid)
@@ -98,6 +108,15 @@ export function AssistantPage() {
         setDeleteTargetUuid(null)
     }, [deleteTargetUuid, deleteConversation, selectedUuid, createConversation])
 
+    const handleTurnPersisted = useCallback(
+        (conversationUuid: string) => {
+            queryClient.invalidateQueries({ queryKey: messagesKey(conversationUuid) })
+            queryClient.invalidateQueries({ queryKey: CONVERSATIONS_KEY })
+            setSelectedUuid((current) => current ?? conversationUuid)
+        },
+        [queryClient],
+    )
+
     const selectedTitle = conversations.find((c) => c.uuid === selectedUuid)?.title ?? 'Assistant'
 
     return (
@@ -138,6 +157,14 @@ export function AssistantPage() {
                         )}
                         <p className="text-slate-500 text-xs mt-0.5">Answers from your notes</p>
                     </div>
+                    <button
+                        type="button"
+                        onClick={() => setVoiceModeOpen(true)}
+                        aria-label="Start voice mode"
+                        className="p-2 text-violet-300 hover:text-violet-200 hover:bg-violet-500/10 rounded-lg transition-colors"
+                    >
+                        <AudioLines className="w-5 h-5" />
+                    </button>
                 </header>
 
                 {/* Scrollable message area positioned between header and composer */}
@@ -164,6 +191,13 @@ export function AssistantPage() {
                 confirmText="Delete"
                 variant="danger"
                 isPending={deleteConversation.isPending}
+            />
+
+            <VoiceModeOverlay
+                isOpen={voiceModeOpen}
+                conversationUuid={selectedUuid}
+                onClose={() => setVoiceModeOpen(false)}
+                onTurnPersisted={handleTurnPersisted}
             />
         </div>
     )
