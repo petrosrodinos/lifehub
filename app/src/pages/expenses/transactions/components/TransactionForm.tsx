@@ -2,6 +2,9 @@ import { useState, useCallback, useEffect } from "react";
 import type { CreateExpenseEntryDto, ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { useAuthStore } from "../../../../store/auth-store";
+import { useBusinessSettings } from "../../../../features/expenses/business-settings/hooks/use-business-settings";
+import { getPreviousMonthPeriod } from "../../utils/vat-period.helper";
+import type { VatPeriod } from "../../utils/vat-period.helper";
 import { getInitialFromAccountUuid } from "../../utils/resolve-default-account.helper";
 import { calculateVatAmount, evaluateAmountExpression } from "../utils/amount-calculator.helper";
 import { TransactionFormFields } from "./TransactionFormFields";
@@ -31,10 +34,21 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
   const [subcategoryUuid, setSubcategoryUuid] = useState(initialData?.subcategory_uuid || "");
   const [selectedTagUuids, setSelectedTagUuids] = useState<string[]>(initialData?.tag_uuids || []);
   const [entryDateTime, setEntryDateTime] = useState(toDatetimeLocalInputValue(initialData?.entry_date));
+  const { data: businessSettings } = useBusinessSettings();
+  const [vatPeriodOverride, setVatPeriodOverride] = useState<VatPeriod | null>(
+    initialData?.vat_period_year !== undefined && initialData?.vat_period_month !== undefined
+      ? { year: initialData.vat_period_year, month: initialData.vat_period_month }
+      : null,
+  );
+  const vatPeriod = vatPeriodOverride ?? getPreviousMonthPeriod(entryDateTime);
 
   const handleCategorySelect = useCallback((nextCategoryUuid: string, nextSubcategoryUuid: string) => {
     setCategoryUuid(nextCategoryUuid);
     setSubcategoryUuid(nextSubcategoryUuid);
+  }, []);
+
+  const handleVatPeriodChange = useCallback((year: number, month: number) => {
+    setVatPeriodOverride({ year, month });
   }, []);
 
   const handleVatAmountChange = useCallback((value: string) => {
@@ -56,6 +70,11 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
   }, [hasVat]);
 
   const isTransfer = type === ExpenseEntryTypes.TRANSFER;
+  const isVatPayment =
+    type === ExpenseEntryTypes.EXPENSE &&
+    Boolean(businessSettings?.vat_payment_category_uuid) &&
+    categoryUuid === businessSettings?.vat_payment_category_uuid &&
+    subcategoryUuid === businessSettings?.vat_payment_subcategory_uuid;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,6 +87,8 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
       amount: parseFloat(resolvedAmount),
       has_vat: hasVat,
       vat_amount: hasVat ? parseFloat(vatAmount) || 0 : undefined,
+      vat_period_year: isVatPayment ? vatPeriod.year : undefined,
+      vat_period_month: isVatPayment ? vatPeriod.month : undefined,
       description: description || undefined,
       from_account_uuid: fromAccountUuid,
       to_account_uuid: isTransfer ? toAccountUuid : undefined,
@@ -104,6 +125,9 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
         categoryUuid={categoryUuid}
         subcategoryUuid={subcategoryUuid}
         onCategorySelect={handleCategorySelect}
+        showVatPeriod={isVatPayment}
+        vatPeriod={vatPeriod}
+        onVatPeriodChange={handleVatPeriodChange}
         selectedTagUuids={selectedTagUuids}
         onTagsChange={setSelectedTagUuids}
         description={description}

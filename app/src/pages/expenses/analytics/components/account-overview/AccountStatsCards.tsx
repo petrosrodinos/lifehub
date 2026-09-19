@@ -28,7 +28,7 @@ export function AccountStatsCards({ selectedAccounts, setSelectedAccounts, fromD
     account_uuids: selectedAccounts.join(","),
     from_date: fromDate,
     to_date: toDate,
-    ...(hasVatOnly && { has_vat: true }),
+    ...(hasVatOnly && { has_vat: true, include_vat_payments: true }),
   };
 
   const { data: stats, isLoading: isLoadingStats } = useStats(analyticsParams);

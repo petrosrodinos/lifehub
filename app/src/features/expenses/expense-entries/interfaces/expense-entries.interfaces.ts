@@ -13,6 +13,8 @@ export interface ExpenseEntry {
   amount: string | number
   has_vat?: boolean
   vat_amount?: string | number | null
+  vat_period_year?: number | null
+  vat_period_month?: number | null
   description?: string
   from_account_uuid: string
   to_account_uuid?: string
@@ -34,6 +36,8 @@ export interface CreateExpenseEntryDto {
   amount: number
   has_vat?: boolean
   vat_amount?: number
+  vat_period_year?: number
+  vat_period_month?: number
   description?: string
   from_account_uuid: string
   to_account_uuid?: string
@@ -49,6 +53,8 @@ export interface UpdateExpenseEntryDto {
   amount?: number
   has_vat?: boolean
   vat_amount?: number
+  vat_period_year?: number
+  vat_period_month?: number
   description?: string
   from_account_uuid?: string
   to_account_uuid?: string
@@ -71,6 +77,8 @@ export interface ExpenseEntriesQueryParams {
   to_date?: string
   search?: string
   has_vat?: boolean
+  vat_period_year?: number
+  vat_period_month?: number
 }
 
 export interface ExpenseEntriesResponse {
@@ -91,6 +99,7 @@ export interface AnalyticsQueryParams {
   from_date?: string;
   to_date?: string;
   has_vat?: boolean;
+  include_vat_payments?: boolean;
 }
 
 export interface BalanceTrendData {
@@ -129,6 +138,9 @@ export interface VatLiabilityData {
   vatCollected: number;
   vatPaid: number;
   vatToPay: number;
+  vatPaymentConfigured: boolean;
+  vatPaymentsTotal: number;
+  vatPaymentsCount: number;
   monthStart: string;
   monthEnd: string;
 }

@@ -151,6 +151,10 @@ export const ApiRoutes = {
       update: (uuid: string) => `/hidden-categories/${uuid}`,
       delete: (uuid: string) => `/hidden-categories/${uuid}`,
     },
+    businessSettings: {
+      get: "/business-settings",
+      update: "/business-settings",
+    },
     hiddenSubcategories: {
       list: "/hidden-subcategories",
       create: "/hidden-subcategories",

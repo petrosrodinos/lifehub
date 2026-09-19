@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Briefcase } from "lucide-react";
+import { Briefcase, Settings } from "lucide-react";
 import type { ExpenseEntryType } from "../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { getLocalMonthQueryParams } from "../../features/expenses/expense-entries/utils/month-query-params.helper";
 import { MonthPicker } from "../../components/ui/MonthPicker";
@@ -7,6 +7,7 @@ import { AccountFilters } from "../expenses/analytics/components/account-overvie
 import { AccountStatsCards } from "../expenses/analytics/components/account-overview/AccountStatsCards";
 import { TransactionsListSection } from "../expenses/transactions/components/TransactionsListSection";
 import { VatLiabilityCard } from "./components/VatLiabilityCard";
+import { BusinessSettingsModal } from "./components/BusinessSettingsModal";
 
 const pad = (value: number) => String(value).padStart(2, "0");
 
@@ -27,6 +28,7 @@ export function BusinessPage() {
   const [categoryUuid, setCategoryUuid] = useState("");
   const [subcategoryUuid, setSubcategoryUuid] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const initialMonth = getLocalMonthQueryParams();
   const [vatYear, setVatYear] = useState(initialMonth.year);
@@ -53,11 +55,21 @@ export function BusinessPage() {
           <div className="w-11 h-11 rounded-xl bg-violet-600/20 border border-violet-600/30 flex items-center justify-center">
             <Briefcase className="w-5 h-5 text-violet-400" />
           </div>
-          <div>
+          <div className="flex-1 min-w-0">
             <h1 className="text-2xl font-semibold text-white">Business</h1>
             <p className="text-sm text-slate-500">VAT-taxed transactions and VAT liability, across all accounts</p>
           </div>
+          <button
+            type="button"
+            onClick={() => setIsSettingsOpen(true)}
+            className="flex items-center gap-2 px-3 py-2 bg-slate-800/50 hover:bg-slate-800 text-slate-300 text-sm font-medium rounded-lg transition-colors"
+          >
+            <Settings className="w-4 h-4" />
+            <span className="hidden sm:inline">Settings</span>
+          </button>
         </header>
+
+        <BusinessSettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
 
         <AccountFilters
           selectedAccounts={selectedAccounts}
@@ -102,6 +114,7 @@ export function BusinessPage() {
           onPageChange={setCurrentPage}
           showQuickStats={false}
           hasVatOnly
+          vatPeriod={{ year: vatYear, month: vatMonth }}
         />
       </div>
     </div>

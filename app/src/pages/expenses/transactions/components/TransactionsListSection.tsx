@@ -2,6 +2,7 @@ import { useExpenseEntries } from '../../../../features/expenses/expense-entries
 import type { ExpenseEntry, ExpenseEntryType } from '../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces'
 import { ExpenseEntryTypes } from '../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces'
 import { formatAmount } from '../../utils/transaction'
+import type { VatPeriod } from '../../utils/vat-period.helper'
 import { TransactionCard } from './TransactionCard'
 import { TransactionsLoading } from './TransactionsLoading'
 import { TransactionsEmptyState } from './TransactionsEmptyState'
@@ -21,6 +22,7 @@ type TransactionsListSectionProps = {
   itemsPerPage?: number
   showQuickStats?: boolean
   hasVatOnly?: boolean
+  vatPeriod?: VatPeriod
   onDuplicate?: (transaction: ExpenseEntry) => void
   onCreatePreset?: (transaction: ExpenseEntry) => void
   onTrackProduct?: (transaction: ExpenseEntry) => void
@@ -38,6 +40,7 @@ export function TransactionsListSection({
   itemsPerPage = ITEMS_PER_PAGE,
   showQuickStats = true,
   hasVatOnly = false,
+  vatPeriod,
   onDuplicate,
   onCreatePreset,
   onTrackProduct,
@@ -52,6 +55,7 @@ export function TransactionsListSection({
     ...(fromDate && { from_date: fromDate }),
     ...(toDate && { to_date: toDate }),
     ...(hasVatOnly && { has_vat: true }),
+    ...(hasVatOnly && vatPeriod && { vat_period_year: vatPeriod.year, vat_period_month: vatPeriod.month }),
   })
 
   const transactions = data?.data || []

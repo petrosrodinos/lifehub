@@ -159,6 +159,11 @@ export type HiddenCategory = $Result.DefaultSelection<Prisma.$HiddenCategoryPayl
  */
 export type HiddenSubcategory = $Result.DefaultSelection<Prisma.$HiddenSubcategoryPayload>
 /**
+ * Model BusinessSettings
+ * 
+ */
+export type BusinessSettings = $Result.DefaultSelection<Prisma.$BusinessSettingsPayload>
+/**
  * Model ChatConversation
  * 
  */
@@ -900,6 +905,16 @@ export class PrismaClient<
   get hiddenSubcategory(): Prisma.HiddenSubcategoryDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.businessSettings`: Exposes CRUD operations for the **BusinessSettings** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BusinessSettings
+    * const businessSettings = await prisma.businessSettings.findMany()
+    * ```
+    */
+  get businessSettings(): Prisma.BusinessSettingsDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.chatConversation`: Exposes CRUD operations for the **ChatConversation** model.
     * Example usage:
     * ```ts
@@ -1461,6 +1476,7 @@ export namespace Prisma {
     HiddenActivity: 'HiddenActivity',
     HiddenCategory: 'HiddenCategory',
     HiddenSubcategory: 'HiddenSubcategory',
+    BusinessSettings: 'BusinessSettings',
     ChatConversation: 'ChatConversation',
     FlashCardGroup: 'FlashCardGroup',
     FlashCard: 'FlashCard',
@@ -1486,7 +1502,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseEntryPreset" | "expenseTag" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "productPurchase" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "noteTag" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory" | "chatConversation" | "flashCardGroup" | "flashCard" | "flashCardImage" | "quizGroup" | "quizQuestion" | "quizQuestionOption" | "quizAttempt" | "quizAttemptAnswer" | "chatMessage"
+      modelProps: "user" | "activity" | "scheduleSlot" | "activitySchedule" | "activityScheduleWeekday" | "activityScheduleDate" | "activityOccurrence" | "activityLog" | "expenseAccount" | "expenseCategory" | "expenseSubcategory" | "expenseEntry" | "expenseEntryPreset" | "expenseTag" | "expenseStore" | "expenseReceipt" | "expenseProduct" | "expenseReceiptItem" | "productPurchase" | "muscleGroup" | "exercise" | "workout" | "workoutEntry" | "workoutSet" | "note" | "noteTag" | "hiddenActivity" | "hiddenCategory" | "hiddenSubcategory" | "businessSettings" | "chatConversation" | "flashCardGroup" | "flashCard" | "flashCardImage" | "quizGroup" | "quizQuestion" | "quizQuestionOption" | "quizAttempt" | "quizAttemptAnswer" | "chatMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3636,6 +3652,80 @@ export namespace Prisma {
           }
         }
       }
+      BusinessSettings: {
+        payload: Prisma.$BusinessSettingsPayload<ExtArgs>
+        fields: Prisma.BusinessSettingsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BusinessSettingsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BusinessSettingsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload>
+          }
+          findFirst: {
+            args: Prisma.BusinessSettingsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BusinessSettingsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload>
+          }
+          findMany: {
+            args: Prisma.BusinessSettingsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload>[]
+          }
+          create: {
+            args: Prisma.BusinessSettingsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload>
+          }
+          createMany: {
+            args: Prisma.BusinessSettingsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BusinessSettingsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload>[]
+          }
+          delete: {
+            args: Prisma.BusinessSettingsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload>
+          }
+          update: {
+            args: Prisma.BusinessSettingsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload>
+          }
+          deleteMany: {
+            args: Prisma.BusinessSettingsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BusinessSettingsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BusinessSettingsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload>[]
+          }
+          upsert: {
+            args: Prisma.BusinessSettingsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessSettingsPayload>
+          }
+          aggregate: {
+            args: Prisma.BusinessSettingsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBusinessSettings>
+          }
+          groupBy: {
+            args: Prisma.BusinessSettingsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BusinessSettingsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BusinessSettingsCountArgs<ExtArgs>
+            result: $Utils.Optional<BusinessSettingsCountAggregateOutputType> | number
+          }
+        }
+      }
       ChatConversation: {
         payload: Prisma.$ChatConversationPayload<ExtArgs>
         fields: Prisma.ChatConversationFieldRefs
@@ -4513,6 +4603,7 @@ export namespace Prisma {
     hiddenActivity?: HiddenActivityOmit
     hiddenCategory?: HiddenCategoryOmit
     hiddenSubcategory?: HiddenSubcategoryOmit
+    businessSettings?: BusinessSettingsOmit
     chatConversation?: ChatConversationOmit
     flashCardGroup?: FlashCardGroupOmit
     flashCard?: FlashCardOmit
@@ -5047,6 +5138,7 @@ export namespace Prisma {
     entry_presets: number
     products: number
     hidden_categories: number
+    business_settings: number
   }
 
   export type ExpenseCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5055,6 +5147,7 @@ export namespace Prisma {
     entry_presets?: boolean | ExpenseCategoryCountOutputTypeCountEntry_presetsArgs
     products?: boolean | ExpenseCategoryCountOutputTypeCountProductsArgs
     hidden_categories?: boolean | ExpenseCategoryCountOutputTypeCountHidden_categoriesArgs
+    business_settings?: boolean | ExpenseCategoryCountOutputTypeCountBusiness_settingsArgs
   }
 
   // Custom InputTypes
@@ -5103,6 +5196,13 @@ export namespace Prisma {
     where?: HiddenCategoryWhereInput
   }
 
+  /**
+   * ExpenseCategoryCountOutputType without action
+   */
+  export type ExpenseCategoryCountOutputTypeCountBusiness_settingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BusinessSettingsWhereInput
+  }
+
 
   /**
    * Count Type ExpenseSubcategoryCountOutputType
@@ -5113,6 +5213,7 @@ export namespace Prisma {
     entry_presets: number
     products: number
     hidden_subcategories: number
+    business_settings: number
   }
 
   export type ExpenseSubcategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5120,6 +5221,7 @@ export namespace Prisma {
     entry_presets?: boolean | ExpenseSubcategoryCountOutputTypeCountEntry_presetsArgs
     products?: boolean | ExpenseSubcategoryCountOutputTypeCountProductsArgs
     hidden_subcategories?: boolean | ExpenseSubcategoryCountOutputTypeCountHidden_subcategoriesArgs
+    business_settings?: boolean | ExpenseSubcategoryCountOutputTypeCountBusiness_settingsArgs
   }
 
   // Custom InputTypes
@@ -5159,6 +5261,13 @@ export namespace Prisma {
    */
   export type ExpenseSubcategoryCountOutputTypeCountHidden_subcategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: HiddenSubcategoryWhereInput
+  }
+
+  /**
+   * ExpenseSubcategoryCountOutputType without action
+   */
+  export type ExpenseSubcategoryCountOutputTypeCountBusiness_settingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BusinessSettingsWhereInput
   }
 
 
@@ -6015,6 +6124,7 @@ export namespace Prisma {
     subcategories?: boolean | User$subcategoriesArgs<ExtArgs>
     hidden_categories?: boolean | User$hidden_categoriesArgs<ExtArgs>
     hidden_subcategories?: boolean | User$hidden_subcategoriesArgs<ExtArgs>
+    business_settings?: boolean | User$business_settingsArgs<ExtArgs>
     expense_receipts?: boolean | User$expense_receiptsArgs<ExtArgs>
     expense_stores?: boolean | User$expense_storesArgs<ExtArgs>
     expense_products?: boolean | User$expense_productsArgs<ExtArgs>
@@ -6091,6 +6201,7 @@ export namespace Prisma {
     subcategories?: boolean | User$subcategoriesArgs<ExtArgs>
     hidden_categories?: boolean | User$hidden_categoriesArgs<ExtArgs>
     hidden_subcategories?: boolean | User$hidden_subcategoriesArgs<ExtArgs>
+    business_settings?: boolean | User$business_settingsArgs<ExtArgs>
     expense_receipts?: boolean | User$expense_receiptsArgs<ExtArgs>
     expense_stores?: boolean | User$expense_storesArgs<ExtArgs>
     expense_products?: boolean | User$expense_productsArgs<ExtArgs>
@@ -6125,6 +6236,7 @@ export namespace Prisma {
       subcategories: Prisma.$ExpenseSubcategoryPayload<ExtArgs>[]
       hidden_categories: Prisma.$HiddenCategoryPayload<ExtArgs>[]
       hidden_subcategories: Prisma.$HiddenSubcategoryPayload<ExtArgs>[]
+      business_settings: Prisma.$BusinessSettingsPayload<ExtArgs> | null
       expense_receipts: Prisma.$ExpenseReceiptPayload<ExtArgs>[]
       expense_stores: Prisma.$ExpenseStorePayload<ExtArgs>[]
       expense_products: Prisma.$ExpenseProductPayload<ExtArgs>[]
@@ -6559,6 +6671,7 @@ export namespace Prisma {
     subcategories<T extends User$subcategoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$subcategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     hidden_categories<T extends User$hidden_categoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$hidden_categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     hidden_subcategories<T extends User$hidden_subcategoriesArgs<ExtArgs> = {}>(args?: Subset<T, User$hidden_subcategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    business_settings<T extends User$business_settingsArgs<ExtArgs> = {}>(args?: Subset<T, User$business_settingsArgs<ExtArgs>>): Prisma__BusinessSettingsClient<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     expense_receipts<T extends User$expense_receiptsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_receiptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_stores<T extends User$expense_storesArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_storesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseStorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     expense_products<T extends User$expense_productsArgs<ExtArgs> = {}>(args?: Subset<T, User$expense_productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7338,6 +7451,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: HiddenSubcategoryScalarFieldEnum | HiddenSubcategoryScalarFieldEnum[]
+  }
+
+  /**
+   * User.business_settings
+   */
+  export type User$business_settingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    where?: BusinessSettingsWhereInput
   }
 
   /**
@@ -17648,6 +17780,7 @@ export namespace Prisma {
     entry_presets?: boolean | ExpenseCategory$entry_presetsArgs<ExtArgs>
     products?: boolean | ExpenseCategory$productsArgs<ExtArgs>
     hidden_categories?: boolean | ExpenseCategory$hidden_categoriesArgs<ExtArgs>
+    business_settings?: boolean | ExpenseCategory$business_settingsArgs<ExtArgs>
     _count?: boolean | ExpenseCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expenseCategory"]>
 
@@ -17694,6 +17827,7 @@ export namespace Prisma {
     entry_presets?: boolean | ExpenseCategory$entry_presetsArgs<ExtArgs>
     products?: boolean | ExpenseCategory$productsArgs<ExtArgs>
     hidden_categories?: boolean | ExpenseCategory$hidden_categoriesArgs<ExtArgs>
+    business_settings?: boolean | ExpenseCategory$business_settingsArgs<ExtArgs>
     _count?: boolean | ExpenseCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExpenseCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17712,6 +17846,7 @@ export namespace Prisma {
       entry_presets: Prisma.$ExpenseEntryPresetPayload<ExtArgs>[]
       products: Prisma.$ExpenseProductPayload<ExtArgs>[]
       hidden_categories: Prisma.$HiddenCategoryPayload<ExtArgs>[]
+      business_settings: Prisma.$BusinessSettingsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -18122,6 +18257,7 @@ export namespace Prisma {
     entry_presets<T extends ExpenseCategory$entry_presetsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$entry_presetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPresetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     products<T extends ExpenseCategory$productsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     hidden_categories<T extends ExpenseCategory$hidden_categoriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$hidden_categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    business_settings<T extends ExpenseCategory$business_settingsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseCategory$business_settingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18699,6 +18835,30 @@ export namespace Prisma {
   }
 
   /**
+   * ExpenseCategory.business_settings
+   */
+  export type ExpenseCategory$business_settingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    where?: BusinessSettingsWhereInput
+    orderBy?: BusinessSettingsOrderByWithRelationInput | BusinessSettingsOrderByWithRelationInput[]
+    cursor?: BusinessSettingsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BusinessSettingsScalarFieldEnum | BusinessSettingsScalarFieldEnum[]
+  }
+
+  /**
    * ExpenseCategory without action
    */
   export type ExpenseCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18937,6 +19097,7 @@ export namespace Prisma {
     entry_presets?: boolean | ExpenseSubcategory$entry_presetsArgs<ExtArgs>
     products?: boolean | ExpenseSubcategory$productsArgs<ExtArgs>
     hidden_subcategories?: boolean | ExpenseSubcategory$hidden_subcategoriesArgs<ExtArgs>
+    business_settings?: boolean | ExpenseSubcategory$business_settingsArgs<ExtArgs>
     _count?: boolean | ExpenseSubcategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["expenseSubcategory"]>
 
@@ -18982,6 +19143,7 @@ export namespace Prisma {
     entry_presets?: boolean | ExpenseSubcategory$entry_presetsArgs<ExtArgs>
     products?: boolean | ExpenseSubcategory$productsArgs<ExtArgs>
     hidden_subcategories?: boolean | ExpenseSubcategory$hidden_subcategoriesArgs<ExtArgs>
+    business_settings?: boolean | ExpenseSubcategory$business_settingsArgs<ExtArgs>
     _count?: boolean | ExpenseSubcategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ExpenseSubcategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19002,6 +19164,7 @@ export namespace Prisma {
       entry_presets: Prisma.$ExpenseEntryPresetPayload<ExtArgs>[]
       products: Prisma.$ExpenseProductPayload<ExtArgs>[]
       hidden_subcategories: Prisma.$HiddenSubcategoryPayload<ExtArgs>[]
+      business_settings: Prisma.$BusinessSettingsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -19411,6 +19574,7 @@ export namespace Prisma {
     entry_presets<T extends ExpenseSubcategory$entry_presetsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$entry_presetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseEntryPresetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     products<T extends ExpenseSubcategory$productsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpenseProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     hidden_subcategories<T extends ExpenseSubcategory$hidden_subcategoriesArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$hidden_subcategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HiddenSubcategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    business_settings<T extends ExpenseSubcategory$business_settingsArgs<ExtArgs> = {}>(args?: Subset<T, ExpenseSubcategory$business_settingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19963,6 +20127,30 @@ export namespace Prisma {
   }
 
   /**
+   * ExpenseSubcategory.business_settings
+   */
+  export type ExpenseSubcategory$business_settingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    where?: BusinessSettingsWhereInput
+    orderBy?: BusinessSettingsOrderByWithRelationInput | BusinessSettingsOrderByWithRelationInput[]
+    cursor?: BusinessSettingsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BusinessSettingsScalarFieldEnum | BusinessSettingsScalarFieldEnum[]
+  }
+
+  /**
    * ExpenseSubcategory without action
    */
   export type ExpenseSubcategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19997,12 +20185,16 @@ export namespace Prisma {
     id: number | null
     amount: Decimal | null
     vat_amount: Decimal | null
+    vat_period_year: number | null
+    vat_period_month: number | null
   }
 
   export type ExpenseEntrySumAggregateOutputType = {
     id: number | null
     amount: Decimal | null
     vat_amount: Decimal | null
+    vat_period_year: number | null
+    vat_period_month: number | null
   }
 
   export type ExpenseEntryMinAggregateOutputType = {
@@ -20013,6 +20205,8 @@ export namespace Prisma {
     amount: Decimal | null
     has_vat: boolean | null
     vat_amount: Decimal | null
+    vat_period_year: number | null
+    vat_period_month: number | null
     description: string | null
     from_account_uuid: string | null
     to_account_uuid: string | null
@@ -20032,6 +20226,8 @@ export namespace Prisma {
     amount: Decimal | null
     has_vat: boolean | null
     vat_amount: Decimal | null
+    vat_period_year: number | null
+    vat_period_month: number | null
     description: string | null
     from_account_uuid: string | null
     to_account_uuid: string | null
@@ -20051,6 +20247,8 @@ export namespace Prisma {
     amount: number
     has_vat: number
     vat_amount: number
+    vat_period_year: number
+    vat_period_month: number
     description: number
     from_account_uuid: number
     to_account_uuid: number
@@ -20068,12 +20266,16 @@ export namespace Prisma {
     id?: true
     amount?: true
     vat_amount?: true
+    vat_period_year?: true
+    vat_period_month?: true
   }
 
   export type ExpenseEntrySumAggregateInputType = {
     id?: true
     amount?: true
     vat_amount?: true
+    vat_period_year?: true
+    vat_period_month?: true
   }
 
   export type ExpenseEntryMinAggregateInputType = {
@@ -20084,6 +20286,8 @@ export namespace Prisma {
     amount?: true
     has_vat?: true
     vat_amount?: true
+    vat_period_year?: true
+    vat_period_month?: true
     description?: true
     from_account_uuid?: true
     to_account_uuid?: true
@@ -20103,6 +20307,8 @@ export namespace Prisma {
     amount?: true
     has_vat?: true
     vat_amount?: true
+    vat_period_year?: true
+    vat_period_month?: true
     description?: true
     from_account_uuid?: true
     to_account_uuid?: true
@@ -20122,6 +20328,8 @@ export namespace Prisma {
     amount?: true
     has_vat?: true
     vat_amount?: true
+    vat_period_year?: true
+    vat_period_month?: true
     description?: true
     from_account_uuid?: true
     to_account_uuid?: true
@@ -20228,6 +20436,8 @@ export namespace Prisma {
     amount: Decimal
     has_vat: boolean
     vat_amount: Decimal | null
+    vat_period_year: number | null
+    vat_period_month: number | null
     description: string | null
     from_account_uuid: string
     to_account_uuid: string | null
@@ -20266,6 +20476,8 @@ export namespace Prisma {
     amount?: boolean
     has_vat?: boolean
     vat_amount?: boolean
+    vat_period_year?: boolean
+    vat_period_month?: boolean
     description?: boolean
     from_account_uuid?: boolean
     to_account_uuid?: boolean
@@ -20295,6 +20507,8 @@ export namespace Prisma {
     amount?: boolean
     has_vat?: boolean
     vat_amount?: boolean
+    vat_period_year?: boolean
+    vat_period_month?: boolean
     description?: boolean
     from_account_uuid?: boolean
     to_account_uuid?: boolean
@@ -20320,6 +20534,8 @@ export namespace Prisma {
     amount?: boolean
     has_vat?: boolean
     vat_amount?: boolean
+    vat_period_year?: boolean
+    vat_period_month?: boolean
     description?: boolean
     from_account_uuid?: boolean
     to_account_uuid?: boolean
@@ -20345,6 +20561,8 @@ export namespace Prisma {
     amount?: boolean
     has_vat?: boolean
     vat_amount?: boolean
+    vat_period_year?: boolean
+    vat_period_month?: boolean
     description?: boolean
     from_account_uuid?: boolean
     to_account_uuid?: boolean
@@ -20356,7 +20574,7 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type ExpenseEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "type" | "amount" | "has_vat" | "vat_amount" | "description" | "from_account_uuid" | "to_account_uuid" | "category_uuid" | "subcategory_uuid" | "preset_uuid" | "entry_date" | "created_at" | "updated_at", ExtArgs["result"]["expenseEntry"]>
+  export type ExpenseEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "type" | "amount" | "has_vat" | "vat_amount" | "vat_period_year" | "vat_period_month" | "description" | "from_account_uuid" | "to_account_uuid" | "category_uuid" | "subcategory_uuid" | "preset_uuid" | "entry_date" | "created_at" | "updated_at", ExtArgs["result"]["expenseEntry"]>
   export type ExpenseEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     from_account?: boolean | ExpenseAccountDefaultArgs<ExtArgs>
@@ -20407,6 +20625,8 @@ export namespace Prisma {
       amount: Prisma.Decimal
       has_vat: boolean
       vat_amount: Prisma.Decimal | null
+      vat_period_year: number | null
+      vat_period_month: number | null
       description: string | null
       from_account_uuid: string
       to_account_uuid: string | null
@@ -20855,6 +21075,8 @@ export namespace Prisma {
     readonly amount: FieldRef<"ExpenseEntry", 'Decimal'>
     readonly has_vat: FieldRef<"ExpenseEntry", 'Boolean'>
     readonly vat_amount: FieldRef<"ExpenseEntry", 'Decimal'>
+    readonly vat_period_year: FieldRef<"ExpenseEntry", 'Int'>
+    readonly vat_period_month: FieldRef<"ExpenseEntry", 'Int'>
     readonly description: FieldRef<"ExpenseEntry", 'String'>
     readonly from_account_uuid: FieldRef<"ExpenseEntry", 'String'>
     readonly to_account_uuid: FieldRef<"ExpenseEntry", 'String'>
@@ -42034,6 +42256,1183 @@ export namespace Prisma {
 
 
   /**
+   * Model BusinessSettings
+   */
+
+  export type AggregateBusinessSettings = {
+    _count: BusinessSettingsCountAggregateOutputType | null
+    _avg: BusinessSettingsAvgAggregateOutputType | null
+    _sum: BusinessSettingsSumAggregateOutputType | null
+    _min: BusinessSettingsMinAggregateOutputType | null
+    _max: BusinessSettingsMaxAggregateOutputType | null
+  }
+
+  export type BusinessSettingsAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type BusinessSettingsSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type BusinessSettingsMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    vat_payment_category_uuid: string | null
+    vat_payment_subcategory_uuid: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type BusinessSettingsMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_uuid: string | null
+    vat_payment_category_uuid: string | null
+    vat_payment_subcategory_uuid: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type BusinessSettingsCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_uuid: number
+    vat_payment_category_uuid: number
+    vat_payment_subcategory_uuid: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type BusinessSettingsAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type BusinessSettingsSumAggregateInputType = {
+    id?: true
+  }
+
+  export type BusinessSettingsMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    vat_payment_category_uuid?: true
+    vat_payment_subcategory_uuid?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type BusinessSettingsMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    vat_payment_category_uuid?: true
+    vat_payment_subcategory_uuid?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type BusinessSettingsCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_uuid?: true
+    vat_payment_category_uuid?: true
+    vat_payment_subcategory_uuid?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type BusinessSettingsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BusinessSettings to aggregate.
+     */
+    where?: BusinessSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BusinessSettings to fetch.
+     */
+    orderBy?: BusinessSettingsOrderByWithRelationInput | BusinessSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BusinessSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BusinessSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BusinessSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BusinessSettings
+    **/
+    _count?: true | BusinessSettingsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BusinessSettingsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BusinessSettingsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BusinessSettingsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BusinessSettingsMaxAggregateInputType
+  }
+
+  export type GetBusinessSettingsAggregateType<T extends BusinessSettingsAggregateArgs> = {
+        [P in keyof T & keyof AggregateBusinessSettings]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBusinessSettings[P]>
+      : GetScalarType<T[P], AggregateBusinessSettings[P]>
+  }
+
+
+
+
+  export type BusinessSettingsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BusinessSettingsWhereInput
+    orderBy?: BusinessSettingsOrderByWithAggregationInput | BusinessSettingsOrderByWithAggregationInput[]
+    by: BusinessSettingsScalarFieldEnum[] | BusinessSettingsScalarFieldEnum
+    having?: BusinessSettingsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BusinessSettingsCountAggregateInputType | true
+    _avg?: BusinessSettingsAvgAggregateInputType
+    _sum?: BusinessSettingsSumAggregateInputType
+    _min?: BusinessSettingsMinAggregateInputType
+    _max?: BusinessSettingsMaxAggregateInputType
+  }
+
+  export type BusinessSettingsGroupByOutputType = {
+    id: number
+    uuid: string
+    user_uuid: string
+    vat_payment_category_uuid: string | null
+    vat_payment_subcategory_uuid: string | null
+    created_at: Date
+    updated_at: Date
+    _count: BusinessSettingsCountAggregateOutputType | null
+    _avg: BusinessSettingsAvgAggregateOutputType | null
+    _sum: BusinessSettingsSumAggregateOutputType | null
+    _min: BusinessSettingsMinAggregateOutputType | null
+    _max: BusinessSettingsMaxAggregateOutputType | null
+  }
+
+  type GetBusinessSettingsGroupByPayload<T extends BusinessSettingsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BusinessSettingsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BusinessSettingsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BusinessSettingsGroupByOutputType[P]>
+            : GetScalarType<T[P], BusinessSettingsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BusinessSettingsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    vat_payment_category_uuid?: boolean
+    vat_payment_subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vat_payment_category?: boolean | BusinessSettings$vat_payment_categoryArgs<ExtArgs>
+    vat_payment_subcategory?: boolean | BusinessSettings$vat_payment_subcategoryArgs<ExtArgs>
+  }, ExtArgs["result"]["businessSettings"]>
+
+  export type BusinessSettingsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    vat_payment_category_uuid?: boolean
+    vat_payment_subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vat_payment_category?: boolean | BusinessSettings$vat_payment_categoryArgs<ExtArgs>
+    vat_payment_subcategory?: boolean | BusinessSettings$vat_payment_subcategoryArgs<ExtArgs>
+  }, ExtArgs["result"]["businessSettings"]>
+
+  export type BusinessSettingsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    vat_payment_category_uuid?: boolean
+    vat_payment_subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vat_payment_category?: boolean | BusinessSettings$vat_payment_categoryArgs<ExtArgs>
+    vat_payment_subcategory?: boolean | BusinessSettings$vat_payment_subcategoryArgs<ExtArgs>
+  }, ExtArgs["result"]["businessSettings"]>
+
+  export type BusinessSettingsSelectScalar = {
+    id?: boolean
+    uuid?: boolean
+    user_uuid?: boolean
+    vat_payment_category_uuid?: boolean
+    vat_payment_subcategory_uuid?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type BusinessSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "user_uuid" | "vat_payment_category_uuid" | "vat_payment_subcategory_uuid" | "created_at" | "updated_at", ExtArgs["result"]["businessSettings"]>
+  export type BusinessSettingsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vat_payment_category?: boolean | BusinessSettings$vat_payment_categoryArgs<ExtArgs>
+    vat_payment_subcategory?: boolean | BusinessSettings$vat_payment_subcategoryArgs<ExtArgs>
+  }
+  export type BusinessSettingsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vat_payment_category?: boolean | BusinessSettings$vat_payment_categoryArgs<ExtArgs>
+    vat_payment_subcategory?: boolean | BusinessSettings$vat_payment_subcategoryArgs<ExtArgs>
+  }
+  export type BusinessSettingsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    vat_payment_category?: boolean | BusinessSettings$vat_payment_categoryArgs<ExtArgs>
+    vat_payment_subcategory?: boolean | BusinessSettings$vat_payment_subcategoryArgs<ExtArgs>
+  }
+
+  export type $BusinessSettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BusinessSettings"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      vat_payment_category: Prisma.$ExpenseCategoryPayload<ExtArgs> | null
+      vat_payment_subcategory: Prisma.$ExpenseSubcategoryPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      uuid: string
+      user_uuid: string
+      vat_payment_category_uuid: string | null
+      vat_payment_subcategory_uuid: string | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["businessSettings"]>
+    composites: {}
+  }
+
+  type BusinessSettingsGetPayload<S extends boolean | null | undefined | BusinessSettingsDefaultArgs> = $Result.GetResult<Prisma.$BusinessSettingsPayload, S>
+
+  type BusinessSettingsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BusinessSettingsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BusinessSettingsCountAggregateInputType | true
+    }
+
+  export interface BusinessSettingsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BusinessSettings'], meta: { name: 'BusinessSettings' } }
+    /**
+     * Find zero or one BusinessSettings that matches the filter.
+     * @param {BusinessSettingsFindUniqueArgs} args - Arguments to find a BusinessSettings
+     * @example
+     * // Get one BusinessSettings
+     * const businessSettings = await prisma.businessSettings.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BusinessSettingsFindUniqueArgs>(args: SelectSubset<T, BusinessSettingsFindUniqueArgs<ExtArgs>>): Prisma__BusinessSettingsClient<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BusinessSettings that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BusinessSettingsFindUniqueOrThrowArgs} args - Arguments to find a BusinessSettings
+     * @example
+     * // Get one BusinessSettings
+     * const businessSettings = await prisma.businessSettings.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BusinessSettingsFindUniqueOrThrowArgs>(args: SelectSubset<T, BusinessSettingsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BusinessSettingsClient<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BusinessSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessSettingsFindFirstArgs} args - Arguments to find a BusinessSettings
+     * @example
+     * // Get one BusinessSettings
+     * const businessSettings = await prisma.businessSettings.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BusinessSettingsFindFirstArgs>(args?: SelectSubset<T, BusinessSettingsFindFirstArgs<ExtArgs>>): Prisma__BusinessSettingsClient<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BusinessSettings that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessSettingsFindFirstOrThrowArgs} args - Arguments to find a BusinessSettings
+     * @example
+     * // Get one BusinessSettings
+     * const businessSettings = await prisma.businessSettings.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BusinessSettingsFindFirstOrThrowArgs>(args?: SelectSubset<T, BusinessSettingsFindFirstOrThrowArgs<ExtArgs>>): Prisma__BusinessSettingsClient<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BusinessSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessSettingsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BusinessSettings
+     * const businessSettings = await prisma.businessSettings.findMany()
+     * 
+     * // Get first 10 BusinessSettings
+     * const businessSettings = await prisma.businessSettings.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const businessSettingsWithIdOnly = await prisma.businessSettings.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BusinessSettingsFindManyArgs>(args?: SelectSubset<T, BusinessSettingsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BusinessSettings.
+     * @param {BusinessSettingsCreateArgs} args - Arguments to create a BusinessSettings.
+     * @example
+     * // Create one BusinessSettings
+     * const BusinessSettings = await prisma.businessSettings.create({
+     *   data: {
+     *     // ... data to create a BusinessSettings
+     *   }
+     * })
+     * 
+     */
+    create<T extends BusinessSettingsCreateArgs>(args: SelectSubset<T, BusinessSettingsCreateArgs<ExtArgs>>): Prisma__BusinessSettingsClient<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BusinessSettings.
+     * @param {BusinessSettingsCreateManyArgs} args - Arguments to create many BusinessSettings.
+     * @example
+     * // Create many BusinessSettings
+     * const businessSettings = await prisma.businessSettings.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BusinessSettingsCreateManyArgs>(args?: SelectSubset<T, BusinessSettingsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BusinessSettings and returns the data saved in the database.
+     * @param {BusinessSettingsCreateManyAndReturnArgs} args - Arguments to create many BusinessSettings.
+     * @example
+     * // Create many BusinessSettings
+     * const businessSettings = await prisma.businessSettings.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BusinessSettings and only return the `id`
+     * const businessSettingsWithIdOnly = await prisma.businessSettings.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BusinessSettingsCreateManyAndReturnArgs>(args?: SelectSubset<T, BusinessSettingsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BusinessSettings.
+     * @param {BusinessSettingsDeleteArgs} args - Arguments to delete one BusinessSettings.
+     * @example
+     * // Delete one BusinessSettings
+     * const BusinessSettings = await prisma.businessSettings.delete({
+     *   where: {
+     *     // ... filter to delete one BusinessSettings
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BusinessSettingsDeleteArgs>(args: SelectSubset<T, BusinessSettingsDeleteArgs<ExtArgs>>): Prisma__BusinessSettingsClient<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BusinessSettings.
+     * @param {BusinessSettingsUpdateArgs} args - Arguments to update one BusinessSettings.
+     * @example
+     * // Update one BusinessSettings
+     * const businessSettings = await prisma.businessSettings.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BusinessSettingsUpdateArgs>(args: SelectSubset<T, BusinessSettingsUpdateArgs<ExtArgs>>): Prisma__BusinessSettingsClient<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BusinessSettings.
+     * @param {BusinessSettingsDeleteManyArgs} args - Arguments to filter BusinessSettings to delete.
+     * @example
+     * // Delete a few BusinessSettings
+     * const { count } = await prisma.businessSettings.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BusinessSettingsDeleteManyArgs>(args?: SelectSubset<T, BusinessSettingsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BusinessSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessSettingsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BusinessSettings
+     * const businessSettings = await prisma.businessSettings.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BusinessSettingsUpdateManyArgs>(args: SelectSubset<T, BusinessSettingsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BusinessSettings and returns the data updated in the database.
+     * @param {BusinessSettingsUpdateManyAndReturnArgs} args - Arguments to update many BusinessSettings.
+     * @example
+     * // Update many BusinessSettings
+     * const businessSettings = await prisma.businessSettings.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BusinessSettings and only return the `id`
+     * const businessSettingsWithIdOnly = await prisma.businessSettings.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BusinessSettingsUpdateManyAndReturnArgs>(args: SelectSubset<T, BusinessSettingsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BusinessSettings.
+     * @param {BusinessSettingsUpsertArgs} args - Arguments to update or create a BusinessSettings.
+     * @example
+     * // Update or create a BusinessSettings
+     * const businessSettings = await prisma.businessSettings.upsert({
+     *   create: {
+     *     // ... data to create a BusinessSettings
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BusinessSettings we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BusinessSettingsUpsertArgs>(args: SelectSubset<T, BusinessSettingsUpsertArgs<ExtArgs>>): Prisma__BusinessSettingsClient<$Result.GetResult<Prisma.$BusinessSettingsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BusinessSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessSettingsCountArgs} args - Arguments to filter BusinessSettings to count.
+     * @example
+     * // Count the number of BusinessSettings
+     * const count = await prisma.businessSettings.count({
+     *   where: {
+     *     // ... the filter for the BusinessSettings we want to count
+     *   }
+     * })
+    **/
+    count<T extends BusinessSettingsCountArgs>(
+      args?: Subset<T, BusinessSettingsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BusinessSettingsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BusinessSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessSettingsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BusinessSettingsAggregateArgs>(args: Subset<T, BusinessSettingsAggregateArgs>): Prisma.PrismaPromise<GetBusinessSettingsAggregateType<T>>
+
+    /**
+     * Group by BusinessSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessSettingsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BusinessSettingsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BusinessSettingsGroupByArgs['orderBy'] }
+        : { orderBy?: BusinessSettingsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BusinessSettingsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBusinessSettingsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BusinessSettings model
+   */
+  readonly fields: BusinessSettingsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BusinessSettings.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BusinessSettingsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    vat_payment_category<T extends BusinessSettings$vat_payment_categoryArgs<ExtArgs> = {}>(args?: Subset<T, BusinessSettings$vat_payment_categoryArgs<ExtArgs>>): Prisma__ExpenseCategoryClient<$Result.GetResult<Prisma.$ExpenseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    vat_payment_subcategory<T extends BusinessSettings$vat_payment_subcategoryArgs<ExtArgs> = {}>(args?: Subset<T, BusinessSettings$vat_payment_subcategoryArgs<ExtArgs>>): Prisma__ExpenseSubcategoryClient<$Result.GetResult<Prisma.$ExpenseSubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BusinessSettings model
+   */
+  interface BusinessSettingsFieldRefs {
+    readonly id: FieldRef<"BusinessSettings", 'Int'>
+    readonly uuid: FieldRef<"BusinessSettings", 'String'>
+    readonly user_uuid: FieldRef<"BusinessSettings", 'String'>
+    readonly vat_payment_category_uuid: FieldRef<"BusinessSettings", 'String'>
+    readonly vat_payment_subcategory_uuid: FieldRef<"BusinessSettings", 'String'>
+    readonly created_at: FieldRef<"BusinessSettings", 'DateTime'>
+    readonly updated_at: FieldRef<"BusinessSettings", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BusinessSettings findUnique
+   */
+  export type BusinessSettingsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which BusinessSettings to fetch.
+     */
+    where: BusinessSettingsWhereUniqueInput
+  }
+
+  /**
+   * BusinessSettings findUniqueOrThrow
+   */
+  export type BusinessSettingsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which BusinessSettings to fetch.
+     */
+    where: BusinessSettingsWhereUniqueInput
+  }
+
+  /**
+   * BusinessSettings findFirst
+   */
+  export type BusinessSettingsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which BusinessSettings to fetch.
+     */
+    where?: BusinessSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BusinessSettings to fetch.
+     */
+    orderBy?: BusinessSettingsOrderByWithRelationInput | BusinessSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BusinessSettings.
+     */
+    cursor?: BusinessSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BusinessSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BusinessSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BusinessSettings.
+     */
+    distinct?: BusinessSettingsScalarFieldEnum | BusinessSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * BusinessSettings findFirstOrThrow
+   */
+  export type BusinessSettingsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which BusinessSettings to fetch.
+     */
+    where?: BusinessSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BusinessSettings to fetch.
+     */
+    orderBy?: BusinessSettingsOrderByWithRelationInput | BusinessSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BusinessSettings.
+     */
+    cursor?: BusinessSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BusinessSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BusinessSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BusinessSettings.
+     */
+    distinct?: BusinessSettingsScalarFieldEnum | BusinessSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * BusinessSettings findMany
+   */
+  export type BusinessSettingsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which BusinessSettings to fetch.
+     */
+    where?: BusinessSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BusinessSettings to fetch.
+     */
+    orderBy?: BusinessSettingsOrderByWithRelationInput | BusinessSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BusinessSettings.
+     */
+    cursor?: BusinessSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BusinessSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BusinessSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BusinessSettings.
+     */
+    distinct?: BusinessSettingsScalarFieldEnum | BusinessSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * BusinessSettings create
+   */
+  export type BusinessSettingsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BusinessSettings.
+     */
+    data: XOR<BusinessSettingsCreateInput, BusinessSettingsUncheckedCreateInput>
+  }
+
+  /**
+   * BusinessSettings createMany
+   */
+  export type BusinessSettingsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BusinessSettings.
+     */
+    data: BusinessSettingsCreateManyInput | BusinessSettingsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BusinessSettings createManyAndReturn
+   */
+  export type BusinessSettingsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * The data used to create many BusinessSettings.
+     */
+    data: BusinessSettingsCreateManyInput | BusinessSettingsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BusinessSettings update
+   */
+  export type BusinessSettingsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BusinessSettings.
+     */
+    data: XOR<BusinessSettingsUpdateInput, BusinessSettingsUncheckedUpdateInput>
+    /**
+     * Choose, which BusinessSettings to update.
+     */
+    where: BusinessSettingsWhereUniqueInput
+  }
+
+  /**
+   * BusinessSettings updateMany
+   */
+  export type BusinessSettingsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BusinessSettings.
+     */
+    data: XOR<BusinessSettingsUpdateManyMutationInput, BusinessSettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which BusinessSettings to update
+     */
+    where?: BusinessSettingsWhereInput
+    /**
+     * Limit how many BusinessSettings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BusinessSettings updateManyAndReturn
+   */
+  export type BusinessSettingsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * The data used to update BusinessSettings.
+     */
+    data: XOR<BusinessSettingsUpdateManyMutationInput, BusinessSettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which BusinessSettings to update
+     */
+    where?: BusinessSettingsWhereInput
+    /**
+     * Limit how many BusinessSettings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BusinessSettings upsert
+   */
+  export type BusinessSettingsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BusinessSettings to update in case it exists.
+     */
+    where: BusinessSettingsWhereUniqueInput
+    /**
+     * In case the BusinessSettings found by the `where` argument doesn't exist, create a new BusinessSettings with this data.
+     */
+    create: XOR<BusinessSettingsCreateInput, BusinessSettingsUncheckedCreateInput>
+    /**
+     * In case the BusinessSettings was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BusinessSettingsUpdateInput, BusinessSettingsUncheckedUpdateInput>
+  }
+
+  /**
+   * BusinessSettings delete
+   */
+  export type BusinessSettingsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+    /**
+     * Filter which BusinessSettings to delete.
+     */
+    where: BusinessSettingsWhereUniqueInput
+  }
+
+  /**
+   * BusinessSettings deleteMany
+   */
+  export type BusinessSettingsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BusinessSettings to delete
+     */
+    where?: BusinessSettingsWhereInput
+    /**
+     * Limit how many BusinessSettings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BusinessSettings.vat_payment_category
+   */
+  export type BusinessSettings$vat_payment_categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseCategory
+     */
+    select?: ExpenseCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseCategory
+     */
+    omit?: ExpenseCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseCategoryInclude<ExtArgs> | null
+    where?: ExpenseCategoryWhereInput
+  }
+
+  /**
+   * BusinessSettings.vat_payment_subcategory
+   */
+  export type BusinessSettings$vat_payment_subcategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExpenseSubcategory
+     */
+    select?: ExpenseSubcategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExpenseSubcategory
+     */
+    omit?: ExpenseSubcategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseSubcategoryInclude<ExtArgs> | null
+    where?: ExpenseSubcategoryWhereInput
+  }
+
+  /**
+   * BusinessSettings without action
+   */
+  export type BusinessSettingsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessSettings
+     */
+    select?: BusinessSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessSettings
+     */
+    omit?: BusinessSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessSettingsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model ChatConversation
    */
 
@@ -54440,6 +55839,8 @@ export namespace Prisma {
     amount: 'amount',
     has_vat: 'has_vat',
     vat_amount: 'vat_amount',
+    vat_period_year: 'vat_period_year',
+    vat_period_month: 'vat_period_month',
     description: 'description',
     from_account_uuid: 'from_account_uuid',
     to_account_uuid: 'to_account_uuid',
@@ -54721,6 +56122,19 @@ export namespace Prisma {
   };
 
   export type HiddenSubcategoryScalarFieldEnum = (typeof HiddenSubcategoryScalarFieldEnum)[keyof typeof HiddenSubcategoryScalarFieldEnum]
+
+
+  export const BusinessSettingsScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_uuid: 'user_uuid',
+    vat_payment_category_uuid: 'vat_payment_category_uuid',
+    vat_payment_subcategory_uuid: 'vat_payment_subcategory_uuid',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type BusinessSettingsScalarFieldEnum = (typeof BusinessSettingsScalarFieldEnum)[keyof typeof BusinessSettingsScalarFieldEnum]
 
 
   export const ChatConversationScalarFieldEnum: {
@@ -55353,6 +56767,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryListRelationFilter
     hidden_categories?: HiddenCategoryListRelationFilter
     hidden_subcategories?: HiddenSubcategoryListRelationFilter
+    business_settings?: XOR<BusinessSettingsNullableScalarRelationFilter, BusinessSettingsWhereInput> | null
     expense_receipts?: ExpenseReceiptListRelationFilter
     expense_stores?: ExpenseStoreListRelationFilter
     expense_products?: ExpenseProductListRelationFilter
@@ -55394,6 +56809,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryOrderByRelationAggregateInput
     hidden_categories?: HiddenCategoryOrderByRelationAggregateInput
     hidden_subcategories?: HiddenSubcategoryOrderByRelationAggregateInput
+    business_settings?: BusinessSettingsOrderByWithRelationInput
     expense_receipts?: ExpenseReceiptOrderByRelationAggregateInput
     expense_stores?: ExpenseStoreOrderByRelationAggregateInput
     expense_products?: ExpenseProductOrderByRelationAggregateInput
@@ -55438,6 +56854,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryListRelationFilter
     hidden_categories?: HiddenCategoryListRelationFilter
     hidden_subcategories?: HiddenSubcategoryListRelationFilter
+    business_settings?: XOR<BusinessSettingsNullableScalarRelationFilter, BusinessSettingsWhereInput> | null
     expense_receipts?: ExpenseReceiptListRelationFilter
     expense_stores?: ExpenseStoreListRelationFilter
     expense_products?: ExpenseProductListRelationFilter
@@ -56230,6 +57647,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetListRelationFilter
     products?: ExpenseProductListRelationFilter
     hidden_categories?: HiddenCategoryListRelationFilter
+    business_settings?: BusinessSettingsListRelationFilter
   }
 
   export type ExpenseCategoryOrderByWithRelationInput = {
@@ -56247,6 +57665,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetOrderByRelationAggregateInput
     products?: ExpenseProductOrderByRelationAggregateInput
     hidden_categories?: HiddenCategoryOrderByRelationAggregateInput
+    business_settings?: BusinessSettingsOrderByRelationAggregateInput
   }
 
   export type ExpenseCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -56267,6 +57686,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetListRelationFilter
     products?: ExpenseProductListRelationFilter
     hidden_categories?: HiddenCategoryListRelationFilter
+    business_settings?: BusinessSettingsListRelationFilter
   }, "id" | "uuid">
 
   export type ExpenseCategoryOrderByWithAggregationInput = {
@@ -56316,6 +57736,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetListRelationFilter
     products?: ExpenseProductListRelationFilter
     hidden_subcategories?: HiddenSubcategoryListRelationFilter
+    business_settings?: BusinessSettingsListRelationFilter
   }
 
   export type ExpenseSubcategoryOrderByWithRelationInput = {
@@ -56332,6 +57753,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetOrderByRelationAggregateInput
     products?: ExpenseProductOrderByRelationAggregateInput
     hidden_subcategories?: HiddenSubcategoryOrderByRelationAggregateInput
+    business_settings?: BusinessSettingsOrderByRelationAggregateInput
   }
 
   export type ExpenseSubcategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -56351,6 +57773,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetListRelationFilter
     products?: ExpenseProductListRelationFilter
     hidden_subcategories?: HiddenSubcategoryListRelationFilter
+    business_settings?: BusinessSettingsListRelationFilter
   }, "id" | "uuid">
 
   export type ExpenseSubcategoryOrderByWithAggregationInput = {
@@ -56392,6 +57815,8 @@ export namespace Prisma {
     amount?: DecimalFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFilter<"ExpenseEntry"> | boolean
     vat_amount?: DecimalNullableFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: IntNullableFilter<"ExpenseEntry"> | number | null
+    vat_period_month?: IntNullableFilter<"ExpenseEntry"> | number | null
     description?: StringNullableFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
@@ -56420,6 +57845,8 @@ export namespace Prisma {
     amount?: SortOrder
     has_vat?: SortOrder
     vat_amount?: SortOrderInput | SortOrder
+    vat_period_year?: SortOrderInput | SortOrder
+    vat_period_month?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrderInput | SortOrder
@@ -56451,6 +57878,8 @@ export namespace Prisma {
     amount?: DecimalFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFilter<"ExpenseEntry"> | boolean
     vat_amount?: DecimalNullableFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: IntNullableFilter<"ExpenseEntry"> | number | null
+    vat_period_month?: IntNullableFilter<"ExpenseEntry"> | number | null
     description?: StringNullableFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
@@ -56479,6 +57908,8 @@ export namespace Prisma {
     amount?: SortOrder
     has_vat?: SortOrder
     vat_amount?: SortOrderInput | SortOrder
+    vat_period_year?: SortOrderInput | SortOrder
+    vat_period_month?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrderInput | SortOrder
@@ -56506,6 +57937,8 @@ export namespace Prisma {
     amount?: DecimalWithAggregatesFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string
     has_vat?: BoolWithAggregatesFilter<"ExpenseEntry"> | boolean
     vat_amount?: DecimalNullableWithAggregatesFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: IntNullableWithAggregatesFilter<"ExpenseEntry"> | number | null
+    vat_period_month?: IntNullableWithAggregatesFilter<"ExpenseEntry"> | number | null
     description?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringWithAggregatesFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableWithAggregatesFilter<"ExpenseEntry"> | string | null
@@ -57989,6 +59422,79 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"HiddenSubcategory"> | Date | string
   }
 
+  export type BusinessSettingsWhereInput = {
+    AND?: BusinessSettingsWhereInput | BusinessSettingsWhereInput[]
+    OR?: BusinessSettingsWhereInput[]
+    NOT?: BusinessSettingsWhereInput | BusinessSettingsWhereInput[]
+    id?: IntFilter<"BusinessSettings"> | number
+    uuid?: StringFilter<"BusinessSettings"> | string
+    user_uuid?: StringFilter<"BusinessSettings"> | string
+    vat_payment_category_uuid?: StringNullableFilter<"BusinessSettings"> | string | null
+    vat_payment_subcategory_uuid?: StringNullableFilter<"BusinessSettings"> | string | null
+    created_at?: DateTimeFilter<"BusinessSettings"> | Date | string
+    updated_at?: DateTimeFilter<"BusinessSettings"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    vat_payment_category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
+    vat_payment_subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
+  }
+
+  export type BusinessSettingsOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    vat_payment_category_uuid?: SortOrderInput | SortOrder
+    vat_payment_subcategory_uuid?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    user?: UserOrderByWithRelationInput
+    vat_payment_category?: ExpenseCategoryOrderByWithRelationInput
+    vat_payment_subcategory?: ExpenseSubcategoryOrderByWithRelationInput
+  }
+
+  export type BusinessSettingsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    uuid?: string
+    user_uuid?: string
+    AND?: BusinessSettingsWhereInput | BusinessSettingsWhereInput[]
+    OR?: BusinessSettingsWhereInput[]
+    NOT?: BusinessSettingsWhereInput | BusinessSettingsWhereInput[]
+    vat_payment_category_uuid?: StringNullableFilter<"BusinessSettings"> | string | null
+    vat_payment_subcategory_uuid?: StringNullableFilter<"BusinessSettings"> | string | null
+    created_at?: DateTimeFilter<"BusinessSettings"> | Date | string
+    updated_at?: DateTimeFilter<"BusinessSettings"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    vat_payment_category?: XOR<ExpenseCategoryNullableScalarRelationFilter, ExpenseCategoryWhereInput> | null
+    vat_payment_subcategory?: XOR<ExpenseSubcategoryNullableScalarRelationFilter, ExpenseSubcategoryWhereInput> | null
+  }, "id" | "uuid" | "user_uuid">
+
+  export type BusinessSettingsOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    vat_payment_category_uuid?: SortOrderInput | SortOrder
+    vat_payment_subcategory_uuid?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: BusinessSettingsCountOrderByAggregateInput
+    _avg?: BusinessSettingsAvgOrderByAggregateInput
+    _max?: BusinessSettingsMaxOrderByAggregateInput
+    _min?: BusinessSettingsMinOrderByAggregateInput
+    _sum?: BusinessSettingsSumOrderByAggregateInput
+  }
+
+  export type BusinessSettingsScalarWhereWithAggregatesInput = {
+    AND?: BusinessSettingsScalarWhereWithAggregatesInput | BusinessSettingsScalarWhereWithAggregatesInput[]
+    OR?: BusinessSettingsScalarWhereWithAggregatesInput[]
+    NOT?: BusinessSettingsScalarWhereWithAggregatesInput | BusinessSettingsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"BusinessSettings"> | number
+    uuid?: StringWithAggregatesFilter<"BusinessSettings"> | string
+    user_uuid?: StringWithAggregatesFilter<"BusinessSettings"> | string
+    vat_payment_category_uuid?: StringNullableWithAggregatesFilter<"BusinessSettings"> | string | null
+    vat_payment_subcategory_uuid?: StringNullableWithAggregatesFilter<"BusinessSettings"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"BusinessSettings"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"BusinessSettings"> | Date | string
+  }
+
   export type ChatConversationWhereInput = {
     AND?: ChatConversationWhereInput | ChatConversationWhereInput[]
     OR?: ChatConversationWhereInput[]
@@ -58966,6 +60472,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -59007,6 +60514,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -59047,6 +60555,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -59088,6 +60597,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -59904,6 +61414,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateInput = {
@@ -59920,6 +61431,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryUpdateInput = {
@@ -59935,6 +61447,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateInput = {
@@ -59951,6 +61464,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseCategoryCreateManyInput = {
@@ -59995,6 +61509,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateInput = {
@@ -60009,6 +61524,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryUpdateInput = {
@@ -60022,6 +61538,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateInput = {
@@ -60036,6 +61553,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseSubcategoryCreateManyInput = {
@@ -60071,6 +61589,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -60094,6 +61614,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -60114,6 +61636,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60137,6 +61661,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60159,6 +61685,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -60176,6 +61704,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60190,6 +61720,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61703,6 +63235,70 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BusinessSettingsCreateInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutBusiness_settingsInput
+    vat_payment_category?: ExpenseCategoryCreateNestedOneWithoutBusiness_settingsInput
+    vat_payment_subcategory?: ExpenseSubcategoryCreateNestedOneWithoutBusiness_settingsInput
+  }
+
+  export type BusinessSettingsUncheckedCreateInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    vat_payment_category_uuid?: string | null
+    vat_payment_subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type BusinessSettingsUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBusiness_settingsNestedInput
+    vat_payment_category?: ExpenseCategoryUpdateOneWithoutBusiness_settingsNestedInput
+    vat_payment_subcategory?: ExpenseSubcategoryUpdateOneWithoutBusiness_settingsNestedInput
+  }
+
+  export type BusinessSettingsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    vat_payment_category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_payment_subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BusinessSettingsCreateManyInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    vat_payment_category_uuid?: string | null
+    vat_payment_subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type BusinessSettingsUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BusinessSettingsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    vat_payment_category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_payment_subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ChatConversationCreateInput = {
     uuid?: string
     title?: string
@@ -62891,6 +64487,11 @@ export namespace Prisma {
     none?: HiddenSubcategoryWhereInput
   }
 
+  export type BusinessSettingsNullableScalarRelationFilter = {
+    is?: BusinessSettingsWhereInput | null
+    isNot?: BusinessSettingsWhereInput | null
+  }
+
   export type ExpenseReceiptListRelationFilter = {
     every?: ExpenseReceiptWhereInput
     some?: ExpenseReceiptWhereInput
@@ -63872,6 +65473,16 @@ export namespace Prisma {
     isNot?: UserWhereInput | null
   }
 
+  export type BusinessSettingsListRelationFilter = {
+    every?: BusinessSettingsWhereInput
+    some?: BusinessSettingsWhereInput
+    none?: BusinessSettingsWhereInput
+  }
+
+  export type BusinessSettingsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ExpenseCategoryCountOrderByAggregateInput = {
     id?: SortOrder
     uuid?: SortOrder
@@ -64017,6 +65628,8 @@ export namespace Prisma {
     amount?: SortOrder
     has_vat?: SortOrder
     vat_amount?: SortOrder
+    vat_period_year?: SortOrder
+    vat_period_month?: SortOrder
     description?: SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrder
@@ -64032,6 +65645,8 @@ export namespace Prisma {
     id?: SortOrder
     amount?: SortOrder
     vat_amount?: SortOrder
+    vat_period_year?: SortOrder
+    vat_period_month?: SortOrder
   }
 
   export type ExpenseEntryMaxOrderByAggregateInput = {
@@ -64042,6 +65657,8 @@ export namespace Prisma {
     amount?: SortOrder
     has_vat?: SortOrder
     vat_amount?: SortOrder
+    vat_period_year?: SortOrder
+    vat_period_month?: SortOrder
     description?: SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrder
@@ -64061,6 +65678,8 @@ export namespace Prisma {
     amount?: SortOrder
     has_vat?: SortOrder
     vat_amount?: SortOrder
+    vat_period_year?: SortOrder
+    vat_period_month?: SortOrder
     description?: SortOrder
     from_account_uuid?: SortOrder
     to_account_uuid?: SortOrder
@@ -64076,6 +65695,8 @@ export namespace Prisma {
     id?: SortOrder
     amount?: SortOrder
     vat_amount?: SortOrder
+    vat_period_year?: SortOrder
+    vat_period_month?: SortOrder
   }
 
   export type EnumExpenseEntryTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -65121,6 +66742,44 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type BusinessSettingsCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    vat_payment_category_uuid?: SortOrder
+    vat_payment_subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type BusinessSettingsAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type BusinessSettingsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    vat_payment_category_uuid?: SortOrder
+    vat_payment_subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type BusinessSettingsMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_uuid?: SortOrder
+    vat_payment_category_uuid?: SortOrder
+    vat_payment_subcategory_uuid?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type BusinessSettingsSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type NoteNullableScalarRelationFilter = {
     is?: NoteWhereInput | null
     isNot?: NoteWhereInput | null
@@ -66060,6 +67719,12 @@ export namespace Prisma {
     connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
   }
 
+  export type BusinessSettingsCreateNestedOneWithoutUserInput = {
+    create?: XOR<BusinessSettingsCreateWithoutUserInput, BusinessSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutUserInput
+    connect?: BusinessSettingsWhereUniqueInput
+  }
+
   export type ExpenseReceiptCreateNestedManyWithoutUserInput = {
     create?: XOR<ExpenseReceiptCreateWithoutUserInput, ExpenseReceiptUncheckedCreateWithoutUserInput> | ExpenseReceiptCreateWithoutUserInput[] | ExpenseReceiptUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ExpenseReceiptCreateOrConnectWithoutUserInput | ExpenseReceiptCreateOrConnectWithoutUserInput[]
@@ -66240,6 +67905,12 @@ export namespace Prisma {
     connectOrCreate?: HiddenSubcategoryCreateOrConnectWithoutUserInput | HiddenSubcategoryCreateOrConnectWithoutUserInput[]
     createMany?: HiddenSubcategoryCreateManyUserInputEnvelope
     connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+  }
+
+  export type BusinessSettingsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<BusinessSettingsCreateWithoutUserInput, BusinessSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutUserInput
+    connect?: BusinessSettingsWhereUniqueInput
   }
 
   export type ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput = {
@@ -66540,6 +68211,16 @@ export namespace Prisma {
     update?: HiddenSubcategoryUpdateWithWhereUniqueWithoutUserInput | HiddenSubcategoryUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: HiddenSubcategoryUpdateManyWithWhereWithoutUserInput | HiddenSubcategoryUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: HiddenSubcategoryScalarWhereInput | HiddenSubcategoryScalarWhereInput[]
+  }
+
+  export type BusinessSettingsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<BusinessSettingsCreateWithoutUserInput, BusinessSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutUserInput
+    upsert?: BusinessSettingsUpsertWithoutUserInput
+    disconnect?: BusinessSettingsWhereInput | boolean
+    delete?: BusinessSettingsWhereInput | boolean
+    connect?: BusinessSettingsWhereUniqueInput
+    update?: XOR<XOR<BusinessSettingsUpdateToOneWithWhereWithoutUserInput, BusinessSettingsUpdateWithoutUserInput>, BusinessSettingsUncheckedUpdateWithoutUserInput>
   }
 
   export type ExpenseReceiptUpdateManyWithoutUserNestedInput = {
@@ -66912,6 +68593,16 @@ export namespace Prisma {
     update?: HiddenSubcategoryUpdateWithWhereUniqueWithoutUserInput | HiddenSubcategoryUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: HiddenSubcategoryUpdateManyWithWhereWithoutUserInput | HiddenSubcategoryUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: HiddenSubcategoryScalarWhereInput | HiddenSubcategoryScalarWhereInput[]
+  }
+
+  export type BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<BusinessSettingsCreateWithoutUserInput, BusinessSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutUserInput
+    upsert?: BusinessSettingsUpsertWithoutUserInput
+    disconnect?: BusinessSettingsWhereInput | boolean
+    delete?: BusinessSettingsWhereInput | boolean
+    connect?: BusinessSettingsWhereUniqueInput
+    update?: XOR<XOR<BusinessSettingsUpdateToOneWithWhereWithoutUserInput, BusinessSettingsUpdateWithoutUserInput>, BusinessSettingsUncheckedUpdateWithoutUserInput>
   }
 
   export type ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput = {
@@ -67963,6 +69654,13 @@ export namespace Prisma {
     connect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
   }
 
+  export type BusinessSettingsCreateNestedManyWithoutVat_payment_categoryInput = {
+    create?: XOR<BusinessSettingsCreateWithoutVat_payment_categoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput> | BusinessSettingsCreateWithoutVat_payment_categoryInput[] | BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput[]
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutVat_payment_categoryInput | BusinessSettingsCreateOrConnectWithoutVat_payment_categoryInput[]
+    createMany?: BusinessSettingsCreateManyVat_payment_categoryInputEnvelope
+    connect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+  }
+
   export type ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput = {
     create?: XOR<ExpenseSubcategoryCreateWithoutCategoryInput, ExpenseSubcategoryUncheckedCreateWithoutCategoryInput> | ExpenseSubcategoryCreateWithoutCategoryInput[] | ExpenseSubcategoryUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutCategoryInput | ExpenseSubcategoryCreateOrConnectWithoutCategoryInput[]
@@ -67996,6 +69694,13 @@ export namespace Prisma {
     connectOrCreate?: HiddenCategoryCreateOrConnectWithoutCategoryInput | HiddenCategoryCreateOrConnectWithoutCategoryInput[]
     createMany?: HiddenCategoryCreateManyCategoryInputEnvelope
     connect?: HiddenCategoryWhereUniqueInput | HiddenCategoryWhereUniqueInput[]
+  }
+
+  export type BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_categoryInput = {
+    create?: XOR<BusinessSettingsCreateWithoutVat_payment_categoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput> | BusinessSettingsCreateWithoutVat_payment_categoryInput[] | BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput[]
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutVat_payment_categoryInput | BusinessSettingsCreateOrConnectWithoutVat_payment_categoryInput[]
+    createMany?: BusinessSettingsCreateManyVat_payment_categoryInputEnvelope
+    connect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutCategoriesNestedInput = {
@@ -68078,6 +69783,20 @@ export namespace Prisma {
     deleteMany?: HiddenCategoryScalarWhereInput | HiddenCategoryScalarWhereInput[]
   }
 
+  export type BusinessSettingsUpdateManyWithoutVat_payment_categoryNestedInput = {
+    create?: XOR<BusinessSettingsCreateWithoutVat_payment_categoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput> | BusinessSettingsCreateWithoutVat_payment_categoryInput[] | BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput[]
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutVat_payment_categoryInput | BusinessSettingsCreateOrConnectWithoutVat_payment_categoryInput[]
+    upsert?: BusinessSettingsUpsertWithWhereUniqueWithoutVat_payment_categoryInput | BusinessSettingsUpsertWithWhereUniqueWithoutVat_payment_categoryInput[]
+    createMany?: BusinessSettingsCreateManyVat_payment_categoryInputEnvelope
+    set?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    disconnect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    delete?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    connect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    update?: BusinessSettingsUpdateWithWhereUniqueWithoutVat_payment_categoryInput | BusinessSettingsUpdateWithWhereUniqueWithoutVat_payment_categoryInput[]
+    updateMany?: BusinessSettingsUpdateManyWithWhereWithoutVat_payment_categoryInput | BusinessSettingsUpdateManyWithWhereWithoutVat_payment_categoryInput[]
+    deleteMany?: BusinessSettingsScalarWhereInput | BusinessSettingsScalarWhereInput[]
+  }
+
   export type ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput = {
     create?: XOR<ExpenseSubcategoryCreateWithoutCategoryInput, ExpenseSubcategoryUncheckedCreateWithoutCategoryInput> | ExpenseSubcategoryCreateWithoutCategoryInput[] | ExpenseSubcategoryUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutCategoryInput | ExpenseSubcategoryCreateOrConnectWithoutCategoryInput[]
@@ -68148,6 +69867,20 @@ export namespace Prisma {
     deleteMany?: HiddenCategoryScalarWhereInput | HiddenCategoryScalarWhereInput[]
   }
 
+  export type BusinessSettingsUncheckedUpdateManyWithoutVat_payment_categoryNestedInput = {
+    create?: XOR<BusinessSettingsCreateWithoutVat_payment_categoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput> | BusinessSettingsCreateWithoutVat_payment_categoryInput[] | BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput[]
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutVat_payment_categoryInput | BusinessSettingsCreateOrConnectWithoutVat_payment_categoryInput[]
+    upsert?: BusinessSettingsUpsertWithWhereUniqueWithoutVat_payment_categoryInput | BusinessSettingsUpsertWithWhereUniqueWithoutVat_payment_categoryInput[]
+    createMany?: BusinessSettingsCreateManyVat_payment_categoryInputEnvelope
+    set?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    disconnect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    delete?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    connect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    update?: BusinessSettingsUpdateWithWhereUniqueWithoutVat_payment_categoryInput | BusinessSettingsUpdateWithWhereUniqueWithoutVat_payment_categoryInput[]
+    updateMany?: BusinessSettingsUpdateManyWithWhereWithoutVat_payment_categoryInput | BusinessSettingsUpdateManyWithWhereWithoutVat_payment_categoryInput[]
+    deleteMany?: BusinessSettingsScalarWhereInput | BusinessSettingsScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutSubcategoriesInput = {
     create?: XOR<UserCreateWithoutSubcategoriesInput, UserUncheckedCreateWithoutSubcategoriesInput>
     connectOrCreate?: UserCreateOrConnectWithoutSubcategoriesInput
@@ -68188,6 +69921,13 @@ export namespace Prisma {
     connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
   }
 
+  export type BusinessSettingsCreateNestedManyWithoutVat_payment_subcategoryInput = {
+    create?: XOR<BusinessSettingsCreateWithoutVat_payment_subcategoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput> | BusinessSettingsCreateWithoutVat_payment_subcategoryInput[] | BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput[]
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutVat_payment_subcategoryInput | BusinessSettingsCreateOrConnectWithoutVat_payment_subcategoryInput[]
+    createMany?: BusinessSettingsCreateManyVat_payment_subcategoryInputEnvelope
+    connect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+  }
+
   export type ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput = {
     create?: XOR<ExpenseEntryCreateWithoutSubcategoryInput, ExpenseEntryUncheckedCreateWithoutSubcategoryInput> | ExpenseEntryCreateWithoutSubcategoryInput[] | ExpenseEntryUncheckedCreateWithoutSubcategoryInput[]
     connectOrCreate?: ExpenseEntryCreateOrConnectWithoutSubcategoryInput | ExpenseEntryCreateOrConnectWithoutSubcategoryInput[]
@@ -68214,6 +69954,13 @@ export namespace Prisma {
     connectOrCreate?: HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput | HiddenSubcategoryCreateOrConnectWithoutSubcategoryInput[]
     createMany?: HiddenSubcategoryCreateManySubcategoryInputEnvelope
     connect?: HiddenSubcategoryWhereUniqueInput | HiddenSubcategoryWhereUniqueInput[]
+  }
+
+  export type BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_subcategoryInput = {
+    create?: XOR<BusinessSettingsCreateWithoutVat_payment_subcategoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput> | BusinessSettingsCreateWithoutVat_payment_subcategoryInput[] | BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput[]
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutVat_payment_subcategoryInput | BusinessSettingsCreateOrConnectWithoutVat_payment_subcategoryInput[]
+    createMany?: BusinessSettingsCreateManyVat_payment_subcategoryInputEnvelope
+    connect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutSubcategoriesNestedInput = {
@@ -68290,6 +70037,20 @@ export namespace Prisma {
     deleteMany?: HiddenSubcategoryScalarWhereInput | HiddenSubcategoryScalarWhereInput[]
   }
 
+  export type BusinessSettingsUpdateManyWithoutVat_payment_subcategoryNestedInput = {
+    create?: XOR<BusinessSettingsCreateWithoutVat_payment_subcategoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput> | BusinessSettingsCreateWithoutVat_payment_subcategoryInput[] | BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput[]
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutVat_payment_subcategoryInput | BusinessSettingsCreateOrConnectWithoutVat_payment_subcategoryInput[]
+    upsert?: BusinessSettingsUpsertWithWhereUniqueWithoutVat_payment_subcategoryInput | BusinessSettingsUpsertWithWhereUniqueWithoutVat_payment_subcategoryInput[]
+    createMany?: BusinessSettingsCreateManyVat_payment_subcategoryInputEnvelope
+    set?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    disconnect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    delete?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    connect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    update?: BusinessSettingsUpdateWithWhereUniqueWithoutVat_payment_subcategoryInput | BusinessSettingsUpdateWithWhereUniqueWithoutVat_payment_subcategoryInput[]
+    updateMany?: BusinessSettingsUpdateManyWithWhereWithoutVat_payment_subcategoryInput | BusinessSettingsUpdateManyWithWhereWithoutVat_payment_subcategoryInput[]
+    deleteMany?: BusinessSettingsScalarWhereInput | BusinessSettingsScalarWhereInput[]
+  }
+
   export type ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput = {
     create?: XOR<ExpenseEntryCreateWithoutSubcategoryInput, ExpenseEntryUncheckedCreateWithoutSubcategoryInput> | ExpenseEntryCreateWithoutSubcategoryInput[] | ExpenseEntryUncheckedCreateWithoutSubcategoryInput[]
     connectOrCreate?: ExpenseEntryCreateOrConnectWithoutSubcategoryInput | ExpenseEntryCreateOrConnectWithoutSubcategoryInput[]
@@ -68344,6 +70105,20 @@ export namespace Prisma {
     update?: HiddenSubcategoryUpdateWithWhereUniqueWithoutSubcategoryInput | HiddenSubcategoryUpdateWithWhereUniqueWithoutSubcategoryInput[]
     updateMany?: HiddenSubcategoryUpdateManyWithWhereWithoutSubcategoryInput | HiddenSubcategoryUpdateManyWithWhereWithoutSubcategoryInput[]
     deleteMany?: HiddenSubcategoryScalarWhereInput | HiddenSubcategoryScalarWhereInput[]
+  }
+
+  export type BusinessSettingsUncheckedUpdateManyWithoutVat_payment_subcategoryNestedInput = {
+    create?: XOR<BusinessSettingsCreateWithoutVat_payment_subcategoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput> | BusinessSettingsCreateWithoutVat_payment_subcategoryInput[] | BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput[]
+    connectOrCreate?: BusinessSettingsCreateOrConnectWithoutVat_payment_subcategoryInput | BusinessSettingsCreateOrConnectWithoutVat_payment_subcategoryInput[]
+    upsert?: BusinessSettingsUpsertWithWhereUniqueWithoutVat_payment_subcategoryInput | BusinessSettingsUpsertWithWhereUniqueWithoutVat_payment_subcategoryInput[]
+    createMany?: BusinessSettingsCreateManyVat_payment_subcategoryInputEnvelope
+    set?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    disconnect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    delete?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    connect?: BusinessSettingsWhereUniqueInput | BusinessSettingsWhereUniqueInput[]
+    update?: BusinessSettingsUpdateWithWhereUniqueWithoutVat_payment_subcategoryInput | BusinessSettingsUpdateWithWhereUniqueWithoutVat_payment_subcategoryInput[]
+    updateMany?: BusinessSettingsUpdateManyWithWhereWithoutVat_payment_subcategoryInput | BusinessSettingsUpdateManyWithWhereWithoutVat_payment_subcategoryInput[]
+    deleteMany?: BusinessSettingsScalarWhereInput | BusinessSettingsScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutExpense_entriesInput = {
@@ -69672,6 +71447,52 @@ export namespace Prisma {
     upsert?: ExpenseSubcategoryUpsertWithoutHidden_subcategoriesInput
     connect?: ExpenseSubcategoryWhereUniqueInput
     update?: XOR<XOR<ExpenseSubcategoryUpdateToOneWithWhereWithoutHidden_subcategoriesInput, ExpenseSubcategoryUpdateWithoutHidden_subcategoriesInput>, ExpenseSubcategoryUncheckedUpdateWithoutHidden_subcategoriesInput>
+  }
+
+  export type UserCreateNestedOneWithoutBusiness_settingsInput = {
+    create?: XOR<UserCreateWithoutBusiness_settingsInput, UserUncheckedCreateWithoutBusiness_settingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBusiness_settingsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ExpenseCategoryCreateNestedOneWithoutBusiness_settingsInput = {
+    create?: XOR<ExpenseCategoryCreateWithoutBusiness_settingsInput, ExpenseCategoryUncheckedCreateWithoutBusiness_settingsInput>
+    connectOrCreate?: ExpenseCategoryCreateOrConnectWithoutBusiness_settingsInput
+    connect?: ExpenseCategoryWhereUniqueInput
+  }
+
+  export type ExpenseSubcategoryCreateNestedOneWithoutBusiness_settingsInput = {
+    create?: XOR<ExpenseSubcategoryCreateWithoutBusiness_settingsInput, ExpenseSubcategoryUncheckedCreateWithoutBusiness_settingsInput>
+    connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutBusiness_settingsInput
+    connect?: ExpenseSubcategoryWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBusiness_settingsNestedInput = {
+    create?: XOR<UserCreateWithoutBusiness_settingsInput, UserUncheckedCreateWithoutBusiness_settingsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBusiness_settingsInput
+    upsert?: UserUpsertWithoutBusiness_settingsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBusiness_settingsInput, UserUpdateWithoutBusiness_settingsInput>, UserUncheckedUpdateWithoutBusiness_settingsInput>
+  }
+
+  export type ExpenseCategoryUpdateOneWithoutBusiness_settingsNestedInput = {
+    create?: XOR<ExpenseCategoryCreateWithoutBusiness_settingsInput, ExpenseCategoryUncheckedCreateWithoutBusiness_settingsInput>
+    connectOrCreate?: ExpenseCategoryCreateOrConnectWithoutBusiness_settingsInput
+    upsert?: ExpenseCategoryUpsertWithoutBusiness_settingsInput
+    disconnect?: ExpenseCategoryWhereInput | boolean
+    delete?: ExpenseCategoryWhereInput | boolean
+    connect?: ExpenseCategoryWhereUniqueInput
+    update?: XOR<XOR<ExpenseCategoryUpdateToOneWithWhereWithoutBusiness_settingsInput, ExpenseCategoryUpdateWithoutBusiness_settingsInput>, ExpenseCategoryUncheckedUpdateWithoutBusiness_settingsInput>
+  }
+
+  export type ExpenseSubcategoryUpdateOneWithoutBusiness_settingsNestedInput = {
+    create?: XOR<ExpenseSubcategoryCreateWithoutBusiness_settingsInput, ExpenseSubcategoryUncheckedCreateWithoutBusiness_settingsInput>
+    connectOrCreate?: ExpenseSubcategoryCreateOrConnectWithoutBusiness_settingsInput
+    upsert?: ExpenseSubcategoryUpsertWithoutBusiness_settingsInput
+    disconnect?: ExpenseSubcategoryWhereInput | boolean
+    delete?: ExpenseSubcategoryWhereInput | boolean
+    connect?: ExpenseSubcategoryWhereUniqueInput
+    update?: XOR<XOR<ExpenseSubcategoryUpdateToOneWithWhereWithoutBusiness_settingsInput, ExpenseSubcategoryUpdateWithoutBusiness_settingsInput>, ExpenseSubcategoryUncheckedUpdateWithoutBusiness_settingsInput>
   }
 
   export type UserCreateNestedOneWithoutChat_conversationsInput = {
@@ -71175,6 +72996,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -71196,6 +73019,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -71320,6 +73145,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutUserInput = {
@@ -71335,6 +73161,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutUserInput = {
@@ -71357,6 +73184,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutUserInput = {
@@ -71370,6 +73198,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutUserInput = {
@@ -71430,6 +73259,28 @@ export namespace Prisma {
   export type HiddenSubcategoryCreateManyUserInputEnvelope = {
     data: HiddenSubcategoryCreateManyUserInput | HiddenSubcategoryCreateManyUserInput[]
     skipDuplicates?: boolean
+  }
+
+  export type BusinessSettingsCreateWithoutUserInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    vat_payment_category?: ExpenseCategoryCreateNestedOneWithoutBusiness_settingsInput
+    vat_payment_subcategory?: ExpenseSubcategoryCreateNestedOneWithoutBusiness_settingsInput
+  }
+
+  export type BusinessSettingsUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid?: string
+    vat_payment_category_uuid?: string | null
+    vat_payment_subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type BusinessSettingsCreateOrConnectWithoutUserInput = {
+    where: BusinessSettingsWhereUniqueInput
+    create: XOR<BusinessSettingsCreateWithoutUserInput, BusinessSettingsUncheckedCreateWithoutUserInput>
   }
 
   export type ExpenseReceiptCreateWithoutUserInput = {
@@ -72139,6 +73990,8 @@ export namespace Prisma {
     amount?: DecimalFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFilter<"ExpenseEntry"> | boolean
     vat_amount?: DecimalNullableFilter<"ExpenseEntry"> | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: IntNullableFilter<"ExpenseEntry"> | number | null
+    vat_period_month?: IntNullableFilter<"ExpenseEntry"> | number | null
     description?: StringNullableFilter<"ExpenseEntry"> | string | null
     from_account_uuid?: StringFilter<"ExpenseEntry"> | string
     to_account_uuid?: StringNullableFilter<"ExpenseEntry"> | string | null
@@ -72334,6 +74187,34 @@ export namespace Prisma {
     subcategory_uuid?: StringFilter<"HiddenSubcategory"> | string
     created_at?: DateTimeFilter<"HiddenSubcategory"> | Date | string
     updated_at?: DateTimeFilter<"HiddenSubcategory"> | Date | string
+  }
+
+  export type BusinessSettingsUpsertWithoutUserInput = {
+    update: XOR<BusinessSettingsUpdateWithoutUserInput, BusinessSettingsUncheckedUpdateWithoutUserInput>
+    create: XOR<BusinessSettingsCreateWithoutUserInput, BusinessSettingsUncheckedCreateWithoutUserInput>
+    where?: BusinessSettingsWhereInput
+  }
+
+  export type BusinessSettingsUpdateToOneWithWhereWithoutUserInput = {
+    where?: BusinessSettingsWhereInput
+    data: XOR<BusinessSettingsUpdateWithoutUserInput, BusinessSettingsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BusinessSettingsUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    vat_payment_category?: ExpenseCategoryUpdateOneWithoutBusiness_settingsNestedInput
+    vat_payment_subcategory?: ExpenseSubcategoryUpdateOneWithoutBusiness_settingsNestedInput
+  }
+
+  export type BusinessSettingsUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    vat_payment_category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_payment_subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ExpenseReceiptUpsertWithWhereUniqueWithoutUserInput = {
@@ -72756,6 +74637,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -72796,6 +74678,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -73046,6 +74929,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -73086,6 +74970,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -73205,6 +75090,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -73245,6 +75131,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -73338,6 +75225,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -73378,6 +75266,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -73499,6 +75388,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -73539,6 +75429,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -73758,6 +75649,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -73798,6 +75690,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -74229,6 +76122,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -74269,6 +76163,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -74470,6 +76365,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -74510,6 +76406,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -74717,6 +76614,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -74757,6 +76655,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -74948,6 +76847,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -74988,6 +76888,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -75027,6 +76928,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -75067,6 +76969,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -75092,6 +76995,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -75114,6 +77019,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     to_account_uuid?: string | null
     category_uuid?: string | null
@@ -75143,6 +77050,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -75165,6 +77074,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     category_uuid?: string | null
@@ -75338,6 +77249,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -75378,6 +77290,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -75481,6 +77394,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -75521,6 +77435,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -75550,6 +77465,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutCategoryInput = {
@@ -75563,6 +77479,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutCategoryInput = {
@@ -75581,6 +77498,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -75603,6 +77522,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -75749,6 +77670,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BusinessSettingsCreateWithoutVat_payment_categoryInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutBusiness_settingsInput
+    vat_payment_subcategory?: ExpenseSubcategoryCreateNestedOneWithoutBusiness_settingsInput
+  }
+
+  export type BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    vat_payment_subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type BusinessSettingsCreateOrConnectWithoutVat_payment_categoryInput = {
+    where: BusinessSettingsWhereUniqueInput
+    create: XOR<BusinessSettingsCreateWithoutVat_payment_categoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput>
+  }
+
+  export type BusinessSettingsCreateManyVat_payment_categoryInputEnvelope = {
+    data: BusinessSettingsCreateManyVat_payment_categoryInput | BusinessSettingsCreateManyVat_payment_categoryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutCategoriesInput = {
     update: XOR<UserUpdateWithoutCategoriesInput, UserUncheckedUpdateWithoutCategoriesInput>
     create: XOR<UserCreateWithoutCategoriesInput, UserUncheckedCreateWithoutCategoriesInput>
@@ -75785,6 +77733,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -75825,6 +77774,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -75919,6 +77869,35 @@ export namespace Prisma {
     data: XOR<HiddenCategoryUpdateManyMutationInput, HiddenCategoryUncheckedUpdateManyWithoutCategoryInput>
   }
 
+  export type BusinessSettingsUpsertWithWhereUniqueWithoutVat_payment_categoryInput = {
+    where: BusinessSettingsWhereUniqueInput
+    update: XOR<BusinessSettingsUpdateWithoutVat_payment_categoryInput, BusinessSettingsUncheckedUpdateWithoutVat_payment_categoryInput>
+    create: XOR<BusinessSettingsCreateWithoutVat_payment_categoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_categoryInput>
+  }
+
+  export type BusinessSettingsUpdateWithWhereUniqueWithoutVat_payment_categoryInput = {
+    where: BusinessSettingsWhereUniqueInput
+    data: XOR<BusinessSettingsUpdateWithoutVat_payment_categoryInput, BusinessSettingsUncheckedUpdateWithoutVat_payment_categoryInput>
+  }
+
+  export type BusinessSettingsUpdateManyWithWhereWithoutVat_payment_categoryInput = {
+    where: BusinessSettingsScalarWhereInput
+    data: XOR<BusinessSettingsUpdateManyMutationInput, BusinessSettingsUncheckedUpdateManyWithoutVat_payment_categoryInput>
+  }
+
+  export type BusinessSettingsScalarWhereInput = {
+    AND?: BusinessSettingsScalarWhereInput | BusinessSettingsScalarWhereInput[]
+    OR?: BusinessSettingsScalarWhereInput[]
+    NOT?: BusinessSettingsScalarWhereInput | BusinessSettingsScalarWhereInput[]
+    id?: IntFilter<"BusinessSettings"> | number
+    uuid?: StringFilter<"BusinessSettings"> | string
+    user_uuid?: StringFilter<"BusinessSettings"> | string
+    vat_payment_category_uuid?: StringNullableFilter<"BusinessSettings"> | string | null
+    vat_payment_subcategory_uuid?: StringNullableFilter<"BusinessSettings"> | string | null
+    created_at?: DateTimeFilter<"BusinessSettings"> | Date | string
+    updated_at?: DateTimeFilter<"BusinessSettings"> | Date | string
+  }
+
   export type UserCreateWithoutSubcategoriesInput = {
     uuid?: string
     email: string
@@ -75944,6 +77923,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -75984,6 +77964,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -76015,6 +77996,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutSubcategoriesInput = {
@@ -76030,6 +78012,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutSubcategoriesInput = {
@@ -76043,6 +78026,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -76065,6 +78050,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -76211,6 +78198,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BusinessSettingsCreateWithoutVat_payment_subcategoryInput = {
+    uuid?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutBusiness_settingsInput
+    vat_payment_category?: ExpenseCategoryCreateNestedOneWithoutBusiness_settingsInput
+  }
+
+  export type BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    vat_payment_category_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type BusinessSettingsCreateOrConnectWithoutVat_payment_subcategoryInput = {
+    where: BusinessSettingsWhereUniqueInput
+    create: XOR<BusinessSettingsCreateWithoutVat_payment_subcategoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput>
+  }
+
+  export type BusinessSettingsCreateManyVat_payment_subcategoryInputEnvelope = {
+    data: BusinessSettingsCreateManyVat_payment_subcategoryInput | BusinessSettingsCreateManyVat_payment_subcategoryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutSubcategoriesInput = {
     update: XOR<UserUpdateWithoutSubcategoriesInput, UserUncheckedUpdateWithoutSubcategoriesInput>
     create: XOR<UserCreateWithoutSubcategoriesInput, UserUncheckedCreateWithoutSubcategoriesInput>
@@ -76247,6 +78261,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -76287,6 +78302,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -76324,6 +78340,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutSubcategoriesInput = {
@@ -76339,6 +78356,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseEntryUpsertWithWhereUniqueWithoutSubcategoryInput = {
@@ -76405,6 +78423,22 @@ export namespace Prisma {
     data: XOR<HiddenSubcategoryUpdateManyMutationInput, HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryInput>
   }
 
+  export type BusinessSettingsUpsertWithWhereUniqueWithoutVat_payment_subcategoryInput = {
+    where: BusinessSettingsWhereUniqueInput
+    update: XOR<BusinessSettingsUpdateWithoutVat_payment_subcategoryInput, BusinessSettingsUncheckedUpdateWithoutVat_payment_subcategoryInput>
+    create: XOR<BusinessSettingsCreateWithoutVat_payment_subcategoryInput, BusinessSettingsUncheckedCreateWithoutVat_payment_subcategoryInput>
+  }
+
+  export type BusinessSettingsUpdateWithWhereUniqueWithoutVat_payment_subcategoryInput = {
+    where: BusinessSettingsWhereUniqueInput
+    data: XOR<BusinessSettingsUpdateWithoutVat_payment_subcategoryInput, BusinessSettingsUncheckedUpdateWithoutVat_payment_subcategoryInput>
+  }
+
+  export type BusinessSettingsUpdateManyWithWhereWithoutVat_payment_subcategoryInput = {
+    where: BusinessSettingsScalarWhereInput
+    data: XOR<BusinessSettingsUpdateManyMutationInput, BusinessSettingsUncheckedUpdateManyWithoutVat_payment_subcategoryInput>
+  }
+
   export type UserCreateWithoutExpense_entriesInput = {
     uuid?: string
     email: string
@@ -76430,6 +78464,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -76470,6 +78505,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -76573,6 +78609,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutEntriesInput = {
@@ -76588,6 +78625,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutEntriesInput = {
@@ -76605,6 +78643,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutEntriesInput = {
@@ -76618,6 +78657,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutEntriesInput = {
@@ -76811,6 +78851,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -76851,6 +78892,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -76972,6 +79014,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutEntriesInput = {
@@ -76987,6 +79030,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseSubcategoryUpsertWithoutEntriesInput = {
@@ -77010,6 +79054,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutEntriesInput = {
@@ -77023,6 +79068,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseEntryPresetUpsertWithoutEntriesInput = {
@@ -77208,6 +79254,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -77248,6 +79295,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -77351,6 +79399,7 @@ export namespace Prisma {
     entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutEntry_presetsInput = {
@@ -77366,6 +79415,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutEntry_presetsInput = {
@@ -77383,6 +79433,7 @@ export namespace Prisma {
     entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutEntry_presetsInput = {
@@ -77396,6 +79447,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutEntry_presetsInput = {
@@ -77435,6 +79487,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -77457,6 +79511,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -77516,6 +79572,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -77556,6 +79613,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -77677,6 +79735,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutEntry_presetsInput = {
@@ -77692,6 +79751,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseSubcategoryUpsertWithoutEntry_presetsInput = {
@@ -77715,6 +79775,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutEntry_presetsInput = {
@@ -77728,6 +79789,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseTagUpsertWithWhereUniqueWithoutEntry_presetsInput = {
@@ -77787,6 +79849,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -77827,6 +79890,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -77852,6 +79916,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -77874,6 +79940,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -77980,6 +80048,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -78020,6 +80089,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -78092,6 +80162,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
@@ -78132,6 +80203,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
@@ -78220,6 +80292,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
@@ -78260,6 +80333,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
@@ -78315,6 +80389,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
     product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
@@ -78355,6 +80430,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
     product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
@@ -78401,6 +80477,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -78423,6 +80501,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -78509,6 +80589,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
     product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
@@ -78549,6 +80630,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
     product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
@@ -78607,6 +80689,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -78629,6 +80713,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -78699,6 +80785,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
@@ -78739,6 +80826,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
@@ -78769,6 +80857,7 @@ export namespace Prisma {
     entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutProductsInput = {
@@ -78784,6 +80873,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutCategoryInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutProductsInput = {
@@ -78801,6 +80891,7 @@ export namespace Prisma {
     entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutProductsInput = {
@@ -78814,6 +80905,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutSubcategoryInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutProductsInput = {
@@ -78938,6 +81030,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
@@ -78978,6 +81071,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
@@ -79014,6 +81108,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutProductsInput = {
@@ -79029,6 +81124,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseSubcategoryUpsertWithoutProductsInput = {
@@ -79052,6 +81148,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutProductsInput = {
@@ -79065,6 +81162,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseReceiptItemUpsertWithWhereUniqueWithoutProductInput = {
@@ -79265,6 +81363,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -79305,6 +81404,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -79365,6 +81465,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     entry_date?: Date | string
     created_at?: Date | string
@@ -79387,6 +81489,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -79442,6 +81546,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -79482,6 +81587,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -79554,6 +81660,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -79576,6 +81684,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -79615,6 +81725,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -79655,6 +81766,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -79743,6 +81855,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -79783,6 +81896,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -79838,6 +81952,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -79878,6 +81993,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -79986,6 +82102,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -80026,6 +82143,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -80124,6 +82242,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -80164,6 +82283,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -80248,6 +82368,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -80288,6 +82409,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -80613,6 +82735,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -80653,6 +82776,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -80763,6 +82887,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -80803,6 +82928,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -80874,6 +83000,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -80914,6 +83041,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -81001,6 +83129,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -81041,6 +83170,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -81095,6 +83225,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -81135,6 +83266,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -81228,6 +83360,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -81268,6 +83401,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -81351,6 +83485,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -81391,6 +83526,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -81422,6 +83558,7 @@ export namespace Prisma {
     entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryUncheckedCreateWithoutHidden_categoriesInput = {
@@ -81437,6 +83574,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutCategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_categoryInput
   }
 
   export type ExpenseCategoryCreateOrConnectWithoutHidden_categoriesInput = {
@@ -81480,6 +83618,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -81520,6 +83659,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -81557,6 +83697,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutHidden_categoriesInput = {
@@ -81572,6 +83713,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type UserCreateWithoutHidden_subcategoriesInput = {
@@ -81599,6 +83741,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -81639,6 +83782,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -81668,6 +83812,7 @@ export namespace Prisma {
     entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
     entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryUncheckedCreateWithoutHidden_subcategoriesInput = {
@@ -81681,6 +83826,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
     entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutSubcategoryInput
     products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedManyWithoutVat_payment_subcategoryInput
   }
 
   export type ExpenseSubcategoryCreateOrConnectWithoutHidden_subcategoriesInput = {
@@ -81724,6 +83870,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -81764,6 +83911,7 @@ export namespace Prisma {
     categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -81799,6 +83947,7 @@ export namespace Prisma {
     entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutHidden_subcategoriesInput = {
@@ -81812,6 +83961,333 @@ export namespace Prisma {
     entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_subcategoryNestedInput
+  }
+
+  export type UserCreateWithoutBusiness_settingsInput = {
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    date?: string | null
+    is_admin?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryCreateNestedManyWithoutUserInput
+    expense_entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupCreateNestedManyWithoutUserInput
+    exercises?: ExerciseCreateNestedManyWithoutUserInput
+    workouts?: WorkoutCreateNestedManyWithoutUserInput
+    notes?: NoteCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupCreateNestedManyWithoutUserInput
+    quiz_groups?: QuizGroupCreateNestedManyWithoutUserInput
+    chat_conversations?: ChatConversationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBusiness_settingsInput = {
+    id?: number
+    uuid?: string
+    email: string
+    phone?: string | null
+    password: string
+    first_name: string
+    last_name: string
+    role: $Enums.AuthRole
+    date?: string | null
+    is_admin?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    activities?: ActivityUncheckedCreateNestedManyWithoutUserInput
+    schedule_slots?: ScheduleSlotUncheckedCreateNestedManyWithoutUserInput
+    activity_schedules?: ActivityScheduleUncheckedCreateNestedManyWithoutUserInput
+    activity_logs?: ActivityLogUncheckedCreateNestedManyWithoutUserInput
+    activity_occurrences?: ActivityOccurrenceUncheckedCreateNestedManyWithoutUserInput
+    hidden_activities?: HiddenActivityUncheckedCreateNestedManyWithoutUserInput
+    expense_accounts?: ExpenseAccountUncheckedCreateNestedManyWithoutUserInput
+    expense_entries?: ExpenseEntryUncheckedCreateNestedManyWithoutUserInput
+    expense_entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutUserInput
+    expense_tags?: ExpenseTagUncheckedCreateNestedManyWithoutUserInput
+    categories?: ExpenseCategoryUncheckedCreateNestedManyWithoutUserInput
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
+    expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
+    expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
+    product_purchases?: ProductPurchaseUncheckedCreateNestedManyWithoutUserInput
+    muscle_groups?: MuscleGroupUncheckedCreateNestedManyWithoutUserInput
+    exercises?: ExerciseUncheckedCreateNestedManyWithoutUserInput
+    workouts?: WorkoutUncheckedCreateNestedManyWithoutUserInput
+    notes?: NoteUncheckedCreateNestedManyWithoutUserInput
+    note_tags?: NoteTagUncheckedCreateNestedManyWithoutUserInput
+    flash_card_groups?: FlashCardGroupUncheckedCreateNestedManyWithoutUserInput
+    quiz_groups?: QuizGroupUncheckedCreateNestedManyWithoutUserInput
+    chat_conversations?: ChatConversationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBusiness_settingsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBusiness_settingsInput, UserUncheckedCreateWithoutBusiness_settingsInput>
+  }
+
+  export type ExpenseCategoryCreateWithoutBusiness_settingsInput = {
+    uuid?: string
+    name: string
+    icon?: string | null
+    color?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user?: UserCreateNestedOneWithoutCategoriesInput
+    subcategories?: ExpenseSubcategoryCreateNestedManyWithoutCategoryInput
+    entries?: ExpenseEntryCreateNestedManyWithoutCategoryInput
+    entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryCreateNestedManyWithoutCategoryInput
+  }
+
+  export type ExpenseCategoryUncheckedCreateWithoutBusiness_settingsInput = {
+    id?: number
+    uuid?: string
+    user_uuid?: string | null
+    name: string
+    icon?: string | null
+    color?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutCategoryInput
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutCategoryInput
+    entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutCategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutCategoryInput
+    hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type ExpenseCategoryCreateOrConnectWithoutBusiness_settingsInput = {
+    where: ExpenseCategoryWhereUniqueInput
+    create: XOR<ExpenseCategoryCreateWithoutBusiness_settingsInput, ExpenseCategoryUncheckedCreateWithoutBusiness_settingsInput>
+  }
+
+  export type ExpenseSubcategoryCreateWithoutBusiness_settingsInput = {
+    uuid?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    user?: UserCreateNestedOneWithoutSubcategoriesInput
+    category: ExpenseCategoryCreateNestedOneWithoutSubcategoriesInput
+    entries?: ExpenseEntryCreateNestedManyWithoutSubcategoryInput
+    entry_presets?: ExpenseEntryPresetCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutSubcategoryInput
+  }
+
+  export type ExpenseSubcategoryUncheckedCreateWithoutBusiness_settingsInput = {
+    id?: number
+    uuid?: string
+    user_uuid?: string | null
+    category_uuid: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    entries?: ExpenseEntryUncheckedCreateNestedManyWithoutSubcategoryInput
+    entry_presets?: ExpenseEntryPresetUncheckedCreateNestedManyWithoutSubcategoryInput
+    products?: ExpenseProductUncheckedCreateNestedManyWithoutSubcategoryInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutSubcategoryInput
+  }
+
+  export type ExpenseSubcategoryCreateOrConnectWithoutBusiness_settingsInput = {
+    where: ExpenseSubcategoryWhereUniqueInput
+    create: XOR<ExpenseSubcategoryCreateWithoutBusiness_settingsInput, ExpenseSubcategoryUncheckedCreateWithoutBusiness_settingsInput>
+  }
+
+  export type UserUpsertWithoutBusiness_settingsInput = {
+    update: XOR<UserUpdateWithoutBusiness_settingsInput, UserUncheckedUpdateWithoutBusiness_settingsInput>
+    create: XOR<UserCreateWithoutBusiness_settingsInput, UserUncheckedCreateWithoutBusiness_settingsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBusiness_settingsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBusiness_settingsInput, UserUncheckedUpdateWithoutBusiness_settingsInput>
+  }
+
+  export type UserUpdateWithoutBusiness_settingsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    date?: NullableStringFieldUpdateOperationsInput | string | null
+    is_admin?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUpdateManyWithoutUserNestedInput
+    expense_entry_presets?: ExpenseEntryPresetUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUpdateManyWithoutUserNestedInput
+    notes?: NoteUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUpdateManyWithoutUserNestedInput
+    quiz_groups?: QuizGroupUpdateManyWithoutUserNestedInput
+    chat_conversations?: ChatConversationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBusiness_settingsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    role?: EnumAuthRoleFieldUpdateOperationsInput | $Enums.AuthRole
+    date?: NullableStringFieldUpdateOperationsInput | string | null
+    is_admin?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    activities?: ActivityUncheckedUpdateManyWithoutUserNestedInput
+    schedule_slots?: ScheduleSlotUncheckedUpdateManyWithoutUserNestedInput
+    activity_schedules?: ActivityScheduleUncheckedUpdateManyWithoutUserNestedInput
+    activity_logs?: ActivityLogUncheckedUpdateManyWithoutUserNestedInput
+    activity_occurrences?: ActivityOccurrenceUncheckedUpdateManyWithoutUserNestedInput
+    hidden_activities?: HiddenActivityUncheckedUpdateManyWithoutUserNestedInput
+    expense_accounts?: ExpenseAccountUncheckedUpdateManyWithoutUserNestedInput
+    expense_entries?: ExpenseEntryUncheckedUpdateManyWithoutUserNestedInput
+    expense_entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutUserNestedInput
+    expense_tags?: ExpenseTagUncheckedUpdateManyWithoutUserNestedInput
+    categories?: ExpenseCategoryUncheckedUpdateManyWithoutUserNestedInput
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
+    expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
+    expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
+    product_purchases?: ProductPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    muscle_groups?: MuscleGroupUncheckedUpdateManyWithoutUserNestedInput
+    exercises?: ExerciseUncheckedUpdateManyWithoutUserNestedInput
+    workouts?: WorkoutUncheckedUpdateManyWithoutUserNestedInput
+    notes?: NoteUncheckedUpdateManyWithoutUserNestedInput
+    note_tags?: NoteTagUncheckedUpdateManyWithoutUserNestedInput
+    flash_card_groups?: FlashCardGroupUncheckedUpdateManyWithoutUserNestedInput
+    quiz_groups?: QuizGroupUncheckedUpdateManyWithoutUserNestedInput
+    chat_conversations?: ChatConversationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ExpenseCategoryUpsertWithoutBusiness_settingsInput = {
+    update: XOR<ExpenseCategoryUpdateWithoutBusiness_settingsInput, ExpenseCategoryUncheckedUpdateWithoutBusiness_settingsInput>
+    create: XOR<ExpenseCategoryCreateWithoutBusiness_settingsInput, ExpenseCategoryUncheckedCreateWithoutBusiness_settingsInput>
+    where?: ExpenseCategoryWhereInput
+  }
+
+  export type ExpenseCategoryUpdateToOneWithWhereWithoutBusiness_settingsInput = {
+    where?: ExpenseCategoryWhereInput
+    data: XOR<ExpenseCategoryUpdateWithoutBusiness_settingsInput, ExpenseCategoryUncheckedUpdateWithoutBusiness_settingsInput>
+  }
+
+  export type ExpenseCategoryUpdateWithoutBusiness_settingsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutCategoriesNestedInput
+    subcategories?: ExpenseSubcategoryUpdateManyWithoutCategoryNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutCategoryNestedInput
+    entry_presets?: ExpenseEntryPresetUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type ExpenseCategoryUncheckedUpdateWithoutBusiness_settingsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryNestedInput
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutCategoryNestedInput
+    entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutCategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
+    hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type ExpenseSubcategoryUpsertWithoutBusiness_settingsInput = {
+    update: XOR<ExpenseSubcategoryUpdateWithoutBusiness_settingsInput, ExpenseSubcategoryUncheckedUpdateWithoutBusiness_settingsInput>
+    create: XOR<ExpenseSubcategoryCreateWithoutBusiness_settingsInput, ExpenseSubcategoryUncheckedCreateWithoutBusiness_settingsInput>
+    where?: ExpenseSubcategoryWhereInput
+  }
+
+  export type ExpenseSubcategoryUpdateToOneWithWhereWithoutBusiness_settingsInput = {
+    where?: ExpenseSubcategoryWhereInput
+    data: XOR<ExpenseSubcategoryUpdateWithoutBusiness_settingsInput, ExpenseSubcategoryUncheckedUpdateWithoutBusiness_settingsInput>
+  }
+
+  export type ExpenseSubcategoryUpdateWithoutBusiness_settingsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutSubcategoriesNestedInput
+    category?: ExpenseCategoryUpdateOneRequiredWithoutSubcategoriesNestedInput
+    entries?: ExpenseEntryUpdateManyWithoutSubcategoryNestedInput
+    entry_presets?: ExpenseEntryPresetUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
+  }
+
+  export type ExpenseSubcategoryUncheckedUpdateWithoutBusiness_settingsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    category_uuid?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    entries?: ExpenseEntryUncheckedUpdateManyWithoutSubcategoryNestedInput
+    entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutSubcategoryNestedInput
+    products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
+    hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
   }
 
   export type UserCreateWithoutChat_conversationsInput = {
@@ -81840,6 +84316,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -81880,6 +84357,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -81994,6 +84472,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -82034,6 +84513,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -82140,6 +84620,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -82180,6 +84661,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -82270,6 +84752,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -82310,6 +84793,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -82603,6 +85087,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductCreateNestedManyWithoutUserInput
@@ -82643,6 +85128,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_categories?: HiddenCategoryUncheckedCreateNestedManyWithoutUserInput
     hidden_subcategories?: HiddenSubcategoryUncheckedCreateNestedManyWithoutUserInput
+    business_settings?: BusinessSettingsUncheckedCreateNestedOneWithoutUserInput
     expense_receipts?: ExpenseReceiptUncheckedCreateNestedManyWithoutUserInput
     expense_stores?: ExpenseStoreUncheckedCreateNestedManyWithoutUserInput
     expense_products?: ExpenseProductUncheckedCreateNestedManyWithoutUserInput
@@ -82792,6 +85278,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUpdateManyWithoutUserNestedInput
@@ -82832,6 +85319,7 @@ export namespace Prisma {
     subcategories?: ExpenseSubcategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutUserNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutUserNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateOneWithoutUserNestedInput
     expense_receipts?: ExpenseReceiptUncheckedUpdateManyWithoutUserNestedInput
     expense_stores?: ExpenseStoreUncheckedUpdateManyWithoutUserNestedInput
     expense_products?: ExpenseProductUncheckedUpdateManyWithoutUserNestedInput
@@ -83743,6 +86231,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -84284,6 +86774,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -84305,6 +86797,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -84326,6 +86820,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -84448,6 +86944,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateWithoutUserInput = {
@@ -84463,6 +86960,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutCategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutCategoryNestedInput
     hidden_categories?: HiddenCategoryUncheckedUpdateManyWithoutCategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_categoryNestedInput
   }
 
   export type ExpenseCategoryUncheckedUpdateManyWithoutUserInput = {
@@ -84485,6 +86983,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutUserInput = {
@@ -84498,6 +86997,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateManyWithoutUserInput = {
@@ -85491,6 +87991,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     to_account_uuid?: string | null
     category_uuid?: string | null
@@ -85509,6 +88011,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     category_uuid?: string | null
@@ -85569,6 +88073,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -85591,6 +88097,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85612,6 +88120,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85628,6 +88138,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -85650,6 +88162,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85671,6 +88185,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85836,6 +88352,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -85890,6 +88408,15 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type BusinessSettingsCreateManyVat_payment_categoryInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    vat_payment_subcategory_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type ExpenseSubcategoryUpdateWithoutCategoryInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -85900,6 +88427,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateWithoutCategoryInput = {
@@ -85913,6 +88441,7 @@ export namespace Prisma {
     entry_presets?: ExpenseEntryPresetUncheckedUpdateManyWithoutSubcategoryNestedInput
     products?: ExpenseProductUncheckedUpdateManyWithoutSubcategoryNestedInput
     hidden_subcategories?: HiddenSubcategoryUncheckedUpdateManyWithoutSubcategoryNestedInput
+    business_settings?: BusinessSettingsUncheckedUpdateManyWithoutVat_payment_subcategoryNestedInput
   }
 
   export type ExpenseSubcategoryUncheckedUpdateManyWithoutCategoryInput = {
@@ -85930,6 +88459,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -85952,6 +88483,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -85973,6 +88506,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86120,6 +88655,32 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BusinessSettingsUpdateWithoutVat_payment_categoryInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBusiness_settingsNestedInput
+    vat_payment_subcategory?: ExpenseSubcategoryUpdateOneWithoutBusiness_settingsNestedInput
+  }
+
+  export type BusinessSettingsUncheckedUpdateWithoutVat_payment_categoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    vat_payment_subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BusinessSettingsUncheckedUpdateManyWithoutVat_payment_categoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    vat_payment_subcategory_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ExpenseEntryCreateManySubcategoryInput = {
     id?: number
     uuid?: string
@@ -86128,6 +88689,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -86182,12 +88745,23 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
+  export type BusinessSettingsCreateManyVat_payment_subcategoryInput = {
+    id?: number
+    uuid?: string
+    user_uuid: string
+    vat_payment_category_uuid?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type ExpenseEntryUpdateWithoutSubcategoryInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     type?: EnumExpenseEntryTypeFieldUpdateOperationsInput | $Enums.ExpenseEntryType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86210,6 +88784,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86231,6 +88807,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86378,6 +88956,32 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BusinessSettingsUpdateWithoutVat_payment_subcategoryInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutBusiness_settingsNestedInput
+    vat_payment_category?: ExpenseCategoryUpdateOneWithoutBusiness_settingsNestedInput
+  }
+
+  export type BusinessSettingsUncheckedUpdateWithoutVat_payment_subcategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    vat_payment_category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BusinessSettingsUncheckedUpdateManyWithoutVat_payment_subcategoryInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_uuid?: StringFieldUpdateOperationsInput | string
+    vat_payment_category_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ExpenseTagUpdateWithoutEntriesInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -86417,6 +89021,8 @@ export namespace Prisma {
     amount: Decimal | DecimalJsLike | number | string
     has_vat?: boolean
     vat_amount?: Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: number | null
+    vat_period_month?: number | null
     description?: string | null
     from_account_uuid: string
     to_account_uuid?: string | null
@@ -86464,6 +89070,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86486,6 +89094,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86507,6 +89117,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86523,6 +89135,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entry_date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86545,6 +89159,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -86566,6 +89182,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     has_vat?: BoolFieldUpdateOperationsInput | boolean
     vat_amount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    vat_period_year?: NullableIntFieldUpdateOperationsInput | number | null
+    vat_period_month?: NullableIntFieldUpdateOperationsInput | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     from_account_uuid?: StringFieldUpdateOperationsInput | string
     to_account_uuid?: NullableStringFieldUpdateOperationsInput | string | null

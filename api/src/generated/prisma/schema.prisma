@@ -111,6 +111,7 @@ model User {
   subcategories         ExpenseSubcategory[]
   hidden_categories     HiddenCategory[]
   hidden_subcategories  HiddenSubcategory[]
+  business_settings     BusinessSettings?
 
   // Receipts
   expense_receipts ExpenseReceipt[]
@@ -347,6 +348,7 @@ model ExpenseCategory {
   entry_presets     ExpenseEntryPreset[]
   products          ExpenseProduct[]
   hidden_categories HiddenCategory[]
+  business_settings BusinessSettings[]
 
   @@index([user_uuid])
   @@map("categories")
@@ -367,6 +369,7 @@ model ExpenseSubcategory {
   entry_presets        ExpenseEntryPreset[]
   products             ExpenseProduct[]
   hidden_subcategories HiddenSubcategory[]
+  business_settings    BusinessSettings[]
 
   @@index([category_uuid])
   @@map("subcategories")
@@ -380,6 +383,8 @@ model ExpenseEntry {
   amount            Decimal
   has_vat           Boolean          @default(false)
   vat_amount        Decimal?
+  vat_period_year   Int?
+  vat_period_month  Int?
   description       String?
   from_account_uuid String
   to_account_uuid   String?
@@ -405,6 +410,7 @@ model ExpenseEntry {
   @@index([subcategory_uuid])
   @@index([entry_date])
   @@index([preset_uuid])
+  @@index([user_uuid, vat_period_year, vat_period_month])
   @@map("expense_entries")
 }
 
@@ -775,6 +781,22 @@ model HiddenSubcategory {
   @@index([user_uuid])
   @@index([subcategory_uuid])
   @@map("expense_hidden_subcategories")
+}
+
+model BusinessSettings {
+  id                           Int      @id @default(autoincrement())
+  uuid                         String   @unique @default(uuid())
+  user_uuid                    String   @unique
+  vat_payment_category_uuid    String?
+  vat_payment_subcategory_uuid String?
+  created_at                   DateTime @default(now())
+  updated_at                   DateTime @updatedAt
+
+  user                    User                @relation(fields: [user_uuid], references: [uuid], onDelete: Cascade)
+  vat_payment_category    ExpenseCategory?    @relation(fields: [vat_payment_category_uuid], references: [uuid], onDelete: SetNull)
+  vat_payment_subcategory ExpenseSubcategory? @relation(fields: [vat_payment_subcategory_uuid], references: [uuid], onDelete: SetNull)
+
+  @@map("business_settings")
 }
 
 enum ChatMessageRole {

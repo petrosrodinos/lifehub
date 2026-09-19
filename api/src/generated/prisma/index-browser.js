@@ -268,6 +268,8 @@ exports.Prisma.ExpenseEntryScalarFieldEnum = {
   amount: 'amount',
   has_vat: 'has_vat',
   vat_amount: 'vat_amount',
+  vat_period_year: 'vat_period_year',
+  vat_period_month: 'vat_period_month',
   description: 'description',
   from_account_uuid: 'from_account_uuid',
   to_account_uuid: 'to_account_uuid',
@@ -493,6 +495,16 @@ exports.Prisma.HiddenSubcategoryScalarFieldEnum = {
   uuid: 'uuid',
   user_uuid: 'user_uuid',
   subcategory_uuid: 'subcategory_uuid',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.BusinessSettingsScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_uuid: 'user_uuid',
+  vat_payment_category_uuid: 'vat_payment_category_uuid',
+  vat_payment_subcategory_uuid: 'vat_payment_subcategory_uuid',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -836,6 +848,7 @@ exports.Prisma.ModelName = {
   HiddenActivity: 'HiddenActivity',
   HiddenCategory: 'HiddenCategory',
   HiddenSubcategory: 'HiddenSubcategory',
+  BusinessSettings: 'BusinessSettings',
   ChatConversation: 'ChatConversation',
   FlashCardGroup: 'FlashCardGroup',
   FlashCard: 'FlashCard',

@@ -6,6 +6,7 @@ import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries
 import { EditTransactionModal } from "./EditTransactionModal";
 import { TransactionActionsDropdown } from "./TransactionActionsDropdown";
 import { formatAmount, formatDate, formatTime } from "../../utils/transaction";
+import { formatVatPeriod } from "../../utils/vat-period.helper";
 import { Routes } from "../../../../routes/routes";
 
 type TransactionCardProps = {
@@ -98,6 +99,10 @@ export function TransactionCard({ transaction, onDuplicate, onCreatePreset, onTr
     ? Number(transaction.vat_amount)
     : null;
   const netAmount = vatAmount !== null ? Number(transaction.amount) - vatAmount : null;
+  const vatPeriodLabel =
+    transaction.vat_period_year && transaction.vat_period_month
+      ? formatVatPeriod(transaction.vat_period_year, transaction.vat_period_month)
+      : null;
 
   return (
     <>
@@ -157,6 +162,9 @@ export function TransactionCard({ transaction, onDuplicate, onCreatePreset, onTr
               <div className="mt-1 text-[10px] sm:text-xs text-slate-400">
                 VAT {formatAmount(vatAmount)} · Net {formatAmount(netAmount)}
               </div>
+            )}
+            {vatPeriodLabel && (
+              <div className="mt-1 text-[10px] sm:text-xs text-violet-300">VAT payment · {vatPeriodLabel}</div>
             )}
           </div>
 

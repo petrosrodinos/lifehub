@@ -1,5 +1,6 @@
 import { useVatLiability } from "../../../features/expenses/expense-entries/hooks/use-expense-entries";
 import { formatCurrency } from "../../../utils/format-currency.utils";
+import { VatPaymentStatuses, VatPaymentStatusDisplay, getVatPaymentStatus } from "../utils/vat-payment-status.helper";
 
 type VatLiabilityCardProps = {
   year: number;
@@ -11,6 +12,13 @@ export function VatLiabilityCard({ year, month }: VatLiabilityCardProps) {
 
   const vatToPay = data?.vatToPay ?? 0;
   const isOwed = vatToPay > 0;
+  const vatPaymentsTotal = data?.vatPaymentsTotal ?? 0;
+  const paymentStatus = getVatPaymentStatus({
+    isConfigured: data?.vatPaymentConfigured ?? false,
+    vatToPay,
+    vatPaid: vatPaymentsTotal,
+  });
+  const statusDisplay = paymentStatus === VatPaymentStatuses.NOT_CONFIGURED ? null : VatPaymentStatusDisplay[paymentStatus];
 
   return (
     <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800/50 p-6 space-y-4">
@@ -26,6 +34,17 @@ export function VatLiabilityCard({ year, month }: VatLiabilityCardProps) {
           <div className="flex flex-wrap justify-between gap-2 text-sm text-slate-400">
             <span>Collected on income: {formatCurrency(data?.vatCollected ?? 0)}</span>
             <span>Paid on expenses: {formatCurrency(data?.vatPaid ?? 0)}</span>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-800/50 text-sm">
+            {statusDisplay ? (
+              <>
+                <span className="text-slate-400">VAT paid to tax authority: {formatCurrency(vatPaymentsTotal)}</span>
+                <span className={`px-2 py-0.5 rounded-md text-xs font-medium ${statusDisplay.className}`}>{statusDisplay.label}</span>
+              </>
+            ) : (
+              <span className="text-slate-500">Set a VAT payment category in Business settings to track payments.</span>
+            )}
           </div>
         </>
       )}

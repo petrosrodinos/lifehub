@@ -30,6 +30,8 @@ export interface CreateExpenseEntryInput {
     description?: string;
     has_vat?: boolean;
     vat_amount?: number;
+    vat_period_year?: number;
+    vat_period_month?: number;
     account_name: string;
     to_account_name?: string;
     category_name?: string;
@@ -241,6 +243,8 @@ export class ExpensesRetrievalService {
                 description: input.description,
                 has_vat: input.has_vat,
                 vat_amount: input.vat_amount,
+                vat_period_year: input.vat_period_year,
+                vat_period_month: input.vat_period_month,
                 from_account_uuid: fromAccountResolution.uuid,
                 to_account_uuid,
                 category_uuid,

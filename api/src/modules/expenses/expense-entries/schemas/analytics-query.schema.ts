@@ -6,6 +6,7 @@ export const AnalyticsQuerySchema = z.object({
   from_date: z.string().optional().transform((val) => val && val.length > 0 ? new Date(val) : undefined),
   to_date: z.string().optional().transform((val) => val && val.length > 0 ? new Date(val) : undefined),
   has_vat: z.coerce.boolean().optional(),
+  include_vat_payments: z.enum(['true', 'false']).optional().transform((val) => val === 'true'),
 });
 
 export type AnalyticsQueryType = z.infer<typeof AnalyticsQuerySchema>;

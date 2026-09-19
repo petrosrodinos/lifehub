@@ -43,6 +43,30 @@ export class CreateExpenseEntryDto {
   vat_amount?: number;
 
   @ApiProperty({
+    description: 'Year of the VAT period this payment covers. Required when the entry is a VAT payment.',
+    example: 2026,
+    required: false,
+  })
+  @IsOptional()
+  @IsInt()
+  @Min(2000)
+  @Max(2100)
+  @Type(() => Number)
+  vat_period_year?: number;
+
+  @ApiProperty({
+    description: 'Month (1-12) of the VAT period this payment covers. Required when the entry is a VAT payment.',
+    example: 8,
+    required: false,
+  })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(12)
+  @Type(() => Number)
+  vat_period_month?: number;
+
+  @ApiProperty({
     description: 'Entry description',
     example: 'Grocery shopping at Walmart',
     required: false,

@@ -23,12 +23,14 @@ export function createCreateExpenseEntryTool(
             description: z.string().nullable().optional().describe('Entry description, e.g. Grocery shopping'),
             has_vat: z.boolean().nullable().optional().describe('Whether VAT applies to this entry'),
             vat_amount: z.number().min(0).nullable().optional().describe('Custom VAT amount; defaults to 24% of the amount when has_vat is true'),
+            vat_period_year: z.number().int().min(2000).max(2100).nullable().optional().describe('Year of the VAT period being paid; required when the entry is a VAT payment'),
+            vat_period_month: z.number().int().min(1).max(12).nullable().optional().describe('Month (1-12) of the VAT period being paid; required when the entry is a VAT payment. Can differ from the entry date, e.g. August VAT paid in September'),
             entry_date: z.string().nullable().optional().describe('Entry date/time in ISO format; defaults to now'),
             quantity: z.number().int().min(1).max(100).nullable().optional().describe('Number of identical entries to create; defaults to 1'),
         }),
         timeoutMs: assistantConfig.toolTimeoutMs,
         async execute(
-            { type, amount, account_name, to_account_name, category_name, subcategory_name, tag_names, description, has_vat, vat_amount, entry_date, quantity },
+            { type, amount, account_name, to_account_name, category_name, subcategory_name, tag_names, description, has_vat, vat_amount, vat_period_year, vat_period_month, entry_date, quantity },
             runContext,
         ) {
             const context = runContext?.context as AssistantToolContext | undefined;
@@ -48,6 +50,8 @@ export function createCreateExpenseEntryTool(
                 description: description ?? undefined,
                 has_vat: has_vat ?? undefined,
                 vat_amount: vat_amount ?? undefined,
+                vat_period_year: vat_period_year ?? undefined,
+                vat_period_month: vat_period_month ?? undefined,
                 entry_date: entry_date ?? undefined,
                 quantity: quantity ?? undefined,
             });

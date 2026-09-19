@@ -7,6 +7,8 @@ import { useExpenseCategories } from "../../../../features/expenses/expense-cate
 import { useExpenseSubcategories } from "../../../../features/expenses/expense-subcategories/hooks/use-expense-subcategories";
 import { useExpenseTags, useCreateExpenseTag } from "../../../../features/expenses/expense-tags/hooks/use-expense-tags";
 import { TagSelector } from "../../../../components/ui/TagSelector";
+import { MonthPicker } from "../../../../components/ui/MonthPicker";
+import type { VatPeriod } from "../../utils/vat-period.helper";
 import { AmountCalculatorField } from "./AmountCalculatorField";
 import { CategorySubcategoryPickerModal } from "./CategorySubcategoryPickerModal";
 
@@ -27,6 +29,9 @@ type TransactionFormFieldsProps = {
   categoryUuid: string;
   subcategoryUuid: string;
   onCategorySelect: (categoryUuid: string, subcategoryUuid: string) => void;
+  showVatPeriod?: boolean;
+  vatPeriod?: VatPeriod;
+  onVatPeriodChange?: (year: number, month: number) => void;
   selectedTagUuids: string[];
   onTagsChange: (uuids: string[]) => void;
   description: string;
@@ -51,6 +56,9 @@ export function TransactionFormFields({
   categoryUuid,
   subcategoryUuid,
   onCategorySelect,
+  showVatPeriod = false,
+  vatPeriod,
+  onVatPeriodChange,
   selectedTagUuids,
   onTagsChange,
   description,
@@ -286,6 +294,14 @@ export function TransactionFormFields({
             selectedSubcategoryUuid={subcategoryUuid}
             onSelect={onCategorySelect}
           />
+
+          {showVatPeriod && vatPeriod && onVatPeriodChange && (
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">VAT period</label>
+              <MonthPicker year={vatPeriod.year} month={vatPeriod.month} onChange={onVatPeriodChange} disabled={isPending} />
+              <p className="mt-1 text-xs text-slate-500">Month this VAT payment covers. Can differ from the payment date.</p>
+            </div>
+          )}
 
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Tags</label>

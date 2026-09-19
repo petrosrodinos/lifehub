@@ -10,6 +10,7 @@ import { validateExpenseRelations, validateExpenseTags } from '../utils/expense-
 import { calculateMonthlyBudgetProgress, getCurrentMonthUtcDateRange } from '../utils/monthly-budget-progress.helper';
 import { MonthlyBudgetProgressQueryType } from './schemas/monthly-budget-progress-query.schema';
 import { VatLiabilityQueryType } from './schemas/vat-liability-query.schema';
+import { buildVatPaymentWhere, buildVatTransactionsClause, getVatPaymentSettings, resolveVatPeriodFields } from '../utils/vat-payment.utils';
 
 const VAT_RATE = 0.24;
 
@@ -45,12 +46,22 @@ export class ExpenseEntriesService {
 
       const hasVat = entryFields.has_vat ?? false;
 
+      const vatPeriod = resolveVatPeriodFields(await getVatPaymentSettings(this.prisma, user_uuid), {
+        type: entryFields.type,
+        category_uuid: entryFields.category_uuid,
+        subcategory_uuid: entryFields.subcategory_uuid,
+        vat_period_year: entryFields.vat_period_year,
+        vat_period_month: entryFields.vat_period_month,
+      });
+
       const entryData = {
         user_uuid,
         type: entryFields.type,
         amount: entryFields.amount,
         has_vat: hasVat,
         vat_amount: calculateVatAmount(hasVat, entryFields.amount, entryFields.vat_amount),
+        vat_period_year: vatPeriod.vat_period_year,
+        vat_period_month: vatPeriod.vat_period_month,
         description: entryFields.description,
         from_account_uuid: entryFields.from_account_uuid,
         to_account_uuid: entryFields.to_account_uuid,
@@ -86,7 +97,7 @@ export class ExpenseEntriesService {
 
   async findAll(user_uuid: string, query: ExpenseEntriesQueryType) {
     try {
-      const { page, limit, type, category_uuid, subcategory_uuid, from_account_uuid, to_account_uuid, account_uuids, from_date, to_date, search, tag_uuid, has_vat } = query;
+      const { page, limit, type, category_uuid, subcategory_uuid, from_account_uuid, to_account_uuid, account_uuids, from_date, to_date, search, tag_uuid, has_vat, vat_period_year, vat_period_month } = query;
 
       const skip = (page - 1) * limit;
 
@@ -150,6 +161,18 @@ export class ExpenseEntriesService {
 
       const excludeHidden = await this.getExcludeHiddenWhere(user_uuid);
       Object.assign(where, excludeHidden);
+
+      if (has_vat === true && vat_period_year !== undefined && vat_period_month !== undefined) {
+        const paymentWhere = buildVatPaymentWhere(await getVatPaymentSettings(this.prisma, user_uuid));
+
+        if (paymentWhere) {
+          const clause = buildVatTransactionsClause(paymentWhere, { year: vat_period_year, month: vat_period_month }, where.entry_date);
+
+          delete where.has_vat;
+          delete where.entry_date;
+          where.AND = [...(Array.isArray(where.AND) ? where.AND : []), clause];
+        }
+      }
 
       const [data, total] = await Promise.all([
         this.prisma.expenseEntry.findMany({
@@ -216,6 +239,14 @@ export class ExpenseEntriesService {
         await validateExpenseTags(this.prisma, user_uuid, tag_uuids);
       }
 
+      const vatPeriod = resolveVatPeriodFields(await getVatPaymentSettings(this.prisma, user_uuid), {
+        type: updateFields.type ?? existingEntry.type,
+        category_uuid: updateFields.category_uuid ?? existingEntry.category_uuid,
+        subcategory_uuid: updateFields.subcategory_uuid ?? existingEntry.subcategory_uuid,
+        vat_period_year: updateFields.vat_period_year ?? existingEntry.vat_period_year,
+        vat_period_month: updateFields.vat_period_month ?? existingEntry.vat_period_month,
+      });
+
       await this.revertAccountBalances(existingEntry);
 
       const nextHasVat = updateFields.has_vat ?? existingEntry.has_vat;
@@ -226,6 +257,8 @@ export class ExpenseEntriesService {
         data: {
           ...updateFields,
           vat_amount: calculateVatAmount(nextHasVat, nextAmount, updateFields.vat_amount),
+          vat_period_year: vatPeriod.vat_period_year,
+          vat_period_month: vatPeriod.vat_period_month,
           entry_date: entry_date ? new Date(entry_date) : undefined,
           ...(tag_uuids !== undefined ? { tags: { set: tag_uuids.map((tagUuid) => ({ uuid: tagUuid })) } } : {}),
         },
@@ -598,7 +631,11 @@ export class ExpenseEntriesService {
         query.month,
       );
 
-      const [incomeVat, expenseVat] = await Promise.all([
+      const paymentWhere = buildVatPaymentWhere(await getVatPaymentSettings(this.prisma, user_uuid));
+      const periodYear = Number(monthStartKey.slice(0, 4));
+      const periodMonth = Number(monthStartKey.slice(5, 7));
+
+      const [incomeVat, expenseVat, vatPayments] = await Promise.all([
         this.prisma.expenseEntry.aggregate({
           where: {
             user_uuid,
@@ -617,6 +654,18 @@ export class ExpenseEntriesService {
           },
           _sum: { vat_amount: true },
         }),
+        paymentWhere
+          ? this.prisma.expenseEntry.aggregate({
+            where: {
+              user_uuid,
+              ...paymentWhere,
+              vat_period_year: periodYear,
+              vat_period_month: periodMonth,
+            },
+            _sum: { amount: true },
+            _count: { _all: true },
+          })
+          : null,
       ]);
 
       const vatCollected = Number(incomeVat._sum.vat_amount || 0);
@@ -626,6 +675,9 @@ export class ExpenseEntriesService {
         vatCollected,
         vatPaid,
         vatToPay: vatCollected - vatPaid,
+        vatPaymentConfigured: paymentWhere !== null,
+        vatPaymentsTotal: Number(vatPayments?._sum.amount || 0),
+        vatPaymentsCount: vatPayments?._count._all ?? 0,
         monthStart: monthStartKey,
         monthEnd: monthEndKey,
       };
@@ -682,6 +734,18 @@ export class ExpenseEntriesService {
 
       if (query.has_vat !== undefined) {
         where.has_vat = query.has_vat;
+      }
+
+      if (query.has_vat === true && query.include_vat_payments) {
+        const paymentWhere = buildVatPaymentWhere(await getVatPaymentSettings(this.prisma, user_uuid));
+
+        if (paymentWhere) {
+          delete where.has_vat;
+          where.AND = [
+            ...(Array.isArray(where.AND) ? where.AND : []),
+            { OR: [{ has_vat: true }, paymentWhere] },
+          ];
+        }
       }
 
       where.type = { in: [ExpenseEntryType.INCOME, ExpenseEntryType.EXPENSE] };

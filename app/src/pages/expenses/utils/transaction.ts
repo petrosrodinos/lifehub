@@ -6,6 +6,8 @@ export const expenseEntryToCreateDto = (transaction: ExpenseEntry): Partial<Crea
   amount: typeof transaction.amount === "string" ? parseFloat(transaction.amount) : transaction.amount,
   has_vat: transaction.has_vat ?? false,
   vat_amount: transaction.vat_amount !== null && transaction.vat_amount !== undefined ? Number(transaction.vat_amount) : undefined,
+  vat_period_year: transaction.vat_period_year ?? undefined,
+  vat_period_month: transaction.vat_period_month ?? undefined,
   description: transaction.description,
   from_account_uuid: transaction.from_account_uuid,
   to_account_uuid: transaction.to_account_uuid,
