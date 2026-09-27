@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Dumbbell } from "lucide-react";
 import type { WorkoutEntry } from "../../../features/gym/workout-entries/interfaces/workout-entries.interface";
+import { useWorkoutEntries } from "../../../features/gym/workout-entries/hooks/use-workout-entries";
 import { useCreateWorkoutSet, useReorderWorkoutSets } from "../../../features/gym/workout-sets/hooks/use-workout-sets";
 import { ExerciseTypes } from "../../../features/gym/exercises/interfaces/exercises.interface";
 import type { CreateWorkoutSetDto } from "../../../features/gym/workout-sets/interfaces/workout-sets.interface";
@@ -32,12 +33,21 @@ export function TrackTab({ entry }: TrackTabProps) {
   const exerciseSets = entry.sets || [];
   const exerciseType = exercise?.type || ExerciseTypes.REPS;
 
+  const hasNoSets = exerciseSets.length === 0;
+  const { data: pastEntries } = useWorkoutEntries({ exercise_uuid: entry.exercise_uuid }, { enabled: hasNoSets });
+
   const formInitialValues = useMemo((): Partial<SetFormValues> | undefined => {
-    const set = selectedSetUuid
-      ? exerciseSets.find((s) => s.uuid === selectedSetUuid)
-      : exerciseSets[exerciseSets.length - 1];
-    return set ? workoutSetToFormValues(set) : undefined;
-  }, [exerciseSets, selectedSetUuid]);
+    if (exerciseSets.length > 0) {
+      const set = selectedSetUuid
+        ? exerciseSets.find((s) => s.uuid === selectedSetUuid)
+        : exerciseSets[exerciseSets.length - 1];
+      return set ? workoutSetToFormValues(set) : undefined;
+    }
+
+    const lastSessionEntry = (pastEntries || []).find((e) => e.uuid !== entry.uuid && e.sets && e.sets.length > 0);
+    const firstSetOfLastSession = lastSessionEntry?.sets?.[0];
+    return firstSetOfLastSession ? workoutSetToFormValues(firstSetOfLastSession) : undefined;
+  }, [exerciseSets, selectedSetUuid, pastEntries, entry.uuid]);
 
   const handleReorderSets = (reordered: WorkoutSet[]) => {
     reorderSets.mutate(reordered.map((s, i) => ({ uuid: s.uuid, order: i })));

@@ -25,10 +25,11 @@ const QUERY_KEYS = {
   exercises: ['exercises'],
 }
 
-export function useWorkoutEntries(params?: { exercise_uuid?: string; workout_uuid?: string }) {
+export function useWorkoutEntries(params?: { exercise_uuid?: string; workout_uuid?: string }, options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: [...QUERY_KEYS.workoutEntries, params],
     queryFn: () => getWorkoutEntries(params),
+    enabled: options?.enabled ?? true,
   })
 }
 
