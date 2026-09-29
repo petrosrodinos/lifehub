@@ -129,6 +129,8 @@ export const ApiRoutes = {
       get: (uuid: string) => `/expense-accounts/${uuid}`,
       update: (uuid: string) => `/expense-accounts/${uuid}`,
       delete: (uuid: string) => `/expense-accounts/${uuid}`,
+      setDefault: (uuid: string) => `/expense-accounts/${uuid}/default`,
+      clearDefault: (uuid: string) => `/expense-accounts/${uuid}/default`,
     },
     categories: {
       list: "/expense-categories",

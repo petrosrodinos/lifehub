@@ -68,6 +68,32 @@ export class ExpenseAccountsController {
     return this.expenseAccountsService.update(user_uuid, uuid, updateExpenseAccountDto);
   }
 
+  @Patch(':uuid/default')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Set an expense account as the default account' })
+  @ApiParam({ name: 'uuid', description: 'Expense account UUID' })
+  @ApiResponse({ status: 200, description: 'Default expense account set successfully' })
+  @ApiResponse({ status: 404, description: 'Expense account not found' })
+  setDefault(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string
+  ) {
+    return this.expenseAccountsService.setDefault(user_uuid, uuid);
+  }
+
+  @Delete(':uuid/default')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Clear the default flag from an expense account' })
+  @ApiParam({ name: 'uuid', description: 'Expense account UUID' })
+  @ApiResponse({ status: 200, description: 'Default expense account cleared successfully' })
+  @ApiResponse({ status: 404, description: 'Expense account not found' })
+  clearDefault(
+    @CurrentUser('user_uuid') user_uuid: string,
+    @Param('uuid') uuid: string
+  ) {
+    return this.expenseAccountsService.clearDefault(user_uuid, uuid);
+  }
+
   @Delete(':uuid')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Delete an expense account' })

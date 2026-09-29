@@ -2,6 +2,10 @@ import { useCallback, useState } from "react";
 import { Star } from "lucide-react";
 import type { ExpenseAccount } from "../../../../features/expenses/expense-accounts/interfaces/expense-accounts.interfaces";
 import { useAuthStore } from "../../../../store/auth-store";
+import {
+  useSetDefaultExpenseAccount,
+  useClearDefaultExpenseAccount,
+} from "../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
 import { formatAccountBalance } from "../../utils/format-account-balance";
 import { EditAccountModal } from "./EditAccountModal";
 
@@ -12,11 +16,11 @@ type AccountCardProps = {
 export function AccountCard({ account }: AccountCardProps) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const showAccountBalances = useAuthStore((state) => state.showAccountBalances);
-  const defaultAccountUuid = useAuthStore((state) => state.defaultAccountUuid);
-  const setDefaultAccountUuid = useAuthStore((state) => state.setDefaultAccountUuid);
+  const { mutate: setDefaultExpenseAccount } = useSetDefaultExpenseAccount();
+  const { mutate: clearDefaultExpenseAccount } = useClearDefaultExpenseAccount();
 
   const balance = formatAccountBalance(account.balance);
-  const isDefault = defaultAccountUuid === account.uuid;
+  const isDefault = !!account.is_default;
 
   const handleOpenEdit = useCallback(() => {
     setIsEditModalOpen(true);
@@ -27,8 +31,12 @@ export function AccountCard({ account }: AccountCardProps) {
   }, []);
 
   const handleToggleDefault = useCallback(() => {
-    setDefaultAccountUuid(isDefault ? null : account.uuid);
-  }, [account.uuid, isDefault, setDefaultAccountUuid]);
+    if (isDefault) {
+      clearDefaultExpenseAccount(account.uuid);
+    } else {
+      setDefaultExpenseAccount(account.uuid);
+    }
+  }, [account.uuid, isDefault, setDefaultExpenseAccount, clearDefaultExpenseAccount]);
 
   return (
     <>

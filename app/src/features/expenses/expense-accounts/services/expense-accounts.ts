@@ -65,3 +65,21 @@ export const deleteExpenseAccount = async (uuid: string): Promise<void> => {
     throw new Error(error.response?.data?.message || 'Failed to delete expense account')
   }
 }
+
+export const setDefaultExpenseAccount = async (uuid: string): Promise<ExpenseAccount> => {
+  try {
+    const response = await axiosInstance.patch(ApiRoutes.expenses.accounts.setDefault(uuid))
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to set default expense account')
+  }
+}
+
+export const clearDefaultExpenseAccount = async (uuid: string): Promise<ExpenseAccount> => {
+  try {
+    const response = await axiosInstance.delete(ApiRoutes.expenses.accounts.clearDefault(uuid))
+    return response.data
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to clear default expense account')
+  }
+}

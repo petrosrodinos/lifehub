@@ -11,6 +11,8 @@ import {
   createExpenseAccount,
   updateExpenseAccount,
   deleteExpenseAccount,
+  setDefaultExpenseAccount,
+  clearDefaultExpenseAccount,
 } from '../services/expense-accounts'
 
 const QUERY_KEYS = {
@@ -73,6 +75,34 @@ export function useUpdateExpenseAccount() {
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Failed to update expense account', { duration: 3000 })
+    },
+  })
+}
+
+export function useSetDefaultExpenseAccount() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (uuid: string) => setDefaultExpenseAccount(uuid),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccounts })
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Failed to set default expense account', { duration: 3000 })
+    },
+  })
+}
+
+export function useClearDefaultExpenseAccount() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (uuid: string) => clearDefaultExpenseAccount(uuid),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.expenseAccounts })
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'Failed to clear default expense account', { duration: 3000 })
     },
   })
 }

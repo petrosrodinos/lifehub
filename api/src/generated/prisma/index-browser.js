@@ -235,6 +235,7 @@ exports.Prisma.ExpenseAccountScalarFieldEnum = {
   color: 'color',
   balance: 'balance',
   is_professional: 'is_professional',
+  is_default: 'is_default',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };

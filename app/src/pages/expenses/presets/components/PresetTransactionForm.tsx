@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import type {
   CreateExpenseEntryPresetDto,
   ExpenseRecurrenceFrequency,
@@ -12,7 +12,7 @@ import {
   PRESET_RECURRENCE_MONTH_OPTIONS,
   PRESET_RECURRENCE_WEEKDAY_OPTIONS,
 } from "../../../../config/constants/dropdowns/preset-recurrence";
-import { useAuthStore } from "../../../../store/auth-store";
+import { useExpenseAccounts } from "../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
 import { getInitialFromAccountUuid } from "../../utils/resolve-default-account.helper";
 import { evaluateAmountExpression } from "../../transactions/utils/amount-calculator.helper";
 import { TransactionFormFields } from "../../transactions/components/TransactionFormFields";
@@ -30,7 +30,8 @@ const selectClassName =
   "w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-violet-500 transition-colors";
 
 export function PresetTransactionForm({ onSubmit, onCancel, submitLabel, isPending, initialData }: PresetTransactionFormProps) {
-  const defaultAccountUuid = useAuthStore((state) => state.defaultAccountUuid);
+  const { data: accountsData } = useExpenseAccounts();
+  const defaultAccountUuid = accountsData?.find((account) => account.is_default)?.uuid ?? null;
   const [title, setTitle] = useState(initialData?.title || "");
   const [type, setType] = useState<ExpenseEntryType>(initialData?.type || ExpenseEntryTypes.EXPENSE);
   const [amount, setAmount] = useState(initialData?.amount?.toString() || "");
@@ -49,6 +50,11 @@ export function PresetTransactionForm({ onSubmit, onCancel, submitLabel, isPendi
     initialData?.recurrence_day_of_month ?? "",
   );
   const [recurrenceMonth, setRecurrenceMonth] = useState<number | "">(initialData?.recurrence_month ?? "");
+
+  useEffect(() => {
+    if (initialData?.from_account_uuid || fromAccountUuid || !defaultAccountUuid) return;
+    setFromAccountUuid(defaultAccountUuid);
+  }, [defaultAccountUuid, initialData?.from_account_uuid, fromAccountUuid]);
 
   const handleCategorySelect = useCallback((nextCategoryUuid: string, nextSubcategoryUuid: string) => {
     setCategoryUuid(nextCategoryUuid);

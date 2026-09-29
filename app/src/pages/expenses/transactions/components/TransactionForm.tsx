@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect } from "react";
 import type { CreateExpenseEntryDto, ExpenseEntryType } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
 import { ExpenseEntryTypes } from "../../../../features/expenses/expense-entries/interfaces/expense-entries.interfaces";
-import { useAuthStore } from "../../../../store/auth-store";
 import { useBusinessSettings } from "../../../../features/expenses/business-settings/hooks/use-business-settings";
+import { useExpenseAccounts } from "../../../../features/expenses/expense-accounts/hooks/use-expense-accounts";
 import { getPreviousMonthPeriod } from "../../utils/vat-period.helper";
 import type { VatPeriod } from "../../utils/vat-period.helper";
 import { getInitialFromAccountUuid } from "../../utils/resolve-default-account.helper";
@@ -20,7 +20,8 @@ type TransactionFormProps = {
 };
 
 export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, initialData, showQuantity = false }: TransactionFormProps) {
-  const defaultAccountUuid = useAuthStore((state) => state.defaultAccountUuid);
+  const { data: accountsData } = useExpenseAccounts();
+  const defaultAccountUuid = accountsData?.find((account) => account.is_default)?.uuid ?? null;
   const [type, setType] = useState<ExpenseEntryType>(initialData?.type || ExpenseEntryTypes.EXPENSE);
   const [amount, setAmount] = useState(initialData?.amount?.toString() || "");
   const [hasVat, setHasVat] = useState(initialData?.has_vat || false);
@@ -55,6 +56,11 @@ export function TransactionForm({ onSubmit, onCancel, submitLabel, isPending, in
     setVatAmount(value);
     setIsVatAmountTouched(true);
   }, []);
+
+  useEffect(() => {
+    if (initialData?.from_account_uuid || fromAccountUuid || !defaultAccountUuid) return;
+    setFromAccountUuid(defaultAccountUuid);
+  }, [defaultAccountUuid, initialData?.from_account_uuid, fromAccountUuid]);
 
   useEffect(() => {
     if (!hasVat || isVatAmountTouched) return;

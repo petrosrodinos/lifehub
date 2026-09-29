@@ -83,6 +83,42 @@ export class ExpenseAccountsService {
     }
   }
 
+  async setDefault(user_uuid: string, uuid: string) {
+
+    try {
+      await this.findOne(user_uuid, uuid);
+
+      await this.prisma.$transaction([
+        this.prisma.expenseAccount.updateMany({
+          where: { user_uuid, is_default: true },
+          data: { is_default: false },
+        }),
+        this.prisma.expenseAccount.update({
+          where: { uuid },
+          data: { is_default: true },
+        }),
+      ]);
+
+      return this.findOne(user_uuid, uuid);
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to set default expense account');
+    }
+  }
+
+  async clearDefault(user_uuid: string, uuid: string) {
+
+    try {
+      await this.findOne(user_uuid, uuid);
+
+      return this.prisma.expenseAccount.update({
+        where: { uuid },
+        data: { is_default: false },
+      });
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to clear default expense account');
+    }
+  }
+
   async remove(user_uuid: string, uuid: string) {
 
     try {
